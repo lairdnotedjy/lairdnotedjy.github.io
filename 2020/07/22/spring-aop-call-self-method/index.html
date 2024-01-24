@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="背景首先请思考一下以下代码执行的结果：  LogAop.java  123456789101112131415161718&#x2F;&#x2F;声明一个AOP拦截service包下的所有方法@Aspectpublic class LogAop &#123;  @Around(&quot;execution(* com.demo.service.*.*(..))&quot;)  public Object log(P">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring AOP调用本类方法没有生效的问题">
+<meta property="og:url" content="https://www.sovdating.com/2020/07/22/spring-aop-call-self-method/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="背景首先请思考一下以下代码执行的结果：  LogAop.java  123456789101112131415161718&#x2F;&#x2F;声明一个AOP拦截service包下的所有方法@Aspectpublic class LogAop &#123;  @Around(&quot;execution(* com.demo.service.*.*(..))&quot;)  public Object log(P">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-22T09:54:25.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:47:47.907Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="spring">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2020/07/22/spring-aop-call-self-method/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2020/07/22/spring-aop-call-self-method/","path":"2020/07/22/spring-aop-call-self-method/","title":"Spring AOP调用本类方法没有生效的问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Spring AOP调用本类方法没有生效的问题 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E7%9B%B4%E8%A7%89"><span class="nav-number">2.</span> <span class="nav-text">反直觉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%90%86%E8%A7%A3-AOP"><span class="nav-number">3.</span> <span class="nav-text">理解 AOP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%8E%9F%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">动态代理原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-AOP-%E4%B8%AD%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E6%9C%AC%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">5.</span> <span class="nav-text">Spring AOP 中方法调用本类方法的解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">6.</span> <span class="nav-text">附录</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/07/22/spring-aop-call-self-method/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Spring AOP调用本类方法没有生效的问题 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring AOP调用本类方法没有生效的问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-07-22 17:54:25" itemprop="dateCreated datePublished" datetime="2020-07-22T17:54:25+08:00">2020-07-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>首先请思考一下以下代码执行的结果：</p>
+<ul>
+<li>LogAop.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明一个AOP拦截service包下的所有方法</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogAop</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Around(&quot;execution(* com.demo.service.*.*(..))&quot;)</span></span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">log</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="type">MethodSignature</span> <span class="variable">methodSignature</span> <span class="operator">=</span> (MethodSignature) joinPoint.getSignature();</span><br><span class="line">          <span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> methodSignature.getMethod();</span><br><span class="line">          <span class="type">Object</span> <span class="variable">ret</span> <span class="operator">=</span> joinPoint.proceed();</span><br><span class="line">          <span class="comment">//执行完目标方法之后打印</span></span><br><span class="line">          System.out.println(<span class="string">&quot;after execute method:&quot;</span>+method.getName());</span><br><span class="line">          <span class="keyword">return</span> ret;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (Throwable throwable) &#123;</span><br><span class="line">          <span class="keyword">throw</span> throwable;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<ul>
+<li>UserService.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> User <span class="title function_">save</span><span class="params">(User user)</span>&#123;</span><br><span class="line">    <span class="comment">//省略代码</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendEmail</span><span class="params">(User user)</span>&#123;</span><br><span class="line">    <span class="comment">//省略代码</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//注册</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">(User user)</span>&#123;</span><br><span class="line">    <span class="comment">//保存用户</span></span><br><span class="line">    <span class="built_in">this</span>.save(user);</span><br><span class="line">    <span class="comment">//发送邮件给用户</span></span><br><span class="line">    <span class="built_in">this</span>.sendEmail(user);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>UserServiceTest.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceTest</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span>&#123;</span><br><span class="line">    userService.save(<span class="keyword">new</span> <span class="title class_">User</span>());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendEmail</span><span class="params">()</span>&#123;</span><br><span class="line">    userService.sendEmail(<span class="keyword">new</span> <span class="title class_">User</span>());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">()</span>&#123;</span><br><span class="line">    userService.register(<span class="keyword">new</span> <span class="title class_">User</span>());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在执行<code>save</code>方法后，控制台输出为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">after execute method:save</span><br></pre></td></tr></table></figure>
+
+<p>在执行<code>sendEmail</code>方法后，控制台输出为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">after execute method:sendEmail</span><br></pre></td></tr></table></figure>
+
+<p>请问在执行<code>register()</code>方法后会打印出什么内容？</p>
+<h2 id="反直觉"><a href="#反直觉" class="headerlink" title="反直觉"></a>反直觉</h2><p>这个时候可能很多人都会和我之前想的一样，在<code>register</code>方法里调用了<code>save</code>和<code>sendEmail</code>，那 AOP 会处理<code>save</code>和<code>sendEmail</code>，输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">after execute method:save</span><br><span class="line">after execute method:sendEmail</span><br><span class="line">after execute method:register</span><br></pre></td></tr></table></figure>
+
+<p>然而事实并不是这样的，而是输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">after execute method:register</span><br></pre></td></tr></table></figure>
+
+<p>在这种认知的情况下，很可能就会写出有<code>bug</code>的代码，例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span>&#123;</span><br><span class="line">  <span class="comment">//用户下单一个商品</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">order</span><span class="params">(User user,String orderId)</span>&#123;</span><br><span class="line">    <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> findOrder(orderId);</span><br><span class="line">    pay(user,order);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Transactional</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">pay</span><span class="params">(User user,Order order)</span>&#123;</span><br><span class="line">    <span class="comment">//扣款</span></span><br><span class="line">    user.setMoney(user.getMoney()-order.getPrice());</span><br><span class="line">    save(user);</span><br><span class="line">    <span class="comment">//...其它处理</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当用户下单时调用的<code>order</code>方法，在该方法里面调用了<code>@Transactional</code>注解修饰的<code>pay</code>方法，这个时候<code>pay</code>方法的事务管理已经不生效了，在发生异常时就会出现问题。</p>
+<h2 id="理解-AOP"><a href="#理解-AOP" class="headerlink" title="理解 AOP"></a>理解 AOP</h2><p>我们知道 Spring AOP 默认是基于动态代理来实现的，那么先化繁为简，只要搞懂最基本的动态代理自然就明白之前的原因了，这里直接以 JDK 动态代理为例来演示一下上面的情况。</p>
+<p>由于 JDK 动态代理一定需要接口类，所以首先声明一个<code>IUserService</code>接口</p>
+<ul>
+<li>IUserService.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IUserService</span>&#123;</span><br><span class="line">  User <span class="title function_">save</span><span class="params">(User user)</span>;</span><br><span class="line">  <span class="keyword">void</span> <span class="title function_">sendEmail</span><span class="params">(User user)</span>;</span><br><span class="line">  User <span class="title function_">register</span><span class="params">(User user)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写实现类</p>
+<ul>
+<li>UserService.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> <span class="keyword">implements</span> <span class="title class_">IUserService</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> User <span class="title function_">save</span><span class="params">(User user)</span>&#123;</span><br><span class="line">    <span class="comment">//省略代码</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendEmail</span><span class="params">(User user)</span>&#123;</span><br><span class="line">    <span class="comment">//省略代码</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//注册</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">(User user)</span>&#123;</span><br><span class="line">    <span class="comment">//保存用户</span></span><br><span class="line">    <span class="built_in">this</span>.save(user);</span><br><span class="line">    <span class="comment">//发送邮件给用户</span></span><br><span class="line">    <span class="built_in">this</span>.sendEmail(user);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写日志处理动态代理实现</p>
+<ul>
+<li>ServiceLogProxy.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ServiceLogProxy</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">getProxy</span><span class="params">(Class&lt;?&gt; clazz, Object target)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), <span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;clazz&#125;, <span class="keyword">new</span> <span class="title class_">InvocationHandler</span>() &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">                    <span class="type">Object</span> <span class="variable">ret</span> <span class="operator">=</span> method.invoke(target, args);</span><br><span class="line">                    System.out.println(<span class="string">&quot;after execute method:&quot;</span> + method.getName());</span><br><span class="line">                    <span class="keyword">return</span> ret;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行代码</p>
+<ul>
+<li>Main.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//获取代理类</span></span><br><span class="line">        <span class="type">IUserService</span> <span class="variable">userService</span> <span class="operator">=</span> (IUserService) ServiceLogProxy.getProxy(IUserService.class, <span class="keyword">new</span> <span class="title class_">UserService</span>());</span><br><span class="line">        userService.save(<span class="keyword">new</span> <span class="title class_">User</span>());</span><br><span class="line">        userService.sendEmail(<span class="keyword">new</span> <span class="title class_">User</span>());</span><br><span class="line">        userService.register(<span class="keyword">new</span> <span class="title class_">User</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">after execute method:save</span><br><span class="line">after execute method:sendEmail</span><br><span class="line">after execute method:register</span><br></pre></td></tr></table></figure>
+
+<p>可以发现和之前 Spring AOP 的情况一样，<code>register</code>方法中调用的<code>save</code>和<code>sendEmail</code>方法同样的没有被动态代理拦截到，这是为什么呢，接下来就看看下动态代理的底层实现。</p>
+<h2 id="动态代理原理"><a href="#动态代理原理" class="headerlink" title="动态代理原理"></a>动态代理原理</h2><p>其实动态代理就是在运行期间动态的生成了一个<code>class</code>在 jvm 中，然后通过这个<code>class</code>的实例调用真正的实现类的方法，伪代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">$Proxy0</span> <span class="keyword">implements</span> <span class="title class_">IUserService</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//这个类就是之前动态代理里的new InvocationHandler()&#123;&#125;对象</span></span><br><span class="line">  <span class="keyword">private</span> InvocationHandler h;</span><br><span class="line">  <span class="comment">//从接口中拿到的register Method</span></span><br><span class="line">  <span class="keyword">private</span> Method registerMethod;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">(User user)</span>&#123;</span><br><span class="line">    <span class="comment">//执行前面ServiceLogProxy编写好的invoke方法，实现代理功能</span></span><br><span class="line">    h.invoke(<span class="built_in">this</span>,registerMethod,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;user&#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>回到刚刚的<code>main</code>方法，那个<code>userService</code>变量的实例类型其实就是动态生成的类，可以把它的 class 打印出来看看：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">IUserService</span> <span class="variable">userService</span> <span class="operator">=</span> (IUserService) ServiceLogProxy.getProxy(IUserService.class, <span class="keyword">new</span> <span class="title class_">UserService</span>());</span><br><span class="line">System.out.println(userService.getClass());</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxx.xxx.$Proxy0</span><br></pre></td></tr></table></figure>
+
+<p>在了解这个原理之后，再接着解答之前的疑问，可以看到通过<code>代理类的实例</code>执行的方法才会进入到拦截处理中，而在<code>InvocationHandler#invoke()</code>方法中，是这样执行目标方法的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注意这个target是new UserService()实例对象</span></span><br><span class="line"><span class="type">Object</span> <span class="variable">ret</span> <span class="operator">=</span> method.invoke(target, args);</span><br><span class="line">System.out.println(<span class="string">&quot;after execute method:&quot;</span> + method.getName());</span><br></pre></td></tr></table></figure>
+
+<p>在<code>register</code>方法中调用<code>this.save</code>和<code>this.sendEmail</code>方法时，<code>this</code>是指向本身<code>new UserService()</code>实例，所以本质上就是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line"><span class="type">UserService</span> <span class="variable">userService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserService</span>();</span><br><span class="line">userService.save(user);</span><br><span class="line">userService.sendEmail(user);</span><br></pre></td></tr></table></figure>
+
+<p>不是动态代理生成的类去执行目标方法，那必然不会进行动态代理的拦截处理中，明白这个之后原理之后，就可以改造下之前的方法，让方法内调用本类方法也能使动态代理生效，就是用动态代理生成的类去调用方法就好了，改造如下：</p>
+<ul>
+<li>UserService.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> <span class="keyword">implements</span> <span class="title class_">IUserService</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//注册</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">(User user)</span>&#123;</span><br><span class="line">    <span class="comment">//获取到代理类</span></span><br><span class="line">    <span class="type">IUserService</span> <span class="variable">self</span> <span class="operator">=</span> (IUserService) ServiceLogProxy.getProxy(IUserService.class, <span class="built_in">this</span>);</span><br><span class="line">    <span class="comment">//通过代理类保存用户</span></span><br><span class="line">    self.save(user);</span><br><span class="line">    <span class="comment">//通过代理类发送邮件给用户</span></span><br><span class="line">    self.sendEmail(user);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行<code>main</code>方法，结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">after execute method:save</span><br><span class="line">after execute method:sendEmail</span><br><span class="line">after execute method:save</span><br><span class="line">after execute method:sendEmail</span><br><span class="line">after execute method:register</span><br></pre></td></tr></table></figure>
+
+<p>可以看到已经达到预期效果了。</p>
+<h2 id="Spring-AOP-中方法调用本类方法的解决方案"><a href="#Spring-AOP-中方法调用本类方法的解决方案" class="headerlink" title="Spring AOP 中方法调用本类方法的解决方案"></a>Spring AOP 中方法调用本类方法的解决方案</h2><p>同样的，只要使用代理类来执行目标方法就行，而不是用<code>this</code>引用，修改后如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//拿到代理类</span></span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">private</span> UserService self;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//注册</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">(User user)</span>&#123;</span><br><span class="line">    <span class="comment">//通过代理类保存用户</span></span><br><span class="line">    self.save(user);</span><br><span class="line">    <span class="comment">//通过代理类发送邮件给用户</span></span><br><span class="line">    self.sendEmail(user);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>好了，问题到此就解决了，但是需要注意的是<code>Spring</code>官方是不提倡这样的做法的，官方提倡的是使用一个新的类来解决此类问题，例如创建一个<code>UserRegisterService</code>类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserRegisterService</span>&#123;</span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//注册</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">(User user)</span>&#123;</span><br><span class="line">    <span class="comment">//通过代理类保存用户</span></span><br><span class="line">    userService.save(user);</span><br><span class="line">    <span class="comment">//通过代理类发送邮件给用户</span></span><br><span class="line">    userService.sendEmail(user);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p><a target="_blank" rel="noopener" href="https://monkeywie.github.io/2018/07/25/jvm-dump-class/">从JVM中拿到动态代理生成的class文件</a><br><a target="_blank" rel="noopener" href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#aop-understanding-aop-proxies">aop-understanding-aop-proxies</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/spring/" rel="tag"># spring</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/07/13/idea-maven-helper-plugin/" rel="prev" title="IDEA插件推荐之Maven-Helper">
+                  <i class="fa fa-angle-left"></i> IDEA插件推荐之Maven-Helper
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/08/07/upgrade-hexo-next/" rel="next" title="给博客的next主题升个级">
+                  给博客的next主题升个级 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -125,18 +125,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-count">548</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">93</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-count">381</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -162,7 +162,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/03/14/Safari%20%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95(inspect)%E7%A7%BB%E5%8A%A8%E7%AB%AFwebview,%E6%89%BE%E4%B8%8D%E5%88%B0%E5%BE%85%E8%B0%83%E8%AF%95%E9%A1%B5%E9%9D%A2/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/08/09/Use-nuts-cloud-sync-IntelliJ-IDEA-configuration-files/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/03/14/Safari%20%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95(inspect)%E7%A7%BB%E5%8A%A8%E7%AB%AFwebview,%E6%89%BE%E4%B8%8D%E5%88%B0%E5%BE%85%E8%B0%83%E8%AF%95%E9%A1%B5%E9%9D%A2/" class="post-title-link" itemprop="url">Safari远程调试(inspect)移动端webview,找不到待调试页面</a>
+          <a href="/2016/08/09/Use-nuts-cloud-sync-IntelliJ-IDEA-configuration-files/" class="post-title-link" itemprop="url">使用坚果云同步IntelliJ IDEA的配置文件</a>
         </h2>
 
         <div class="post-meta-container">
@@ -191,14 +191,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-03-14 00:00:02" itemprop="dateCreated datePublished" datetime="2016-03-14T00:00:02+08:00">2016-03-14</time>
+      <time title="Created: 2016-08-09 21:50:39" itemprop="dateCreated datePublished" datetime="2016-08-09T21:50:39+08:00">2016-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -206,7 +206,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/inspect/" itemprop="url" rel="index"><span itemprop="name">inspect</span></a>
+          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
         </span>
     </span>
 
@@ -220,429 +220,760 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Safari-远程调试移动端webview-找不到-待调试-页面"><a href="#Safari-远程调试移动端webview-找不到-待调试-页面" class="headerlink" title="Safari 远程调试移动端webview, 找不到 待调试 页面"></a>Safari 远程调试移动端webview, 找不到 待调试 页面</h1><h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p> ios设备升级到9.0,默认的开发者权限是关闭的</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>需要设置开发者权限<br>设置-开发者- instruments -Logging-Energy[打开]<br>设置-开发者-ui Automation- Enable UI Automation[打开]</p>
-<h2 id="原因二"><a href="#原因二" class="headerlink" title="原因二"></a>原因二</h2><ul>
-<li><p>Build Settings 中Provisioning Profile中设置了<code>xxx_dis</code>发布版</p>
+          <p>对于IDEA这样的神器，每个人都必然会有很多个性化的配置，那么如何在多台终端同步IDEA的配置呢？配合强大的坚果云同步功能来自动同步你的配置文件吧。另外坚果云免费版虽然对流量有限制，但是同步一个小小的配置文件夹还是足够了。</p>
+<p>此方法也适用于JetBrains家的其它IDE系列产品，稍有不同之处请自行调整。</p>
+<ul>
+<li><strong>IntelliJ IDEA</strong>，一套智慧型的Java整合开发工具，特别专注与强调程序员的开发撰写效率提升</li>
+<li><strong>PHPStorm</strong>，PHP集成开发工具</li>
+<li><strong>PyCharm</strong>，智能Python集成开发工具</li>
+<li><strong>RubyMine</strong>，一个为Ruby和Rails开发者准备的IDE，其带有所有开发者必须的功能，并将之紧密集成于便捷的开发环境中</li>
+<li><strong>WebStorm</strong>，智能HTML&#x2F;CSS&#x2F;JS开发工具</li>
+<li><strong>AppCode</strong>，开发Obj-C的IDE，是一个XCode的替代物</li>
+</ul>
+<p>IDEA 默认配置文件存放位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Windows 保存在 &#x27;%HOMEPATH%/.&lt;product&gt;&lt;version&gt;/config&#x27; 例如&#x27;C:/Users/JohnS/.IntelliJIdea2018.1/config&#x27;</span><br><span class="line">Unix/Linux 保存在 &#x27;~/.&lt;product&gt;&lt;version&gt;/config&#x27; 例如 &#x27;~/.IntelliJIdea2018.1/config&#x27;</span><br><span class="line">Mac 保存在 &#x27;~/Library/Preferences/&lt;product&gt;&lt;version&gt;&#x27; 例如 &#x27;~/Library/Preferences/IntelliJIdea2018.1&#x27;</span><br></pre></td></tr></table></figure>
+<p>坚果云的客户端安装就不说了，关闭IDEA，从你的默认配置目录里剪切config这个目录到你的坚果云同步目录。如果你想要同步多个工具的配置目录，那么可以为config搭配一个父目录使用。如下所示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E:/jianguoyun/IDEA/config        #IDEA的配置文件路径</span><br><span class="line">E:/jianguoyun/PyCharm/config     #PyCharm的配置文件路径</span><br><span class="line">E:/jianguoyun/PHPStorm/config    #PHPStorm的配置文件路径</span><br></pre></td></tr></table></figure>
+
+<p>打开IDEA安装目录<code>C:/Program Files (x86)/JetBrains/IntelliJ IDEA 2016.2/bin/idea.properties</code>，找到第8行，把idea.config.path前面的<code>#</code>号去掉，<code>=</code>号后面的路径修改成之前的配置文件夹的目录，例如IDEA修改为<code>idea.config.path=E:/jianguoyun/IDEA/config</code>。记得把路径中的“\”换成“&#x2F;”。在Mac系统中，IDEA的配置路径<code>~/Library/Preferences/IntelliJIdea2018.1</code>下面并不存在<code>idea.properties</code>，那么新建一个文件即可，内容如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># custom IntelliJ IDEA properties</span><br><span class="line">idea.config.path=/Users/mulai.wx/Nutstore Files/jianguoyun/IDEA/config-mac</span><br></pre></td></tr></table></figure>
+<p>如果有不清楚的地方，可以直接参考IDEA的官方文档 <a target="_blank" rel="noopener" href="https://www.jetbrains.com/help/idea/tuning-the-ide.html#default-dirs"><strong>Default IDE directories</strong></a>。</p>
+<p>那么在公司直接安装坚果云，将IDEA的配置文件夹同步到本地，然后修改<code>idea.properties</code>中的值指向坚果云中正确的配置文件夹路径即可。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/08/09/HTML5-CSS3%20%E7%89%B9%E6%80%A7%E6%A3%80%E6%B5%8B%E5%BA%93(%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95)%20-%20modernizr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/08/09/HTML5-CSS3%20%E7%89%B9%E6%80%A7%E6%A3%80%E6%B5%8B%E5%BA%93(%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95)%20-%20modernizr/" class="post-title-link" itemprop="url">HTML5 /CSS3  特性检测库 ( 兼容性测试 ) - modernizr</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-08-09 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-09T00:00:00+08:00">2016-08-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>&emsp; &emsp; Modernizr帮助我们检测浏览器是否实现了某个feature，如果实现了那么开发人员就可以充分利用这个feature做一些工作，反之没有实现开发人员也好提供一个fallback。所以，我们要明白的是Modernizr只是帮我们检测feature是否被支持，它并不能够给浏览器添加那些本来不支持的feature。</p>
+<h1 id="Modernizr有一个-test页面"><a href="#Modernizr有一个-test页面" class="headerlink" title="Modernizr有一个 test页面"></a>Modernizr有一个 test页面</h1><p><a target="_blank" rel="noopener" href="http://modernizr.github.io/Modernizr/test/index.html">http://modernizr.github.io/Modernizr/test/index.html</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-9-24/63662667.jpg"></p>
+<p>&emsp; &emsp; 言归正传。当我们引入了Modernizr.js类库后， <html> 标签的class属性就会被相应的赋值，以显示浏览器是否支持某类CSS属性。比如在IE6下面，不支持boderradius特性，那么在 <html> 标签中就会出现 no-borderradius 类，我们可以做一些fallback的工作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.no-borradius div&#123;</span><br><span class="line">    /*-- do some hacks here --*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><ul>
+<li>引入<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;css/normalize.css&quot;&gt;</span><br><span class="line">&lt;script src=&quot;js/vendor/modernizr-2.8.3.min.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+<li>向<html>元素添加“no-js”的类。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;html class=&quot;no-js&quot;&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="打开页面，F12观察（是否存在no-开头的特性标记）"><a href="#打开页面，F12观察（是否存在no-开头的特性标记）" class="headerlink" title="打开页面，F12观察（是否存在no-开头的特性标记）"></a>打开页面，F12观察（是否存在<code>no-</code>开头的特性标记）</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html class=&quot; js flexbox canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths&quot; lang=&quot;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="依据浏览器支持能力加载资源-Modernizr-load"><a href="#依据浏览器支持能力加载资源-Modernizr-load" class="headerlink" title="依据浏览器支持能力加载资源 Modernizr.load()"></a>依据浏览器支持能力加载资源 <code>Modernizr.load()</code></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Modernizr.load(</span><br><span class="line">    test: Modernizr.webgl,</span><br><span class="line">    yep : &#x27;three.js&#x27;,</span><br><span class="line">    nope: &#x27;jebgl.js&#x27;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>&emsp; &emsp; 当浏览器支持WebGL的时候，就引入 three.js 这个类库做一些3D效果。浏览器不支持WebGL的时候可以使用 jebgl.js 做一些fallback操作.</p>
+<p>&emsp; &emsp; 还有一个比较酷的例子来自官方文档。我们在用jQuery类库的时候，通常都是这种写法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;window.jQuery || document.write(&#x27;&lt;script src=&quot;js/libs/jquery-1.7.1.min.js&quot;&gt;\x3C/script&gt;&#x27;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>现在用Modernizr.load()可以这么写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Modernizr.load([</span><br><span class="line">  &#123;</span><br><span class="line">    load: &#x27;//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js&#x27;,</span><br><span class="line">    complete: function () &#123;</span><br><span class="line">      if ( !window.jQuery ) &#123;</span><br><span class="line">            Modernizr.load(&#x27;js/libs/jquery-1.7.1.min.js&#x27;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    // This will wait for the fallback to load and</span><br><span class="line">    // execute if it needs to.</span><br><span class="line">    load: &#x27;needs-jQuery.js&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h2 id="http-html5test-com"><a href="#http-html5test-com" class="headerlink" title="http://html5test.com/
+ "></a><a target="_blank" rel="noopener" href="http://html5test.com/">http://html5test.com/</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/90259375.jpg">
+ </h2><p><code>Modernizr.js入门指南 - 推酷</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/UVnEVj">http://www.tuicool.com/articles/UVnEVj</a></p>
+<p><code>文档 - Modernizr 中文网</code><br><a target="_blank" rel="noopener" href="http://modernizr.cn/docs/">http://modernizr.cn/docs/</a></p>
+<p><code>HTML5 Modernizr - HTML5 中文教程 - 极客学院Wiki</code><br><a target="_blank" rel="noopener" href="http://wiki.jikexueyuan.com/project/html5/modernizr.html">http://wiki.jikexueyuan.com/project/html5/modernizr.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/08/09/markdown%20%E8%BE%93%E5%85%A5%E6%AE%B5%E8%90%BD%E7%BC%A9%E8%BF%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/08/09/markdown%20%E8%BE%93%E5%85%A5%E6%AE%B5%E8%90%BD%E7%BC%A9%E8%BF%9B/" class="post-title-link" itemprop="url">markdown 输入段落缩进</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-08-09 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-09T00:00:00+08:00">2016-08-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="对应css"><a href="#对应css" class="headerlink" title="对应css"></a>对应css</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p &#123;</span><br><span class="line">     text-indent: 2em; /*首行缩进*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="方法一：-全角空格"><a href="#方法一：-全角空格" class="headerlink" title="方法一： 全角空格"></a>方法一： 全角空格</h1><p>&emsp; &emsp; 全角空格，切换到全角模式下（一般的中文输入法都是按 shift + space）输入两个空格就行了。这个相对  <code>$nbsp;</code>  来说稍微干净一点，而且宽度是整整两个汉字，很整齐。</p>
+<p><code>在 Markdown 语言中，如何实现段首空格的显示 ？ - 中文排版 - 知乎</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.zhihu.com/question/21420126">http://www.zhihu.com/question/21420126</a></p>
+<h1 id="方法二：制表符-emsp-emsp"><a href="#方法二：制表符-emsp-emsp" class="headerlink" title="方法二：制表符 &amp;emsp; &amp;emsp;"></a>方法二：制表符 <code>&amp;emsp; &amp;emsp;</code></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">半方大的空白&amp;ensp;或&amp;#8194;</span><br><span class="line">全方大的空白&amp;emsp;或&amp;#8195;</span><br><span class="line">不断行的空白格&amp;nbsp;或&amp;#160;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<p><code>markdown.css 让 HTML 显示成 Markdown 纯文本 见证 CSS 的强大</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000000487062">https://segmentfault.com/a/1190000000487062</a></p>
+<p><code>Html转换为MarkDown样式代码 | Html2MarkDown - aTool在线工具</code><br><a target="_blank" rel="noopener" href="http://www.atool.org/html2markdown.php">http://www.atool.org/html2markdown.php</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/29/%E4%B8%BA%E9%85%8D%E5%90%88%E2%80%9CAndroid6.0%E6%9D%83%E9%99%90%E6%A3%80%E6%9F%A5%E6%9C%BA%E5%88%B6%E6%94%B9%E5%8F%98%E2%80%9D%E6%8F%90%E4%BE%9B%E7%9A%84cordova%E6%9D%83%E9%99%90%E6%8F%92%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/07/29/%E4%B8%BA%E9%85%8D%E5%90%88%E2%80%9CAndroid6.0%E6%9D%83%E9%99%90%E6%A3%80%E6%9F%A5%E6%9C%BA%E5%88%B6%E6%94%B9%E5%8F%98%E2%80%9D%E6%8F%90%E4%BE%9B%E7%9A%84cordova%E6%9D%83%E9%99%90%E6%8F%92%E4%BB%B6/" class="post-title-link" itemprop="url">为配合“Android6.0权限检查机制改变”提供的cordova权限插件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-29T00:00:00+08:00">2016-07-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>**由于Android6.0权限检查机制的改变.在以前，权限在用户选择安装是授权。现在，需要在使用的过程中显示授权。<br>对于用到旧的cordova插件可能不支持或者停止更新。所以，需要独立的权限控制插件来补偿。 **</p>
+<hr>
+<h1 id="使用新的插件cordova-plugin-android-permission"><a href="#使用新的插件cordova-plugin-android-permission" class="headerlink" title="使用新的插件cordova-plugin-android-permission"></a>使用新的插件<code>cordova-plugin-android-permission</code></h1><p><a target="_blank" rel="noopener" href="https://github.com/NeoLSN/cordova-plugin-android-permission">https://github.com/NeoLSN/cordova-plugin-android-permission</a></p>
+<ul>
+<li>官网替代插件已出:<code>cordova-plugin-compat</code>(无API调用文档)</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/cordova-plugin-compat">https://github.com/apache/cordova-plugin-compat</a></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add cordova-plugin-android-permissions@0.9.1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var permissions = cordova.plugins.permissions;</span><br><span class="line">    permissions.hasPermission(permissions.WRITE_EXTERNAL_STORAGE , checkPermissionCallback, null);</span><br><span class="line"> </span><br><span class="line">    function checkPermissionCallback(status) &#123;</span><br><span class="line">      if(!status.hasPermission) &#123;</span><br><span class="line">        var errorCallback = function() &#123;</span><br><span class="line">          console.warn(&#x27;Camera permission is not turned on&#x27;);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        permissions.requestPermission(</span><br><span class="line">          permissions.WRITE_EXTERNAL_STORAGE,</span><br><span class="line">          function(status) &#123;</span><br><span class="line">            if(!status.hasPermission) errorCallback();</span><br><span class="line">          &#125;,</span><br><span class="line">          errorCallback);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="更多150余种权限参数-请见"><a href="#更多150余种权限参数-请见" class="headerlink" title="更多150余种权限参数,请见"></a>更多150余种权限参数,请见</h1><p><a target="_blank" rel="noopener" href="https://github.com/NeoLSN/cordova-plugin-android-permission/blob/master/www/permissions.js">https://github.com/NeoLSN/cordova-plugin-android-permission/blob/master/www/permissions.js</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/33817408.jpg"></p>
+<h1 id="效果-测试解决华为android6-0手机，获取存储权限。成功"><a href="#效果-测试解决华为android6-0手机，获取存储权限。成功" class="headerlink" title="效果(测试解决华为android6.0手机，获取存储权限。成功)"></a>效果(测试解决华为android6.0手机，获取存储权限。成功)</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-7-30/33998655.jpg"></p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-7-30/95736569.jpg"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/07/29/%E4%B8%BA%E9%85%8D%E5%90%88%E2%80%9CAndroid6.0%E6%9D%83%E9%99%90%E6%A3%80%E6%9F%A5%E6%9C%BA%E5%88%B6%E6%94%B9%E5%8F%98%E2%80%9D%E6%8F%90%E4%BE%9B%E7%9A%84cordova%E6%9D%83%E9%99%90%E6%8F%92%E4%BB%B6/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/28/linux%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%B9%E9%87%8F%E5%AE%89%E5%85%A8%E6%8E%A7%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/07/28/linux%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%B9%E9%87%8F%E5%AE%89%E5%85%A8%E6%8E%A7%E5%88%B6/" class="post-title-link" itemprop="url">linux 服务器批量安全控制</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-28T00:00:00+08:00">2016-07-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="linux-ssh端口修改-md"><a href="#linux-ssh端口修改-md" class="headerlink" title="linux ssh端口修改.md"></a>linux ssh端口修改.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo   sed -i &quot;s/#Port 22/Port 1997/g&quot; /etc/ssh/sshd_config</span><br><span class="line">sudo cat /etc/ssh/sshd_config |grep Port</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="linux-ssh禁止root登陆-md"><a href="#linux-ssh禁止root登陆-md" class="headerlink" title="linux ssh禁止root登陆.md"></a>linux ssh禁止root登陆.md</h1><ul>
+<li>新建替代root的管理用户<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">adduser sysadmin</span><br><span class="line">passwd sysadmin    # 修改密码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">grep sysadmin /etc/passwd # 查看用户是否存在</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>同步用户环境变量<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp -rf .bashrc /home/sysadmin/</span><br><span class="line">cp -rf cfg /home/sysadmin/</span><br></pre></td></tr></table></figure></li>
+<li>为新建的用户（sysadmin）赋予<code>sudo</code>权限<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;sysadmin  ALL=(ALL)    NOPASSWD:ALL&#x27; &gt;&gt; /etc/sudoers </span><br><span class="line"># 或手动: sudo vim  /etc/sudoers</span><br><span class="line"></span><br><span class="line">sudo cat /etc/sudoers |grep &quot;ALL=(ALL)&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>关闭root用户的ssh通道（即禁止root登陆）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 更新配置</span><br><span class="line">sudo sed -i &quot;s/PermitRootLogin yes/PermitRootLogin no/g&quot; /etc/ssh/sshd_config</span><br><span class="line"># 查看</span><br><span class="line">sudo   cat /etc/ssh/sshd_config |grep PermitRootLogin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 重启生效</span><br><span class="line">sudo /etc/init.d/sshd restart</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="linux-限制普通用户su切换到-root-md"><a href="#linux-限制普通用户su切换到-root-md" class="headerlink" title="linux 限制普通用户su切换到 root.md"></a>linux 限制普通用户su切换到 root.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 修改sysadmin用户分组为wheel</span><br><span class="line">usermod -g  wheel sysadmin</span><br><span class="line"># 查看</span><br><span class="line">id sysadmin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 更新配置（wheel组外用户不允许切换至root）</span><br><span class="line">sudo vim /etc/pam.d/su # auth required pam_wheel.so use_uid (解开此注释)</span><br><span class="line"># 查看</span><br><span class="line">sudo   cat /etc/pam.d/su |grep &#x27;required&#x27;</span><br></pre></td></tr></table></figure>
+
+<h1 id="linux-防火墙iptables设置-md"><a href="#linux-防火墙iptables设置-md" class="headerlink" title="linux 防火墙iptables设置.md"></a>linux 防火墙iptables设置.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">sudo iptables -A INPUT -i lo -j ACCEPT #允许来自于lo接口的数据包</span><br><span class="line">sudo   iptables -A INPUT -p tcp --dport 1997 -j ACCEPT #ssh端口22-&gt;1997</span><br><span class="line">#  sudo  iptables -A INPUT -p tcp --dport 21 -j ACCEPT #FTP端口21</span><br><span class="line">sudo   iptables -A INPUT -p tcp --dport 80 -j ACCEPT #web服务端口80</span><br><span class="line">sudo   iptables -A INPUT -p tcp --dport 8080 -j ACCEPT #tomcat</span><br><span class="line">#  sudo   iptables -A INPUT -p tcp --dport xxxx -j ACCEPT #mysql</span><br><span class="line">#  sudo   iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT #允许icmp包通过,也就是允许ping</span><br><span class="line">#  sudo   iptables -A INPUT -p tcp -s 45.96.174.68 -j ACCEPT #如果要添加内网ip信任（接受其所有TCP请求）</span><br><span class="line">sudo   iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT #允许所有对外请求的返回包</span><br><span class="line">sudo   iptables -P INPUT DROP #过滤所有非以上规则的请求</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看（ 所有iptables以序号标记显示 ）</span><br><span class="line">sudo iptables -L -n --line-numbers</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 开机启动-chkconfig</span><br><span class="line">sudo service iptables save # 保存现状</span><br><span class="line">sudo chkconfig iptables on # 添加到自启动chkconfig</span><br><span class="line">chkconfig --list | grep &#x27;3:on&#x27; # 检查开机启动</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="linux-nginx权限控制策略-md"><a href="#linux-nginx权限控制策略-md" class="headerlink" title="linux nginx权限控制策略.md"></a>linux nginx权限控制策略.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo chown -R sysadmin /usr/local/nginx/html </span><br><span class="line">sudo chown -R sysadmin /usr/local/apache-tomcat-*/webapps</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cd /usr/local/nginx/html &amp;&amp; ll</span><br><span class="line">cd  /usr/local/apache-tomcat-*/webapps  &amp;&amp; ll</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h1 id="恢复-建议使用root用户"><a href="#恢复-建议使用root用户" class="headerlink" title="恢复(建议使用root用户)"></a>恢复(建议使用root用户)</h1><h1 id="四-linux-ssh端口修改-md"><a href="#四-linux-ssh端口修改-md" class="headerlink" title="四 . linux ssh端口修改.md"></a>四 . linux ssh端口修改.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo   sed -i &quot;s/Port 1997/#Port 22/g&quot; /etc/ssh/sshd_config</span><br><span class="line">sudo cat /etc/ssh/sshd_config |grep Port</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo /etc/init.d/sshd restart</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="二-linux-ssh禁止root登陆-md"><a href="#二-linux-ssh禁止root登陆-md" class="headerlink" title="二 . linux ssh禁止root登陆.md"></a>二 . linux ssh禁止root登陆.md</h1><ul>
+<li>恢复root用户的ssh通道（即 恢复 root登陆）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo sed -i &quot;s/PermitRootLogin no/PermitRootLogin yes/g&quot; /etc/ssh/sshd_config</span><br><span class="line">sudo cat /etc/ssh/sshd_config |grep PermitRootLogin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo /etc/init.d/sshd restart</span><br></pre></td></tr></table></figure></li>
+<li>回收：新建的用户（sysadmin）赋予sudo权限</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/sudoers #  手动删除或注释  &#x27;sysadmin  ALL=(ALL)    NOPASSWD:ALL&#x27;  </span><br><span class="line">sudo cat /etc/sudoers |grep &quot;ALL=(ALL)&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>回收：新建替代root的管理用户<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">userdel sysadmin #  仅删除用户帐号，而不删除相关文件。( 需手动删除用户主目录和邮件目录)</span><br><span class="line">#  -f 删除用户登入目录以及目录中所有文件。</span><br><span class="line">rm -rf /home/sysadmin</span><br><span class="line"></span><br><span class="line">rm -rf /var/mail/sysadmin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 或</span><br><span class="line">userdel -r sysadmin # -r 彻底删除（含用户主目录和邮件目录）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">grep sysadmin /etc/passwd</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="三-linux-限制普通用户su切换到-root-md"><a href="#三-linux-限制普通用户su切换到-root-md" class="headerlink" title="三. linux 限制普通用户su切换到 root.md"></a>三. linux 限制普通用户su切换到 root.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo   vim /etc/pam.d/su # auth required pam_wheel.so use_uid (还原注释)</span><br><span class="line"></span><br><span class="line">sudo   cat /etc/pam.d/su |grep &#x27;required&#x27;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="一-linux-防火墙iptables设置-md"><a href="#一-linux-防火墙iptables设置-md" class="headerlink" title="一.linux 防火墙iptables设置.md"></a>一.linux 防火墙iptables设置.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 清空规则(重置)</span><br><span class="line">sudo   iptables -P INPUT ACCEPT # 恢复默认允许访问(不恢复就麻烦了~)</span><br><span class="line">sudo   iptables -F # 清空默认所有规则</span><br><span class="line">sudo   iptables -X # 清空自定义的所有规则</span><br><span class="line">sudo   iptables -Z # 计数器置0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看（ 所有iptables以序号标记显示 ）</span><br><span class="line"></span><br><span class="line">sudo   iptables -L -n --line-numbers</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 开机启动-chkconfig</span><br><span class="line">sudo service iptables save # 保存现状</span><br><span class="line">sudo   chkconfig iptables off # 删除</span><br><span class="line">chkconfig --list | grep &#x27;3:on&#x27; # 检查开机启动</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="五-linux-nginx权限控制策略-md"><a href="#五-linux-nginx权限控制策略-md" class="headerlink" title="五. linux nginx权限控制策略.md"></a>五. linux nginx权限控制策略.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo chown -R root /usr/local/nginx/html </span><br><span class="line">sudo chown -R root /usr/local/apache-tomcat-*/webapps</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cd /usr/local/nginx/html &amp;&amp; ll</span><br><span class="line">cd  /usr/local/apache-tomcat-*/webapps  &amp;&amp; ll</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/07/28/linux%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%B9%E9%87%8F%E5%AE%89%E5%85%A8%E6%8E%A7%E5%88%B6/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/26/%E8%AE%BE%E8%AE%A1%E7%AB%99%E7%82%B9%20&%20%E6%95%88%E6%9E%9C%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/07/26/%E8%AE%BE%E8%AE%A1%E7%AB%99%E7%82%B9%20&%20%E6%95%88%E6%9E%9C%E5%BA%93/" class="post-title-link" itemprop="url">设计站点 & 效果库</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-07-26 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-26T00:00:00+08:00">2016-07-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="设计站点"><a href="#设计站点" class="headerlink" title="设计站点"></a>设计站点</h1><ul>
+<li><p><code>Codrops|有用的资源和灵感的创意思维</code><br><a target="_blank" rel="noopener" href="http://tympanus.net/codrops/">http://tympanus.net/codrops/</a></p>
+<ul>
+<li><code>Mary Lou, Author at Codrops</code>      <a target="_blank" rel="noopener" href="http://tympanus.net/codrops/author/crnacura/">http://tympanus.net/codrops/author/crnacura/</a></li>
+</ul>
 </li>
-<li><p>解决办法：修改为<code>xxx_dev</code>或者<code>automatic</code>,重新安装到程序包，就能正常在Safari中正常调试了</p>
+<li><p><code>Dribbble - Show and tell for designers 显示并告诉设计师</code><br><a target="_blank" rel="noopener" href="https://dribbble.com/">https://dribbble.com/</a></p>
+<ul>
+<li><code>Manoela Ilic - Dribbble</code>      <a target="_blank" rel="noopener" href="https://dribbble.com/crnacura">https://dribbble.com/crnacura</a></li>
+</ul>
+</li>
+<li><p><code>视觉中国设计师社区</code><br>搜索：视差:  <a target="_blank" rel="noopener" href="http://shijue.me/community/search?search=works&key=%E8%A7%86%E5%B7%AE">http://shijue.me/community/search?search=works&amp;key=%E8%A7%86%E5%B7%AE</a></p>
+</li>
+<li><p><code>优设-UISDC: 优秀网页设计联盟-SDC-网页设计师交流平台-听讲座，聊设计，找素材，尽在优设网</code><br><a target="_blank" rel="noopener" href="http://www.uisdc.com/">http://www.uisdc.com/</a></p>
+</li>
+<li><p><code>觉唯_用户体验设计分享平台</code><br>搜索：视差:  <a target="_blank" rel="noopener" href="http://www.jiawin.com/?genre=&s=%E8%A7%86%E5%B7%AE">http://www.jiawin.com/?genre=&amp;s=%E8%A7%86%E5%B7%AE</a></p>
+<ul>
+<li><p><code>14个超棒的带有故事趣味性视差滚动网站_觉唯设计</code>           <a target="_blank" rel="noopener" href="http://www.jiawin.com/story-scrolling-website">http://www.jiawin.com/story-scrolling-website</a></p>
+<ul>
+<li><code> Every Last Drop – An Interactive Website about Water Saving</code>           <a target="_blank" rel="noopener" href="http://everylastdrop.co.uk/">http://everylastdrop.co.uk/</a><br>   <img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-7-30/74694953.jpg"></li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 <hr>
-<h1 id="常规Safari远程调试"><a href="#常规Safari远程调试" class="headerlink" title="常规Safari远程调试"></a>常规Safari远程调试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">设置</span><br><span class="line">   | Safari</span><br><span class="line">   |        | 高级</span><br><span class="line">   |        |      |Web检查器</span><br></pre></td></tr></table></figure>
-<p><code>Mac下ionic调试 - java_speed的个人页面 - 开源中国社区</code><br><a target="_blank" rel="noopener" href="https://my.oschina.net/twinkling/blog/504824?p=">https://my.oschina.net/twinkling/blog/504824?p=</a></p>
+<h1 id="插件库"><a href="#插件库" class="headerlink" title="插件库"></a>插件库</h1><p><code>dowebok - 做好网站</code><br><a target="_blank" rel="noopener" href="http://www.dowebok.com/">http://www.dowebok.com/</a></p>
+<p><code>jQuery插件库-收集最全最新最好的jQuery插件</code><br><a target="_blank" rel="noopener" href="http://www.jq22.com/">http://www.jq22.com/</a></p>
+<p><code>jQuery之家-自由分享jQuery、html5、css3的插件库</code><br><a target="_blank" rel="noopener" href="http://www.htmleaf.com/">http://www.htmleaf.com</a></p>
+<p><code>jquery插件-jQ酷</code><br><a target="_blank" rel="noopener" href="http://www.jqcool.net/">http://www.jqcool.net</a></p>
+<p><code>网页特效库-html5 css3动画-banner特效-酷站欣赏</code><br><a target="_blank" rel="noopener" href="http://www.5iweb.com.cn/">http://www.5iweb.com.cn/</a></p>
 <hr>
-<h1 id="更多调试工具"><a href="#更多调试工具" class="headerlink" title="更多调试工具"></a>更多调试工具</h1><p>使用weinre调试</p>
-<p>使用chrome的inspect调试</p>
-<p>GapDebug</p>
-<p>PhoneGap Developer App</p>
-<p>Ionic View</p>
-<p><code>ionic调试方法总结 - ioniconline的博客 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/ioniconline/article/details/50162685">http://blog.csdn.net/ioniconline/article/details/50162685</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/03/14/Safari%20%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95(inspect)%E7%A7%BB%E5%8A%A8%E7%AB%AFwebview,%E6%89%BE%E4%B8%8D%E5%88%B0%E5%BE%85%E8%B0%83%E8%AF%95%E9%A1%B5%E9%9D%A2/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/03/14/hexo%E6%8F%90%E4%BA%A4github%E5%87%BA%E9%94%99(ssh)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/03/14/hexo%E6%8F%90%E4%BA%A4github%E5%87%BA%E9%94%99(ssh)/" class="post-title-link" itemprop="url">hexo提交github出错(ssh)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-03-14 00:00:00" itemprop="dateCreated datePublished" datetime="2016-03-14T00:00:00+08:00">2016-03-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="hexo-d-提交github出错-ssh"><a href="#hexo-d-提交github出错-ssh" class="headerlink" title="hexo d 提交github出错(ssh)"></a><code>hexo d</code> 提交github出错(ssh)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">On branch master</span><br><span class="line">nothing to commit, working directory clean</span><br><span class="line">Warning: Permanently added the RSA host key for IP address &#x27;192.30.252.128&#x27; to the list of known hosts.</span><br><span class="line">ERROR: Permission to liuxiang/liuxiang.github.io.git denied to lushanlai.</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line">FATAL Something&#x27;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html</span><br><span class="line">Error: Warning: Permanently added the RSA host key for IP address &#x27;192.30.252.128&#x27; to the list of known hosts.</span><br><span class="line">ERROR: Permission to liuxiang/liuxiang.github.io.git denied to lushanlai.</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; (F:\Tool\node\hexo\blog\node_modules\hexo-deployer-git\node_modules\hexo-util\lib\spawn.js:42:17)</span><br><span class="line">    at emitTwo (events.js:87:13)</span><br><span class="line">    at ChildProcess.emit (events.js:172:7)</span><br><span class="line">    at maybeClose (internal/child_process.js:817:16)</span><br><span class="line">    at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nothing to commit, working directory clean</span><br><span class="line">fatal: Could not read from remote repository.</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><ul>
-<li><p>重新本地生成ssh-key</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C &quot;邮件地址@youremail.com&quot;</span><br><span class="line"></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;</span><br><span class="line">Enter passphrase (empty for no passphrase):&lt;输入加密串&gt;  (不建议输入密码,hexo提交默认是无密码)</span><br><span class="line">Enter same passphrase again:&lt;再次输入加密串&gt;</span><br></pre></td></tr></table></figure></li>
-<li><p>更新,github  <code> https://github.com/settings/ssh</code></p>
-</li>
-<li><p>测试连接 <code>ssh -T git@github.com</code></p>
-</li>
-<li><p>hexo重新提交 <code>hexo d</code></p>
-</li>
-</ul>
-<hr>
-<h1 id="上传操作-hexo-d-报错spawn-git-ENOENT"><a href="#上传操作-hexo-d-报错spawn-git-ENOENT" class="headerlink" title="上传操作  hexo d  报错spawn git ENOENT"></a>上传操作  hexo d  报错spawn git ENOENT</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Error: spawn git ENOENT</span><br><span class="line">    at exports._errnoException (util.js:746:11)</span><br><span class="line">    at Process.ChildProcess._handle.onexit (child_process.js:1053:32)</span><br><span class="line">    at child_process.js:1144:20)</span><br><span class="line">    at process._tickCallback (node.js:355:11)</span><br></pre></td></tr></table></figure>
-<p>未添加Git环境变量引起，添加Git与git管理库的环境变量即可；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\Git\bin;D:\Git\libexec\git-core</span><br></pre></td></tr></table></figure>
-<p><code>hexo 部署至Git遇到的坑 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/67c57c70f275">http://www.jianshu.com/p/67c57c70f275</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/03/14/hexo%E6%8F%90%E4%BA%A4github%E5%87%BA%E9%94%99(ssh)/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/03/13/travisci-hexo-deploy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/03/13/travisci-hexo-deploy/" class="post-title-link" itemprop="url">使用travis-ci自动部署hexo博客</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-03-13 16:51:37" itemprop="dateCreated datePublished" datetime="2016-03-13T16:51:37+08:00">2016-03-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:14:31" itemprop="dateModified" datetime="2024-01-24T10:14:31+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>travis-ci是一个持续集成工具，目前已经支持大部分主流语言了，如：node.js、objective-c、android、php、c、java、python、ruby、go等等。travis ci与github集成非常紧密，官方的集成测试托管只支持github项目，而且它对于公有的github仓库免费。在这篇文章中，我将介绍如何通过travis-ci自动化部署hexo博客。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/03/13/travisci-hexo-deploy/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/03/13/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%ADblog%20&%20github%20pages,hexo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/03/13/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%ADblog%20&%20github%20pages,hexo/" class="post-title-link" itemprop="url">手把手搭blog & github pages,hexo</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-03-13 00:00:00" itemprop="dateCreated datePublished" datetime="2016-03-13T00:00:00+08:00">2016-03-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/blog/" itemprop="url" rel="index"><span itemprop="name">blog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>基于github pages支持 &amp; hexo  静态博客 生成器</p>
+<h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><h2 id="视差抖动"><a href="#视差抖动" class="headerlink" title="视差抖动"></a>视差抖动</h2><blockquote>
+<p>视差引擎作出反应到智能设备的方向</p>
 </blockquote>
-<h1 id="收益"><a href="#收益" class="headerlink" title="收益"></a>收益</h1><ul>
-<li><p>学习留存率<br><a target="_blank" rel="noopener" href="http://liuxiang.github.io/2015/12/18/%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E5%B9%B3%E5%9D%87%E7%95%99%E5%AD%98%E7%8E%87/">http://liuxiang.github.io/2015/12/18/%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E5%B9%B3%E5%9D%87%E7%95%99%E5%AD%98%E7%8E%87/</a></p>
-</li>
-<li><p>从事行业留下点东西</p>
-</li>
-<li><p>github好装逼,找工作待遇好</p>
-</li>
-<li><p>分类:留自己看,给别人看</p>
-</li>
-<li><p>被动总结,结构化知识</p>
-</li>
-<li><p>方便分享</p>
-</li>
+<p><code>wagerfield/parallax: Parallax Engine that reacts to the orientation of a smart device</code><br><a target="_blank" rel="noopener" href="https://github.com/wagerfield/parallax">https://github.com/wagerfield/parallax</a></p>
+<p><strong>效果</strong><br><code>parallax.js</code><br><a target="_blank" rel="noopener" href="http://matthew.wagerfield.com/parallax/">http://matthew.wagerfield.com/parallax/</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-7-30/39021411.jpg"></p>
+<hr>
+<h2 id="视差滚动（Parallax-Scrolling）"><a href="#视差滚动（Parallax-Scrolling）" class="headerlink" title="视差滚动（Parallax Scrolling）"></a>视差滚动（Parallax Scrolling）</h2><p><code>用 Stellar.js 制作视差滚动效果 - 新闻 - SegmentFault</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000002566463">https://segmentfault.com/a/1190000002566463</a></p>
+<p><code>markdalgleish/stellar.js: Stellar.js - Parallax scrolling made easy</code><br><a target="_blank" rel="noopener" href="https://github.com/markdalgleish/stellar.js">https://github.com/markdalgleish/stellar.js</a></p>
+<p><strong>效果</strong><br><a target="_blank" rel="noopener" href="http://markdalgleish.com/projects/stellar.js/demos/backgrounds.html">http://markdalgleish.com/projects/stellar.js/demos/backgrounds.html</a><br><a target="_blank" rel="noopener" href="http://im.qq.com/">http://im.qq.com/</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-7-30/59285362.jpg"></p>
+<hr>
+<h2 id="全屏滚动-幻灯片插件-轮播图-banner横幅-滑动插件-滑块插件"><a href="#全屏滚动-幻灯片插件-轮播图-banner横幅-滑动插件-滑块插件" class="headerlink" title="全屏滚动 &#x2F; 幻灯片插件 &#x2F; 轮播图 &#x2F; banner横幅 &#x2F; 滑动插件 &#x2F; 滑块插件"></a>全屏滚动 &#x2F; 幻灯片插件 &#x2F; 轮播图 &#x2F; banner横幅 &#x2F; 滑动插件 &#x2F; 滑块插件</h2><p><code>alvarotrigo/fullPage.js: fullPage plugin by Alvaro Trigo. Create full screen pages fast and simple</code><br><a target="_blank" rel="noopener" href="https://github.com/alvarotrigo/fullPage.js">https://github.com/alvarotrigo/fullPage.js</a></p>
+<ul>
+<li>示例库<br><a target="_blank" rel="noopener" href="http://www.dowebok.com/demo/2014/77/">http://www.dowebok.com/demo/2014/77/</a></li>
 </ul>
-<h1 id="一-pages-github"><a href="#一-pages-github" class="headerlink" title="一.pages.github"></a>一.pages.github</h1><p>1.注册github账号<br>2.新建 [username].github.io  项目</p>
-<p><strong>参考</strong><br><a target="_blank" rel="noopener" href="https://pages.github.com/">https://pages.github.com/</a></p>
-<h1 id="二-hexo-博客生成器"><a href="#二-hexo-博客生成器" class="headerlink" title="二.hexo 博客生成器"></a>二.hexo 博客生成器</h1><p>windows：安装 nodejs,hexo</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g #npm安装hexo-cli</span><br><span class="line">$ hexo init blog #hexo初始化,命名blog</span><br><span class="line">$ cd blog #进入目录</span><br><span class="line">$ npm install #安装依赖模块</span><br><span class="line">$ hexo server #开启预览(http://localhost:4000,Press Ctrl+C to stop)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ hexo generate #生成静态页面</span><br><span class="line">$ hexo server #开启预览(http://localhost:4000,Press Ctrl+C to stop)</span><br></pre></td></tr></table></figure>
+<p><strong>效果</strong></p>
+<p><code>jquery整屏滚动插件Scrollify</code><br><a target="_blank" rel="noopener" href="http://www.jq22.com/yanshi465">http://www.jq22.com/yanshi465</a></p>
+<p><code>带视觉差效果的平滑单页滚动jQuery插件</code><br><a target="_blank" rel="noopener" href="http://www.jq22.com/yanshi8665">http://www.jq22.com/yanshi8665</a>  </p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-7-30/85707060.jpg"></p>
+<hr>
+<h1 id="移动端触摸滑动插件swiper"><a href="#移动端触摸滑动插件swiper" class="headerlink" title="移动端触摸滑动插件swiper"></a>移动端触摸滑动插件<code>swiper</code></h1><p><a target="_blank" rel="noopener" href="http://www.swiper.com.cn/">http://www.swiper.com.cn/</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/92743533.jpg"></p>
+<hr>
+<h1 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h1><p><code>前端收藏夹</code><br><a target="_blank" rel="noopener" href="http://collect.w3ctrain.com/">http://collect.w3ctrain.com/</a></p>
+<p><code>送给前端的你，推荐几篇前端汇总文章。 - 学习编程 - 知乎专栏</code></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22229868">https://zhuanlan.zhihu.com/p/22229868</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/07/26/%E8%AE%BE%E8%AE%A1%E7%AB%99%E7%82%B9%20&%20%E6%95%88%E6%9E%9C%E5%BA%93/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
 
 
-<h1 id="三-配置hexo提交github路径"><a href="#三-配置hexo提交github路径" class="headerlink" title="三.配置hexo提交github路径"></a>三.配置hexo提交github路径</h1><p><code>blog/_config.yml</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  #repository: https://github.com/liuxiang/liuxiang.github.io.git</span><br><span class="line">  repository: git@github.com:liuxiang/liuxiang.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 
 
-<h1 id="四-配置github代码提交-ssh信任（作用：免账号提交代码，集成hexo）"><a href="#四-配置github代码提交-ssh信任（作用：免账号提交代码，集成hexo）" class="headerlink" title="四.配置github代码提交 ssh信任（作用：免账号提交代码，集成hexo）"></a>四.配置github代码提交 ssh信任（作用：免账号提交代码，集成hexo）</h1><p><code>配置SSH keys</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/05289a4bc8b2">http://www.jianshu.com/p/05289a4bc8b2</a></p>
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/25/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE-linux%20Web%E6%9C%8D%E5%8A%A1%E5%AE%89%E5%85%A8.xmind/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/07/25/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE-linux%20Web%E6%9C%8D%E5%8A%A1%E5%AE%89%E5%85%A8.xmind/" class="post-title-link" itemprop="url">思维导图-linux Web服务安全.xmind</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-07-25 00:00:03" itemprop="dateCreated datePublished" datetime="2016-07-25T00:00:03+08:00">2016-07-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://github.com/liuxiang/xmind">下载：<code>linux Web服务安全.xmind </code></a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-7-25/37155340.jpg"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/07/25/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE-linux%20Web%E6%9C%8D%E5%8A%A1%E5%AE%89%E5%85%A8.xmind/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/25/%E5%9B%BE%E7%89%87%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/07/25/%E5%9B%BE%E7%89%87%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">图片异步加载方案</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-07-25 00:00:02" itemprop="dateCreated datePublished" datetime="2016-07-25T00:00:02+08:00">2016-07-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="jQuery-Lazy-Load-图片延迟加载"><a href="#jQuery-Lazy-Load-图片延迟加载" class="headerlink" title="jQuery Lazy Load 图片延迟加载"></a>jQuery Lazy Load 图片延迟加载</h1><blockquote>
+<p> Lazy Load 是一个用 JavaScript 编写的 jQuery 插件. 它可以延迟加载长页面中的图片. 在浏览器可视区域外的图片不会被载入, 直到用户将页面滚动到它们所在的位置. 这与图片预加载的处理方式正好是相反的.<br>在包含很多大图片长页面中延迟加载图片可以加快页面加载速度. 浏览器将会在加载可见图片之后即进入就绪状态. 在某些情况下还可以帮助降低服务器负担.<br><a target="_blank" rel="noopener" href="http://www.w3cways.com/1765.html">http://www.w3cways.com/1765.html</a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;jquery.lazyload.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!--</span><br><span class="line">将真实图片地址写在 data-original 属性中，而 src 属性中的图片换成占位符的图片（例如 1x1 像素的灰色图片或者 loading 的 gif 图片）</span><br><span class="line">添加 class=&quot;lazy&quot; 用于区别哪些图片需要延时加载，当然你也可以换成别的关键词，修改的同时记得修改调用时的 jQuery 选择器</span><br><span class="line">添加 width 和 height 属性有助于在图片未加载时占满所需要的空间</span><br><span class="line">--&gt;</span><br><span class="line">&lt;img class=&quot;lazy&quot; src=&quot;grey.gif&quot; data-original=&quot;example.jpg&quot; width=&quot;640&quot; heigh=&quot;480&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$(&#x27;img.lazy&#x27;).lazyload();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>jQuery Lazy Load 图片延迟加载 - 前端开发仓库</code><br><a target="_blank" rel="noopener" href="http://code.ciaoca.com/jquery/lazyload/">http://code.ciaoca.com/jquery/lazyload/</a></p>
+<p><code>你还在用jquery.lazyload这个坑爹的图片分屏加载插件么？ - 胡尐睿丶 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/hooray/archive/2011/10/15/2212922.html">http://www.cnblogs.com/hooray/archive/2011/10/15/2212922.html</a><br>(第二次图片请求，取消了)<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-7-25/81154367.jpg"></p>
+<h1 id="更多工具"><a href="#更多工具" class="headerlink" title="更多工具"></a>更多工具</h1><ul>
+<li><p>lazysizes</p>
 <blockquote>
-<p>安装Git - 打开Git Bash Here窗口<br>设置用户名邮箱<br>git config –global user.name “liuxiang”<br>git config –global user.email “<a href="mailto:&#108;&#x69;&#117;&#120;&#105;&#x61;&#x6e;&#103;&#x2e;&#49;&#50;&#x32;&#55;&#x40;&#x71;&#x71;&#46;&#99;&#x6f;&#x6d;&#x2e;&#x63;&#111;&#x6d;">&#108;&#x69;&#117;&#120;&#105;&#x61;&#x6e;&#103;&#x2e;&#49;&#50;&#x32;&#55;&#x40;&#x71;&#x71;&#46;&#99;&#x6f;&#x6d;&#x2e;&#x63;&#111;&#x6d;</a>“</p>
+<p>原生js，不依赖于jquery&#x2F;zepto<br>自动监测可能发生变化的lazyload节点，不需要额外初始化<br>支持响应式图片srcset<br>性能高，改善SEO</p>
 </blockquote>
-<p>SSH keys</p>
-<ul>
-<li><p>介绍</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C &quot;邮件地址@youremail.com&quot;</span><br><span class="line"></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Enter passphrase (empty for no passphrase):&lt;输入加密串&gt;  (不建议输入密码,hexo提交默认是无密码)</span><br><span class="line">Enter same passphrase again:&lt;再次输入加密串&gt;</span><br></pre></td></tr></table></figure>
-
+<p>   <code>aFarkas/lazysizes.</code><br>   <a target="_blank" rel="noopener" href="https://github.com/aFarkas/lazysizes">https://github.com/aFarkas/lazysizes</a></p>
 </li>
-<li><p>操作</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C &quot;liuxiang.1227@qq.com&quot;</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/c/Users/Administrator/.ssh/id_rsa):</span><br><span class="line">/c/Users/Administrator/.ssh/id_rsa already exists.</span><br><span class="line">Overwrite (y/n)? y</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in /c/Users/Administrator/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /c/Users/Administrator/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:GDZ/8mEe4W9vL+re3ZI0S16zSgWgAB23/lvQVi+BEi4 liuxiang.1227@qq.com</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|     .oo....     |</span><br><span class="line">|       .o.o...   |</span><br><span class="line">|      + Eo+ .... |</span><br><span class="line">|     . =.o o. o..|</span><br><span class="line">|      . S.*. o...|</span><br><span class="line">|         *.+o =o.|</span><br><span class="line">|          o.o* =o|</span><br><span class="line">|           .+oBo.|</span><br><span class="line">|           ++++++|</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>-添加SSH Key到GitHub<br>在本机设置SSH Key之后，需要添加到GitHub上，以完成SSH链接的设置。</p>
+<li><p>antimoderate</p>
 <blockquote>
-<p>1、打开本地C:\Documents and Settings\Administrator.ssh\id_rsa.pub文件。此文件里面内容为刚才生成人密钥。如果看不到这个文件，你需要设置显示隐藏文件。准确的复制这个文件的内容，才能保证设置的成功。</p>
+<p>先加载一张很小的缩略图，它可能只有1K左右，并且按所需尺寸模糊显示，等到大尺寸图片下载好再完整显示大图</p>
 </blockquote>
-<blockquote>
-<p>2、登陆github系统。点击右上角的 Account Settings—&gt;SSH Public keys —&gt; add another public keys</p>
-</blockquote>
-<blockquote>
-<p>3、把你本地生成的密钥复制到里面（key文本框中）， 点击 add key 就ok了</p>
-</blockquote>
-<blockquote>
-<p>测试</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br><span class="line">Hi liuxiang! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
-
-<h2 id="五-hexo提交发布内容-public"><a href="#五-hexo提交发布内容-public" class="headerlink" title="五.hexo提交发布内容(public)"></a>五.hexo提交发布内容(public)</h2><p><code> hexo deploy</code> #发布github(依赖_config.yml中deploy-github配置)</p>
-<p>** 错误**<br><code>hexo deploy命令显示ERROR Deployer not found : github</code><br><strong>解决办法</strong><br><code>npm install hexo-deployer-git --save</code></p>
-<p><strong>重试</strong><br><code> hexo deploy</code> #发布github(依赖_config.yml中deploy-github配置)</p>
-<h2 id="测试访问-github-io"><a href="#测试访问-github-io" class="headerlink" title="测试访问 ****.github.io"></a>测试访问 <code>****.github.io</code></h2><hr>
-<h1 id="六-更新hexo主题模板"><a href="#六-更新hexo主题模板" class="headerlink" title="六.更新hexo主题模板"></a>六.更新<code>hexo</code>主题模板</h1><p>github搜：hexo-theme<br><a target="_blank" rel="noopener" href="https://github.com/search?o=desc&q=hexo-theme&s=stars&type=Repositories&utf8=%E2%9C%93">https://github.com/search?o=desc&amp;q=hexo-theme&amp;s=stars&amp;type=Repositories&amp;utf8=%E2%9C%93</a><br>如：<code>hexo-theme-yilia</code></p>
-<ul>
-<li><code>下载&amp;位置</code>: <code>blog/themes</code></li>
-<li><code>更新主题模板应用</code> 修改hexo根目录下的 _config.yml ： theme: yilia</li>
-<li><code>重新编译&amp;本地服务</code> <code>hexo g &amp; hexo s</code></li>
-</ul>
-<p><strong>出错</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR Process failed: layout/.DS_Store</span><br><span class="line">TypeError: Cannot read property &#x27;compile&#x27; of undefined</span><br></pre></td></tr></table></figure>
-<p><strong>解决办法</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd 进到你使用的theme对应的目录，再进到layout/和layout/_partial/下.</span><br><span class="line">分别执行rm .DS_Store</span><br></pre></td></tr></table></figure>
-<p><strong>参考</strong>  <a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000004533667">https://segmentfault.com/q/1010000004533667</a></p>
-<ul>
-<li>重试&gt;重新编译&amp;本地服务 <code>hexo g &amp; hexo s</code></li>
-</ul>
-<h1 id="提交blog更新"><a href="#提交blog更新" class="headerlink" title="提交blog更新"></a>提交blog更新</h1><p><code> hexo deploy</code> #发布github(依赖_config.yml中deploy-github配置)</p>
-<hr>
-<h1 id="保留hexo工程代码，提交至github"><a href="#保留hexo工程代码，提交至github" class="headerlink" title="保留hexo工程代码，提交至github"></a>保留hexo工程代码，提交至github</h1><ul>
-<li>github 新建工程<code>blog.hexo</code></li>
-<li>将本地blog工程提交<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;# blog.hexo&quot; &gt;&gt; README.md</span><br><span class="line"></span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line">git remote add origin https://github.com/liuxiang/blog.hexo.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="hexo使用"><a href="#hexo使用" class="headerlink" title="hexo使用"></a>hexo使用</h1><ul>
-<li><p>指定文章<code>标题</code>&amp;<code>日期</code>&amp;<code>分类</code>&amp;<code>标签</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 文章名</span><br><span class="line">date: 2016-03-13 00:00:01</span><br><span class="line">categories:分类</span><br><span class="line">tags: [标签1, 标签2]</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>增加更多<br><code>&lt;!-- more --&gt;</code>  之前内容会显示在首页预览，之后内容只能在点击文章标题进入后才可看到</p>
-</li>
-<li><p>插件<br><code>统计访问:不蒜子</code> <a target="_blank" rel="noopener" href="http://service.ibruce.info/">http://service.ibruce.info/</a></p>
+<p>   <code>whackashoe/antimoderate: The progressive image loading library for great good!</code><br>   <a target="_blank" rel="noopener" href="https://github.com/whackashoe/antimoderate">https://github.com/whackashoe/antimoderate</a></p>
 </li>
 </ul>
-<p><code>更多</code> <a target="_blank" rel="noopener" href="https://hexo.io/plugins/">https://hexo.io/plugins/</a><br><code>搜索插件</code> Hexo 中有用户基础的 Swiftype 和 Hexo 官网使用的 Algolia</p>
-<h2 id="markdown格式，编写指导"><a href="#markdown格式，编写指导" class="headerlink" title="markdown格式，编写指导"></a>markdown格式，编写指导</h2><p><code>马克飞象</code> <a target="_blank" rel="noopener" href="https://maxiang.io/">https://maxiang.io/</a><br><code>作业部落</code> <a target="_blank" rel="noopener" href="https://www.zybuluo.com/mdeditor">https://www.zybuluo.com/mdeditor</a><br><code>七牛图床</code>  <a target="_blank" rel="noopener" href="http://yotuku.cn/">http://yotuku.cn/</a></p>
+<h1 id="图片延迟加载-手动实现"><a href="#图片延迟加载-手动实现" class="headerlink" title="图片延迟加载-手动实现"></a>图片延迟加载-手动实现</h1><p><code>Web图片延迟加载的思路 - 简书</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/cc05e9a769e6">http://www.jianshu.com/p/cc05e9a769e6</a></p>
+<p><code>图片延迟加载demo - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/bb16cd4f79d7">http://www.jianshu.com/p/bb16cd4f79d7</a></p>
 <hr>
-<p><strong>参考</strong><br><code>hexo你的博客</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/AfQnQjy/">http://www.tuicool.com/articles/AfQnQjy/</a></p>
-<p><code>如何搭建一个独立博客——简明Github Pages与Hexo教程</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/05289a4bc8b2">http://www.jianshu.com/p/05289a4bc8b2</a></p>
-<p><code>Hexo搭建Github静态博客 - 金石开 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhcncn/p/4097881.html">http://www.cnblogs.com/zhcncn/p/4097881.html</a></p>
-<p><code>史上最详细“截图”搭建Hexo博客并部署到Github_百度经验</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/d8072ac47aca0fec95cefd2d.html">http://jingyan.baidu.com/article/d8072ac47aca0fec95cefd2d.html</a></p>
-<p><code>hexo | 逝去的记忆 </code><br><a target="_blank" rel="noopener" href="http://www.coolpython.cn/category/hexo/">http://www.coolpython.cn/category/hexo/</a></p>
-<p><code>使用Hexo搭建博客</code><br><a target="_blank" rel="noopener" href="https://blog.lmintlcx.com/post/blog-with-hexo.html">https://blog.lmintlcx.com/post/blog-with-hexo.html</a></p>
-<p><code>hexo主题推荐 </code></p>
-<p><a target="_blank" rel="noopener" href="http://www.zhihu.com/question/24422335">http://www.zhihu.com/question/24422335</a></p>
-<p><code>StaticGen开源静态网站 - StaticGen</code><br><a target="_blank" rel="noopener" href="http://www.staticgen.com/">http://www.staticgen.com/</a></p>
-<p><code>手把手教你用github pages搭建博客</code><br><a target="_blank" rel="noopener" href="http://www.woaitqs.cc/blog/2016/06/08/blog-seo-baidu.html">http://www.woaitqs.cc/blog/2016/06/08/blog-seo-baidu.html</a></p>
+<h1 id="扩展应用：响应式图片解决方案-Srcset和sizes"><a href="#扩展应用：响应式图片解决方案-Srcset和sizes" class="headerlink" title="扩展应用：响应式图片解决方案(Srcset和sizes)"></a>扩展应用：响应式图片解决方案(Srcset和sizes)</h1><p><code>图片响应式解决方案 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/235ef450f5e9">http://www.jianshu.com/p/235ef450f5e9</a></p>
+<p><code>Srcset和sizes_Responsive 教程_w3cplus</code><br><a target="_blank" rel="noopener" href="http://www.w3cplus.com/css3/srcset-sizes.html">http://www.w3cplus.com/css3/srcset-sizes.html</a></p>
 <hr>
-<p><code>hexo YAML [分类 &amp; 标签]编译问题</code></p>
-<p><a target="_blank" rel="noopener" href="http://liuxiang.github.io/2015/11/30/hexo%20YAML%20[%E5%88%86%E7%B1%BB%20&%20%E6%A0%87%E7%AD%BE]%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98/">http://liuxiang.github.io/2015/11/30/hexo%20YAML%20[%E5%88%86%E7%B1%BB%20&amp;%20%E6%A0%87%E7%AD%BE]%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98/</a></p>
-<p><code>markdown 图片注释</code><br><a target="_blank" rel="noopener" href="http://liuxiang.github.io/2016/02/23/markdown%20%E5%9B%BE%E7%89%87%E6%B3%A8%E9%87%8A/">http://liuxiang.github.io/2016/02/23/markdown%20%E5%9B%BE%E7%89%87%E6%B3%A8%E9%87%8A/</a></p>
+<p><strong>更多参考</strong><br><code>图片延迟加载方案 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/dc5fd46ff22c">http://www.jianshu.com/p/dc5fd46ff22c</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2016/03/13/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%ADblog%20&%20github%20pages,hexo/#more" rel="contents">
+              <a class="btn" href="/2016/07/25/%E5%9B%BE%E7%89%87%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E6%96%B9%E6%A1%88/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -673,7 +1004,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/03/10/%E5%89%8D%E7%AB%AF%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E5%8F%91%E5%B1%95%E5%8F%B2/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/25/xmind-%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -691,7 +1022,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/03/10/%E5%89%8D%E7%AB%AF%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E5%8F%91%E5%B1%95%E5%8F%B2/" class="post-title-link" itemprop="url">前端异步编程发展史</a>
+          <a href="/2016/07/25/xmind-%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0%EF%BC%89/" class="post-title-link" itemprop="url">xmind-技术（个人笔记）</a>
         </h2>
 
         <div class="post-meta-container">
@@ -702,7 +1033,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-03-10 00:00:02" itemprop="dateCreated datePublished" datetime="2016-03-10T00:00:02+08:00">2016-03-10</time>
+      <time title="Created: 2016-07-25 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-25T00:00:00+08:00">2016-07-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -710,15 +1041,6 @@
       </span>
       <span class="post-meta-item-text">Edited on</span>
       <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
     </span>
 
   
@@ -731,58 +1053,97 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="前端异步编程发展史-callBack-Promise-Generator-async-await-md"><a href="#前端异步编程发展史-callBack-Promise-Generator-async-await-md" class="headerlink" title="前端异步编程发展史(callBack,Promise,Generator,async-await).md"></a>前端异步编程发展史(callBack,Promise,Generator,async-await).md</h1><h1 id="github搜索window-Promise-document-write"><a href="#github搜索window-Promise-document-write" class="headerlink" title="github搜索&lt;script&gt;window.Promise || document.write"></a>github搜索<code>&lt;script&gt;window.Promise || document.write</code></h1><p><a target="_blank" rel="noopener" href="https://github.com/search?q=%3Cscript%3Ewindow.Promise+%7C%7C+document.write&type=Code&utf8=%E2%9C%93">https://github.com/search?q=%3Cscript%3Ewindow.Promise+%7C%7C+document.write&amp;type=Code&amp;utf8=%E2%9C%93</a></p>
-<p><code>ES6-Promise (subset of rsvp.js)</code><br><a target="_blank" rel="noopener" href="https://github.com/stefanpenner/es6-promise">https://github.com/stefanpenner/es6-promise</a></p>
-<hr>
-<h1 id="一，callback"><a href="#一，callback" class="headerlink" title="一，callback"></a>一，callback</h1><h1 id="二，ES6中的Promise"><a href="#二，ES6中的Promise" class="headerlink" title="二，ES6中的Promise"></a>二，ES6中的<code>Promise</code></h1><p><code>谈谈 ES6 的 Promise 对象</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000002928371">https://segmentfault.com/a/1190000002928371</a></p>
-<p><code>JavaScript Promise迷你书（中文版)</code><br><a target="_blank" rel="noopener" href="http://liubin.org/promises-book/">http://liubin.org/promises-book/</a></p>
-<p><code>Promise的前世今生和妙用技巧</code></p>
-<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/whitewolf/archive/2015/10/22/4902570.html">http://www.cnblogs.com/whitewolf/archive/2015/10/22/4902570.html</a></p>
-<p><code>谈谈使用promise时候的一些反模式</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/FvyQ3a">http://www.tuicool.com/articles/FvyQ3a</a></p>
-<h1 id="三，Generator"><a href="#三，Generator" class="headerlink" title="三，Generator"></a>三，Generator</h1><p><code>异步编程之Generator(1)——领略魅力</code></p>
-<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/MFn2Uj">http://www.tuicool.com/articles/MFn2Uj</a></p>
-<h1 id="四，ES7中的async和await"><a href="#四，ES7中的async和await" class="headerlink" title="四，ES7中的async和await"></a>四，ES7中的async和await</h1><h1 id="异步-API"><a href="#异步-API" class="headerlink" title="异步 API"></a>异步 API</h1><ul>
-<li>fetch</li>
-<li>service worker</li>
-<li>web worker<br>这几个是JavaScript异步编程的API</li>
+          <p><a target="_blank" rel="noopener" href="https://github.com/liuxiang/xmind">https://github.com/liuxiang/xmind</a></p>
+<h1 id="xmind-技术"><a href="#xmind-技术" class="headerlink" title="xmind-技术"></a>xmind-技术</h1><ul>
+<li>Android笔记.xmind</li>
+<li>App Store最新审核指南.xmind</li>
+<li>git 操作手册.xmind</li>
+<li>git菜单.pptx</li>
+<li>iOS证书&amp;打包&amp;上架.xmind</li>
+<li>Java 技术路线.xmind</li>
+<li>linux Web服务安全.xmind</li>
+<li>linux 环境部署.xmind</li>
+<li>linux常用命令.docx</li>
+<li>linux常用命令.mmap</li>
+<li>linux常用命令.xmind</li>
+<li>README.md</li>
+<li>[编程书籍]</li>
+<li>Android高薪之路-Android程序员面试宝典.xmind</li>
+<li>CSS高效开发实战 CSS 3 LESS SASS Bootstrap Foundation.xmind</li>
+<li>DBA修炼之道：数据库管理员的第一本书（原书第2版）.xmind</li>
+<li>JavaScript高级程序设计（第3版）.xmind</li>
+<li>Java常用算法手册（含盘）.xmind</li>
+<li>Java并发编程实战 .txt</li>
+<li>Java并发编程实战.xmind</li>
+<li>Java性能优化权威指南 [Java performance].xmind</li>
+<li>Java核心技术·卷1 基础知识（原书第9版）.xmind</li>
+<li>Java核心技术（卷2）：高级特性（原书第9版）.xmind</li>
+<li>Java程序员面试宝典（第三版）.xmind</li>
+<li>Java程序员面试笔试宝典.xmind</li>
+<li>Java编程思想（第4版） [thinking in java].xmind</li>
+<li>jQuery技术内幕：深入解析jQuery架构设计与实现原理.xmind</li>
+<li>Oracle DBA手记   数据库诊断案例与性能优化实践 @豆瓣.xmind</li>
+<li>Oracle DBA手记3：数据库性能优化与内部原理解析 @京东.xmind</li>
+<li>Web前端工程师修炼之道（原书第4版）.xmind</li>
+<li>[其它书籍]</li>
+<li>《Web前端黑客技术揭秘》.xmind</li>
+<li>《白帽子讲web安全》.xmind</li>
+<li>《白帽子讲web安全》手录.xmind</li>
+<li>[编程书籍].xmind</li>
+<li>图灵程序设计丛书：精通jQuery（第2版）.xmind</li>
+<li>图解CSS3：核心技术与案例实战.xmind</li>
+<li>思维导图 书录.lnk</li>
+<li>数据结构与算法分析：Java语言描述（第2版） [Data structures and algorithm analysis in java second edition].xmind</li>
+<li>深入理解Java虚拟机：JVM高级特性与最佳实践（第2版）.xmind</li>
+<li>疯狂Android讲义（第2版 附光盘）.xmind</li>
+<li>疯狂软件教育标准教材：疯狂Java讲义（第3版 附光盘）.xmind</li>
+<li>目录标题 正则 格式化.txt</li>
+<li>编写高质量代码：Web前端开发修炼之道.xmind</li>
+<li>超实用的jQuery代码段.xmind</li>
+<li>软件开发视频大讲堂：Android从入门到精通（附光盘1张).xmind</li>
+<li>锋利的jQuery（第2版）.xmind</li>
+<li>前端</li>
+<li>cookie &amp; session.xmind</li>
+<li>javaScript Html jsp 操纵关系.txt</li>
+<li>javaScript.xmind</li>
+<li>javaScript事件.xmind</li>
+<li>js jsp html 关系.pptx</li>
+<li>web跨域.xmind</li>
+<li>前端安全 认证.xmind</li>
+<li>前端技术-all.xmind</li>
+<li>前端技术-常识.xmind</li>
+<li>前端技术-应用.xmind</li>
+<li>前端技术-框架.xmind</li>
+<li>前端框架选型.xmind</li>
+<li>压力测试.xmind</li>
+<li>后端</li>
+<li>log4j.xmind</li>
+<li>NoSQL 非关系型数据库.xmind</li>
+<li>RESTful.xmind</li>
+<li>【Shiro-流程】安全框架&amp;cas单点登录.xmind</li>
+<li>【Shiro-配置】安全框架&amp;cas单点登录.xmind</li>
+<li>加密 解码.xmind</li>
+<li>缓存服务技术.xmind</li>
+<li>网络编程.xmind</li>
+<li>设计模式-23.xmind</li>
+<li>身份认证.xmind</li>
+<li>安全-密码.xmind</li>
+<li>开源项目&amp;网站模板.xmind</li>
+<li>技术栈.xmind</li>
+<li>正则表达式.xmind</li>
+<li>汽车互联网.xmind</li>
+<li>界面&amp;后台的合并与分离.xmind</li>
+<li>职能地图-Android.xmind</li>
+<li>职能地图-Java.xmind</li>
+<li>职能地图-个人 v2.0 .xmind</li>
+<li>职能地图-个人.xmind</li>
+<li>运维工作.xmind</li>
+<li>邀请码.xmind</li>
+<li>阿里云盾.xmind</li>
 </ul>
-<hr>
-<h1 id="如何做到兼容："><a href="#如何做到兼容：" class="headerlink" title="如何做到兼容："></a>如何做到兼容：</h1><h2 id="方法一：通过Polyfill-类库"><a href="#方法一：通过Polyfill-类库" class="headerlink" title="方法一：通过Polyfill 类库"></a>方法一：通过Polyfill 类库</h2><p><code>jakearchibald/es6-promise</code>:一个兼容 ES6 Promises 的Polyfill类库。 它基于 RSVP.js 这个兼容 Promises&#x2F;A+ 的类库， 它只是 RSVP.js 的一个子集，只实现了Promises 规定的 API。<br><code>yahoo/ypromise</code>: 这是一个独立版本的 YUI 的 Promise Polyfill，具有和 ES6 Promises 的兼容性。<br><code>getify/native-promise-only</code>: 以作为ES6 Promises的polyfill为目的的类库 它严格按照ES6 Promises的规范设计，没有添加在规范中没有定义的功能。 如果运行环境有原生的Promise支持的话，则优先使用原生的Promise支持。</p>
-<h2 id="方法二：通过扩展类库"><a href="#方法二：通过扩展类库" class="headerlink" title="方法二：通过扩展类库"></a>方法二：通过扩展类库</h2><p><code>then/promise</code>: a super set of ES6 Promises designed to have readable, performant code and to provide just the extensions that are absolutely necessary for using promises today.<br><code>petkaantonov/bluebird</code>: 这个类库除了兼容 Promise 规范之外，还扩展了取消promise对象的运行，取得promise的运行进度，以及错误处理的扩展检测等非常丰富的功能，此外它在实现上还在性能问题下了很大的功夫。<br><code>when</code>: 大小很小,node和浏览器环境下都可以使用。<br><code>q</code>: 类库 Q 实现了 Promises 和 Deferreds 等规范。 它自2009年开始开发，还提供了面向Node.js的文件IO API Q-IO 等， 是一个在很多场景下都能用得到的类库。</p>
-<p><code>Promise之深度解析 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/e0bb0083220e">http://www.jianshu.com/p/e0bb0083220e</a></p>
-<p><code>Promise实战 | 前端工程师手册</code><br><a target="_blank" rel="noopener" href="https://leohxj.gitbooks.io/front-end-database/content/javascript-asynchronous/use-promise.html">https://leohxj.gitbooks.io/front-end-database/content/javascript-asynchronous/use-promise.html</a></p>
-<hr>
-<p>支持Promise 我们可以使用 lie</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/calvinmetcalf/lie">https://github.com/calvinmetcalf/lie</a></p>
-<p><code>ES6 + Webpack + React + Babel 如何在低版本浏览器上愉快的玩耍（下） - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/rYRBbiA">http://www.tuicool.com/articles/rYRBbiA</a></p>
-<hr>
-<h1 id="Promise-的现行解决方案"><a href="#Promise-的现行解决方案" class="headerlink" title="Promise 的现行解决方案"></a>Promise 的现行解决方案</h1><p>其实已经有一些第三方库实现了 Promise 的功能：</p>
-<ul>
-<li>Q</li>
-<li>when</li>
-<li>WinJS</li>
-<li>RSVP.js</li>
-</ul>
-<p>上面这些库和 JavaScript 原生 Promise 都遵守一个通用的、标准化的规范：Promises&#x2F;A+，jQuery 有个类似的方法叫 Deferred，但不兼容 Promises&#x2F;A+ 规范，于是会有点小问题，使用需谨慎。jQuery 还有一个 Promise 类型，它其实是 Deferred 的缩减版，所以也有同样问题。</p>
-<p>尽管 Promise 的各路实现遵循同一规范，它们的 API 还是各不相同。JavaScript Promise 的 API 比较接近 RSVP.js，如下创建 Promise：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var promise = new Promise(function(resolve, reject) &#123;</span><br><span class="line">  // do a thing, possibly async, then…</span><br><span class="line"> </span><br><span class="line">  if (/* everything turned out fine */) &#123;</span><br><span class="line">    resolve(&quot;Stuff worked!&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  else &#123;</span><br><span class="line">    reject(Error(&quot;It broke&quot;));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><code>JavaScript Promise：去而复返 - 司徒正美 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/rubylouvre/p/3495286.html">http://www.cnblogs.com/rubylouvre/p/3495286.html</a></p>
-<p><code>JavaScript Promises 初体验 - 王铁手的博客 - SegmentFault</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000002507303">https://segmentfault.com/a/1190000002507303</a></p>
-<hr>
-<p><strong>参考</strong><br><code>Javascript异步编程的发展</code></p>
-<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/rmeYBjV">http://www.tuicool.com/articles/rmeYBjV</a></p>
-<p><code>JavaScript异步编程解决方案笔记</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/yu6jQrI">http://www.tuicool.com/articles/yu6jQrI</a></p>
-<p><code>Javascript异步编程模型进化</code></p>
-<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/IvuA7rb">http://www.tuicool.com/articles/IvuA7rb</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.回忆往昔之callback</span><br><span class="line"></span><br><span class="line">2.活在当下之promise</span><br><span class="line"></span><br><span class="line">3.憧憬未来之generater</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<p><code>谈谈 ES6 的 Promise 对象 - ac黄博客精选 - SegmentFault</code></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000002928371">https://segmentfault.com/a/1190000002928371</a></p>
-<p><code>jQuery的deferred对象详解 - 阮一峰的网络日志</code><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html">http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2016/03/10/%E5%89%8D%E7%AB%AF%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E5%8F%91%E5%B1%95%E5%8F%B2/#more" rel="contents">
+              <a class="btn" href="/2016/07/25/xmind-%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0%EF%BC%89/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -813,7 +1174,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/03/10/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/22/nginx%20%E9%83%A8%E7%BD%B2%E7%9A%84%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BDjquery.js%E6%88%96%E4%BB%85%E5%8A%A0%E8%BD%BD%E5%87%BA%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E9%97%AE%E9%A2%98,%E5%A4%9A%E4%B8%AA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -831,7 +1192,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/03/10/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" class="post-title-link" itemprop="url">前端面试</a>
+          <a href="/2016/07/22/nginx%20%E9%83%A8%E7%BD%B2%E7%9A%84%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BDjquery.js%E6%88%96%E4%BB%85%E5%8A%A0%E8%BD%BD%E5%87%BA%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E9%97%AE%E9%A2%98,%E5%A4%9A%E4%B8%AA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="post-title-link" itemprop="url">nginx 部署的项目无法加载jquery.js或仅加载出代码片段问题,多个解决办法</a>
         </h2>
 
         <div class="post-meta-container">
@@ -842,7 +1203,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-03-10 00:00:00" itemprop="dateCreated datePublished" datetime="2016-03-10T00:00:00+08:00">2016-03-10</time>
+      <time title="Created: 2016-07-22 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-22T00:00:00+08:00">2016-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -850,15 +1211,6 @@
       </span>
       <span class="post-meta-item-text">Edited on</span>
       <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">前端面试</span></a>
-        </span>
     </span>
 
   
@@ -871,621 +1223,36 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="前端面试"><a href="#前端面试" class="headerlink" title="前端面试"></a>前端面试</h1><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ul>
-<li><code>html</code><br>盒子<br>IE8以下浏览器的盒模型中定义的元素的宽高不包括内边距和边框</li>
+          <h1 id="问题现象-jquery-js文件无法加载，导致页面样式错乱"><a href="#问题现象-jquery-js文件无法加载，导致页面样式错乱" class="headerlink" title="问题现象 jquery.js文件无法加载，导致页面样式错乱"></a>问题现象 <code>jquery.js</code>文件无法加载，导致页面样式错乱</h1><ul>
+<li><p>前端浏览器体现：<br><code>GET http://***/jquery.js net::ERR_INCOMPLETE_CHUNKED_ENCODING</code></p>
+</li>
+<li><p>后端<code>tail -f /usr/local/nginx/logs/error.log</code>错误日志体现：<br><code>nginx /usr/local/nginx/proxy_temp/* failed (13: Permission denied)</code></p>
+</li>
 </ul>
-<p>文件上传enctype&#x3D;”multipart&#x2F;form-data”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2016/07/22 17:54:59 [crit] 4281#0: *441 open() &quot;/usr/local/nginx/proxy_temp/2/00/0000000002&quot; failed (13: Permission denied) while reading upstream, client: 115.197.165.164, server: , request: &quot;GET /teach_pc/js/jquery-1.11.2.min.js HTTP/1.1&quot;, upstream: &quot;http://127.0.0.1:8080/teach_pc/js/jquery-1.11.2.min.js&quot;, host: &quot;121.40.195.52&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
 <ul>
-<li><code>css</code><br>适配(自适应，响应式)</li>
-</ul>
-<p>居中&amp;垂直居中（文字&#x2F;div）<br>position 跟 display、margin collapse、overflow、float 这些特征相互叠加后会怎么样？</p>
-<p>css优先级法则&amp;!important<br>css兼容性(css hack)（举例）<br>浮动，影响，清除浮动</p>
-<ul>
-<li><code>javaScript</code><br>作用域与变量提升<br>js原型，继承(原型链)<br>闭包，作用域，隐患&#x2F;办法<br>前端存储<br>自定义事件&#x2F; 属性，</li>
-</ul>
-<p>构造函数<br>模块化</p>
-<ul>
-<li><code>ajax</code><br>同步和异步<br>异步编程（callback，Promise，Generator ， ES7中的async和await）<br>跨域，同源</li>
-</ul>
-<h2 id="个性方向"><a href="#个性方向" class="headerlink" title="个性方向"></a>个性方向</h2><p>canvas</p>
-<h1 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jquery ， Bootstrap</span><br><span class="line">angular，React，node，gulp</span><br><span class="line">webpack，require.js</span><br><span class="line"></span><br><span class="line">yoman</span><br><span class="line">nodejs</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><p>模型理解： MVC，MVVM， mvp</p>
-<p>前端测试： 逻辑，性能<br>开发工具及熟练性(定位文件,方法,历史,重构,调试)</p>
-<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><p>减少页面加载事件的方法（合理引用，减少请求，缩小资源，提速带宽）<br>重排，重绘</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 对面板强行重绘（解决文字重叠问题）</span><br><span class="line">$(&quot;ion-content&quot;).css(&#x27;display&#x27;, &#x27;none&#x27;);</span><br><span class="line">document.body.offsetWidth;// 在样式变化间加入计算,可强制提交之前的样式变化。否则浏览器会进行事务优化，事务前后无变化的不再重绘</span><br><span class="line">$(&quot;ion-content&quot;).css(&#x27;display&#x27;, &#x27;&#x27;);</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="工程化，自动化"><a href="#工程化，自动化" class="headerlink" title="工程化，自动化"></a>工程化，自动化</h2><p>“use strict”严格模式，作用<br>模板引擎</p>
-<h2 id="思想，见识"><a href="#思想，见识" class="headerlink" title="思想，见识"></a>思想，见识</h2><p>浏览器对资源下载的并发数(6个)<br>前端安全<br>说说最近最流行的一些东西吧？常去哪些网站？<br>TypeScript,ES5 和 ES6</p>
-<p>Web Component 标准</p>
-<p>前端构建集成： Grunt、Gulp、Fix、Webpack</p>
-<p>模板,范式:CMD, AMD, CommonJS</p>
-<hr>
-<p><strong>参考</strong><br><code>前端开发知识点与面试题集锦</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/UjMNFfB">http://www.tuicool.com/articles/UjMNFfB</a></p>
-<p><code>web前端面试题集锦</code><br><a target="_blank" rel="noopener" href="http://ljinkai.github.io/2015/07/30/front-end-interview/">http://ljinkai.github.io/2015/07/30/front-end-interview/</a></p>
-<p><code>部分面试知识点（web前端工程师）</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/MV73eiu">http://www.tuicool.com/articles/MV73eiu</a></p>
-<p><code>关于前端面试</code></p>
-<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/JbARfmU">http://www.tuicool.com/articles/JbARfmU</a></p>
-<p><code>前端面试需要带什么作品？</code></p>
-<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/EFFB7v6">http://www.tuicool.com/articles/EFFB7v6</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/03/10/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/03/09/Chrome%20%20DevTools-%E7%BD%91%E7%BB%9C%E6%8A%93%E5%8C%85%E2%80%94%E2%80%94Betwixt/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/03/09/Chrome%20%20DevTools-%E7%BD%91%E7%BB%9C%E6%8A%93%E5%8C%85%E2%80%94%E2%80%94Betwixt/" class="post-title-link" itemprop="url">Chrome  DevTools:网络抓包——Betwixt</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-03-09 00:00:02" itemprop="dateCreated datePublished" datetime="2016-03-09T00:00:02+08:00">2016-03-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Chrome/" itemprop="url" rel="index"><span itemprop="name">Chrome</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="DevTools-网络抓包——Betwixt"><a href="#DevTools-网络抓包——Betwixt" class="headerlink" title="DevTools:网络抓包——Betwixt"></a>DevTools:网络抓包——<code>Betwixt</code></h1><p><img src="https://umaar.com/assets/images/dev-tips/os-network-proxy.gif"></p>
-<h1 id="Betwixt-github"><a href="#Betwixt-github" class="headerlink" title="Betwixt github"></a><code>Betwixt</code> github</h1><p><a target="_blank" rel="noopener" href="https://github.com/kdzwinel/betwixt">https://github.com/kdzwinel/betwixt</a></p>
-<p><strong>DownLoad</strong> <a target="_blank" rel="noopener" href="https://github.com/kdzwinel/betwixt/releases">https://github.com/kdzwinel/betwixt/releases</a></p>
-<h1 id="Betwixt"><a href="#Betwixt" class="headerlink" title="Betwixt"></a>Betwixt</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">This tool will help you analyze web traffic outside the browser using familiar Chrome DevTools interface.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">![Betwixt in action](http://i.imgur.com/ccgmL2C.gif)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**This project is in an early stage of development, things may break, values may not be accurate. All contributors are very welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) fore more details.**</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Installing</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Download the [latest release](https://github.com/kdzwinel/betwixt/releases/latest) for your operating system, [build your own bundle](docs/building.md) or [run Betwixt from the source code](docs/building.md).</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Setting up</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">In order to capture traffic, you&#x27;ll have to direct it to the proxy created by Betwixt in the background (`http://localhost:8008`).</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">If you wish to analyze traffic system wide:</span><br><span class="line"></span><br><span class="line">- on OS X - `System Preferences → Network → Advanced → Proxies → Web Proxy (HTTP)`</span><br><span class="line"></span><br><span class="line">- on Ubuntu - `All Settings → Network → Network Proxy`</span><br><span class="line"></span><br><span class="line">- on Windows - `PC Settings → Network → Proxy`</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">![Setting up proxy on OS X](http://i.imgur.com/QL3cE6L.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">If you want to capture traffic coming from a single terminal (e.g. wget, npm) use `export http_proxy=http://localhost:8008`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### License [MIT](LICENSE.md)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>windows - Proxy设置：</p>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/33300421.jpg"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/03/09/Chrome%20%20DevTools-%E7%BD%91%E7%BB%9C%E6%8A%93%E5%8C%85%E2%80%94%E2%80%94Betwixt/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/03/09/chrome%20%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95(inspect)%E7%A7%BB%E5%8A%A8%E7%AB%AFwebview,%E6%89%BE%E4%B8%8D%E5%88%B0%E5%BE%85%E8%B0%83%E8%AF%95%E9%A1%B5%E9%9D%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/03/09/chrome%20%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95(inspect)%E7%A7%BB%E5%8A%A8%E7%AB%AFwebview,%E6%89%BE%E4%B8%8D%E5%88%B0%E5%BE%85%E8%B0%83%E8%AF%95%E9%A1%B5%E9%9D%A2/" class="post-title-link" itemprop="url">chrome 远程调试(inspect)移动端webview,找不到待调试页面</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-03-09 00:00:00" itemprop="dateCreated datePublished" datetime="2016-03-09T00:00:00+08:00">2016-03-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/chrome/" itemprop="url" rel="index"><span itemprop="name">chrome</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="chrome-远程调试移动端webview-找不到-待调试-页面"><a href="#chrome-远程调试移动端webview-找不到-待调试-页面" class="headerlink" title="chrome 远程调试移动端webview, 找不到 待调试 页面"></a>chrome 远程调试移动端webview, 找不到 待调试 页面</h1><h1 id="需要开启调试功能setWebContentsDebuggingEnabled-增加如下代码"><a href="#需要开启调试功能setWebContentsDebuggingEnabled-增加如下代码" class="headerlink" title="需要开启调试功能setWebContentsDebuggingEnabled,增加如下代码"></a>需要开启调试功能<code>setWebContentsDebuggingEnabled</code>,增加如下代码</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (Build.VERSION.SDK_INT &gt;=Build.VERSION_CODES.KITKAT) &#123;</span><br><span class="line">     WebView.setWebContentsDebuggingEnabled(true);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>以上配置方法适用于安卓应用内所有的WebView情形。</p>
-<p>安卓WebView是否可调试并不取决于应用中manifest的标志变量debuggable，如果你想只在debuggable为true时候允许WebView远程调试，请使用以下代码段：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (Build.VERSION.SDK_INT&gt;= Build.VERSION_CODES.KITKAT) &#123;</span><br><span class="line">    if (0 != (getApplicationInfo().flags &amp;=ApplicationInfo.FLAG_DEBUGGABLE)) &#123; </span><br><span class="line">              WebView.setWebContentsDebuggingEnabled(true);</span><br><span class="line">     &#125;  </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="cordova-webViewEngine-调试开关控制-可通过android-sdk进行断点调试"><a href="#cordova-webViewEngine-调试开关控制-可通过android-sdk进行断点调试" class="headerlink" title="cordova webViewEngine 调试开关控制(可通过android sdk进行断点调试)"></a>cordova webViewEngine 调试开关控制(可通过android sdk进行断点调试)</h1><h2 id="project-name-platforms-android-CordovaLib-src-org-apache-cordova-engine-SystemWebViewEngine-java"><a href="#project-name-platforms-android-CordovaLib-src-org-apache-cordova-engine-SystemWebViewEngine-java" class="headerlink" title="project_name\platforms\android\CordovaLib\src\org\apache\cordova\engine\SystemWebViewEngine.java"></a><code>project_name</code>\platforms\android\CordovaLib\src\org\apache\cordova\engine\SystemWebViewEngine.java<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//Determine whether we&#x27;re in debug or release mode, and turn on Debugging!</span><br><span class="line">ApplicationInfo appInfo = webView.getContext().getApplicationContext().getApplicationInfo();</span><br><span class="line">if ((appInfo.flags &amp; ApplicationInfo.FLAG_DEBUGGABLE) != 0 &amp;&amp;</span><br><span class="line">     android.os.Build.VERSION.SDK_INT &gt;= android.os.Build.VERSION_CODES.KITKAT) &#123;</span><br><span class="line">     enableRemoteDebugging();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @TargetApi(Build.VERSION_CODES.KITKAT)</span><br><span class="line">    private void enableRemoteDebugging() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            WebView.setWebContentsDebuggingEnabled(true);</span><br><span class="line">        &#125; catch (IllegalArgumentException e) &#123;</span><br><span class="line">            Log.d(TAG, &quot;You have one job! To turn on Remote Web Debugging! YOU HAVE FAILED! &quot;);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></h2><h1 id="android配置文件声明调试"><a href="#android配置文件声明调试" class="headerlink" title="android配置文件声明调试"></a>android配置文件声明调试</h1><p><code>AndroidManifest.xml</code>  - <code>android:debuggable</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">    android:icon=&quot;@drawable/ic_launcher&quot;</span><br><span class="line">    android:label=&quot;@string/app_name&quot;</span><br><span class="line">    android:theme=&quot;@style/AppTheme&quot;</span><br><span class="line">    android:debuggable=&quot;true&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<p><strong>参考</strong><br><code>移动端Web开发调试之Chrome远程调试(Remote Debugging)</code></p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/freshlover/article/details/42528643">http://blog.csdn.net/freshlover/article/details/42528643</a></p>
-<p><code>Chrome调试Android应用（Debug）</code><br><a target="_blank" rel="noopener" href="http://ask.dcloud.net.cn/article/69">http://ask.dcloud.net.cn/article/69</a></p>
-<p><code>IBM Worklight - How do I enable WebView debugging in Android?</code><br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/20396372/ibm-worklight-how-do-i-enable-webview-debugging-in-android">https://stackoverflow.com/questions/20396372/ibm-worklight-how-do-i-enable-webview-debugging-in-android</a></p>
-<p><code>Disable remote debugging in Appgyver</code><br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/31043235/disable-remote-debugging-in-appgyver/31044036#31044036">https://stackoverflow.com/questions/31043235/disable-remote-debugging-in-appgyver/31044036#31044036</a></p>
-<p><code>Error when I try to build framework file with cordova</code><br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/25186129/error-when-i-try-to-build-framework-file-with-cordova">https://stackoverflow.com/questions/25186129/error-when-i-try-to-build-framework-file-with-cordova</a></p>
-<p><code>玩转cordova之二--增强的webview</code><br><a target="_blank" rel="noopener" href="http://www.ituring.com.cn/article/130434">http://www.ituring.com.cn/article/130434</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/03/09/chrome%20%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95(inspect)%E7%A7%BB%E5%8A%A8%E7%AB%AFwebview,%E6%89%BE%E4%B8%8D%E5%88%B0%E5%BE%85%E8%B0%83%E8%AF%95%E9%A1%B5%E9%9D%A2/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/03/08/css%E6%8E%A7%E5%88%B6%E5%86%85%E5%AE%B9%E6%BA%A2%E5%87%BA%E6%8E%A7%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/03/08/css%E6%8E%A7%E5%88%B6%E5%86%85%E5%AE%B9%E6%BA%A2%E5%87%BA%E6%8E%A7%E5%88%B6/" class="post-title-link" itemprop="url">css控制内容溢出控制</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-03-08 00:00:00" itemprop="dateCreated datePublished" datetime="2016-03-08T00:00:00+08:00">2016-03-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>css控制内容溢出时，使用<code>...</code>末尾</p>
-<h1 id="Html"><a href="#Html" class="headerlink" title="Html"></a>Html</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot; overflow &quot;&gt;ssssssssssssssssssssssssssssssssssssss&lt;div&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.overflow&#123;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">    text-overflow: ellipsis;</span><br><span class="line">    white-space: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-3-14/80967330.jpg"></p>
-<!-- 
-  `=>`    -->
-
-
-
-<p><strong>参考</strong><br><code> ionic css .item</code><br><a target="_blank" rel="noopener" href="https://github.com/driftyco/ionic/blob/master/scss/_items.scss">https://github.com/driftyco/ionic/blob/master/scss/_items.scss</a>   line:150</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// Handle text overflow</span><br><span class="line">.item,</span><br><span class="line">.item h1,</span><br><span class="line">.item h2,</span><br><span class="line">.item h3,</span><br><span class="line">.item h4,</span><br><span class="line">.item h5,</span><br><span class="line">.item h6,</span><br><span class="line">.item p,</span><br><span class="line">.item-content,</span><br><span class="line">.item-content h1,</span><br><span class="line">.item-content h2,</span><br><span class="line">.item-content h3,</span><br><span class="line">.item-content h4,</span><br><span class="line">.item-content h5,</span><br><span class="line">.item-content h6,</span><br><span class="line">.item-content p &#123;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">  text-overflow: ellipsis;</span><br><span class="line">  white-space: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="还原多行"><a href="#还原多行" class="headerlink" title="还原多行"></a>还原多行</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.item-text-wrap&#123;</span><br><span class="line">  overflow: visible;</span><br><span class="line"></span><br><span class="line">  white-space: normal;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-3-14/73237505.jpg"></p>
-<!--
-  =>   -->
-
-
-<p><strong>参考</strong><br><a target="_blank" rel="noopener" href="https://github.com/driftyco/ionic/blob/master/scss/_items.scss">https://github.com/driftyco/ionic/blob/master/scss/_items.scss</a>     line:213</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">.item-text-wrap .item,</span><br><span class="line">.item-text-wrap .item-content,</span><br><span class="line">.item-text-wrap,</span><br><span class="line">.item-text-wrap h1,</span><br><span class="line">.item-text-wrap h2,</span><br><span class="line">.item-text-wrap h3,</span><br><span class="line">.item-text-wrap h4,</span><br><span class="line">.item-text-wrap h5,</span><br><span class="line">.item-text-wrap h6,</span><br><span class="line">.item-text-wrap p,</span><br><span class="line">.item-complex.item-text-wrap .item-content,</span><br><span class="line">.item-body h1,</span><br><span class="line">.item-body h2,</span><br><span class="line">.item-body h3,</span><br><span class="line">.item-body h4,</span><br><span class="line">.item-body h5,</span><br><span class="line">.item-body h6,</span><br><span class="line">.item-body p &#123;</span><br><span class="line">  overflow: visible;</span><br><span class="line">  white-space: normal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/03/08/css%E6%8E%A7%E5%88%B6%E5%86%85%E5%AE%B9%E6%BA%A2%E5%87%BA%E6%8E%A7%E5%88%B6/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/03/05/%E5%89%8D%E7%AB%AF%E5%B8%83%E5%B1%80%20css%E5%B1%85%E4%B8%AD%E6%96%87%E9%9B%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/03/05/%E5%89%8D%E7%AB%AF%E5%B8%83%E5%B1%80%20css%E5%B1%85%E4%B8%AD%E6%96%87%E9%9B%86/" class="post-title-link" itemprop="url">前端css居中文集</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-03-05 00:00:00" itemprop="dateCreated datePublished" datetime="2016-03-05T00:00:00+08:00">2016-03-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/css%E5%B1%85%E4%B8%AD/" itemprop="url" rel="index"><span itemprop="name">css居中</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>CSS居中完整版</code> <a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/v6f6byE">http://www.tuicool.com/articles/v6f6byE</a>  &#x3D;&gt;  <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000004851345">https://segmentfault.com/a/1190000004851345</a></p>
-<p><code>Erichain/css-center-complete</code>  <a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete">https://github.com/Erichain/css-center-complete</a></p>
-<h2 id="Contents"><a href="#Contents" class="headerlink" title="Contents"></a>Contents</h2><p>为了大家更好的理解，我们使用了树形的目录结构。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/horizontal">水平方向的居中</a><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/horizontal/center-inline-element">水平居中行内元素(比如链接或者文本)</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/horizontal/center-block-element">水平居中块级元素</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/horizontal/center-multiple-block-elements">水平居中多个块级元素</a></li>
-</ul>
+<li><p>如后端并没有此提示或问题出在tomcat服务容器中，有一种可能是数据磁盘满了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h # 查看磁盘占用情况</span><br></pre></td></tr></table></figure>
+<p>在任意目录 vi 写入内容，也会有提示<code>E514: write error (file system full?) </code>(文件系统已满)</p>
 </li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/vertical">垂直方向的居中</a><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/vertical/center-inline-element">垂直居中行内元素(比如链接或者文本)</a><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/vertical/center-inline-element/single-line">单行</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/vertical/center-inline-element/multi-lines">多行</a></li>
-</ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/vertical/center-block-element">垂直居中块级元素</a><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/vertical/center-block-element/know-height">知道元素的高度</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/vertical/center-block-element/unknown%20height">不知道元素的高度</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/vertical/center-block-element/flexbox">使用flexbox</a></li>
-</ul>
+<li><p>问题原因</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">看一下nginx 反向代理参数说明</span><br><span class="line"> </span><br><span class="line">proxy_connect_timeout 600; #nginx跟后端服务器连接超时时间(代理连接超时)</span><br><span class="line">proxy_read_timeout 600; #连接成功后，后端服务器响应时间(代理接收超时)</span><br><span class="line">proxy_send_timeout 600; #后端服务器数据回传时间(代理发送超时)</span><br><span class="line">proxy_buffer_size 32k; #设置代理服务器（nginx）保存用户头信息的缓冲区大小</span><br><span class="line">proxy_buffers 4 32k; #proxy_buffers缓冲区，网页平均在32k以下的话，这样设置</span><br><span class="line">proxy_busy_buffers_size 64k; #高负荷下缓冲大小（proxy_buffers*2）</span><br><span class="line">proxy_temp_file_write_size 64k; #设定缓存文件夹大小，大于这个值，将从upstream服务器传</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">问题就出在proxy_temp_file_write_size上，当你的文件超过该参数设置的大小时，nginx会先将文件写入临时目录(缺省为nginx安装目下/proxy_temp目录),</span><br><span class="line"> </span><br><span class="line">如果nginx对prxoy_temp没有权限就会写不进去，结果就是只显示部分页面</span><br><span class="line">`` `</span><br><span class="line">http://www.nginx.cn/695.html</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 正常不会出现此问题，造成原因是因为全局替换了文件所有者</span><br></pre></td></tr></table></figure>
+<p>chown -R root &#x2F;usr&#x2F;local&#x2F;nginx<br>chown -R sysadmin &#x2F;usr&#x2F;local&#x2F;nginx # 或此</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt; 此命令的-R会递归替换内部所有子文件（含 proxy_temp ）的所有者为root</span><br><span class="line">&gt; 而nginx默认是使用nobody用户启动，由此nobody用户将无法更新目录 proxy_temp下的文件了</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 解决办法一：更改 `proxy_temp/` 文件权限</span><br><span class="line">    -  破坏了目录的安全管理策略，不建议</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>因为权限问题不能写入Nginx的缓存文件夹里，修改Nginx的缓存文件夹权限，问题解决！<br>chmod -R 777 proxy_temp&#x2F;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">-  解决方法二：更新nginx.conf中nobody用户为root</span><br><span class="line">     -  破坏了目录的安全管理策略，不建议</span><br></pre></td></tr></table></figure>
+<p>发现都是nobody的进程，但是nginx的目录都是root用户，另外集群tomcat也是属于root用户，而且root启动，查看nginx.conf:<br>user nobody<br>改成：user root<br>停止nginx -s stop<br>重启nginx -c  nginx.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://www.2cto.com/os/201203/122371.html</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 解决方法三：更新`proxy_temp`文件夹的所有者归还给`nobody`</span><br><span class="line">     - 推荐</span><br></pre></td></tr></table></figure>
+<p>chown -R  nobody  &#x2F;usr&#x2F;local&#x2F;nginx&#x2F; proxy_temp</p>
 </li>
 </ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/horizontal%26%26vertical">水平垂直都居中</a><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/horizontal%26%26vertical/fixed-height-and-width">元素的宽高固定</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/horizontal%26%26vertical/unknown-height-and-width">元素的宽高不固定</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/Erichain/css-center-complete/tree/master/horizontal%26%26vertical/flexbox">使用flexbox</a></li>
-</ul>
-</li>
-</ul>
-<p>每一种情况都有相应的code pen，可以点击链接查看。</p>
-<hr>
-<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
-<li><p><code>position</code><br>static ：默认值，无特殊定位，对象遵循正常文档流。top，right，bottom，left等属性不会被应用，默认值。<br>relative：相对定位，对象遵循正常文档流，但将依据top，right，bottom，left等属性在正常文档流中偏移位置。<br>absolute：绝对定位，对象脱离正常文档流，使用top，right，bottom，left等属性进行绝对定位。而其层叠通过z-index属性定义。<br>fixed：固定定位，对象脱离正常文档流，使用top，right，bottom，left等属性以窗口为参考点进行定位，当出现滚动条时，对象不会随着滚动。</p>
-</li>
-<li><p><code>float</code><br>float属性取值：none(默认)、left、right、inherit。</p>
-</li>
-<li><p><code>display</code><br>display属性取值：none、inline、inline-block、block、table相关属性值、inherit。<br>display :   inline和block，又叫行内元素和块级元素<br>display: inline-block; 行内块元素</p>
-</li>
-</ul>
-<p>table相关的属性值可以用来垂直居中</p>
-<p>display:flex 多栏多列布局</p>
-<h1 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h1><p><code>text-align:center;</code> 行内，行内块级</p>
-<p><code>margin:0 auto;</code>     块级元素，居中盒子与父级盒子宽度指定切小于父级宽度,常搭配<code>width:80%</code></p>
-<ul>
-<li>水平居中-未知宽度</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.divCenter &#123;</span><br><span class="line">  left: 50%;</span><br><span class="line"> </span><br><span class="line">  -webkit-transform: translate(-50%);</span><br><span class="line">  -moz-transform: translate(-50%);</span><br><span class="line">  -ms-transform: translate(-50%);</span><br><span class="line">  -o-transform: translate(-50%);</span><br><span class="line">  transform: translate(-50%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h1><h2 id="行内元素或者行内块级元素？-inline-或者-inline-block"><a href="#行内元素或者行内块级元素？-inline-或者-inline-block" class="headerlink" title="行内元素或者行内块级元素？(inline 或者 inline-block)"></a>行内元素或者行内块级元素？(inline 或者 inline-block)</h2><ul>
-<li>单行(line-height与heigth相等,配合center)<br><code>pading-top:10px; pading-bottom:10px</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">height: 100px;</span><br><span class="line">line-height: 100px;</span><br><span class="line">white-space: nowrap;</span><br></pre></td></tr></table></figure></li>
-<li>多行 垂直 居中- flex Box 垂直居中</li>
-</ul>
-<p>方法一：   display: <code>table-cell</code> &amp;&amp; <code> vertical-align: middle</code>;</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.parent &#123;</span><br><span class="line">  display: table;</span><br><span class="line">  width: 200px;</span><br><span class="line">  height: 400px;</span><br><span class="line">&#125;</span><br><span class="line">.child &#123;</span><br><span class="line">  display: table-cell;</span><br><span class="line">  vertical-align: middle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>方法二</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.flex-center-vertically &#123;</span><br><span class="line"></span><br><span class="line">    display: flex;</span><br><span class="line">    justify-content: center;</span><br><span class="line">    flex-direction: column;  /* 决定主轴的方向（即项目的排列方向） */</span><br><span class="line">    height: 400px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>inline-block 垂直 居中(<code> ::before</code> &amp;&amp; <code> inline-block</code> &amp;&amp; <code>vertical-align : middle</code> ) - 单行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.ghost-center &#123;</span><br><span class="line">    position: relative;</span><br><span class="line">&#125;</span><br><span class="line">.ghost-center::before &#123;</span><br><span class="line">    content: &quot; &quot;;</span><br><span class="line">    display: inline-block;</span><br><span class="line">    height: 100%;</span><br><span class="line">    width: 1%;</span><br><span class="line">    vertical-align: middle;</span><br><span class="line">&#125;</span><br><span class="line">.ghost-center p &#123;</span><br><span class="line">    display: inline-block;</span><br><span class="line">    vertical-align: middle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="块级元素"><a href="#块级元素" class="headerlink" title="块级元素"></a>块级元素</h2><ul>
-<li><p>已知高度-垂直居中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.parent &#123;</span><br><span class="line">    position: relative;</span><br><span class="line">&#125;</span><br><span class="line">.child &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top: 50%;</span><br><span class="line">    height: 100px;</span><br><span class="line">    margin-top: -50px;</span><br><span class="line">    /* 如果没有使用border-box的话就只需要关心padding和border了 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>未知高度-垂直居中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.parent &#123;</span><br><span class="line">    position: relative;</span><br><span class="line">&#125;</span><br><span class="line">.child &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top: 50%;</span><br><span class="line">    transform: translateY(-50%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>flex Box 垂直居中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.parent &#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    flex-direction: column; /* 决定主轴的方向（即项目的排列方向） */</span><br><span class="line">    justify-content: center;</span><br><span class="line">&#125;</span><br><span class="line">align-items: center;         /* -垂直居中*/</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="横竖都居中"><a href="#横竖都居中" class="headerlink" title="横竖都居中"></a>横竖都居中</h2><ul>
-<li>元素固定宽高</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">.parent &#123;</span><br><span class="line">    position: relative;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.child &#123;</span><br><span class="line">    width: 300px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    padding: 20px;</span><br><span class="line"> </span><br><span class="line">    position: absolute;</span><br><span class="line">    top: 50%;</span><br><span class="line">    left: 50%;</span><br><span class="line"> </span><br><span class="line">    margin: -70px 0 0 -170px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>transform控制方法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.parent &#123;</span><br><span class="line">    position: relative;</span><br><span class="line">&#125;</span><br><span class="line">.child &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top: 50%;</span><br><span class="line">    left: 50%;</span><br><span class="line">    transform: translate(-50%, -50%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>父子容器配合</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.parent &#123;</span><br><span class="line">     margin: auto; /* 解决垂直居中，水平居中并不能生效 */</span><br><span class="line">    display: flex;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.child &#123;</span><br><span class="line">    margin: auto;/* 依赖父级的flex布局，可以使用margin：auto；解决水平居中 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="margin-auto-生效条件"><a href="#margin-auto-生效条件" class="headerlink" title="margin: auto;生效条件"></a><code>margin: auto;</code>生效条件</h3><ul>
-<li><p>文档声明: DOCTYPE声明</p>
-</li>
-<li><p>生效场景<code>(自元素宽度小于父级元素宽度时auto可生效)</code></p>
-<ul>
-<li><p>当前标签要求: 自元素需要有宽度(或说自身宽度小于父级宽度,可生效Auto)  </p>
-</li>
-<li><p>父级 display: flex;  自元素可使用auto</p>
-</li>
-</ul>
-</li>
-<li><p>失效场景</p>
-<ul>
-<li><p>自身无宽度或宽度与父级一致再或超过父级</p>
-</li>
-<li><p>浮动了</p>
-</li>
-</ul>
-</li>
-<li><p><code>margin: 0 auto;</code>与<code>text-align:center;</code>区别</p>
-<ul>
-<li><p><code>margin: 0 auto;</code> 通过外边距使自身居中显示</p>
-</li>
-<li><p><code>text-align:center;</code> 通知子集依据自身的位置及宽度, 居中显示</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="全屏方式"><a href="#全屏方式" class="headerlink" title="全屏方式"></a>全屏方式</h2><ul>
-<li>兼容性最好<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">position: absolute;</span><br><span class="line"></span><br><span class="line">top: 0;</span><br><span class="line">left: 0;</span><br><span class="line">bottom: 0;</span><br><span class="line">right: 0;</span><br></pre></td></tr></table></figure></li>
-<li>依据可视宽高(简单)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">position: absolute;</span><br><span class="line"></span><br><span class="line">height: 100vh;</span><br><span class="line">width: 100vw;</span><br></pre></td></tr></table></figure></li>
-<li>受父级容器影响<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">position: absolute;</span><br><span class="line"></span><br><span class="line"> width: 100%;</span><br><span class="line">height: 100%;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="全屏方式-flex-Box-横竖都居中"><a href="#全屏方式-flex-Box-横竖都居中" class="headerlink" title="全屏方式 , flex Box 横竖都居中"></a>全屏方式 , flex Box 横竖都居中</h2><ul>
-<li><p>不遮盖背景(非全屏,相对全屏横竖居中)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    /*  容器位置起点(右上角)居中  */</span><br><span class="line">    position: absolute;</span><br><span class="line">    top: 50%;</span><br><span class="line">    left: 50%;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    /* 内容横竖回退50%,使其内容同时居中 */</span><br><span class="line"></span><br><span class="line">    transform: translate(-50%, -50%);</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">-  铺满全屏</span><br></pre></td></tr></table></figure>
-<p>.parent {</p>
-<p>  &#x2F;* 使容器铺满全屏 *&#x2F;<br>  position: absolute;<br>  height: 100vh;<br>  width: 100vw;</p>
-<p>  &#x2F;* 设置弹性布局,子集横竖居中 <em>&#x2F;<br>  display: flex;                      &#x2F;<em>父级flex Box布局</em>&#x2F;<br>  justify-content: center;    &#x2F;</em> -水平居中*&#x2F;<br>  align-items: center;         &#x2F;* -垂直居中*&#x2F;</p>
-</li>
-</ul>
-<p>}</p>
-<p>&#x2F;* 子集处于横竖居中位置 *&#x2F;</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">**父级(全屏) | 子集(不 遮盖父级 ,居中) **</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">或(父子容器配合)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>.parent {</p>
-<pre><code>position: absolute;
-height: 100vh;
-width: 100vw;
-
-display: flex;         \*父级flex Box布局*\
-</code></pre>
-<p>}</p>
-<p>.child {<br>     margin: auto;     * 内容可设置margin:auto *<br>}</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">** 父级(全屏) | 子集(遮盖父级,用外边距使子集相对居中)**</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">- 分析</span><br><span class="line">`justify-content: center`会改变`.  parent `自身面板位置.</span><br><span class="line">如希望子集其它元素不受影响，可以在子集元素中配合`margin:auto` 使用.  或使用` display: -webkit-box `布局：</span><br></pre></td></tr></table></figure>
-<pre><code>display: -webkit-box;
--webkit-box-pack: center;    /* -水平居中: 其中一半空间被置于首个子元素前，另一半被置于最后一个子元素后 */
--webkit-box-align: center;    /* -垂直居中: 其中 一半位于子元素之上，另一半位于子元素之下 */
-</code></pre>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">- 定义</span><br><span class="line">    -  box-pack 属性规定当框大于子元素的尺寸，在何处放置子元素。</span><br><span class="line"></span><br><span class="line">    - box-align 属性规定如何对齐框的子元素 。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">![]( http://7xnbs3.com1.z0.glb.clouddn.com/16-4-24/75684487.jpg)</span><br><span class="line">&lt;!-- </span><br><span class="line">    --&gt;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"># ===========================================&gt; 更多,更强</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">使用`display: block;` `display: inline-block;` 来改变元素类似，辅助定位</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* table-cell 居中</span><br></pre></td></tr></table></figure>
-<p>.parent {<br>  display: table;<br>  width: 200px;<br>  height: 400px;<br>}<br>.child {<br>     vertical-align: middle;    &#x2F;<em>垂直居中</em>&#x2F;<br>     display: table-cell;    &#x2F;<em>表格化</em>&#x2F;<br>     word-break: break-all;    &#x2F;<em>文字长度达到盒子的宽度后强制换行</em>&#x2F;<br>}</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">` ★ `  `CSS居中完全指南`  http://www.tuicool.com/articles/f6BJn23</span><br><span class="line"></span><br><span class="line">`div表格定高垂直居中，水平居中 - 推酷`  http://www.tuicool.com/articles/VjARZbv</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*   webkit  box</span><br></pre></td></tr></table></figure>
-<pre><code>display: -webkit-box;
--webkit-box-pack: center;
--webkit-box-align: center;
-display: -moz-box;
--moz-box-pack: center;
--moz-box-align: center;   
-display: -ms-flexbox;
--ms-flex-pack: center;
--ms-flex-align: center;
-</code></pre>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">`一问就蒙(1)--垂直居中` http://www.tuicool.com/articles/Qj67zqJ</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*   -webkit-box &amp;  flex二合一</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>.Center-Container.is-Flexbox {<br>  display: -webkit-box;<br>  display: -moz-box;<br>  display: -ms-flexbox;<br>  display: -webkit-flex;<br>  display: flex;<br>  -webkit-box-align: center;<br>     -moz-box-align: center;<br>     -ms-flex-align: center;<br>  -webkit-align-items: center;<br>          align-items: center;<br>  -webkit-box-pack: center;<br>     -moz-box-pack: center;<br>     -ms-flex-pack: center;<br>  -webkit-justify-content: center;<br>          justify-content: center;<br>}</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">` ★ ` `如何只用CSS做到完全居中`</span><br><span class="line">http://blog.jobbole.com/46574/</span><br><span class="line">* 原文  http://codepen.io/shshaw/full/gEiDt</span><br><span class="line">* 专题  `Designing CSS Layouts With Flexbox Is As Easy As Pie – Smashing Magazine` </span><br><span class="line">https://www.smashingmagazine.com/2013/05/centering-elements-with-flexbox/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">**更多参考**</span><br><span class="line">`讲一讲CSS的position/float/display都有哪些取值，它们相互叠加时的行为都是什么？_许乐乐_新浪博客`</span><br><span class="line">http://blog.sina.com.cn/s/blog_5e4b495d0101738w.html</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">` ★ `  `CSS居中完全指南`</span><br><span class="line">http://www.tuicool.com/articles/f6BJn23</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">` ★ ` `如何只用CSS做到完全居中`</span><br><span class="line">http://blog.jobbole.com/46574/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`盘点8种CSS实现垂直居中水平居中的绝对定位居中技术`  源自=&gt;  `如何只用CSS做到完全居中`</span><br><span class="line"></span><br><span class="line">http://blog.csdn.net/freshlover/article/details/11579669</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`从一个居中方法说起 —— 谈 translate 与 相对、绝对定位 - SegmentFault`</span><br><span class="line">http://segmentfault.com/a/1190000002436755</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`CSS实现元素水平/垂直居中的方法 - xiuhong的个人页面 - 开源中国社区`</span><br><span class="line"></span><br><span class="line">http://my.oschina.net/xiuhong/blog/261346</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> `CSS水平居中/垂直居中的N个方法 前端开发必收藏 - CSS - 酷站代码`</span><br><span class="line">http://www.5icool.org/a/201309/a2516.html</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`CSS实现居中的7种方法 - chenmoquan的专栏 - 博客频道 - CSDN.NET`</span><br><span class="line">http://blog.csdn.net/chenmoquan/article/details/41547609</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">** display:flex **</span><br><span class="line">&gt; `Flex 布局教程：语法篇 - 阮一峰的网络日志`</span><br><span class="line">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt;`Flex 布局教程：实例篇 - 阮一峰的网络日志`</span><br><span class="line">http://www.ruanyifeng.com/blog/2015/07/flex-examples.html?bsh_bid=683103006</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; `CSS3 display:flex和display:box有什么区别？ - 知乎`</span><br><span class="line">https://www.zhihu.com/question/22991944</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">` ★ `  `使用 CSS 弹性盒 - CSS | MDN`</span><br><span class="line">https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes</span><br><span class="line">![]( https://mdn.mozillademos.org/files/12998/flexbox.png)</span><br><span class="line">&lt;!--</span><br><span class="line">--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`结合 CSS3 的布局新特征谈谈常见布局方法`</span><br><span class="line">http://www.tuicool.com/articles/QrUZzyu</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`这可能是史上最全的CSS自适应布局总结`</span><br><span class="line">http://www.tuicool.com/articles/rYjyiyz</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`CSS布局自适应等分比例实践-前端开发博客`</span><br><span class="line">http://caibaojian.com/css-equal-layout.html</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 工具 </span><br><span class="line">` 居中场景选择css  How to Center in CSS`</span><br><span class="line">http://howtocenterincss.com/</span><br><span class="line">https://github.com/oliverzheng/howtocenterincss</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">` 居中场景选择 css   Centering in CSS: A Complete Guide | CSS-Tricks`</span><br><span class="line">https://css-tricks.com/centering-css-complete-guide/</span><br><span class="line">https://github.com/Erichain/css-center-complete</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"># 图片与文字垂直居中</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>img{<br>     vertical-align: middle;</p>
-<p>}</p>
-<pre><code>`文字与图片在同一行垂直居中问题 `
-http://blog.csdn.net/tool163/article/details/7088236
-
+<h1 id="更多影响到的其它文件"><a href="#更多影响到的其它文件" class="headerlink" title="更多影响到的其它文件"></a>更多影响到的其它文件</h1><p>chown -R  nobody  &#x2F;usr&#x2F;local&#x2F;nginx&#x2F; client_body_temp</p>
+<p>chown -R  nobody  &#x2F;usr&#x2F;local&#x2F;nginx&#x2F; fastcgi_temp</p>
+<p>chown -R  nobody  &#x2F;usr&#x2F;local&#x2F;nginx&#x2F; scgi_temp</p>
+<p>chown -R  nobody  &#x2F;usr&#x2F;local&#x2F;nginx&#x2F; uwsgi_temp</p>
+<pre><code>
 
 &lt;!-- more --&gt;
 </code></pre>
@@ -1508,7 +1275,7 @@ http://blog.csdn.net/tool163/article/details/7088236
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/28/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/30/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/28/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/30/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

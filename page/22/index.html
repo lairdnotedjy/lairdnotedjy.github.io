@@ -125,18 +125,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-count">548</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">93</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-count">381</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -162,7 +162,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/22/nginx%20%E9%83%A8%E7%BD%B2%E7%9A%84%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BDjquery.js%E6%88%96%E4%BB%85%E5%8A%A0%E8%BD%BD%E5%87%BA%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E9%97%AE%E9%A2%98,%E5%A4%9A%E4%B8%AA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/16/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-APP%E6%94%AF%E4%BB%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/07/22/nginx%20%E9%83%A8%E7%BD%B2%E7%9A%84%E9%A1%B9%E7%9B%AE%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BDjquery.js%E6%88%96%E4%BB%85%E5%8A%A0%E8%BD%BD%E5%87%BA%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E9%97%AE%E9%A2%98,%E5%A4%9A%E4%B8%AA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="post-title-link" itemprop="url">nginx 部署的项目无法加载jquery.js或仅加载出代码片段问题,多个解决办法</a>
+          <a href="/2016/12/16/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-APP%E6%94%AF%E4%BB%98/" class="post-title-link" itemprop="url">微信支付-APP支付</a>
         </h2>
 
         <div class="post-meta-container">
@@ -191,7 +191,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-07-22 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-22T00:00:00+08:00">2016-07-22</time>
+      <time title="Created: 2016-12-16 00:00:02" itemprop="dateCreated datePublished" datetime="2016-12-16T00:00:02+08:00">2016-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -211,38 +211,343 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="问题现象-jquery-js文件无法加载，导致页面样式错乱"><a href="#问题现象-jquery-js文件无法加载，导致页面样式错乱" class="headerlink" title="问题现象 jquery.js文件无法加载，导致页面样式错乱"></a>问题现象 <code>jquery.js</code>文件无法加载，导致页面样式错乱</h1><ul>
-<li><p>前端浏览器体现：<br><code>GET http://***/jquery.js net::ERR_INCOMPLETE_CHUNKED_ENCODING</code></p>
-</li>
-<li><p>后端<code>tail -f /usr/local/nginx/logs/error.log</code>错误日志体现：<br><code>nginx /usr/local/nginx/proxy_temp/* failed (13: Permission denied)</code></p>
-</li>
+          <h1 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h1><p><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_3">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_3</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-1-19/54482401-file_1484817226181_73db.png"></p>
+<ul>
+<li>过程说明<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">商户系统和微信支付系统主要交互说明：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">步骤1：用户在商户APP中选择商品，提交订单，选择微信支付。</span><br><span class="line">步骤2：商户后台收到用户支付单，调用微信支付统一下单接口。参见【统一下单API】。</span><br><span class="line">步骤3：统一下单接口返回正常的prepay_id，再按签名规范重新生成签名后，将数据传输给APP。参与签名的字段名为appId，partnerId，prepayId，nonceStr，timeStamp，package。注意：package的值格式为Sign=WXPay</span><br><span class="line">步骤4：商户APP调起微信支付。api参见本章节【app端开发步骤说明】</span><br><span class="line">步骤5：商户后台接收支付通知。api参见【支付结果通知API】</span><br><span class="line">步骤6：商户后台查询支付结果。，api参见【查询订单API】</span><br></pre></td></tr></table></figure></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2016/07/22 17:54:59 [crit] 4281#0: *441 open() &quot;/usr/local/nginx/proxy_temp/2/00/0000000002&quot; failed (13: Permission denied) while reading upstream, client: 115.197.165.164, server: , request: &quot;GET /teach_pc/js/jquery-1.11.2.min.js HTTP/1.1&quot;, upstream: &quot;http://127.0.0.1:8080/teach_pc/js/jquery-1.11.2.min.js&quot;, host: &quot;121.40.195.52&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="生成订单（-微信-）"><a href="#生成订单（-微信-）" class="headerlink" title="生成订单（ 微信 ）"></a>生成订单（ 微信 ）</h1><p>参考：统一下单接口 <code>&lt;trade_type&gt;APP&lt;/trade_type&gt;</code><br><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;xml&gt;</span><br><span class="line">   &lt;appid&gt;wx2421b1c4370ec43b&lt;/appid&gt;</span><br><span class="line">   &lt;attach&gt;支付测试&lt;/attach&gt;</span><br><span class="line">   &lt;body&gt;APP支付测试&lt;/body&gt;</span><br><span class="line">   &lt;mch_id&gt;10000100&lt;/mch_id&gt;</span><br><span class="line">   &lt;nonce_str&gt;1add1a30ac87aa2db72f57a2375d8fec&lt;/nonce_str&gt;</span><br><span class="line">   &lt;notify_url&gt;http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php&lt;/notify_url&gt;</span><br><span class="line">   &lt;out_trade_no&gt;1415659990&lt;/out_trade_no&gt;</span><br><span class="line">   &lt;spbill_create_ip&gt;14.23.150.211&lt;/spbill_create_ip&gt;</span><br><span class="line">   &lt;total_fee&gt;1&lt;/total_fee&gt;</span><br><span class="line">   &lt;trade_type&gt;APP&lt;/trade_type&gt;</span><br><span class="line">   &lt;sign&gt;0CB01533B8C1EF103065174F50BCA001&lt;/sign&gt;</span><br><span class="line">&lt;/xml&gt; </span><br></pre></td></tr></table></figure>
 
 
 <ul>
-<li><p>如后端并没有此提示或问题出在tomcat服务容器中，有一种可能是数据磁盘满了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h # 查看磁盘占用情况</span><br></pre></td></tr></table></figure>
-<p>在任意目录 vi 写入内容，也会有提示<code>E514: write error (file system full?) </code>(文件系统已满)</p>
+<li>API签名规范<br><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3</a></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">假设传送的参数如下：</span><br><span class="line">appid： wxd930ea5d5a258f4f</span><br><span class="line">mch_id： 10000100</span><br><span class="line">device_info： 1000</span><br><span class="line">body： test</span><br><span class="line">nonce_str： ibuaiVcKdpRxkhJA</span><br><span class="line"> </span><br><span class="line">第一步：对参数按照key=value的格式，并按照参数名ASCII字典序排序如下：</span><br><span class="line">stringA=&quot;appid=wxd930ea5d5a258f4f&amp;body=test&amp;device_info=1000&amp;mch_id=10000100&amp;nonce_str=ibuaiVcKdpRxkhJA&quot;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">第二步：拼接API密钥：</span><br><span class="line">stringSignTemp=&quot;stringA&amp;key=192006250b4c09247ec02edce69f6a2d&quot;</span><br><span class="line">sign=MD5(stringSignTemp).toUpperCase()=&quot;9A0A8659F005D6984697E2CA0A9CF3B7&quot;</span><br><span class="line"> </span><br><span class="line">最终得到最终发送的数据：</span><br><span class="line">&lt;xml&gt;</span><br><span class="line">&lt;appid&gt;wxd930ea5d5a258f4f&lt;/appid&gt;</span><br><span class="line">&lt;mch_id&gt;10000100&lt;/mch_id&gt;</span><br><span class="line">&lt;device_info&gt;1000&lt;device_info&gt;</span><br><span class="line">&lt;body&gt;test&lt;/body&gt;</span><br><span class="line">&lt;nonce_str&gt;ibuaiVcKdpRxkhJA&lt;/nonce_str&gt;</span><br><span class="line">&lt;sign&gt;9A0A8659F005D6984697E2CA0A9CF3B7&lt;/sign&gt;</span><br><span class="line">&lt;xml&gt;  </span><br></pre></td></tr></table></figure>
+<p>微信提供相关接口在线签名验证工具： <a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/tools/signverify/">https://pay.weixin.qq.com/wiki/tools/signverify/</a></p>
+<ul>
+<li>API密钥<br>商户平台中设置  <a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/">https://pay.weixin.qq.com</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-1-19/41729331-file_1484817256396_ffb0.png"></li>
+</ul>
+<h1 id="调起支付"><a href="#调起支付" class="headerlink" title="调起支付"></a>调起支付</h1><p><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5</a></p>
+<ul>
+<li>android<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">IWXAPI api;</span><br><span class="line">PayReq request = new PayReq();</span><br><span class="line">request.appId = &quot;wxd930ea5d5a258f4f&quot;;</span><br><span class="line">request.partnerId = &quot;1900000109&quot;;</span><br><span class="line">request.prepayId= &quot;1101000000140415649af9fc314aa427&quot;,;</span><br><span class="line">request.packageValue = &quot;Sign=WXPay&quot;;</span><br><span class="line">request.nonceStr= &quot;1101000000140429eb40476f8896f4c9&quot;;</span><br><span class="line">request.timeStamp= &quot;1398746574&quot;;</span><br><span class="line">request.sign= &quot;7FFECB600D7157C5AA49810D2D8F28BC2811827B&quot;;</span><br><span class="line">api.sendReq(req);</span><br></pre></td></tr></table></figure></li>
+<li>cordova plugin ： cordova-plugin-wechat</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/xu-li/cordova-plugin-wechat">https://github.com/xu-li/cordova-plugin-wechat</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var dto = response.data.object.dto;</span><br><span class="line">// var params = &#123;</span><br><span class="line">//   appid: resData.appid,</span><br><span class="line">//   noncestr: resData.nonce_str, // nonce:随机字符串，不长于32位。推荐随机数生成算法</span><br><span class="line">//   package: resData.package,</span><br><span class="line">//   partnerid: resData.partnerid, // merchant id : 商户号</span><br><span class="line">//   prepayid: resData.prepay_id, // prepay id:微信生成的预支付回话标识，用于后续接口调用中使用，该值有效期为2小时</span><br><span class="line">//   timestamp: resData.timestamp, // timestamp:时间戳 String(10)</span><br><span class="line">//   sign:resData.sign</span><br><span class="line">// &#125;;</span><br><span class="line"> </span><br><span class="line">window.Wechat &amp;&amp; window.Wechat.sendPaymentRequest(dto, function () &#123;</span><br><span class="line">  console.log(&quot;Success&quot;);</span><br><span class="line">  orderCheck(response.data.object.code);// 订单校验</span><br><span class="line">&#125;, function (reason) &#123;</span><br><span class="line">  // alert(&quot;Failed: &quot; + reason);</span><br><span class="line">  console.log(&quot;Failed:&quot;, reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>该sign生成字段名列表见调起支付API<br><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_12">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_12</a></p>
 </li>
-<li><p>问题原因</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">看一下nginx 反向代理参数说明</span><br><span class="line"> </span><br><span class="line">proxy_connect_timeout 600; #nginx跟后端服务器连接超时时间(代理连接超时)</span><br><span class="line">proxy_read_timeout 600; #连接成功后，后端服务器响应时间(代理接收超时)</span><br><span class="line">proxy_send_timeout 600; #后端服务器数据回传时间(代理发送超时)</span><br><span class="line">proxy_buffer_size 32k; #设置代理服务器（nginx）保存用户头信息的缓冲区大小</span><br><span class="line">proxy_buffers 4 32k; #proxy_buffers缓冲区，网页平均在32k以下的话，这样设置</span><br><span class="line">proxy_busy_buffers_size 64k; #高负荷下缓冲大小（proxy_buffers*2）</span><br><span class="line">proxy_temp_file_write_size 64k; #设定缓存文件夹大小，大于这个值，将从upstream服务器传</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">问题就出在proxy_temp_file_write_size上，当你的文件超过该参数设置的大小时，nginx会先将文件写入临时目录(缺省为nginx安装目下/proxy_temp目录),</span><br><span class="line"> </span><br><span class="line">如果nginx对prxoy_temp没有权限就会写不进去，结果就是只显示部分页面</span><br><span class="line">`` `</span><br><span class="line">http://www.nginx.cn/695.html</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 正常不会出现此问题，造成原因是因为全局替换了文件所有者</span><br></pre></td></tr></table></figure>
-<p>chown -R root &#x2F;usr&#x2F;local&#x2F;nginx<br>chown -R sysadmin &#x2F;usr&#x2F;local&#x2F;nginx # 或此</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt; 此命令的-R会递归替换内部所有子文件（含 proxy_temp ）的所有者为root</span><br><span class="line">&gt; 而nginx默认是使用nobody用户启动，由此nobody用户将无法更新目录 proxy_temp下的文件了</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 解决办法一：更改 `proxy_temp/` 文件权限</span><br><span class="line">    -  破坏了目录的安全管理策略，不建议</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>因为权限问题不能写入Nginx的缓存文件夹里，修改Nginx的缓存文件夹权限，问题解决！<br>chmod -R 777 proxy_temp&#x2F;</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">-  解决方法二：更新nginx.conf中nobody用户为root</span><br><span class="line">     -  破坏了目录的安全管理策略，不建议</span><br></pre></td></tr></table></figure>
-<p>发现都是nobody的进程，但是nginx的目录都是root用户，另外集群tomcat也是属于root用户，而且root启动，查看nginx.conf:<br>user nobody<br>改成：user root<br>停止nginx -s stop<br>重启nginx -c  nginx.conf</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://www.2cto.com/os/201203/122371.html</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 解决方法三：更新`proxy_temp`文件夹的所有者归还给`nobody`</span><br><span class="line">     - 推荐</span><br></pre></td></tr></table></figure>
-<p>chown -R  nobody  &#x2F;usr&#x2F;local&#x2F;nginx&#x2F; proxy_temp</p>
+<li><p><code> API签名规范</code>(同上)<br><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3</a></p>
+</li>
+<li><p>依赖API密钥 (同上)</p>
 </li>
 </ul>
-<h1 id="更多影响到的其它文件"><a href="#更多影响到的其它文件" class="headerlink" title="更多影响到的其它文件"></a>更多影响到的其它文件</h1><p>chown -R  nobody  &#x2F;usr&#x2F;local&#x2F;nginx&#x2F; client_body_temp</p>
-<p>chown -R  nobody  &#x2F;usr&#x2F;local&#x2F;nginx&#x2F; fastcgi_temp</p>
-<p>chown -R  nobody  &#x2F;usr&#x2F;local&#x2F;nginx&#x2F; scgi_temp</p>
-<p>chown -R  nobody  &#x2F;usr&#x2F;local&#x2F;nginx&#x2F; uwsgi_temp</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/16/QQ%E6%94%AF%E4%BB%98-cordova%20qpay/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/12/16/QQ%E6%94%AF%E4%BB%98-cordova%20qpay/" class="post-title-link" itemprop="url">QQ支付-cordova qpay</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-12-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-16T00:00:00+08:00">2016-12-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h1><p><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=201">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=201</a><br><img src="http://p.qpic.cn/qpaywikipic/0/qpaywikipic_582045e17a9263438/0"></p>
+<h1 id="生成订单"><a href="#生成订单" class="headerlink" title="生成订单"></a>生成订单</h1><ul>
+<li><p>参考统一下单接口<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=58">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=58</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;xml&gt;</span><br><span class="line">  &lt;appid&gt;1111223451&lt;/appid&gt; &lt;!-- 应用ID --&gt;</span><br><span class="line">  &lt;body&gt;123&lt;/body&gt; &lt;!-- 商品描述  --&gt;</span><br><span class="line">  &lt;device_info&gt;1234567890abc&lt;/device_info&gt; &lt;!-- 设备信息 --&gt;</span><br><span class="line">  &lt;limit_pay&gt;&lt;/limit_pay&gt; &lt;!-- 支付方式限制  --&gt;</span><br><span class="line">  &lt;mch_id&gt;1301278501&lt;/mch_id&gt; &lt;!-- 商户ID --&gt;</span><br><span class="line">  &lt;nonce_str&gt;fecf31a13be2309093db5df934848583&lt;/nonce_str&gt; &lt;!-- 随机字符串 --&gt;</span><br><span class="line">  &lt;notify_url&gt;https://qpay.qq.com/cgi-bin/pay/qpay_unified_order.cgi&lt;/notify_url&gt;&lt;!-- 支付结果通知地址 --&gt;</span><br><span class="line">  &lt;out_trade_no&gt;2016061235213702&lt;/out_trade_no&gt; &lt;!-- 商户订单号  --&gt;</span><br><span class="line">  &lt;sign&gt;f0c328d362858713b66feafb802615d8&lt;/sign&gt;&lt;!-- 统一下单签名 --&gt;</span><br><span class="line">  &lt;spbill_create_ip&gt;10.123.9.102&lt;/spbill_create_ip&gt; &lt;!-- 终端ip --&gt;</span><br><span class="line">  &lt;total_fee&gt;1&lt;/total_fee&gt; &lt;!-- 价格  --&gt;</span><br><span class="line">  &lt;trade_type&gt;NATIVE&lt;/trade_type&gt; &lt;!-- 支付场景  --&gt;</span><br><span class="line">&lt;/xml&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>签名规范<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=57">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=57</a></p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">假设传送的参数如下： </span><br><span class="line">appid： d930ea5d5a258f4f </span><br><span class="line">mch_id： 10000100 </span><br><span class="line">device_info： 1000 </span><br><span class="line">body： test </span><br><span class="line">nonce_str： ibuaiVcKdpRxkhJA </span><br><span class="line"> </span><br><span class="line">第一步：对参数按照key=value的格式，并按照参数名ASCII字典序排序如下： </span><br><span class="line">stringA=&quot;appid=d930ea5d5a258f4f&amp;body=test&amp;device_info=1000&amp;mch_id=10000100&amp;nonce_str=ibuaiVcKdpRxkhJA&quot;; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">第二步：拼接API密钥： </span><br><span class="line">stringSignTemp=&quot;stringA&amp;key=192006250b4c09247ec02edce69f6a2d&quot; </span><br><span class="line">sign=MD5(stringSignTemp).toUpperCase()=&quot;9A0A8659F005D6984697E2CA0A9CF3B7&quot; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">最终得到最终发送的数据： </span><br><span class="line">&lt;xml&gt; </span><br><span class="line">&lt;appid&gt;d930ea5d5a258f4f&lt;/appid&gt; </span><br><span class="line">&lt;mch_id&gt;10000100&lt;/mch_id&gt; </span><br><span class="line">&lt;device_info&gt;1000&lt;device_info&gt; </span><br><span class="line">&lt;body&gt;test&lt;/body&gt; </span><br><span class="line">&lt;nonce_str&gt;ibuaiVcKdpRxkhJA&lt;/nonce_str&gt;</span><br><span class="line">&lt;sign&gt;9A0A8659F005D6984697E2CA0A9CF3B7&lt;/sign&gt; </span><br><span class="line">&lt;xml&gt; </span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>API密钥<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/account/api_cert.shtml">https://qpay.qq.com/account/api_cert.shtml</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-12-23/82075208-file_1482463058867_b57.png"></li>
+</ul>
+<h1 id="调起支付"><a href="#调起支付" class="headerlink" title="调起支付"></a>调起支付</h1><ul>
+<li>android<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=165">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=165</a></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">（1）初始化PayApi，并将数据填写完整：</span><br><span class="line">PayApi api = new PayApi();</span><br><span class="line">api.appId = APP_ID; // 在http://open.qq.com注册的AppId,参与支付签名，签名关键字key为appId       </span><br><span class="line">api.serialNumber = ...; // 支付序号,用于标识此次支付</span><br><span class="line">api.callbackScheme = ...; // QQ钱包支付结果回调给urlscheme为callbackScheme的activity.，参看后续的“支付回调结果处理” </span><br><span class="line">api.tokenId = ...; // QQ钱包支付生成的token_id</span><br><span class="line">api.pubAcc = ...; // 手Q公众帐号id.参与支付签名，签名关键字key为pubAcc</span><br><span class="line">api.pubAccHint = ...; // 支付完成页面，展示给用户的提示语：提醒关注公众帐号</span><br><span class="line">api.nonce = ...; // 随机字段串，每次支付时都要不一样.参与支付签名，签名关键字key为nonce</span><br><span class="line">api.timeStamp = ...; // 时间戳，为1970年1月1日00:00到请求发起时间的秒数</span><br><span class="line">api.bargainorId = ...; // 商户号.参与支付签名，签名关键字key为bargainorId</span><br><span class="line">api.sig = ...; // 商户Server下发的数字签名，生成的签名串，参看“数字签名”</span><br><span class="line">api.sigType = &quot;HMAC-SHA1&quot;; // 签名时，使用的加密方式，默认为&quot;HMAC-SHA1&quot;</span><br><span class="line"> </span><br><span class="line">（2）在启动QQ钱包支付前，判断一下数据是否完整，再启动QQ钱包支付：</span><br><span class="line">if (api.checkParams()) &#123;</span><br><span class="line">     openApi.execApi(api);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>cordova plugin：com.wosai.qpay</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">QPay.mqqPay(&#123;</span><br><span class="line">  tokenId: &#x27;1V39f4eaf286fe3718731871b4fe96dc&#x27;,// 订单号</span><br><span class="line">  nonce: &#x27;&#x27;,// 随机数</span><br><span class="line">  bargainorId: &#x27;1424912901&#x27;,// 商户号</span><br><span class="line">  appKey: &#x27;CuWbc7F0XrTpnHBa&#x27;,// appkey</span><br><span class="line">  sig: &#x27;&#x27;</span><br><span class="line">&#125;, function (res) &#123;</span><br><span class="line">  alert(&quot;res:&quot; + res)</span><br><span class="line">&#125;, function (res) &#123;</span><br><span class="line">  alert(&quot;error:&quot; + res)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>APP调用QQ钱包支付-签名规范<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=165">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=165</a></p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">数字签名</span><br><span class="line"> </span><br><span class="line">为了保障商户利益与安全，商户App调用QQ钱包支付时启用另一套签名机制。该签名机制与“商户后台与QQ钱包支付后台的签名机制”是不同的。</span><br><span class="line"> </span><br><span class="line">1、源串构造方法</span><br><span class="line">（1）将需要参与签名的所有参数按key进行字典升序排列。</span><br><span class="line">（2）将第1步中排序后的参数(key=value)用&amp;拼接起来；</span><br><span class="line">（3）key中存在大小写字母，保持大小写字母的存在。不要将key进行统一转换为大写或小写操作；</span><br><span class="line">（4）如果value为空, 生成格式为“key=”，这点与后台之间签名方法是不一样的；</span><br><span class="line">（5）签名原始串中，字段名和字段值都采用原始值，不进行URL Encode。</span><br><span class="line"> </span><br><span class="line">举例：</span><br><span class="line">调用某个接口，接口有如下字段：</span><br><span class="line">appId、nonce、tokenId、pubAcc、bargainorId</span><br><span class="line"> </span><br><span class="line">实际调用接口时，各字段的值：</span><br><span class="line">appId=100619284、nonce=ksjfwierwfjk、tokenId=1000000002、pubAcc=、bargainorId=1900000109</span><br><span class="line"> </span><br><span class="line">正确的签名原始串是：</span><br><span class="line">appId=100619284&amp;bargainorId=1900000109&amp;nonce=ksjfwierwfjk&amp;pubAcc=&amp;tokenId=1000000002</span><br><span class="line"> </span><br><span class="line">常见的错误有：</span><br><span class="line">appId=100619284&amp;bargainorId=1900000109&amp;nonce=ksjfwierwfjk&amp;tokenId=1000000002</span><br><span class="line">appid=100619284&amp;bargainorid=1900000109&amp;nonce=ksjfwierwfjk&amp;pubacc=&amp;tokenid=1000000002</span><br><span class="line">appId=100619284&amp;nonce=ksjfwierwfjk&amp;tokenId=1000000002&amp;pubAcc=&amp;bargainorId=1900000109</span><br><span class="line"> </span><br><span class="line">2、 密钥构造方法</span><br><span class="line">（1）在http://open.qq.com申请appId，并获得appKey；</span><br><span class="line">（2）构造到密钥的方式：在应用的appkey末尾加上一个字符的“&amp;”，即appkey&amp;。</span><br><span class="line"> </span><br><span class="line">示例：</span><br><span class="line">appkey 值为 d139ae6fb0175e5659dce2a7c1fe84d5</span><br><span class="line">正确的密钥为：d139ae6fb0175e5659dce2a7c1fe84d5&amp;</span><br><span class="line"> </span><br><span class="line">3、 生成签名值方法</span><br><span class="line">（1）使用HMAC-SHA1加密算法，使用”密钥构造方法“中得到的密钥对“源串构造方法”中得到的源串进行加密（注：一般程序语言中会内置HMAC-SHA1加密算法的函数，例如PHP5.1.2之后的版本可直接调用hash_hmac函数）；</span><br><span class="line">（2）然后将加密后的字符串进行Base64编码（注：一般程序语言中会内置Base64编码函数，例如PHP中可直接调用 base64_encode() 函数）；</span><br><span class="line">（3）最后得到的签名值sig结果如下：</span><br><span class="line">c6xXw0tNABhOMc869h1bfxTp9Mk= </span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/15/%E6%96%B0%E4%B8%80%E4%BB%A3%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7yarn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/12/15/%E6%96%B0%E4%B8%80%E4%BB%A3%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7yarn/" class="post-title-link" itemprop="url">新一代包管理工具yarn</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-12-15 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-15T00:00:00+08:00">2016-12-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>Yarn vs npm：你需要知道的一切</code><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23493436?utm_source=tuicool&utm_medium=referral">https://zhuanlan.zhihu.com/p/23493436?utm_source=tuicool&amp;utm_medium=referral</a></p>
+<p><code>新一代包管理工具yarn</code><br><a target="_blank" rel="noopener" href="http://imweb.io/topic/581f6c0bf2e7e042172d618a?utm_source=tuicool&utm_medium=referral">http://imweb.io/topic/581f6c0bf2e7e042172d618a?utm_source=tuicool&amp;utm_medium=referral</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm install === yarn / yarn install</span><br><span class="line">npm install xxx —save === yarn add xxx</span><br><span class="line">npm uninstall xxx —save === yarn remove xxx</span><br><span class="line">npm install xxx —save-dev === yarn add xxx —dev</span><br><span class="line">npm update === yarn upgrade</span><br><span class="line">npm install xxx -g === yarn global add xxx</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<ul>
+<li><p>新的包管理工具,主打是速度和依赖管理(可靠性)</p>
+</li>
+<li><p>同样有淘宝的仓库:<br>默认仓库:<code>https://registry.yarnpkg.com</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn config set registry &quot; https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
+<p>我刚在 专家库项目上试了下,删除node_modules再用yarn可以装回去</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/13/%E6%AF%94%E5%AF%B9css%E4%B8%8Ejquery%E9%80%89%E6%8B%A9%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/12/13/%E6%AF%94%E5%AF%B9css%E4%B8%8Ejquery%E9%80%89%E6%8B%A9%E5%99%A8/" class="post-title-link" itemprop="url">比对css与jquery选择器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-12-13 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-13T00:00:00+08:00">2016-12-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="第三位开始"><a href="#第三位开始" class="headerlink" title="第三位开始 &#96;&#96;&#96;"></a>第三位开始 &#96;&#96;&#96;</h1><pre><code>.exam_info &gt; div:nth-child(n+3) &#123;
+  color: #a2a2a2;
+&#125;
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"># 最前两位</span><br></pre></td></tr></table></figure>
+<pre><code>.exam_info &gt; div:nth-child(-n+2) &#123;
+  color: #a2a2a2;
+&#125;
+</code></pre>
 <pre><code>
 
-&lt;!-- more --&gt;
+# 比对:  Css与jQuery选择器汇总
+名称 |   Css    | jQuery
+--|--|--|
+第一个元素  |    :first-child  |    :first, :first-child
+最后个元素  |    :last-child    |  :last, :last-child
+偶数的元素  |    :nth-child(even)   |   :even
+奇数的元素  |    :nth-child(odd)   |   :odd
+大于给定索引值的元素  |    :nth-child(n+2)   |   :gt(0)
+小于给定索引值的元素  |    :nth-child(-1n+8)   |   :lt(2)
+
+
+
+
+**参考**
+`Css与jQuery选择器转换 gt lt eq - 快乐每一天 - ITeye技术网站`
+http://qiaolevip.iteye.com/blog/2189124
+
+
+
+`jQuery选择器和选取方法 - MaxIE - 博客园`
+http://www.cnblogs.com/MaxIE/p/4078869.html
+
+
+`这 30 类 CSS 选择器，你必须记在脑袋里！ - 开源中国社区`
+http://www.oschina.net/news/57107/30-css-selector-you-should-remeber
 </code></pre>
 
       
@@ -270,7 +575,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/21/linux%20nginx%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/10/Read-a-programmer-s-rantings/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -288,7 +593,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/07/21/linux%20nginx%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/" class="post-title-link" itemprop="url">linux nginx权限控制策略</a>
+          <a href="/2016/12/10/Read-a-programmer-s-rantings/" class="post-title-link" itemprop="url">读《程序员的呐喊》</a>
         </h2>
 
         <div class="post-meta-container">
@@ -299,14 +604,23 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-07-21 00:00:03" itemprop="dateCreated datePublished" datetime="2016-07-21T00:00:03+08:00">2016-07-21</time>
+      <time title="Created: 2016-12-10 22:41:53" itemprop="dateCreated datePublished" datetime="2016-12-10T22:41:53+08:00">2016-12-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+        </span>
     </span>
 
   
@@ -319,315 +633,26 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="方式一：更改目录权限，开放其它用户访问"><a href="#方式一：更改目录权限，开放其它用户访问" class="headerlink" title="方式一：更改目录权限，开放其它用户访问"></a>方式一：更改目录权限，开放<code>其它用户</code>访问</h1><ul>
-<li>优点：可以提供给所有者(root)以外的用户进行维护</li>
-<li>缺点：<code>其它用户</code>包含了定义的管理员用户和其它所有用户.存在安全隐患</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 nginx</span><br></pre></td></tr></table></figure>
-
-<h1 id="方式二：更改html目录所有者-（推荐）"><a href="#方式二：更改html目录所有者-（推荐）" class="headerlink" title="方式二：更改html目录所有者 （推荐）"></a>方式二：更改<code>html</code>目录所有者 （推荐）</h1><ul>
-<li>优点:区别于其它用户的权限,避免了权限公开</li>
-<li>缺点:文件的原所有者(非root)将失去管理权.但可以还原所有者来归还权限<ul>
-<li>root用户具备ALL权限,可以操作其他用户的文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R sysadmin /usr/local/nginx/html </span><br><span class="line">sudo chown -R  sysadmin: sysadmin   /usr/local/nginx /html  #  群组一并修改</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>tomcat 同理<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R sysadmin  /usr/local/apache-tomcat-*/webapps</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="方式三：更改目录安装位置，于维护用户的目录下"><a href="#方式三：更改目录安装位置，于维护用户的目录下" class="headerlink" title="方式三：更改目录安装位置，于维护用户的目录下"></a>方式三：更改目录安装位置，于维护用户的目录下</h1><ul>
-<li>优点：由<code>nginx</code>专有用户 管理（前提依然需要更换文件所有者）</li>
-<li>缺点：更像是<code>nginx</code>独有的服务，且在维护其它服务时会频繁的切换用户<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">./configure  --prefix=/home/nginx/nginx   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo chown -R sysadmin nginx/</span><br><span class="line"></span><br><span class="line">sudo chown -R sysadmin: sysadmin  nginx/ #  群组一并修改</span><br></pre></td></tr></table></figure></li>
-<li>注意问题<br><code>nginx 部署的项目无法加载jquery.js或加载出片段问题,多个解决办法.md   </code></li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/07/21/linux%20nginx%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/21/linux%20ssh%E7%AB%AF%E5%8F%A3%E4%BF%AE%E6%94%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/07/21/linux%20ssh%E7%AB%AF%E5%8F%A3%E4%BF%AE%E6%94%B9/" class="post-title-link" itemprop="url">linux ssh端口修改</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-07-21 00:00:02" itemprop="dateCreated datePublished" datetime="2016-07-21T00:00:02+08:00">2016-07-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="编辑sshd服务配置文件"><a href="#编辑sshd服务配置文件" class="headerlink" title="编辑sshd服务配置文件"></a>编辑<code>sshd</code>服务配置文件</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-<h1 id="更改端口"><a href="#更改端口" class="headerlink" title="更改端口"></a>更改端口</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># Port <span class="number">22</span> =&gt; Port <span class="number">1997</span></span><br></pre></td></tr></table></figure>
-<h1 id="重启sshd服务"><a href="#重启sshd服务" class="headerlink" title="重启sshd服务"></a>重启sshd服务</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/sshd restart</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/07/21/linux%20ssh%E7%AB%AF%E5%8F%A3%E4%BF%AE%E6%94%B9/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/21/linux%20%E9%98%B2%E7%81%AB%E5%A2%99iptables%E8%AE%BE%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/07/21/linux%20%E9%98%B2%E7%81%AB%E5%A2%99iptables%E8%AE%BE%E7%BD%AE/" class="post-title-link" itemprop="url">linux 防火墙iptables设置</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-07-21 00:00:01" itemprop="dateCreated datePublished" datetime="2016-07-21T00:00:01+08:00">2016-07-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="限制端口服务-生效小-延迟"><a href="#限制端口服务-生效小-延迟" class="headerlink" title="限制端口服务( 生效小 延迟)"></a>限制端口服务( 生效小 延迟)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 限制端口服务( 生效小 延迟)</span><br><span class="line"></span><br><span class="line">iptables -A INPUT -i lo -j ACCEPT #允许来自于lo接口的数据包</span><br><span class="line">iptables -A INPUT -p tcp --dport 1997 -j ACCEPT #ssh端口22-&gt;1997</span><br><span class="line"># iptables -A INPUT -p tcp --dport 21 -j ACCEPT #FTP端口21</span><br><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT #web服务端口80</span><br><span class="line">iptables -A INPUT -p tcp --dport 8080 -j ACCEPT #tomcat</span><br><span class="line"># iptables -A INPUT -p tcp --dport xxxx -j ACCEPT #mysql</span><br><span class="line"># iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT #允许icmp包通过,也就是允许ping</span><br><span class="line"># iptables -A INPUT -p tcp -s 45.96.174.68 -j ACCEPT #如果要添加内网ip信任（接受其所有TCP请求）</span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT #允许所有对外请求的返回包</span><br><span class="line">iptables -P INPUT DROP #过滤所有非以上规则的请求</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iptables -L -n --line-numbers # 所有iptables以序号标记显示</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n --line-numbers # 所有iptables以序号标记显示</span><br><span class="line"></span><br><span class="line">iptables -D INPUT 7 # 删除具体行规则</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="保存-重启-立即生效"><a href="#保存-重启-立即生效" class="headerlink" title="保存,重启-立即生效"></a>保存,重启-立即生效</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 保存,重启-立即生效</span><br><span class="line"></span><br><span class="line">/etc/rc.d/init.d/iptables save</span><br><span class="line">service iptables restart</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iptables -L -n --line-numbers # 所有iptables以序号标记显示</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="清空规则-重置"><a href="#清空规则-重置" class="headerlink" title="清空规则(重置)"></a>清空规则(重置)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 清空规则(重置)</span><br><span class="line"></span><br><span class="line">iptables -P INPUT ACCEPT # 恢复默认允许访问(不恢复就麻烦了~)</span><br><span class="line">iptables -F # 清空默认所有规则</span><br><span class="line">iptables -X # 清空自定义的所有规则</span><br><span class="line">iptables -Z # 计数器置0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iptables -L -n --line-numbers #  所有iptables以序号标记显示</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="开机启动-chkconfig"><a href="#开机启动-chkconfig" class="headerlink" title="开机启动-chkconfig"></a>开机启动-chkconfig</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 开机启动-chkconfig</span><br><span class="line"></span><br><span class="line">service iptables save # 保存现状</span><br><span class="line">chkconfig iptables on  # 添加到自启动chkconfig</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">chkconfig --list | grep &#x27;3:on&#x27;  # 检查开机启动</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chkconfig iptables off  # 删除</span><br><span class="line">chkconfig iptables on  # 恢复</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">chkconfig --list | grep &#x27;3:on&#x27;  # 检查开机启动</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<p>*<em>参考</em> *<br><code>阿里云Centos配置iptables防火墙 | KK文章</code><br><a target="_blank" rel="noopener" href="http://blog.kkyun.com/?p=50">http://blog.kkyun.com/?p=50</a></p>
-<p><code>iptables命令_Linux iptables 命令用法详解：Linux上常用的防火墙软件</code><br><a target="_blank" rel="noopener" href="http://man.linuxde.net/iptables">http://man.linuxde.net/iptables</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/07/21/linux%20%E9%98%B2%E7%81%AB%E5%A2%99iptables%E8%AE%BE%E7%BD%AE/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/20/linux%20%E9%99%90%E5%88%B6%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7su%E5%88%87%E6%8D%A2%E5%88%B0%C2%A0root/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/07/20/linux%20%E9%99%90%E5%88%B6%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7su%E5%88%87%E6%8D%A2%E5%88%B0%C2%A0root/" class="post-title-link" itemprop="url">linux 限制普通用户su切换到 root</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-07-20 00:00:02" itemprop="dateCreated datePublished" datetime="2016-07-20T00:00:02+08:00">2016-07-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="对允许切换root的用户添加到wheel分组"><a href="#对允许切换root的用户添加到wheel分组" class="headerlink" title="对允许切换root的用户添加到wheel分组"></a>对允许切换root的用户添加到<code>wheel</code>分组</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod -g  wheel sysadmin</span><br></pre></td></tr></table></figure>
+          <p><strong>作者简介：</strong>Steve Yegge是一名程序员，也是博主，写了很多关于编程语言，生产力，和软件文化的文章。他拥有华盛顿大学计算机科学本科学位，20年的业界经验，开发领域涉及嵌入式操作系统、可扩展的电子商务系统、移动设备应用、提升软件生产力的工具等。他曾供职于亚马逊和Google等公司。</p>
+<p>徐旭铭，编了十几年程，翻译过几本书，现在在亚马逊当码农。工作和兴趣都是写代码，喜欢看上去很麻烦的问题。住在西雅图，闲暇时喜欢看美剧。</p>
+<p>这本书真是太有意思了，里面充斥了作者对各种语言以及开发现象和编程风格的吐槽，但是读来并不让人反感，也不觉得偏激，真是太有才了，真羡慕可以把吐槽文也写得这么棒的人。在书中，作者着重推荐了《重构》注意是<a target="_blank" rel="noopener" href="https://book.douban.com/subject/1229923/">Refactoring</a>，我刚开始心里想到的是<a target="_blank" rel="noopener" href="https://book.douban.com/subject/5320866/">Rework</a>，其实并不是。这是两本完全不同的书，但是我推荐你把它们都读一读，必然会受益匪浅。书中作者的一句话非常有意思，他说，“在读《重构》之前，他感觉自己这么多年来都像是脱了裤子上班一样，其他人是不是早就读过这本书了？我会不会是唯一不知道的人？”。我想，对于读书都这么如饥似渴的人，并且生怕落后于别人的人，在读到一本好书时的那种焦灼感，怎么可能会一直默默无闻呢？另外说一句，这本书翻译的也很棒，实属不易。</p>
+<p>到今天，重构已经衍生出一整个产业链了，它就是一面旗帜。Java IDE的粉丝们都在为之摇旗呐喊。重构工具就好像摆在商店里的产品一样。翻开菜单从里面挑一个出来，连地球都能撬起来。</p>
+<p>在谈到语言的宗教情况时，这个现象确实很严重，不管是在国内还是在国外，都不缺少狂热的语言宗教分子。当然了这里面的语言指的是计算机世界里的编程语言，而不是我们日常中所说的语言。每个语言狂热分子都把自己所使用的语言视为正统宗教，容不得别人指手画脚，哪怕这些都是善意的行为，在他们眼里，也是对他们语言宗教的亵渎。</p>
+<p>好在当你会的语言越来越多的时候，也就相当于你在不断的改变宗教信仰。每次改变信仰，下一个对你的影响力就越弱，因为你在语言宗教的世界里变得越来越成熟，并且也不那么极端与狂热了，你可以站在一个宗教之外去审视当初自己沉溺其中的宗教。在各个宗教之间切换的时候，使你变得原来越睿智了，再也不屑于为了语言去与别人发生争执了。</p>
+<p>每当遇到一些事物你觉得很好很强大，别人却批评抱怨的时候，你总会忍不住希望他们赶紧离开，好继续坐井观天，这时千万别忘了这一点：之所以我们今天能冲破黑暗时代，生活在一个相对光明的启蒙时代，正是因为我们敢于挑战自己最宝贵的信仰。所以质疑是件好事。</p>
+<p>最重要的是作者指出了结对编程、极限编程、敏捷开发等都是扯犊子的玩意，这些都是软件咨询师搞出来挣钱的套路。其实这也是被逼无奈，如果像以前那样以完成一个项目之后才付款，但是在这过程之中，客户不断的变更需求，大多数软件咨询师以及负责开发项目的人都是挣不到钱的，因为这种项目成功的概率太小了，所以聪明的咨询师们搞出了各种概念并按阶段付款。但是并不能一概而论，有坏的敏捷开发，同时也有好的敏捷开发，在文中作者举了Google的例子作为好的敏捷，不妨看看列出的如下几点：</p>
 <ul>
-<li>查看用户所在用户组<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23huf4wo4Z ~]# groups sysadmin</span><br><span class="line">sysadmin : wheel</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23huf4wo4Z ~]# id sysadmin #   查看用户情况</span><br><span class="line">uid=502(sysadmin) gid=10(wheel) groups=10(wheel)</span><br></pre></td></tr></table></figure></li>
-<li>查看用户组下成员<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">more /etc/group | grep wheel</span><br><span class="line"></span><br><span class="line">grep GID /etc/passwd</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wheel:x:10:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23huf4wo4Z ~]# grep 10: /etc/passwd</span><br><span class="line">uucp:x:10:14:uucp:/var/spool/uucp:/sbin/nologin</span><br><span class="line">sysadmin:x:500:10::/home/sysadmin:/bin/bash</span><br></pre></td></tr></table></figure></li>
+<li>经理也至少有一半时间在写代码，所以他们更像是技术主管</li>
+<li>工程师可以在任何时候换组，或者换项目，不会有人质疑你。只要你一句话，第二天就会有人来帮你把东西都搬到新的组那边去</li>
+<li>Google的理念是不去告诉工程师要做什么，他们也是这样严格执行的</li>
+<li>鼓励工程师花工作时间中的20%的时间去做任何想做的事情，而不是日常工作</li>
+<li>很少开会。我估计一个工程师平均一周大概开3次会吧，这还包括了和主管一对一沟通</li>
+<li>安静的环境。工程师或单独，或三五一组，都非常安静地专注于自己的工作</li>
+<li>没有甘特图，或是日期-任务-负责人的表格，或是任何看得到的项目管理工具</li>
+<li>就算真的碰到项目吃紧的时候，大家还是会去吃午饭和晚饭，都是免费的哦，除非自愿，没人会长时间的工作</li>
 </ul>
-<h1 id="开启限制wheel组外登陆配置"><a href="#开启限制wheel组外登陆配置" class="headerlink" title="开启限制wheel组外登陆配置"></a>开启限制<code>wheel</code>组外登陆配置</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pam.d/su</span><br><span class="line"># auth required pam_wheel.so use_uid (解开此注释)</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/43413358.jpg"></p>
-<h1 id="Test：切换"><a href="#Test：切换" class="headerlink" title="Test：切换"></a>Test：切换</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su root</span><br><span class="line">或</span><br><span class="line">su -</span><br></pre></td></tr></table></figure>
-<h1 id="查看当前登录"><a href="#查看当前登录" class="headerlink" title="查看当前登录"></a>查看当前登录</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[sysadmin@iZ23zj3xeplZ ~]$ id</span><br><span class="line">uid=503(sysadmin) gid=10(wheel) groups=10(wheel)</span><br></pre></td></tr></table></figure>
-<p>还有<code>whoami</code> 和 <code>cd </code> <code>pwd</code> 看看默认的路径</p>
-<hr>
-<p><code>云服务器 ECS CentOS 系统限制普通用户切换到 root 管理员账号</code><br><a target="_blank" rel="noopener" href="https://help.aliyun.com/knowledge_detail/37566.html">https://help.aliyun.com/knowledge_detail/37566.html</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/07/20/linux%20%E9%99%90%E5%88%B6%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7su%E5%88%87%E6%8D%A2%E5%88%B0%C2%A0root/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<p>感觉作者已经完全被Google收服了，是诚心的。在文中他说，在Google，每周都有新花样，新福利，新变化，新的调研，来问我们怎么才能让大家在Google过得更舒服。当然并不仅仅只是这些，在Google里驱使大家去做正确的事的动因是感激，这超过了所有的因素，甚至比所有的因素加在一起还要多。你会忍不住想要做到更好，因为Google对你的照顾无微不至，让人觉得好像欠了它似的。</p>
+
       
     </div>
 
@@ -653,7 +678,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/20/linux%20ssh%E7%A6%81%E6%AD%A2root%E7%99%BB%E9%99%86/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/10/nginx.conf%20%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8www%E5%89%8D%E7%BC%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -671,7 +696,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/07/20/linux%20ssh%E7%A6%81%E6%AD%A2root%E7%99%BB%E9%99%86/" class="post-title-link" itemprop="url">linux ssh禁止root登陆</a>
+          <a href="/2016/12/10/nginx.conf%20%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8www%E5%89%8D%E7%BC%80/" class="post-title-link" itemprop="url">nginx.conf 配置自动www前缀</a>
         </h2>
 
         <div class="post-meta-container">
@@ -682,7 +707,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-07-20 00:00:01" itemprop="dateCreated datePublished" datetime="2016-07-20T00:00:01+08:00">2016-07-20</time>
+      <time title="Created: 2016-12-10 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-10T00:00:00+08:00">2016-12-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -702,234 +727,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="1-新建管理用户"><a href="#1-新建管理用户" class="headerlink" title="1. 新建管理用户"></a>1. 新建管理用户</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adduser sysadmin</span><br><span class="line">passwd sysadmin    # 修改密码</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="1-1-同步用户环境变量"><a href="#1-1-同步用户环境变量" class="headerlink" title="1.1 同步用户环境变量"></a>1.1 同步用户环境变量</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp -rf .bashrc /home/sysadmin/</span><br><span class="line">cp -rf cfg /home/sysadmin/</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="1-2-赋予用户超级权限"><a href="#1-2-赋予用户超级权限" class="headerlink" title="1.2  赋予用户超级权限"></a>1.2  赋予用户超级权限</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo   vim /etc/sudoers # 或 visudo </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">root ALL=(ALL) ALL # 参照物</span><br><span class="line">sysadmin ALL=(ALL) ALL #  sudo ** 需要输入密码</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">:wq! # 强制保存退出</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 每次输入的时候不需要输入当前用户的密码可以这样设置（不推荐这样用）</span><br><span class="line"></span><br><span class="line">sysadmin      ALL=(ALL) NOPASSWD: ALL   #  sudo ** 不需要输入密码</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="2-关闭root登陆"><a href="#2-关闭root登陆" class="headerlink" title="2. 关闭root登陆"></a>2. 关闭root登陆</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/ssh/sshd_config</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PermitRootLogin yes =&gt; PermitRootLogin no</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="3-重启sshd服务"><a href="#3-重启sshd服务" class="headerlink" title="3. 重启sshd服务"></a>3. 重启sshd服务</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/sshd restart</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="4-新建普通用户（视情况而定）"><a href="#4-新建普通用户（视情况而定）" class="headerlink" title="4. 新建普通用户（视情况而定）"></a>4. 新建普通用户（视情况而定）</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adduser admin</span><br><span class="line">passwd admin    # 修改密码</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="同步用户环境变量"><a href="#同步用户环境变量" class="headerlink" title="同步用户环境变量"></a>同步用户环境变量</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp -rf .bashrc /home/ admin /</span><br><span class="line">cp -rf cfg /home/ admin /</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="Test：不可sudo执行超级权限"><a href="#Test：不可sudo执行超级权限" class="headerlink" title="Test：不可sudo执行超级权限"></a>Test：不可sudo执行超级权限</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[test@iZ23huf4wo4Z ~]$ sudo vim /etc/ssh/sshd_config</span><br><span class="line">[sudo] password for test: </span><br><span class="line">test is not in the sudoers file.  This incident will be reported.</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/07/20/linux%20ssh%E7%A6%81%E6%AD%A2root%E7%99%BB%E9%99%86/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/19/linux%20%E5%AE%89%E5%85%A8%E6%96%87%E9%9B%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/07/19/linux%20%E5%AE%89%E5%85%A8%E6%96%87%E9%9B%86/" class="post-title-link" itemprop="url">linux 安全文集</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-07-19 00:00:05" itemprop="dateCreated datePublished" datetime="2016-07-19T00:00:05+08:00">2016-07-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>Linux配置使用SSH Key登录并禁用root密码登录</code><br><a target="_blank" rel="noopener" href="http://www.duoluodeyu.com/1114.html">http://www.duoluodeyu.com/1114.html</a></p>
-<p><code>Linux上禁用/启用SSH和SSH Root登录</code><br><a target="_blank" rel="noopener" href="http://www.linuxdown.net/install/soft/2016/0309/4979.html">http://www.linuxdown.net/install/soft/2016/0309/4979.html</a></p>
-<p><code>Web 安全渗透方面的学习路线? - 知乎</code><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21914899">https://www.zhihu.com/question/21914899</a></p>
-<p><code>成为一个黑客需要多久？ - 知乎</code><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/38805579">https://www.zhihu.com/question/38805579</a></p>
-<p><code>Linux常用的安全工具 - 李晨光 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/chenguang/p/3742249.html">http://www.cnblogs.com/chenguang/p/3742249.html</a></p>
-<p><code>CentOS iptables防火墙的基本应用讲解centos</code><br><a target="_blank" rel="noopener" href="http://www.centoscn.com/CentOS/2013/0413/293.html">http://www.centoscn.com/CentOS/2013/0413/293.html</a></p>
-<p><code>CentOS防火墙iptables的配置方法详解-CentOS-操作系统-壹聚教程网</code><br><a target="_blank" rel="noopener" href="http://www.111cn.net/sys/CentOS/53293.htm">http://www.111cn.net/sys/CentOS/53293.htm</a></p>
-<p><code>阿里云Centos配置iptables防火墙 | KK文章</code><br><a target="_blank" rel="noopener" href="http://blog.kkyun.com/?p=50">http://blog.kkyun.com/?p=50</a></p>
-<hr>
-<p><code>使用netstat检测及监测网络连接-系统运维|Linux.中国-开源社区</code><br><a target="_blank" rel="noopener" href="https://linux.cn/article-3807-1.html">https://linux.cn/article-3807-1.html</a></p>
-<p><code>linux查看网络链接状况命令_欧阳剑飞_新浪博客</code><br><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_4d6c45250100xhc7.html">http://blog.sina.com.cn/s/blog_4d6c45250100xhc7.html</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/07/19/linux%20%E5%AE%89%E5%85%A8%E6%96%87%E9%9B%86/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/19/linux-java%20%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/07/19/linux-java%20%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">linux-java 手动安装</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-07-19 00:00:04" itemprop="dateCreated datePublished" datetime="2016-07-19T00:00:04+08:00">2016-07-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h1><ul>
-<li>下载安装文件<br><code>官网下载</code></li>
-</ul>
-<p><a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html#jdk-7u80-oth-JPR">http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html#jdk-7u80-oth-JPR</a></p>
-<pre><code>   `jdk-7u80-linux-x64.tar.gz`
+          <h1 id="nginx-conf-配置自动www前缀-会改写地址栏"><a href="#nginx-conf-配置自动www前缀-会改写地址栏" class="headerlink" title="nginx.conf 配置自动www前缀(会改写地址栏) &#96;&#96;&#96;"></a>nginx.conf 配置自动www前缀(会改写地址栏) &#96;&#96;&#96;</h1><p>server{<br>    listen       80;<br>    server_name  saixueba.com;<br>    location &#x2F; {<br>             rewrite ^(.*)$ <a target="_blank" rel="noopener" href="http://www.saixueba.com/$1">http://www.saixueba.com/$1</a> permanent;<br>        }<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">![](http://7xnbs3.com1.z0.glb.clouddn.com/17-1-19/60383016-file_1484816953830_c781.png)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">---</span><br><span class="line">注意:部分浏览器会自动加www前缀(360极速浏览器),</span><br><span class="line">**怎么分辨** 首发请求网络中就带有了www前缀,说明浏览器处理的.没有(如上)就是程序处理的.</span><br><span class="line">![](http://7xnbs3.com1.z0.glb.clouddn.com/17-1-19/86307962-file_1484816982497_68aa.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"># 同时监听</span><br></pre></td></tr></table></figure>
+<p> server {<br>        listen       80;<br>        server_name   saixueba.com    <a target="_blank" rel="noopener" href="http://www.saixueba.com/">www.saixueba.com</a>;</p>
+<pre><code>    # saixueba.com 
+    location / &#123;
+        proxy_pass http://120.55.244.116/sxb_index/;
+    &#125;
 </code></pre>
-<ul>
-<li><p>同步至服务器<br>  <code>/usr/local/src</code></p>
-</li>
-<li><p>安装<br>   <code>tar -xvzf  jdk-7u80-linux-x64.tar.gz </code></p>
-</li>
-<li><p>环境变量配置<br>编辑 文件  <code>vi ~/.bashrc</code>  添加以下变量</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/home/codebrother/jdk/jdk1.7.0_25</span><br><span class="line">export JAVA_BIN=$JAVA_HOME/bin</span><br><span class="line">export JAVA_LIB=$JAVA_HOME/lib</span><br><span class="line">export CLASSPATH=.:$JAVA_LIB/tools.jar:$JAVA_LIB/dt.jar</span><br><span class="line">export PATH=$JAVA_BIN:$PATH</span><br></pre></td></tr></table></figure>
+<p>}<br>&#96;&#96;&#96;</p>
 
-</li>
-<li><p>配置环境变量,方法二</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在/etc/profile下增加</span><br><span class="line"> </span><br><span class="line"># set Java environment</span><br><span class="line">JAVA_HOME=/usr/share/jdk1.6.0_43</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">export JAVA_HOME</span><br><span class="line">export PATH</span><br><span class="line">export CLASSPATH</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<p><code>Linux JDK安装及配置 (tar.gz版)_百度经验</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/ab0b56308966acc15afa7d18.html">http://jingyan.baidu.com/article/ab0b56308966acc15afa7d18.html</a></p>
-<p><code>linux如何安装jdk_百度经验</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/d621e8dae805272865913fa7.html">http://jingyan.baidu.com/article/d621e8dae805272865913fa7.html</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/07/19/linux-java%20%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
@@ -955,7 +762,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/19/linux-java%20yum%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/05/Lucene-6-0-index-file-format/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -973,7 +780,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/07/19/linux-java%20yum%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">linux-java yum安装</a>
+          <a href="/2016/12/05/Lucene-6-0-index-file-format/" class="post-title-link" itemprop="url">Lucene 6.0 索引文件格式</a>
         </h2>
 
         <div class="post-meta-container">
@@ -984,14 +791,23 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-07-19 00:00:03" itemprop="dateCreated datePublished" datetime="2016-07-19T00:00:03+08:00">2016-07-19</time>
+      <time title="Created: 2016-12-05 22:01:55" itemprop="dateCreated datePublished" datetime="2016-12-05T22:01:55+08:00">2016-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+        </span>
     </span>
 
   
@@ -1004,30 +820,66 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="查看CentOS自带JDK是否已安装"><a href="#查看CentOS自带JDK是否已安装" class="headerlink" title="查看CentOS自带JDK是否已安装"></a>查看CentOS自带JDK是否已安装</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list installed |grep java</span><br></pre></td></tr></table></figure>
+          <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>在Lucene中基本的概念包括：index、document、field和term。一个index包含一个documents的序列</p>
 <ul>
-<li>若有自带安装的JDK，如何卸载CentOS系统自带Java环境？</li>
-<li>卸载JDK相关文件输入：yum -y remove java-1.7.0-openjdk*。</li>
-<li>卸载tzdata-java输入：yum -y remove tzdata-java.noarch。</li>
+<li>一个document是一个fields的序列</li>
+<li>一个field是一个命名的terms序列</li>
+<li>一个term是一个bytes的序列</li>
 </ul>
-<hr>
-<h1 id="查看yum库中的Java安装包"><a href="#查看yum库中的Java安装包" class="headerlink" title="查看yum库中的Java安装包"></a>查看yum库中的Java安装包</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y list java*</span><br></pre></td></tr></table></figure>
+<p>在两个不同fields中的相同bytes序列被认为是不同的term。因此，term表示为一对：命名field的字符串，以及field内的bytes。</p>
+<h4 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h4><p>谈到倒排索引，那么首先看看正排是什么样子的呢？假设文档1包含【中文、英文、日文】，文档2包含【英文、日文、韩文】，文档3包含【韩文，中文】那么根据文档去查找内容的话</p>
+<ul>
+<li>文档1-&gt;【中文、英文、日文】</li>
+<li>文档2-&gt;【英文、日文、韩文】</li>
+<li>文档3-&gt;【韩文，中文】</li>
+</ul>
+<p>反过来，根据内容去查找文档</p>
+<ul>
+<li>中文-&gt;【文档1、文档3】</li>
+<li>英文-&gt;【文档1、文档2】</li>
+<li>日文-&gt;【文档1、文档2】</li>
+<li>韩文-&gt;【文档2、文档3】</li>
+</ul>
+<p>就是倒排索引，而Lucene擅长的也正在于此。</p>
+<h4 id="Fields的类型"><a href="#Fields的类型" class="headerlink" title="Fields的类型"></a>Fields的类型</h4><ul>
+<li>TextField：索引并分词，不包含词向量，多用于文本的正文</li>
+<li>StringField：索引但不分词，整个String作为单个标记索引，例如可用于“国家名称”或“ID”等，或者其它任何你想要用来排序的字段</li>
+<li>IntPoint：int型用于精确&#x2F;范围查询的索引</li>
+<li>LongPoint：long型用于精确&#x2F;范围查询的索引</li>
+<li>FloatPoint：float型用于精确&#x2F;范围查询的索引</li>
+<li>DoublePoint：double型用于精确&#x2F;范围查询的索引</li>
+<li>SortedDocValuesField：存储每个文档BytesRef值的字段，索引用于排序，如果需要存储值，需要再用StoredField实例</li>
+<li>SortedSetDocValuesField：存储每个文档一组BytesRef值的字段，索引用于faceting&#x2F;grouping&#x2F;joining，如果需要存储值，需要再用StoredField实例</li>
+<li>NumericDocValuesField：存储每个文档long值的字段，用于scoring&#x2F;sorting&#x2F;值检索</li>
+<li>SortedNumericDocValuesField：存储每个文档一组long值的字段，用于scoring&#x2F;sorting&#x2F;值检索</li>
+<li>StoredField：用于在汇总结果中检索的仅存储值</li>
+</ul>
+<h4 id="段（Segments）"><a href="#段（Segments）" class="headerlink" title="段（Segments）"></a>段（Segments）</h4><p>Lucene的索引可能是由多个子索引或Segments组成。每个Segment是一个完全独立地索引，可以单独用于搜索。索引涉及</p>
+<ol>
+<li>为新添加的documents创建新的segments</li>
+<li>合并已经存在的segments</li>
+</ol>
+<p>搜索可能涉及多个segments或&#x2F;和多个索引，每个索引可能由一组segments组成。</p>
+<h4 id="文档编号"><a href="#文档编号" class="headerlink" title="文档编号"></a>文档编号</h4><p>Lucene通过一个整型的文档编号指向每个文档，第一个被加入索引的文档编号为0，后续加入的文档编号依次递增。注意文档编号是可能发生变化的，所以在Lucene外部存储这些值时需要格外小心。</p>
+<h3 id="索引结构概述"><a href="#索引结构概述" class="headerlink" title="索引结构概述"></a>索引结构概述</h3><p>每个segment索引包括信息</p>
+<ul>
+<li>Segment info：包含有关segment的元数据，例如文档编号，使用的文件</li>
+<li>Field names：包含索引中使用的字段名称集合</li>
+<li>Stored Field values：对于每个document，它包含属性-值对的列表，其中属性是字段名称。这些用于存储有关文档的辅助信息，例如其标题、url或访问数据库的标识符</li>
+<li>Term dictionary：包含所有文档的所有索引字段中使用的所有terms的字典。字典还包括包含term的文档编号，以及指向term的频率和接近度的指针</li>
+<li>Term Frequency data：对于字典中的每个term，包含该term的所有文档的数量以及该term在该文档中的频率，除非省略频率（IndexOptions.DOCS）</li>
+<li>Term Proximity data：对于字典中的每个term，term在每个文档中出现的位置。注意，如果所有文档中的所有字段都省略位置数据，则不会存在</li>
+<li>Normalization factors：对于每个文档中的每个字段，存储一个值，该值将乘以该字段上的匹配的分数</li>
+<li>Term Vectors：对于每个文档中的每个字段，可以存储term vector，term vector由term文本和term频率组成</li>
+<li>Per-document values：与存储的值类似，这些也以文档编号作为key，但通常旨在被加载到主存储器中以用于快速访问。存储的值通常用于汇总来自搜索的结果，而每个文档值对于诸如评分因子是有用的</li>
+<li>Live documents：一个可选文件，指示哪些文档是活动的</li>
+<li>Point values：可选的文件对，记录索引字段尺寸，以实现快速数字范围过滤和大数值（例如BigInteger、BigDecimal（1D）、地理形状交集（2D，3D））</li>
+</ul>
+<h3 id="文件命名"><a href="#文件命名" class="headerlink" title="文件命名"></a>文件命名</h3><p>属于一个段的所有文件具有相同的名称和不同的扩展名。当使用复合索引文件，这些文件（除了段信息文件、锁文件和已删除的文档文件）将压缩成单个<code>.cfs</code>文件。当任何索引文件被保存到目录时，它被赋予一个从未被使用过的文件名字。</p>
+<h3 id="文件扩展名摘要"><a href="#文件扩展名摘要" class="headerlink" title="文件扩展名摘要"></a>文件扩展名摘要</h3><p>| 名称 | 文件扩展名 | 简短描述 |<br>| ———— | ———— |<br>| Segments File | segments_N | 保存了一个提交点（a commit point）的信息 |<br>| Lock File | write.lock | 防止多个IndexWriter同时写到一份索引文件中 |<br>| Segment Info| .si | 保存了索引段的元数据信息 |<br>| Compound File | .cfs，.cfe | 一个可选的虚拟文件，把所有索引信息都存储到复合索引文件中 |<br>| Fields | .fnm | 保存fields的相关信息 |<br>| Field Index | .fdx | 保存指向field data的指针|<br>| Field Data | .fdt | 文档存储的字段的值 |<br>| Term Dictionary | .tim |term词典，存储term信息 |<br>| Term Index | .tip | 到Term Dictionary的索引|<br>| Frequencies | .doc | 由包含每个term以及频率的docs列表组成 |<br>| Positions | .pos | 存储出现在索引中的term的位置信息 |<br>| Payloads | .pay | 存储额外的per-position元数据信息，例如字符偏移和用户payloads |<br>| Norms | .nvd，.nvm | .nvm文件保存索引字段加权因子的元数据，.nvd文件保存索引字段加权数据 |<br>| Per-Document Values | .dvd，.dvm | .dvm文件保存索引文档评分因子的元数据，.dvd文件保存索引文档评分数据 |<br>| Term Vector Index | .tvx | 将偏移存储到文档数据文件中 |<br>| Term Vector Documents | .tvd | 包含有term vectors的每个文档信息 |<br>| Term Vector Fields | .tvf | 字段级别有关term vectors的信息 |<br>| Live Documents | .liv | 哪些是有效文件的信息 |<br>| Point values | .dii，.dim | 保留索引点，如果有的话 |</p>
+<h4 id="锁文件"><a href="#锁文件" class="headerlink" title="锁文件"></a>锁文件</h4><p>默认情况下，存储在索引目录中的锁文件名为“write.lock”。如果锁目录与索引目录不同，则锁文件将命名为“XXXX-write.lock”，其中XXXX是从索引目录的完整路径导出的唯一前缀。此锁文件确保每次只有一个写入程序在修改索引。</p>
+<p>英文文档参见：<a target="_blank" rel="noopener" href="https://lucene.apache.org/core/6_0_0/core/org/apache/lucene/codecs/lucene60/package-summary.html">https://lucene.apache.org/core/6_0_0&#x2F;core&#x2F;org&#x2F;apache&#x2F;lucene&#x2F;codecs&#x2F;lucene60&#x2F;package-summary.html</a></p>
 
-
-<h1 id="使用yum安装Java环境。"><a href="#使用yum安装Java环境。" class="headerlink" title="使用yum安装Java环境。"></a>使用yum安装Java环境。</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install java-1.7.0-openjdk*</span><br><span class="line">(以yum库中java-1.7.0为例)</span><br></pre></td></tr></table></figure>
-<h1 id="查看刚安装的Java版本信息。"><a href="#查看刚安装的Java版本信息。" class="headerlink" title="查看刚安装的Java版本信息。"></a>查看刚安装的Java版本信息。</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java -version 可查看Java版本</span><br><span class="line">javac 可查看Java的编译器命令用法（可略）。</span><br><span class="line">默认情况下jdk安装得路径 /usr/lib/jvm</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<p><strong>参考</strong><br><code>在CentOS上安装Java环境：[1]使用yum安装java_百度经验</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/4853e1e51d0c101909f72607.html">http://jingyan.baidu.com/article/4853e1e51d0c101909f72607.html</a></p>
-<p><code>在linux上使用yum安装JDK-qyf404-ChinaUnix博客</code><br><a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid-15463753-id-4252690.html">http://blog.chinaunix.net/uid-15463753-id-4252690.html</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/07/19/linux-java%20yum%E5%AE%89%E8%A3%85/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
@@ -1053,7 +905,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/07/19/linux-tomcat%20%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/02/npm%20registry%E4%BB%93%E5%BA%93%E5%88%87%E6%8D%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1071,7 +923,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/07/19/linux-tomcat%20%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">linux-tomcat 安装</a>
+          <a href="/2016/12/02/npm%20registry%E4%BB%93%E5%BA%93%E5%88%87%E6%8D%A2/" class="post-title-link" itemprop="url">npm registry仓库切换</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1082,7 +934,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-07-19 00:00:02" itemprop="dateCreated datePublished" datetime="2016-07-19T00:00:02+08:00">2016-07-19</time>
+      <time title="Created: 2016-12-02 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-02T00:00:00+08:00">2016-12-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1102,56 +954,198 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="tomcat依赖"><a href="#tomcat依赖" class="headerlink" title="tomcat依赖"></a>tomcat依赖</h1><ul>
-<li>java (jdk-7u80)<br>请见： <code>linux-java yum安装.md</code>  <code>linux-java 手动安装.md</code></li>
-<li>检查 <code>java -version</code></li>
-</ul>
-<h1 id="tomcat安装"><a href="#tomcat安装" class="headerlink" title="tomcat安装"></a>tomcat安装</h1><ul>
-<li><p>下载</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src</span><br><span class="line">wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-7/v7.0.70/bin/apache-tomcat-7.0.70.tar.gz</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>安装</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf  apache-tomcat-7.0.70.tar.gz</span><br><span class="line">mv  apache-tomcat-7.0.70   /usr/local/</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>部署</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 服务部署</span><br><span class="line">souceCode 同步至 /usr/local/apache-tomcat-7.0.70/webapps</span><br><span class="line"></span><br><span class="line"># jvm配置</span><br><span class="line">vi catalina.sh</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>多个tomcat,需更新环境变量</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/apache-tomcat-7.0.70/bin/startup.sh</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CATALINA_BASE=&quot;/usr/local/apache-tomcat-7.0.62&quot;</span><br><span class="line">CATALINA_HOME=&quot;/usr/local/apache-tomcat-7.0.62&quot;</span><br></pre></td></tr></table></figure>
+          <h1 id="安装npm仓库管理"><a href="#安装npm仓库管理" class="headerlink" title="安装npm仓库管理 &#96;&#96;&#96;"></a>安装npm仓库管理 &#96;&#96;&#96;</h1><p>npm install nrm -g<br>nrm ls</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/Pana/nrm</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看仓库</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>windows<br>set “CATALINA_BASE&#x3D;&#x2F;usr&#x2F;local&#x2F;apache-tomcat-7.0.62”<br>set  “ CATALINA_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;apache-tomcat-7.0.62”</p>
+<p>nrm ls</p>
 </blockquote>
-</li>
-<li><p>启动</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 启动tomcat</span><br><span class="line">/usr/local/apache-tomcat-7.0.70/bin/startup.sh</span><br><span class="line"></span><br><span class="line"># 同步查看启动日志</span><br><span class="line">tail -f  /usr/local/apache-tomcat-7.0.70/logs/ catalina.out</span><br></pre></td></tr></table></figure>
+<p>  npm —- <a target="_blank" rel="noopener" href="https://registry.npmjs.org/">https://registry.npmjs.org/</a><br>  cnpm — <a target="_blank" rel="noopener" href="http://r.cnpmjs.org/">http://r.cnpmjs.org/</a></p>
+<ul>
+<li>taobao - <a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org/</a><br>nj —– <a target="_blank" rel="noopener" href="https://registry.nodejitsu.com/">https://registry.nodejitsu.com/</a><br>rednpm - <a target="_blank" rel="noopener" href="http://registry.mirror.cqupt.edu.cn/">http://registry.mirror.cqupt.edu.cn/</a><br>npmMirror  <a target="_blank" rel="noopener" href="https://skimdb.npmjs.com/registry/">https://skimdb.npmjs.com/registry/</a><br>edunpm - <a target="_blank" rel="noopener" href="http://registry.enpmjs.org/">http://registry.enpmjs.org/</a><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># 切换</span><br></pre></td></tr></table></figure>
+nrm use cnpm</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"># 手动删除registry配置</span><br></pre></td></tr></table></figure>
+<p>npm config delete registry<br>npm config delete disturl</p>
+<p>或者<br>npm config edit<br>找到淘宝那两行,删除</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"># 手动指定registry</span><br><span class="line">- 设置</span><br></pre></td></tr></table></figure>
+<p>npm config set registry <a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 查看</span><br></pre></td></tr></table></figure>
+<p>npm config list<br>&#96;&#96;&#96;</p>
 
-</li>
-<li><p>数据库白名单（如果需要）</p>
-</li>
-<li><p>访问测试</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://ip:8080/appName</span><br></pre></td></tr></table></figure>
+      
+    </div>
 
-</li>
-<li><p>停止</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/apache-tomcat-7.0.70/bin/startup.sh</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/01/react-native%20Fetching%20JS%20Bundle%20%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/12/01/react-native%20Fetching%20JS%20Bundle%20%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/" class="post-title-link" itemprop="url">react-native Fetching JS Bundle 问题排查</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-12-01 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-01T00:00:00+08:00">2016-12-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-1-19/66720886-file_1484816673101_12b00.png"></p>
+<h1 id="排查React-Packager日志"><a href="#排查React-Packager日志" class="headerlink" title="排查React Packager日志"></a>排查<code>React Packager</code>日志</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Scanning 1 folders for symlinks in G:\liuxiang_code_git\my-react-native\30-days-of-react-native-development\node_modules\.npminstall\react-native\0.34.1 (1ms)</span><br><span class="line">┌────────────────────────────────────────────────────────── ──────────────────┐</span><br><span class="line"> │  Running packager on port 8081.                                            │</span><br><span class="line"> │                                                                            │</span><br><span class="line"> │  Keep this packager running while developing on any JS projects. Feel      │</span><br><span class="line"> │  free to close this tab and run your own packager instance if you          │</span><br><span class="line"> │  prefer.                                                                   │</span><br><span class="line"> │                                                                            │</span><br><span class="line"> │  https://github.com/facebook/react-native                                  │</span><br><span class="line"> │                                                                            │</span><br><span class="line">└────────────────────────────────────────────────────────── ──────────────────┘</span><br><span class="line">Looking for JS files in</span><br><span class="line">   G:\liuxiang_code_git\my-react-native\30-days-of-react-native-development\node_modules\.npminstall\react-native\0.34.1\react-native</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>可见<code>Looking for JS files in</code>项目目标不应该在<code>node_modules</code>中<br>正确的目标应该是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">G:\liuxiang_code_git\my-react-native\30-days-of-react-native-development</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>删除<code>node_modules</code>,重装.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<ul>
+<li>国内加速<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>查看<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config get registry</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/11/30/sublime%20text%20%E6%9C%80%E6%96%B0%E7%A0%B4%E8%A7%A3%E4%B8%8B%E8%BD%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/11/30/sublime%20text%20%E6%9C%80%E6%96%B0%E7%A0%B4%E8%A7%A3%E4%B8%8B%E8%BD%BD/" class="post-title-link" itemprop="url">sublime text 最新破解下载</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-11-30 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-30T00:00:00+08:00">2016-11-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="官方下载"><a href="#官方下载" class="headerlink" title="官方下载"></a>官方下载</h1><p><a target="_blank" rel="noopener" href="http://www.sublimetext.com/3">http://www.sublimetext.com/3</a></p>
+<hr>
+<h1 id="破解-汉化下载-http-sublimetext-iaixue-com-dl-win-zh-cn-x64"><a href="#破解-汉化下载-http-sublimetext-iaixue-com-dl-win-zh-cn-x64" class="headerlink" title="破解&amp;汉化下载 http://sublimetext.iaixue.com/dl/#win.zh_cn.x64"></a>破解&amp;汉化下载 <a target="_blank" rel="noopener" href="http://sublimetext.iaixue.com/dl/#win.zh_cn.x64">http://sublimetext.iaixue.com/dl/#win.zh_cn.x64</a></h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-1-19/4036217-file_1484816498391_133d.png"></p>
+<ul>
+<li>需要登录才可下载，QQ登录即可<br>或直开对应网盘：<br><a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1c0nH3X2#list/path=%2Frelease%2Fbeta&parentPath=%2F">http://pan.baidu.com/s/1c0nH3X2#list/path=%2Frelease%2Fbeta&amp;parentPath=%2F</a></li>
 </ul>
 <hr>
-<p><code>CentOS7.0安装与配置Tomcat-7</code><br><a target="_blank" rel="noopener" href="http://www.centoscn.com/image-text/config/2014/1127/4194.html">http://www.centoscn.com/image-text/config/2014/1127/4194.html</a></p>
+<h1 id="最新版本号见"><a href="#最新版本号见" class="headerlink" title="最新版本号见"></a>最新版本号见</h1><p><a target="_blank" rel="noopener" href="http://www.sublimetext.com/3">http://www.sublimetext.com/3</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-1-19/16751226-file_1484816514885_9bc8.png"></p>
 <hr>
-<p><code>linux安装tomcat_百度经验</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/ff42efa9162ea5c19e22021c.html">http://jingyan.baidu.com/article/ff42efa9162ea5c19e22021c.html</a></p>
-<p><code>Tomcat在Linux上的安装与配置 - 平凡的世界 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/gyming/article/details/36060843">http://blog.csdn.net/gyming/article/details/36060843</a></p>
-<p><code>Linux下安装Tomcat服务器和部署Web应用 - 孤傲苍狼 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/xdp-gacl/p/4097608.html">http://www.cnblogs.com/xdp-gacl/p/4097608.html</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/07/19/linux-tomcat%20%E5%AE%89%E8%A3%85/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<p><code>Sublime Text3与Sublime Text 2的区别在哪里？ - 知乎</code><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/25078353/answer/30021831">https://www.zhihu.com/question/25078353/answer/30021831</a></p>
+
       
     </div>
 
@@ -1170,7 +1164,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/21/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/23/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/21/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/23/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

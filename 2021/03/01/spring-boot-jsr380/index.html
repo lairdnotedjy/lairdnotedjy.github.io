@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="介绍JSR-380是 J2EE 的一个规范，用于校验实体属性，它是JSR-303的升级版，在 Spring Boot 中可以基于它优雅实现参数校验。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot使用JSR-380进行校验">
+<meta property="og:url" content="https://www.sovdating.com/2021/03/01/spring-boot-jsr380/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="介绍JSR-380是 J2EE 的一个规范，用于校验实体属性，它是JSR-303的升级版，在 Spring Boot 中可以基于它优雅实现参数校验。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.sovdating.com/spring-boot-jsr380/2021-02-26-10-45-55.png">
+<meta property="article:published_time" content="2021-03-01T02:15:18.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:47:47.908Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="spring">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.sovdating.com/spring-boot-jsr380/2021-02-26-10-45-55.png">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2021/03/01/spring-boot-jsr380/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2021/03/01/spring-boot-jsr380/","path":"2021/03/01/spring-boot-jsr380/","title":"Spring Boot使用JSR-380进行校验"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Spring Boot使用JSR-380进行校验 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E8%87%AA%E5%AE%9A%E4%B9%89%E9%94%99%E8%AF%AF%E5%93%8D%E5%BA%94"><span class="nav-number">3.</span> <span class="nav-text">通过全局异常自定义错误响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%A0%A1%E9%AA%8C%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">常用校验注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">5.</span> <span class="nav-text">附录</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2021/03/01/spring-boot-jsr380/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Spring Boot使用JSR-380进行校验 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring Boot使用JSR-380进行校验
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-03-01 10:15:18" itemprop="dateCreated datePublished" datetime="2021-03-01T10:15:18+08:00">2021-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><code>JSR-380</code>是 J2EE 的一个规范，用于校验实体属性，它是<code>JSR-303</code>的升级版，在 Spring Boot 中可以基于它优雅实现参数校验。</p>
+<span id="more"></span>
+
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>在没有使用<code>JSR-380</code>之前，我们一般都会将参数校验硬编码在<code>controller</code>类中，示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Result <span class="title function_">add</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(StringUtils.isBlank(user.getName()))&#123;</span><br><span class="line">        <span class="keyword">return</span> Result.error(<span class="string">&quot;用户名不能为空&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而使用<code>JSR-380</code>只需要通过添加对应的注解即可实现校验，示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span>&#123;</span><br><span class="line">    <span class="meta">@NotBlank</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Result <span class="title function_">register</span><span class="params">(<span class="meta">@Validated</span> <span class="meta">@RequestBody</span> User user)</span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样看起来代码是不是清爽了很多，只需要在需要校验的字段上加上对应的校验注解，然后对需要校验的地方加上<code>@Validated</code>注解，然后框架就会帮我们完成校验。</p>
+<h2 id="通过全局异常自定义错误响应"><a href="#通过全局异常自定义错误响应" class="headerlink" title="通过全局异常自定义错误响应"></a>通过全局异常自定义错误响应</h2><p>框架校验失败之后会抛出异常，需要捕获这个异常然后来自定义校验不通过的错误响应，这里直接贴代码，兼容<code>@RequestBody</code>、<code>@ModelAttribute</code>、<code>@RequestParam</code>三种入参的校验：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GlobalExceptionHandler</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExceptionHandler(value = &#123;MethodArgumentNotValidException.class, BindException.class&#125;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;Result&gt; <span class="title function_">methodArgumentNotValidHandler</span><span class="params">(HttpServletRequest request, Exception e)</span> &#123;</span><br><span class="line">        BindingResult bindingResult;</span><br><span class="line">        <span class="keyword">if</span> (e <span class="keyword">instanceof</span> MethodArgumentNotValidException) &#123;</span><br><span class="line">            <span class="comment">//@RequestBody参数校验</span></span><br><span class="line">            bindingResult = ((MethodArgumentNotValidException) e).getBindingResult();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//@ModelAttribute参数校验</span></span><br><span class="line">            bindingResult = ((BindException) e).getBindingResult();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">FieldError</span> <span class="variable">fieldError</span> <span class="operator">=</span> bindingResult.getFieldError();</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(Result.fail(Result.CODE_PARAMS_INVALID, <span class="string">&quot;[&quot;</span> + fieldError.getField() + <span class="string">&quot;]&quot;</span> + fieldError.getDefaultMessage()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//@RequestParam参数校验</span></span><br><span class="line">    <span class="meta">@ExceptionHandler(value = &#123;ConstraintViolationException.class, MissingServletRequestParameterException.class&#125;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;Result&gt; <span class="title function_">constraintViolationHandler</span><span class="params">(Exception e)</span> &#123;</span><br><span class="line">        String field;</span><br><span class="line">        String msg;</span><br><span class="line">        <span class="keyword">if</span> (e <span class="keyword">instanceof</span> ConstraintViolationException) &#123;</span><br><span class="line">            ConstraintViolation&lt;?&gt; constraintViolation = ((ConstraintViolationException) e).getConstraintViolations().stream().findFirst().get();</span><br><span class="line">            List&lt;Path.Node&gt; pathList = StreamSupport.stream(constraintViolation.getPropertyPath().spliterator(), <span class="literal">false</span>)</span><br><span class="line">                    .collect(Collectors.toList());</span><br><span class="line">            field = pathList.get(pathList.size() - <span class="number">1</span>).getName();</span><br><span class="line">            msg = constraintViolation.getMessage();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 这个不是JSR标准返回的异常，要自定义提示文本</span></span><br><span class="line">            field = ((MissingServletRequestParameterException) e).getParameterName();</span><br><span class="line">            msg = <span class="string">&quot;不能为空&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(Result.fail(Result.CODE_PARAMS_INVALID, <span class="string">&quot;[&quot;</span> + field + <span class="string">&quot;]&quot;</span> + msg));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后再访问一下接口，可以看到错误提示已经按自定义的规范显示了：</p>
+<p><img src="/spring-boot-jsr380/2021-02-26-10-45-55.png"></p>
+<p>可以看到都不需要写任何提示文本就可以完成校验和提示，上图的<code>不能为空</code>是框架内置的<code>I18N</code>国际化支持，每个注解都内置相应的提示模板。</p>
+<h2 id="常用校验注解"><a href="#常用校验注解" class="headerlink" title="常用校验注解"></a>常用校验注解</h2><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@NotNull</td>
+<td>验证值不为 null</td>
+</tr>
+<tr>
+<td>@AssertTrue</td>
+<td>验证值为 true</td>
+</tr>
+<tr>
+<td>@Size</td>
+<td>验证值的长度介于 min 和 max 之间，可应用于 String、Collection、Map 和数组类型</td>
+</tr>
+<tr>
+<td>@Min</td>
+<td>验证值不小于该值</td>
+</tr>
+<tr>
+<td>@Max</td>
+<td>验证值不大于该值</td>
+</tr>
+<tr>
+<td>@Email</td>
+<td>验证字符串是有效的电子邮件地址</td>
+</tr>
+<tr>
+<td>@NotEmpty</td>
+<td>验证值不为 null 或空，可应用于 String、Collection、Map 和数组类型</td>
+</tr>
+<tr>
+<td>@NotBlank</td>
+<td>验证字符串不为 null 并且不是空白字符</td>
+</tr>
+<tr>
+<td>@Positive</td>
+<td>验证数字为正数</td>
+</tr>
+<tr>
+<td>@PositiveOrZero</td>
+<td>验证数字为正数(包括 0)</td>
+</tr>
+<tr>
+<td>@Negative</td>
+<td>验证数字为负数</td>
+</tr>
+<tr>
+<td>@NegativeOrZero</td>
+<td>验证数字为负数(包括 0)</td>
+</tr>
+<tr>
+<td>@Past</td>
+<td>验证日期值是过去</td>
+</tr>
+<tr>
+<td>@PastOrPresent</td>
+<td>验证日期值是过去(包括现在)</td>
+</tr>
+<tr>
+<td>@Future</td>
+<td>验证日期值是未来</td>
+</tr>
+<tr>
+<td>@FutureOrPresent</td>
+<td>验证日期值是未来(包括现在)</td>
+</tr>
+</tbody></table>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>本文完整代码放在<a target="_blank" rel="noopener" href="https://github.com/monkeyWie/spring-boot-best-practices/tree/master/jsr380">github</a>。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.baeldung.com/javax-validation">Java Bean Validation Basics</a></li>
+<li><a target="_blank" rel="noopener" href="https://jcp.org/en/jsr/detail?id=380">JSR-380 规范</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/spring/" rel="tag"># spring</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/27/spring-boot-log-request-and-response-body/" rel="prev" title="Spring Boot记录完整请求响应日志">
+                  <i class="fa fa-angle-left"></i> Spring Boot记录完整请求响应日志
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/04/26/cgo-pass-callback/" rel="next" title="cgo传递回调函数">
+                  cgo传递回调函数 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

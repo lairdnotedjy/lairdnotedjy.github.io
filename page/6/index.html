@@ -125,18 +125,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-count">548</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">93</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-count">381</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -162,7 +162,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/19/%E9%9B%86%E5%90%88-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/02/11/github-mirror/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/05/19/%E9%9B%86%E5%90%88-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">集合-数据结构</a>
+          <a href="/2020/02/11/github-mirror/" class="post-title-link" itemprop="url">github镜像站</a>
         </h2>
 
         <div class="post-meta-container">
@@ -191,405 +191,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-05-19 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-19T00:00:00+08:00">2017-05-19</time>
+      <time title="Created: 2020-02-11 12:47:31" itemprop="dateCreated datePublished" datetime="2020-02-11T12:47:31+08:00">2020-02-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="colletion-集合"><a href="#colletion-集合" class="headerlink" title="colletion 集合"></a>colletion 集合</h1><p>Collection<br>├List<br>│├LinkedList<br>│├ArrayList<br>│└Vector<br>│　└Stack<br>└Set<br>│├HashSet<br>│├TreeSet</p>
-<p>Vector与ArrayList一样，也是通过数组实现的，不同的是它支持线程的同步，即某一时刻只有一个线程能够写Vector(线程安全)，避免多线程同时写而引起的不一致性，但实现同步需要很高的花费，因此，访问它比访问ArrayList慢</p>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-26/47993865.jpg"></p>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-26/33139232.jpg"></p>
-<ul>
-<li>HashSet &#x2F; TreeSet (内存结构可见，Set均为Map实现)<br>HashSet内部就是使用Hashmap实现的，和Hashmap不同的是它不需要Key和Value两个值。<br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/ywl925/p/3865269.html">http://www.cnblogs.com/ywl925/p/3865269.html</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-7-22/27211841.jpg"></li>
-</ul>
-<hr>
-<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>Map<br>├ HashMap 数组+链表-&gt;红黑树<br>├Hashtable   线程安全与null值不存储</p>
-<p>├LinkHashMap 双向链（left，right）<br>└WeakHashMap</p>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-26/93117418.jpg"></p>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-26/17405961.jpg"></p>
-<hr>
-<h1 id="Concurrent-并发"><a href="#Concurrent-并发" class="headerlink" title="Concurrent 并发"></a>Concurrent 并发</h1><p>├ ConcurrentMap 并发<br>│├ ConcurrentHashMap  并发</p>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-26/65851401.jpg"><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-7-22/55627263.jpg"></p>
-<p><code>Hashtable与ConcurrentHashMap区别 - wisgood的专栏 - CSDN博客</code></p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/wisgood/article/details/19338693">http://blog.csdn.net/wisgood/article/details/19338693</a></p>
-<p><code>Java之美[从菜鸟到高手演变]之HashMap、HashTable - 智慧演绎，无处不在 - CSDN博客</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/zhangerqing/article/details/8193118">http://blog.csdn.net/zhangerqing/article/details/8193118</a></p>
-<hr>
-<p><img src="http://upload-images.jianshu.io/upload_images/1479978-eba64be1ecc7d6f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
-<hr>
-<p><code>java基础 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/4e734cbf192a">http://www.jianshu.com/p/4e734cbf192a</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/18/linux%20vi%20%E8%A1%8C%E5%8F%B7-%E4%BD%8D%E7%BD%AE-%E6%9F%A5%E6%89%BE-%E5%8C%BA%E9%97%B4-%E8%BE%93%E5%87%BA-%E8%BF%87%E6%BB%A4-%E4%B8%8B%E8%BD%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/05/18/linux%20vi%20%E8%A1%8C%E5%8F%B7-%E4%BD%8D%E7%BD%AE-%E6%9F%A5%E6%89%BE-%E5%8C%BA%E9%97%B4-%E8%BE%93%E5%87%BA-%E8%BF%87%E6%BB%A4-%E4%B8%8B%E8%BD%BD/" class="post-title-link" itemprop="url">linux vi 行号/位置/查找/区间/输出/过滤/下载</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-18 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-18T00:00:00+08:00">2017-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="行号"><a href="#行号" class="headerlink" title="行号"></a>行号</h1><p>显示行号 <code>:nu</code><br>全文显示 <code>:set nu</code></p>
-<ul>
-<li>全文行数<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23huf4wo4Z logs]# wc -l localhost_access_log.2017-05-18.txt </span><br><span class="line">770460 localhost_access_log.2017-05-18.txt</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h1><p><code>gg</code>  跳到首一行</p>
-<p><code>GG</code>  跳到尾一行</p>
-<h1 id="查找（相对光标所在位置）"><a href="#查找（相对光标所在位置）" class="headerlink" title="查找（相对光标所在位置）"></a>查找（相对光标所在位置）</h1><p><code>/content</code>  （自上往下）</p>
-<ul>
-<li>下一个<code>n</code></li>
-<li>上一个<code>Shift+n</code></li>
-</ul>
-<p><code>?content</code>  （自 下 往 上 ）</p>
-<ul>
-<li>上 一个<code>n</code></li>
-<li>下 一个<code>Shift+n</code></li>
-</ul>
-<hr>
-<h1 id="打印出起始行和结束行之间的内容"><a href="#打印出起始行和结束行之间的内容" class="headerlink" title="打印出起始行和结束行之间的内容"></a>打印出起始行和结束行之间的内容</h1><p><code>sed -n  &#39;210048,210049p&#39;  catalina.out</code></p>
-<ul>
-<li>输出文件<br><code>sed -n  &#39;210048,312712p&#39;  catalina.out &gt; catalina.out.0209.12</code></li>
-</ul>
-<h1 id="过滤打印"><a href="#过滤打印" class="headerlink" title="过滤打印"></a>过滤打印</h1><p><code>cat catalina.out.0209.12 | grep 操作计时</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[k12Service]  操作计时：188ms  类名: com.wosai.teach.restful.knowPoint.KnowPointLoadExpReadInterFace  方法名:getMain() result:</span><br><span class="line">[k12Service]  操作计时：29ms  类名: com.wosai.teach.restful.sys.SysConfigInterface  方法名:sysConfig() result:</span><br><span class="line">[k12Service]  操作计时：120ms  类名: com.wosai.teach.restful.order.FindProductListInterface  方法名:getMain() result:</span><br><span class="line">[k12Service]  操作计时：112ms  类名: com.wosai.teach.restful.order.FindProductListInterface  方法名:getMain() result:</span><br><span class="line">[k12Service]  操作计时：224ms  类名: com.wosai.teach.restful.knowPoint.KnowPointLoadExpReadInterFace  方法名:getMain() result:</span><br></pre></td></tr></table></figure>
-<ul>
-<li>输出文件<br><code>cat catalina.out.0209.12 | grep 操作计时 &gt; catalina.out.0209.12.grep</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23ult4m4yZ logs]# vi catalina.out</span><br><span class="line">catalina.out               catalina.out.0209.12       catalina.out.0209.12.grep </span><br></pre></td></tr></table></figure></li>
-<li>下载文件<br><code>sz catalina.out.0209.12.grep</code></li>
-</ul>
-<hr>
-<p><code>linux vi 查找 - 疯狂程序员 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/shine0181/article/details/6632597">http://blog.csdn.net/shine0181/article/details/6632597</a></p>
-<p><code>VIM中gg=G是什么 - 编程</code><br><a target="_blank" rel="noopener" href="http://www.myexception.cn/program/880876.html">http://www.myexception.cn/program/880876.html</a></p>
-<p><code>在linux中使用vi 打开文件时，能显示行号吗？_百度知道</code><br><a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/812870968035725732.html">https://zhidao.baidu.com/question/812870968035725732.html</a></p>
-<p><code>linux下的vim/vi永久显示行号</code><br><a target="_blank" rel="noopener" href="http://www.07net01.com/linux/2016/04/1426154.html">http://www.07net01.com/linux/2016/04/1426154.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/16/spring%E6%B3%A8%E8%A7%A3@ResponseBody%E8%BF%94%E5%9B%9EJSON%20%E8%AE%BE%E7%BD%AE%E4%B8%8D%E8%BF%94%E5%9B%9E%E4%B8%BA%20null%20%E7%9A%84%E5%80%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/05/16/spring%E6%B3%A8%E8%A7%A3@ResponseBody%E8%BF%94%E5%9B%9EJSON%20%E8%AE%BE%E7%BD%AE%E4%B8%8D%E8%BF%94%E5%9B%9E%E4%B8%BA%20null%20%E7%9A%84%E5%80%BC/" class="post-title-link" itemprop="url">spring注解@ResponseBody返回JSON 设置不返回为 null 的值</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-16 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-16T00:00:00+08:00">2017-05-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="方法-一"><a href="#方法-一" class="headerlink" title="方法 一"></a>方法 一</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;mvc:annotation-driven&gt;</span><br><span class="line">    &lt;mvc:message-converters register-defaults=&quot;true&quot;&gt;</span><br><span class="line">        &lt;bean class=&quot;org.springframework.http.converter.json.MappingJackson2HttpMessageConverter&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;objectMapper&quot;&gt;</span><br><span class="line">                &lt;bean class=&quot;com.fasterxml.jackson.databind.ObjectMapper&quot;&gt;</span><br><span class="line">                    &lt;property name=&quot;serializationInclusion&quot;&gt;</span><br><span class="line">                        &lt;value type=&quot;com.fasterxml.jackson.annotation.JsonInclude.Include&quot;&gt;NON_NULL&lt;/value&gt;</span><br><span class="line">                    &lt;/property&gt;</span><br><span class="line">                &lt;/bean&gt;</span><br><span class="line">            &lt;/property&gt;</span><br><span class="line">        &lt;/bean&gt;</span><br><span class="line">    &lt;/mvc:message-converters&gt;</span><br><span class="line">&lt;/mvc:annotation-driven&gt;</span><br></pre></td></tr></table></figure>
-<p>参考链接：</p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000002522525/a-1020000002522849">https://segmentfault.com/q/1010000002522525/a-1020000002522849</a></p>
-<p>https:&#x2F;&#x2F; stackoverflow.com&#x2F;questions&#x2F;4823358&#x2F;spring-configure-responsebody-json-format#answer-13876694</p>
-<hr>
-<h1 id="方法-二"><a href="#方法-二" class="headerlink" title="方法 二"></a>方法 二</h1><p>在你要输出的数据的类加上</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)</span><br></pre></td></tr></table></figure>
-<p>参考文章：<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/6049523/how-to-configure-spring-mvc-3-to-not-return-null-object-in-json-response#answer-6049967">http://stackoverflow.com/questions/6049523/how-to-configure-spring-mvc-3-to-not-return-null-object-in-json-response#answer-6049967</a></p>
-<hr>
-<p><strong>参考</strong><br><code>spring 注解 @ResponseBody 返回JSON 设置不返回为 null 的值 - yxwb1253587469的博客 - 博客频道 - CSDN.NET</code><br>blog.csdn.net&#x2F;yxwb1253587469&#x2F;article&#x2F;details&#x2F;71195207</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/13/Java%20IDEA%20Maven%E6%90%AD%E5%BB%BA%E5%A4%9A%E6%A8%A1%E5%9D%97%E9%A1%B9%E7%9B%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/05/13/Java%20IDEA%20Maven%E6%90%AD%E5%BB%BA%E5%A4%9A%E6%A8%A1%E5%9D%97%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">Java IDEA Maven搭建多模块项目</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-13 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-13T00:00:00+08:00">2017-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="主工程"><a href="#主工程" class="headerlink" title="主工程"></a>主工程</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/95754311.jpg"></p>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/54843808.jpg"></p>
-<h1 id="子模块（web-或不选）"><a href="#子模块（web-或不选）" class="headerlink" title="子模块（web&#x2F;或不选）"></a>子模块（web&#x2F;或不选）</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/87323924.jpg"></p>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/42850945.jpg"></p>
-<h1 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/1742924.jpg"></p>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/17956154.jpg"></p>
-<hr>
-<h1 id="Maven-多模块项目参考-iBase4J"><a href="#Maven-多模块项目参考-iBase4J" class="headerlink" title="Maven 多模块项目参考 iBase4J"></a>Maven 多模块项目参考 iBase4J</h1><p><a target="_blank" rel="noopener" href="http://git.oschina.net/iBase4J/iBase4J">http://git.oschina.net/iBase4J/iBase4J</a></p>
-<p><code> #32 iBase4J 架构研究 [置顶]</code> <a target="_blank" rel="noopener" href="http://git.oschina.net/iBase4J/iBase4J/issues/32">http://git.oschina.net/iBase4J/iBase4J/issues/32</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/85002761.jpg"></p>
-<h1 id="快速构建"><a href="#快速构建" class="headerlink" title="快速构建"></a>快速构建</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">* 启动命令：</span><br><span class="line">     clean package -P build tomcat7:run-war-only -f pom-sys-service-server.xml</span><br><span class="line">     clean package -P build tomcat7:run-war-only -f pom-sys-web-server.xml</span><br><span class="line">* 打包命令：</span><br><span class="line">     clean package -P build -f pom-sys-service-server.xml</span><br><span class="line">     clean package -P build -f pom-sys-service-server.xml</span><br><span class="line">* 生产环境打包命令：</span><br><span class="line">     clean package -P product -f pom-sys-service-server.xml</span><br><span class="line">     clean package -P product -f pom-sys-service-server.xml</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>pom-sys-service-server.xml (方便在主项目iBase4j中指定具体模块的构建)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">&lt;artifactId&gt;iBase4J-SYS-Service-Server&lt;/artifactId&gt;</span><br><span class="line">&lt;name&gt;$&#123;project.artifactId&#125;&lt;/name&gt;</span><br><span class="line">&lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">&lt;url&gt;http://maven.apache.org&lt;/url&gt;</span><br><span class="line">&lt;parent&gt;</span><br><span class="line">&lt;groupId&gt;org.ibase4j&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;iBase4J&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.1.0&lt;/version&gt;</span><br><span class="line">&lt;relativePath&gt;./&lt;/relativePath&gt;</span><br><span class="line">&lt;/parent&gt;</span><br><span class="line">&lt;modules&gt;</span><br><span class="line">&lt;module&gt;iBase4J-Common&lt;/module&gt;</span><br><span class="line">&lt;module&gt;iBase4J-SYS-Facade&lt;/module&gt;</span><br><span class="line">&lt;module&gt;iBase4J-SYS-Service&lt;/module&gt;</span><br><span class="line">&lt;/modules&gt;</span><br><span class="line">&lt;!-- clean package -P build tomcat7:run-war-only -f pom-sys-service-server.xml --&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h1><p>功能搜索<code>Ctrl+shift+A</code>-<code>reim</code> 选择<code>Reimport</code>即可<code>刷新 工程 maven</code><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-7-21/41633512.jpg"></p>
-<hr>
-<p><strong>参考</strong><br><code>Java一步一步构建web系统 在IDEA下用Maven搭建多模块项目 - 推酷</code>  <code>★</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/FZfiYfF">http://www.tuicool.com/articles/FZfiYfF</a></p>
-<p><code>[工具资源] Intellij IDEA 2016 学习系列之 (一) 创建 maven 多模块项目 - 推酷</code>  <code>★</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/z6ZZzuR">http://www.tuicool.com/articles/z6ZZzuR</a></p>
-<p><code>每日一博 | Maven 多模块项目介绍及搭建 - 推酷</code> <code>★</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/yiIra2">http://www.tuicool.com/articles/yiIra2</a></p>
-<p><code>Maven提高篇系列之（一）——多模块 vs 继承</code></p>
-<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/RJBZb2z">www.tuicool.com/articles/RJBZb2z</a></p>
-<p><code>使用命令行快速创建Maven多模块项目 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/Y3Ab2uJ">http://www.tuicool.com/articles/Y3Ab2uJ</a></p>
-<hr>
-<p><code>用idea创建一个maven web项目 - Coder Wu的博客 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/sinat_34596644/article/details/52891274">http://blog.csdn.net/sinat_34596644/article/details/52891274</a></p>
-<p><code>使用IntelliJ IDEA 15和Maven创建Java Web项目 - MyArrow的专栏 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/myarrow/article/details/50824793">http://blog.csdn.net/myarrow/article/details/50824793</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/12/MySQL-pull-the-massive-data-out-of-memory-error/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/05/12/MySQL-pull-the-massive-data-out-of-memory-error/" class="post-title-link" itemprop="url">MySQL 拉取海量数据报 OutOfMemoryError</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-12 22:40:37" itemprop="dateCreated datePublished" datetime="2017-05-12T22:40:37+08:00">2017-05-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -597,7 +206,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
         </span>
     </span>
 
@@ -611,50 +220,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>在用最基本的<code>JDBC</code>拉取数据的时候，由于拉取的是海量数据，所以程序跑了一段时间之后报<code>java.lang.OutOfMemoryError: Java heap space</code>，这个错误很简单，也很好解决，网上一搜一大把，只需要设置<code>ResultSet</code>获取数据模式为<code>row-by-row</code>，但是总结多数的解决方案是如下两种：<br>① 以PreparedStatement为例，需要设置四个参数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">preparedStatement = connection.prepareStatement(formatSql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);</span><br><span class="line">preparedStatement.setFetchSize(Integer.MIN_VALUE);</span><br><span class="line">preparedStatement.setFetchDirection(ResultSet.FETCH_REVERSE);</span><br></pre></td></tr></table></figure>
+          <p><code>github release</code>一直下载不动，或者干脆直接下载失败，搜索一番发现 github 竟然还有镜像站点，下载速度还不错，地址：<del><a target="_blank" rel="noopener" href="http://github-mirror.bugkiller.org/">http://github-mirror.bugkiller.org</a></del>，新地址：<a target="_blank" rel="noopener" href="https://hub.fastgit.org/">https://hub.fastgit.org</a>。</p>
+<p>如果有油猴的话推荐直接使用<a target="_blank" rel="noopener" href="https://greasyfork.org/en/scripts/397419-fastgithub-%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E8%AE%BF%E9%97%AE-%E5%85%8B%E9%9A%86%E5%92%8C%E4%B8%8B%E8%BD%BD">FastGithub</a>，效果图：</p>
+<p><img src="/github-mirror/2020-12-21-15-26-14.png"></p>
+<p><img src="/github-mirror/2020-12-21-15-26-35.png"></p>
 
-<p>② 同样以PreparedStatement为例，需要设置三个参数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">preparedStatement = connection.prepareStatement(formatSql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);</span><br><span class="line">preparedStatement.setFetchSize(Integer.MIN_VALUE);</span><br></pre></td></tr></table></figure>
-
-<p>这种解决方案是可以的，那么本文还有无存在的必要呢？当然有。这两种方案基本上都是参看MySQL官方说明来解决的，具体链接<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-implementation-notes.html">点我</a>，内容摘录如下</p>
-<blockquote>
-<p>By default, ResultSets are completely retrieved and stored in memory. In most cases this is the most efficient way to operate and, due to the design of the MySQL network protocol, is easier to implement. If you are working with ResultSets that have a large number of rows or large values and cannot allocate heap space in your JVM for the memory required, you can tell the driver to stream the results back one row at a time.</p>
-</blockquote>
-<blockquote>
-<p>To enable this functionality, create a Statement instance in the following manner:</p>
-</blockquote>
-<blockquote>
-<p>stmt &#x3D; conn.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY, java.sql.ResultSet.CONCUR_READ_ONLY);<br>stmt.setFetchSize(Integer.MIN_VALUE);</p>
-</blockquote>
-<blockquote>
-<p>The combination of a forward-only, read-only result set, with a fetch size of Integer.MIN_VALUE serves as a signal to the driver to stream result sets row-by-row. After this, any result sets created with the statement will be retrieved row-by-row.</p>
-</blockquote>
-<blockquote>
-<p>There are some caveats with this approach. You must read all of the rows in the result set (or close it) before you can issue any other queries on the connection, or an exception will be thrown.</p>
-</blockquote>
-<blockquote>
-<p>The earliest the locks these statements hold can be released (whether they be MyISAM table-level locks or row-level locks in some other storage engine such as InnoDB) is when the statement completes.</p>
-</blockquote>
-<blockquote>
-<p>If the statement is within scope of a transaction, then locks are released when the transaction completes (which implies that the statement needs to complete first). As with most other databases, statements are not complete until all the results pending on the statement are read or the active result set for the statement is closed.</p>
-</blockquote>
-<blockquote>
-<p>Therefore, if using streaming results, process them as quickly as possible if you want to maintain concurrent access to the tables referenced by the statement producing the result set.</p>
-</blockquote>
-<p>但是我想说，其实一个参数就足矣。只需要设置<code>fetch size</code>为<code>Integer.MIN_VALUE</code>即可。代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">preparedStatement = connection.prepareStatement(formatSql);</span><br><span class="line">preparedStatement.setFetchSize(Integer.MIN_VALUE);</span><br></pre></td></tr></table></figure>
-
-<p>这样为什么可以呢？我们来看源码，点开prepareStatement的具体实现。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mysql.jdbc;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConnectionImpl</span> <span class="keyword">extends</span> <span class="title class_">ConnectionPropertiesImpl</span> <span class="keyword">implements</span> <span class="title class_">MySQLConnection</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> PreparedStatement <span class="title function_">prepareStatement</span><span class="params">(String sql)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.prepareStatement(sql, <span class="number">1003</span>, <span class="number">1007</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到即使你调用的是<code>prepareStatement(formatSql)</code>，但是在实现中调用的是<code>prepareStatement(sql, 1003, 1007)</code>，而<code>ResultSet.TYPE_FORWARD_ONLY = 1003</code>，<code>ResultSet.CONCUR_READ_ONLY = 1007</code>，所以不需要在调用的时候传递<code>TYPE_FORWARD_ONLY </code>和<code>CONCUR_READ_ONLY</code>。</p>
-<p>再来看<code>setFetchDirection</code>的具体实现类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mysql.jdbc;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StatementImpl</span> <span class="keyword">implements</span> <span class="title class_">Statement</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setFetchDirection</span><span class="params">(<span class="type">int</span> direction)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">        <span class="keyword">switch</span>(direction) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1000</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1001</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1002</span>:</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">throw</span> SQLError.createSQLException(Messages.getString(<span class="string">&quot;Statement.5&quot;</span>), <span class="string">&quot;S1009&quot;</span>, <span class="built_in">this</span>.getExceptionInterceptor());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可知，在实现中，当<code>direction</code>值是1000、1001和1002时，其处理逻辑是一样的，那么这些值表示什么意思呢？在<code>ResultSet</code>类中可以查到</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">FETCH_FORWARD</span> <span class="operator">=</span> <span class="number">1000</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">FETCH_REVERSE</span> <span class="operator">=</span> <span class="number">1001</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">FETCH_UNKNOWN</span> <span class="operator">=</span> <span class="number">1002</span>;</span><br></pre></td></tr></table></figure>
-<p>所以再调用<code>preparedStatement.setFetchDirection(ResultSet.FETCH_REVERSE);</code>这一句其实完全没必要，因为不论你传递的是哪个值，其结果都是相同的，所以说，使用流式结果集获取海量数据一个参数足矣，不要迷信网上二手信息，同样不要迷信官网，只有源码最靠谱。</p>
-<p>如果想继续深究，可以查看MySQL判断是否开启流式结果集的方法，实现如下，判断逻辑很简单</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mysql.jdbc;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StatementImpl</span> <span class="keyword">implements</span> <span class="title class_">Statement</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="type">boolean</span> <span class="title function_">createStreamingResultSet</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.resultSetType == <span class="number">1003</span> &amp;&amp; <span class="built_in">this</span>.resultSetConcurrency == <span class="number">1007</span> &amp;&amp; <span class="built_in">this</span>.fetchSize == -<span class="number">2147483648</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -680,7 +250,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/09/Gradle-uses-extended-attributes-to-manage-dependent-version-numbers/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/01/13/talk-http-keep-alive/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -698,7 +268,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/05/09/Gradle-uses-extended-attributes-to-manage-dependent-version-numbers/" class="post-title-link" itemprop="url">Gradle使用扩展属性管理依赖版本号</a>
+          <a href="/2020/01/13/talk-http-keep-alive/" class="post-title-link" itemprop="url">聊聊HTTP协议的keep-alive</a>
         </h2>
 
         <div class="post-meta-container">
@@ -709,14 +279,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-05-09 21:15:19" itemprop="dateCreated datePublished" datetime="2017-05-09T21:15:19+08:00">2017-05-09</time>
+      <time title="Created: 2020-01-13 12:01:13" itemprop="dateCreated datePublished" datetime="2020-01-13T12:01:13+08:00">2020-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -724,7 +294,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
         </span>
     </span>
 
@@ -738,34 +308,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h4 id="Maven预设变量"><a href="#Maven预设变量" class="headerlink" title="Maven预设变量"></a>Maven预设变量</h4><p>使用过<code>Maven</code>的人应该都知道，我们在<code>Maven</code>项目中添加依赖的一般性做法。就是打开<code>pom.xml</code>文件，在<code>&lt;dependencies&gt;</code>节点下添加</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>包含坐标和版本号的内容，那么在<code>Java</code>类文件中，就可以引用<code>Lucene</code>包中的各种类了。但是要注意一点，这里面的版本号是以硬编码的形式存在，作为一个合格的软件开发者，要尽量在你的代码中避免硬编码的情况。为什么呢？比如我需要依赖其它的<code>Lucene</code>模块，那么<code>pom.xml</code>中添加内容如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-analyzers-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-queryparser<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-highlighter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-queries<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>假设经年累月，项目需要升级，<code>Lucene</code>的新版本也已发布，那么是不是需要手动修改每一行<code>&lt;version&gt;5.5.0&lt;/version&gt;</code>呢？这还只是依赖几个模块的问题，假设你依赖成百上千个模块，其版本号都需要升级，是不是觉得想抽当初的自己呢？其实在<code>Maven</code>中这种情况很好解决、就是利用预设变量。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version.lucene</span>&gt;</span>6.0.0<span class="tag">&lt;/<span class="name">version.lucene</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-analyzers-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-queryparser<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-highlighter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-queries<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>那么以后再遇到项目升级的情况，只需要手动修改<code>&lt;version.lucene&gt;6.0.0&lt;/version.lucene&gt;</code>一行代码即可搞定，所有引用到该版本变量的依赖都自动升级，这样来管理依赖，是不是很哈皮呢？</p>
-<h4 id="Gradle单模块"><a href="#Gradle单模块" class="headerlink" title="Gradle单模块"></a>Gradle单模块</h4><p>同样作为后起之秀的<code>Gradle</code>如何优雅地解决类似问题呢？硬编码的写法如下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile &quot;org.apache.lucene:lucene-core:5.5.0&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>优雅的写法①如下，打开<code>build.gradle</code>文件</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ext &#123;</span><br><span class="line">    luceneVersion = &#x27;6.5.0&#x27;</span><br><span class="line">&#125;</span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &quot;org.apache.lucene:lucene-core:$luceneVersion&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>一定要注意包含<code>$</code>符号时，要用双引号，我就因用单引号在这上吃过亏。在<code>Gradle</code>中单引号和双引号都是合法的，但是略有不同。单引号中的内容严格对应<code>Java</code>中的<code>String</code>，不对<code>$</code>符号进行转义。双引号的内容则和脚本语言处理有点像，如果字符中有<code>$</code>号的话，则它会先对<code>$</code>表达式求值。在<code>Gradle</code>中，其实还有三引号的情形，这代表什么呢？三引号中的字符串支持任意换行，比如</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> multieLines = <span class="string">&#x27;&#x27;</span><span class="string">&#x27; begin</span></span><br><span class="line"><span class="string">  line  1</span></span><br><span class="line"><span class="string">  line  2</span></span><br><span class="line"><span class="string">  line  3</span></span><br><span class="line"><span class="string">  end &#x27;</span><span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>除了①，还有优雅的写法②，使用字典类型，修改<code>build.gradle</code>文件</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ext &#123;</span><br><span class="line">    javaSourceCompatibility = &#x27;1.8&#x27;</span><br><span class="line">    libVersions = [</span><br><span class="line">            junit : &#x27;4.12&#x27;,</span><br><span class="line">            lucene: &#x27;6.5.0&#x27;,</span><br><span class="line">            guava : &#x27;20.0&#x27;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &quot;junit:junit:$libVersions.junit&quot;</span><br><span class="line">    compile &quot;com.google.guava:guava:$libVersions.guava&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Gradle多模块"><a href="#Gradle多模块" class="headerlink" title="Gradle多模块"></a>Gradle多模块</h4><p>当在一个根项目下有多个子模块，那么一种简单的做法是在每个子模块中都定义<code>ext</code>代码块，声明需要使用到的版本号变量，这样做当然可以。但是当遇到需要升级版本号的情况时，需要手动修改所有的子模块，其实还有更优雅的解决方案。就是在根项目中定义<code>ext</code>代码块，打开根项目的<code>build.gradle</code>定义</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ext &#123;</span><br><span class="line">    luceneVersion = &#x27;6.5.0&#x27;</span><br><span class="line">    libVersions = [</span><br><span class="line">            junit : &#x27;4.12&#x27;,</span><br><span class="line">            guava : &#x27;20.0&#x27;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后在每个子模块的<code>build.gradle</code>中都可以直接引用之，方式如下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile &quot;junit:junit:$&#123;rootProject.libVersions.junit&#125;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样，当需要升级版本号的时候，只需要升级根项目中的变量即可，所用子模块的版本号会自动升级。</p>
-<h4 id="消除Gradle编译警告"><a href="#消除Gradle编译警告" class="headerlink" title="消除Gradle编译警告"></a>消除Gradle编译警告</h4><p>通过Gradle编译项目过程中，有时会报如下警告信息</p>
-<blockquote>
-<p>注: xxx.java使用或覆盖了已过时的 API。<br>注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。<br>注: xxx.java使用了未经检查或不安全的操作。<br>注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。</p>
-</blockquote>
-<p>警告不是Error，虽然不影响编译，但是看着总是不舒服，所以想办法消除警告信息。根据StackOverflow上的<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/18689365/how-to-add-xlintunchecked-to-my-android-gradle-based-project">问答</a>，在<code>build.gradle</code>中添加如下配置即可消除警告。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    gradle.projectsEvaluated &#123;</span><br><span class="line">        tasks.withType(JavaCompile) &#123;</span><br><span class="line">            options.compilerArgs &lt;&lt; &quot;-Xlint:unchecked&quot; &lt;&lt; &quot;-Xlint:deprecation&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>HTTP 协议里的<code>keep-alive</code>机制和长连接协议的<code>keep-alive</code>机制有所不同，HTTP 中的作用是为了复用 TCP 连接，而长连接中大多数作用是为了保活，例如 TCP 通过 keep-alive 心跳包来检测对方是否存活。</p>
+<p>在<code>HTTP/1.1</code>版本中<code>keep-alive</code>默认是开启的，通过复用 TCP 连接，可以有效的降低 TCP 连接创建的开销，大多数浏览器只允许同时对同一个域名建立 6 个 TCP 连接。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/01/13/talk-http-keep-alive/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -791,7 +343,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/09/ionic%E6%97%A5%E6%9C%9F%E6%8E%A7%E4%BB%B6ionicdatepicker/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/12/30/debug-use-nginx-proxy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -809,7 +361,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/05/09/ionic%E6%97%A5%E6%9C%9F%E6%8E%A7%E4%BB%B6ionicdatepicker/" class="post-title-link" itemprop="url">ionic日期控件ionicdatepicker</a>
+          <a href="/2019/12/30/debug-use-nginx-proxy/" class="post-title-link" itemprop="url">通过nginx反向代理来调试代码</a>
         </h2>
 
         <div class="post-meta-container">
@@ -820,323 +372,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-05-09 00:00:02" itemprop="dateCreated datePublished" datetime="2017-05-09T00:00:02+08:00">2017-05-09</time>
+      <time title="Created: 2019-12-30 17:17:28" itemprop="dateCreated datePublished" datetime="2019-12-30T17:17:28+08:00">2019-12-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="ionic-datepicker"><a href="#ionic-datepicker" class="headerlink" title="ionic-datepicker"></a>ionic-datepicker</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bower install ionic-datepicker --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://market.ionic.io/plugins/ionicdatepicker">https://market.ionic.io/plugins/ionicdatepicker</a><br><code>github</code> <a target="_blank" rel="noopener" href="https://github.com/rajeshwarpatlolla/ionic-datepicker">https://github.com/rajeshwarpatlolla/ionic-datepicker</a>  <code>★</code><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/42969560.jpg"></p>
-<hr>
-<h1 id="datepicker-for-ionic"><a href="#datepicker-for-ionic" class="headerlink" title="datepicker-for-ionic"></a>datepicker-for-ionic</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bower i datepicker-for-ionic --save</span><br><span class="line">npm i datepicker-for-ionic --save</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/datepicker-for-ionic">https://www.npmjs.com/package/datepicker-for-ionic</a><br><a target="_blank" rel="noopener" href="http://npm.taobao.org/package/datepicker-for-ionic">http://npm.taobao.org/package/datepicker-for-ionic</a></p>
-<p><code>github</code>   <a target="_blank" rel="noopener" href="https://github.com/celsomarques/ionic-datepicker">https://github.com/celsomarques/ionic-datepicker</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/72000024.jpg"></p>
-<hr>
-<p><strong>参考</strong><br><code>ionic之时间&amp;日期组件实例 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/xuexiiphone/article/details/52087915">http://blog.csdn.net/xuexiiphone/article/details/52087915</a></p>
-<p><code>Ionic集成ionic-datepicker插件 - ljw124213的博客 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/ljw124213/article/details/60588752">http://blog.csdn.net/ljw124213/article/details/60588752</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/09/jetbrains%20IntelliJ-Webstorm%20svn%E6%8F%92%E4%BB%B6%E5%88%9D%E5%A7%8B%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/05/09/jetbrains%20IntelliJ-Webstorm%20svn%E6%8F%92%E4%BB%B6%E5%88%9D%E5%A7%8B%E5%8C%96/" class="post-title-link" itemprop="url">jetbrains IntelliJ/Webstorm svn插件初始化</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-09 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-09T00:00:00+08:00">2017-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="subversion-工具-下载"><a href="#subversion-工具-下载" class="headerlink" title="subversion 工具 下载"></a>subversion 工具 下载</h1><p><a target="_blank" rel="noopener" href="http://subversion.apache.org/packages.html#windows">http://subversion.apache.org/packages.html#windows</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/88396036.jpg"></p>
-<hr>
-<ul>
-<li>**subversion(支持控制台Command) **<br><a target="_blank" rel="noopener" href="https://tortoisesvn.net/downloads.html">https://tortoisesvn.net/downloads.html</a>  <code>TortoiseSVN-1.9.5.27581-x64-svn-1.9.5.msi</code></li>
-</ul>
-<p>使用的是TortoiseSVN-1.9.4.27285-x64-svn-1.9.4，安装过程需要注意的是，默认安装没有选择”command line client tools”<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/25113416.jpg"></p>
-<ul>
-<li><p>**subversion **  绿色免安装<br><a target="_blank" rel="noopener" href="http://subversion.apache.org/download.cgi#recommended-release">http://subversion.apache.org/download.cgi#recommended-release</a>  <code>subversion-1.9.5.zip</code><br><strong>命令行支持，配置环境变量</strong>：path +&#x3D; <code>F:\Tool\SVN,CVS\Apache-Subversion-1.9.5\bin</code></p>
-</li>
-<li><p>** sliksvn **  ： <code>Slik-Subversion-1.9.5-x64.msi</code><br><a target="_blank" rel="noopener" href="https://sliksvn.com/download/">https://sliksvn.com/download/</a></p>
-</li>
-</ul>
-<hr>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p><code>Ctrl + Alt + S</code><br>** Use Command line client ** ：  <code>svn</code> 或 <code>C:\Program Files\SlikSvn\bin\svn.exe</code><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/56881942.jpg"></p>
-<hr>
-<p><strong>参考</strong><br><code>Windows下使用svn命令行.md</code></p>
-<p><code>Webstorm2016使用技巧——SVN插件使用 - 博客频道 - CSDN.NET</code></p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/hysh_keystone/article/details/52013789">http://blog.csdn.net/hysh_keystone/article/details/52013789</a></p>
-<p><code>Webstorm SVN配置_屋里屋外点点_新浪博客</code><br><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_9984f2fb0102w8av.html">http://blog.sina.com.cn/s/blog_9984f2fb0102w8av.html</a></p>
-<p><code>webstorm上svn的安装使用</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/jgj0129/article/details/52757115">http://blog.csdn.net/jgj0129/article/details/52757115</a></p>
-<p><code>WebStorm配置svn共享、检出项目-博客-云栖社区-阿里云</code><br><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/46981">https://yq.aliyun.com/articles/46981</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/08/ionic%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/05/08/ionic%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1/" class="post-title-link" itemprop="url">ionic嵌套路由</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-08 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-08T00:00:00+08:00">2017-05-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="getting-started"><a href="#getting-started" class="headerlink" title="getting-started"></a>getting-started</h1><p><a target="_blank" rel="noopener" href="http://ionicframework.com/getting-started">http://ionicframework.com/getting-started</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/30893720.jpg"></p>
-<hr>
-<h1 id="示例：-ionic-starter-tabs"><a href="#示例：-ionic-starter-tabs" class="headerlink" title="示例： ionic-starter-tabs"></a>示例： ionic-starter-tabs</h1><p><a target="_blank" rel="noopener" href="https://github.com/driftyco/ionic-starter-tabs">https://github.com/driftyco/ionic-starter-tabs</a></p>
-<p><a target="_blank" rel="noopener" href="http://plnkr.co/edit/qYMCrt?p=preview">http://plnkr.co/edit/qYMCrt?p=preview</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/36107114.jpg"></p>
-<ul>
-<li><p>tab &#x2F; tab.dash， tab.friends</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  // setup an abstract state for the tabs directive</span><br><span class="line">  .state(&#x27;tab&#x27;, &#123;</span><br><span class="line">    url: &quot;/tab&quot;,</span><br><span class="line">    abstract: true,</span><br><span class="line">    templateUrl: &quot;tabs.html&quot;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  // Each tab has its own nav history stack:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  .state(&#x27;tab.dash&#x27;, &#123;</span><br><span class="line">    url: &#x27;/dash&#x27;,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;tab-dash&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;tab-dash.html&#x27;,</span><br><span class="line">        controller: &#x27;DashCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  .state(&#x27;tab.friends&#x27;, &#123;</span><br><span class="line">    url: &#x27;/friends&#x27;,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;tab-friends&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;tab-friends.html&#x27;,</span><br><span class="line">        controller: &#x27;FriendsCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  .state(&#x27;tab.friend-detail&#x27;, &#123;</span><br><span class="line">    url: &#x27;/friend/:friendId&#x27;,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;tab-friends&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;friend-detail.html&#x27;,</span><br><span class="line">        controller: &#x27;FriendDetailCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  .state(&#x27;tab.account&#x27;, &#123;</span><br><span class="line">    url: &#x27;/account&#x27;,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;tab-account&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;tab-account.html&#x27;,</span><br><span class="line">        controller: &#x27;AccountCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// if none of the above states are matched, use this as the fallback</span><br><span class="line">$urlRouterProvider.otherwise(&#x27;/tab/dash&#x27;);</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>tabs.html</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;ion-tabs class=&quot;tabs-icon-top&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- Pets Tab --&gt;</span><br><span class="line">  &lt;ion-tab title=&quot;Dashboard&quot; icon=&quot;icon ion-home&quot; href=&quot;#/tab/dash&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-dash&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/ion-tab&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- Adopt Tab --&gt;</span><br><span class="line">  &lt;ion-tab title=&quot;Friends&quot; icon=&quot;icon ion-heart&quot; href=&quot;#/tab/friends&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-friends&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/ion-tab&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- About Tab --&gt;</span><br><span class="line">  &lt;ion-tab title=&quot;Account&quot; icon=&quot;icon ion-gear-b&quot; href=&quot;#/tab/account&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-account&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/ion-tab&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/ion-tabs&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="示例：-ionic-starter-sidemenu"><a href="#示例：-ionic-starter-sidemenu" class="headerlink" title="示例： ionic-starter-sidemenu"></a>示例： ionic-starter-sidemenu</h1><p><a target="_blank" rel="noopener" href="https://github.com/driftyco/ionic-starter-sidemenu">https://github.com/driftyco/ionic-starter-sidemenu</a></p>
-<p><a target="_blank" rel="noopener" href="http://plnkr.co/edit/0RXSDB?p=preview">http://plnkr.co/edit/0RXSDB?p=preview</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/68685846.jpg"></p>
-<h1 id="侧边栏-菜单"><a href="#侧边栏-菜单" class="headerlink" title="侧边栏+菜单"></a>侧边栏+菜单</h1><ul>
-<li><p>app</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">  .state(&#x27;app&#x27;, &#123;</span><br><span class="line">    url: &#x27;/app&#x27;,</span><br><span class="line">    abstract: true,</span><br><span class="line">    templateUrl: &#x27;app/app/menu.html&#x27;,</span><br><span class="line">    controller: &#x27;AppCtrl&#x27;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></li>
-<li><p>app.table</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">  .state(&#x27;app.table&#x27;, &#123;</span><br><span class="line">    url: &#x27;/table&#x27;,</span><br><span class="line">    templateUrl: &#x27;app/table/table.html&#x27;,</span><br><span class="line">    controller: &#x27;TableCtrl&#x27;</span><br><span class="line">    // views:&#123;</span><br><span class="line">    //   &#x27;tableContent&#x27;:&#123;</span><br><span class="line">    //     templateUrl:&#x27;app/table/table.html&#x27;,</span><br><span class="line">    //     controller:&#x27;TableCtrl&#x27;</span><br><span class="line">    //   &#125;</span><br><span class="line">    // &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure></li>
-<li><p>app&#x2F;table&#x2F;table.html （<code>自定义嵌套路由页面</code>&#x2F;<code> &lt;ion-tabs</code> ）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;ion-view view-title=&quot;&quot; class=&quot;table_page&quot; hide-nav-bar=&quot;true&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;ion-content class=&quot;table_content&quot; overflow-scroll=&quot;true&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;table_panel&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      &lt;div class=&quot;table_div&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!--主页--&gt;</span><br><span class="line">        &lt;button class=&quot;button buttons button-clear header-item ws_tab&quot; ng-click=&quot;forward(4)&quot;&gt;</span><br><span class="line">          &lt;!--&lt;i class=&quot;icon ion-social-youtube-outline&quot; style=&quot;color: white;&quot;&gt;&lt;/i&gt;--&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/6.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active == 4&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/5.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active != 4&quot;&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">          &lt;div class=&quot;tab_text&quot; ng-style=&quot;&#123;true:&#123;color:&#x27;#56b0ec&#x27;&#125;&#125;[active == 4]&quot;&gt;主页&lt;/div&gt;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!--课件--&gt;</span><br><span class="line">        &lt;button class=&quot;button buttons button-clear header-item ws_tab&quot; ng-click=&quot;forward(1)&quot;&gt;</span><br><span class="line">          &lt;!--&lt;i class=&quot;icon ion-android-home&quot; style=&quot;color: white;&quot;&gt;&lt;/i&gt;--&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/4.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active == 1&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/3.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active != 1&quot;&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">          &lt;div class=&quot;tab_text&quot; ng-style=&quot;&#123;true:&#123;color:&#x27;#56b0ec&#x27;&#125;&#125;[active == 1]&quot;&gt;课件&lt;/div&gt;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!--专项--&gt;</span><br><span class="line">        &lt;button class=&quot;button buttons button-clear header-item ws_tab&quot; ng-click=&quot;forward(2)&quot; ng-if=&quot;$root.ios_isPayChoose&quot;&gt;</span><br><span class="line">          &lt;!--&lt;i class=&quot;icon ion-ios-bookmarks-outline&quot; style=&quot;color: white;&quot;&gt;&lt;/i&gt;--&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/2.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active == 2&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/1.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active != 2&quot;&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">          &lt;div class=&quot;tab_text&quot; ng-style=&quot;&#123;true:&#123;color:&#x27;#56b0ec&#x27;&#125;&#125;[active == 2]&quot;&gt;专项&lt;/div&gt;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!--&lt;button ui-sref=&quot;app.table.live&quot; class=&quot;button buttons button-clear header-item&quot; ng-click=&quot;active=3&quot;&gt;--&gt;</span><br><span class="line">          &lt;!--&amp;lt;!&amp;ndash;&lt;i class=&quot;icon ion-social-youtube-outline&quot; style=&quot;color: white;&quot;&gt;&lt;/i&gt;&amp;ndash;&amp;gt;--&gt;</span><br><span class="line">          &lt;!--&lt;img src=&quot;img/table/nav/play_active.png&quot; style=&quot;height: 30px;&quot; ng-if=&quot;active == 3&quot;&gt;--&gt;</span><br><span class="line">          &lt;!--&lt;img src=&quot;img/table/nav/play.png&quot; style=&quot;height: 30px;&quot; ng-if=&quot;active != 3&quot;&gt;--&gt;</span><br><span class="line">        &lt;!--&lt;/button&gt;--&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;div ng-show=&quot;active == 4&quot;&gt;</span><br><span class="line">      &lt;ion-nav-view name=&quot;mainContent&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div ng-show=&quot;!active || active == 1&quot;&gt;</span><br><span class="line">      &lt;ion-nav-view name=&quot;homeContent&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div ng-show=&quot;active == 2&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;specialContent&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;!--&lt;div ng-show=&quot;active == 3&quot;&gt;--&gt;</span><br><span class="line">      &lt;!--&lt;ion-nav-view name=&quot;liveContent&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;/div&gt;--&gt;</span><br><span class="line">  &lt;/ion-content&gt;</span><br><span class="line">&lt;/ion-view&gt;</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>app.table. main</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">  .state(&#x27;app.table.main&#x27;, &#123;</span><br><span class="line">    url: &#x27;/main&#x27;,</span><br><span class="line">    // cache:false,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;mainContent&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;app/main/main.html&#x27;,</span><br><span class="line">        controller: &#x27;MainCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="使用ion-tabs-存在二级路由丢失返回键问题"><a href="#使用ion-tabs-存在二级路由丢失返回键问题" class="headerlink" title="使用ion-tabs  存在二级路由丢失返回键问题"></a>使用<code>ion-tabs</code>  存在二级路由丢失返回键问题</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--&lt;ion-view view-title=&quot;table&quot; class=&quot;page-tab&quot;&gt;--&gt;</span><br><span class="line">&lt;!--&lt;ion-view class=&quot;page-tab&quot;&gt; &amp;lt;!&amp;ndash; 取消路由页面的view-title避免子类复写失败 &amp;ndash;&amp;gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;page-tab&quot;&gt;</span><br><span class="line">  &lt;!-- 注意：存在二级路由丢失返回键问题 --&gt;</span><br><span class="line">  &lt;!--&lt;ion-tabs class=&quot;tabs-icon-top tabs-color-active-positive my-tab&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&amp;lt;!&amp;ndash; Dashboard Tab &amp;ndash;&amp;gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-tab title=&quot;首页&quot; icon-off=&quot;ion-ios-home-outline&quot; icon-on=&quot;ion-ios-home&quot; href=&quot;#/app/tab/home&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-nav-view name=&quot;tab-home&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tab&gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!--&amp;lt;!&amp;ndash; Chats Tab &amp;ndash;&amp;gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-tab title=&quot;设备&quot; icon-off=&quot;ion-ios-chatboxes-outline&quot; icon-on=&quot;ion-ios-chatboxes&quot; href=&quot;#/app/tab/device&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-nav-view name=&quot;tab-device&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tab&gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!--&amp;lt;!&amp;ndash; Account Tab &amp;ndash;&amp;gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-tab title=&quot;工单&quot; icon-off=&quot;ion-ios-list-outline&quot; icon-on=&quot;ion-ios-list&quot; href=&quot;#/app/tab/work&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-nav-view name=&quot;tab-work&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tab&gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!--&lt;ion-tab title=&quot;个人&quot; icon-off=&quot;ion-ios-person-outline&quot; icon-on=&quot;ion-ios-person&quot; href=&quot;#/app/tab/account&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-nav-view name=&quot;tab-account&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tab&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tabs&gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- ------------------------------------------------------------ --&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- 注意：自定义路由,可解决二级路由丢失返回键问题 --&gt;</span><br><span class="line">  &lt;div ng-show=&quot;isShow(&#x27;app.tab.home&#x27;)&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-home&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div ng-show=&quot;isShow(&#x27;app.tab.device&#x27;)&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-device&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div ng-show=&quot;isShow(&#x27;app.tab.work&#x27;)&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-work&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div ng-show=&quot;isShow(&#x27;app.tab.account&#x27;)&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-account&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;div class=&quot;table_button&quot;&gt;</span><br><span class="line">    &lt;!--&lt;div class=&quot;&quot; ui-sref=&quot;app.tab.home&quot;&gt;--&gt;</span><br><span class="line">    &lt;div class=&quot;&quot; ng-click=&quot;go(&#x27;app.tab.home&#x27;)&quot;&gt;</span><br><span class="line">      &lt;img ng-src=&quot;img/table/nav/&#123;&#123;isShow(&#x27;app.tab.home&#x27;)?2:1&#125;&#125;.png&quot; class=&quot;tab_img&quot;&gt;</span><br><span class="line">      &lt;div&gt;首页&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;!--&lt;div class=&quot;&quot; ui-sref=&quot;app.tab.device&quot;&gt;--&gt;</span><br><span class="line">    &lt;div class=&quot;&quot; ng-click=&quot;go(&#x27;app.tab.device&#x27;)&quot;&gt;</span><br><span class="line">      &lt;img ng-src=&quot;img/table/nav/&#123;&#123;isShow(&#x27;app.tab.device&#x27;)?4:3&#125;&#125;.png&quot; class=&quot;tab_img&quot;&gt;</span><br><span class="line">      &lt;div&gt;设备&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;!--&lt;div class=&quot;&quot; ui-sref=&quot;app.tab.work&quot;&gt;--&gt;</span><br><span class="line">    &lt;div class=&quot;&quot; ng-click=&quot;go(&#x27;app.tab.work&#x27;)&quot;&gt;</span><br><span class="line">      &lt;img ng-src=&quot;img/table/nav/&#123;&#123;isShow(&#x27;app.tab.work&#x27;)?6:5&#125;&#125;.png&quot; class=&quot;tab_img&quot;&gt;</span><br><span class="line">      &lt;div&gt;工单&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;!--&lt;div class=&quot;&quot; ui-sref=&quot;app.tab.account&quot;&gt;--&gt;</span><br><span class="line">    &lt;div class=&quot;&quot; ng-click=&quot;go(&#x27;app.tab.account&#x27;)&quot;&gt;</span><br><span class="line">      &lt;img ng-src=&quot;img/table/nav/&#123;&#123;isShow(&#x27;app.tab.account&#x27;)?6:5&#125;&#125;.png&quot; class=&quot;tab_img&quot;&gt;</span><br><span class="line">      &lt;div&gt;个人&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;!--&lt;/ion-view&gt;--&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  $scope.isShow = isShow;</span><br><span class="line">  $scope.go = function (value) &#123;</span><br><span class="line">    // $ionicHistory.nextViewOptions(&#123;historyRoot: true&#125;);// 路由框架页面,全部升级为顶层路由(不同于默认顶层root)</span><br><span class="line">    $state.go(value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function isShow(stateName) &#123;</span><br><span class="line">  return stateName == $state.current.name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="取消路由页面的view-title避免子类复写失败"><a href="#取消路由页面的view-title避免子类复写失败" class="headerlink" title="取消路由页面的view-title避免子类复写失败"></a>取消路由页面的view-title避免子类复写失败</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--&lt;ion-view view-title=&quot;table&quot; class=&quot;page-tab&quot;&gt;--&gt;</span><br><span class="line">&lt;!--&lt;ion-view class=&quot;page-tab&quot;&gt; &amp;lt;!&amp;ndash; 取消路由页面的view-title避免子类复写失败 &amp;ndash;&amp;gt;--&gt;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="tab切换出现菜单"><a href="#tab切换出现菜单" class="headerlink" title="tab切换出现菜单"></a>tab切换出现菜单</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/9520430.jpg"></p>
-<ul>
-<li><p>出现情况，index&#x3D;1 复用了historyId<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/38952069.jpg"></p>
-</li>
-<li><p>不出现情况，各自为index&#x3D;0<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/35408752.jpg"></p>
-</li>
-<li><p>问题原因：嵌套路由间切换，同样会发生历史轨迹，出现返回键的情况</p>
-</li>
-<li><p>解决办法：对嵌套路由间切换，全部升级为顶层路由 (不同于默认顶层root)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$scope.go = function (value) &#123;</span><br><span class="line">  $ionicHistory.nextViewOptions(&#123;historyRoot: true&#125;);// 路由框架页面,全部升级为顶层路由(不同于默认顶层root)</span><br><span class="line">  $state.go(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="同时使用-Tabs-Side-Menu"><a href="#同时使用-Tabs-Side-Menu" class="headerlink" title="同时使用 Tabs + Side Menu"></a>同时使用 Tabs + Side Menu</h1><p><code>Ionic Tabs + Side Menu</code><br><a target="_blank" rel="noopener" href="http://loring-dodge.azurewebsites.net/ionic-tabs-plus-side-menu/">http://loring-dodge.azurewebsites.net/ionic-tabs-plus-side-menu/</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/22491562.jpg"></p>
-<hr>
-<p><strong>参考</strong><br><code>ionic back 返回按钮不正常显示&amp;&amp;二级路由点击返回按钮失效无法返回到上一级页面的问题</code></p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/badgirl_hong/article/details/53505919">http://blog.csdn.net/badgirl_hong/article/details/53505919</a></p>
-<p><code>ionic tab(选项卡) | 菜鸟教程</code><br><a target="_blank" rel="noopener" href="http://www.runoob.com/ionic/ionic-tab.html">http://www.runoob.com/ionic/ionic-tab.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/06/The-name-of-the-people/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/05/06/The-name-of-the-people/" class="post-title-link" itemprop="url">人民的名义</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-06 22:28:03" itemprop="dateCreated datePublished" datetime="2017-05-06T22:28:03+08:00">2017-05-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1144,7 +387,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
         </span>
     </span>
 
@@ -1158,13 +401,663 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>一不小心，追了一个剧《人民的名义》，随着剧情一点一点地推进，突然开始很心疼，心疼的不是别人，也不是剧中的人物，因为那毕竟是虚构的，不是真实的人生，而是我们自己，这才是真真实实的生活与生命。看了剧中的情节，真是大开眼界，不论是祁同伟的一人得道，鸡犬升天，还是赵瑞龙的草菅人命亦或是丁义珍在饭局上左右逢源，逢场作戏，近似人生赢家。甚至一个处级干部赵德汉，都能狂贪几个亿，要知道，除了国家级领导人，下面就是部司厅局处科，小小一个处级干部，都能贪污几个亿？你知道天朝有多少处级干部吗？呵呵，我还真查了下，毛爷爷说，没有调查就没有发言权，参考链接在<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23916966?sort=created">这里</a>，处级干部约60万，一个人一亿的话，不敢想象，当然了，不能这么悲观，要相信党相信政府，我还是有这觉悟的。现如今大家都说日子难过，现在知道了吧？为什么我们日子难过了，在人民的名义中各种现象也只是社会真实情况的冰山一角吧？假设现实情况比电视剧中所要努力描绘的良好社会略槽糕一点点，那么日子难就很正常了，我想说，不正常才奇怪哩。</p>
-<p>现在好多人都说房价高，那么房价为什么会高呢？只有两种情况，一种是你赚钱的速度赶不上房价的上涨速度，另一种是货币贬值了，房价虚高，只不过刚需接盘侠们是货币贬值的最后承受者，没有享受到任何一点点货币贬值带来的收益，要知道货币贬值对所有人来说并不是公平的，有人说，我手里的钱贬值了，那有钱人手里的钱一样也贬值了呀？只能说你too young，too simple，钱就像是流水，就像一条河，同样的一河水，在水的上游和下游能一样吗？同样货币这个贬值链，就像一条河水一样，也分上游下游，货币流到上游的人的手里的时候，并没有贬值，而是和以前价值一样，那么这些占据上游的都是哪些人呢？发大水的是央行，上游的人是各大国有银行、国企、国家各部委、权力掌控者等，中游是商业银行、民营企业、利益既得者等，经过层层盘剥，当这个贬值链流到下游的时候，又是哪些人呢？就是这个底层劳动人民、刚需接盘侠，之所以房价会高涨，是因为没有任何一个产业能够锁住这么海量的贬值货币，唯有将这些海量的货币存之于楼市，才能尽量减少对其他行业的伤害，试想通胀不是流向楼市，而是流向日常生活必须品，那个个吃不上饭可是天大的问题了，但是一部分人住不上房却不是致命的，即使这些住不上房的人闹腾也不用操心，因为那些有房的会代政府来管教他们，你说此话怎讲，君不见，房价略降，全国各地的售楼处都出现了业主打砸情况吗？这不就是有房产者、既得利益者在代国家管教这些无房产者吗？房价想降很难，一是政府不愿意，房价降了，海量的贬值货币往哪藏呢？二是有产者不愿意，买不起房，大家不会联合起来打砸售楼处，但是房价下降，已买房的人则会联合起来上书政府，要求政府救市，更有甚者，直接联合起来打砸售楼处，还有天理吗？法制社会存在这种流氓行径？没有任何理由，就是因为房价下降，就可以任意耍流氓了？呵呵，这些人没有得到严肃的处理，已经代表了政府的态度，睁一只眼闭一只眼，这些人就都没事了。</p>
-<p>追剧的过程中，一把手在剧中出现了无数遍，我英文不好，不要欺负我，我想请问一把手英文怎么翻译呢？大英帝国、美帝国家人民的词典中，有一把手这个词吗？有海外待过的人，还望不吝赐教。民选政府与任命制有着本质的区别，民选出来的领导人要对人民负责，同理，任命制选出来的领导人只对任命他的人负责。这种本质的区别，注定了人民有着本质的不同地位，该得到什么样的对待都是自己争取而来，你笑着看资本主义国家人民游行、示威、罢工，那就不要忽视人家赢得的地位。有付出才有收获，老祖宗留下来的话，是有道理的。任命制在我看来只能听天由命了，就像古代皇帝一样，如果是个雄才大略、英明神武的皇帝，那么人民生活相对来说更幸福一点，如果碰到昏庸无能、荒淫无度的主，那人民的生活能不水深火热吗？这不就是靠天吃饭吗？和现在的任命制有啥区别？一把手喜欢你，就提拔你，至于你对人民来说是福是祸，又有几个一把手会关心呢？</p>
-<p>这部剧叫《人民的名义》，恕我愚钝，我不知道这里面哪一点代表了人民的名义，我只看到草根出身的处长在第一集就被干掉了，我只看到同样草根出身的祁同伟和高小琴最后同样被干掉了，而那个利用权势不断打压祁同伟的人呢？梁璐包括他的父亲最后毫发无损，这就是人民的名义吗？人民的孩子总是最先和最后被干掉吗？我分明看到的就是有权有势同样能逍遥法外，我不知道现实中有多少丁义珍，但是我敢保证现实中的丁义珍绝对不会在国外的餐馆刷盘子，处处美化、处处讨喜，编剧们都不觉得恶心吗？像沙瑞金和侯亮平在现实中毕竟是少数，再进一步讲，现实中有多少丁义珍、赵立春（副国级，国家领导人啊、领导人啊、领导人啊）、赵瑞龙、刘新建、陈清泉等等这些人呢？恐怕远不止电视中所表现的那些吧？</p>
-<p>在剧情最后部分，侯亮平劝降祁同伟，莫名的心疼起祁同伟来，那个和天下棋，愿用自己的命去胜天半子的人，也许在祁的心中是这么想的，你侯亮平算什么东西，也敢来劝降我？在祁的身边，虽然不乏师长，以及同一师门的师弟师妹，但是又有几个打心眼里瞧得起看得起他的呢？他想过靠自己的努力来出人头地，在大学里学习努力，成绩优异，并且还是校学生会主席，但是有什么用呢？毫无关系背景的他，眼睁睁的看着那些能力平平甚至低于他的的校友们分配到了大城市，而他却被掌控权力的梁璐的父亲下放到了穷山沟沟里，只因他没接受梁璐的追求，即便他没有放弃，主动请缨去做缉毒工作，因为这个工作更危险，更容易立功，凭借着过人的勇气和努力，他成为了缉毒英雄，但是结果呢？梁璐的父亲，凭借手握大权，借着权力以惜才为名义，阻止让他升迁，硬生生的将他继续困于穷山沟之中。最终，这个内心孤傲的人向现实屈服了，这才有了那在汉东大学的著名一跪，祁同伟啊是个被时代抛弃的人、是个被权力毁掉的人、是个草根出身不断向上爬却死在权力脚下的人，直到最后事发败露，他也没有屈服，用他的话说，这个世界上没有人能够审判他，即便可能被判无期徒刑，苟延残喘，但是并没有，他没有投降，没有屈服，而是选择自杀结束生命。</p>
-<p>剧中还有一个现象被大家忽略了，那就是高育良和李达康的女儿都出国了，这就是官二代的命啊。而侯亮平和陈海这种所谓的中产呢？孩子只能挤在国内上些垃圾学校，甚至侯亮平妻子给孩子报的一个补习班，那老师居然是个电工，但是招生工作火热火热的，这和现代的学区房、各种补习班真是不谋而合。幸好这个老师被侯亮平一眼识破，谁又能说现实中存在诸多没有被识破的呢？如果现实中没有侯亮平去戳穿老师的嘴脸呢？岂不是依然可以大摇大摆的顶着补习班的名义继续招摇撞骗。如果现实中的所有官员子女都在国外接受教育，他们对人民又怎么会负责呢？从小接受资本主义国家的理念、文化、习俗、教育等等，怎么比得了土生土长的中国人对人民的了解程度呢？这些人谁又能保证其不在官爸爸富爸爸的扶持下走上统治人民的路子呢？当他们成长为了统治阶级，只要自我舒适，谁管你人民死活，大不了贪了几个亿全家移民罢了。</p>
+          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>现在公司项目都是前后端分离的方式开发，有些时候由于某些新需求开发或者 bug 修改，想要让前端直接连到我本地开发环境进行调试，而前端代码我并没有，只能通过前端部署的测试环境进行测试，最简单的办法就是直接改 host 把后端测试环境的域名指向我本地的 IP，这对于 HTTP 协议的服务来说是很轻易做到的，不过公司的测试环境全部上了 HTTPS，而我本地的服务是 HTTP 协议这样就算是改了 host 也会由于协议不同导致请求失败，所以需要将本地的服务升级成 HTTPS 才行。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/30/debug-use-nginx-proxy/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/12/10/k8s-dns-lookup-timeout/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/12/10/k8s-dns-lookup-timeout/" class="post-title-link" itemprop="url">k8s域名解析超时问题记录</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-12-10 11:42:26" itemprop="dateCreated datePublished" datetime="2019-12-10T11:42:26+08:00">2019-12-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>近期线上 k8s 时不时就会出现一些内部服务间的调用超时问题，通过日志可以得知超时的原因都是出现在<code>域名解析</code>上，并且都是 k8s 内部的域名解析超时，于是直接先将内部域名替换成 k8s service 的 IP，观察一段时间发现没有超时的情况发生了，但是由于使用 service IP 不是长久之计，所以还要去找解决办法。</p>
+<h2 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h2><p>一开始运维同事在调用方 pod 中使用<code>ab</code>工具对目标服务进行了多次压测，并没有发现有超时的请求，我介入之后分析<code>ab</code>这类 http 压测工具应该都会有 dns 缓存，而我们主要是要测试 dns 服务的性能，于是直接动手撸了一个压测工具只做域名解析，代码如下：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/10/k8s-dns-lookup-timeout/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/12/06/docker-registry-mirror/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/12/06/docker-registry-mirror/" class="post-title-link" itemprop="url">docker镜像加速器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-12-06 09:03:26" itemprop="dateCreated datePublished" datetime="2019-12-06T09:03:26+08:00">2019-12-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>国内从 docker hub 拉取镜像时速度非常慢，这里记录下国内的一些免费加速镜像服务器。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/06/docker-registry-mirror/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/11/27/vscode-markdown-ppt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/11/27/vscode-markdown-ppt/" class="post-title-link" itemprop="url">用vscode + markdown制作简易幻灯片(PPT)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-11-27 12:07:03" itemprop="dateCreated datePublished" datetime="2019-11-27T12:07:03+08:00">2019-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">杂谈</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在公司里经常做技术分享，如果用 PPT 来做的话非常耗费时间，所以一般都是直接用 markdwon 写，但是 markdwon 有个缺点是不能像 PPT 那样翻页展示，于是就 google 了一番看看能不能把 markdown 做成像 PPT 那样的效果，果然已经有这样的技术了，下面就记录下具体步骤。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/27/vscode-markdown-ppt/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/11/15/minikube-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/11/15/minikube-install/" class="post-title-link" itemprop="url">minikube安装</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-11-15 17:00:51" itemprop="dateCreated datePublished" datetime="2019-11-15T17:00:51+08:00">2019-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="minikube-介绍"><a href="#minikube-介绍" class="headerlink" title="minikube 介绍"></a>minikube 介绍</h2><p>minikube 是 k8s 官方维护的一个单机版的 k8s，通过 minikube 可以很方便的在本地机器上安装一套 k8s 环境用于日常的学习与开发。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>环境: 虚拟机中的<code>centos:7</code>操作系统，其它情况可以参考<a target="_blank" rel="noopener" href="https://minikube.sigs.k8s.io/docs/start/">官方文档</a>，主要步骤都是类似的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/15/minikube-install/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/11/15/create-ssl-cert-with-san/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/11/15/create-ssl-cert-with-san/" class="post-title-link" itemprop="url">OpenSSL创建带SAN扩展的证书并进行CA自签</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-11-15 16:52:50" itemprop="dateCreated datePublished" datetime="2019-11-15T16:52:50+08:00">2019-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="什么是-SAN"><a href="#什么是-SAN" class="headerlink" title="什么是 SAN"></a>什么是 SAN</h2><p>SAN(Subject Alternative Name) 是 SSL 标准 x509 中定义的一个扩展。使用了 SAN 字段的 SSL 证书，可以扩展此证书支持的域名，使得一个证书可以支持多个不同域名的解析。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/15/create-ssl-cert-with-san/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/11/15/docker-connect-remote/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/11/15/docker-connect-remote/" class="post-title-link" itemprop="url">docker远程连接</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-11-15 16:19:32" itemprop="dateCreated datePublished" datetime="2019-11-15T16:19:32+08:00">2019-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>docker 其实是一个 C&#x2F;S 程序，执行<code>docker</code>命令行其实就是在与<code>docker daemon</code>服务进行通讯，这里主要是记录下<code>linux</code>下的 <code>docker</code> 如何配置可以被远程访问。</p>
+<h2 id="服务端配置"><a href="#服务端配置" class="headerlink" title="服务端配置"></a>服务端配置</h2><p>在<code>linux</code>上 docker 默认是使用<code>unix socket</code>进行通讯的，如果要远程访问是不支持的，对此需要开启 <code>tcp协议</code>，以支持外部访问。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/15/docker-connect-remote/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/10/29/hello-github-actions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/10/29/hello-github-actions/" class="post-title-link" itemprop="url">Github Actions尝鲜</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-10-29 13:41:56" itemprop="dateCreated datePublished" datetime="2019-10-29T13:41:56+08:00">2019-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><a target="_blank" rel="noopener" href="https://github.com/features/actions">Github Actions</a>是 github 官方推出的一款 CI(持续集成)工具，目前还处于<code>Beta</code>版本，需要<a target="_blank" rel="noopener" href="https://github.com/features/actions/signup/">申请</a>内测资格才能使用，申请成功之后在自己的代码仓库就可以看到<code>Actions</code>了。</p>
+<p><img src="/hello-github-actions/2019-10-30-11-30-13.png"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/29/hello-github-actions/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1183,7 +1076,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

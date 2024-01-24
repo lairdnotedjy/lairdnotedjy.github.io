@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言mongoDB 提供的副本集是将数据同步至多个节点，提供了数据冗余备份和节点故障的情况下可以自动转移的高可用特性，架构图如下： 有时候需要要在本地搭建一套 mongoDB 副本集环境来做测试，如果用虚拟机的话还是比较麻烦的，这里记录下如何用 docker-compose 快速搭建 mongoDB 副本集。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过docker-compose快速搭建mongodb副本集">
+<meta property="og:url" content="https://www.sovdating.com/2020/03/10/mongodb-replica-set/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="前言mongoDB 提供的副本集是将数据同步至多个节点，提供了数据冗余备份和节点故障的情况下可以自动转移的高可用特性，架构图如下： 有时候需要要在本地搭建一套 mongoDB 副本集环境来做测试，如果用虚拟机的话还是比较麻烦的，这里记录下如何用 docker-compose 快速搭建 mongoDB 副本集。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.sovdating.com/mongodb-replica-set/2020-03-11-09-53-26.png">
+<meta property="article:published_time" content="2020-03-10T03:09:10.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:47:47.892Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="mongo">
+<meta property="article:tag" content="docker-compose">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.sovdating.com/mongodb-replica-set/2020-03-11-09-53-26.png">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2020/03/10/mongodb-replica-set/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2020/03/10/mongodb-replica-set/","path":"2020/03/10/mongodb-replica-set/","title":"通过docker-compose快速搭建mongodb副本集"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>通过docker-compose快速搭建mongodb副本集 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F"><span class="nav-number">2.</span> <span class="nav-text">构建镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">3.</span> <span class="nav-text">后记</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/03/10/mongodb-replica-set/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="通过docker-compose快速搭建mongodb副本集 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          通过docker-compose快速搭建mongodb副本集
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-03-10 11:09:10" itemprop="dateCreated datePublished" datetime="2020-03-10T11:09:10+08:00">2020-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>mongoDB 提供的副本集是将数据同步至多个节点，提供了数据冗余备份和节点故障的情况下可以自动转移的高可用特性，架构图如下：<br><img src="/mongodb-replica-set/2020-03-11-09-53-26.png"></p>
+<p>有时候需要要在本地搭建一套 mongoDB 副本集环境来做测试，如果用虚拟机的话还是比较麻烦的，这里记录下如何用 docker-compose 快速搭建 mongoDB 副本集。</p>
+<span id="more"></span>
+
+<h2 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h2><ol>
+<li>准备秘钥用于节点之间的认证</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rand -base64 756 &gt; auth.key</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>编写 Dockerfile</li>
+</ol>
+<p>调整 mongo 官方提供的镜像，像里面添加秘钥文件</p>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> mongo:<span class="number">3.4</span>.<span class="number">10</span></span><br><span class="line"><span class="comment">#将秘钥文件复制到镜像中</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> auth.key /app/auth.key</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">chown</span> -R mongodb:mongodb /app/auth.key</span></span><br><span class="line"><span class="comment">#设置秘钥文件权限，这一步非常关键</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">chmod</span> 600 /app/auth.key</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>构建镜像</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t mongo-replset .</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>编写 docker-compose</li>
+</ol>
+<p>开启三个容器，组成一主两从的副本集集群，另外再开启一个容器监听和初始化副本集，这里我的实现方式并不优雅，就是一直重试直到前面三个 mongod 进程启动完成(官方有个<a target="_blank" rel="noopener" href="https://docs.docker.com/compose/startup-order/">解决方案</a>来检测依赖服务的启动，不过有点麻烦这里就略过了)，启动完成之后执行副本集初始化命令：<code>mongo mongodb://root:123@mongo-1:27011/admin --eval &#39;rs.initiate(&#123; _id: &quot;rs&quot;, members: [&#123;_id:1,host:&quot;mongo-1:27011&quot;&#125;,&#123;_id:2,host:&quot;mongo-2:27012&quot;&#125;,&#123;_id:3,host:&quot;mongo-3:27013&quot;&#125;]&#125;)&#39;</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3.1&quot;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">mongo-1:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mongo-replset</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">mongo-1</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">27011</span><span class="string">:27011</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_ROOT_USERNAME:</span> <span class="string">root</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_ROOT_PASSWORD:</span> <span class="number">123</span></span><br><span class="line">    <span class="attr">command:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">--port</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;27011&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">--replSet</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">rs</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">--keyFile</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/app/auth.key</span></span><br><span class="line">  <span class="attr">mongo-2:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mongo-replset</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">mongo-2</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">27012</span><span class="string">:27012</span></span><br><span class="line">    <span class="attr">command:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">--port</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;27012&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">--replSet</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">rs</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">--keyFile</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/app/auth.key</span></span><br><span class="line">  <span class="attr">mongo-3:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mongo-replset</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">mongo-3</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">27013</span><span class="string">:27013</span></span><br><span class="line">    <span class="attr">command:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">--port</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;27013&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">--replSet</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">rs</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">--keyFile</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/app/auth.key</span></span><br><span class="line">  <span class="attr">mongo-init:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mongo:3.4.10</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mongo-1</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mongo-2</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mongo-3</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">on-failure:5</span></span><br><span class="line">    <span class="attr">command:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mongo</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mongodb://root:123@mongo-1:27011/admin</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">--eval</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;rs.initiate(&#123; _id: &quot;rs&quot;, members: [&#123;_id:1,host:&quot;mongo-1:27011&quot;&#125;,&#123;_id:2,host:&quot;mongo-2:27012&quot;&#125;,&#123;_id:3,host:&quot;mongo-3:27013&quot;&#125;]&#125;)&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>运行</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br><span class="line">Creating mongo-replica_mongo-1_1 ... done</span><br><span class="line">Creating mongo-replica_mongo-3_1 ... done</span><br><span class="line">Creating mongo-replica_mongo-2_1 ... done</span><br><span class="line">Creating mongo-replica_mongo-init_1 ... done</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>查看副本集状态</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">docker-compose exec mongo-1 mongo mongodb://root:123@mongo-1:27011/admin --eval &#x27;rs.status()&#x27;</span><br><span class="line">MongoDB shell version v3.4.10</span><br><span class="line">connecting to: mongodb://root:123@mongo-1:27011/admin</span><br><span class="line">MongoDB server version: 3.4.10</span><br><span class="line">&#123;</span><br><span class="line">        &quot;set&quot; : &quot;rs&quot;,</span><br><span class="line">        &quot;date&quot; : ISODate(&quot;2020-03-10T07:01:59.764Z&quot;),</span><br><span class="line">        &quot;myState&quot; : 1,</span><br><span class="line">        &quot;term&quot; : NumberLong(1),</span><br><span class="line">        &quot;heartbeatIntervalMillis&quot; : NumberLong(2000),</span><br><span class="line">        &quot;optimes&quot; : &#123;</span><br><span class="line">                &quot;lastCommittedOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1583823710, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(1)</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;appliedOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1583823710, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(1)</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;durableOpTime&quot; : &#123;</span><br><span class="line">                        &quot;ts&quot; : Timestamp(1583823710, 1),</span><br><span class="line">                        &quot;t&quot; : NumberLong(1)</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;members&quot; : [</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 1,</span><br><span class="line">                        &quot;name&quot; : &quot;mongo-1:27011&quot;,</span><br><span class="line">                        &quot;health&quot; : 1,</span><br><span class="line">                        &quot;state&quot; : 1,</span><br><span class="line">                        &quot;stateStr&quot; : &quot;PRIMARY&quot;,</span><br><span class="line">                        &quot;uptime&quot; : 263,</span><br><span class="line">                        &quot;optime&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1583823710, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(1)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDate&quot; : ISODate(&quot;2020-03-10T07:01:50Z&quot;),</span><br><span class="line">                        &quot;electionTime&quot; : Timestamp(1583823469, 1),</span><br><span class="line">                        &quot;electionDate&quot; : ISODate(&quot;2020-03-10T06:57:49Z&quot;),</span><br><span class="line">                        &quot;configVersion&quot; : 1,</span><br><span class="line">                        &quot;self&quot; : true</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 2,</span><br><span class="line">                        &quot;name&quot; : &quot;mongo-2:27012&quot;,</span><br><span class="line">                        &quot;health&quot; : 1,</span><br><span class="line">                        &quot;state&quot; : 2,</span><br><span class="line">                        &quot;stateStr&quot; : &quot;SECONDARY&quot;,</span><br><span class="line">                        &quot;uptime&quot; : 261,</span><br><span class="line">                        &quot;optime&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1583823710, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(1)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDurable&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1583823710, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(1)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDate&quot; : ISODate(&quot;2020-03-10T07:01:50Z&quot;),</span><br><span class="line">                        &quot;optimeDurableDate&quot; : ISODate(&quot;2020-03-10T07:01:50Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeat&quot; : ISODate(&quot;2020-03-10T07:01:59.120Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeatRecv&quot; : ISODate(&quot;2020-03-10T07:01:58.109Z&quot;),</span><br><span class="line">                        &quot;pingMs&quot; : NumberLong(0),</span><br><span class="line">                        &quot;syncingTo&quot; : &quot;mongo-1:27011&quot;,</span><br><span class="line">                        &quot;configVersion&quot; : 1</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                        &quot;_id&quot; : 3,</span><br><span class="line">                        &quot;name&quot; : &quot;mongo-3:27013&quot;,</span><br><span class="line">                        &quot;health&quot; : 1,</span><br><span class="line">                        &quot;state&quot; : 2,</span><br><span class="line">                        &quot;stateStr&quot; : &quot;SECONDARY&quot;,</span><br><span class="line">                        &quot;uptime&quot; : 261,</span><br><span class="line">                        &quot;optime&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1583823710, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(1)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDurable&quot; : &#123;</span><br><span class="line">                                &quot;ts&quot; : Timestamp(1583823710, 1),</span><br><span class="line">                                &quot;t&quot; : NumberLong(1)</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &quot;optimeDate&quot; : ISODate(&quot;2020-03-10T07:01:50Z&quot;),</span><br><span class="line">                        &quot;optimeDurableDate&quot; : ISODate(&quot;2020-03-10T07:01:50Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeat&quot; : ISODate(&quot;2020-03-10T07:01:59.120Z&quot;),</span><br><span class="line">                        &quot;lastHeartbeatRecv&quot; : ISODate(&quot;2020-03-10T07:01:58.103Z&quot;),</span><br><span class="line">                        &quot;pingMs&quot; : NumberLong(0),</span><br><span class="line">                        &quot;syncingTo&quot; : &quot;mongo-1:27011&quot;,</span><br><span class="line">                        &quot;configVersion&quot; : 1</span><br><span class="line">                &#125;</span><br><span class="line">        ],</span><br><span class="line">        &quot;ok&quot; : 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>使用 docker-compose 搭建的 mongodb 副本集就完成了，以后可以基于此快速搭建一套 mongodb 副本集环境进行测试。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/mongo/" rel="tag"># mongo</a>
+              <a href="/tags/docker-compose/" rel="tag"># docker-compose</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/02/21/docker-clean/" rel="prev" title="docker清理">
+                  <i class="fa fa-angle-left"></i> docker清理
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/03/26/stateless-captcha/" rel="next" title="设计一种无状态的验证码">
+                  设计一种无状态的验证码 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

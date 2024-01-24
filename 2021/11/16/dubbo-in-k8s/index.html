@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="背景由于公司内部所有服务都是跑在阿里云 k8s 上的，然后 dubbo 提供者默认向注册中心上报的 IP 都是Pod IP，这意味着在 k8s 集群外的网络环境是调用不了 dubbo 服务的，如果本地开发需要访问 k8s 内的 dubbo 提供者服务的话，需要手动把服务暴露到外网，我们的做法是针对每一个提供者服务暴露一个SLB IP+自定义端口，并且通过 dubbo 提供的DUBBO_IP_TO_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手撸一个ingress controller来打通dubbo+k8s网络">
+<meta property="og:url" content="https://www.sovdating.com/2021/11/16/dubbo-in-k8s/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="背景由于公司内部所有服务都是跑在阿里云 k8s 上的，然后 dubbo 提供者默认向注册中心上报的 IP 都是Pod IP，这意味着在 k8s 集群外的网络环境是调用不了 dubbo 服务的，如果本地开发需要访问 k8s 内的 dubbo 提供者服务的话，需要手动把服务暴露到外网，我们的做法是针对每一个提供者服务暴露一个SLB IP+自定义端口，并且通过 dubbo 提供的DUBBO_IP_TO_">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.sovdating.com/dubbo-in-k8s/2021-11-16-11-01-58.png">
+<meta property="og:image" content="https://www.sovdating.com/dubbo-in-k8s/2021-11-16-10-56-51.png">
+<meta property="article:published_time" content="2021-11-16T02:31:41.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:47:47.801Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="go">
+<meta property="article:tag" content="k8s">
+<meta property="article:tag" content="ingress">
+<meta property="article:tag" content="dubbo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.sovdating.com/dubbo-in-k8s/2021-11-16-11-01-58.png">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2021/11/16/dubbo-in-k8s/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2021/11/16/dubbo-in-k8s/","path":"2021/11/16/dubbo-in-k8s/","title":"手撸一个ingress controller来打通dubbo+k8s网络"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>手撸一个ingress controller来打通dubbo+k8s网络 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E9%A2%84%E7%A0%94"><span class="nav-number">2.</span> <span class="nav-text">技术预研</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-number">2.2.</span> <span class="nav-text">架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dubbo-%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.3.</span> <span class="nav-text">dubbo 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k8s-ingress"><span class="nav-number">2.4.</span> <span class="nav-text">k8s ingress</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91"><span class="nav-number">3.</span> <span class="nav-text">开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85%E8%87%AA%E5%AE%9A%E4%B9%89-Filter"><span class="nav-number">3.1.</span> <span class="nav-text">消费者自定义 Filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dubbo-%E7%BD%91%E5%85%B3"><span class="nav-number">3.2.</span> <span class="nav-text">dubbo 网关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dubbo-ingress-controller-%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.3.</span> <span class="nav-text">dubbo ingress controller 实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-%E9%95%9C%E5%83%8F%E6%8F%90%E4%BE%9B"><span class="nav-number">3.4.</span> <span class="nav-text">docker 镜像提供</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yaml-%E6%A8%A1%E6%9D%BF%E6%8F%90%E4%BE%9B"><span class="nav-number">3.5.</span> <span class="nav-text">yaml 模板提供</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2021/11/16/dubbo-in-k8s/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="手撸一个ingress controller来打通dubbo+k8s网络 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          手撸一个ingress controller来打通dubbo+k8s网络
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-11-16 10:31:41" itemprop="dateCreated datePublished" datetime="2021-11-16T10:31:41+08:00">2021-11-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>由于公司内部所有服务都是跑在阿里云 k8s 上的，然后 dubbo 提供者默认向注册中心上报的 IP 都是<code>Pod IP</code>，这意味着在 k8s 集群外的网络环境是调用不了 dubbo 服务的，如果本地开发需要访问 k8s 内的 dubbo 提供者服务的话，需要手动把服务暴露到外网，我们的做法是针对每一个提供者服务暴露一个<code>SLB IP+自定义端口</code>，并且通过 dubbo 提供的<code>DUBBO_IP_TO_REGISTRY</code>和<code>DUBBO_PORT_TO_REGISTRY</code>环境变量来把对应的<code>SLB IP+自定义端口</code>注册到注册中心里，这样就实现了本地网络和 k8s dubbo 服务的打通，但是这种方式管理起来非常麻烦，每个服务都得自定义一个端口，而且每个服务之间端口还不能冲突，当服务多起来之后非常难以管理。</p>
+<p>于是我就在想能不能像<code>nginx ingress</code>一样实现一个<code>七层代理+虚拟域名</code>来复用一个端口，通过目标 dubbo 提供者的<code>application.name</code>来做对应的转发，这样的话所有的服务只需要注册同一个<code>SLB IP+端口</code>就可以了，大大的提升便利性，一方调研之后发现可行就开撸了！</p>
+<blockquote>
+<p>项目已开源：<a target="_blank" rel="noopener" href="https://github.com/monkeyWie/dubbo-ingress-controller">https://github.com/monkeyWie/dubbo-ingress-controller</a></p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="技术预研"><a href="#技术预研" class="headerlink" title="技术预研"></a>技术预研</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>首先 dubbo RPC 调用默认是走的<code>dubbo协议</code>，所以我需要先去看看协议里有没有可以利用做转发的报文信息，就是寻找类似于 HTTP 协议里的 Host 请求头，如果有的话就可以根据此信息做<code>反向代理</code>和<code>虚拟域名</code>的转发，在此基础之上实现一个类似<code>nginx</code>的<code>dubbo网关</code>。</li>
+<li>第二步就是要实现<code>dubbo ingress controller</code>，通过 k8s ingress 的 watcher 机制动态的更新<code>dubbo 网关</code>的虚拟域名转发配置，然后所有的提供者服务都由此服务同一转发，并且上报到注册中心的地址也统一为此服务的地址。</li>
+</ol>
+<h3 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h3><p><img src="/dubbo-in-k8s/2021-11-16-11-01-58.png"></p>
+<h3 id="dubbo-协议"><a href="#dubbo-协议" class="headerlink" title="dubbo 协议"></a>dubbo 协议</h3><p>先上一个官方的协议图：</p>
+<p><img src="/dubbo-in-k8s/2021-11-16-10-56-51.png"></p>
+<p>可以看到 dubbo 协议的 header 是固定的<code>16个字节</code>，里面并没有类似于 HTTP Header 的可扩展字段，也没有携带目标提供者的<code>application.name</code>字段，于是我向官方提了个<a target="_blank" rel="noopener" href="https://github.com/apache/dubbo/issues/9251">issue</a>，官方的答复是通过消费者<code>自定义Filter</code>来将目标提供者的<code>application.name</code>放到<code>attachments</code>里，这里不得不吐槽下 dubbo 协议，扩展字段竟然是放在<code>body</code>里，如果要实现转发需要把请求报文全部解析完才能拿到想要报文，不过问题不大，因为主要是做给开发环境用的，这一步勉强可以实现。</p>
+<h3 id="k8s-ingress"><a href="#k8s-ingress" class="headerlink" title="k8s ingress"></a>k8s ingress</h3><p>k8s ingress 是为 HTTP 而生的，但是里面的字段够用了，来看一段 ingress 配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">user-rpc-dubbo</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubernetes.io/ingress.class:</span> <span class="string">&quot;dubbo&quot;</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">host:</span> <span class="string">user-rpc</span></span><br><span class="line">      <span class="attr">http:</span></span><br><span class="line">        <span class="attr">paths:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">backend:</span></span><br><span class="line">              <span class="attr">serviceName:</span> <span class="string">user-rpc</span></span><br><span class="line">              <span class="attr">servicePort:</span> <span class="number">20880</span></span><br><span class="line">            <span class="attr">path:</span> <span class="string">/</span></span><br></pre></td></tr></table></figure>
+
+<p>配置和 http 一样通过<code>host</code>来做转发规则，但是<code>host</code>配置的是目标提供者的<code>application.name</code>，后端服务是目标提供者对应的<code>service</code>，这里有一个比较特殊的是使用了一个<code>kubernetes.io/ingress.class</code>注解，这个注解可以指定此<code>ingress</code>对哪个<code>ingress controller</code>生效，后面我们的<code>dubbo ingress controller</code>就只会解析注解值为<code>dubbo</code>的 ingress 配置。</p>
+<h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><p>前面的技术预研一切顺利，接着就进入开发阶段了。</p>
+<h3 id="消费者自定义-Filter"><a href="#消费者自定义-Filter" class="headerlink" title="消费者自定义 Filter"></a>消费者自定义 Filter</h3><p>前面有提到如果请求里要携带目标提供者的<code>application.name</code>，需要消费者<code>自定义Filter</code>，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Activate(group = CONSUMER)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AddTargetFilter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> Result <span class="title function_">invoke</span><span class="params">(Invoker&lt;?&gt; invoker, Invocation invocation)</span> <span class="keyword">throws</span> RpcException &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">targetApplication</span> <span class="operator">=</span> StringUtils.isBlank(invoker.getUrl().getRemoteApplication()) ?</span><br><span class="line">        invoker.getUrl().getGroup() : invoker.getUrl().getRemoteApplication();</span><br><span class="line">    <span class="comment">// 目标提供者的application.name放入attachment</span></span><br><span class="line">    invocation.setAttachment(<span class="string">&quot;target-application&quot;</span>, targetApplication);</span><br><span class="line">    <span class="keyword">return</span> invoker.invoke(invocation);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里又要吐槽一下，dubbo 消费者首次访问时会发起一个获取 metadata 的请求，这个请求通过<code>invoker.getUrl().getRemoteApplication()</code>是拿不到值的，通过<code>invoker.getUrl().getGroup()</code>才能拿到。</p>
+<h3 id="dubbo-网关"><a href="#dubbo-网关" class="headerlink" title="dubbo 网关"></a>dubbo 网关</h3><p>这里就要开发一个类似<code>nginx</code>的<code>dubbo网关</code>，并实现七层代理和虚拟域名转发，编程语言直接选择了 go，首先 go 做网络开发心智负担低，另外有个 dubbo-go 项目，可以直接利用里面的解码器，然后 go 有原生的 k8s sdk 支持，简直完美！</p>
+<p>思路就是开启一个<code>TCP Server</code>，然后解析 dubbo 请求的报文，把<code>attachment</code>里的<code>target-application</code>属性拿到，再反向代理到真正的 dubbo 提供者服务上，核心代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">routingTable := <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;</span><br><span class="line">  <span class="string">&quot;user-rpc&quot;</span>: <span class="string">&quot;user-rpc:20880&quot;</span>,</span><br><span class="line">  <span class="string">&quot;pay-rpc&quot;</span>:  <span class="string">&quot;pay-rpc:20880&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">listener, err := net.Listen(<span class="string">&quot;tcp&quot;</span>, <span class="string">&quot;:20880&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> &#123;</span><br><span class="line">  clientConn, err := listener.Accept()</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    logger.Errorf(<span class="string">&quot;accept error:%v&quot;</span>, err)</span><br><span class="line">    <span class="keyword">continue</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">defer</span> clientConn.Close()</span><br><span class="line">    <span class="keyword">var</span> proxyConn net.Conn</span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">      <span class="keyword">if</span> proxyConn != <span class="literal">nil</span> &#123;</span><br><span class="line">        proxyConn.Close()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    scanner := bufio.NewScanner(clientConn)</span><br><span class="line">    scanner.Split(split)</span><br><span class="line">    <span class="comment">// 解析请求报文，拿到一个完整的请求</span></span><br><span class="line">    <span class="keyword">for</span> scanner.Scan() &#123;</span><br><span class="line">      data := scanner.Bytes()</span><br><span class="line">      <span class="comment">// 通过dubbo-go提供的库把[]byte反序列化成dubbo请求结构体</span></span><br><span class="line">      buf := bytes.NewBuffer(data)</span><br><span class="line">      pkg := impl.NewDubboPackage(buf)</span><br><span class="line">      pkg.Unmarshal()</span><br><span class="line">      body := pkg.Body.(<span class="keyword">map</span>[<span class="type">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">      attachments := body[<span class="string">&quot;attachments&quot;</span>].(<span class="keyword">map</span>[<span class="type">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">      <span class="comment">// 从attachments里拿到目标提供者的application.name</span></span><br><span class="line">      target := attachments[<span class="string">&quot;target-application&quot;</span>].(<span class="type">string</span>)</span><br><span class="line">      <span class="keyword">if</span> proxyConn == <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="comment">// 反向代理到真正的后端服务上</span></span><br><span class="line">        host := routingTable[target]</span><br><span class="line">        proxyConn, _ = net.Dial(<span class="string">&quot;tcp&quot;</span>, host)</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">          <span class="comment">// 原始转发</span></span><br><span class="line">          io.Copy(clientConn, proxyConn)</span><br><span class="line">        &#125;()</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 把原始报文写到真正后端服务上，然后走原始转发即可</span></span><br><span class="line">      proxyConn.Write(data)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">split</span><span class="params">(data []<span class="type">byte</span>, atEOF <span class="type">bool</span>)</span></span> (advance <span class="type">int</span>, token []<span class="type">byte</span>, err <span class="type">error</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> atEOF &amp;&amp; <span class="built_in">len</span>(data) == <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>, <span class="literal">nil</span>, <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	buf := bytes.NewBuffer(data)</span><br><span class="line">	pkg := impl.NewDubboPackage(buf)</span><br><span class="line">	err = pkg.ReadHeader()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> errors.Is(err, hessian.ErrHeaderNotEnough) || errors.Is(err, hessian.ErrBodyNotEnough) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>, <span class="literal">nil</span>, <span class="literal">nil</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>, <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> !pkg.IsRequest() &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>, <span class="literal">nil</span>, errors.New(<span class="string">&quot;not request&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	requestLen := impl.HEADER_LENGTH + pkg.Header.BodyLen</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(data) &lt; requestLen &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>, <span class="literal">nil</span>, <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> requestLen, data[<span class="number">0</span>:requestLen], <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="dubbo-ingress-controller-实现"><a href="#dubbo-ingress-controller-实现" class="headerlink" title="dubbo ingress controller 实现"></a>dubbo ingress controller 实现</h3><p>前面已经实现了一个<code>dubbo网关</code>，但是里面的虚拟域名转发配置(<code>routingTable</code>)还是写死在代码里的，现在要做的就是当检测到<code>k8s ingress</code>有更新时，动态的更新这个配置就可以了。</p>
+<p>首先先简单的说明下<code>ingress controller</code>的原理，拿我们常用的<code>nginx ingress controller</code>为例，它也是一样通过监听<code>k8s ingress</code>资源变动，然后动态的生成<code>nginx.conf</code>文件，当发现配置发生了改变时，触发<code>nginx -s reload</code>重新加载配置文件。</p>
+<p>里面用到的核心技术就是<a target="_blank" rel="noopener" href="https://github.com/kubernetes/client-go/tree/master/informers">informers</a>，利用它来监听<code>k8s资源</code>的变动，示例代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在集群内获取k8s访问配置</span></span><br><span class="line">cfg, err := rest.InClusterConfig()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  logger.Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建k8s sdk client实例</span></span><br><span class="line">client, err := kubernetes.NewForConfig(cfg)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  logger.Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建Informer工厂</span></span><br><span class="line">factory := informers.NewSharedInformerFactory(client, time.Minute)</span><br><span class="line">handler := cache.ResourceEventHandlerFuncs&#123;</span><br><span class="line">  AddFunc: <span class="function"><span class="keyword">func</span><span class="params">(obj <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 新增事件</span></span><br><span class="line">  &#125;,</span><br><span class="line">  UpdateFunc: <span class="function"><span class="keyword">func</span><span class="params">(oldObj, newObj <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 更新事件</span></span><br><span class="line">  &#125;,</span><br><span class="line">  DeleteFunc: <span class="function"><span class="keyword">func</span><span class="params">(obj <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 删除事件</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 监听ingress变动</span></span><br><span class="line">informer := factory.Extensions().V1beta1().Ingresses().Informer()</span><br><span class="line">informer.AddEventHandler(handler)</span><br><span class="line">informer.Run(ctx.Done())</span><br></pre></td></tr></table></figure>
+
+<p>通过实现上面的三个事件来动态的更新转发配置，每个事件都会携带对应的<code>Ingress</code>对象信息过来，然后进行对应的处理即可：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ingress, ok := obj.(*v1beta12.Ingress)</span><br><span class="line"><span class="keyword">if</span> ok &#123;</span><br><span class="line">  <span class="comment">// 通过注解过滤出dubbo ingress</span></span><br><span class="line">  ingressClass := ingress.Annotations[<span class="string">&quot;kubernetes.io/ingress.class&quot;</span>]</span><br><span class="line">  <span class="keyword">if</span> ingressClass == <span class="string">&quot;dubbo&quot;</span> &amp;&amp; <span class="built_in">len</span>(ingress.Spec.Rules) &gt; <span class="number">0</span> &#123;</span><br><span class="line">    rule := ingress.Spec.Rules[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(rule.HTTP.Paths) &gt; <span class="number">0</span> &#123;</span><br><span class="line">      backend := rule.HTTP.Paths[<span class="number">0</span>].Backend</span><br><span class="line">      host := rule.Host</span><br><span class="line">      service := fmt.Sprintf(<span class="string">&quot;%s:%d&quot;</span>, backend.ServiceName+<span class="string">&quot;.&quot;</span>+ingress.Namespace, backend.ServicePort.IntVal)</span><br><span class="line">      <span class="comment">// 获取到ingress配置中host对应的service，通知给dubbo网关进行更新</span></span><br><span class="line">      notify(host,service)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="docker-镜像提供"><a href="#docker-镜像提供" class="headerlink" title="docker 镜像提供"></a>docker 镜像提供</h3><p>k8s 之上所有的服务都需要跑在容器里的，这里也不例外，需要把<code>dubbo ingress controller</code>构建成 docker 镜像，这里通过两阶段构建优化，来减小镜像体积：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> golang:<span class="number">1.17</span>.<span class="number">3</span> AS builder</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /src</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"><span class="keyword">ENV</span> GOPROXY https://goproxy.cn</span><br><span class="line"><span class="keyword">ENV</span> CGO_ENABLED=<span class="number">0</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> go build -ldflags <span class="string">&quot;-w -s&quot;</span> -o main cmd/main.go</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">FROM</span> debian AS runner</span><br><span class="line"><span class="keyword">ENV</span> TZ=Asia/shanghai</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder /src/main .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">chmod</span> +x ./main</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;./main&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="yaml-模板提供"><a href="#yaml-模板提供" class="headerlink" title="yaml 模板提供"></a>yaml 模板提供</h3><p>由于要在集群内访问 k8s API，需要给 Pod 进行授权，通过<code>K8S rbac</code>进行授权，并以<code>Deployment</code>类型服务进行部署，最终模板如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ServiceAccount</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">dubbo-ingress-controller</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">default</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterRole</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">dubbo-ingress-controller</span></span><br><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">apiGroups:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">extensions</span></span><br><span class="line">    <span class="attr">resources:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ingresses</span></span><br><span class="line">    <span class="attr">verbs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">get</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">list</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">watch</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterRoleBinding</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">dubbo-ingress-controller</span></span><br><span class="line"><span class="attr">roleRef:</span></span><br><span class="line">  <span class="attr">apiGroup:</span> <span class="string">rbac.authorization.k8s.io</span></span><br><span class="line">  <span class="attr">kind:</span> <span class="string">ClusterRole</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">dubbo-ingress-controller</span></span><br><span class="line"><span class="attr">subjects:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">kind:</span> <span class="string">ServiceAccount</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">dubbo-ingress-controller</span></span><br><span class="line">    <span class="attr">namespace:</span> <span class="string">default</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">default</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">dubbo-ingress-controller</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">dubbo-ingress-controller</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">dubbo-ingress-controller</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">dubbo-ingress-controller</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">serviceAccountName:</span> <span class="string">dubbo-ingress-controller</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">dubbo-ingress-controller</span></span><br><span class="line">          <span class="attr">image:</span> <span class="string">liwei2633/dubbo-ingress-controller:0.0.1</span></span><br><span class="line">          <span class="attr">ports:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">20880</span></span><br></pre></td></tr></table></figure>
+
+<p>后期需要的话可以做成<code>Helm</code>进行管理。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>至此<code>dubbo ingress controller</code>实现完成，可以说麻雀虽小但是五脏俱全，里面涉及到了<code>dubbo协议</code>、<code>TCP协议</code>、<code>七层代理</code>、<code>k8s ingress</code>、<code>docker</code>等等很多内容，这些很多知识都是在<code>云原生</code>越来越流行的时代需要掌握的，开发完之后感觉受益匪浅。</p>
+<p>关于完整的使用教程可以通过<a target="_blank" rel="noopener" href="https://github.com/monkeyWie/dubbo-ingress-controller#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">github</a>查看。</p>
+<blockquote>
+<p>参考链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://dubbo.apache.org/zh/docs/concepts/rpc-protocol/#protocol-spec">dubbo 协议</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/apache/dubbo-go">dubbo-go</a></li>
+<li><a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/concepts/services-networking/ingress-controllers/#%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA-ingress-%E6%8E%A7%E5%88%B6%E5%99%A8">使用多个-ingress-控制器</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.qikqiak.com/post/custom-k8s-ingress-controller-with-go/">使用 Golang 自定义 Kubernetes Ingress Controller</a></li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/go/" rel="tag"># go</a>
+              <a href="/tags/k8s/" rel="tag"># k8s</a>
+              <a href="/tags/ingress/" rel="tag"># ingress</a>
+              <a href="/tags/dubbo/" rel="tag"># dubbo</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/26/wsl2-gui-idea-config/" rel="prev" title="wsl2官方gui安装IDEA踩坑记录">
+                  <i class="fa fa-angle-left"></i> wsl2官方gui安装IDEA踩坑记录
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/11/18/java17-compatibility/" rel="next" title="升级到Java 17没这么简单">
+                  升级到Java 17没这么简单 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

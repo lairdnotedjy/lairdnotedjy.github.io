@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言 项目使用的springfox-swagger2@2.9.2版本  在 Spring 中集成 swagger 文档功能，需要通过@ApiModel注解修饰出入参的类，但是如果有两个不同包下的相同名称的类都使用了@ApiModel注解时，会导致文档被覆盖，例如：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义SpringBoot+Swagger中@ApiModel默认名称">
+<meta property="og:url" content="https://www.sovdating.com/2021/07/30/custom-spring-swagger-apimodel-default-name/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="前言 项目使用的springfox-swagger2@2.9.2版本  在 Spring 中集成 swagger 文档功能，需要通过@ApiModel注解修饰出入参的类，但是如果有两个不同包下的相同名称的类都使用了@ApiModel注解时，会导致文档被覆盖，例如：">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.sovdating.com/custom-spring-swagger-apimodel-default-name/2021-07-30-17-49-22.png">
+<meta property="og:image" content="https://www.sovdating.com/custom-spring-swagger-apimodel-default-name/2021-07-30-17-53-55.png">
+<meta property="og:image" content="https://www.sovdating.com/custom-spring-swagger-apimodel-default-name/2021-07-30-18-01-36.png">
+<meta property="og:image" content="https://www.sovdating.com/custom-spring-swagger-apimodel-default-name/2021-08-08-15-02-04.png">
+<meta property="og:image" content="https://www.sovdating.com/custom-spring-swagger-apimodel-default-name/2021-08-08-15-03-16.png">
+<meta property="og:image" content="https://www.sovdating.com/custom-spring-swagger-apimodel-default-name/2021-08-08-15-34-49.png">
+<meta property="article:published_time" content="2021-07-30T08:28:19.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:47:47.790Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="spring">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.sovdating.com/custom-spring-swagger-apimodel-default-name/2021-07-30-17-49-22.png">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2021/07/30/custom-spring-swagger-apimodel-default-name/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2021/07/30/custom-spring-swagger-apimodel-default-name/","path":"2021/07/30/custom-spring-swagger-apimodel-default-name/","title":"自定义SpringBoot+Swagger中@ApiModel默认名称"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>自定义SpringBoot+Swagger中@ApiModel默认名称 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81"><span class="nav-number">2.</span> <span class="nav-text">解决冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-ApiModel-%E6%B3%A8%E8%A7%A3%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">修改@ApiModel 注解（推荐）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%B1%BB%E5%90%8D"><span class="nav-number">2.2.</span> <span class="nav-text">修改类名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-swagger-%E6%8F%92%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">自定义 swagger 插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2021/07/30/custom-spring-swagger-apimodel-default-name/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="自定义SpringBoot+Swagger中@ApiModel默认名称 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          自定义SpringBoot+Swagger中@ApiModel默认名称
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-30 16:28:19" itemprop="dateCreated datePublished" datetime="2021-07-30T16:28:19+08:00">2021-07-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>项目使用的<code>springfox-swagger2@2.9.2</code>版本</p>
+</blockquote>
+<p>在 Spring 中集成 swagger 文档功能，需要通过<code>@ApiModel</code>注解修饰出入参的类，但是如果有两个不同包下的相同名称的类都使用了<code>@ApiModel</code>注解时，会导致文档被覆盖，例如：</p>
+<span id="more"></span>
+
+<ul>
+<li>com.example.demo.login.dto.UserDTO</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.login.dto;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@ApiModel</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDTO</span>&#123;</span><br><span class="line">  <span class="meta">@ApiModelProperty(&quot;姓名&quot;)</span></span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="meta">@ApiModelProperty(&quot;年龄&quot;)</span></span><br><span class="line">  <span class="keyword">private</span> Integer age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>com.example.demo.vip.dto.UserDTO</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.vip.dto;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@ApiModel</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDTO</span>&#123;</span><br><span class="line">  <span class="meta">@ApiModelProperty(&quot;姓名&quot;)</span></span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="meta">@ApiModelProperty(&quot;会员级别&quot;)</span></span><br><span class="line">  <span class="keyword">private</span> Integer vipLevel;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面两个类生成出来的文档会变成一个<code>swagger model</code>：</p>
+<p><img src="/custom-spring-swagger-apimodel-default-name/2021-07-30-17-49-22.png"></p>
+<p>从而导致接口文档显示错误：</p>
+<p><img src="/custom-spring-swagger-apimodel-default-name/2021-07-30-17-53-55.png"></p>
+<h2 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h2><h3 id="修改-ApiModel-注解（推荐）"><a href="#修改-ApiModel-注解（推荐）" class="headerlink" title="修改@ApiModel 注解（推荐）"></a>修改@ApiModel 注解（推荐）</h3><p>通过修改@ApiModel 的 value 属性，来规避同名冲突，修改之后为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.login.dto;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@ApiModel(&quot;login$UserDTO&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDTO</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.vip.dto;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@ApiModel(&quot;vip$UserDTO&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDTO</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到生成了两个<code>swagger model</code>：</p>
+<p><img src="/custom-spring-swagger-apimodel-default-name/2021-07-30-18-01-36.png"></p>
+<h3 id="修改类名"><a href="#修改类名" class="headerlink" title="修改类名"></a>修改类名</h3><p>把两个类名做修改，让类名不冲突即可。</p>
+<h2 id="自定义-swagger-插件"><a href="#自定义-swagger-插件" class="headerlink" title="自定义 swagger 插件"></a>自定义 swagger 插件</h2><p>然而上面解决冲突的方式还是太麻烦了，定义一个文档的出入参类而已，还要考虑类重名的问题，这种增加心智负担和工作量的问题应该要尽量避免掉的，我在想有没有可能做到每个类上只需要加上<code>@ApiModel</code>注解就行，剩下的冲突问题全部不用考虑。</p>
+<p>于是乎通过跟踪源码，找到了<code>swagger model</code>名称生成的地方，详见：<a target="_blank" rel="noopener" href="https://github.com/springfox/springfox/blob/09d4a734b64a216bb5c26c0329f3d15b8276c0e4/springfox-swagger-common/src/main/java/springfox/documentation/swagger/schema/ApiModelTypeNameProvider.java#L38-L43">github</a></p>
+<p><img src="/custom-spring-swagger-apimodel-default-name/2021-08-08-15-02-04.png"></p>
+<p>可以看到取名的逻辑是，优先取<code>@ApiModel</code>的<code>value</code>值，如果没有就会使用<code>defaultTypeName</code>,跟进去一看，<code>defaultTypeName</code>是直接取类的<code>简称</code>，代码如下：</p>
+<p><img src="/custom-spring-swagger-apimodel-default-name/2021-08-08-15-03-16.png"></p>
+<p>正是因为默认情况下取类的<code>简称</code>，导致不同包名下的同名类生成出来的<code>swagger model</code>被覆盖。<br>原因已经分析出来了，接下来其实就是看看能不能定制化这个<code>super.nameFor(type)</code>方法了，然而很遗憾这个方法是写死的，没地方下手，但是<code>ApiModelTypeNameProvider</code>这个类上两个注解<code>@Component</code>和<code>@Order</code>已经明示了这个是一个<code>Spring bean</code>，并且是通过<code>Spring插件机制进行加载的</code>，所以可以自定义一个插件来完成，在默认时通过完整的类路径和类名来生成唯一的<code>swagger model</code>，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order(SwaggerPluginSupport.SWAGGER_PLUGIN_ORDER - 100)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FullPathTypeNameProvider</span> <span class="keyword">extends</span> <span class="title class_">DefaultTypeNameProvider</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">SPLIT_CHAR</span> <span class="operator">=</span> <span class="string">&quot;$&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">nameFor</span><span class="params">(Class&lt;?&gt; type)</span> &#123;</span><br><span class="line">        <span class="type">ApiModel</span> <span class="variable">annotation</span> <span class="operator">=</span> AnnotationUtils.findAnnotation(type, ApiModel.class);</span><br><span class="line">        <span class="keyword">if</span> (annotation == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">super</span>.nameFor(type);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.hasText(annotation.value())) &#123;</span><br><span class="line">            <span class="keyword">return</span> annotation.value();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果@ApiModel的value为空，则默认取完整类路径</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">packagePathLength</span> <span class="operator">=</span> type.getPackage().getName().length();</span><br><span class="line">        <span class="keyword">return</span> Stream.of(type.getPackage().getName().split(<span class="string">&quot;\\.&quot;</span>))</span><br><span class="line">                .map(path -&gt; path.substring(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">                .collect(Collectors.joining(SPLIT_CHAR))</span><br><span class="line">                + SPLIT_CHAR</span><br><span class="line">                + type.getName().substring(packagePathLength + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="/custom-spring-swagger-apimodel-default-name/2021-08-08-15-34-49.png"></p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>通过这一个小小的优化，就可以减少许多团队中不必要的沟通成本，让我们能更专注于业务开发。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/spring/" rel="tag"># spring</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/21/vitrual-box-installation-on-ubuntu/" rel="prev" title="VitrualBox安装增强功能失败的解决办法">
+                  <i class="fa fa-angle-left"></i> VitrualBox安装增强功能失败的解决办法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/08/13/custom-apollo-support-defualt-env/" rel="next" title="通过Apollo SPI机制实现默认环境变量配置支持">
+                  通过Apollo SPI机制实现默认环境变量配置支持 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

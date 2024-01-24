@@ -125,18 +125,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-count">548</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">93</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-count">381</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -162,7 +162,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/04/30/linux%E6%B8%85%E7%A9%BA%E6%96%87%E4%BB%B6-%E6%B8%85%E7%90%86%E5%86%85%E5%AE%B9%EF%BC%88%E6%B8%85%E7%90%86%E7%A3%81%E7%9B%98%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/10/10/go-cross-compile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/30/linux%E6%B8%85%E7%A9%BA%E6%96%87%E4%BB%B6-%E6%B8%85%E7%90%86%E5%86%85%E5%AE%B9%EF%BC%88%E6%B8%85%E7%90%86%E7%A3%81%E7%9B%98%EF%BC%89/" class="post-title-link" itemprop="url">linux清空文件/清理内容</a>
+          <a href="/2019/10/10/go-cross-compile/" class="post-title-link" itemprop="url">Go语言之交叉编译</a>
         </h2>
 
         <div class="post-meta-container">
@@ -191,100 +191,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-04-30 00:00:00" itemprop="dateCreated datePublished" datetime="2017-04-30T00:00:00+08:00">2017-04-30</time>
+      <time title="Created: 2019-10-10 15:22:27" itemprop="dateCreated datePublished" datetime="2019-10-10T15:22:27+08:00">2019-10-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>&gt;</code> 覆盖文件<br><code>&gt;&gt;</code> 追加文件</p>
-<h1 id="test-txt-测试"><a href="#test-txt-测试" class="headerlink" title="test.txt 测试"></a>test.txt 测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23j23f6aaZ ~]# echo &#x27;hello&#x27; &gt; test.txt</span><br><span class="line">[root@iZ23j23f6aaZ ~]# ll</span><br><span class="line">total 1484</span><br><span class="line">-rw-r--r-- 1 root root 1506593 Dec 17 14:53 atlassian-jira-6.3.6.tar.gz</span><br><span class="line">drwxr-xr-x 2 root root    4096 Jul 13  2015 cfg</span><br><span class="line">drwxr-xr-x 2 root root    4096 Dec 10 15:34 –p</span><br><span class="line">-rw-r--r-- 1 root root       6 Apr 30 09:28 test.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# echo null &gt; test.txt</span><br><span class="line">[root@iZ23j23f6aaZ ~]# ll</span><br><span class="line">total 1484</span><br><span class="line">-rw-r--r-- 1 root root 1506593 Dec 17 14:53 atlassian-jira-6.3.6.tar.gz</span><br><span class="line">drwxr-xr-x 2 root root    4096 Jul 13  2015 cfg</span><br><span class="line">drwxr-xr-x 2 root root    4096 Dec 10 15:34 –p</span><br><span class="line">-rw-r--r-- 1 root root       5 Apr 30 09:28 test.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# echo &#x27;&#x27; &gt; test.txt</span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# ll</span><br><span class="line">total 1484</span><br><span class="line">-rw-r--r-- 1 root root 1506593 Dec 17 14:53 atlassian-jira-6.3.6.tar.gz</span><br><span class="line">drwxr-xr-x 2 root root    4096 Jul 13  2015 cfg</span><br><span class="line">drwxr-xr-x 2 root root    4096 Dec 10 15:34 –p</span><br><span class="line">-rw-r--r-- 1 root root       1 Apr 30 09:28 test.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# cat null &gt; test.txt</span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23j23f6aaZ ~]# ll</span><br><span class="line">total 1480</span><br><span class="line">-rw-r--r-- 1 root root 1506593 Dec 17 14:53 atlassian-jira-6.3.6.tar.gz</span><br><span class="line">drwxr-xr-x 2 root root    4096 Jul 13  2015 cfg</span><br><span class="line">drwxr-xr-x 2 root root    4096 Dec 10 15:34 –p</span><br><span class="line">-rw-r--r-- 1 root root       0 Apr 30 09:29 test.txt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code> echo &#39;&#39; &gt; test.txt</code>    结果1kb</li>
-<li><code> cat null &gt; test.txt</code> 结果0 kb</li>
-</ul>
-<h1 id="access-log-测试"><a href="#access-log-测试" class="headerlink" title="access.log  测试"></a>access.log  测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1304</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root  58073 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ logs]# echo &#x27;&#x27; &gt; access.log </span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1244</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root   1102 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1256</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root  14806 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ logs]# cat null &gt; access.log</span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1244</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root   2190 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1252</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root  11339 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ logs]# cat null &gt; access.log</span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1244</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root   1801 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line">[root@iZ23j23f6aaZ logs]# </span><br></pre></td></tr></table></figure>
-
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23ult4m4yZ ~]# df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/xvda1       20G  5.2G   14G  28% /</span><br><span class="line">tmpfs           1.9G     0  1.9G   0% /dev/shm</span><br><span class="line">/dev/xvdb1       20G  4.6G   15G  25% /mnt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23ult4m4yZ ~]# cd /usr/local/nginx/logs/</span><br><span class="line">[root@iZ23ult4m4yZ logs]# ll</span><br><span class="line">total 1025708</span><br><span class="line">-rw-r--r-- 1 root   root 702671189 Apr 28 11:21 access_2017-04-27_11:21:53.log</span><br><span class="line">-rw-r--r-- 1 nobody root  77063276 Apr 29 00:00 access_2017-04-28_00:00:01.log</span><br><span class="line">-rw-r--r-- 1 nobody root 143218093 Apr 30 00:00 access_2017-04-29_00:00:01.log</span><br><span class="line">-rw-r--r-- 1 nobody root  49736274 Apr 30 09:39 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root  76566363 Apr 30 09:39 error.log</span><br><span class="line">-rw-r--r-- 1 root   root         6 Apr 23 20:18 nginx.pid</span><br><span class="line">[root@iZ23ult4m4yZ logs]# du -sh *</span><br><span class="line">671M access_2017-04-27_11:21:53.log</span><br><span class="line">74M access_2017-04-28_00:00:01.log</span><br><span class="line">137M access_2017-04-29_00:00:01.log</span><br><span class="line">48M access.log</span><br><span class="line">74M error.log</span><br><span class="line">4.0K nginx.pid</span><br><span class="line">[root@iZ23ult4m4yZ logs]# cat null &gt; access_2017-04-27_11\:21\:53.log </span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23ult4m4yZ logs]# du -sh *</span><br><span class="line">0 access_2017-04-27_11:21:53.log</span><br><span class="line">74M access_2017-04-28_00:00:01.log</span><br><span class="line">137M access_2017-04-29_00:00:01.log</span><br><span class="line">48M access.log</span><br><span class="line">74M error.log</span><br><span class="line">4.0K nginx.pid</span><br><span class="line">[root@iZ23ult4m4yZ logs]# df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/xvda1       20G  5.2G   14G  28% /</span><br><span class="line">tmpfs           1.9G     0  1.9G   0% /dev/shm</span><br><span class="line">/dev/xvdb1       20G  4.0G   15G  21% /mnt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23ult4m4yZ logs]# ll</span><br><span class="line">total 123716</span><br><span class="line">-rw-r--r-- 1 root   root        0 Apr 30 09:40 access_2017-04-27_11:21:53.log</span><br><span class="line">-rw-r--r-- 1 nobody root        0 Apr 30 09:41 access_2017-04-28_00:00:01.log</span><br><span class="line">-rw-r--r-- 1 nobody root        0 Apr 30 09:41 access_2017-04-29_00:00:01.log</span><br><span class="line">-rw-r--r-- 1 nobody root 49978683 Apr 30 09:41 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 76566363 Apr 30 09:39 error.log</span><br><span class="line">-rw-r--r-- 1 root   root        6 Apr 23 20:18 nginx.pid</span><br><span class="line">[root@iZ23ult4m4yZ logs]# df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/xvda1       20G  5.2G   14G  28% /</span><br><span class="line">tmpfs           1.9G     0  1.9G   0% /dev/shm</span><br><span class="line">/dev/xvdb1       20G  3.8G   15G  20% /mnt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23ult4m4yZ logs]# cat null &gt; catalina.out </span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23ult4m4yZ logs]# df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/xvda1       20G  5.2G   14G  28% /</span><br><span class="line">tmpfs           1.9G     0  1.9G   0% /dev/shm</span><br><span class="line">/dev/xvdb1       20G  324M   19G   2% /mnt</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/04/25/Read-ant-tribe-college-graduates-live-in-the-village-record/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/25/Read-ant-tribe-college-graduates-live-in-the-village-record/" class="post-title-link" itemprop="url">读《蚁族：大学毕业生聚居村实录》</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-04-25 22:35:41" itemprop="dateCreated datePublished" datetime="2017-04-25T22:35:41+08:00">2017-04-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -292,7 +206,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
         </span>
     </span>
 
@@ -306,13 +220,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>古有科举，今有高考，然今日境却不与古日同。科举自隋唐始，终于晚清，这是古代读书人唯一的上升通道，虽然说比较困难，但是最起码还是一个可行的通道，能让人对未来满怀憧憬。但当今时代，时移世易，在这个权利和人情的社会，越是“苦读”的平民家庭出身的孩子，机会可能越少。许多靠近权力的机关和垄断行业里，越来越没有平民和贫苦人家孩子的缘分。父辈的权力和“人脉”会以某种方式“世袭”。“蚁族”们大多来自农村和县级市，家庭收入低，他们的父母处于社会中下层。十年寒窗苦读得以让他们接受高等教育，但毕业时他们发现，由于自己没有“硬”关系，只能又回到“村”里。他们不是不努力不是不上进的一群人，能够从数千万底层劳动人民中脱颖而出，本身就说明了他们还是有所追求，有所渴望的，但是现实给予了他们重重一击，这一击足以让他们将人生中种种不如意，归因于这个社会，从而使自己喝社会对立起来。</p>
-<p>人们说，现在是“知识经济”的时代。然而，蚁族们，接受了高等教育，却无法实现知识致富，甚至对某些人来说，找到一份糊口的工作都比较困难，这到底是自身不够努力？还是社会无法提供施展的平台？他们在社会上究竟处于怎样的位置？他们比传统的农民工幸福吗？难道他们千里迢迢来到大城市只为了体味生活的磨难？蚁族们有太多的故事值得述说，每个人虽然微若蝼蚁，但是都怀有各自那小小的梦想与希望。鲁迅先生说，希望本无所谓有，也无所谓无，这就像地上的路，其实地上本没有路，走的人多了，也便成了路。虽然现实有各种困难，但是对于蚁族们来说，心有多大，舞台才有多大。</p>
-<p>在这本书中记录了大量采访对象身上的故事，看了他们的故事有时候也能看到自己的影子吧。不是不努力，不努力的人确实有，但是努力了依然看不到希望的恐怕才是主流吧，不能简单的把原因归咎于这些才毕业或者说毕业没有多久，也没啥能力的学生身上，大学的垃圾教育不足以培养他们在社会上谋生的手段，这又能怪的了谁呢？大学一直都是易出难进，至少在中国是这样的，而美国与此恰恰相反，美国的模式是易进难出，任何人都可以去读名校，但是四年本科毕业率极低，至少比中国低20个百分点吧。中国的大学就像是一股洪流，不是能够轻易改变的，任何置身其中的人，哪怕你能看到问题所在，你依然无能为力，你能做的只是尽量提高对自己的要求而已，仅此别无他法，只能被这股洪流裹挟着，浪费掉那谈不上多重的生命。</p>
-<p>其实这些蚁族中也不乏有毅力、雄心、长远规划的人，而这些人多数都是男人，总的来说，在采访的蚁族中，每月一两千、两三千且月月光的女生居多，他们从心里上就认为自己是弱者，自己无需为以后考虑，更无需负担买房的压力，所以他们反而是过得更舒适的一类人，而另一类人呢？工资有的能到五六千，但是依然只蜗居在这每月几百块的破旧房子里，而舍不得租住更好的但价格更贵的房子，他们多数都是在默默地为了以后做这长远的打算。他们年纪都不大，却有更远大的目标，他们有能力使自己过得更好，却甘愿蜗居在这条件极差的城中村里，他们不在乎眼前的生活是否安逸。在这个世界上，他们将事业放在重要的位置。在他们看来，美好的梦想永远值得他们努力奋斗。</p>
-<p>农村孩子在城市中等待翻身，如同等待铁树开花一样艰难。他们以考大学的方式告别农村，却至今仍无法融入城市的主流文化。物竞天择，家庭的负担和过低的起点，使农村的孩子无法轻装上阵。走出了老家的农村，又走进了北京的农村，这仿佛是一种宿命，萦绕着他们本该绽放的人生。然而他们没有退缩，在我看来，这些蜗居在城中村的人，心中依然保留着一份幻想，期待靠自己的努力，不断打拼，最终能够在这个城市立稳脚跟。可惜，现实是残酷的，他们终将成为北京的弃儿，我又何尝不是呢？一个人奋斗在魔都，满以为凭自己的努力可以奋斗出属于自己的一片天，如今想想，痴念罢了。不管是既得利益者，还是有产阶层，抑或统治阶级，都不可能轻易的让你成为这个全国顶尖城市的原住民。</p>
-<p>大家想必都还记得曾经非常火热的《奋斗》吧？这些刚毕业就开上奥迪或奥拓的年轻人是否就是我们想象中的奋斗？如果这就是80后的奋斗，那这些城中村居住着的大学生难道都在混生活混日子？《奋斗》中那些俊男靓女们整天无所事事，打台球、泡吧的都市青年们究竟在为什么奋斗？其实，真正的生活中，这些住在“聚居村”里的“蚁族”正以实际行动诠释着“奋斗”的真正含义。刚毕业的他们面对生活显得捉襟见肘，但是这些能直面现实、接受现实的年轻人具有强大的精神动力，他们有自己的理想，而且正在积蓄力量为实现这些理想而奋斗。现实的分层是残酷的，《奋斗》的导演们以及里面的俊男靓女们其实并不知道什么才是真正源于生活的奋斗，那种从社会的底层不断向上爬，去努力撬动途径的每一个阶层所遇到的阻力与抗拒究竟有多大，他们是完全无法体会的，这部剧虽然很火，但是仅仅是富家公子顽劣青年的自我标榜与吹捧而已，他们并不理解艺术源于生活，更高于生活的真正含义。</p>
-
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>当初学习 go 语言的原因之一就是看中了 go 可以直接编译成机器码运行，并且支持跨操作系统的交叉编译，这对开发跨操作系统软件提供了极大的便利，这篇文章目的就是记录下 go 是如何交叉编译的。</p>
+<h2 id="交叉编译"><a href="#交叉编译" class="headerlink" title="交叉编译"></a>交叉编译</h2><p>go 语言里交叉编译支持非常多的操作系统，可以通过<code>go tool dist list</code>命令来查看支持的操作系统列表。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/10/go-cross-compile/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -338,7 +255,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/04/24/%E5%A4%A9%E6%B0%94%E9%A2%84%E6%8A%A5API/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/09/16/k8s-update-operate/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -356,7 +273,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/24/%E5%A4%A9%E6%B0%94%E9%A2%84%E6%8A%A5API/" class="post-title-link" itemprop="url">天气预报API</a>
+          <a href="/2019/09/16/k8s-update-operate/" class="post-title-link" itemprop="url">k8s正确的更新姿势</a>
         </h2>
 
         <div class="post-meta-container">
@@ -367,100 +284,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-04-24 00:00:00" itemprop="dateCreated datePublished" datetime="2017-04-24T00:00:00+08:00">2017-04-24</time>
+      <time title="Created: 2019-09-16 18:00:46" itemprop="dateCreated datePublished" datetime="2019-09-16T18:00:46+08:00">2019-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="中国天气API"><a href="#中国天气API" class="headerlink" title="中国天气API"></a>中国天气API</h1><ul>
-<li><p>请求服务 : 查询实时天气信息<br><a target="_blank" rel="noopener" href="http://www.weather.com.cn/data/sk/101110101.html">http://www.weather.com.cn/data/sk/101110101.html</a></p>
-</li>
-<li><p>在浏览器中输入请求地址，获得西安的天气。<br><img src="http://images.cnblogs.com/cnblogs_com/wangshuo1/839574/o_QQ%e6%88%aa%e5%9b%be20160614105012.png"></p>
-</li>
-</ul>
-<p><strong>参考</strong><br><code>中国天气网-天气预报接口api - 王信平 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/wangshuo1/p/5583229.html">http://www.cnblogs.com/wangshuo1/p/5583229.html</a></p>
-<h1 id="天气预报API-心知天气-创建网页天气插件"><a href="#天气预报API-心知天气-创建网页天气插件" class="headerlink" title="天气预报API - 心知天气 - 创建网页天气插件"></a>天气预报API - 心知天气 - 创建网页天气插件</h1><p><a target="_blank" rel="noopener" href="https://www.seniverse.com/widget/create">https://www.seniverse.com/widget/create</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/80260431.jpg"></p>
-<p>api服务搜索<br><a target="_blank" rel="noopener" href="http://apistore.baidu.com/astore/servicesearch?word=%E5%A4%A9%E6%B0%94">http://apistore.baidu.com/astore/servicesearch?word=%E5%A4%A9%E6%B0%94</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/57247185.jpg"></p>
-<h1 id="彩云API"><a href="#彩云API" class="headerlink" title="彩云API"></a>彩云API</h1><p><a target="_blank" rel="noopener" href="http://wiki.swarma.net/index.php/%E5%BD%A9%E4%BA%91%E5%A4%A9%E6%B0%94API/v2">http://wiki.swarma.net/index.php/%E5%BD%A9%E4%BA%91%E5%A4%A9%E6%B0%94API/v2</a></p>
-<h1 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h1><p><code>网上的天气 API 哪一个更加可靠？ - 知乎</code><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20575288/answer/120006182">https://www.zhihu.com/question/20575288/answer/120006182</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/04/16/Reservoir-forum-elite-realtor-ouchengxiao/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/16/Reservoir-forum-elite-realtor-ouchengxiao/" class="post-title-link" itemprop="url">水库论坛炒房多军欧神—欧成效</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-04-16 10:55:50" itemprop="dateCreated datePublished" datetime="2017-04-16T10:55:50+08:00">2017-04-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -468,7 +299,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+          <a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a>
         </span>
     </span>
 
@@ -482,26 +313,394 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><strong>欧神简介：</strong>姓欧名成效。出生于丁巳年癸丑月癸酉日。上海人，疑似出生于公务员&#x2F;教育系统的家庭，父母其一据说为正处级。欧神是神童，跳了两级，上海高考前一百，稀里糊涂下进入复旦物理系。那是他的迷惘期，毕业后进入某五百强快消品外企做管培生。然而，他觉得那样的人生毫无希望，毫无前途，他渴望成功。尝试过做外汇，失败告终。在温相（相，古称丞相，今乃总理。我特么很讨厌现在还用相这个字，放眼世界都是民主国家的天下，我天朝人民的思维还仍旧停留在封建时代）上台后的两年内，一次偶然的机遇，他接触到了上海的房地产。一开始只是为了短期获得利差，不料却一头栽了下去。</p>
-<p>之前，我的粉丝里面，有人问我欧神现在房产有多少，我估计他起码有25~30套。但是后来看到他的回忆录，他第一次短期获利后，开始大量建仓。第一次大量建仓后，房价虚高，迫于父母压力，仍然抛售了500平米的上海房产，那可是2004-2005年！欧神在网络上，我们能够找到的，最早的作品，是在天涯论坛，是发表于2004年7月31日23点的：《人民币面临巨大的贬值压力》。</p>
-<p>欧神在这篇文章内断言，人民币将对外升值，对内贬值。也因此，欧神认为，只有房地产，才是人民抵抗通货膨胀、资产增值的选择。然后，他发表了大量大量经济观察的文章。基本没有看走眼的。然而，当年下面，满满的都是愤青骂街留言。此时的欧神，才26岁。同时，欧神指出，炒房，是一条竞争几乎为零、不论资质人人皆可参与、只要下功夫迟早赚出一个亿的康庄大道。看准了大趋势，然后一头扎在炒房领域。反复炒反复炒反复炒。炒房是个非常孤独的事情，炒房客蛮少，躺着赚钱也缺乏社交。欧神即便再有钱，在经济关系中，不过是个中国最牛散户，兴许还剥削Ｎ多人以收租。有钱，有闲，就在网上开论坛，聊天。他系统性地把全部炒房心得，发表出来。他目前认为京沪还有上升空间。而且，非常看好重庆。2016年11月，他在清华第一次公开亮相，为某经济论坛发表演讲。</p>
-<p>这是他的大致经历了。他的女儿，如果我没记错，出生于庚寅年的己土日。2010年。他不止一个孩子了。</p>
-<hr>
-<p>在最新的一期水库论坛中，欧神坦言对于房产而言，普通人已经没有上车机会了，阶级固化基本完成了。这真是一个疯狂的时代。TG（T代表锤子，G代表镰刀，这是标识，只可意会，不可言传），ZF，吃相越来越难看了。他们要把一切不属于自己阶层的人，打成奴隶，永世不得翻身。就像西西弗斯一样，推着无用的巨石，永世处于那样的状态。而另一方面，那些没上车的人们，他们不比那些上车的聪明？不比他们勤奋？不比他们优秀？不比他们道德？阶级流动的渠道，说关闭就关闭。普通的屌丝阶层，甚至扩大到中产阶层，连知情权都没有，怎么回事都不知道。像苍蝇一样无头乱撞，什么都不懂，最后只能归咎自己命不好。此时此刻，我才感受到了欧神的价值。屌丝一生，都遇不到一个真正的富人，告诉他们真正的诀窍。只能自己瞎折腾一生，哪怕比欧神双商高资质好，都会如此。再聪明，八字再好，也不过是韭菜，只有被收割的命运。只不过，十年前，韭菜们还有系统性逃离的机会。人人那时，都有机会。除了90后。80后也有微弱的机会。现在当然也有，只不过阶层固化获得了决定性的胜利，看还有谁能钻过去吧。未来，八字估计都不顶用了。货币会一直超发，没有笼子的权利就是逃出瓶子的恶魔，人民控制不了货币超发，只能默默承受着通胀对你的财富的吞噬，想想七八十年代那些上一代人节衣缩食，辛苦攒下百十来块的养老钱，现在呢？也只够两顿饭钱吧？我有时会莫名地心疼这些人，钱真的攒不住，攒一辈子几年就给你通胀掉了，另一方面我又对大众的愚昧恨之入骨，他们不知道争取权利也不知道支持那些为他们争取权利的人，反而给那些为整个社会民主化进程呕心沥血的人泼以无情的冷水与嘲讽。在心里默默讥笑他们“你们这些傻叉，就知道民主就知道争取权利，看我们多聪明，躲在你们背后，你们争取到了，我们一样可以享受，你们争取不到，我还有嘲笑的对象，好爽啊”，这就是我天朝绝大多数人的心态吧。</p>
-<hr>
-<p>欧神对金融系统有着深刻的认知，比如央行拿外汇去拯救国有银行的坏账，好多人感觉和自己没有关系，于是没有人出声，其实一方面坏账是指钱被贪官贪污或者携款潜逃国外，导致银行无法填补亏空，形成坏账，另一方面，外汇属于全体中国人民，用外汇储备去填补亏空，本质上就是用每一个中国人辛苦攒来的钱去填补亏空，这里面包括你的、我的、他的、所有人的，没人能逃得掉。为什么说是人民的钱，因为这背后一系列的操作最后都会导致物价上涨，由物价上涨来填补，而每一个人只要你在国内生存，就间接的变成由你消费膨胀的物价来填补坏账的亏空。</p>
-<p>在2004年的时候，基于对金融系统深刻的认知，欧成效说“房价是太低，不是太高，远远地太低太低太低。房价上涨，是一个《挤泡沫》的过程，挤掉的是货币系统里面的泡沫”。我补充一句，坏账越多亏空越多贪官越多，最后导致的就是人民币里面的泡沫越多，而如果仅靠物价上涨是无法消化这么多泡沫的，而且老百姓也最不愿意，因为你每天都要吃饭喝水，你无法承受这么多泡沫所带来的物价上涨，所以归根结底，一个可靠的手段是房价上涨，用房价来消化货币系统中的泡沫，进而将房价维持在高位，也将超发的货币绑定在房价之上。</p>
-<p>购房千万不要购买以房型作为卖点的楼盘，否则你很可能进去了就被套牢了，房型并没有统一的标准，如果是自住，只需要选择适合你自己的就好了，无非是朝向、通风、采光。对于上班族来说，一个4~6平米的客卫，才是最优质房型。强烈推荐买房应该买市中心，五六年房龄的低估房，原则上不买一手房。</p>
-<p>如果汇率上涨，则受益者是人民币持有人，也即是十万万老百姓。你可以很轻松地去加勒比海海滩度假，去希腊看奥运会，甚至娶一个年轻漂亮的买来西亚太太。而如果汇率不涨，国内通胀的话。受益的是政府和银行。作为最大的债务人，几万亿的坏账将相应缩水，从而更容易偿还。政府还将获得大量的铸币权，以应付财政开支。</p>
-<p>房地产事业，是一种典型的“剥削内贸补贴外贸”。用国内老百姓的负担，来补贴出口竞争力。甚至可以说，“房价越高，出口竞争力越强”。中国也即将走上日本的老路。低汇率，导致外汇储备急剧增加，引发通胀压力。而政府将通胀压力引向房地产，让国内百姓为此买单。外贸出口也始终不受损伤。这是欧神2005年说的话，以他的话来判断2005~2017这之间中国的经济走势来说的话，基本上都是正确的。</p>
-<p>欧神说房价越高，居民购买力越强，因为他认为房价就像是零和博弈，有人付出钱买房，自然就有人靠卖房获取收入，那么你想过如果卖方都是政府呢？或者说卖方都是开发商呢？这种大量的金钱集中在一个人或者一个组织的身上，其购买力是远远不如将钱分散到千万人身上的，因为一个人消费能力再强，自然也无法消费一千个人或者一万个人所消费的东西，所以我并不赞成欧神的观点。相反我认为高房价大大的透支了刚需族中产阶级的购买力，注意我说的是刚需，那些名下有几套房的中产并不在我的范围之内。</p>
-<p>美元并没有什么购买力。3万亿Dollar的外汇储备，也根本买不回“中国曾出口”的等价购买力。更何况，美国的信用，已经大大受到质疑，三万亿美元最终能拿回多少。金融界目前都是个大大的问号。如果美元收不回来，那么我们过去二三十年的出口，都扔到海里了。如果美元通货膨胀，贬值2&#x2F;3，那么我们过去十几年的出口都扔到海里了。出口导向型的经济政策，其最终的输家只有一个，那就是农民，因为商人出口挣到外汇，央行把外汇换成人民币，而这人民币就是靠印刷机印出来的，农民手中的钱凭空损失了购买力，而他们并不自知。有人冲到我们的草原，抢夺我们的牛马，抢夺我们的羊羔。我们拼命反抗，因为我们知道他是强盗，抢我小羊的强盗。有人在电脑前拨动了几个数字，宣布几项政策。造成了数以十万亿的财富移动，造成了沿海几亿人的繁荣，造成了内陆几亿人的贫穷，而这幕后黑手、最大的强盗其实就是央行。我们不知道，因为我们不懂经济，不懂金融学。我们只知道日子是很苦很苦的，却从来不明白为什么。</p>
-<p>治大国如烹小鲜。当远方的信使，骑着快马气喘吁吁地奔波了八百里跑过来和你说“宰相大人，不好了，出大事了”。你掏出手枪，砰地一声，把信使打死了。然后洋洋得意地和周围人说：“我什么也没听到，天下太平”。你这不是2B么。我们现在的内阁团，就是这么一群2B。欧神的这段话说的非常贴切，对于房价是十年九控，除了2009年（08年金融危机，余威延后，致09年房价略降），基本上是越控越涨，很简单，现在房价的90%成本是土地成本，土地成本不降，你想降房价？开玩笑，有哪个开发商愿意亏本建房卖给你呢？房价必然是土地成本+建筑成本+利润等的总和，所以说限购限贷只会使需求延后而已，对于减少土地供应，则更是傻逼政策，未来没地建房了，你还指望房价下降？不涨上天才怪呢！</p>
-<p>文章里有一个小段子，我感觉不错，摘录如下“一个中国人刚到USA时，美国人对他说：‘美国是一个法制社会，你明白吗？’。那个人说：‘明白，公民都要守法’。美国官员说：‘No，法制社会的意思是，政府要守法’”。禁不住一声仰天长叹！</p>
-<p>另外一个段子是这样的，话说重庆的中心是解放碑，解放碑就是重庆中央广场的一个石碑，连接放射性的五条大道，其地位类似于上海的人民广场。段子是这么说的，当年江姐被捕，就是因为蒲志高看见她在朝天门码头上船，穿西装而且自己扛皮箱，于是蒲志高推测她必然是想省钱的G党特务兼屌丝无疑。哈哈，笑了半天。</p>
-<p>在任何一个社会，任何一个时代，“觉醒”的人都是少数的，哪怕启蒙时代也不例外。具体来说，就是无论社会怎样变革，哪怕再过100年。社会上看“综艺”节目的人数，仍将大大多于《科学新发现》。阿姨们会为“中国达人秀”上两个镜头感动得热泪盈眶，却丝毫不考虑新出的法规对公平的践踏。用中国一句很有传统智慧的话说：“肉食者鄙”。对于“觉醒”的人群，估计占总人口的0.1%，以中国目前的人口规模，则是100W人。这个数字包含了中国目前所有的“上层”精英。包括所有有权有势的人。这个社会其实就是0.1%的人，在奴役着99.9%的人，从诛心的角度讲，则是0.1%的人在愚弄着99.9%的人。比如现在火遍全国的学区房，其实这些接盘侠们只能算是中产里的富裕者而已，完全算不上精英或者高层，精英和高层是不会让他的后代在国内接受这种洗脑式的垃圾教育的，他们的后代早已驰骋在国外的世界顶级名校中了。</p>
-<p>如果你要买房，那么记住一句话准没错，“政府呼吁买房时，一般都是房价最低的时候，买房的事得听政府的”。听党的话跟党走，政策放松时马上入场买，涨个一年半，政府要调控了马上卖，高抛低吸，虽然不一定能卖在最顶峰，但肯定比你追涨杀跌要强百倍。</p>
-<p><strong>参考文献</strong><br>[1] <a target="_blank" rel="noopener" href="https://zhbjob.gitbooks.io/yevon_ou/content/">欧神文集</a>（仅有部分，内容不全，全文请自行去下载PDF）</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>公司的 CI&#x2F;CD 平台研发要告一个段落了，在此记录一下如何使用 k8s 的客户端工具 kubectl 来进行更新操作的。</p>
+<h2 id="更新-Deployment"><a href="#更新-Deployment" class="headerlink" title="更新 Deployment"></a>更新 Deployment</h2><p>要知道 kubectl 是不支持 update 操作的，假设有如下<code>Deployment.yaml</code>需要进行部署：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/16/k8s-update-operate/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/09/03/go-flag-slice-map/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/09/03/go-flag-slice-map/" class="post-title-link" itemprop="url">Go语言flag接收slice和map类型参数</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-09-03 15:22:27" itemprop="dateCreated datePublished" datetime="2019-09-03T15:22:27+08:00">2019-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>go 自带的<code>flag</code>包可以很容易的实现一个命令行程序的参数解析，但是<code>flag</code>包默认只支持几个基本类型的参数解析，如果需要传递<code>slice</code>或者<code>map</code>类型时就要自定义了，这里记录一下。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>通过<code>flag.Var()</code>方法传递一个<code>Value</code>接口，即可自定义命令行参数的解析，<code>flag.Value</code>接口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">type Value interface &#123;</span><br><span class="line">	String() string</span><br><span class="line">	Set(string) error</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/03/go-flag-slice-map/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/08/14/free-ssl-cert/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/08/14/free-ssl-cert/" class="post-title-link" itemprop="url">使用免费的HTTPS证书</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-08-14 15:20:56" itemprop="dateCreated datePublished" datetime="2019-08-14T15:20:56+08:00">2019-08-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>众所周知 HTTPS 是保证 HTTP 通讯安全的协议，网站启用 HTTPS 可以避免很多安全性的问题， 而且 Chrome 浏览器 从 68 版本开始直接将 HTTP 网站标记为不安全了。</p>
+<p>所以把网站升级成 HTTPS 自然是大势所趋，不过启用 HTTPS 有个最重要的问题是 HTTPS 证书<code>要花钱</code>！如果每年额外花钱去购买 HTTPS 证书，那也是一笔很大的开销。那么有没有免费的<code>HTTPS</code>证书可以用呢，查了下资料有个叫<a target="_blank" rel="noopener" href="https://letsencrypt.org/"><code>Let’s Encrypt</code></a>的项目就提供了免费签发 HTTPS 证书的服务，这里记录下如何使用<code>Let’s Encrypt</code>来签发证书。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/14/free-ssl-cert/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/08/08/server-push-and-websocket/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/08/08/server-push-and-websocket/" class="post-title-link" itemprop="url">服务器推送技术与websocket协议</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-08-08 16:35:37" itemprop="dateCreated datePublished" datetime="2019-08-08T16:35:37+08:00">2019-08-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>websocket 作为现代浏览器的长连接标准，可以很好的解决浏览器与服务器实时通讯的问题，那么在 websocket 出现之前是怎么解决这个问题的呢？首先来回顾一下在此之前浏览器和服务器的”长连接”之路。</p>
+<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>在 websocket 协议出来之前，主要是有三种方向去实现类似 websocket 的功能的。</p>
+<h3 id="Flash"><a href="#Flash" class="headerlink" title="Flash"></a>Flash</h3><p>flash 支持 socket 通讯功能，基于 flash 可以很简单的实现与服务器建立通讯。</p>
+<ul>
+<li>优点：开发简单、兼容性高</li>
+<li>缺点：需要浏览器启用 flash 功能，并且逐渐被浏览器淘汰</li>
+</ul>
+<h3 id="AJAX-Polling"><a href="#AJAX-Polling" class="headerlink" title="AJAX Polling"></a>AJAX Polling</h3><p>浏览器使用 ajax 去轮询服务器，服务器有内容就返回，轮询也分为短轮询和长轮询。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/08/server-push-and-websocket/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/07/25/maven-download-jar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/07/25/maven-download-jar/" class="post-title-link" itemprop="url">maven下载指定依赖jar包</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-07-25 09:40:16" itemprop="dateCreated datePublished" datetime="2019-07-25T09:40:16+08:00">2019-07-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:get -Dartifact=groupId:artifactId:version:jar:sources</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><ul>
+<li><p>下载jar包</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:get -Dartifact=junit:junit:4.12:jar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载源码</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:get -Dartifact=junit:junit:4.12:jar:sources</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -528,7 +727,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/04/13/%E5%89%8D%E7%AB%AF%E5%A4%A7%E5%9B%BE%E6%8B%96%E5%8A%A8%E6%9F%A5%E7%9C%8B-%E6%A1%86%E5%86%85%E5%9B%BE%E7%89%87%E6%8B%96%E6%8B%BD/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/07/19/docker-web-terminal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -546,7 +745,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/13/%E5%89%8D%E7%AB%AF%E5%A4%A7%E5%9B%BE%E6%8B%96%E5%8A%A8%E6%9F%A5%E7%9C%8B-%E6%A1%86%E5%86%85%E5%9B%BE%E7%89%87%E6%8B%96%E6%8B%BD/" class="post-title-link" itemprop="url">前端大图拖动查看/框内图片拖拽</a>
+          <a href="/2019/07/19/docker-web-terminal/" class="post-title-link" itemprop="url">通过web terminal来连接docker容器</a>
         </h2>
 
         <div class="post-meta-container">
@@ -557,14 +756,23 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-04-13 00:00:00" itemprop="dateCreated datePublished" datetime="2017-04-13T00:00:00+08:00">2017-04-13</time>
+      <time title="Created: 2019-07-19 18:22:01" itemprop="dateCreated datePublished" datetime="2019-07-19T18:22:01+08:00">2019-07-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a>
+        </span>
     </span>
 
   
@@ -577,30 +785,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="前端大图拖动查看-框内图片拖拽-scrolling-mouse-touch"><a href="#前端大图拖动查看-框内图片拖拽-scrolling-mouse-touch" class="headerlink" title="前端大图拖动查看&#x2F;框内图片拖拽 scrolling mouse  touch"></a>前端大图拖动查看&#x2F;框内图片拖拽 <code>scrolling mouse  touch</code></h1><p><code>jquery.Kinetic.js</code>   <a target="_blank" rel="noopener" href="https://github.com/davetayls/jquery.kinetic">https://github.com/davetayls/jquery.kinetic</a><br>不依赖jquery的版本 <a target="_blank" rel="noopener" href="https://github.com/dzek69/vanilla.kinetic">https://github.com/dzek69/vanilla.kinetic</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 示例：http://g.jumore.com/--&gt;</span><br><span class="line">angular.element(&quot;#m-map-container&quot;).kinetic(&#123;</span><br><span class="line">triggerHardware: !0,</span><br><span class="line">slowdown: .8</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/59275119.jpg"></p>
-<ul>
-<li><code>代码移动</code></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;li class=&quot;nav-item europe&quot; ng-click=&quot;gotoContinent(&#x27;19.60544&#x27;, &#x27;48.807678&#x27;)&quot;&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/li&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$rootScope.$broadcast(&#x27;continent:broadcast&#x27;, [longitude, latitude]);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$rootScope.$on(&#x27;continent:broadcast&#x27;, function (event, data) &#123;</span><br><span class="line">    //console.log(&#x27;continent:broadcast&#x27;, data);</span><br><span class="line">  var xy = scope.map.lonlat2xy([data[0], data[1]]);</span><br><span class="line">  var x = xy[0], y = xy[1]</span><br><span class="line">    //console.log(&#x27;var x = xy[0], y = xy[1]&#x27;, x, y);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  $timeout(function() &#123;</span><br><span class="line">    // recalc the project position</span><br><span class="line">    scope.countProjectPosition(x, y)</span><br><span class="line">  &#125;, 500)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var mapContainer = angular.element(&quot;#m-map-container&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">scope.countProjectPosition = function(x, y) &#123;</span><br><span class="line">  var c, left, top, width = $window.innerWidth,</span><br><span class="line">    height = $window.innerHeight,</span><br><span class="line">    i = 70,</span><br><span class="line">    k = .4,</span><br><span class="line">    l = -30;</span><br><span class="line">  c = width * k;</span><br><span class="line">  left = x - (c + i + l);</span><br><span class="line">  top = y - height / 2;</span><br><span class="line">  mapContainer.animate(&#123;</span><br><span class="line">    scrollTop: top,</span><br><span class="line">    scrollLeft: left</span><br><span class="line">  &#125;, 300)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="框内-图片-拖拽-jQuery-ImageView"><a href="#框内-图片-拖拽-jQuery-ImageView" class="headerlink" title="框内 图片 拖拽  jQuery.ImageView"></a><code>框内 图片 拖拽</code>  <code>jQuery.ImageView</code></h1><p><a target="_blank" rel="noopener" href="http://www.lanrenzhijia.com/jquery/2961.html">http://www.lanrenzhijia.com/jquery/2961.html</a></p>
-<p><a target="_blank" rel="noopener" href="http://4coder.info/en/code/jquery-plugins/jquery-imageview/">http://4coder.info/en/code/jquery-plugins/jquery-imageview/</a></p>
-<hr>
-<h1 id="jquery-地图-拖"><a href="#jquery-地图-拖" class="headerlink" title="jquery 地图 拖"></a>jquery 地图 拖</h1><p><code>jQuery仿谷歌可放大缩小拖动的地图代码</code><br><a target="_blank" rel="noopener" href="http://www.16sucai.com/2011/04/6631.html">http://www.16sucai.com/2011/04/6631.html</a></p>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/18213597.jpg"></p>
-<p>JVectorMap 是一个显示矢量地图的jQuery插件    <a target="_blank" rel="noopener" href="http://jvectormap.com/">http://jvectormap.com/</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/20001992.jpg"></p>
-<hr>
-<h1 id="js仿百度地图放大缩小拖拽查看效果-素材中国17素材网"><a href="#js仿百度地图放大缩小拖拽查看效果-素材中国17素材网" class="headerlink" title="js仿百度地图放大缩小拖拽查看效果_素材中国17素材网"></a>js仿百度地图放大缩小拖拽查看效果_素材中国17素材网</h1><p><a target="_blank" rel="noopener" href="http://www.17sucai.com/pins/11299.html">http://www.17sucai.com/pins/11299.html</a></p>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/64370862.jpg">
- </p>
-
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在公司内部使用 Jenkins 做 CI&#x2F;CD 时，经常会碰到项目构建失败的情况，一般情况下通过 Jenkins 的构建控制台输出都可以了解到大概发生的问题，但是有些特殊情况开发需要在 Jenkins 服务器上排查问题，这个时候就只能找运维去调试了，为了开发人员的体验就调研了下 web terminal，能够在构建失败时提供容器终端给开发进行问题的排查。</p>
+<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><p><img src="/docker-web-terminal/2019-07-22-09-24-49.png"><br>支持颜色高亮，支持<kbd>tab</kbd>键补全，支持复制粘贴，体验基本上与平常的 terminal 一致。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/19/docker-web-terminal/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -626,7 +820,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/04/12/ngrok%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/07/11/k8s-graceful-shutdown/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -644,7 +838,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/12/ngrok%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1/" class="post-title-link" itemprop="url">ngrok配置本地服务</a>
+          <a href="/2019/07/11/k8s-graceful-shutdown/" class="post-title-link" itemprop="url">Kubernetes之服务优雅升级</a>
         </h2>
 
         <div class="post-meta-container">
@@ -655,14 +849,23 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-04-12 00:00:00" itemprop="dateCreated datePublished" datetime="2017-04-12T00:00:00+08:00">2017-04-12</time>
+      <time title="Created: 2019-07-11 10:22:46" itemprop="dateCreated datePublished" datetime="2019-07-11T10:22:46+08:00">2019-07-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a>
+        </span>
     </span>
 
   
@@ -675,80 +878,26 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="一、-ngrok配置本地服务"><a href="#一、-ngrok配置本地服务" class="headerlink" title="一、 ngrok配置本地服务"></a>一、 ngrok配置本地服务</h1><ul>
-<li><code> ngrok.yml</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tunnels:</span><br><span class="line">  h80:</span><br><span class="line">    proto: http</span><br><span class="line">    addr: 80</span><br><span class="line">  h8080:</span><br><span class="line">    proto: http</span><br><span class="line">    addr: 8080</span><br></pre></td></tr></table></figure></li>
-<li>运行</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ngrok.exe start -config ngrok.yml --all</span><br><span class="line"></span><br><span class="line">或指定</span><br><span class="line">ngrok.exe start -config ngrok.yml h80</span><br><span class="line">ngrok.exe start -config ngrok.yml h8080</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li><p>启动日志</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ngrok by @inconshreveable                                       (Ctrl+C to quit)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Session Status                online</span><br><span class="line">Update                        update available (version 2.2.4, Ctrl-U to update)</span><br><span class="line">Version                       2.1.18</span><br><span class="line">Region                        United States (us)</span><br><span class="line">Web Interface                 http://127.0.0.1:4040</span><br><span class="line">Forwarding                    http://3c9e34ca.ngrok.io -&gt; localhost:80</span><br><span class="line">Forwarding                    http://a85188d8.ngrok.io -&gt; localhost:8080</span><br><span class="line">Forwarding                    https://3c9e34ca.ngrok.io -&gt; localhost:80</span><br><span class="line">Forwarding                    https://a85188d8.ngrok.io -&gt; localhost:8080</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Connections                   ttl     opn     rt1     rt5     p50     p90</span><br><span class="line">                              38      0       0.08    0.04    21.30   97.93</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>访问（8080的后端服务单独 端口隧道 ）<br><a target="_blank" rel="noopener" href="http://3c9e34ca.ngrok.io/louyu?host=http://a85188d8.ngrok.io/bright/web/">http://3c9e34ca.ngrok.io/louyu?host=http://a85188d8.ngrok.io/bright/web/</a></p>
-</li>
-</ul>
-<hr>
-<h1 id="利用nginx反向代理掉8080服务"><a href="#利用nginx反向代理掉8080服务" class="headerlink" title="利用nginx反向代理掉8080服务"></a>利用nginx反向代理掉8080服务</h1><ul>
-<li><p><code>nginx.conf</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    root   html;</span><br><span class="line">    index  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">location /bright &#123;</span><br><span class="line">    root   html;</span><br><span class="line">    proxy_pass  http://localhost:8080;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>访问（仅使用一个80端口隧道）</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://3c9e34ca.ngrok.io/louyu?host=http://3c9e34ca.ngrok.io/bright/web</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h2><p>1.海外服务器,速度慢<br>2.360安全提醒<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/78635931.jpg"></p>
-<hr>
-<h1 id="二、（国内）NATAPP基于ngrok的国内高速内网穿透服务"><a href="#二、（国内）NATAPP基于ngrok的国内高速内网穿透服务" class="headerlink" title="二、（国内）NATAPP基于ngrok的国内高速内网穿透服务"></a>二、（国内）NATAPP基于ngrok的国内高速内网穿透服务</h1><p><a target="_blank" rel="noopener" href="https://natapp.cn/">https://natapp.cn/</a></p>
-<ul>
-<li><code>教程</code>   <a target="_blank" rel="noopener" href="https://natapp.cn/article/natapp_newbie">https://natapp.cn/article/natapp_newbie</a></li>
-<li>使用本地配置文件 <code>config.ini</code>   <a target="_blank" rel="noopener" href="https://natapp.cn/article/config_ini">https://natapp.cn/article/config_ini</a><br>我的 authtoken  <code>c4392fc2e74ed855</code></li>
-</ul>
-<p><code>自定义子域名需购买付费产品</code><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/5497063.jpg"></p>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><ul>
-<li><p><code>config.ini</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#将本文件放置于natapp同级目录 程序将读取 [default] 段</span><br><span class="line">#在命令行参数模式如 natapp -authtoken=xxx 等相同参数将会覆盖掉此配置</span><br><span class="line">[default]</span><br><span class="line">authtoken= c4392fc2e74ed855                       #对应一条隧道的authtoken</span><br><span class="line">clienttoken=                    #对应客户端的clienttoken,将会忽略authtoken,若无请留空,</span><br><span class="line">logto=none                      #log 日志文件, 可以是 none 代表不记录 或者 stdout 代表直接屏幕输出 ,默认为none</span><br><span class="line">loglevel=DEBUG                  #日志等级 DEBUG, INFO, WARNING, ERROR 默认为 DEBUG</span><br><span class="line">http_proxy=                     #代理设置 如 http://http://10.123.10.10:3128</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>启动[ windows ] ：运行&gt;<code> natapp.exe</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Powered By NATAPP       Please visit https://natapp.cn          (Ctrl+C to Quit)</span><br><span class="line">Tunnel Status           Online</span><br><span class="line">Version                 2.3.4</span><br><span class="line">Forwarding              http://ik2ui2.natappfree.cc -&gt; 127.0.0.1:80</span><br><span class="line">Web Interface           http://127.0.0.1:4040</span><br><span class="line">Total Connections       14</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>访问</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://ik2ui2.natappfree.cc/louyu?host=http://ik2ui2.natappfree.cc/bright/web/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>免费缺点：<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/45480419.jpg"></p>
-</li>
-</ul>
-<hr>
-<h1 id="三、完全免费服务-Ngrok国内免费服务器——糖果科技"><a href="#三、完全免费服务-Ngrok国内免费服务器——糖果科技" class="headerlink" title="三、完全免费服务 Ngrok国内免费服务器——糖果科技"></a>三、完全免费服务 <code>Ngrok国内免费服务器——糖果科技</code></h1><p><a target="_blank" rel="noopener" href="http://www.qydev.com/">http://www.qydev.com/</a><br>运行实例： <code>ngrok -config=ngrok.cfg -subdomain xxx 80</code></p>
-<ul>
-<li>运行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ngrok -config=ngrok.cfg -subdomain liuxiang 80</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>启动日志<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ngrok                                                           (Ctrl+C to quit)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Tunnel Status                 online</span><br><span class="line">Version                       1.7/1.7</span><br><span class="line">Forwarding                    http://wosai.tunnel.qydev.com -&gt; 127.0.0.1:80</span><br><span class="line">Forwarding                    https://wosai.tunnel.qydev.com -&gt; 127.0.0.1:80</span><br><span class="line">Web Interface                 127.0.0.1:4040</span><br><span class="line"># Conn                        21</span><br><span class="line">Avg Conn Time                 3486.01ms</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="四、自建ngrok服务"><a href="#四、自建ngrok服务" class="headerlink" title="四、自建ngrok服务"></a>四、自建ngrok服务</h1><p>开源代码：<code>inconshreveable/ngrok</code>  <a target="_blank" rel="noopener" href="https://github.com/inconshreveable/ngrok">https://github.com/inconshreveable/ngrok</a></p>
-<ul>
-<li>ngrok开发者指南</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://github.com/inconshreveable/ngrok/blob/master/docs/DEVELOPMENT.md">https://github.com/inconshreveable/ngrok/blob/master/docs/DEVELOPMENT.md</a></p>
-<ul>
-<li>大致过程<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">一、安装git</span><br><span class="line">二、安装go环境</span><br><span class="line">三、编译ngrok</span><br><span class="line">四、为域名生成证书</span><br><span class="line">五、在软件源代码目录下面会生成一些证书文件，我们需要把这些文件拷贝到指定位置</span><br><span class="line">六、如果是在国内的服务器需要改，香港或者国外的服务器不需要</span><br><span class="line">七、编译服务端（根据自己系统的来）</span><br><span class="line">八、编译客户端</span><br><span class="line">九、客户端配置文件</span><br><span class="line">十、服务端启动</span><br><span class="line">十一、客户端使用</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>参考</strong><br><code>ngrok服务器搭建步骤 - 简书</code> <code>★</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/b254547b9fe5">http://www.jianshu.com/p/b254547b9fe5</a><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/694dd87510f8">http://www.jianshu.com/p/694dd87510f8</a></p>
-<p><code>自建ngrok服务 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/fcc73e019936">http://www.jianshu.com/p/fcc73e019936</a></p>
-<p><code>自建Ngrok服务与使用方法 - 季樊 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/pwenlee/p/5302880.html">http://www.cnblogs.com/pwenlee/p/5302880.html</a></p>
-<p><code>在阿里云搭建自己的ngrok服务 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/ZraURrq">http://www.tuicool.com/articles/ZraURrq</a></p>
-<hr>
-<p><code>映射公网花生壳、PubYun、NoIP、DynDNS、Ngrok、Tunnel、localtu... - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/b11d70d9dd52">http://www.jianshu.com/p/b11d70d9dd52</a></p>
-<p><code>自搭Ngrok实现树莓派内网穿透 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/91f01e30a9b0">http://www.jianshu.com/p/91f01e30a9b0</a></p>
-
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><code>k8s</code>本身就支持服务滚动升级，但是如果程序没有正确的处理退出信号时，就会导致部分请求直接被中断从而影响用户体验。</p>
+<h2 id="滚动升级步骤"><a href="#滚动升级步骤" class="headerlink" title="滚动升级步骤"></a>滚动升级步骤</h2><p>每个<code>pod</code>代表一个集群中的节点，在 k8s 做<code>rolling-update</code>的时候默认会向旧的<code>pod</code>发送一个<code>SIGTERM</code>信号，如果应用没有对<code>SIGTERM</code>信号做处理的话，会立即强制退出程序，这样的话会导致有些请求还没处理完，前端应用请求错误。</p>
+<p>先来回顾下 k8s 的滚动升级步骤：</p>
+<ol>
+<li>启动一个新的 pod</li>
+<li>等待新的 pod 进入 Ready 状态</li>
+<li>创建 Endpoint，将新的 pod 纳入负载均衡</li>
+<li>移除与老 pod 相关的 Endpoint，并且将老 pod 状态设置为 Terminating，此时将不会有新的请求到达老 pod</li>
+<li>给老 pod 发送 SIGTERM 信号，并且等待 terminationGracePeriodSeconds 这么长的时间。(默认为 30 秒)</li>
+<li>超过 terminationGracePeriodSeconds 等待时间直接强制 kill 进程并关闭旧的 pod</li>
+</ol>
+<p>这里要注意，<code>SIGTERM信号如果进程没有处理的话也其实也就会导致进程被强杀</code>，如果处理了但是超过<code>terminationGracePeriodSeconds</code>配置的时间也一样会被强杀，所以这个时间可以根据具体的情况去设置。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/11/k8s-graceful-shutdown/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -774,7 +923,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/04/09/javaScript%E7%A9%BA%E5%80%BC[undefined,null,--,0]%E6%AF%94%E8%BE%83/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/07/08/win10-open-cmd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -792,7 +941,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/09/javaScript%E7%A9%BA%E5%80%BC%5Bundefined,null,--,0%5D%E6%AF%94%E8%BE%83/" class="post-title-link" itemprop="url">javaScript空值[undefined,null,'',0]比较</a>
+          <a href="/2019/07/08/win10-open-cmd/" class="post-title-link" itemprop="url">win10右键菜单在当前目录下打开CMD</a>
         </h2>
 
         <div class="post-meta-container">
@@ -803,14 +952,23 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-04-09 00:00:00" itemprop="dateCreated datePublished" datetime="2017-04-09T00:00:00+08:00">2017-04-09</time>
+      <time title="Created: 2019-07-08 11:18:36" itemprop="dateCreated datePublished" datetime="2019-07-08T11:18:36+08:00">2019-07-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/windows/" itemprop="url" rel="index"><span itemprop="name">windows</span></a>
+        </span>
     </span>
 
   
@@ -823,16 +981,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><img src="https://segmentfault.com/img/bVkpiW"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">var a;// undefined</span><br><span class="line">var aa = null;</span><br><span class="line">var aaa = &#x27;&#x27;;</span><br><span class="line">var aaaa = 0;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(isNaN(a)); // true</span><br><span class="line">console.log(isNaN(aa));</span><br><span class="line">console.log(isNaN(aaa));</span><br><span class="line">console.log(isNaN(aaaa));</span><br><span class="line">console.log(&#x27;--------------------------------&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(a === undefined);// true</span><br><span class="line">console.log(a == undefined);// true</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(aa === undefined);</span><br><span class="line">console.log(aa == undefined);// true</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(aaa === undefined);</span><br><span class="line">console.log(aaa == undefined);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(aaaa === undefined);</span><br><span class="line">console.log(aaaa == undefined);</span><br><span class="line">console.log(&#x27;--------------------------------&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(a === null);</span><br><span class="line">console.log(a == null);// true</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(aa === null);// true</span><br><span class="line">console.log(aa == null);// true</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(aaa === null);</span><br><span class="line">console.log(aaa == null);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(aaaa === null);</span><br><span class="line">console.log(aaaa == null);</span><br><span class="line">console.log(&#x27;--------------------------------&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(a === &#x27;&#x27;);</span><br><span class="line">console.log(a == &#x27;&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(aa === &#x27;&#x27;);</span><br><span class="line">console.log(aa == &#x27;&#x27;);// true</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(aaa === &#x27;&#x27;);// true</span><br><span class="line">console.log(aaa == &#x27;&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(aaaa === &#x27;&#x27;);</span><br><span class="line">console.log(aaaa == &#x27;&#x27;);// true</span><br><span class="line">console.log(&#x27;--------------------------------&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(!a);// true</span><br><span class="line">console.log(!aa);// true</span><br><span class="line">console.log(!aaa);// true</span><br><span class="line">console.log(!aaaa);// true</span><br></pre></td></tr></table></figure>
-
-
-<p><code>undefined与null的区别 - 阮一峰的网络日志</code><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/03/undefined-vs-null.html">http://www.ruanyifeng.com/blog/2014/03/undefined-vs-null.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000002441634">https://segmentfault.com/a/1190000002441634</a></p>
-<p><code>细说 Javascript 拾遗篇（二） : undefined 和 null - StephenLee - SegmentFault</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000000512023">https://segmentfault.com/a/1190000000512023</a></p>
-<p><code>js判断undefined类型,undefined,null, 的区别详细解析 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/qq_34117825/article/details/52325685">http://blog.csdn.net/qq_34117825/article/details/52325685</a></p>
-<p><code>javascript类型系统——undefined和null - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/b2MVJ3">http://www.tuicool.com/articles/b2MVJ3</a></p>
-
+          <p>win10 右键菜单只能打开 Powershell，然而不知道是 Powershell 难用还是我不会用，各种莫名其妙的问题，这个时候想想还是<code>cmd</code>真香，所以在网上找了个办法把 <code>cmd</code> 加到右键菜单里已方便使用。</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>新建一个文档，赋值粘贴以下代码，并且将文档保存为.reg 格式的文件。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/08/win10-open-cmd/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -858,7 +1016,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/04/08/angular%E5%9B%BE%E7%89%87%E6%88%96%E9%99%84%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/07/03/java-reflect-getdeclaredmethods-issue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -876,7 +1034,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/08/angular%E5%9B%BE%E7%89%87%E6%88%96%E9%99%84%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="post-title-link" itemprop="url">angular图片或附件上传</a>
+          <a href="/2019/07/03/java-reflect-getdeclaredmethods-issue/" class="post-title-link" itemprop="url">java反射使用getDeclaredMethods会获取到父类方法的解决办法</a>
         </h2>
 
         <div class="post-meta-container">
@@ -887,14 +1045,23 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-04-08 00:00:00" itemprop="dateCreated datePublished" datetime="2017-04-08T00:00:00+08:00">2017-04-08</time>
+      <time title="Created: 2019-07-03 10:18:25" itemprop="dateCreated datePublished" datetime="2019-07-03T10:18:25+08:00">2019-07-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
     </span>
 
   
@@ -907,309 +1074,23 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><p><code>AngularJS 文件上传控件 ng-file-upload - 岳小昊 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/yuexiaohao/p/5556055.html">http://www.cnblogs.com/yuexiaohao/p/5556055.html</a></p>
-<ul>
-<li><code>ng-file-upload</code>  <a target="_blank" rel="noopener" href="https://github.com/danialfarid/ng-file-upload">https://github.com/danialfarid/ng-file-upload</a></li>
-<li><code>angular-file-upload</code>  <a target="_blank" rel="noopener" href="https://github.com/nervgh/angular-file-upload">https://github.com/nervgh/angular-file-upload</a></li>
-</ul>
-<p><code>[Angularjs]ng-file-upload上传文件 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/eeAb6r6">http://www.tuicool.com/articles/eeAb6r6</a></p>
-<hr>
-<h1 id="angular-http"><a href="#angular-http" class="headerlink" title="angular $http"></a>angular $http</h1><p><code>AngularJS下$http上传文件(AngularJS file upload/post file) - Jannie_Kung的博客 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/jannie_kung/article/details/52057288">http://blog.csdn.net/jannie_kung/article/details/52057288</a></p>
-<p><code>angular 采用$http 上传file spring 提示找不到boundary</code></p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/wendy260310/article/details/49493461">http://blog.csdn.net/wendy260310/article/details/49493461</a></p>
-<ul>
-<li>遗留问题<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">服务器由于被认为是客户端错误（例如，格式错误的请求语法，无效请求消息成帧或欺骗性请求路由）的某些东西而无法或不会处理该请求。</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/99127824.jpg"></p>
-<ul>
-<li>后台异常：<code>“iconSrc”所需的类型[java.lang.String]：找不到匹配的编辑者或转换策略</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Field error in object &#x27;layerIconlib&#x27; on field &#x27;iconSrc&#x27;: rejected value [org.springframework.web.multipart.commons.CommonsMultipartFile@78cfdcd6]; codes [typeMismatch.layerIconlib.iconSrc,typeMismatch.iconSrc,typeMismatch.java.lang.String,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [layerIconlib.iconSrc,iconSrc]; arguments []; default message [iconSrc]]; default message [Failed to convert property value of type [org.springframework.web.multipart.commons.CommonsMultipartFile] to required type [java.lang.String] for property &#x27;iconSrc&#x27;; nested exception is java.lang.IllegalStateException: Cannot convert value of type [org.springframework.web.multipart.commons.CommonsMultipartFile] to required type [java.lang.String] for property &#x27;iconSrc&#x27;: no matching editors or conversion strategy found]</span><br><span class="line">at org.springframework.web.method.annotation.ModelAttributeMethodProcessor.resolveArgument(ModelAttributeMethodProcessor.java:113)</span><br><span class="line">at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:78)</span><br><span class="line">at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:162)</span><br><span class="line">at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:129)</span><br><span class="line">at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110)</span><br><span class="line">at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:775)</span><br><span class="line">at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:705)</span><br><span class="line">at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)</span><br><span class="line">at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:959)</span><br><span class="line">at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)</span><br><span class="line">at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:965)</span><br><span class="line">at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:867)</span><br></pre></td></tr></table></figure></li>
-<li>问题原因：<code>File</code>文件（图片）对象不能使Model中的file_url值存储，因为数据类型不一致，在spring的自动装载时，会出现此错误</li>
-<li>解决办法：换个名字载入对象</li>
-</ul>
-<hr>
-<h1 id="完整示例"><a href="#完整示例" class="headerlink" title="完整示例"></a>完整示例</h1><h2 id="方案一：-http轻量支持"><a href="#方案一：-http轻量支持" class="headerlink" title="方案一： $ http轻量支持"></a>方案一：<code> $ http</code>轻量支持</h2><ul>
-<li>业务调用</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 上传文件</span><br><span class="line">$httpFactory.layer.iconlib_save(iconlib.id, iconlib.classId, iconlib.iconSrc, iconlib.icon)</span><br><span class="line">  .success(function (response) &#123;</span><br><span class="line">    $log.debug(response);</span><br><span class="line">    toastr.success(&#x27;操作成功&#x27;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>一贯统一的接口定义方式</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iconlib_save: function (id, classId, iconSrc, file) &#123;</span><br><span class="line">  var url = domain + &#x27;layer/iconlib/save&#x27;;</span><br><span class="line">  var data = &#123;id: id, classId: classId, iconSrc: iconSrc, file: file&#125;;</span><br><span class="line">  return sendForm(url, data);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li><code>formData</code>公共处理<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">function sendForm(url, data) &#123;</span><br><span class="line">  angular.forEach(data, function (value, key, data) &#123;</span><br><span class="line">    value == null &amp;&amp; delete data[key];// 清理空字段,避免后台数据自动组装引发异常</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  var req = &#123;</span><br><span class="line">    url: url,</span><br><span class="line">    method: &#x27;POST&#x27;,</span><br><span class="line">    data: data,</span><br><span class="line">    headers: &#123;&#x27;Content-Type&#x27;: undefined&#125;,</span><br><span class="line">    transformRequest: function (data, headersGetter) &#123;</span><br><span class="line">      let formData = new FormData();</span><br><span class="line">      angular.forEach(data, function (value, key) &#123;</span><br><span class="line">        formData.append(key, value);</span><br><span class="line">      &#125;);</span><br><span class="line">      return formData;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  // 参见：http://blog.csdn.net/jannie_kung/article/details/52057288</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  return $http(req)</span><br><span class="line">    .success(function (response) &#123;</span><br><span class="line">      // alert(response);</span><br><span class="line">    &#125;).error(function (err) &#123;</span><br><span class="line">      $log.error(error);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="方案二：插件支持，优点：支持进度展示"><a href="#方案二：插件支持，优点：支持进度展示" class="headerlink" title="方案二：插件支持，优点：支持进度展示"></a>方案二：插件支持，优点：支持进度展示</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 文件上传示例</span><br><span class="line">false &amp;&amp; Upload.upload(&#123;</span><br><span class="line">  url: _config.domain_name + &#x27;layer/iconlib/save&#x27;,</span><br><span class="line">  data: &#123;classId: iconlib.classId&#125;,</span><br><span class="line">  file: iconlib.icon</span><br><span class="line">&#125;).then(function (resp) &#123;</span><br><span class="line">  console.log(&#x27;Success &#x27; + resp.config.data.file.name + &#x27;uploaded. Response: &#x27; + resp.data);</span><br><span class="line">&#125;, function (resp) &#123;</span><br><span class="line">  console.log(&#x27;Error status: &#x27; + resp.status);</span><br><span class="line">&#125;, function (evt) &#123;</span><br><span class="line">  var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);</span><br><span class="line">  console.log(&#x27;progress: &#x27; + progressPercentage + &#x27;% &#x27; + evt.config.data.file.name);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 变更图标库图标</span><br><span class="line"> * (前端请求需要注意,文件字段名必须为file,与此声明对应/如不声明则需与字段名一致-否则无法获取到文件对象)</span><br><span class="line"> *</span><br><span class="line"> * @param layerIconlib</span><br><span class="line"> * @return</span><br><span class="line"> */</span><br><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(method = RequestMethod.POST, value = &quot;iconlib/save&quot;)</span><br><span class="line">public Object saveIconLib(LayerIconlib layerIconlib, @RequestParam(required = false, value = &quot;file&quot;) MultipartFile file) &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    if (layerIconlib.getId() != null) &#123;</span><br><span class="line">        layerIconlibMapper.updateByPrimaryKey(layerIconlib);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        layerIconlibMapper.insert(layerIconlib);</span><br><span class="line">    &#125;</span><br><span class="line">    return new HashedMap() &#123;&#123;</span><br><span class="line">        put(&quot;object&quot;, null);</span><br><span class="line">        put(&quot;result&quot;, Constants.JSON_RESULT_SUCCESS);</span><br><span class="line">        put(&quot;message&quot;, &quot;success&quot;);</span><br><span class="line">    &#125;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="http-or-ajax-http-boundary"><a href="#http-or-ajax-http-boundary" class="headerlink" title="http or ajax ($http boundary)"></a>http or ajax ($http boundary)</h1><p><code>HTTP上传文件的boundary - Hello World! - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/cxb_phoenix/article/details/51063147">http://blog.csdn.net/cxb_phoenix/article/details/51063147</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/04/07/%E5%89%8D%E7%AB%AF%E4%BA%8B%E4%BB%B6%E7%9B%B8%E5%85%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/07/%E5%89%8D%E7%AB%AF%E4%BA%8B%E4%BB%B6%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">前端事件相关</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-04-07 00:00:03" itemprop="dateCreated datePublished" datetime="2017-04-07T00:00:03+08:00">2017-04-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="html-不推荐"><a href="#html-不推荐" class="headerlink" title="html (不推荐)"></a>html (不推荐)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div onclick=&quot;alert(1)&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p>— # DOM</p>
-<ul>
-<li><p>DOM &#x2F; GlobalEventHandlers</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GlobalEventHandlers.onblur</span><br><span class="line">GlobalEventHandlers.onchange</span><br><span class="line">GlobalEventHandlers.onclick</span><br></pre></td></tr></table></figure>
-<p><code>API</code>  <a target="_blank" rel="noopener" href="http://devdocs.io/dom-globaleventhandlers/">http://devdocs.io/dom-globaleventhandlers/</a></p>
-</li>
-<li><p>DOM &#x2F; Event</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">element.addEventListener(type, listener[, useCapture]); // IE6~8不支持</span><br><span class="line">element.attachEvent(’on’ + type, listener); // IE6~10，IE11不支持</span><br><span class="line">element[’on’ + type] = function()&#123;&#125; // 所有浏览器</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function cb() &#123; console.log(1); &#125;</span><br><span class="line">element.addEventListener(&#x27;click&#x27;, cb, false);</span><br><span class="line">element.attachEvent(&#x27;onclick&#x27;, cb);</span><br><span class="line">element.onclick = cb;</span><br></pre></td></tr></table></figure>
-<p><code>API</code>  <a target="_blank" rel="noopener" href="http://devdocs.io/dom-event/">http://devdocs.io/dom-event/</a></p>
-<p><code>JavaScript的事件监听与捕获和冒泡 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/vIrmMr">http://www.tuicool.com/articles/vIrmMr</a></p>
-<p><code>JavaScript HTML DOM EventListener | 菜鸟教程</code><br><a target="_blank" rel="noopener" href="http://www.runoob.com/js/js-htmldom-eventlistener.html">http://www.runoob.com/js/js-htmldom-eventlistener.html</a></p>
-<hr>
-<h1 id="jquery"><a href="#jquery" class="headerlink" title="jquery"></a>jquery</h1><p><code>API</code> <a target="_blank" rel="noopener" href="http://devdocs.io/jquery-events/">http://devdocs.io/jquery-events/</a></p>
-<ul>
-<li><p><code>bind</code>匹配元素附加一个或更多事件处理器 (不推荐)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(selector).bind(event,data,function)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><p><code>on</code>添加事件 (推荐)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;p&quot;).on(&quot;click&quot;,function()&#123;</span><br><span class="line">alert(&quot;The paragraph was clicked.&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
-<li><p><code> one</code>仅触发一次的事件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">当点击 &lt;p&gt; 元素时，增加该元素的文本大小（每个 &lt;p&gt; 元素只能触发一次事件）：</span><br><span class="line">$(&quot;p&quot;).one(&quot;click&quot;,function()&#123;</span><br><span class="line">$(this).animate(&#123;fontSize:&quot;+=6px&quot;&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
-<li><p><code>live</code>过期的事件控制方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">live() 在版本 1.9 中被移除。添加一个或多个事件处理程序到当前或未来的被选元素</span><br><span class="line">load() 在版本 1.8 中被废弃。添加一个事件处理程序到 load 事件</span><br><span class="line">die() 在版本 1.9 中被移除。移除所有通过 live() 方法添加的事件处理程序</span><br><span class="line"></span><br><span class="line">error() 在版本 1.8 中被废弃。添加/触发 error 事件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="http://www.runoob.com/jquery/jquery-ref-events.html">http://www.runoob.com/jquery/jquery-ref-events.html</a></p>
-</li>
-<li><p>快速指定事件处理</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;button&quot;).click(function()&#123;</span><br><span class="line">  $(&quot;p&quot;).slideToggle();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$(&quot;.field&quot;).change(function()&#123;</span><br><span class="line">  $(this).css(&quot;background-color&quot;,&quot;#FFFFCC&quot;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$(&quot;input&quot;).blur(function()&#123;</span><br><span class="line">  $(&quot;input&quot;).css(&quot;background-color&quot;,&quot;#D6D6FF&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">bind()    向元素添加事件处理程序</span><br><span class="line">unbind()    从被选元素上移除添加的事件处理程序</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">on()    向元素添加事件处理程序</span><br><span class="line">off()    移除通过 on() 方法添加的事件处理程序</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">click()    添加/触发 click 事件</span><br><span class="line">trigger()    触发绑定到被选元素的所有事件</span><br><span class="line">triggerHandler()    触发绑定到被选元素的指定事件上的所有函数</span><br><span class="line">event.stopPropagation()    阻止事件向上冒泡到 DOM 树，阻止任何父处理程序被事件通知</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="http://www.runoob.com/jquery/jquery-ref-events.html">http://www.runoob.com/jquery/jquery-ref-events.html</a></p>
-<ul>
-<li>总结<br>1.bind()函数只能针对已经存在的元素进行事件的设置；但是live(),on(),delegate()均支持未来新添加元素的事件设置</li>
-</ul>
-<p>2.bind()函数在jquery1.7版本以前比较受推崇，1.7版本出来之后，官方已经不推荐用bind()，替代函数为on()</p>
-<p>见： <code>Jquery中的bind(),on()绑定事件方式总结</code></p>
-<ul>
-<li>on.(‘click’) 和 .click() 的区别。<br>on 属于 绑定事件处理器(event-handler-attachment) , 而 .click() 属于 jquery包装好的鼠标事件。</li>
-</ul>
-<p>见： <code>jQuery 事件用法详解</code></p>
-<hr>
-<p><code>Jquery中的bind(),on()绑定事件方式总结</code></p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/qq_27918787/article/details/52541102">http://blog.csdn.net/qq_27918787/article/details/52541102</a></p>
-<p><code>jquery on()方法和bind()方法的区别</code> - childSelector 不写则和bing一样</p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/oyuemijindu/article/details/50677538">http://blog.csdn.net/oyuemijindu/article/details/50677538</a></p>
-<p><code>jQuery 事件用法详解</code></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000005791376">https://segmentfault.com/a/1190000005791376</a></p>
-<ul>
-<li>实现原理</li>
-<li>事件操作<ul>
-<li>绑定事件</li>
-<li>解除事件</li>
-<li>触发事件</li>
-<li>事件委托</li>
-</ul>
-</li>
-<li>事件操作进阶<ul>
-<li>阻止默认事件</li>
-<li>阻止事件传播</li>
-<li>阻止事件向后执行</li>
-<li>命名空间</li>
-<li>自定义事件</li>
-<li>事件队列</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h1 id="angular"><a href="#angular" class="headerlink" title="angular"></a>angular</h1><ul>
-<li>html<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;button ng-click=&quot;count = count + 1&quot;&gt;点我！&lt;/button&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<code>AngularJS 事件 | 菜鸟教程</code><br><a target="_blank" rel="noopener" href="http://www.runoob.com/angularjs/angularjs-html-events.html">http://www.runoob.com/angularjs/angularjs-html-events.html</a></li>
-</ul>
-<p><code>angularjs学习笔记—事件指令 - 学习笔记 - SegmentFault</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000002634554">https://segmentfault.com/a/1190000002634554</a></p>
-<hr>
-<h1 id="jquery-angular-主动触发"><a href="#jquery-angular-主动触发" class="headerlink" title="jquery&#x2F;angular 主动触发"></a><code>jquery</code>&#x2F;<code>angular</code> 主动触发</h1><ul>
-<li>angular ng-click程序触发,方法</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">document.querySelector(&#x27;.nav-bar-title.ng-binding&#x27;).click();// no</span><br><span class="line">$(&#x27;.nav-bar-title.ng-binding&#x27;).click();// no</span><br><span class="line">$(&#x27;.nav-bar-title.ng-binding&#x27;).trigger(&#x27;click&#x27;,function()&#123;&#125;);// no</span><br><span class="line">$(&#x27;.nav-bar-title.ng-binding&#x27;).triggerHandler(&#x27;click&#x27;); // no</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">angular.element(document.querySelector(&#x27;.nav-bar-title.ng-binding&#x27;)).triggerHandler(&#x27;click&#x27;);// ok</span><br><span class="line">angular.element($(&#x27;.nav-bar-title.ng-binding&#x27;)).triggerHandler(&#x27;click&#x27;);// ok</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="javaScript-主动触发"><a href="#javaScript-主动触发" class="headerlink" title="javaScript 主动触发"></a><code>javaScript</code> 主动触发</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 定义</span><br><span class="line">document.addEventListener(&quot;click&quot;,onclick,false);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 触发</span><br><span class="line">var event=document.createEventObject(); //创建对象</span><br><span class="line">document.fireEvent(&quot;onclick&quot;,event);</span><br><span class="line">或</span><br><span class="line">var e=document.createEvent(&quot;MouseEvents&quot;);</span><br><span class="line">e.initMouseEvent(&quot;click&quot;), //初始化事件对象</span><br><span class="line">document.dispatchEvent(e);</span><br></pre></td></tr></table></figure>
-<p><code>JavaScript主动触发事件在浏览器上的差异</code><br><a target="_blank" rel="noopener" href="https://www.web-tinker.com/article/20032.html">https://www.web-tinker.com/article/20032.html</a></p>
-<hr>
-<h1 id="获取-触发-事件的elment对象"><a href="#获取-触发-事件的elment对象" class="headerlink" title="获取 触发 事件的elment对象"></a>获取 触发 事件的elment对象</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(event, event.target);// 选择element</span><br><span class="line">console.log(event.currentTarget, event.currentTarget.querySelector(&quot;video&quot;));// 当前事件element</span><br></pre></td></tr></table></figure>
-<p>见：</p>
-<ul>
-<li>ng-click获取当前标签对象（this）.md</li>
-<li>element click function 传递对象.md</li>
-</ul>
-<hr>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/22605682.jpg"></p>
-<p><code>javascript - window.addEventListener 如何防止同一元素多次绑定同一事件 触发多次？？ - SegmentFault</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000006204885">https://segmentfault.com/q/1010000006204885</a></p>
-<hr>
-<p><strong>参考</strong><br><code>angular ng-click程序触发.md</code></p>
-<p><code>在javascript或者jQuery中绑定按钮点击事件，和在HTML 标签中直接调用onclick属性有什么区别？</code></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000000332625">https://segmentfault.com/q/1010000000332625</a></p>
-<p><code>DOM 事件详解 - 新闻 - SegmentFault</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000000352393">https://segmentfault.com/a/1190000000352393</a></p>
-<p><code>《JavaScript 闯关记》之事件 stone0090/javascript-lessons</code><br><a target="_blank" rel="noopener" href="https://github.com/stone0090/javascript-lessons/tree/master/2.3-Event">https://github.com/stone0090/javascript-lessons/tree/master/2.3-Event</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/04/07/angular%E5%9B%BE%E7%89%87%E9%A2%84%E8%A7%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/04/07/angular%E5%9B%BE%E7%89%87%E9%A2%84%E8%A7%88/" class="post-title-link" itemprop="url">angular图片预览</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-04-07 00:00:02" itemprop="dateCreated datePublished" datetime="2017-04-07T00:00:02+08:00">2017-04-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li><p>html实现</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">  &lt;label for=&quot;InputFile&quot; class=&quot;col-sm-3 control-label&quot;&gt;图片&lt;/label&gt;</span><br><span class="line">  &lt;div class=&quot;col-sm-9&quot;&gt;</span><br><span class="line">    &lt;input id=&quot;InputFile&quot; type=&quot;file&quot;</span><br><span class="line">           onchange=&quot;angular.element(this).scope().modalData.icon = window.URL.createObjectURL(this.files[0]);</span><br><span class="line">                       angular.element(this).scope().$apply()&quot;/&gt;</span><br><span class="line">    &lt;img ng-src=&quot;&#123;&#123;modalData.icon&#125;&#125;&quot;&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>指令实现</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">  &lt;label for=&quot;layout_img&quot; class=&quot;col-sm-3 control-label&quot;&gt;图片&#123;&#123;modalData.layer.background&#125;&#125;&lt;/label&gt;</span><br><span class="line">  &lt;div class=&quot;col-sm-9&quot;&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!--&lt;input id=&quot;layout_img&quot; type=&quot;file&quot; fileread=&quot;uploadme&quot; ng-model=&quot;modalData.layer.background&quot;/&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;img ng-src=&quot;&#123;&#123;modalData.layer.background&#125;&#125;&quot;&gt;--&gt;</span><br><span class="line">    &lt;input id=&quot;layout_img&quot; type=&quot;file&quot; fileread=&quot;modalData.layer.background&quot;/&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;img class=&quot;layout-img&quot; ng-src=&quot;&#123;&#123;modalData.layer.background.url&#125;&#125;&quot;&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.directive(&quot;fileread&quot;, [function () &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    scope: &#123;</span><br><span class="line">      fileread: &quot;=&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    link: function (scope, element, attributes) &#123;</span><br><span class="line">      element.bind(&quot;change&quot;, function (changeEvent) &#123;</span><br><span class="line">        scope.$apply(function () &#123;</span><br><span class="line">                scope.fileread = changeEvent.target.files[0];</span><br><span class="line">              scope.fileread.url = URL.createObjectURL(changeEvent.target.files[0]);        </span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;])</span><br></pre></td></tr></table></figure></li>
-</ul>
-
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在使用<code>getDeclaredMethods</code>方法获取类中的方法时碰到一个奇怪的问题，先来看看<code>getDeclaredMethods</code>方法的注释：</p>
+<blockquote>
+<p>Returns an array containing Method objects reflecting all the declared methods of the class or interface represented by this Class object, including public, protected, default (package) access, and private methods, <strong>but excluding inherited methods</strong>.</p>
+</blockquote>
+<p>谷歌翻译:</p>
+<blockquote>
+<p>返回一个包含 Method 对象的数组，这些对象反映此 Class 对象所表示的类或接口的所有声明方法，包括 public，protected，default（包）访问和私有方法，<strong>但不包括继承的方法</strong>。</p>
+</blockquote>
+<p>注意加粗的字体，可以看到 JDK 注释里明确的说明了<code>getDeclaredMethods</code>方法不会返回继承的方法，我要的功能就是取当前类上的方法(不包含父类的)，但是事情并没有这么简单，下面一起来看看是为什么。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/03/java-reflect-getdeclaredmethods-issue/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1228,7 +1109,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

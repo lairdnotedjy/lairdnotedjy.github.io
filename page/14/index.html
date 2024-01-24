@@ -125,18 +125,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-count">548</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">93</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-count">381</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -162,7 +162,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/16/ionic-native-transitions%20%E8%AF%95%E7%94%A8(%E4%BD%BF%E7%94%A8%E5%8E%9F%E7%94%9F%E5%8A%A8%E7%94%BB)/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/18/linux%20vi%20%E8%A1%8C%E5%8F%B7-%E4%BD%8D%E7%BD%AE-%E6%9F%A5%E6%89%BE-%E5%8C%BA%E9%97%B4-%E8%BE%93%E5%87%BA-%E8%BF%87%E6%BB%A4-%E4%B8%8B%E8%BD%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/12/16/ionic-native-transitions%20%E8%AF%95%E7%94%A8(%E4%BD%BF%E7%94%A8%E5%8E%9F%E7%94%9F%E5%8A%A8%E7%94%BB)/" class="post-title-link" itemprop="url">ionic-native-transitions 试用</a>
+          <a href="/2017/05/18/linux%20vi%20%E8%A1%8C%E5%8F%B7-%E4%BD%8D%E7%BD%AE-%E6%9F%A5%E6%89%BE-%E5%8C%BA%E9%97%B4-%E8%BE%93%E5%87%BA-%E8%BF%87%E6%BB%A4-%E4%B8%8B%E8%BD%BD/" class="post-title-link" itemprop="url">linux vi 行号/位置/查找/区间/输出/过滤/下载</a>
         </h2>
 
         <div class="post-meta-container">
@@ -191,7 +191,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-12-16 00:00:03" itemprop="dateCreated datePublished" datetime="2016-12-16T00:00:03+08:00">2016-12-16</time>
+      <time title="Created: 2017-05-18 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-18T00:00:00+08:00">2017-05-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -211,338 +211,123 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><code>github</code><br><a target="_blank" rel="noopener" href="https://github.com/shprink/ionic-native-transitions">https://github.com/shprink/ionic-native-transitions</a></p>
+          <h1 id="行号"><a href="#行号" class="headerlink" title="行号"></a>行号</h1><p>显示行号 <code>:nu</code><br>全文显示 <code>:set nu</code></p>
+<ul>
+<li>全文行数<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23huf4wo4Z logs]# wc -l localhost_access_log.2017-05-18.txt </span><br><span class="line">770460 localhost_access_log.2017-05-18.txt</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h1><p><code>gg</code>  跳到首一行</p>
+<p><code>GG</code>  跳到尾一行</p>
+<h1 id="查找（相对光标所在位置）"><a href="#查找（相对光标所在位置）" class="headerlink" title="查找（相对光标所在位置）"></a>查找（相对光标所在位置）</h1><p><code>/content</code>  （自上往下）</p>
+<ul>
+<li>下一个<code>n</code></li>
+<li>上一个<code>Shift+n</code></li>
+</ul>
+<p><code>?content</code>  （自 下 往 上 ）</p>
+<ul>
+<li>上 一个<code>n</code></li>
+<li>下 一个<code>Shift+n</code></li>
+</ul>
 <hr>
-<h1 id="1-安装node-modules"><a href="#1-安装node-modules" class="headerlink" title="1.安装node_modules"></a>1.安装<code>node_modules</code></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install ionic-native-transitions --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h1 id="2-安装lib库依赖"><a href="#2-安装lib库依赖" class="headerlink" title="2.安装lib库依赖"></a>2.安装lib库依赖</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bower install shprink/ionic-native-transitions</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="打印出起始行和结束行之间的内容"><a href="#打印出起始行和结束行之间的内容" class="headerlink" title="打印出起始行和结束行之间的内容"></a>打印出起始行和结束行之间的内容</h1><p><code>sed -n  &#39;210048,210049p&#39;  catalina.out</code></p>
 <ul>
-<li>引入<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;./PathToBowerLib/dist/ionic-native-transitions.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>输出文件<br><code>sed -n  &#39;210048,312712p&#39;  catalina.out &gt; catalina.out.0209.12</code></li>
 </ul>
-<h1 id="3-安装cordova插件plugin"><a href="#3-安装cordova插件plugin" class="headerlink" title="3.安装cordova插件plugin"></a>3.安装cordova插件plugin</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Using Cordova</span><br><span class="line">cordova plugin add https://github.com/Telerik-Verified-Plugins/NativePageTransitions#0.6.5</span><br><span class="line"> </span><br><span class="line"># Using Ionic CLI</span><br><span class="line">ionic plugin add https://github.com/Telerik-Verified-Plugins/NativePageTransitions#0.6.5</span><br></pre></td></tr></table></figure>
+<h1 id="过滤打印"><a href="#过滤打印" class="headerlink" title="过滤打印"></a>过滤打印</h1><p><code>cat catalina.out.0209.12 | grep 操作计时</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[k12Service]  操作计时：188ms  类名: com.wosai.teach.restful.knowPoint.KnowPointLoadExpReadInterFace  方法名:getMain() result:</span><br><span class="line">[k12Service]  操作计时：29ms  类名: com.wosai.teach.restful.sys.SysConfigInterface  方法名:sysConfig() result:</span><br><span class="line">[k12Service]  操作计时：120ms  类名: com.wosai.teach.restful.order.FindProductListInterface  方法名:getMain() result:</span><br><span class="line">[k12Service]  操作计时：112ms  类名: com.wosai.teach.restful.order.FindProductListInterface  方法名:getMain() result:</span><br><span class="line">[k12Service]  操作计时：224ms  类名: com.wosai.teach.restful.knowPoint.KnowPointLoadExpReadInterFace  方法名:getMain() result:</span><br></pre></td></tr></table></figure>
 <ul>
-<li>IOS9设备 闪屏问题，安装插件解决<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Using Cordova</span><br><span class="line">cordova plugin add cordova-plugin-wkwebview</span><br><span class="line"> </span><br><span class="line"># Using Ionic CLI</span><br><span class="line">ionic plugin add cordova-plugin-wkwebview</span><br></pre></td></tr></table></figure></li>
+<li>输出文件<br><code>cat catalina.out.0209.12 | grep 操作计时 &gt; catalina.out.0209.12.grep</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23ult4m4yZ logs]# vi catalina.out</span><br><span class="line">catalina.out               catalina.out.0209.12       catalina.out.0209.12.grep </span><br></pre></td></tr></table></figure></li>
+<li>下载文件<br><code>sz catalina.out.0209.12.grep</code></li>
 </ul>
-<h1 id="4-ionic（angular）模块引入-app-js"><a href="#4-ionic（angular）模块引入-app-js" class="headerlink" title="4.ionic（angular）模块引入. app.js "></a>4.ionic（angular）模块引入. <code>app.js </code></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.module(&#x27;yourApp&#x27;, [ &#x27;ionic-native-transitions&#x27; ]);</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="5-安装尝试-无需改变默认配置"><a href="#5-安装尝试-无需改变默认配置" class="headerlink" title="5.安装尝试(无需改变默认配置)"></a>5.安装尝试(无需改变默认配置)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ionic platform add android</span><br><span class="line">ionic run android</span><br></pre></td></tr></table></figure>
-
-
 <hr>
-<h1 id="6-修改默认配置"><a href="#6-修改默认配置" class="headerlink" title="6.修改默认配置"></a>6.修改默认配置</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.config(function($ionicNativeTransitionsProvider)&#123;</span><br><span class="line">    nativeTransitionConfig();//  场景切换,配置</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 场景切换,配置</span><br><span class="line">*/</span><br><span class="line">function nativeTransitionConfig() &#123;</span><br><span class="line">  $ionicNativeTransitionsProvider.setDefaultOptions(&#123;</span><br><span class="line">    duration: 200, // in milliseconds (ms), default 400,</span><br><span class="line">    slowdownfactor: 4, // overlap views (higher number is more) or no overlap (1), default 4</span><br><span class="line">    iosdelay: -1, // ms to wait for the iOS webview to update before animation kicks in, default -1</span><br><span class="line">    androiddelay: -1, // same as above but for Android, default -1</span><br><span class="line">    winphonedelay: -1, // same as above but for Windows Phone, default -1,</span><br><span class="line">    fixedPixelsTop: 0, // the number of pixels of your fixed header, default 0 (iOS and Android)</span><br><span class="line">    fixedPixelsBottom: 0, // the number of pixels of your fixed footer (f.i. a tab bar), default 0 (iOS and Android)</span><br><span class="line">    triggerTransitionEvent: &#x27;$ionicView.afterEnter&#x27;, // internal ionic-native-transitions option</span><br><span class="line">    backInOppositeDirection: false // Takes over default back transition and state back transition to use the opposite direction transition to go back</span><br><span class="line">  &#125;);</span><br><span class="line"> </span><br><span class="line">  /**</span><br><span class="line">   * transitions</span><br><span class="line">   * Slide 滑动</span><br><span class="line">   * Flip 翻转</span><br><span class="line">   * Fade 褪色</span><br><span class="line">   * Drawer 抽屉</span><br><span class="line">   * Curl 卷曲</span><br><span class="line">   */</span><br><span class="line">  $ionicNativeTransitionsProvider.setDefaultTransition(&#123;</span><br><span class="line">    type: &#x27;slide&#x27;,</span><br><span class="line">    direction: &#x27;left&#x27;</span><br><span class="line">  &#125;);</span><br><span class="line"> </span><br><span class="line">  $ionicNativeTransitionsProvider.setDefaultBackTransition(&#123;</span><br><span class="line">    type: &#x27;slide&#x27;,</span><br><span class="line">    direction: &#x27;right&#x27;</span><br><span class="line">  &#125;);</span><br><span class="line"> </span><br><span class="line">  /**</span><br><span class="line">   * 更多配置,详见官方介绍：</span><br><span class="line">   * https://github.com/shprink/ionic-native-transitions</span><br><span class="line">   */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>linux vi 查找 - 疯狂程序员 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/shine0181/article/details/6632597">http://blog.csdn.net/shine0181/article/details/6632597</a></p>
+<p><code>VIM中gg=G是什么 - 编程</code><br><a target="_blank" rel="noopener" href="http://www.myexception.cn/program/880876.html">http://www.myexception.cn/program/880876.html</a></p>
+<p><code>在linux中使用vi 打开文件时，能显示行号吗？_百度知道</code><br><a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/812870968035725732.html">https://zhidao.baidu.com/question/812870968035725732.html</a></p>
+<p><code>linux下的vim/vi永久显示行号</code><br><a target="_blank" rel="noopener" href="http://www.07net01.com/linux/2016/04/1426154.html">http://www.07net01.com/linux/2016/04/1426154.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
 
 
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/16/spring%E6%B3%A8%E8%A7%A3@ResponseBody%E8%BF%94%E5%9B%9EJSON%20%E8%AE%BE%E7%BD%AE%E4%B8%8D%E8%BF%94%E5%9B%9E%E4%B8%BA%20null%20%E7%9A%84%E5%80%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/05/16/spring%E6%B3%A8%E8%A7%A3@ResponseBody%E8%BF%94%E5%9B%9EJSON%20%E8%AE%BE%E7%BD%AE%E4%B8%8D%E8%BF%94%E5%9B%9E%E4%B8%BA%20null%20%E7%9A%84%E5%80%BC/" class="post-title-link" itemprop="url">spring注解@ResponseBody返回JSON 设置不返回为 null 的值</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-16 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-16T00:00:00+08:00">2017-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="方法-一"><a href="#方法-一" class="headerlink" title="方法 一"></a>方法 一</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;mvc:annotation-driven&gt;</span><br><span class="line">    &lt;mvc:message-converters register-defaults=&quot;true&quot;&gt;</span><br><span class="line">        &lt;bean class=&quot;org.springframework.http.converter.json.MappingJackson2HttpMessageConverter&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;objectMapper&quot;&gt;</span><br><span class="line">                &lt;bean class=&quot;com.fasterxml.jackson.databind.ObjectMapper&quot;&gt;</span><br><span class="line">                    &lt;property name=&quot;serializationInclusion&quot;&gt;</span><br><span class="line">                        &lt;value type=&quot;com.fasterxml.jackson.annotation.JsonInclude.Include&quot;&gt;NON_NULL&lt;/value&gt;</span><br><span class="line">                    &lt;/property&gt;</span><br><span class="line">                &lt;/bean&gt;</span><br><span class="line">            &lt;/property&gt;</span><br><span class="line">        &lt;/bean&gt;</span><br><span class="line">    &lt;/mvc:message-converters&gt;</span><br><span class="line">&lt;/mvc:annotation-driven&gt;</span><br></pre></td></tr></table></figure>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000002522525/a-1020000002522849">https://segmentfault.com/q/1010000002522525/a-1020000002522849</a></p>
+<p>https:&#x2F;&#x2F; stackoverflow.com&#x2F;questions&#x2F;4823358&#x2F;spring-configure-responsebody-json-format#answer-13876694</p>
 <hr>
-<p><strong>参考</strong><br><code>ionic-native-transitions让你的Ionic应用比原生还快</code></p>
-<h2 id="http-www-phonegap100-com-article-482-1-html"><a href="#http-www-phonegap100-com-article-482-1-html" class="headerlink" title="http://www.phonegap100.com/article-482-1.html"></a><a target="_blank" rel="noopener" href="http://www.phonegap100.com/article-482-1.html">http://www.phonegap100.com/article-482-1.html</a><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ionic-native-transitions调用原生页面切换实现ionic路由切换，让你的ionic应用比原生的应用更快</span><br></pre></td></tr></table></figure></h2><p><code>ionic react-native和native开发移动app那个好</code><br><a target="_blank" rel="noopener" href="http://www.phonegap100.com/article-486-1.html">http://www.phonegap100.com/article-486-1.html</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ionic使用ionic-native-transitions   调用原生专场基本看不出和原生区别  （适合android ios）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<p><code>让ionic应用实现类原生app的平滑过渡 | 常亮的技术博客</code><br><a target="_blank" rel="noopener" href="http://www.diantuo.net/1613">http://www.diantuo.net/1613</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/16/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-APP%E6%94%AF%E4%BB%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/12/16/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-APP%E6%94%AF%E4%BB%98/" class="post-title-link" itemprop="url">微信支付-APP支付</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-12-16 00:00:02" itemprop="dateCreated datePublished" datetime="2016-12-16T00:00:02+08:00">2016-12-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h1><p><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_3">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_3</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-1-19/54482401-file_1484817226181_73db.png"></p>
-<ul>
-<li>过程说明<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">商户系统和微信支付系统主要交互说明：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">步骤1：用户在商户APP中选择商品，提交订单，选择微信支付。</span><br><span class="line">步骤2：商户后台收到用户支付单，调用微信支付统一下单接口。参见【统一下单API】。</span><br><span class="line">步骤3：统一下单接口返回正常的prepay_id，再按签名规范重新生成签名后，将数据传输给APP。参与签名的字段名为appId，partnerId，prepayId，nonceStr，timeStamp，package。注意：package的值格式为Sign=WXPay</span><br><span class="line">步骤4：商户APP调起微信支付。api参见本章节【app端开发步骤说明】</span><br><span class="line">步骤5：商户后台接收支付通知。api参见【支付结果通知API】</span><br><span class="line">步骤6：商户后台查询支付结果。，api参见【查询订单API】</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="生成订单（-微信-）"><a href="#生成订单（-微信-）" class="headerlink" title="生成订单（ 微信 ）"></a>生成订单（ 微信 ）</h1><p>参考：统一下单接口 <code>&lt;trade_type&gt;APP&lt;/trade_type&gt;</code><br><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;xml&gt;</span><br><span class="line">   &lt;appid&gt;wx2421b1c4370ec43b&lt;/appid&gt;</span><br><span class="line">   &lt;attach&gt;支付测试&lt;/attach&gt;</span><br><span class="line">   &lt;body&gt;APP支付测试&lt;/body&gt;</span><br><span class="line">   &lt;mch_id&gt;10000100&lt;/mch_id&gt;</span><br><span class="line">   &lt;nonce_str&gt;1add1a30ac87aa2db72f57a2375d8fec&lt;/nonce_str&gt;</span><br><span class="line">   &lt;notify_url&gt;http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php&lt;/notify_url&gt;</span><br><span class="line">   &lt;out_trade_no&gt;1415659990&lt;/out_trade_no&gt;</span><br><span class="line">   &lt;spbill_create_ip&gt;14.23.150.211&lt;/spbill_create_ip&gt;</span><br><span class="line">   &lt;total_fee&gt;1&lt;/total_fee&gt;</span><br><span class="line">   &lt;trade_type&gt;APP&lt;/trade_type&gt;</span><br><span class="line">   &lt;sign&gt;0CB01533B8C1EF103065174F50BCA001&lt;/sign&gt;</span><br><span class="line">&lt;/xml&gt; </span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>API签名规范<br><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3</a></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">假设传送的参数如下：</span><br><span class="line">appid： wxd930ea5d5a258f4f</span><br><span class="line">mch_id： 10000100</span><br><span class="line">device_info： 1000</span><br><span class="line">body： test</span><br><span class="line">nonce_str： ibuaiVcKdpRxkhJA</span><br><span class="line"> </span><br><span class="line">第一步：对参数按照key=value的格式，并按照参数名ASCII字典序排序如下：</span><br><span class="line">stringA=&quot;appid=wxd930ea5d5a258f4f&amp;body=test&amp;device_info=1000&amp;mch_id=10000100&amp;nonce_str=ibuaiVcKdpRxkhJA&quot;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">第二步：拼接API密钥：</span><br><span class="line">stringSignTemp=&quot;stringA&amp;key=192006250b4c09247ec02edce69f6a2d&quot;</span><br><span class="line">sign=MD5(stringSignTemp).toUpperCase()=&quot;9A0A8659F005D6984697E2CA0A9CF3B7&quot;</span><br><span class="line"> </span><br><span class="line">最终得到最终发送的数据：</span><br><span class="line">&lt;xml&gt;</span><br><span class="line">&lt;appid&gt;wxd930ea5d5a258f4f&lt;/appid&gt;</span><br><span class="line">&lt;mch_id&gt;10000100&lt;/mch_id&gt;</span><br><span class="line">&lt;device_info&gt;1000&lt;device_info&gt;</span><br><span class="line">&lt;body&gt;test&lt;/body&gt;</span><br><span class="line">&lt;nonce_str&gt;ibuaiVcKdpRxkhJA&lt;/nonce_str&gt;</span><br><span class="line">&lt;sign&gt;9A0A8659F005D6984697E2CA0A9CF3B7&lt;/sign&gt;</span><br><span class="line">&lt;xml&gt;  </span><br></pre></td></tr></table></figure>
-<p>微信提供相关接口在线签名验证工具： <a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/tools/signverify/">https://pay.weixin.qq.com/wiki/tools/signverify/</a></p>
-<ul>
-<li>API密钥<br>商户平台中设置  <a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/">https://pay.weixin.qq.com</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-1-19/41729331-file_1484817256396_ffb0.png"></li>
-</ul>
-<h1 id="调起支付"><a href="#调起支付" class="headerlink" title="调起支付"></a>调起支付</h1><p><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5</a></p>
-<ul>
-<li>android<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">IWXAPI api;</span><br><span class="line">PayReq request = new PayReq();</span><br><span class="line">request.appId = &quot;wxd930ea5d5a258f4f&quot;;</span><br><span class="line">request.partnerId = &quot;1900000109&quot;;</span><br><span class="line">request.prepayId= &quot;1101000000140415649af9fc314aa427&quot;,;</span><br><span class="line">request.packageValue = &quot;Sign=WXPay&quot;;</span><br><span class="line">request.nonceStr= &quot;1101000000140429eb40476f8896f4c9&quot;;</span><br><span class="line">request.timeStamp= &quot;1398746574&quot;;</span><br><span class="line">request.sign= &quot;7FFECB600D7157C5AA49810D2D8F28BC2811827B&quot;;</span><br><span class="line">api.sendReq(req);</span><br></pre></td></tr></table></figure></li>
-<li>cordova plugin ： cordova-plugin-wechat</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://github.com/xu-li/cordova-plugin-wechat">https://github.com/xu-li/cordova-plugin-wechat</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var dto = response.data.object.dto;</span><br><span class="line">// var params = &#123;</span><br><span class="line">//   appid: resData.appid,</span><br><span class="line">//   noncestr: resData.nonce_str, // nonce:随机字符串，不长于32位。推荐随机数生成算法</span><br><span class="line">//   package: resData.package,</span><br><span class="line">//   partnerid: resData.partnerid, // merchant id : 商户号</span><br><span class="line">//   prepayid: resData.prepay_id, // prepay id:微信生成的预支付回话标识，用于后续接口调用中使用，该值有效期为2小时</span><br><span class="line">//   timestamp: resData.timestamp, // timestamp:时间戳 String(10)</span><br><span class="line">//   sign:resData.sign</span><br><span class="line">// &#125;;</span><br><span class="line"> </span><br><span class="line">window.Wechat &amp;&amp; window.Wechat.sendPaymentRequest(dto, function () &#123;</span><br><span class="line">  console.log(&quot;Success&quot;);</span><br><span class="line">  orderCheck(response.data.object.code);// 订单校验</span><br><span class="line">&#125;, function (reason) &#123;</span><br><span class="line">  // alert(&quot;Failed: &quot; + reason);</span><br><span class="line">  console.log(&quot;Failed:&quot;, reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li><p>该sign生成字段名列表见调起支付API<br><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_12">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_12</a></p>
-</li>
-<li><p><code> API签名规范</code>(同上)<br><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3</a></p>
-</li>
-<li><p>依赖API密钥 (同上)</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/16/QQ%E6%94%AF%E4%BB%98-cordova%20qpay/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/12/16/QQ%E6%94%AF%E4%BB%98-cordova%20qpay/" class="post-title-link" itemprop="url">QQ支付-cordova qpay</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-12-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-16T00:00:00+08:00">2016-12-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h1><p><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=201">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=201</a><br><img src="http://p.qpic.cn/qpaywikipic/0/qpaywikipic_582045e17a9263438/0"></p>
-<h1 id="生成订单"><a href="#生成订单" class="headerlink" title="生成订单"></a>生成订单</h1><ul>
-<li><p>参考统一下单接口<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=58">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=58</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;xml&gt;</span><br><span class="line">  &lt;appid&gt;1111223451&lt;/appid&gt; &lt;!-- 应用ID --&gt;</span><br><span class="line">  &lt;body&gt;123&lt;/body&gt; &lt;!-- 商品描述  --&gt;</span><br><span class="line">  &lt;device_info&gt;1234567890abc&lt;/device_info&gt; &lt;!-- 设备信息 --&gt;</span><br><span class="line">  &lt;limit_pay&gt;&lt;/limit_pay&gt; &lt;!-- 支付方式限制  --&gt;</span><br><span class="line">  &lt;mch_id&gt;1301278501&lt;/mch_id&gt; &lt;!-- 商户ID --&gt;</span><br><span class="line">  &lt;nonce_str&gt;fecf31a13be2309093db5df934848583&lt;/nonce_str&gt; &lt;!-- 随机字符串 --&gt;</span><br><span class="line">  &lt;notify_url&gt;https://qpay.qq.com/cgi-bin/pay/qpay_unified_order.cgi&lt;/notify_url&gt;&lt;!-- 支付结果通知地址 --&gt;</span><br><span class="line">  &lt;out_trade_no&gt;2016061235213702&lt;/out_trade_no&gt; &lt;!-- 商户订单号  --&gt;</span><br><span class="line">  &lt;sign&gt;f0c328d362858713b66feafb802615d8&lt;/sign&gt;&lt;!-- 统一下单签名 --&gt;</span><br><span class="line">  &lt;spbill_create_ip&gt;10.123.9.102&lt;/spbill_create_ip&gt; &lt;!-- 终端ip --&gt;</span><br><span class="line">  &lt;total_fee&gt;1&lt;/total_fee&gt; &lt;!-- 价格  --&gt;</span><br><span class="line">  &lt;trade_type&gt;NATIVE&lt;/trade_type&gt; &lt;!-- 支付场景  --&gt;</span><br><span class="line">&lt;/xml&gt;</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>签名规范<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=57">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=57</a></p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">假设传送的参数如下： </span><br><span class="line">appid： d930ea5d5a258f4f </span><br><span class="line">mch_id： 10000100 </span><br><span class="line">device_info： 1000 </span><br><span class="line">body： test </span><br><span class="line">nonce_str： ibuaiVcKdpRxkhJA </span><br><span class="line"> </span><br><span class="line">第一步：对参数按照key=value的格式，并按照参数名ASCII字典序排序如下： </span><br><span class="line">stringA=&quot;appid=d930ea5d5a258f4f&amp;body=test&amp;device_info=1000&amp;mch_id=10000100&amp;nonce_str=ibuaiVcKdpRxkhJA&quot;; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">第二步：拼接API密钥： </span><br><span class="line">stringSignTemp=&quot;stringA&amp;key=192006250b4c09247ec02edce69f6a2d&quot; </span><br><span class="line">sign=MD5(stringSignTemp).toUpperCase()=&quot;9A0A8659F005D6984697E2CA0A9CF3B7&quot; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">最终得到最终发送的数据： </span><br><span class="line">&lt;xml&gt; </span><br><span class="line">&lt;appid&gt;d930ea5d5a258f4f&lt;/appid&gt; </span><br><span class="line">&lt;mch_id&gt;10000100&lt;/mch_id&gt; </span><br><span class="line">&lt;device_info&gt;1000&lt;device_info&gt; </span><br><span class="line">&lt;body&gt;test&lt;/body&gt; </span><br><span class="line">&lt;nonce_str&gt;ibuaiVcKdpRxkhJA&lt;/nonce_str&gt;</span><br><span class="line">&lt;sign&gt;9A0A8659F005D6984697E2CA0A9CF3B7&lt;/sign&gt; </span><br><span class="line">&lt;xml&gt; </span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>API密钥<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/account/api_cert.shtml">https://qpay.qq.com/account/api_cert.shtml</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-12-23/82075208-file_1482463058867_b57.png"></li>
-</ul>
-<h1 id="调起支付"><a href="#调起支付" class="headerlink" title="调起支付"></a>调起支付</h1><ul>
-<li>android<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=165">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=165</a></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">（1）初始化PayApi，并将数据填写完整：</span><br><span class="line">PayApi api = new PayApi();</span><br><span class="line">api.appId = APP_ID; // 在http://open.qq.com注册的AppId,参与支付签名，签名关键字key为appId       </span><br><span class="line">api.serialNumber = ...; // 支付序号,用于标识此次支付</span><br><span class="line">api.callbackScheme = ...; // QQ钱包支付结果回调给urlscheme为callbackScheme的activity.，参看后续的“支付回调结果处理” </span><br><span class="line">api.tokenId = ...; // QQ钱包支付生成的token_id</span><br><span class="line">api.pubAcc = ...; // 手Q公众帐号id.参与支付签名，签名关键字key为pubAcc</span><br><span class="line">api.pubAccHint = ...; // 支付完成页面，展示给用户的提示语：提醒关注公众帐号</span><br><span class="line">api.nonce = ...; // 随机字段串，每次支付时都要不一样.参与支付签名，签名关键字key为nonce</span><br><span class="line">api.timeStamp = ...; // 时间戳，为1970年1月1日00:00到请求发起时间的秒数</span><br><span class="line">api.bargainorId = ...; // 商户号.参与支付签名，签名关键字key为bargainorId</span><br><span class="line">api.sig = ...; // 商户Server下发的数字签名，生成的签名串，参看“数字签名”</span><br><span class="line">api.sigType = &quot;HMAC-SHA1&quot;; // 签名时，使用的加密方式，默认为&quot;HMAC-SHA1&quot;</span><br><span class="line"> </span><br><span class="line">（2）在启动QQ钱包支付前，判断一下数据是否完整，再启动QQ钱包支付：</span><br><span class="line">if (api.checkParams()) &#123;</span><br><span class="line">     openApi.execApi(api);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li><p>cordova plugin：com.wosai.qpay</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">QPay.mqqPay(&#123;</span><br><span class="line">  tokenId: &#x27;1V39f4eaf286fe3718731871b4fe96dc&#x27;,// 订单号</span><br><span class="line">  nonce: &#x27;&#x27;,// 随机数</span><br><span class="line">  bargainorId: &#x27;1424912901&#x27;,// 商户号</span><br><span class="line">  appKey: &#x27;CuWbc7F0XrTpnHBa&#x27;,// appkey</span><br><span class="line">  sig: &#x27;&#x27;</span><br><span class="line">&#125;, function (res) &#123;</span><br><span class="line">  alert(&quot;res:&quot; + res)</span><br><span class="line">&#125;, function (res) &#123;</span><br><span class="line">  alert(&quot;error:&quot; + res)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>APP调用QQ钱包支付-签名规范<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=165">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=165</a></p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">数字签名</span><br><span class="line"> </span><br><span class="line">为了保障商户利益与安全，商户App调用QQ钱包支付时启用另一套签名机制。该签名机制与“商户后台与QQ钱包支付后台的签名机制”是不同的。</span><br><span class="line"> </span><br><span class="line">1、源串构造方法</span><br><span class="line">（1）将需要参与签名的所有参数按key进行字典升序排列。</span><br><span class="line">（2）将第1步中排序后的参数(key=value)用&amp;拼接起来；</span><br><span class="line">（3）key中存在大小写字母，保持大小写字母的存在。不要将key进行统一转换为大写或小写操作；</span><br><span class="line">（4）如果value为空, 生成格式为“key=”，这点与后台之间签名方法是不一样的；</span><br><span class="line">（5）签名原始串中，字段名和字段值都采用原始值，不进行URL Encode。</span><br><span class="line"> </span><br><span class="line">举例：</span><br><span class="line">调用某个接口，接口有如下字段：</span><br><span class="line">appId、nonce、tokenId、pubAcc、bargainorId</span><br><span class="line"> </span><br><span class="line">实际调用接口时，各字段的值：</span><br><span class="line">appId=100619284、nonce=ksjfwierwfjk、tokenId=1000000002、pubAcc=、bargainorId=1900000109</span><br><span class="line"> </span><br><span class="line">正确的签名原始串是：</span><br><span class="line">appId=100619284&amp;bargainorId=1900000109&amp;nonce=ksjfwierwfjk&amp;pubAcc=&amp;tokenId=1000000002</span><br><span class="line"> </span><br><span class="line">常见的错误有：</span><br><span class="line">appId=100619284&amp;bargainorId=1900000109&amp;nonce=ksjfwierwfjk&amp;tokenId=1000000002</span><br><span class="line">appid=100619284&amp;bargainorid=1900000109&amp;nonce=ksjfwierwfjk&amp;pubacc=&amp;tokenid=1000000002</span><br><span class="line">appId=100619284&amp;nonce=ksjfwierwfjk&amp;tokenId=1000000002&amp;pubAcc=&amp;bargainorId=1900000109</span><br><span class="line"> </span><br><span class="line">2、 密钥构造方法</span><br><span class="line">（1）在http://open.qq.com申请appId，并获得appKey；</span><br><span class="line">（2）构造到密钥的方式：在应用的appkey末尾加上一个字符的“&amp;”，即appkey&amp;。</span><br><span class="line"> </span><br><span class="line">示例：</span><br><span class="line">appkey 值为 d139ae6fb0175e5659dce2a7c1fe84d5</span><br><span class="line">正确的密钥为：d139ae6fb0175e5659dce2a7c1fe84d5&amp;</span><br><span class="line"> </span><br><span class="line">3、 生成签名值方法</span><br><span class="line">（1）使用HMAC-SHA1加密算法，使用”密钥构造方法“中得到的密钥对“源串构造方法”中得到的源串进行加密（注：一般程序语言中会内置HMAC-SHA1加密算法的函数，例如PHP5.1.2之后的版本可直接调用hash_hmac函数）；</span><br><span class="line">（2）然后将加密后的字符串进行Base64编码（注：一般程序语言中会内置Base64编码函数，例如PHP中可直接调用 base64_encode() 函数）；</span><br><span class="line">（3）最后得到的签名值sig结果如下：</span><br><span class="line">c6xXw0tNABhOMc869h1bfxTp9Mk= </span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/15/%E6%96%B0%E4%B8%80%E4%BB%A3%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7yarn/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/12/15/%E6%96%B0%E4%B8%80%E4%BB%A3%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7yarn/" class="post-title-link" itemprop="url">新一代包管理工具yarn</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-12-15 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-15T00:00:00+08:00">2016-12-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>Yarn vs npm：你需要知道的一切</code><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23493436?utm_source=tuicool&utm_medium=referral">https://zhuanlan.zhihu.com/p/23493436?utm_source=tuicool&amp;utm_medium=referral</a></p>
-<p><code>新一代包管理工具yarn</code><br><a target="_blank" rel="noopener" href="http://imweb.io/topic/581f6c0bf2e7e042172d618a?utm_source=tuicool&utm_medium=referral">http://imweb.io/topic/581f6c0bf2e7e042172d618a?utm_source=tuicool&amp;utm_medium=referral</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm install === yarn / yarn install</span><br><span class="line">npm install xxx —save === yarn add xxx</span><br><span class="line">npm uninstall xxx —save === yarn remove xxx</span><br><span class="line">npm install xxx —save-dev === yarn add xxx —dev</span><br><span class="line">npm update === yarn upgrade</span><br><span class="line">npm install xxx -g === yarn global add xxx</span><br></pre></td></tr></table></figure>
-
-
+<h1 id="方法-二"><a href="#方法-二" class="headerlink" title="方法 二"></a>方法 二</h1><p>在你要输出的数据的类加上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)</span><br></pre></td></tr></table></figure>
+<p>参考文章：<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/6049523/how-to-configure-spring-mvc-3-to-not-return-null-object-in-json-response#answer-6049967">http://stackoverflow.com/questions/6049523/how-to-configure-spring-mvc-3-to-not-return-null-object-in-json-response#answer-6049967</a></p>
 <hr>
-<ul>
-<li><p>新的包管理工具,主打是速度和依赖管理(可靠性)</p>
-</li>
-<li><p>同样有淘宝的仓库:<br>默认仓库:<code>https://registry.yarnpkg.com</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn config set registry &quot; https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
-<p>我刚在 专家库项目上试了下,删除node_modules再用yarn可以装回去</p>
-</li>
-</ul>
+<p><strong>参考</strong><br><code>spring 注解 @ResponseBody 返回JSON 设置不返回为 null 的值 - yxwb1253587469的博客 - 博客频道 - CSDN.NET</code><br>blog.csdn.net&#x2F;yxwb1253587469&#x2F;article&#x2F;details&#x2F;71195207</p>
 
       
     </div>
@@ -569,7 +354,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/13/%E6%AF%94%E5%AF%B9css%E4%B8%8Ejquery%E9%80%89%E6%8B%A9%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/13/Java%20IDEA%20Maven%E6%90%AD%E5%BB%BA%E5%A4%9A%E6%A8%A1%E5%9D%97%E9%A1%B9%E7%9B%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -587,7 +372,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/12/13/%E6%AF%94%E5%AF%B9css%E4%B8%8Ejquery%E9%80%89%E6%8B%A9%E5%99%A8/" class="post-title-link" itemprop="url">比对css与jquery选择器</a>
+          <a href="/2017/05/13/Java%20IDEA%20Maven%E6%90%AD%E5%BB%BA%E5%A4%9A%E6%A8%A1%E5%9D%97%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">Java IDEA Maven搭建多模块项目</a>
         </h2>
 
         <div class="post-meta-container">
@@ -598,7 +383,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-12-13 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-13T00:00:00+08:00">2016-12-13</time>
+      <time title="Created: 2017-05-13 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-13T00:00:00+08:00">2017-05-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -618,43 +403,33 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="第三位开始"><a href="#第三位开始" class="headerlink" title="第三位开始 &#96;&#96;&#96;"></a>第三位开始 &#96;&#96;&#96;</h1><pre><code>.exam_info &gt; div:nth-child(n+3) &#123;
-  color: #a2a2a2;
-&#125;
-</code></pre>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"># 最前两位</span><br></pre></td></tr></table></figure>
-<pre><code>.exam_info &gt; div:nth-child(-n+2) &#123;
-  color: #a2a2a2;
-&#125;
-</code></pre>
-<pre><code>
-
-# 比对:  Css与jQuery选择器汇总
-名称 |   Css    | jQuery
---|--|--|
-第一个元素  |    :first-child  |    :first, :first-child
-最后个元素  |    :last-child    |  :last, :last-child
-偶数的元素  |    :nth-child(even)   |   :even
-奇数的元素  |    :nth-child(odd)   |   :odd
-大于给定索引值的元素  |    :nth-child(n+2)   |   :gt(0)
-小于给定索引值的元素  |    :nth-child(-1n+8)   |   :lt(2)
+          <h1 id="主工程"><a href="#主工程" class="headerlink" title="主工程"></a>主工程</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/95754311.jpg"></p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/54843808.jpg"></p>
+<h1 id="子模块（web-或不选）"><a href="#子模块（web-或不选）" class="headerlink" title="子模块（web&#x2F;或不选）"></a>子模块（web&#x2F;或不选）</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/87323924.jpg"></p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/42850945.jpg"></p>
+<h1 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/1742924.jpg"></p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/17956154.jpg"></p>
+<hr>
+<h1 id="Maven-多模块项目参考-iBase4J"><a href="#Maven-多模块项目参考-iBase4J" class="headerlink" title="Maven 多模块项目参考 iBase4J"></a>Maven 多模块项目参考 iBase4J</h1><p><a target="_blank" rel="noopener" href="http://git.oschina.net/iBase4J/iBase4J">http://git.oschina.net/iBase4J/iBase4J</a></p>
+<p><code> #32 iBase4J 架构研究 [置顶]</code> <a target="_blank" rel="noopener" href="http://git.oschina.net/iBase4J/iBase4J/issues/32">http://git.oschina.net/iBase4J/iBase4J/issues/32</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/85002761.jpg"></p>
+<h1 id="快速构建"><a href="#快速构建" class="headerlink" title="快速构建"></a>快速构建</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">* 启动命令：</span><br><span class="line">     clean package -P build tomcat7:run-war-only -f pom-sys-service-server.xml</span><br><span class="line">     clean package -P build tomcat7:run-war-only -f pom-sys-web-server.xml</span><br><span class="line">* 打包命令：</span><br><span class="line">     clean package -P build -f pom-sys-service-server.xml</span><br><span class="line">     clean package -P build -f pom-sys-service-server.xml</span><br><span class="line">* 生产环境打包命令：</span><br><span class="line">     clean package -P product -f pom-sys-service-server.xml</span><br><span class="line">     clean package -P product -f pom-sys-service-server.xml</span><br></pre></td></tr></table></figure>
 
 
-
-
-**参考**
-`Css与jQuery选择器转换 gt lt eq - 快乐每一天 - ITeye技术网站`
-http://qiaolevip.iteye.com/blog/2189124
-
-
-
-`jQuery选择器和选取方法 - MaxIE - 博客园`
-http://www.cnblogs.com/MaxIE/p/4078869.html
-
-
-`这 30 类 CSS 选择器，你必须记在脑袋里！ - 开源中国社区`
-http://www.oschina.net/news/57107/30-css-selector-you-should-remeber
-</code></pre>
+<ul>
+<li>pom-sys-service-server.xml (方便在主项目iBase4j中指定具体模块的构建)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">&lt;artifactId&gt;iBase4J-SYS-Service-Server&lt;/artifactId&gt;</span><br><span class="line">&lt;name&gt;$&#123;project.artifactId&#125;&lt;/name&gt;</span><br><span class="line">&lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">&lt;url&gt;http://maven.apache.org&lt;/url&gt;</span><br><span class="line">&lt;parent&gt;</span><br><span class="line">&lt;groupId&gt;org.ibase4j&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;iBase4J&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.1.0&lt;/version&gt;</span><br><span class="line">&lt;relativePath&gt;./&lt;/relativePath&gt;</span><br><span class="line">&lt;/parent&gt;</span><br><span class="line">&lt;modules&gt;</span><br><span class="line">&lt;module&gt;iBase4J-Common&lt;/module&gt;</span><br><span class="line">&lt;module&gt;iBase4J-SYS-Facade&lt;/module&gt;</span><br><span class="line">&lt;module&gt;iBase4J-SYS-Service&lt;/module&gt;</span><br><span class="line">&lt;/modules&gt;</span><br><span class="line">&lt;!-- clean package -P build tomcat7:run-war-only -f pom-sys-service-server.xml --&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h1><p>功能搜索<code>Ctrl+shift+A</code>-<code>reim</code> 选择<code>Reimport</code>即可<code>刷新 工程 maven</code><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-7-21/41633512.jpg"></p>
+<hr>
+<p><strong>参考</strong><br><code>Java一步一步构建web系统 在IDEA下用Maven搭建多模块项目 - 推酷</code>  <code>★</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/FZfiYfF">http://www.tuicool.com/articles/FZfiYfF</a></p>
+<p><code>[工具资源] Intellij IDEA 2016 学习系列之 (一) 创建 maven 多模块项目 - 推酷</code>  <code>★</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/z6ZZzuR">http://www.tuicool.com/articles/z6ZZzuR</a></p>
+<p><code>每日一博 | Maven 多模块项目介绍及搭建 - 推酷</code> <code>★</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/yiIra2">http://www.tuicool.com/articles/yiIra2</a></p>
+<p><code>Maven提高篇系列之（一）——多模块 vs 继承</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/RJBZb2z">www.tuicool.com/articles/RJBZb2z</a></p>
+<p><code>使用命令行快速创建Maven多模块项目 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/Y3Ab2uJ">http://www.tuicool.com/articles/Y3Ab2uJ</a></p>
+<hr>
+<p><code>用idea创建一个maven web项目 - Coder Wu的博客 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/sinat_34596644/article/details/52891274">http://blog.csdn.net/sinat_34596644/article/details/52891274</a></p>
+<p><code>使用IntelliJ IDEA 15和Maven创建Java Web项目 - MyArrow的专栏 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/myarrow/article/details/50824793">http://blog.csdn.net/myarrow/article/details/50824793</a></p>
 
       
     </div>
@@ -681,7 +456,7 @@ http://www.oschina.net/news/57107/30-css-selector-you-should-remeber
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/10/Read-a-programmer-s-rantings/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/12/MySQL-pull-the-massive-data-out-of-memory-error/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -699,7 +474,7 @@ http://www.oschina.net/news/57107/30-css-selector-you-should-remeber
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/12/10/Read-a-programmer-s-rantings/" class="post-title-link" itemprop="url">读《程序员的呐喊》</a>
+          <a href="/2017/05/12/MySQL-pull-the-massive-data-out-of-memory-error/" class="post-title-link" itemprop="url">MySQL 拉取海量数据报 OutOfMemoryError</a>
         </h2>
 
         <div class="post-meta-container">
@@ -710,7 +485,7 @@ http://www.oschina.net/news/57107/30-css-selector-you-should-remeber
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-12-10 22:41:53" itemprop="dateCreated datePublished" datetime="2016-12-10T22:41:53+08:00">2016-12-10</time>
+      <time title="Created: 2017-05-12 22:40:37" itemprop="dateCreated datePublished" datetime="2017-05-12T22:40:37+08:00">2017-05-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -725,7 +500,7 @@ http://www.oschina.net/news/57107/30-css-selector-you-should-remeber
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+          <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
         </span>
     </span>
 
@@ -739,26 +514,50 @@ http://www.oschina.net/news/57107/30-css-selector-you-should-remeber
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><strong>作者简介：</strong>Steve Yegge是一名程序员，也是博主，写了很多关于编程语言，生产力，和软件文化的文章。他拥有华盛顿大学计算机科学本科学位，20年的业界经验，开发领域涉及嵌入式操作系统、可扩展的电子商务系统、移动设备应用、提升软件生产力的工具等。他曾供职于亚马逊和Google等公司。</p>
-<p>徐旭铭，编了十几年程，翻译过几本书，现在在亚马逊当码农。工作和兴趣都是写代码，喜欢看上去很麻烦的问题。住在西雅图，闲暇时喜欢看美剧。</p>
-<p>这本书真是太有意思了，里面充斥了作者对各种语言以及开发现象和编程风格的吐槽，但是读来并不让人反感，也不觉得偏激，真是太有才了，真羡慕可以把吐槽文也写得这么棒的人。在书中，作者着重推荐了《重构》注意是<a target="_blank" rel="noopener" href="https://book.douban.com/subject/1229923/">Refactoring</a>，我刚开始心里想到的是<a target="_blank" rel="noopener" href="https://book.douban.com/subject/5320866/">Rework</a>，其实并不是。这是两本完全不同的书，但是我推荐你把它们都读一读，必然会受益匪浅。书中作者的一句话非常有意思，他说，“在读《重构》之前，他感觉自己这么多年来都像是脱了裤子上班一样，其他人是不是早就读过这本书了？我会不会是唯一不知道的人？”。我想，对于读书都这么如饥似渴的人，并且生怕落后于别人的人，在读到一本好书时的那种焦灼感，怎么可能会一直默默无闻呢？另外说一句，这本书翻译的也很棒，实属不易。</p>
-<p>到今天，重构已经衍生出一整个产业链了，它就是一面旗帜。Java IDE的粉丝们都在为之摇旗呐喊。重构工具就好像摆在商店里的产品一样。翻开菜单从里面挑一个出来，连地球都能撬起来。</p>
-<p>在谈到语言的宗教情况时，这个现象确实很严重，不管是在国内还是在国外，都不缺少狂热的语言宗教分子。当然了这里面的语言指的是计算机世界里的编程语言，而不是我们日常中所说的语言。每个语言狂热分子都把自己所使用的语言视为正统宗教，容不得别人指手画脚，哪怕这些都是善意的行为，在他们眼里，也是对他们语言宗教的亵渎。</p>
-<p>好在当你会的语言越来越多的时候，也就相当于你在不断的改变宗教信仰。每次改变信仰，下一个对你的影响力就越弱，因为你在语言宗教的世界里变得越来越成熟，并且也不那么极端与狂热了，你可以站在一个宗教之外去审视当初自己沉溺其中的宗教。在各个宗教之间切换的时候，使你变得原来越睿智了，再也不屑于为了语言去与别人发生争执了。</p>
-<p>每当遇到一些事物你觉得很好很强大，别人却批评抱怨的时候，你总会忍不住希望他们赶紧离开，好继续坐井观天，这时千万别忘了这一点：之所以我们今天能冲破黑暗时代，生活在一个相对光明的启蒙时代，正是因为我们敢于挑战自己最宝贵的信仰。所以质疑是件好事。</p>
-<p>最重要的是作者指出了结对编程、极限编程、敏捷开发等都是扯犊子的玩意，这些都是软件咨询师搞出来挣钱的套路。其实这也是被逼无奈，如果像以前那样以完成一个项目之后才付款，但是在这过程之中，客户不断的变更需求，大多数软件咨询师以及负责开发项目的人都是挣不到钱的，因为这种项目成功的概率太小了，所以聪明的咨询师们搞出了各种概念并按阶段付款。但是并不能一概而论，有坏的敏捷开发，同时也有好的敏捷开发，在文中作者举了Google的例子作为好的敏捷，不妨看看列出的如下几点：</p>
-<ul>
-<li>经理也至少有一半时间在写代码，所以他们更像是技术主管</li>
-<li>工程师可以在任何时候换组，或者换项目，不会有人质疑你。只要你一句话，第二天就会有人来帮你把东西都搬到新的组那边去</li>
-<li>Google的理念是不去告诉工程师要做什么，他们也是这样严格执行的</li>
-<li>鼓励工程师花工作时间中的20%的时间去做任何想做的事情，而不是日常工作</li>
-<li>很少开会。我估计一个工程师平均一周大概开3次会吧，这还包括了和主管一对一沟通</li>
-<li>安静的环境。工程师或单独，或三五一组，都非常安静地专注于自己的工作</li>
-<li>没有甘特图，或是日期-任务-负责人的表格，或是任何看得到的项目管理工具</li>
-<li>就算真的碰到项目吃紧的时候，大家还是会去吃午饭和晚饭，都是免费的哦，除非自愿，没人会长时间的工作</li>
-</ul>
-<p>感觉作者已经完全被Google收服了，是诚心的。在文中他说，在Google，每周都有新花样，新福利，新变化，新的调研，来问我们怎么才能让大家在Google过得更舒服。当然并不仅仅只是这些，在Google里驱使大家去做正确的事的动因是感激，这超过了所有的因素，甚至比所有的因素加在一起还要多。你会忍不住想要做到更好，因为Google对你的照顾无微不至，让人觉得好像欠了它似的。</p>
+          <p>在用最基本的<code>JDBC</code>拉取数据的时候，由于拉取的是海量数据，所以程序跑了一段时间之后报<code>java.lang.OutOfMemoryError: Java heap space</code>，这个错误很简单，也很好解决，网上一搜一大把，只需要设置<code>ResultSet</code>获取数据模式为<code>row-by-row</code>，但是总结多数的解决方案是如下两种：<br>① 以PreparedStatement为例，需要设置四个参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">preparedStatement = connection.prepareStatement(formatSql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);</span><br><span class="line">preparedStatement.setFetchSize(Integer.MIN_VALUE);</span><br><span class="line">preparedStatement.setFetchDirection(ResultSet.FETCH_REVERSE);</span><br></pre></td></tr></table></figure>
 
+<p>② 同样以PreparedStatement为例，需要设置三个参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">preparedStatement = connection.prepareStatement(formatSql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);</span><br><span class="line">preparedStatement.setFetchSize(Integer.MIN_VALUE);</span><br></pre></td></tr></table></figure>
+
+<p>这种解决方案是可以的，那么本文还有无存在的必要呢？当然有。这两种方案基本上都是参看MySQL官方说明来解决的，具体链接<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-implementation-notes.html">点我</a>，内容摘录如下</p>
+<blockquote>
+<p>By default, ResultSets are completely retrieved and stored in memory. In most cases this is the most efficient way to operate and, due to the design of the MySQL network protocol, is easier to implement. If you are working with ResultSets that have a large number of rows or large values and cannot allocate heap space in your JVM for the memory required, you can tell the driver to stream the results back one row at a time.</p>
+</blockquote>
+<blockquote>
+<p>To enable this functionality, create a Statement instance in the following manner:</p>
+</blockquote>
+<blockquote>
+<p>stmt &#x3D; conn.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY, java.sql.ResultSet.CONCUR_READ_ONLY);<br>stmt.setFetchSize(Integer.MIN_VALUE);</p>
+</blockquote>
+<blockquote>
+<p>The combination of a forward-only, read-only result set, with a fetch size of Integer.MIN_VALUE serves as a signal to the driver to stream result sets row-by-row. After this, any result sets created with the statement will be retrieved row-by-row.</p>
+</blockquote>
+<blockquote>
+<p>There are some caveats with this approach. You must read all of the rows in the result set (or close it) before you can issue any other queries on the connection, or an exception will be thrown.</p>
+</blockquote>
+<blockquote>
+<p>The earliest the locks these statements hold can be released (whether they be MyISAM table-level locks or row-level locks in some other storage engine such as InnoDB) is when the statement completes.</p>
+</blockquote>
+<blockquote>
+<p>If the statement is within scope of a transaction, then locks are released when the transaction completes (which implies that the statement needs to complete first). As with most other databases, statements are not complete until all the results pending on the statement are read or the active result set for the statement is closed.</p>
+</blockquote>
+<blockquote>
+<p>Therefore, if using streaming results, process them as quickly as possible if you want to maintain concurrent access to the tables referenced by the statement producing the result set.</p>
+</blockquote>
+<p>但是我想说，其实一个参数就足矣。只需要设置<code>fetch size</code>为<code>Integer.MIN_VALUE</code>即可。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">preparedStatement = connection.prepareStatement(formatSql);</span><br><span class="line">preparedStatement.setFetchSize(Integer.MIN_VALUE);</span><br></pre></td></tr></table></figure>
+
+<p>这样为什么可以呢？我们来看源码，点开prepareStatement的具体实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mysql.jdbc;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConnectionImpl</span> <span class="keyword">extends</span> <span class="title class_">ConnectionPropertiesImpl</span> <span class="keyword">implements</span> <span class="title class_">MySQLConnection</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> PreparedStatement <span class="title function_">prepareStatement</span><span class="params">(String sql)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.prepareStatement(sql, <span class="number">1003</span>, <span class="number">1007</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到即使你调用的是<code>prepareStatement(formatSql)</code>，但是在实现中调用的是<code>prepareStatement(sql, 1003, 1007)</code>，而<code>ResultSet.TYPE_FORWARD_ONLY = 1003</code>，<code>ResultSet.CONCUR_READ_ONLY = 1007</code>，所以不需要在调用的时候传递<code>TYPE_FORWARD_ONLY </code>和<code>CONCUR_READ_ONLY</code>。</p>
+<p>再来看<code>setFetchDirection</code>的具体实现类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mysql.jdbc;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StatementImpl</span> <span class="keyword">implements</span> <span class="title class_">Statement</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setFetchDirection</span><span class="params">(<span class="type">int</span> direction)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">        <span class="keyword">switch</span>(direction) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1000</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1001</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1002</span>:</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">throw</span> SQLError.createSQLException(Messages.getString(<span class="string">&quot;Statement.5&quot;</span>), <span class="string">&quot;S1009&quot;</span>, <span class="built_in">this</span>.getExceptionInterceptor());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可知，在实现中，当<code>direction</code>值是1000、1001和1002时，其处理逻辑是一样的，那么这些值表示什么意思呢？在<code>ResultSet</code>类中可以查到</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">FETCH_FORWARD</span> <span class="operator">=</span> <span class="number">1000</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">FETCH_REVERSE</span> <span class="operator">=</span> <span class="number">1001</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">FETCH_UNKNOWN</span> <span class="operator">=</span> <span class="number">1002</span>;</span><br></pre></td></tr></table></figure>
+<p>所以再调用<code>preparedStatement.setFetchDirection(ResultSet.FETCH_REVERSE);</code>这一句其实完全没必要，因为不论你传递的是哪个值，其结果都是相同的，所以说，使用流式结果集获取海量数据一个参数足矣，不要迷信网上二手信息，同样不要迷信官网，只有源码最靠谱。</p>
+<p>如果想继续深究，可以查看MySQL判断是否开启流式结果集的方法，实现如下，判断逻辑很简单</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mysql.jdbc;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StatementImpl</span> <span class="keyword">implements</span> <span class="title class_">Statement</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="type">boolean</span> <span class="title function_">createStreamingResultSet</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.resultSetType == <span class="number">1003</span> &amp;&amp; <span class="built_in">this</span>.resultSetConcurrency == <span class="number">1007</span> &amp;&amp; <span class="built_in">this</span>.fetchSize == -<span class="number">2147483648</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -784,7 +583,7 @@ http://www.oschina.net/news/57107/30-css-selector-you-should-remeber
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/10/nginx.conf%20%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8www%E5%89%8D%E7%BC%80/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/09/Gradle-uses-extended-attributes-to-manage-dependent-version-numbers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -802,7 +601,7 @@ http://www.oschina.net/news/57107/30-css-selector-you-should-remeber
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/12/10/nginx.conf%20%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8www%E5%89%8D%E7%BC%80/" class="post-title-link" itemprop="url">nginx.conf 配置自动www前缀</a>
+          <a href="/2017/05/09/Gradle-uses-extended-attributes-to-manage-dependent-version-numbers/" class="post-title-link" itemprop="url">Gradle使用扩展属性管理依赖版本号</a>
         </h2>
 
         <div class="post-meta-container">
@@ -813,91 +612,7 @@ http://www.oschina.net/news/57107/30-css-selector-you-should-remeber
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-12-10 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-10T00:00:00+08:00">2016-12-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="nginx-conf-配置自动www前缀-会改写地址栏"><a href="#nginx-conf-配置自动www前缀-会改写地址栏" class="headerlink" title="nginx.conf 配置自动www前缀(会改写地址栏) &#96;&#96;&#96;"></a>nginx.conf 配置自动www前缀(会改写地址栏) &#96;&#96;&#96;</h1><p>server{<br>    listen       80;<br>    server_name  saixueba.com;<br>    location &#x2F; {<br>             rewrite ^(.*)$ <a target="_blank" rel="noopener" href="http://www.saixueba.com/$1">http://www.saixueba.com/$1</a> permanent;<br>        }<br>}</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">![](http://7xnbs3.com1.z0.glb.clouddn.com/17-1-19/60383016-file_1484816953830_c781.png)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">---</span><br><span class="line">注意:部分浏览器会自动加www前缀(360极速浏览器),</span><br><span class="line">**怎么分辨** 首发请求网络中就带有了www前缀,说明浏览器处理的.没有(如上)就是程序处理的.</span><br><span class="line">![](http://7xnbs3.com1.z0.glb.clouddn.com/17-1-19/86307962-file_1484816982497_68aa.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"># 同时监听</span><br></pre></td></tr></table></figure>
-<p> server {<br>        listen       80;<br>        server_name   saixueba.com    <a target="_blank" rel="noopener" href="http://www.saixueba.com/">www.saixueba.com</a>;</p>
-<pre><code>    # saixueba.com 
-    location / &#123;
-        proxy_pass http://120.55.244.116/sxb_index/;
-    &#125;
-</code></pre>
-<p>}<br>&#96;&#96;&#96;</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/05/Lucene-6-0-index-file-format/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/12/05/Lucene-6-0-index-file-format/" class="post-title-link" itemprop="url">Lucene 6.0 索引文件格式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-12-05 22:01:55" itemprop="dateCreated datePublished" datetime="2016-12-05T22:01:55+08:00">2016-12-05</time>
+      <time title="Created: 2017-05-09 21:15:19" itemprop="dateCreated datePublished" datetime="2017-05-09T21:15:19+08:00">2017-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -926,157 +641,117 @@ http://www.oschina.net/news/57107/30-css-selector-you-should-remeber
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>在Lucene中基本的概念包括：index、document、field和term。一个index包含一个documents的序列</p>
-<ul>
-<li>一个document是一个fields的序列</li>
-<li>一个field是一个命名的terms序列</li>
-<li>一个term是一个bytes的序列</li>
-</ul>
-<p>在两个不同fields中的相同bytes序列被认为是不同的term。因此，term表示为一对：命名field的字符串，以及field内的bytes。</p>
-<h4 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h4><p>谈到倒排索引，那么首先看看正排是什么样子的呢？假设文档1包含【中文、英文、日文】，文档2包含【英文、日文、韩文】，文档3包含【韩文，中文】那么根据文档去查找内容的话</p>
-<ul>
-<li>文档1-&gt;【中文、英文、日文】</li>
-<li>文档2-&gt;【英文、日文、韩文】</li>
-<li>文档3-&gt;【韩文，中文】</li>
-</ul>
-<p>反过来，根据内容去查找文档</p>
-<ul>
-<li>中文-&gt;【文档1、文档3】</li>
-<li>英文-&gt;【文档1、文档2】</li>
-<li>日文-&gt;【文档1、文档2】</li>
-<li>韩文-&gt;【文档2、文档3】</li>
-</ul>
-<p>就是倒排索引，而Lucene擅长的也正在于此。</p>
-<h4 id="Fields的类型"><a href="#Fields的类型" class="headerlink" title="Fields的类型"></a>Fields的类型</h4><ul>
-<li>TextField：索引并分词，不包含词向量，多用于文本的正文</li>
-<li>StringField：索引但不分词，整个String作为单个标记索引，例如可用于“国家名称”或“ID”等，或者其它任何你想要用来排序的字段</li>
-<li>IntPoint：int型用于精确&#x2F;范围查询的索引</li>
-<li>LongPoint：long型用于精确&#x2F;范围查询的索引</li>
-<li>FloatPoint：float型用于精确&#x2F;范围查询的索引</li>
-<li>DoublePoint：double型用于精确&#x2F;范围查询的索引</li>
-<li>SortedDocValuesField：存储每个文档BytesRef值的字段，索引用于排序，如果需要存储值，需要再用StoredField实例</li>
-<li>SortedSetDocValuesField：存储每个文档一组BytesRef值的字段，索引用于faceting&#x2F;grouping&#x2F;joining，如果需要存储值，需要再用StoredField实例</li>
-<li>NumericDocValuesField：存储每个文档long值的字段，用于scoring&#x2F;sorting&#x2F;值检索</li>
-<li>SortedNumericDocValuesField：存储每个文档一组long值的字段，用于scoring&#x2F;sorting&#x2F;值检索</li>
-<li>StoredField：用于在汇总结果中检索的仅存储值</li>
-</ul>
-<h4 id="段（Segments）"><a href="#段（Segments）" class="headerlink" title="段（Segments）"></a>段（Segments）</h4><p>Lucene的索引可能是由多个子索引或Segments组成。每个Segment是一个完全独立地索引，可以单独用于搜索。索引涉及</p>
-<ol>
-<li>为新添加的documents创建新的segments</li>
-<li>合并已经存在的segments</li>
-</ol>
-<p>搜索可能涉及多个segments或&#x2F;和多个索引，每个索引可能由一组segments组成。</p>
-<h4 id="文档编号"><a href="#文档编号" class="headerlink" title="文档编号"></a>文档编号</h4><p>Lucene通过一个整型的文档编号指向每个文档，第一个被加入索引的文档编号为0，后续加入的文档编号依次递增。注意文档编号是可能发生变化的，所以在Lucene外部存储这些值时需要格外小心。</p>
-<h3 id="索引结构概述"><a href="#索引结构概述" class="headerlink" title="索引结构概述"></a>索引结构概述</h3><p>每个segment索引包括信息</p>
-<ul>
-<li>Segment info：包含有关segment的元数据，例如文档编号，使用的文件</li>
-<li>Field names：包含索引中使用的字段名称集合</li>
-<li>Stored Field values：对于每个document，它包含属性-值对的列表，其中属性是字段名称。这些用于存储有关文档的辅助信息，例如其标题、url或访问数据库的标识符</li>
-<li>Term dictionary：包含所有文档的所有索引字段中使用的所有terms的字典。字典还包括包含term的文档编号，以及指向term的频率和接近度的指针</li>
-<li>Term Frequency data：对于字典中的每个term，包含该term的所有文档的数量以及该term在该文档中的频率，除非省略频率（IndexOptions.DOCS）</li>
-<li>Term Proximity data：对于字典中的每个term，term在每个文档中出现的位置。注意，如果所有文档中的所有字段都省略位置数据，则不会存在</li>
-<li>Normalization factors：对于每个文档中的每个字段，存储一个值，该值将乘以该字段上的匹配的分数</li>
-<li>Term Vectors：对于每个文档中的每个字段，可以存储term vector，term vector由term文本和term频率组成</li>
-<li>Per-document values：与存储的值类似，这些也以文档编号作为key，但通常旨在被加载到主存储器中以用于快速访问。存储的值通常用于汇总来自搜索的结果，而每个文档值对于诸如评分因子是有用的</li>
-<li>Live documents：一个可选文件，指示哪些文档是活动的</li>
-<li>Point values：可选的文件对，记录索引字段尺寸，以实现快速数字范围过滤和大数值（例如BigInteger、BigDecimal（1D）、地理形状交集（2D，3D））</li>
-</ul>
-<h3 id="文件命名"><a href="#文件命名" class="headerlink" title="文件命名"></a>文件命名</h3><p>属于一个段的所有文件具有相同的名称和不同的扩展名。当使用复合索引文件，这些文件（除了段信息文件、锁文件和已删除的文档文件）将压缩成单个<code>.cfs</code>文件。当任何索引文件被保存到目录时，它被赋予一个从未被使用过的文件名字。</p>
-<h3 id="文件扩展名摘要"><a href="#文件扩展名摘要" class="headerlink" title="文件扩展名摘要"></a>文件扩展名摘要</h3><p>| 名称 | 文件扩展名 | 简短描述 |<br>| ———— | ———— |<br>| Segments File | segments_N | 保存了一个提交点（a commit point）的信息 |<br>| Lock File | write.lock | 防止多个IndexWriter同时写到一份索引文件中 |<br>| Segment Info| .si | 保存了索引段的元数据信息 |<br>| Compound File | .cfs，.cfe | 一个可选的虚拟文件，把所有索引信息都存储到复合索引文件中 |<br>| Fields | .fnm | 保存fields的相关信息 |<br>| Field Index | .fdx | 保存指向field data的指针|<br>| Field Data | .fdt | 文档存储的字段的值 |<br>| Term Dictionary | .tim |term词典，存储term信息 |<br>| Term Index | .tip | 到Term Dictionary的索引|<br>| Frequencies | .doc | 由包含每个term以及频率的docs列表组成 |<br>| Positions | .pos | 存储出现在索引中的term的位置信息 |<br>| Payloads | .pay | 存储额外的per-position元数据信息，例如字符偏移和用户payloads |<br>| Norms | .nvd，.nvm | .nvm文件保存索引字段加权因子的元数据，.nvd文件保存索引字段加权数据 |<br>| Per-Document Values | .dvd，.dvm | .dvm文件保存索引文档评分因子的元数据，.dvd文件保存索引文档评分数据 |<br>| Term Vector Index | .tvx | 将偏移存储到文档数据文件中 |<br>| Term Vector Documents | .tvd | 包含有term vectors的每个文档信息 |<br>| Term Vector Fields | .tvf | 字段级别有关term vectors的信息 |<br>| Live Documents | .liv | 哪些是有效文件的信息 |<br>| Point values | .dii，.dim | 保留索引点，如果有的话 |</p>
-<h4 id="锁文件"><a href="#锁文件" class="headerlink" title="锁文件"></a>锁文件</h4><p>默认情况下，存储在索引目录中的锁文件名为“write.lock”。如果锁目录与索引目录不同，则锁文件将命名为“XXXX-write.lock”，其中XXXX是从索引目录的完整路径导出的唯一前缀。此锁文件确保每次只有一个写入程序在修改索引。</p>
-<p>英文文档参见：<a target="_blank" rel="noopener" href="https://lucene.apache.org/core/6_0_0/core/org/apache/lucene/codecs/lucene60/package-summary.html">https://lucene.apache.org/core/6_0_0&#x2F;core&#x2F;org&#x2F;apache&#x2F;lucene&#x2F;codecs&#x2F;lucene60&#x2F;package-summary.html</a></p>
+          <h4 id="Maven预设变量"><a href="#Maven预设变量" class="headerlink" title="Maven预设变量"></a>Maven预设变量</h4><p>使用过<code>Maven</code>的人应该都知道，我们在<code>Maven</code>项目中添加依赖的一般性做法。就是打开<code>pom.xml</code>文件，在<code>&lt;dependencies&gt;</code>节点下添加</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>包含坐标和版本号的内容，那么在<code>Java</code>类文件中，就可以引用<code>Lucene</code>包中的各种类了。但是要注意一点，这里面的版本号是以硬编码的形式存在，作为一个合格的软件开发者，要尽量在你的代码中避免硬编码的情况。为什么呢？比如我需要依赖其它的<code>Lucene</code>模块，那么<code>pom.xml</code>中添加内容如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-analyzers-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-queryparser<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-highlighter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-queries<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>假设经年累月，项目需要升级，<code>Lucene</code>的新版本也已发布，那么是不是需要手动修改每一行<code>&lt;version&gt;5.5.0&lt;/version&gt;</code>呢？这还只是依赖几个模块的问题，假设你依赖成百上千个模块，其版本号都需要升级，是不是觉得想抽当初的自己呢？其实在<code>Maven</code>中这种情况很好解决、就是利用预设变量。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version.lucene</span>&gt;</span>6.0.0<span class="tag">&lt;/<span class="name">version.lucene</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-analyzers-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-queryparser<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-highlighter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-queries<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>那么以后再遇到项目升级的情况，只需要手动修改<code>&lt;version.lucene&gt;6.0.0&lt;/version.lucene&gt;</code>一行代码即可搞定，所有引用到该版本变量的依赖都自动升级，这样来管理依赖，是不是很哈皮呢？</p>
+<h4 id="Gradle单模块"><a href="#Gradle单模块" class="headerlink" title="Gradle单模块"></a>Gradle单模块</h4><p>同样作为后起之秀的<code>Gradle</code>如何优雅地解决类似问题呢？硬编码的写法如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile &quot;org.apache.lucene:lucene-core:5.5.0&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优雅的写法①如下，打开<code>build.gradle</code>文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ext &#123;</span><br><span class="line">    luceneVersion = &#x27;6.5.0&#x27;</span><br><span class="line">&#125;</span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &quot;org.apache.lucene:lucene-core:$luceneVersion&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一定要注意包含<code>$</code>符号时，要用双引号，我就因用单引号在这上吃过亏。在<code>Gradle</code>中单引号和双引号都是合法的，但是略有不同。单引号中的内容严格对应<code>Java</code>中的<code>String</code>，不对<code>$</code>符号进行转义。双引号的内容则和脚本语言处理有点像，如果字符中有<code>$</code>号的话，则它会先对<code>$</code>表达式求值。在<code>Gradle</code>中，其实还有三引号的情形，这代表什么呢？三引号中的字符串支持任意换行，比如</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> multieLines = <span class="string">&#x27;&#x27;</span><span class="string">&#x27; begin</span></span><br><span class="line"><span class="string">  line  1</span></span><br><span class="line"><span class="string">  line  2</span></span><br><span class="line"><span class="string">  line  3</span></span><br><span class="line"><span class="string">  end &#x27;</span><span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
 
-      
-    </div>
+<p>除了①，还有优雅的写法②，使用字典类型，修改<code>build.gradle</code>文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ext &#123;</span><br><span class="line">    javaSourceCompatibility = &#x27;1.8&#x27;</span><br><span class="line">    libVersions = [</span><br><span class="line">            junit : &#x27;4.12&#x27;,</span><br><span class="line">            lucene: &#x27;6.5.0&#x27;,</span><br><span class="line">            guava : &#x27;20.0&#x27;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &quot;junit:junit:$libVersions.junit&quot;</span><br><span class="line">    compile &quot;com.google.guava:guava:$libVersions.guava&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/02/npm%20registry%E4%BB%93%E5%BA%93%E5%88%87%E6%8D%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/12/02/npm%20registry%E4%BB%93%E5%BA%93%E5%88%87%E6%8D%A2/" class="post-title-link" itemprop="url">npm registry仓库切换</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-12-02 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-02T00:00:00+08:00">2016-12-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="安装npm仓库管理"><a href="#安装npm仓库管理" class="headerlink" title="安装npm仓库管理 &#96;&#96;&#96;"></a>安装npm仓库管理 &#96;&#96;&#96;</h1><p>npm install nrm -g<br>nrm ls</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/Pana/nrm</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看仓库</span><br></pre></td></tr></table></figure>
+<h4 id="Gradle多模块"><a href="#Gradle多模块" class="headerlink" title="Gradle多模块"></a>Gradle多模块</h4><p>当在一个根项目下有多个子模块，那么一种简单的做法是在每个子模块中都定义<code>ext</code>代码块，声明需要使用到的版本号变量，这样做当然可以。但是当遇到需要升级版本号的情况时，需要手动修改所有的子模块，其实还有更优雅的解决方案。就是在根项目中定义<code>ext</code>代码块，打开根项目的<code>build.gradle</code>定义</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ext &#123;</span><br><span class="line">    luceneVersion = &#x27;6.5.0&#x27;</span><br><span class="line">    libVersions = [</span><br><span class="line">            junit : &#x27;4.12&#x27;,</span><br><span class="line">            guava : &#x27;20.0&#x27;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在每个子模块的<code>build.gradle</code>中都可以直接引用之，方式如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile &quot;junit:junit:$&#123;rootProject.libVersions.junit&#125;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样，当需要升级版本号的时候，只需要升级根项目中的变量即可，所用子模块的版本号会自动升级。</p>
+<h4 id="消除Gradle编译警告"><a href="#消除Gradle编译警告" class="headerlink" title="消除Gradle编译警告"></a>消除Gradle编译警告</h4><p>通过Gradle编译项目过程中，有时会报如下警告信息</p>
 <blockquote>
-<p>nrm ls</p>
+<p>注: xxx.java使用或覆盖了已过时的 API。<br>注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。<br>注: xxx.java使用了未经检查或不安全的操作。<br>注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。</p>
 </blockquote>
-<p>  npm —- <a target="_blank" rel="noopener" href="https://registry.npmjs.org/">https://registry.npmjs.org/</a><br>  cnpm — <a target="_blank" rel="noopener" href="http://r.cnpmjs.org/">http://r.cnpmjs.org/</a></p>
-<ul>
-<li>taobao - <a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org/</a><br>nj —– <a target="_blank" rel="noopener" href="https://registry.nodejitsu.com/">https://registry.nodejitsu.com/</a><br>rednpm - <a target="_blank" rel="noopener" href="http://registry.mirror.cqupt.edu.cn/">http://registry.mirror.cqupt.edu.cn/</a><br>npmMirror  <a target="_blank" rel="noopener" href="https://skimdb.npmjs.com/registry/">https://skimdb.npmjs.com/registry/</a><br>edunpm - <a target="_blank" rel="noopener" href="http://registry.enpmjs.org/">http://registry.enpmjs.org/</a><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># 切换</span><br></pre></td></tr></table></figure>
-nrm use cnpm</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"># 手动删除registry配置</span><br></pre></td></tr></table></figure>
-<p>npm config delete registry<br>npm config delete disturl</p>
-<p>或者<br>npm config edit<br>找到淘宝那两行,删除</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"># 手动指定registry</span><br><span class="line">- 设置</span><br></pre></td></tr></table></figure>
-<p>npm config set registry <a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 查看</span><br></pre></td></tr></table></figure>
-<p>npm config list<br>&#96;&#96;&#96;</p>
+<p>警告不是Error，虽然不影响编译，但是看着总是不舒服，所以想办法消除警告信息。根据StackOverflow上的<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/18689365/how-to-add-xlintunchecked-to-my-android-gradle-based-project">问答</a>，在<code>build.gradle</code>中添加如下配置即可消除警告。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    gradle.projectsEvaluated &#123;</span><br><span class="line">        tasks.withType(JavaCompile) &#123;</span><br><span class="line">            options.compilerArgs &lt;&lt; &quot;-Xlint:unchecked&quot; &lt;&lt; &quot;-Xlint:deprecation&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/09/ionic%E6%97%A5%E6%9C%9F%E6%8E%A7%E4%BB%B6ionicdatepicker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/05/09/ionic%E6%97%A5%E6%9C%9F%E6%8E%A7%E4%BB%B6ionicdatepicker/" class="post-title-link" itemprop="url">ionic日期控件ionicdatepicker</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-09 00:00:02" itemprop="dateCreated datePublished" datetime="2017-05-09T00:00:02+08:00">2017-05-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="ionic-datepicker"><a href="#ionic-datepicker" class="headerlink" title="ionic-datepicker"></a>ionic-datepicker</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bower install ionic-datepicker --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://market.ionic.io/plugins/ionicdatepicker">https://market.ionic.io/plugins/ionicdatepicker</a><br><code>github</code> <a target="_blank" rel="noopener" href="https://github.com/rajeshwarpatlolla/ionic-datepicker">https://github.com/rajeshwarpatlolla/ionic-datepicker</a>  <code>★</code><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/42969560.jpg"></p>
+<hr>
+<h1 id="datepicker-for-ionic"><a href="#datepicker-for-ionic" class="headerlink" title="datepicker-for-ionic"></a>datepicker-for-ionic</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bower i datepicker-for-ionic --save</span><br><span class="line">npm i datepicker-for-ionic --save</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/datepicker-for-ionic">https://www.npmjs.com/package/datepicker-for-ionic</a><br><a target="_blank" rel="noopener" href="http://npm.taobao.org/package/datepicker-for-ionic">http://npm.taobao.org/package/datepicker-for-ionic</a></p>
+<p><code>github</code>   <a target="_blank" rel="noopener" href="https://github.com/celsomarques/ionic-datepicker">https://github.com/celsomarques/ionic-datepicker</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/72000024.jpg"></p>
+<hr>
+<p><strong>参考</strong><br><code>ionic之时间&amp;日期组件实例 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/xuexiiphone/article/details/52087915">http://blog.csdn.net/xuexiiphone/article/details/52087915</a></p>
+<p><code>Ionic集成ionic-datepicker插件 - ljw124213的博客 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/ljw124213/article/details/60588752">http://blog.csdn.net/ljw124213/article/details/60588752</a></p>
 
       
     </div>
@@ -1103,7 +778,7 @@ nrm use cnpm</li>
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/01/react-native%20Fetching%20JS%20Bundle%20%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/09/jetbrains%20IntelliJ-Webstorm%20svn%E6%8F%92%E4%BB%B6%E5%88%9D%E5%A7%8B%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1121,7 +796,7 @@ nrm use cnpm</li>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/12/01/react-native%20Fetching%20JS%20Bundle%20%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/" class="post-title-link" itemprop="url">react-native Fetching JS Bundle 问题排查</a>
+          <a href="/2017/05/09/jetbrains%20IntelliJ-Webstorm%20svn%E6%8F%92%E4%BB%B6%E5%88%9D%E5%A7%8B%E5%8C%96/" class="post-title-link" itemprop="url">jetbrains IntelliJ/Webstorm svn插件初始化</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1132,7 +807,7 @@ nrm use cnpm</li>
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-12-01 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-01T00:00:00+08:00">2016-12-01</time>
+      <time title="Created: 2017-05-09 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-09T00:00:00+08:00">2017-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1152,21 +827,333 @@ nrm use cnpm</li>
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-1-19/66720886-file_1484816673101_12b00.png"></p>
-<h1 id="排查React-Packager日志"><a href="#排查React-Packager日志" class="headerlink" title="排查React Packager日志"></a>排查<code>React Packager</code>日志</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Scanning 1 folders for symlinks in G:\liuxiang_code_git\my-react-native\30-days-of-react-native-development\node_modules\.npminstall\react-native\0.34.1 (1ms)</span><br><span class="line">┌────────────────────────────────────────────────────────── ──────────────────┐</span><br><span class="line"> │  Running packager on port 8081.                                            │</span><br><span class="line"> │                                                                            │</span><br><span class="line"> │  Keep this packager running while developing on any JS projects. Feel      │</span><br><span class="line"> │  free to close this tab and run your own packager instance if you          │</span><br><span class="line"> │  prefer.                                                                   │</span><br><span class="line"> │                                                                            │</span><br><span class="line"> │  https://github.com/facebook/react-native                                  │</span><br><span class="line"> │                                                                            │</span><br><span class="line">└────────────────────────────────────────────────────────── ──────────────────┘</span><br><span class="line">Looking for JS files in</span><br><span class="line">   G:\liuxiang_code_git\my-react-native\30-days-of-react-native-development\node_modules\.npminstall\react-native\0.34.1\react-native</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>可见<code>Looking for JS files in</code>项目目标不应该在<code>node_modules</code>中<br>正确的目标应该是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">G:\liuxiang_code_git\my-react-native\30-days-of-react-native-development</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>删除<code>node_modules</code>,重装.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+          <h1 id="subversion-工具-下载"><a href="#subversion-工具-下载" class="headerlink" title="subversion 工具 下载"></a>subversion 工具 下载</h1><p><a target="_blank" rel="noopener" href="http://subversion.apache.org/packages.html#windows">http://subversion.apache.org/packages.html#windows</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/88396036.jpg"></p>
+<hr>
 <ul>
-<li>国内加速<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>查看<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config get registry</span><br></pre></td></tr></table></figure></li>
+<li>**subversion(支持控制台Command) **<br><a target="_blank" rel="noopener" href="https://tortoisesvn.net/downloads.html">https://tortoisesvn.net/downloads.html</a>  <code>TortoiseSVN-1.9.5.27581-x64-svn-1.9.5.msi</code></li>
 </ul>
+<p>使用的是TortoiseSVN-1.9.4.27285-x64-svn-1.9.4，安装过程需要注意的是，默认安装没有选择”command line client tools”<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/25113416.jpg"></p>
+<ul>
+<li><p>**subversion **  绿色免安装<br><a target="_blank" rel="noopener" href="http://subversion.apache.org/download.cgi#recommended-release">http://subversion.apache.org/download.cgi#recommended-release</a>  <code>subversion-1.9.5.zip</code><br><strong>命令行支持，配置环境变量</strong>：path +&#x3D; <code>F:\Tool\SVN,CVS\Apache-Subversion-1.9.5\bin</code></p>
+</li>
+<li><p>** sliksvn **  ： <code>Slik-Subversion-1.9.5-x64.msi</code><br><a target="_blank" rel="noopener" href="https://sliksvn.com/download/">https://sliksvn.com/download/</a></p>
+</li>
+</ul>
+<hr>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p><code>Ctrl + Alt + S</code><br>** Use Command line client ** ：  <code>svn</code> 或 <code>C:\Program Files\SlikSvn\bin\svn.exe</code><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/56881942.jpg"></p>
+<hr>
+<p><strong>参考</strong><br><code>Windows下使用svn命令行.md</code></p>
+<p><code>Webstorm2016使用技巧——SVN插件使用 - 博客频道 - CSDN.NET</code></p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/hysh_keystone/article/details/52013789">http://blog.csdn.net/hysh_keystone/article/details/52013789</a></p>
+<p><code>Webstorm SVN配置_屋里屋外点点_新浪博客</code><br><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_9984f2fb0102w8av.html">http://blog.sina.com.cn/s/blog_9984f2fb0102w8av.html</a></p>
+<p><code>webstorm上svn的安装使用</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/jgj0129/article/details/52757115">http://blog.csdn.net/jgj0129/article/details/52757115</a></p>
+<p><code>WebStorm配置svn共享、检出项目-博客-云栖社区-阿里云</code><br><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/46981">https://yq.aliyun.com/articles/46981</a></p>
 
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/08/ionic%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/05/08/ionic%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1/" class="post-title-link" itemprop="url">ionic嵌套路由</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-08 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-08T00:00:00+08:00">2017-05-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="getting-started"><a href="#getting-started" class="headerlink" title="getting-started"></a>getting-started</h1><p><a target="_blank" rel="noopener" href="http://ionicframework.com/getting-started">http://ionicframework.com/getting-started</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/30893720.jpg"></p>
+<hr>
+<h1 id="示例：-ionic-starter-tabs"><a href="#示例：-ionic-starter-tabs" class="headerlink" title="示例： ionic-starter-tabs"></a>示例： ionic-starter-tabs</h1><p><a target="_blank" rel="noopener" href="https://github.com/driftyco/ionic-starter-tabs">https://github.com/driftyco/ionic-starter-tabs</a></p>
+<p><a target="_blank" rel="noopener" href="http://plnkr.co/edit/qYMCrt?p=preview">http://plnkr.co/edit/qYMCrt?p=preview</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/36107114.jpg"></p>
+<ul>
+<li><p>tab &#x2F; tab.dash， tab.friends</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  // setup an abstract state for the tabs directive</span><br><span class="line">  .state(&#x27;tab&#x27;, &#123;</span><br><span class="line">    url: &quot;/tab&quot;,</span><br><span class="line">    abstract: true,</span><br><span class="line">    templateUrl: &quot;tabs.html&quot;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  // Each tab has its own nav history stack:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  .state(&#x27;tab.dash&#x27;, &#123;</span><br><span class="line">    url: &#x27;/dash&#x27;,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;tab-dash&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;tab-dash.html&#x27;,</span><br><span class="line">        controller: &#x27;DashCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  .state(&#x27;tab.friends&#x27;, &#123;</span><br><span class="line">    url: &#x27;/friends&#x27;,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;tab-friends&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;tab-friends.html&#x27;,</span><br><span class="line">        controller: &#x27;FriendsCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  .state(&#x27;tab.friend-detail&#x27;, &#123;</span><br><span class="line">    url: &#x27;/friend/:friendId&#x27;,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;tab-friends&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;friend-detail.html&#x27;,</span><br><span class="line">        controller: &#x27;FriendDetailCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  .state(&#x27;tab.account&#x27;, &#123;</span><br><span class="line">    url: &#x27;/account&#x27;,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;tab-account&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;tab-account.html&#x27;,</span><br><span class="line">        controller: &#x27;AccountCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// if none of the above states are matched, use this as the fallback</span><br><span class="line">$urlRouterProvider.otherwise(&#x27;/tab/dash&#x27;);</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>tabs.html</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;ion-tabs class=&quot;tabs-icon-top&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- Pets Tab --&gt;</span><br><span class="line">  &lt;ion-tab title=&quot;Dashboard&quot; icon=&quot;icon ion-home&quot; href=&quot;#/tab/dash&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-dash&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/ion-tab&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- Adopt Tab --&gt;</span><br><span class="line">  &lt;ion-tab title=&quot;Friends&quot; icon=&quot;icon ion-heart&quot; href=&quot;#/tab/friends&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-friends&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/ion-tab&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- About Tab --&gt;</span><br><span class="line">  &lt;ion-tab title=&quot;Account&quot; icon=&quot;icon ion-gear-b&quot; href=&quot;#/tab/account&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-account&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/ion-tab&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/ion-tabs&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="示例：-ionic-starter-sidemenu"><a href="#示例：-ionic-starter-sidemenu" class="headerlink" title="示例： ionic-starter-sidemenu"></a>示例： ionic-starter-sidemenu</h1><p><a target="_blank" rel="noopener" href="https://github.com/driftyco/ionic-starter-sidemenu">https://github.com/driftyco/ionic-starter-sidemenu</a></p>
+<p><a target="_blank" rel="noopener" href="http://plnkr.co/edit/0RXSDB?p=preview">http://plnkr.co/edit/0RXSDB?p=preview</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/68685846.jpg"></p>
+<h1 id="侧边栏-菜单"><a href="#侧边栏-菜单" class="headerlink" title="侧边栏+菜单"></a>侧边栏+菜单</h1><ul>
+<li><p>app</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">  .state(&#x27;app&#x27;, &#123;</span><br><span class="line">    url: &#x27;/app&#x27;,</span><br><span class="line">    abstract: true,</span><br><span class="line">    templateUrl: &#x27;app/app/menu.html&#x27;,</span><br><span class="line">    controller: &#x27;AppCtrl&#x27;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></li>
+<li><p>app.table</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">  .state(&#x27;app.table&#x27;, &#123;</span><br><span class="line">    url: &#x27;/table&#x27;,</span><br><span class="line">    templateUrl: &#x27;app/table/table.html&#x27;,</span><br><span class="line">    controller: &#x27;TableCtrl&#x27;</span><br><span class="line">    // views:&#123;</span><br><span class="line">    //   &#x27;tableContent&#x27;:&#123;</span><br><span class="line">    //     templateUrl:&#x27;app/table/table.html&#x27;,</span><br><span class="line">    //     controller:&#x27;TableCtrl&#x27;</span><br><span class="line">    //   &#125;</span><br><span class="line">    // &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>app&#x2F;table&#x2F;table.html （<code>自定义嵌套路由页面</code>&#x2F;<code> &lt;ion-tabs</code> ）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;ion-view view-title=&quot;&quot; class=&quot;table_page&quot; hide-nav-bar=&quot;true&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;ion-content class=&quot;table_content&quot; overflow-scroll=&quot;true&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;table_panel&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      &lt;div class=&quot;table_div&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!--主页--&gt;</span><br><span class="line">        &lt;button class=&quot;button buttons button-clear header-item ws_tab&quot; ng-click=&quot;forward(4)&quot;&gt;</span><br><span class="line">          &lt;!--&lt;i class=&quot;icon ion-social-youtube-outline&quot; style=&quot;color: white;&quot;&gt;&lt;/i&gt;--&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/6.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active == 4&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/5.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active != 4&quot;&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">          &lt;div class=&quot;tab_text&quot; ng-style=&quot;&#123;true:&#123;color:&#x27;#56b0ec&#x27;&#125;&#125;[active == 4]&quot;&gt;主页&lt;/div&gt;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!--课件--&gt;</span><br><span class="line">        &lt;button class=&quot;button buttons button-clear header-item ws_tab&quot; ng-click=&quot;forward(1)&quot;&gt;</span><br><span class="line">          &lt;!--&lt;i class=&quot;icon ion-android-home&quot; style=&quot;color: white;&quot;&gt;&lt;/i&gt;--&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/4.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active == 1&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/3.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active != 1&quot;&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">          &lt;div class=&quot;tab_text&quot; ng-style=&quot;&#123;true:&#123;color:&#x27;#56b0ec&#x27;&#125;&#125;[active == 1]&quot;&gt;课件&lt;/div&gt;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!--专项--&gt;</span><br><span class="line">        &lt;button class=&quot;button buttons button-clear header-item ws_tab&quot; ng-click=&quot;forward(2)&quot; ng-if=&quot;$root.ios_isPayChoose&quot;&gt;</span><br><span class="line">          &lt;!--&lt;i class=&quot;icon ion-ios-bookmarks-outline&quot; style=&quot;color: white;&quot;&gt;&lt;/i&gt;--&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/2.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active == 2&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/1.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active != 2&quot;&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">          &lt;div class=&quot;tab_text&quot; ng-style=&quot;&#123;true:&#123;color:&#x27;#56b0ec&#x27;&#125;&#125;[active == 2]&quot;&gt;专项&lt;/div&gt;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!--&lt;button ui-sref=&quot;app.table.live&quot; class=&quot;button buttons button-clear header-item&quot; ng-click=&quot;active=3&quot;&gt;--&gt;</span><br><span class="line">          &lt;!--&amp;lt;!&amp;ndash;&lt;i class=&quot;icon ion-social-youtube-outline&quot; style=&quot;color: white;&quot;&gt;&lt;/i&gt;&amp;ndash;&amp;gt;--&gt;</span><br><span class="line">          &lt;!--&lt;img src=&quot;img/table/nav/play_active.png&quot; style=&quot;height: 30px;&quot; ng-if=&quot;active == 3&quot;&gt;--&gt;</span><br><span class="line">          &lt;!--&lt;img src=&quot;img/table/nav/play.png&quot; style=&quot;height: 30px;&quot; ng-if=&quot;active != 3&quot;&gt;--&gt;</span><br><span class="line">        &lt;!--&lt;/button&gt;--&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;div ng-show=&quot;active == 4&quot;&gt;</span><br><span class="line">      &lt;ion-nav-view name=&quot;mainContent&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div ng-show=&quot;!active || active == 1&quot;&gt;</span><br><span class="line">      &lt;ion-nav-view name=&quot;homeContent&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div ng-show=&quot;active == 2&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;specialContent&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;!--&lt;div ng-show=&quot;active == 3&quot;&gt;--&gt;</span><br><span class="line">      &lt;!--&lt;ion-nav-view name=&quot;liveContent&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;/div&gt;--&gt;</span><br><span class="line">  &lt;/ion-content&gt;</span><br><span class="line">&lt;/ion-view&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>app.table. main</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">  .state(&#x27;app.table.main&#x27;, &#123;</span><br><span class="line">    url: &#x27;/main&#x27;,</span><br><span class="line">    // cache:false,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;mainContent&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;app/main/main.html&#x27;,</span><br><span class="line">        controller: &#x27;MainCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="使用ion-tabs-存在二级路由丢失返回键问题"><a href="#使用ion-tabs-存在二级路由丢失返回键问题" class="headerlink" title="使用ion-tabs  存在二级路由丢失返回键问题"></a>使用<code>ion-tabs</code>  存在二级路由丢失返回键问题</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--&lt;ion-view view-title=&quot;table&quot; class=&quot;page-tab&quot;&gt;--&gt;</span><br><span class="line">&lt;!--&lt;ion-view class=&quot;page-tab&quot;&gt; &amp;lt;!&amp;ndash; 取消路由页面的view-title避免子类复写失败 &amp;ndash;&amp;gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;page-tab&quot;&gt;</span><br><span class="line">  &lt;!-- 注意：存在二级路由丢失返回键问题 --&gt;</span><br><span class="line">  &lt;!--&lt;ion-tabs class=&quot;tabs-icon-top tabs-color-active-positive my-tab&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&amp;lt;!&amp;ndash; Dashboard Tab &amp;ndash;&amp;gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-tab title=&quot;首页&quot; icon-off=&quot;ion-ios-home-outline&quot; icon-on=&quot;ion-ios-home&quot; href=&quot;#/app/tab/home&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-nav-view name=&quot;tab-home&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tab&gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!--&amp;lt;!&amp;ndash; Chats Tab &amp;ndash;&amp;gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-tab title=&quot;设备&quot; icon-off=&quot;ion-ios-chatboxes-outline&quot; icon-on=&quot;ion-ios-chatboxes&quot; href=&quot;#/app/tab/device&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-nav-view name=&quot;tab-device&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tab&gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!--&amp;lt;!&amp;ndash; Account Tab &amp;ndash;&amp;gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-tab title=&quot;工单&quot; icon-off=&quot;ion-ios-list-outline&quot; icon-on=&quot;ion-ios-list&quot; href=&quot;#/app/tab/work&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-nav-view name=&quot;tab-work&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tab&gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!--&lt;ion-tab title=&quot;个人&quot; icon-off=&quot;ion-ios-person-outline&quot; icon-on=&quot;ion-ios-person&quot; href=&quot;#/app/tab/account&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-nav-view name=&quot;tab-account&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tab&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tabs&gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- ------------------------------------------------------------ --&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- 注意：自定义路由,可解决二级路由丢失返回键问题 --&gt;</span><br><span class="line">  &lt;div ng-show=&quot;isShow(&#x27;app.tab.home&#x27;)&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-home&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div ng-show=&quot;isShow(&#x27;app.tab.device&#x27;)&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-device&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div ng-show=&quot;isShow(&#x27;app.tab.work&#x27;)&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-work&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div ng-show=&quot;isShow(&#x27;app.tab.account&#x27;)&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-account&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;div class=&quot;table_button&quot;&gt;</span><br><span class="line">    &lt;!--&lt;div class=&quot;&quot; ui-sref=&quot;app.tab.home&quot;&gt;--&gt;</span><br><span class="line">    &lt;div class=&quot;&quot; ng-click=&quot;go(&#x27;app.tab.home&#x27;)&quot;&gt;</span><br><span class="line">      &lt;img ng-src=&quot;img/table/nav/&#123;&#123;isShow(&#x27;app.tab.home&#x27;)?2:1&#125;&#125;.png&quot; class=&quot;tab_img&quot;&gt;</span><br><span class="line">      &lt;div&gt;首页&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;!--&lt;div class=&quot;&quot; ui-sref=&quot;app.tab.device&quot;&gt;--&gt;</span><br><span class="line">    &lt;div class=&quot;&quot; ng-click=&quot;go(&#x27;app.tab.device&#x27;)&quot;&gt;</span><br><span class="line">      &lt;img ng-src=&quot;img/table/nav/&#123;&#123;isShow(&#x27;app.tab.device&#x27;)?4:3&#125;&#125;.png&quot; class=&quot;tab_img&quot;&gt;</span><br><span class="line">      &lt;div&gt;设备&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;!--&lt;div class=&quot;&quot; ui-sref=&quot;app.tab.work&quot;&gt;--&gt;</span><br><span class="line">    &lt;div class=&quot;&quot; ng-click=&quot;go(&#x27;app.tab.work&#x27;)&quot;&gt;</span><br><span class="line">      &lt;img ng-src=&quot;img/table/nav/&#123;&#123;isShow(&#x27;app.tab.work&#x27;)?6:5&#125;&#125;.png&quot; class=&quot;tab_img&quot;&gt;</span><br><span class="line">      &lt;div&gt;工单&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;!--&lt;div class=&quot;&quot; ui-sref=&quot;app.tab.account&quot;&gt;--&gt;</span><br><span class="line">    &lt;div class=&quot;&quot; ng-click=&quot;go(&#x27;app.tab.account&#x27;)&quot;&gt;</span><br><span class="line">      &lt;img ng-src=&quot;img/table/nav/&#123;&#123;isShow(&#x27;app.tab.account&#x27;)?6:5&#125;&#125;.png&quot; class=&quot;tab_img&quot;&gt;</span><br><span class="line">      &lt;div&gt;个人&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;!--&lt;/ion-view&gt;--&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  $scope.isShow = isShow;</span><br><span class="line">  $scope.go = function (value) &#123;</span><br><span class="line">    // $ionicHistory.nextViewOptions(&#123;historyRoot: true&#125;);// 路由框架页面,全部升级为顶层路由(不同于默认顶层root)</span><br><span class="line">    $state.go(value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function isShow(stateName) &#123;</span><br><span class="line">  return stateName == $state.current.name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="取消路由页面的view-title避免子类复写失败"><a href="#取消路由页面的view-title避免子类复写失败" class="headerlink" title="取消路由页面的view-title避免子类复写失败"></a>取消路由页面的view-title避免子类复写失败</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--&lt;ion-view view-title=&quot;table&quot; class=&quot;page-tab&quot;&gt;--&gt;</span><br><span class="line">&lt;!--&lt;ion-view class=&quot;page-tab&quot;&gt; &amp;lt;!&amp;ndash; 取消路由页面的view-title避免子类复写失败 &amp;ndash;&amp;gt;--&gt;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="tab切换出现菜单"><a href="#tab切换出现菜单" class="headerlink" title="tab切换出现菜单"></a>tab切换出现菜单</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/9520430.jpg"></p>
+<ul>
+<li><p>出现情况，index&#x3D;1 复用了historyId<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/38952069.jpg"></p>
+</li>
+<li><p>不出现情况，各自为index&#x3D;0<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/35408752.jpg"></p>
+</li>
+<li><p>问题原因：嵌套路由间切换，同样会发生历史轨迹，出现返回键的情况</p>
+</li>
+<li><p>解决办法：对嵌套路由间切换，全部升级为顶层路由 (不同于默认顶层root)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$scope.go = function (value) &#123;</span><br><span class="line">  $ionicHistory.nextViewOptions(&#123;historyRoot: true&#125;);// 路由框架页面,全部升级为顶层路由(不同于默认顶层root)</span><br><span class="line">  $state.go(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="同时使用-Tabs-Side-Menu"><a href="#同时使用-Tabs-Side-Menu" class="headerlink" title="同时使用 Tabs + Side Menu"></a>同时使用 Tabs + Side Menu</h1><p><code>Ionic Tabs + Side Menu</code><br><a target="_blank" rel="noopener" href="http://loring-dodge.azurewebsites.net/ionic-tabs-plus-side-menu/">http://loring-dodge.azurewebsites.net/ionic-tabs-plus-side-menu/</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/22491562.jpg"></p>
+<hr>
+<p><strong>参考</strong><br><code>ionic back 返回按钮不正常显示&amp;&amp;二级路由点击返回按钮失效无法返回到上一级页面的问题</code></p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/badgirl_hong/article/details/53505919">http://blog.csdn.net/badgirl_hong/article/details/53505919</a></p>
+<p><code>ionic tab(选项卡) | 菜鸟教程</code><br><a target="_blank" rel="noopener" href="http://www.runoob.com/ionic/ionic-tab.html">http://www.runoob.com/ionic/ionic-tab.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/06/The-name-of-the-people/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/05/06/The-name-of-the-people/" class="post-title-link" itemprop="url">人民的名义</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-06 22:28:03" itemprop="dateCreated datePublished" datetime="2017-05-06T22:28:03+08:00">2017-05-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>一不小心，追了一个剧《人民的名义》，随着剧情一点一点地推进，突然开始很心疼，心疼的不是别人，也不是剧中的人物，因为那毕竟是虚构的，不是真实的人生，而是我们自己，这才是真真实实的生活与生命。看了剧中的情节，真是大开眼界，不论是祁同伟的一人得道，鸡犬升天，还是赵瑞龙的草菅人命亦或是丁义珍在饭局上左右逢源，逢场作戏，近似人生赢家。甚至一个处级干部赵德汉，都能狂贪几个亿，要知道，除了国家级领导人，下面就是部司厅局处科，小小一个处级干部，都能贪污几个亿？你知道天朝有多少处级干部吗？呵呵，我还真查了下，毛爷爷说，没有调查就没有发言权，参考链接在<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23916966?sort=created">这里</a>，处级干部约60万，一个人一亿的话，不敢想象，当然了，不能这么悲观，要相信党相信政府，我还是有这觉悟的。现如今大家都说日子难过，现在知道了吧？为什么我们日子难过了，在人民的名义中各种现象也只是社会真实情况的冰山一角吧？假设现实情况比电视剧中所要努力描绘的良好社会略槽糕一点点，那么日子难就很正常了，我想说，不正常才奇怪哩。</p>
+<p>现在好多人都说房价高，那么房价为什么会高呢？只有两种情况，一种是你赚钱的速度赶不上房价的上涨速度，另一种是货币贬值了，房价虚高，只不过刚需接盘侠们是货币贬值的最后承受者，没有享受到任何一点点货币贬值带来的收益，要知道货币贬值对所有人来说并不是公平的，有人说，我手里的钱贬值了，那有钱人手里的钱一样也贬值了呀？只能说你too young，too simple，钱就像是流水，就像一条河，同样的一河水，在水的上游和下游能一样吗？同样货币这个贬值链，就像一条河水一样，也分上游下游，货币流到上游的人的手里的时候，并没有贬值，而是和以前价值一样，那么这些占据上游的都是哪些人呢？发大水的是央行，上游的人是各大国有银行、国企、国家各部委、权力掌控者等，中游是商业银行、民营企业、利益既得者等，经过层层盘剥，当这个贬值链流到下游的时候，又是哪些人呢？就是这个底层劳动人民、刚需接盘侠，之所以房价会高涨，是因为没有任何一个产业能够锁住这么海量的贬值货币，唯有将这些海量的货币存之于楼市，才能尽量减少对其他行业的伤害，试想通胀不是流向楼市，而是流向日常生活必须品，那个个吃不上饭可是天大的问题了，但是一部分人住不上房却不是致命的，即使这些住不上房的人闹腾也不用操心，因为那些有房的会代政府来管教他们，你说此话怎讲，君不见，房价略降，全国各地的售楼处都出现了业主打砸情况吗？这不就是有房产者、既得利益者在代国家管教这些无房产者吗？房价想降很难，一是政府不愿意，房价降了，海量的贬值货币往哪藏呢？二是有产者不愿意，买不起房，大家不会联合起来打砸售楼处，但是房价下降，已买房的人则会联合起来上书政府，要求政府救市，更有甚者，直接联合起来打砸售楼处，还有天理吗？法制社会存在这种流氓行径？没有任何理由，就是因为房价下降，就可以任意耍流氓了？呵呵，这些人没有得到严肃的处理，已经代表了政府的态度，睁一只眼闭一只眼，这些人就都没事了。</p>
+<p>追剧的过程中，一把手在剧中出现了无数遍，我英文不好，不要欺负我，我想请问一把手英文怎么翻译呢？大英帝国、美帝国家人民的词典中，有一把手这个词吗？有海外待过的人，还望不吝赐教。民选政府与任命制有着本质的区别，民选出来的领导人要对人民负责，同理，任命制选出来的领导人只对任命他的人负责。这种本质的区别，注定了人民有着本质的不同地位，该得到什么样的对待都是自己争取而来，你笑着看资本主义国家人民游行、示威、罢工，那就不要忽视人家赢得的地位。有付出才有收获，老祖宗留下来的话，是有道理的。任命制在我看来只能听天由命了，就像古代皇帝一样，如果是个雄才大略、英明神武的皇帝，那么人民生活相对来说更幸福一点，如果碰到昏庸无能、荒淫无度的主，那人民的生活能不水深火热吗？这不就是靠天吃饭吗？和现在的任命制有啥区别？一把手喜欢你，就提拔你，至于你对人民来说是福是祸，又有几个一把手会关心呢？</p>
+<p>这部剧叫《人民的名义》，恕我愚钝，我不知道这里面哪一点代表了人民的名义，我只看到草根出身的处长在第一集就被干掉了，我只看到同样草根出身的祁同伟和高小琴最后同样被干掉了，而那个利用权势不断打压祁同伟的人呢？梁璐包括他的父亲最后毫发无损，这就是人民的名义吗？人民的孩子总是最先和最后被干掉吗？我分明看到的就是有权有势同样能逍遥法外，我不知道现实中有多少丁义珍，但是我敢保证现实中的丁义珍绝对不会在国外的餐馆刷盘子，处处美化、处处讨喜，编剧们都不觉得恶心吗？像沙瑞金和侯亮平在现实中毕竟是少数，再进一步讲，现实中有多少丁义珍、赵立春（副国级，国家领导人啊、领导人啊、领导人啊）、赵瑞龙、刘新建、陈清泉等等这些人呢？恐怕远不止电视中所表现的那些吧？</p>
+<p>在剧情最后部分，侯亮平劝降祁同伟，莫名的心疼起祁同伟来，那个和天下棋，愿用自己的命去胜天半子的人，也许在祁的心中是这么想的，你侯亮平算什么东西，也敢来劝降我？在祁的身边，虽然不乏师长，以及同一师门的师弟师妹，但是又有几个打心眼里瞧得起看得起他的呢？他想过靠自己的努力来出人头地，在大学里学习努力，成绩优异，并且还是校学生会主席，但是有什么用呢？毫无关系背景的他，眼睁睁的看着那些能力平平甚至低于他的的校友们分配到了大城市，而他却被掌控权力的梁璐的父亲下放到了穷山沟沟里，只因他没接受梁璐的追求，即便他没有放弃，主动请缨去做缉毒工作，因为这个工作更危险，更容易立功，凭借着过人的勇气和努力，他成为了缉毒英雄，但是结果呢？梁璐的父亲，凭借手握大权，借着权力以惜才为名义，阻止让他升迁，硬生生的将他继续困于穷山沟之中。最终，这个内心孤傲的人向现实屈服了，这才有了那在汉东大学的著名一跪，祁同伟啊是个被时代抛弃的人、是个被权力毁掉的人、是个草根出身不断向上爬却死在权力脚下的人，直到最后事发败露，他也没有屈服，用他的话说，这个世界上没有人能够审判他，即便可能被判无期徒刑，苟延残喘，但是并没有，他没有投降，没有屈服，而是选择自杀结束生命。</p>
+<p>剧中还有一个现象被大家忽略了，那就是高育良和李达康的女儿都出国了，这就是官二代的命啊。而侯亮平和陈海这种所谓的中产呢？孩子只能挤在国内上些垃圾学校，甚至侯亮平妻子给孩子报的一个补习班，那老师居然是个电工，但是招生工作火热火热的，这和现代的学区房、各种补习班真是不谋而合。幸好这个老师被侯亮平一眼识破，谁又能说现实中存在诸多没有被识破的呢？如果现实中没有侯亮平去戳穿老师的嘴脸呢？岂不是依然可以大摇大摆的顶着补习班的名义继续招摇撞骗。如果现实中的所有官员子女都在国外接受教育，他们对人民又怎么会负责呢？从小接受资本主义国家的理念、文化、习俗、教育等等，怎么比得了土生土长的中国人对人民的了解程度呢？这些人谁又能保证其不在官爸爸富爸爸的扶持下走上统治人民的路子呢？当他们成长为了统治阶级，只要自我舒适，谁管你人民死活，大不了贪了几个亿全家移民罢了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/04/30/linux%E6%B8%85%E7%A9%BA%E6%96%87%E4%BB%B6-%E6%B8%85%E7%90%86%E5%86%85%E5%AE%B9%EF%BC%88%E6%B8%85%E7%90%86%E7%A3%81%E7%9B%98%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/04/30/linux%E6%B8%85%E7%A9%BA%E6%96%87%E4%BB%B6-%E6%B8%85%E7%90%86%E5%86%85%E5%AE%B9%EF%BC%88%E6%B8%85%E7%90%86%E7%A3%81%E7%9B%98%EF%BC%89/" class="post-title-link" itemprop="url">linux清空文件/清理内容</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-04-30 00:00:00" itemprop="dateCreated datePublished" datetime="2017-04-30T00:00:00+08:00">2017-04-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>&gt;</code> 覆盖文件<br><code>&gt;&gt;</code> 追加文件</p>
+<h1 id="test-txt-测试"><a href="#test-txt-测试" class="headerlink" title="test.txt 测试"></a>test.txt 测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23j23f6aaZ ~]# echo &#x27;hello&#x27; &gt; test.txt</span><br><span class="line">[root@iZ23j23f6aaZ ~]# ll</span><br><span class="line">total 1484</span><br><span class="line">-rw-r--r-- 1 root root 1506593 Dec 17 14:53 atlassian-jira-6.3.6.tar.gz</span><br><span class="line">drwxr-xr-x 2 root root    4096 Jul 13  2015 cfg</span><br><span class="line">drwxr-xr-x 2 root root    4096 Dec 10 15:34 –p</span><br><span class="line">-rw-r--r-- 1 root root       6 Apr 30 09:28 test.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# echo null &gt; test.txt</span><br><span class="line">[root@iZ23j23f6aaZ ~]# ll</span><br><span class="line">total 1484</span><br><span class="line">-rw-r--r-- 1 root root 1506593 Dec 17 14:53 atlassian-jira-6.3.6.tar.gz</span><br><span class="line">drwxr-xr-x 2 root root    4096 Jul 13  2015 cfg</span><br><span class="line">drwxr-xr-x 2 root root    4096 Dec 10 15:34 –p</span><br><span class="line">-rw-r--r-- 1 root root       5 Apr 30 09:28 test.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# echo &#x27;&#x27; &gt; test.txt</span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# ll</span><br><span class="line">total 1484</span><br><span class="line">-rw-r--r-- 1 root root 1506593 Dec 17 14:53 atlassian-jira-6.3.6.tar.gz</span><br><span class="line">drwxr-xr-x 2 root root    4096 Jul 13  2015 cfg</span><br><span class="line">drwxr-xr-x 2 root root    4096 Dec 10 15:34 –p</span><br><span class="line">-rw-r--r-- 1 root root       1 Apr 30 09:28 test.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# cat null &gt; test.txt</span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23j23f6aaZ ~]# ll</span><br><span class="line">total 1480</span><br><span class="line">-rw-r--r-- 1 root root 1506593 Dec 17 14:53 atlassian-jira-6.3.6.tar.gz</span><br><span class="line">drwxr-xr-x 2 root root    4096 Jul 13  2015 cfg</span><br><span class="line">drwxr-xr-x 2 root root    4096 Dec 10 15:34 –p</span><br><span class="line">-rw-r--r-- 1 root root       0 Apr 30 09:29 test.txt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code> echo &#39;&#39; &gt; test.txt</code>    结果1kb</li>
+<li><code> cat null &gt; test.txt</code> 结果0 kb</li>
+</ul>
+<h1 id="access-log-测试"><a href="#access-log-测试" class="headerlink" title="access.log  测试"></a>access.log  测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1304</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root  58073 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ logs]# echo &#x27;&#x27; &gt; access.log </span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1244</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root   1102 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1256</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root  14806 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ logs]# cat null &gt; access.log</span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1244</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root   2190 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1252</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root  11339 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ logs]# cat null &gt; access.log</span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1244</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root   1801 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line">[root@iZ23j23f6aaZ logs]# </span><br></pre></td></tr></table></figure>
+
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23ult4m4yZ ~]# df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/xvda1       20G  5.2G   14G  28% /</span><br><span class="line">tmpfs           1.9G     0  1.9G   0% /dev/shm</span><br><span class="line">/dev/xvdb1       20G  4.6G   15G  25% /mnt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23ult4m4yZ ~]# cd /usr/local/nginx/logs/</span><br><span class="line">[root@iZ23ult4m4yZ logs]# ll</span><br><span class="line">total 1025708</span><br><span class="line">-rw-r--r-- 1 root   root 702671189 Apr 28 11:21 access_2017-04-27_11:21:53.log</span><br><span class="line">-rw-r--r-- 1 nobody root  77063276 Apr 29 00:00 access_2017-04-28_00:00:01.log</span><br><span class="line">-rw-r--r-- 1 nobody root 143218093 Apr 30 00:00 access_2017-04-29_00:00:01.log</span><br><span class="line">-rw-r--r-- 1 nobody root  49736274 Apr 30 09:39 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root  76566363 Apr 30 09:39 error.log</span><br><span class="line">-rw-r--r-- 1 root   root         6 Apr 23 20:18 nginx.pid</span><br><span class="line">[root@iZ23ult4m4yZ logs]# du -sh *</span><br><span class="line">671M access_2017-04-27_11:21:53.log</span><br><span class="line">74M access_2017-04-28_00:00:01.log</span><br><span class="line">137M access_2017-04-29_00:00:01.log</span><br><span class="line">48M access.log</span><br><span class="line">74M error.log</span><br><span class="line">4.0K nginx.pid</span><br><span class="line">[root@iZ23ult4m4yZ logs]# cat null &gt; access_2017-04-27_11\:21\:53.log </span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23ult4m4yZ logs]# du -sh *</span><br><span class="line">0 access_2017-04-27_11:21:53.log</span><br><span class="line">74M access_2017-04-28_00:00:01.log</span><br><span class="line">137M access_2017-04-29_00:00:01.log</span><br><span class="line">48M access.log</span><br><span class="line">74M error.log</span><br><span class="line">4.0K nginx.pid</span><br><span class="line">[root@iZ23ult4m4yZ logs]# df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/xvda1       20G  5.2G   14G  28% /</span><br><span class="line">tmpfs           1.9G     0  1.9G   0% /dev/shm</span><br><span class="line">/dev/xvdb1       20G  4.0G   15G  21% /mnt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23ult4m4yZ logs]# ll</span><br><span class="line">total 123716</span><br><span class="line">-rw-r--r-- 1 root   root        0 Apr 30 09:40 access_2017-04-27_11:21:53.log</span><br><span class="line">-rw-r--r-- 1 nobody root        0 Apr 30 09:41 access_2017-04-28_00:00:01.log</span><br><span class="line">-rw-r--r-- 1 nobody root        0 Apr 30 09:41 access_2017-04-29_00:00:01.log</span><br><span class="line">-rw-r--r-- 1 nobody root 49978683 Apr 30 09:41 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 76566363 Apr 30 09:39 error.log</span><br><span class="line">-rw-r--r-- 1 root   root        6 Apr 23 20:18 nginx.pid</span><br><span class="line">[root@iZ23ult4m4yZ logs]# df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/xvda1       20G  5.2G   14G  28% /</span><br><span class="line">tmpfs           1.9G     0  1.9G   0% /dev/shm</span><br><span class="line">/dev/xvdb1       20G  3.8G   15G  20% /mnt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23ult4m4yZ logs]# cat null &gt; catalina.out </span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23ult4m4yZ logs]# df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/xvda1       20G  5.2G   14G  28% /</span><br><span class="line">tmpfs           1.9G     0  1.9G   0% /dev/shm</span><br><span class="line">/dev/xvdb1       20G  324M   19G   2% /mnt</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -1185,7 +1172,7 @@ nrm use cnpm</li>
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/15/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/15/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

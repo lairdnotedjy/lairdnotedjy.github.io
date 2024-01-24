@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="背景通常验证码都是通过session来实现，在服务端生成一个随机字符串作为验证码，将该字符串存到session中，然后将验证码图片渲染到前端，前端提交之后通过session中存放的正确验证码进行对比从而验证输入的正确性。 上面是一个典型的验证码实现的流程，但是这种方案存在非常多的弊端，例如：  分布式应用：大家知道session是有状态的，当服务器存在多个时，需要去处理session丢失的问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计一种无状态的验证码">
+<meta property="og:url" content="https://www.sovdating.com/2020/03/26/stateless-captcha/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="背景通常验证码都是通过session来实现，在服务端生成一个随机字符串作为验证码，将该字符串存到session中，然后将验证码图片渲染到前端，前端提交之后通过session中存放的正确验证码进行对比从而验证输入的正确性。 上面是一个典型的验证码实现的流程，但是这种方案存在非常多的弊端，例如：  分布式应用：大家知道session是有状态的，当服务器存在多个时，需要去处理session丢失的问题。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.sovdating.com/stateless-captcha/2020-03-26-11-49-02.png">
+<meta property="og:image" content="https://www.sovdating.com/stateless-captcha/2020-03-26-11-54-43.png">
+<meta property="article:published_time" content="2020-03-26T03:06:02.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:47:47.909Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="http">
+<meta property="article:tag" content="无状态">
+<meta property="article:tag" content="验证码">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.sovdating.com/stateless-captcha/2020-03-26-11-49-02.png">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2020/03/26/stateless-captcha/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2020/03/26/stateless-captcha/","path":"2020/03/26/stateless-captcha/","title":"设计一种无状态的验证码"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>设计一种无状态的验证码 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E7%8A%B6%E6%80%81%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">无状态验证码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">5.</span> <span class="nav-text">后记</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/03/26/stateless-captcha/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="设计一种无状态的验证码 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          设计一种无状态的验证码
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-03-26 11:06:02" itemprop="dateCreated datePublished" datetime="2020-03-26T11:06:02+08:00">2020-03-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>通常验证码都是通过<code>session</code>来实现，在服务端生成一个随机字符串作为验证码，将该字符串存到<code>session</code>中，然后将验证码图片渲染到前端，前端提交之后通过<code>session</code>中存放的正确验证码进行对比从而验证输入的正确性。</p>
+<p>上面是一个典型的验证码实现的流程，但是这种方案存在非常多的弊端，例如：</p>
+<ol>
+<li>分布式应用：大家知道<code>session</code>是有状态的，当服务器存在多个时，需要去处理<code>session</code>丢失的问题。</li>
+<li>跨域问题：现在前后端分离大行其道，<code>cookie</code>跨域问题会导致<code>session id</code>无法正确传递，需要去处理<code>cookie</code>跨域的问题。</li>
+<li>开销问题：维护<code>session</code>需要消耗一定服务器的资源。</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="无状态验证码"><a href="#无状态验证码" class="headerlink" title="无状态验证码"></a>无状态验证码</h2><p>为了解决上面的问题，我想了一个解决方案，核心思想是将<code>真实的验证码字符串</code>存储在前端，当然是经过<code>加密</code>的字符串，流程图如下：</p>
+<p><img src="/stateless-captcha/2020-03-26-11-49-02.png"></p>
+<ol>
+<li>首先前端通过接口获取一个<code>token</code></li>
+<li>服务端生成<code>随机字符串</code>并通过<code>AES</code>加密，<code>AES KEY</code>放在服务器保证加密解密是安全的</li>
+<li>客户端通过<code>token</code>访问一个验证码图片</li>
+<li>服务器通过<code>AES</code>解密拿到之前生成的<code>随机字符串</code>，然后将字符串渲染成图片返回</li>
+</ol>
+<p>至此前端已经得到了一个<code>token</code>和一个<code>验证码图片</code>，后续的流程图如下：<br><img src="/stateless-captcha/2020-03-26-11-54-43.png"></p>
+<ol>
+<li>前端发起登录请求，将<code>token</code>和用户输入的<code>验证码</code>一起发送到后端。</li>
+<li>服务器通过<code>AES</code>解密拿到之前生成的<code>随机字符串</code>，再和用户输入的<code>验证码</code>做对比校验</li>
+</ol>
+<p>这样就实现了一个无状态的验证码。</p>
+<h2 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h2><p>上面的验证码存在<code>重放攻击</code>的风险，即记录一次正确的<code>token</code>和<code>输入的验证码</code>，这样就可以一直使用，以此绕过验证码校验。对此可以在<code>token</code>中加入<code>过期时间</code>属性，这样<code>token</code>中其实包含了加密后的<code>正确验证码</code>和<code>过期时间</code>，在经过服务器时，首先通过时间检验，这样就可以大大的避免<code>重放攻击</code>的风险。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>这里后端主要是用<code>springboot</code>+<code>hutool</code>来实现，<code>hutool</code>用于验证码图片的渲染。</p>
+<ul>
+<li>后端</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOperation(value = &quot;获取验证码token&quot;, httpMethod = &quot;GET&quot;)</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;captcha&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result&lt;String&gt; <span class="title function_">getCaptcha</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 随机生成4位字符串</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">code</span> <span class="operator">=</span> RandomUtil.randomString(<span class="number">4</span>);</span><br><span class="line">    <span class="comment">// 封装字符串和过期时间</span></span><br><span class="line">    <span class="type">CaptchaDTO</span> <span class="variable">dto</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CaptchaDTO</span>();</span><br><span class="line">    dto.setCode(code);</span><br><span class="line">    <span class="comment">// 过期时间为一分钟</span></span><br><span class="line">    dto.setExp(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(<span class="number">1</span>));</span><br><span class="line">    <span class="comment">// CAPTCHA_AES_KEY为AES加密中用到的key，存储在服务器中</span></span><br><span class="line">    <span class="comment">// 将dto对象转化成json字符串，再通过aes加密</span></span><br><span class="line">    <span class="comment">// token=aes(key,JSON.toString(dto))</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> SecureUtil.aes(Base64.getDecoder().decode(CAPTCHA_AES_KEY)).encryptBase64(JSON.toJSONString(dto));</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Result</span>&lt;&gt;(token);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ApiOperation(value = &quot;渲染验证码&quot;, httpMethod = &quot;GET&quot;)</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;captcha/&#123;token&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">showCaptcha</span><span class="params">(<span class="meta">@PathVariable</span> String token, HttpServletResponse response)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="comment">//解码token</span></span><br><span class="line">    <span class="type">CaptchaDTO</span> <span class="variable">dto</span> <span class="operator">=</span> decodeCaptcha(token);</span><br><span class="line">    <span class="type">LineCaptcha</span> <span class="variable">lineCaptcha</span> <span class="operator">=</span> CaptchaUtil.createLineCaptcha(<span class="number">100</span>, <span class="number">40</span>, <span class="number">4</span>, <span class="number">50</span>);</span><br><span class="line">    <span class="comment">//渲染验证码</span></span><br><span class="line">    lineCaptcha.createImage(dto.getCode());</span><br><span class="line">    response.setContentType(<span class="string">&quot;image/png&quot;</span>);</span><br><span class="line">    lineCaptcha.write(response.getOutputStream());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ApiOperation(value = &quot;登录&quot;, httpMethod = &quot;POST&quot;)</span></span><br><span class="line"><span class="meta">@PostMapping(&quot;login&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result&lt;UserDTO&gt; <span class="title function_">login</span><span class="params">(<span class="meta">@RequestBody</span> LoginVO loginVO)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    CaptchaDTO dto;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//解码token</span></span><br><span class="line">        dto = decodeCaptcha(loginVO.getToken());</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">BizException</span>(<span class="string">&quot;验证码数据异常&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 校验时间和验证码输入</span></span><br><span class="line">    <span class="keyword">if</span> (System.currentTimeMillis() &gt; dto.getExp()</span><br><span class="line">            || StrUtil.isBlank(loginVO.getCode())</span><br><span class="line">            || !dto.getCode().equalsIgnoreCase(loginVO.getCode())) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">BizException</span>(<span class="string">&quot;验证码校验不通过&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 处理登录逻辑</span></span><br><span class="line">    <span class="type">UserDTO</span> <span class="variable">user</span> <span class="operator">=</span> userService.login(loginVO);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Result</span>&lt;&gt;(user);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span> CaptchaDTO <span class="title function_">decodeCaptcha</span><span class="params">(String token)</span> <span class="keyword">throws</span> UnsupportedEncodingException &#123;</span><br><span class="line">    <span class="comment">// 解码token，注意要做一次url decode，因为前端通过url传递时需要做url encode</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">jsonStr</span> <span class="operator">=</span> SecureUtil.aes(Base64.getDecoder().decode(CAPTCHA_AES_KEY)).decryptStrFromBase64(URLDecoder.decode(token, <span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">    <span class="keyword">return</span> JSON.parseObject(jsonStr, CaptchaDTO.class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>前端</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;Login&quot;</span>,</span><br><span class="line">  <span class="attr">data</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">loginForm</span>: &#123; <span class="attr">username</span>: <span class="string">&quot;&quot;</span>, <span class="attr">password</span>: <span class="string">&quot;&quot;</span>, <span class="attr">token</span>: <span class="string">&quot;&quot;</span>, <span class="attr">code</span>: <span class="string">&quot;&quot;</span> &#125;,</span><br><span class="line">      <span class="attr">captchaUrl</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">getCaptcha</span>();</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="comment">//加载验证码</span></span><br><span class="line">    <span class="keyword">async</span> <span class="title function_">getCaptcha</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">//获取验证码token</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">loginForm</span>.<span class="property">token</span> = <span class="built_in">encodeURIComponent</span>(<span class="keyword">await</span> <span class="title function_">getCaptcha</span>());</span><br><span class="line">      <span class="comment">//这里其实对token做了两次encodeURIComponent，因为img标签的get请求浏览器默认会做一次decode，不做两次encode会请求失败</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">captchaUrl</span> = <span class="string">`<span class="subst">$&#123;api&#125;</span>/manager/users/captcha/<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(</span></span></span><br><span class="line"><span class="subst"><span class="string">        <span class="variable language_">this</span>.loginForm.token</span></span></span><br><span class="line"><span class="subst"><span class="string">      )&#125;</span>`</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">async</span> <span class="title function_">login</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="title function_">login</span>(<span class="variable language_">this</span>.<span class="property">loginForm</span>);</span><br><span class="line">      <span class="comment">//登录后处理...</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>虽然在 <code>token</code> 中加入了一分钟的过期时间，但是在这一分钟内其实够干很多事了，比如注册的业务使用这种验证码方式，一分钟内可以模拟大量的请求来进行注册，所以无状态验证码方案并不适合所有的业务场景，还是需要根据业务情况来进行实施。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/http/" rel="tag"># http</a>
+              <a href="/tags/%E6%97%A0%E7%8A%B6%E6%80%81/" rel="tag"># 无状态</a>
+              <a href="/tags/%E9%AA%8C%E8%AF%81%E7%A0%81/" rel="tag"># 验证码</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/03/10/mongodb-replica-set/" rel="prev" title="通过docker-compose快速搭建mongodb副本集">
+                  <i class="fa fa-angle-left"></i> 通过docker-compose快速搭建mongodb副本集
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/03/31/go-reuse-method/" rel="next" title="Go语言方法复用">
+                  Go语言方法复用 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

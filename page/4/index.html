@@ -125,18 +125,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-count">548</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">93</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-count">381</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -162,7 +162,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/06/28/Use-RAMDirectory-to-do-the-cache-to-improve-lucene-s-performance/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/09/02/debian-apt-mirros/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/06/28/Use-RAMDirectory-to-do-the-cache-to-improve-lucene-s-performance/" class="post-title-link" itemprop="url">用RAMDirectory做缓存提高Lucene性能</a>
+          <a href="/2020/09/02/debian-apt-mirros/" class="post-title-link" itemprop="url">debian快速设置apt源</a>
         </h2>
 
         <div class="post-meta-container">
@@ -191,14 +191,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-06-28 22:02:21" itemprop="dateCreated datePublished" datetime="2017-06-28T22:02:21+08:00">2017-06-28</time>
+      <time title="Created: 2020-09-02 15:50:18" itemprop="dateCreated datePublished" datetime="2020-09-02T15:50:18+08:00">2020-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -206,7 +206,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
         </span>
     </span>
 
@@ -220,30 +220,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>RAMDirectory和FSDirectory都继承自BaseDirectory，而BaseDirectory继承自Directory，Directory是Lucene中设计的一个顶层抽象类，可以将其看做本地文件系统的一个目录。</p>
-<p>RAMDirectory是基于内存实现的，具有较高的存储速度，但是受到内存大小的限制，而FSDirectory是基于文件系统实现的，针对不同的操作系统有不同的具体实现类，这些实现类无需用户操心，只需要调用FSDirectory.open(Path path)方法，它就会帮助我们选择最适合的子类，FSDirectory的瓶颈在于磁盘I&#x2F;O。</p>
-<p>如果机器内存足够大的话，那么组合使用RAMDirectory和FSDirectory将能够极大地提高Lucene的性能。组合使用两者的应用场景很多，不同的场景可以分别解决不同的需求，仅列举如下</p>
-<ul>
-<li>批量索引，而无需检索的情况下，先把document存到RAMDirectory中，当达到一定数量之后，再把这些索引一次性加入FSDirectory里</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.lucene.analysis.core.WhitespaceAnalyzer;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.document.Document;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.document.Field;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.document.StringField;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.index.DirectoryReader;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.index.IndexWriter;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.index.IndexWriterConfig;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.search.IndexSearcher;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.search.MatchAllDocsQuery;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.store.FSDirectory;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.store.RAMDirectory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Paths;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Created by wangxu on 2017/06/19 15:31.</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Description: 基于Lucene 6.5开发</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Wang Xu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> V1.0.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> V1.0.0 &lt;br/&gt;</span></span><br><span class="line"><span class="comment"> * WebSite: http://codepub.cn &lt;br&gt;</span></span><br><span class="line"><span class="comment"> * Licence: Apache v2 License</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RamFSDirectoryDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">RAMDirectory</span> <span class="variable">ramDirectory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RAMDirectory</span>();</span><br><span class="line">        <span class="type">IndexWriter</span> <span class="variable">ramWriter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexWriter</span>(ramDirectory, <span class="keyword">new</span> <span class="title class_">IndexWriterConfig</span>(<span class="keyword">new</span> <span class="title class_">WhitespaceAnalyzer</span>()).setOpenMode(IndexWriterConfig.OpenMode.CREATE));</span><br><span class="line"></span><br><span class="line">        <span class="type">FSDirectory</span> <span class="variable">fsDirectory</span> <span class="operator">=</span> FSDirectory.open(Paths.get(<span class="string">&quot;F:/index_RAM_FS&quot;</span>));</span><br><span class="line">        <span class="type">IndexWriter</span> <span class="variable">fsWriter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexWriter</span>(fsDirectory, <span class="keyword">new</span> <span class="title class_">IndexWriterConfig</span>(<span class="keyword">new</span> <span class="title class_">WhitespaceAnalyzer</span>()).setOpenMode(IndexWriterConfig.OpenMode</span><br><span class="line">                .CREATE_OR_APPEND));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//简单起见，这里的数量都比较少，例如索引10000个document，每100个document作为一批</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">tempCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">            <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Document</span>();</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;key&quot;</span>, String.valueOf(i), Field.Store.YES));</span><br><span class="line">            ramWriter.addDocument(document);</span><br><span class="line">            tempCount++;</span><br><span class="line">            <span class="keyword">if</span> (tempCount % <span class="number">100</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                ramWriter.commit();</span><br><span class="line">                ramWriter.close();</span><br><span class="line">                fsWriter.addIndexes(ramDirectory);</span><br><span class="line">                ramDirectory.close();</span><br><span class="line">                fsWriter.commit();</span><br><span class="line">                ramDirectory = <span class="keyword">new</span> <span class="title class_">RAMDirectory</span>();</span><br><span class="line">                ramWriter = <span class="keyword">new</span> <span class="title class_">IndexWriter</span>(ramDirectory, <span class="keyword">new</span> <span class="title class_">IndexWriterConfig</span>(<span class="keyword">new</span> <span class="title class_">WhitespaceAnalyzer</span>()).setOpenMode(IndexWriterConfig.OpenMode.CREATE));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//退出时确保RAMDirectory中内容都被加入本地</span></span><br><span class="line">        <span class="keyword">if</span> (ramWriter != <span class="literal">null</span>) &#123;</span><br><span class="line">            ramWriter.commit();</span><br><span class="line">            ramWriter.close();</span><br><span class="line">            fsWriter.addIndexes(ramDirectory);</span><br><span class="line">            ramDirectory.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">IndexSearcher</span> <span class="variable">indexSearcher</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexSearcher</span>(DirectoryReader.open(fsWriter.getDirectory()));</span><br><span class="line">        fsWriter.close();</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> indexSearcher.count(<span class="keyword">new</span> <span class="title class_">MatchAllDocsQuery</span>());</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>使用 docker 的时候为了排查问题经常需要下载一些软件包，但是一般镜像中都没有<code>vim</code>，如果直接用<code>apt</code>官方源去下载，基本上就是下面这样：<br><img src="/debian-apt-mirros/2020-09-02-15-54-53.png"></p>
+<p>这是因为没有更新源，需要通过<code>apt-get update</code>进行更新，但是国内访问官方源的速度实在是太慢，要修改成国内的源镜像去加速，这里记录下没有<code>vim</code>的情况下如何快速修改源地址。</p>
+<h2 id="使用清华大学镜像"><a href="#使用清华大学镜像" class="headerlink" title="使用清华大学镜像"></a>使用清华大学镜像</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g&#x27; /etc/apt/sources.list</span><br><span class="line">sed -i &#x27;s|security.debian.org/debian-security|mirrors.tuna.tsinghua.edu.cn/debian-security|g&#x27; /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>索引的同时需要搜索，前提是内存总量大于索引文件总量，如果要求新加入的索引对搜索可见，即实时搜索，要怎么做呢？显然实时搜索需要writer和searcher共用同一份索引，同时要定时的将内存中索引备份到文件系统，否则机器一旦宕机，内存中所有的索引文件都将丢失。代码实现也很简单，在备份的时候，可以使用调度线程去进行备份操作，同时还不影响主线程继续接受索引请求；备份策略有两种：全量和增量，增量直接比较文件名，将新增文件拷贝到文件系统，同时删除已过时的索引文件即可。</li>
+<li>更新和安装软件</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.lucene.analysis.core.WhitespaceAnalyzer;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.document.Document;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.document.Field;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.document.StringField;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.index.*;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.search.IndexSearcher;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.search.MatchAllDocsQuery;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.store.Directory;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.store.FSDirectory;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.store.IOContext;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.store.RAMDirectory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Path;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Paths;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ScheduledExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Created by wangxu on 2017/06/19 15:31.</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Description: 基于Lucene 6.5开发</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Wang Xu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> V1.0.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> V1.0.0 &lt;br/&gt;</span></span><br><span class="line"><span class="comment"> * WebSite: http://codepub.cn &lt;br&gt;</span></span><br><span class="line"><span class="comment"> * Licence: Apache v2 License</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RamFSDirectoryDemo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> IndexWriter ramWriter;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> RAMDirectory ramDirectory;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Backup</span> <span class="variable">backup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Backup</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">//将文件系统中索引文件加载到内存中</span></span><br><span class="line">        <span class="type">FSDirectory</span> <span class="variable">fsDirectory</span> <span class="operator">=</span> FSDirectory.open(Paths.get(<span class="string">&quot;F:/index_RAM_FS&quot;</span>));</span><br><span class="line">        ramDirectory = <span class="keyword">new</span> <span class="title class_">RAMDirectory</span>(fsDirectory, IOContext.READONCE);</span><br><span class="line">        fsDirectory.close();</span><br><span class="line"></span><br><span class="line">        <span class="type">IndexWriterConfig</span> <span class="variable">indexWriterConfig</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexWriterConfig</span>(<span class="keyword">new</span> <span class="title class_">WhitespaceAnalyzer</span>());</span><br><span class="line">        indexWriterConfig.setIndexDeletionPolicy(<span class="keyword">new</span> <span class="title class_">SnapshotDeletionPolicy</span>(<span class="keyword">new</span> <span class="title class_">KeepOnlyLastCommitDeletionPolicy</span>()));</span><br><span class="line">        ramWriter = <span class="keyword">new</span> <span class="title class_">IndexWriter</span>(ramDirectory, indexWriterConfig);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//先添加一条记录</span></span><br><span class="line">        <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Document</span>();</span><br><span class="line">        document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;first&quot;</span>, <span class="string">&quot;first&quot;</span>, Field.Store.YES));</span><br><span class="line">        ramWriter.addDocument(document);</span><br><span class="line">        ramWriter.commit();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//定时备份线程</span></span><br><span class="line">        <span class="type">ScheduledExecutorService</span> <span class="variable">backupThread</span> <span class="operator">=</span> Executors.newSingleThreadScheduledExecutor();</span><br><span class="line">        backupThread.scheduleAtFixedRate(backup, <span class="number">0</span>, <span class="number">2</span>, TimeUnit.SECONDS);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//可以继续接受索引请求</span></span><br><span class="line">        document = <span class="keyword">new</span> <span class="title class_">Document</span>();</span><br><span class="line">        document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;key&quot;</span>, Field.Store.YES));</span><br><span class="line">        ramWriter.addDocument(document);</span><br><span class="line">        ramWriter.commit();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//等待索引拷贝完成</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//接受搜索请求，可实现实时搜索</span></span><br><span class="line">        <span class="type">IndexSearcher</span> <span class="variable">indexSearcher</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexSearcher</span>(DirectoryReader.open(ramWriter.getDirectory()));</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> indexSearcher.count(<span class="keyword">new</span> <span class="title class_">MatchAllDocsQuery</span>());</span><br><span class="line">        System.out.println(<span class="string">&quot;total hits: &quot;</span> + count);</span><br><span class="line">        System.out.println(<span class="string">&quot;内存中索引文件：&quot;</span> + Arrays.asList(ramDirectory.listAll()));</span><br><span class="line">        <span class="comment">//查看备份索引是否完整，此处有一个注意点，如果需要在备份索引上打开searcher，那么在备份索引文件的时候需要先备份其它文件，最后再备份segments_N文件</span></span><br><span class="line">        <span class="comment">//因为开searcher的时候，会先加载segments_N文件，这种方式可以保证加载完segments_N文件之后，再加载其它文件一定成功</span></span><br><span class="line"></span><br><span class="line">        fsDirectory = FSDirectory.open(Paths.get(<span class="string">&quot;F:/index_RAM_FS&quot;</span>));</span><br><span class="line">        System.out.println(<span class="string">&quot;备份中索引文件：&quot;</span> + Arrays.asList(fsDirectory.listAll()));</span><br><span class="line">        backupThread.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Backup</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">            IndexWriterConfig config;</span><br><span class="line">            <span class="type">SnapshotDeletionPolicy</span> <span class="variable">indexDeletionPolicy</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="type">IndexCommit</span> <span class="variable">snapshot</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                ramWriter.commit();</span><br><span class="line">                config = (IndexWriterConfig) ramWriter.getConfig();</span><br><span class="line">                indexDeletionPolicy = (SnapshotDeletionPolicy) config.getIndexDeletionPolicy();</span><br><span class="line">                snapshot = indexDeletionPolicy.snapshot();</span><br><span class="line">                config.setIndexCommit(snapshot);</span><br><span class="line">                Collection&lt;String&gt; fileNames = snapshot.getFileNames();</span><br><span class="line">                <span class="type">Path</span> <span class="variable">path</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;F:/index_RAM_FS&quot;</span>);</span><br><span class="line">                <span class="comment">//全量增量任选一种即可</span></span><br><span class="line">                <span class="type">boolean</span> <span class="variable">b</span> <span class="operator">=</span> incrementalBackup(fileNames, path);</span><br><span class="line">                <span class="comment">//boolean b = fullBackup(fileNames, path);</span></span><br><span class="line">                <span class="keyword">if</span> (!b) &#123;</span><br><span class="line">                    System.err.println(<span class="string">&quot;Backup occurs error!&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                System.err.println(e.getMessage());</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    indexDeletionPolicy.release(snapshot);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    System.err.println(e.getMessage());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">fullBackup</span><span class="params">(Collection&lt;String&gt; fileNames, Path path)</span> &#123;</span><br><span class="line">            Objects.requireNonNull(path);</span><br><span class="line">            Directory to;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                to = FSDirectory.open(path);</span><br><span class="line">                <span class="comment">// 全量备份，直接清空拷贝</span></span><br><span class="line">                <span class="keyword">for</span> (File file : path.toFile().listFiles()) &#123;</span><br><span class="line">                    file.delete();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span> (String fileName : fileNames) &#123;</span><br><span class="line">                    to.copyFrom(ramDirectory, fileName, fileName, IOContext.DEFAULT);</span><br><span class="line">                &#125;</span><br><span class="line">                to.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">incrementalBackup</span><span class="params">(Collection&lt;String&gt; fileNames, Path path)</span> &#123;</span><br><span class="line">            <span class="comment">// 增量备份，稍微复杂一些，比较文件名，将ramDirectory中新增索引拷贝过去，同时将ramDirectory中不存在的索引但是在path中存在的旧索引删除</span></span><br><span class="line">            Objects.requireNonNull(path);</span><br><span class="line">            <span class="comment">//fileNames被IndexCommit引用，需要重新构造set集合，进行移除操作</span></span><br><span class="line">            Set&lt;String&gt; files = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;(fileNames);</span><br><span class="line">            <span class="keyword">for</span> (File file : path.toFile().listFiles()) &#123;</span><br><span class="line">                <span class="keyword">if</span> (files.contains(file.getName())) &#123;</span><br><span class="line">                    <span class="comment">//该索引已存在，则不拷贝</span></span><br><span class="line">                    files.remove(file.getName());</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//删除已经过时的索引</span></span><br><span class="line">                    file.delete();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//拷贝全部新增索引</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">Directory</span> <span class="variable">to</span> <span class="operator">=</span> FSDirectory.open(path);</span><br><span class="line">                <span class="keyword">for</span> (String file : files) &#123;</span><br><span class="line">                    to.copyFrom(ramDirectory, file, file, IOContext.DEFAULT);</span><br><span class="line">                &#125;</span><br><span class="line">                to.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>如果内存不够大，不能够存放全部的本地文件系统索引，那么如何实现呢？这时候，需要两套IndexWriter，一套用来处理本地文件系统中的索引，另一套在内存中可以接受新的索引请求；对索引的操作无非就是新增、删除、更新这三种，下面分别论述</p>
-</li>
-<li><p>删除索引： 对于删除操作比较简单，两个IndexWriter都执行一次即可，如果其中一个IndexWriter中不存在待删除的索引的话，那么对索引文件不会有任何影响；这时候又分两种情况，一是待删除的索引在内存中，那么删除-提交-重新打开索引，耗时很短；二是待删除索引在硬盘上，这时候删除-提交，到底要不要重新打开，需要视业务而定，因为硬盘上的索引通常是很大的，如果频繁删除频繁重新打开的话，是很耗性能的，而如果不重新打开，这时候删除的索引对searcher是不可见的，也就是说用户仍然可以搜索到已删除的索引，比较好的方式是用一个后台线程去定时的重新打开硬盘索引，然后更新searcher即可，但是这样对于删除操作无法做到准实时，会有一定的延时。</p>
-</li>
-<li><p>新增索引：所有的新增操作都使用内存中的IndexWriter（称为A），然后提交-重新打开索引-更新searcher，一切都是在内存中操作，耗时极短，对于实时搜索是解决了，而且Lucene中已经提供了MultiReader可以组合多个子reader，很适合这种情况；但是当内存中索引尺寸达到一定大小之后，需要将其合并到文件系统中；在合并的时候还需要另外再开一个内存中的IndexWriter（称为B）用来接受索引合并期间的索引新增操作。不过这种方式实现起来很复杂，需要处理很多问题，例如在内存索引 A 和硬盘索引合并期间如果有更新删除操作怎么处理？在合并之后需要更新MultiReader，但是旧的MultiReader上面还挂有搜索请求怎么办？在新开一个内存索引 B 之后，如何让MultiReader覆盖住它？因为在 B 中必须先有索引，然后才能开Reader，进而才能更新MultiReader；若新增索引速度实在太快，在合并过程没有完成的时候，内存索引又满了，要怎么办？除此以外还有很多问题需要考虑。</p>
-</li>
-<li><p>更新索引：更新其实可以看作是两步操作，先删除后新增，这两步可以借鉴上面的论述。更新操作是无法同时应用于两个IndexWriter的，因为在Lucene中更新的逻辑是这样的，如果存在则更新，如果不存在则新增，那么假设一个IndexWriter中存在，另一个不存在，如果两个都应用更新，那么最后的结果很简单就是存在两份一样的document了。</p>
-</li>
-</ul>
-<p>个人理解优雅的程序应该是简单的，越是简单的程序其实越是健壮，这种方案实现起来很复杂，即使这么复杂的程序实现了，其健壮性仍然值得担忧，所以不是特别推荐使用这种方案。比较好的方案当然是上Elasticsearch集群了，Elasticsearch的刷新时间默认是1s钟，也就是说，最迟1s之后，就可以看到新的数据。当然如果非要针对Lucene进行开发，可以参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/forfuture1978/archive/2010/11/29/1891476.html">Linked公司开源的Zoie搜索引擎</a>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install -y net-tools</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -270,7 +254,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/06/28/RPC%20%E7%9B%B8%E5%85%B3/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/08/20/fast-github-page-with-cloudflare/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -288,7 +272,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/06/28/RPC%20%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">RPC 相关</a>
+          <a href="/2020/08/20/fast-github-page-with-cloudflare/" class="post-title-link" itemprop="url">使用cloudflare免费加速github page</a>
         </h2>
 
         <div class="post-meta-container">
@@ -299,14 +283,23 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-06-28 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-28T00:00:00+08:00">2017-06-28</time>
+      <time title="Created: 2020-08-20 17:45:18" itemprop="dateCreated datePublished" datetime="2020-08-20T17:45:18+08:00">2020-08-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">杂谈</span></a>
+        </span>
     </span>
 
   
@@ -319,120 +312,486 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h1><ul>
-<li>远程调用过程<br>服务消费方（client）以本地调用方式调用远程服务 -<code>[...]</code>- server stub根据解码结果调用本地的服务并响应</li>
-<li>所谓RPC框架即是完成中间过程的过程<br>【提供client请求目标的方式-(反)序列化消息体-网络客户端】【网络服务端-(反)序列化消息体-调用服务端-提供服务注册方式】</li>
-</ul>
-<p>序列化方式：json、xml、hession、protobuf、thrift、text、bytes</p>
-<p><img src="http://img0.tuicool.com/qaiMFfA.png!web"></p>
-<p>| | | 提供client请求目标的方式 | (反)序列化消息体 | 网络服务 | 暴露服务&#x2F;服务发现 | (反)序列化消息体 | 提供server服务注册方式 | RPC框架初始化 |<br>|:—————:|————————–|—————–|——————-|——————-|——————|—————————|—————|<br>| Dubbo | spring-Bean |  类方法属性(行为)-&gt; <br> Object&lt;-二进制  | tcp(dubbo), nio | zookeeper |  类方法属性(行为)-&gt;反射 <br> 二进制&lt;-Object  | spring-Bean(&gt;ZK) | spring-Schema |<br>| webService-Axis | axis.client.Call | Object-soap(xml) | http | proName.wsdl描述 | soap(xml)-Object | Apache Axis:deploy.wsdd部署<br>或 JAX-WS (注解)   <br>   @WebService,@WebMethod | servlet |<br>| java.rmi | Naming.lookup | 类方法属性(行为)-&gt; <br> Object&lt;-二进制  | tcp(rmi) | rmi_doc | 类方法属性(行为)-&gt;反射 <br> 二进制&lt;-Object  | LocateRegistry.createRegistry <br> Naming.rebind | thread |<br>| RESTful | httpClient | json | http | api_doc | json | spring mvc | servlet |</p>
-<p><code>你应该知道的RPC原理 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/Z3QBVv">http://www.tuicool.com/articles/Z3QBVv</a></p>
-<hr>
-<p><code>一个虐你千百遍的问题：“RPC好，还是RESTful好？” - 王启军 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/douliw/article/details/52592188---">http://blog.csdn.net/douliw/article/details/52592188---</a></p>
-<hr>
-<h1 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h1><ul>
-<li><p>节点角色说明<br>Provider:  暴露服务的服务提供方。<br>Consumer:  调用远程服务的服务消费方。<br>Registry:  服务注册与发现的注册中心。<br>Monitor:  统计服务的调用次调和调用时间的监控中心。<br>Container:  服务运行容器</p>
-</li>
-<li><p>核心部分<br>远程通讯: 提供对多种基于长连接的<code>NIO框架</code>抽象封装，包括多种线程模型，<code>序列化</code>，以及“请求-响应”模式的信息交换方式。<br>集群容错: 提供基于接口方法的透明远程过程调用，包括多协议支持，以及<code>软负载均衡</code>，失败容错，地址路由，动态配置等集群支持。<br>自动发现: 基于<code>注册中心</code>目录服务，使服务消费方能动态的查找服务提供方，使地址透明，使服务提供方可以平滑增加或减少机器。</p>
-</li>
-</ul>
-<h2 id="Dubbo-负载均衡策略提供下列四种方式"><a href="#Dubbo-负载均衡策略提供下列四种方式" class="headerlink" title="Dubbo 负载均衡策略提供下列四种方式"></a>Dubbo 负载均衡策略提供下列四种方式</h2><ul>
-<li>Random LoadBalance <code>随机[ 权重 ]</code>，按权重设置随机概率。 Dubbo的默认负载均衡策略</li>
-</ul>
-<p>在一个截面上碰撞的概率高，但调用量越大分布越均匀，而且按概率使用权重后也比较均匀，有利于动态调整提供者权重。</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>github page 在国内访问速度非常慢，而且近期 github.io 的域名经常被干扰解析成<code>127.0.0.1</code>，迫于无奈在网上找到了一个能白嫖加速 github page 的办法，就是套一层 cloudflare CDN，虽然它在国内没有 CDN 节点，但是整体效果是完爆 github.io，不过要注意的是免费版本是有请求次数限制的，每天 10W 次，当然这足够我的小博客使用了，这里记录一下操作步骤。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/20/fast-github-page-with-cloudflare/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/08/07/wireshark-capture-https/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/08/07/wireshark-capture-https/" class="post-title-link" itemprop="url">我云了，原来wireshark可以抓HTTPS明文包</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-08-07 17:30:49" itemprop="dateCreated datePublished" datetime="2020-08-07T17:30:49+08:00">2020-08-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以前在使用<code>wireshark</code>做协议分析的时候，一直以为它只能抓 HTTP 的报文，所以在抓 HTTPS 包的时候一直是用的<code>Fiddler</code>，然而有一天我突然想抓一下<code>HTTP2</code>的报文看一看，<code>Fiddler</code>就不行了，于是在一番 google 之后发现<code>wireshark</code>是可以支持的，只不过需要在特定的条件下才可以。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/07/wireshark-capture-https/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/08/07/upgrade-hexo-next/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/08/07/upgrade-hexo-next/" class="post-title-link" itemprop="url">给博客的next主题升个级</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-08-07 10:08:15" itemprop="dateCreated datePublished" datetime="2020-08-07T10:08:15+08:00">2020-08-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">杂谈</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="为什么升级"><a href="#为什么升级" class="headerlink" title="为什么升级"></a>为什么升级</h2><p>最近突然想把博客的评论系统换掉，因为之前用的<code>valine</code>评论插件，起初是觉得方便并且可以支持匿名评论，但是在评论之后没有通知，很多评论都是过了很久之后我才知道，所以想换一个能有通知的评论系统，起初的选型是：<code>Gitment</code>和<code>Gitalk</code>，但是发现一个更好的<code>utterances</code>，查了一下 next 高版本已经可以支持<code>utterances</code>了，这样升级 next 就直接接入了。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/07/upgrade-hexo-next/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/07/22/spring-aop-call-self-method/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/07/22/spring-aop-call-self-method/" class="post-title-link" itemprop="url">Spring AOP调用本类方法没有生效的问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-07-22 17:54:25" itemprop="dateCreated datePublished" datetime="2020-07-22T17:54:25+08:00">2020-07-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>首先请思考一下以下代码执行的结果：</p>
 <ul>
-<li>RoundRobin LoadBalance <code>轮循</code>，按公约后的权重设置轮循比率。</li>
+<li>LogAop.java</li>
 </ul>
-<p>存在慢的提供者累积请求问题，比如：第二台机器很慢，但没挂，当请求调到第二台时就卡在那，久而久之，所有请求都卡在调到第二台上。</p>
-<ul>
-<li>LeastActive LoadBalance <code>最少活跃调用数</code>，相同活跃数的随机，活跃数指调用前后计数差。</li>
-</ul>
-<p>使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大。</p>
-<ul>
-<li>ConsistentHash LoadBalance <code>一致性Hash</code>，相同参数的请求总是发到同一提供者。</li>
-</ul>
-<p>当某一台提供者挂时，原本发往该提供者的请求，基于虚拟节点，平摊到其它提供者，不会引起剧烈变动。</p>
-<p><code>Dubbo负载均衡策略 - 清风部落 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/qingfengbuluo/p/5527930.html">http://www.cnblogs.com/qingfengbuluo/p/5527930.html</a></p>
-<h2 id="Dubbo的Spring初始化"><a href="#Dubbo的Spring初始化" class="headerlink" title="Dubbo的Spring初始化"></a>Dubbo的Spring初始化</h2><blockquote>
-<p>dubbo使用了spring的自定义的Schema完成了dubbo配置的初始化<br><code>dubbo-2.5.3.jar!\META-INF\spring.handlers</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明一个AOP拦截service包下的所有方法</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogAop</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Around(&quot;execution(* com.demo.service.*.*(..))&quot;)</span></span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">log</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="type">MethodSignature</span> <span class="variable">methodSignature</span> <span class="operator">=</span> (MethodSignature) joinPoint.getSignature();</span><br><span class="line">          <span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> methodSignature.getMethod();</span><br><span class="line">          <span class="type">Object</span> <span class="variable">ret</span> <span class="operator">=</span> joinPoint.proceed();</span><br><span class="line">          <span class="comment">//执行完目标方法之后打印</span></span><br><span class="line">          System.out.println(<span class="string">&quot;after execute method:&quot;</span>+method.getName());</span><br><span class="line">          <span class="keyword">return</span> ret;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (Throwable throwable) &#123;</span><br><span class="line">          <span class="keyword">throw</span> throwable;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/22/spring-aop-call-self-method/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/07/13/idea-maven-helper-plugin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/07/13/idea-maven-helper-plugin/" class="post-title-link" itemprop="url">IDEA插件推荐之Maven-Helper</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-07-13 16:56:38" itemprop="dateCreated datePublished" datetime="2020-07-13T16:56:38+08:00">2020-07-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IDE/" itemprop="url" rel="index"><span itemprop="name">IDE</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Maven-Helper-插件介绍"><a href="#Maven-Helper-插件介绍" class="headerlink" title="Maven-Helper 插件介绍"></a>Maven-Helper 插件介绍</h3><p>这个插件能可以通过 UI 界面的方式来查看 maven 项目的依赖关系，当然还有最重要的功能<code>解决依赖冲突</code>，使用起来非常的方便，效果图：<br><img src="/idea-maven-helper-plugin/2020-07-20-12-01-29.png"></p>
+<p>在开发 JAVA 项目的时候，经常会由于 maven 依赖冲突导致项目启动失败，这个时候往往会懵逼，到底哪个依赖冲突了，需要排除哪个子依赖，有了这个插件之后就可以很快的定位到冲突的组件，并进行排除。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/13/idea-maven-helper-plugin/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/07/06/linux-global-proxy-tool-proxychain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/07/06/linux-global-proxy-tool-proxychain/" class="post-title-link" itemprop="url">linux下的全局代理工具proxychain</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-07-06 11:52:35" itemprop="dateCreated datePublished" datetime="2020-07-06T11:52:35+08:00">2020-07-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="proxychain-介绍"><a href="#proxychain-介绍" class="headerlink" title="proxychain 介绍"></a>proxychain 介绍</h2><blockquote>
+<p>本文介绍的是<a target="_blank" rel="noopener" href="https://github.com/rofl0r/proxychains-ng">proxychains-ng</a>项目</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http\://code.alibabatech.com/schema/dubbo=com.alibaba.dubbo.config.spring.schema.DubboNamespaceHandler ```</span><br></pre></td></tr></table></figure>
-<p>public class DubboNamespaceHandler extends NamespaceHandlerSupport {<br>    public DubboNamespaceHandler() {<br>}</p>
-<p>public void init() {<br>    this.registerBeanDefinitionParser(“application”, new DubboBeanDefinitionParser(ApplicationConfig.class, true));<br>    this.registerBeanDefinitionParser(“module”, new DubboBeanDefinitionParser(ModuleConfig.class, true));<br>    this.registerBeanDefinitionParser(“registry”, new DubboBeanDefinitionParser(RegistryConfig.class, true));<br>    this.registerBeanDefinitionParser(“monitor”, new DubboBeanDefinitionParser(MonitorConfig.class, true));<br>    this.registerBeanDefinitionParser(“provider”, new DubboBeanDefinitionParser(ProviderConfig.class, true));<br>    this.registerBeanDefinitionParser(“consumer”, new DubboBeanDefinitionParser(ConsumerConfig.class, true));<br>    this.registerBeanDefinitionParser(“protocol”, new DubboBeanDefinitionParser(ProtocolConfig.class, true));<br>    this.registerBeanDefinitionParser(“service”, new DubboBeanDefinitionParser(ServiceBean.class, true));<br>    this.registerBeanDefinitionParser(“reference”, new DubboBeanDefinitionParser(ReferenceBean.class, false));<br>    this.registerBeanDefinitionParser(“annotation”, new DubboBeanDefinitionParser(AnnotationBean.class, true));<br>}</p>
-<p>static {</p>
-<pre><code>Version.checkDuplicate(DubboNamespaceHandler.class);
-</code></pre>
-<p>}<br>}</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">this.finishRefresh();</span><br><span class="line">this.invokeListener(listener, event);// 对 ApplicationListeners触发 Event  </span><br><span class="line">listener.onApplicationEvent(event);</span><br></pre></td></tr></table></figure>
-<p><code>com.alibaba.dubbo.config.spring.ServiceBean</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public void onApplicationEvent(ApplicationEvent event) &#123;</span><br><span class="line">    if (ContextRefreshedEvent.class.getName().equals(event.getClass().getName()) &amp;&amp; this.isDelay() &amp;&amp; !this.isExported() &amp;&amp; !this.isUnexported()) &#123;</span><br><span class="line">        if (logger.isInfoEnabled()) &#123;</span><br><span class="line">            logger.info(&quot;The service ready on spring started. service: &quot; + this.getInterface());</span><br><span class="line">        &#125;</span><br><span class="line">        this.export();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 linux 上运行一些命令的时候，经常访问到国外的网站，速度非常的慢，例如用<code>git</code>、<code>wget</code>等等，这个时候就可以通过<code>proxychain</code>工具来使用代理进行网络访问，使用教程如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 git <span class="built_in">clone</span> git@github.com:rofl0r/proxychains-ng.git</span><br></pre></td></tr></table></figure>
 
-
-<p><code>4. dubbo在spring中的初始代</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/u012325403/article/details/55261916">http://blog.csdn.net/u012325403/article/details/55261916</a></p>
-<hr>
-<h1 id="Dubbo-使用示例"><a href="#Dubbo-使用示例" class="headerlink" title="Dubbo 使用示例"></a>Dubbo 使用示例</h1><ul>
-<li><p>Service</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 提供方应用信息，用于计算依赖关系 --&gt;</span><br><span class="line">&lt;dubbo:application name=&quot;dubbo-server&quot;/&gt;</span><br><span class="line">&lt;!-- 使用multicast广播注册中心暴露服务地址 --&gt;</span><br><span class="line">&lt;dubbo:registry address=&quot;zookeeper://localhost:2181&quot;/&gt;</span><br><span class="line">&lt;!-- 用dubbo协议在20880端口暴露服务 --&gt;</span><br><span class="line">&lt;dubbo:protocol name=&quot;dubbo&quot; port=&quot;20880&quot;/&gt;</span><br><span class="line">&lt;!-- 声明需要暴露的服务接口 --&gt;</span><br><span class="line">&lt;dubbo:service interface=&quot;com.fengjx.dubbo.service.HelloService&quot; ref=&quot;helloService&quot;/&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    &lt;!-- 和本地bean一样实现服务 --&gt;</span><br><span class="line">    &lt;bean id=&quot;helloService&quot; class=&quot;com.fengjx.dubbo.service.impl.HelloServiceImpl&quot;/&gt;</span><br><span class="line">``` ```</span><br><span class="line">public class HelloServiceImpl implements HelloService &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 暴露的接口</span><br><span class="line">     *</span><br><span class="line">     * @param name</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public String sayHello(String name) &#123;</span><br><span class="line">        System.out.println(&quot;call sayHello&quot;);</span><br><span class="line">        return &quot;Hello &quot; + name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>Client</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 --&gt;</span><br><span class="line">&lt;dubbo:application name=&quot;dubbo-client&quot;/&gt;</span><br><span class="line">&lt;!-- 使用multicast广播注册中心暴露发现服务地址 --&gt;</span><br><span class="line">&lt;dubbo:registry address=&quot;zookeeper://localhost:2181&quot;/&gt;</span><br><span class="line">&lt;!-- 生成远程服务代理，可以和本地bean一样使用demoService --&gt;</span><br><span class="line">&lt;dubbo:reference id=&quot;helloService&quot; interface=&quot;com.fengjx.dubbo.service.HelloService&quot;/&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;helloServiceConsumer&quot; class=&quot;com.fengjx.dubbo.service.HelloServiceConsumer&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;helloService&quot; ref=&quot;helloService&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringJUnit4ClassRunner.class)</span><br><span class="line">@ContextConfiguration(&quot;/spring.xml&quot;)</span><br><span class="line">public class HelloServiceConsumerTest &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private HelloServiceConsumer helloServiceConsumer;</span><br><span class="line">    @Test</span><br><span class="line">    public void test()&#123;</span><br><span class="line">        String res = helloServiceConsumer.helloFjx();</span><br><span class="line">        System.out.println(res);</span><br><span class="line">        assertEquals(&quot;Hello fengjx&quot;,res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><code>dubbo接口简单示例，maven + intellj构建</code><br><a target="_blank" rel="noopener" href="https://git.oschina.net/fengjx/dubbo-demo.git">https://git.oschina.net/fengjx/dubbo-demo.git</a></p>
-<p><code>Spring+Dubbo+TestNG接口测试 - LangSand的博客 - CSDN博客 </code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/langsand/article/details/72470720">http://blog.csdn.net/langsand/article/details/72470720</a></p>
-<hr>
-<h1 id="webService"><a href="#webService" class="headerlink" title="webService"></a>webService</h1><ul>
-<li>HelloWorld.java [ JAX-WS ]<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import javax.jws.WebMethod;</span><br><span class="line">import javax.jws.WebService;</span><br><span class="line">import javax.xml.ws.Endpoint;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@WebService(targetNamespace = &quot;http://localhost:9000/HelloWorld&quot;)</span><br><span class="line">public class HelloWorld &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@WebMethod</span><br><span class="line">public String sayHello(String name) &#123;</span><br><span class="line">System.out.println(name + &quot;,你好&quot;);</span><br><span class="line">return name + &quot;,你好&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public static void main(String args[])&#123;</span><br><span class="line">Object hello = new HelloWorld();</span><br><span class="line">String address = &quot;http://localhost:9000/HelloWorld&quot;;// 发布到的地址</span><br><span class="line">Endpoint.publish(address, hello);</span><br><span class="line">System.out.println(&quot;发布成功,http://localhost:8989/HelloWorld?wsdl&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-server依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.apache.axis/axis --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.apache.axis&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;axis&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.apache.axis/axis-jaxrpc --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.apache.axis&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;axis-jaxrpc&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- https://mvnrepository.com/artifact/axis/axis-wsdl4j --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;axis&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;axis-wsdl4j&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.5.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/commons-logging/commons-logging-api --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;commons-logging&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;commons-logging-api&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- https://mvnrepository.com/artifact/commons-discovery/commons-discovery --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;commons-discovery&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;commons-discovery&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;0.5&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>生成<code>HelloWorld.wsdl</code> (右键-WebServices<code>-Generate WSDL Form Java Code</code>)</p>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/58767281.jpg"></p>
-<ul>
-<li><p>浏览器即可访问(工具:Wizdler)<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/51287937.jpg"></p>
-</li>
-<li><p>postman也可访问<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/84860502.jpg"></p>
-</li>
-</ul>
-<h1 id="生成客户端"><a href="#生成客户端" class="headerlink" title="生成客户端"></a>生成客户端</h1><ul>
-<li><p>方式一： 选择<code>HelloWorld.wsdl</code>右键-<code>Generate Java Code Form Wsdl</code><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/124167.jpg"></p>
-</li>
-<li><p>方式二：  新建工程（<code>Apache Axis为web方式</code>，<code>JAX-WS为注解方式</code>）</p>
-</li>
-</ul>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/19095284.jpg"></p>
-<p><code> intellij 开发webservice - 先知后觉 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/linxiaoyang/p/4167016.html">http://www.cnblogs.com/linxiaoyang/p/4167016.html</a></p>
-<p><code>如何用IDEA一步一步开发WebService服务器端</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/u010323023/article/details/52926051">http://blog.csdn.net/u010323023/article/details/52926051</a><br><a target="_blank" rel="noopener" href="http://www.biliyu.com/article/986.html">http://www.biliyu.com/article/986.html</a></p>
-<p><code>Intellij Idea 下 生成WebServiceClient (WS客户端) - NotFound404 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/qq_35067322/article/details/53558775">http://blog.csdn.net/qq_35067322/article/details/53558775</a></p>
-<hr>
-<h1 id="RMI"><a href="#RMI" class="headerlink" title="RMI"></a>RMI</h1><p><code>java RMI原理详解 - xinghun_4的专栏 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/xinghun_4/article/details/45787549">http://blog.csdn.net/xinghun_4/article/details/45787549</a></p>
-<p><code>Java RMI详解 - 怀揣梦想，努力前行 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/a19881029/article/details/9465663">http://blog.csdn.net/a19881029/article/details/9465663</a></p>
-<p><code>Java RMI之HelloWorld篇 - 熔 岩 - 51CTO技术博客</code><br><a target="_blank" rel="noopener" href="http://lavasoft.blog.51cto.com/62575/91679/">http://lavasoft.blog.51cto.com/62575/91679/</a></p>
-<hr>
-<h1 id="dubbo-与-WebService区别-跨平台思考"><a href="#dubbo-与-WebService区别-跨平台思考" class="headerlink" title="dubbo 与 WebService区别 跨平台思考?"></a>dubbo 与 WebService区别 跨平台思考?</h1><p>Dubbo提供基于接口的透明的远程过程调用，支持<code>多种协议</code>，包括Dubbo、RMI、<code>WebService</code>、Hessian、Http、Thrift、Redis、Memcached。<br>Dubbo基于注册中心的目录服务，使服务消费方能动态的查找服务提供方，支持平滑的减少或增加服务器。</p>
-<p><code>分布式服务框架Dubbo入门实践 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/d357dada2ff5">http://www.jianshu.com/p/d357dada2ff5</a></p>
-<hr>
-<h1 id="EJB"><a href="#EJB" class="headerlink" title="EJB"></a>EJB</h1><p><code>EJB分布式工作原理 - Senssic - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/senssic/article/details/11850131">http://blog.csdn.net/senssic/article/details/11850131</a></p>
-<p><code>EJB 工作原理 - 企业应用 - Java - ITeye论坛</code><br><a target="_blank" rel="noopener" href="http://www.iteye.com/topic/3832">http://www.iteye.com/topic/3832</a></p>
-<p><code>EJB工作原理学习笔记 - 天下无贼 - 51CTO技术博客</code><br><a target="_blank" rel="noopener" href="http://guojuanjun.blog.51cto.com/277646/1351245">http://guojuanjun.blog.51cto.com/277646/1351245</a></p>
-<p><code>EJB工作原理学习笔记! - 李晓辉的Blog - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/tolixiaohui/article/details/211957">http://blog.csdn.net/tolixiaohui/article/details/211957</a></p>
-<ul>
-<li><p><code>Weblogic</code><br>WebLogic是美国Oracle公司出品的一个application server，确切的说是一个基于JAVAEE架构的中间件 同类有:tomcat</p>
-</li>
-<li><p><code> XDoclet</code><br>  XDoclet 是一个通用的代码生成实用程序,是一个扩展的Javadoc Doclet引擎，它允许您使用象 JavaDoc 标记之类的东西来向诸如类、方法和字段之类的语言特征添加元数据<br>  XDoclet 继承了 JavaDoc 引擎的思想，允许根据定制 JavaDoc 标记生成代码和其他文件。当然，XDoclet 也可以访问整个解析树。这样，它就可以访问类、类的包结构和类的方法。</p>
-</li>
-</ul>
-<p><code>XDoclet是什么? - yangjuqi的日志 - 网易博客</code></p>
-<p><a target="_blank" rel="noopener" href="http://blog.163.com/yangjuqi@126/blog/static/28452285200791192152923/">http://blog.163.com/yangjuqi@126/blog/static/28452285200791192152923/</a></p>
-<hr>
-<p><strong>参考</strong><br><code>Dubbo初探 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/VrQrUv">http://www.tuicool.com/articles/VrQrUv</a></p>
-<p><code>Dubbo源码学习--集群负载均衡算法的实现</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/javanoob/p/dubbo_loadbalance.html">http://www.cnblogs.com/javanoob/p/dubbo_loadbalance.html</a></p>
-<p><code>RPC框架与Dubbo完整使用</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/u010297957/article/details/51702076">http://blog.csdn.net/u010297957/article/details/51702076</a></p>
-<p><code>Java RMI 框架（远程方法调用） - 蚂蚁 - 51CTO技术博客</code><br><a target="_blank" rel="noopener" href="http://haolloyin.blog.51cto.com/1177454/332426/">http://haolloyin.blog.51cto.com/1177454/332426/</a></p>
-
+<p>在所有要运行的命令行之前加上<code>proxychains4</code>就可以通过代理进行网络访问了。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/06/linux-global-proxy-tool-proxychain/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -458,7 +817,7 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/06/26/%E4%BE%9D%E6%8D%AE%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7,%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8F%92%E9%98%9F%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0-%E7%AE%80%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/06/28/k8s-coredns-cname/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -476,7 +835,7 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/06/26/%E4%BE%9D%E6%8D%AE%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7,%E5%AE%9E%E7%8E%B0%E5%8F%AF%E6%8F%92%E9%98%9F%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0-%E7%AE%80%E8%A3%85/" class="post-title-link" itemprop="url">依据任务优先级,实现可插队的线程池 -简装</a>
+          <a href="/2020/06/28/k8s-coredns-cname/" class="post-title-link" itemprop="url">k8s通过coredns配置CNAME</a>
         </h2>
 
         <div class="post-meta-container">
@@ -487,653 +846,14 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-06-26 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-26T00:00:00+08:00">2017-06-26</time>
+      <time title="Created: 2020-06-28 13:51:38" itemprop="dateCreated datePublished" datetime="2020-06-28T13:51:38+08:00">2020-06-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="关键"><a href="#关键" class="headerlink" title="关键"></a>关键</h1><ul>
-<li>队列： <code>PriorityBlockingQueue</code> 优先级</li>
-<li>思路：线程实现Comparable &#x2F; 仅作用在未开始的线程,故注意corePoolSize<br><code>class MyRunnableComp implements Runnable, Comparable&lt;MyRunnableComp&gt;</code></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">package pool.priority;</span><br><span class="line"> </span><br><span class="line">import java.util.concurrent.BlockingQueue;</span><br><span class="line">import java.util.concurrent.PriorityBlockingQueue;</span><br><span class="line">import java.util.concurrent.ThreadPoolExecutor;</span><br><span class="line">import java.util.concurrent.TimeUnit;</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line">* [简单封装]依据任务优先级,可插队的线程池</span><br><span class="line">*/</span><br><span class="line">public class MyPriorityThreadPool &#123;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ThreadPoolExecutor threadPoolExecutor = new ThreadPool_demo().executor();</span><br><span class="line"> </span><br><span class="line">        boolean coreThreadTimeOut = threadPoolExecutor.allowsCoreThreadTimeOut();// 将包括“核心线程”在内的，没有任务分配的任何线程，在等待keepAliveTime时间后全部进行回收</span><br><span class="line">        System.out.println(coreThreadTimeOut);// 默认是false</span><br><span class="line"> </span><br><span class="line">        for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">            /* 常规线程(先进先出-LinkedTransferQueue[CAS乐观锁]) */</span><br><span class="line">//            threadPoolExecutor.execute(new Runnable() &#123;</span><br><span class="line">//                @Override</span><br><span class="line">//                public void run() &#123;</span><br><span class="line">//                    System.out.println(Thread.currentThread().getName() + &quot;正在执行。。。&quot;);</span><br><span class="line">//                &#125;</span><br><span class="line">//            &#125;);</span><br><span class="line"> </span><br><span class="line">            /* 优先级控制线程(依优先级插队-PriorityBlockingQueue)|仅作用在未开始的线程,故注意corePoolSize */</span><br><span class="line">            threadPoolExecutor.execute(new MyRunnableComp((int) (1000 + Math.random() * (9999 - 1000 + 1))));// 首个立即执行</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">class ThreadPool_demo &#123;</span><br><span class="line">    int corePoolSize = 1;// 核心线程(产生后不释放待复用)</span><br><span class="line">    int maximumPoolSize = 100;// 最大池(核心线程数+临时线程数)</span><br><span class="line">    long keepAliveTime = 0l;// 空闲时间(多出corePoolSize的线程在空闲时间超过 keepAliveTime 时将会终止)</span><br><span class="line">    TimeUnit unit = TimeUnit.MILLISECONDS;// 单位 毫秒 纳秒</span><br><span class="line"> </span><br><span class="line">    // BlockingQueue&lt;Runnable&gt; workQueue = new LinkedBlockingQueue&lt;Runnable&gt;();// 双链表,无限队列大小/ 不会有多于corePoolSize的线程被创建,maximumPoolSize没意义</span><br><span class="line">    // BlockingQueue&lt;Runnable&gt; workQueue = new LinkedTransferQueue&lt;Runnable&gt;();// 无锁方式-CAS ★</span><br><span class="line">    // BlockingQueue&lt;Runnable&gt; workQueue = new SynchronousQueue&lt;Runnable&gt;();// 同步</span><br><span class="line">    BlockingQueue&lt;Runnable&gt; workQueue = new PriorityBlockingQueue&lt;Runnable&gt;();// 优先级</span><br><span class="line"> </span><br><span class="line">    public ThreadPoolExecutor executor() &#123;</span><br><span class="line">        return new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line">* 优先级可控的线程池</span><br><span class="line">*/</span><br><span class="line">class MyRunnableComp implements Runnable, Comparable&lt;MyRunnableComp&gt; &#123;</span><br><span class="line">    int priority;// 优先级</span><br><span class="line"> </span><br><span class="line">    public MyRunnableComp(int priority) &#123;</span><br><span class="line">        this.priority = priority;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public int getPriority() &#123;</span><br><span class="line">        return priority;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setPriority(int priority) &#123;</span><br><span class="line">        this.priority = priority;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + &quot;[&quot; + this.priority + &quot;]&quot; + &quot;正在执行。。。&quot;);</span><br><span class="line">        try &#123;</span><br><span class="line">            Thread.sleep(300);// 延长任务完成时间,给优先级排序预留时间</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    /**</span><br><span class="line">     * 顺序控制</span><br><span class="line">     * @param o</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public int compareTo(MyRunnableComp o) &#123;</span><br><span class="line">        if (o.getPriority() == this.priority) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        return o.getPriority() &gt; this.priority ? -1 : 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line">* Java线程池揭秘 - 推酷</span><br><span class="line">* http://www.tuicool.com/articles/32632uB</span><br><span class="line">* &lt;p&gt;</span><br><span class="line">* Java线程池总结 - 推酷</span><br><span class="line">* http://www.tuicool.com/articles/e2aUvyR</span><br><span class="line">* &lt;p&gt;</span><br><span class="line">* PriorityBlockingQueue | 并发编程网 – ifeve.com</span><br><span class="line">* http://ifeve.com/tag/priorityblockingqueue/</span><br><span class="line">*</span><br><span class="line">* Java 7中的TransferQueue | 并发编程网 – ifeve.com</span><br><span class="line">* http://ifeve.com/java-transfer-queue/</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/06/23/API%E5%AE%89%E5%85%A8(https)%E4%B8%8E%E4%BC%9A%E8%AF%9D(OAuth,%E5%8F%82%E6%95%B0%E7%AD%BE%E5%90%8D)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/06/23/API%E5%AE%89%E5%85%A8(https)%E4%B8%8E%E4%BC%9A%E8%AF%9D(OAuth,%E5%8F%82%E6%95%B0%E7%AD%BE%E5%90%8D)/" class="post-title-link" itemprop="url">API安全(https)与会话(OAuth,参数签名)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-06-23 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-23T00:00:00+08:00">2017-06-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="https"><a href="#https" class="headerlink" title="https"></a>https</h1><ul>
-<li>目标: 网络过程, 加密传输,对称加解密</li>
-<li>作用:  劫持,监听,篡改 (广告), 隐私泄露</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>&#x2F;</th>
-<th>对称密钥如何保护</th>
-<th>加密方案约定</th>
-<th>互信</th>
-<th>被公开的信息</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>单向验证</td>
-<td>生成随机数作为密钥<br> 传输过程用公钥加密<br> -B公钥不可解密<br> -B私钥可以</td>
-<td>明文反馈加密<br>使用预定的加密方案<br>+B公钥+A</td>
-<td>随机对称密钥</td>
-<td>A获得B证书,进行验证(服务端可信)</td>
-</tr>
-<tr>
-<td>双向验证</td>
-<td>生成随机数作为密钥<br> 传输过程用公钥加密<br> -B公钥不可解密<br> -B私钥可以</td>
-<td>A公钥加密反馈加密方案<br> (仅A私钥可解) <br> 使用预定的加密方案 <br> +B公钥+A随机对称密钥</td>
-<td>A获得B证书,进行验证(服务端可信)<br> B也获得A证书,进行验证(客户端可信)</td>
-<td>B 公钥<br> A公钥 <br> 加密过的加密方案(A公钥) <br> 加密过的对称密钥(B公钥)</td>
-</tr>
-</tbody></table>
-<p>3大过程:<code>①公钥交换</code>(用于验证对方和对称密钥的加密) &#x2F; <code>②方案协商</code> &#x2F; <code>③客户端提供对称加密给服务端</code></p>
-<hr>
-<h1 id="OAuth（开放授权）-用户托管"><a href="#OAuth（开放授权）-用户托管" class="headerlink" title="OAuth（开放授权）[ 用户托管 ]"></a>OAuth（开放授权）[ 用户托管 ]</h1><p><code>理解OAuth 2.0</code><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html">http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html</a></p>
-<ul>
-<li><code>QQ</code> 网页登陆<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">QQ登录OAuth2.0总体处理流程</span><br><span class="line">QQ登录OAuth2.0总体处理流程如下：</span><br><span class="line">Step1：申请接入，获取appid和apikey；</span><br><span class="line">Step2：开发应用，并设置协作者帐号进行测试联调；</span><br><span class="line">Step3：放置QQ登录按钮；</span><br><span class="line">Step4：通过用户登录验证和授权，获取Access Token；</span><br><span class="line">Step5：通过Access Token获取用户的OpenID；</span><br><span class="line">Step6：调用OpenAPI，来请求访问或修改用户授权的资源。 http://wiki.connect.qq.com/oauth2-0%E7%AE%80%E4%BB%8B</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-  开发攻略_ Server-side</span><br><span class="line"></span><br><span class="line">http://wiki.connect.qq.com/%E5%BC%80%E5%8F%91%E6%94%BB%E7%95%A5_server-side</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 开发攻略_Client-side</span><br><span class="line">http://wiki.connect.qq.com/%E5%BC%80%E5%8F%91%E6%94%BB%E7%95%A5_client-side</span><br></pre></td></tr></table></figure></li>
-<li><code>QQ</code> app 登陆<br>注:认证流程一致,仅在各初唤醒QQ的方式不同,app需要通过原生代码拉起 &#x2F; 获取用户信息接口一致(openId-&gt; get_user_info )<br><a target="_blank" rel="noopener" href="http://wiki.connect.qq.com/qq%E7%99%BB%E5%BD%95">http://wiki.connect.qq.com/qq%E7%99%BB%E5%BD%95</a></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Tencent.login	用户使用QQ账号登录应用</span><br><span class="line">Tencent.logout	注销登录</span><br><span class="line">Tencent.reAuth	当应用调用API返回没有权限（返回码为100030)时，可以让用户重新进行授权</span><br><span class="line">Tencent.shareToQQ	可将新闻、图片、文字等分享给QQ好友、群和讨论组</span><br><span class="line">Tencent.setAvatar	设置用户的QQ头像</span><br><span class="line">OpenApi接口	用于调用没有被SDK分装成单独接口的OpenApi，更多功能接口请查看《API列表》</span><br></pre></td></tr></table></figure>
-
-
-<p>— - <code>微信 </code> 网页登录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 第三方发起微信授权登录请求，微信用户允许授权第三方应用后，微信会拉起应用或重定向到第三方网站，并且带上授权临时票据code参数；</span><br><span class="line">2. 通过code参数加上AppID和AppSecret等，通过API换取access_token；</span><br><span class="line">3. 通过access_token进行接口调用，获取用户基本数据资源或帮助用户实现基本操作。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419316505&amp;token=&amp;lang=zh_CN</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>微信</code> app登录<br>注:认证流程一致,仅在各初唤醒微信的方式不同,app需要通过原生代码拉起 &#x2F; 获取用户信息接口一致(openId-&gt; get_user_info )</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 第三方发起微信授权登录请求，微信用户允许授权第三方应用后，微信会拉起应用或重定向到第三方网站，并且带上授权临时票据code参数；</span><br><span class="line">2. 通过code参数加上AppID和AppSecret等，通过API换取access_token；</span><br><span class="line">3. 通过access_token进行接口调用，获取用户基本数据资源或帮助用户实现基本操作。</span><br><span class="line"></span><br><span class="line">https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419317851&amp;token=&amp;lang=zh_CN</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>总结:<br>OAuth(用户托管)  : 客户端与服务端之间,把原有的账号密码登录托管至第三方 授权机构,在机构登录后,颁发的 access_token (临时)用户本次业务使用.<br>access_token(临时会话,授权机构颁发)  : 包含了商户信息(appid)与登录用户(openId)的信息,特点是有效期控制.</li>
-</ul>
-<hr>
-<h1 id="会话身份传递"><a href="#会话身份传递" class="headerlink" title="会话身份传递"></a>会话身份传递</h1><ul>
-<li>session [管理后台]<br>缺点:依赖 cooke传递sessionId,有跨域屏障</li>
-<li><code>账号密码</code> -&gt; token [body 或 get,post]  [前端系统]<br>缺点:存在明文登录前提,有被劫持风险 &#x2F; token被盗情况下,所有业务接口都可调用</li>
-<li><code>app_key</code> + md5(<code>param</code>+<code>app_secret</code>)  [get,post 或 body] [接入第三方系统]<br>优点:无需登录即可开始业务,减少账号被劫持的风险 &#x2F; 不用担心签名被盗用<br>缺点:每次交互都要加解密. 唯一风险:单一接口被恶意多次调用</li>
-</ul>
-<hr>
-<h1 id="参数签名"><a href="#参数签名" class="headerlink" title="参数签名"></a>参数签名</h1><ul>
-<li>形式<br>商家密钥: app_secret</li>
-</ul>
-<p>sign&#x3D; MD5(<code> 参数字典序</code>+<code>&amp;key= app_secret</code>)</p>
-<p>sign&#x3D;hash_hmac(“sha256”, <code> 参数字典序</code> , app_secret )</p>
-<ul>
-<li><p>作用:<code> 会话身份传递,防身份伪造,防数据篡改</code></p>
-</li>
-<li><p>约束<br>1.在不知商家密钥的情况下,无法做出有效的签名,无效的签名在服务端发现时,将不受理业务。<br>2.客户端发起的任何行为都 不可避免 自动化攻击，但无法篡改数据。<br>3.自动化攻击可建立QPS监控, 机器人检测( 行为分析,报文分析)进行阻拦,https双向验证到客户端 。(爬虫,反爬虫)<br>注意：拼装的关键数据(价格)后端决定,避免签名前篡改。-前端校验不可信</p>
-</li>
-<li><p><code>微信</code> 支付</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">商户系统和微信支付系统主要交互说明：</span><br><span class="line">步骤1：用户在商户APP中选择商品，提交订单，选择微信支付。</span><br><span class="line">步骤2：商户后台收到用户支付单，调用微信支付统一下单接口。参见【统一下单API】。</span><br><span class="line">步骤3：统一下单接口返回正常的prepay_id，再按签名规范重新生成签名后，将数据传输给APP。参与签名的字段名为appid，partnerid，prepayid，noncestr，timestamp，package。注意：package的值格式为Sign=WXPay</span><br><span class="line">步骤4：商户APP调起微信支付。api参见本章节【app端开发步骤说明】</span><br><span class="line">步骤5：商户后台接收支付通知。api参见【支付结果通知API】</span><br><span class="line">步骤6：商户后台查询支付结果。，api参见【查询订单API】</span><br><span class="line">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_3</span><br></pre></td></tr></table></figure>
-<p><code>微信支付</code>  <a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3</a></p>
-</li>
-<li><p><code>QQ</code> 手机支付</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">商户系统和手Q支付系统主要交互说明：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">步骤1：用户在商户APP中选择商品，提交订单，选择手Q支付；</span><br><span class="line">步骤2：商户后台收到用户支付单，调用手Q支付统一下单接口。参见【统一下单API】；</span><br><span class="line">步骤3：统一下单接口返回正常的prepay_id，再按签名规范重新生成签名后，将数据传输给APP；</span><br><span class="line">步骤4：商户APP调起手Q支付；</span><br><span class="line">步骤5：商户后台接收支付通知api，参见【支付结果API】</span><br><span class="line">步骤6：商户后台查询支付结果api，参见【订单查询API】</span><br><span class="line">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=201</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/06/22/https%E8%AF%81%E4%B9%A6%E7%9A%84%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/06/22/https%E8%AF%81%E4%B9%A6%E7%9A%84%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/" class="post-title-link" itemprop="url">https证书的双向验证</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-06-22 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-22T00:00:00+08:00">2017-06-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><ul>
-<li>ssl双向认证和单向认证的区别</li>
-</ul>
-<p>单向认证：只要求站点部署了ssl证书就行，任何用户都可以去访问（IP被限制除外等），只是服务端提供了身份认证。<br>双向认证：则是需要是服务端需要客户端提供身份认证，只能是服务端允许的客户能去访问</p>
-<p><a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/176742669957802364.html">https://zhidao.baidu.com/question/176742669957802364.html</a></p>
-<p><code>Https单向认证和双向认证</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/duanbokan/article/details/50847612">http://blog.csdn.net/duanbokan/article/details/50847612</a></p>
-<p><code>HTTPS服务器配置</code><br><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=10_4">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=10_4</a></p>
-<p><code>openssl基本原理 + 生成证书 + 使用实例 - oldmtn的专栏 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/oldmtn/article/details/52208747">http://blog.csdn.net/oldmtn/article/details/52208747</a></p>
-<p><code>Https单向认证和双向认证 - duanbokan的专栏 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/duanbokan/article/details/50847612">http://blog.csdn.net/duanbokan/article/details/50847612</a>  </p>
-<p><img src="http://img.blog.csdn.net/20160310160503593"></p>
-<h2 id=""><a href="#" class="headerlink" title="
- "></a><img src="http://img.blog.csdn.net/20160310160519781">
- </h2><h1 id="证书合法性检查"><a href="#证书合法性检查" class="headerlink" title="证书合法性检查"></a>证书合法性检查</h1><p><code>浏览器如何验证HTTPS证书的合法性？</code></p>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/37370216?sort=created">https://www.zhihu.com/question/37370216?sort=created</a></p>
-<p><code>HTTPS 客户端验证 服务端证书流程 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/0d59d2216c64">http://www.jianshu.com/p/0d59d2216c64</a></p>
-<hr>
-<h1 id="微信支付-示例"><a href="#微信支付-示例" class="headerlink" title="微信支付-示例"></a>微信支付-示例</h1><p>申请退款</p>
-<p><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_4&index=6">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_4&amp;index=6</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">是否需要证书 </span><br><span class="line">请求需要双向证书。 详见证书使用</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">（2）使用商户证书</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">◆ apiclient_cert.p12是商户证书文件，除PHP外的开发均使用此证书文件。 </span><br><span class="line">◆ 商户如果使用.NET环境开发，请确认Framework版本大于2.0，必须在操作系统上双击安装证书apiclient_cert.p12后才能被正常调用。 </span><br><span class="line">◆ 商户证书调用或安装都需要使用到密码，该密码的值为微信商户号（mch_id） </span><br><span class="line">◆ PHP开发环境请使用商户证书文件apiclient_cert.pem和apiclient_key.pem ，rootca.pem是CA证书。 </span><br><span class="line">各版本的调用实例请参考微信支付提供的Demo外链。 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">https://pay.weixin.qq.com/wiki/doc/api/download/cert.zip</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h1 id="客户端带证书访问"><a href="#客户端带证书访问" class="headerlink" title="客户端带证书访问"></a>客户端带证书访问</h1><ul>
-<li><code>cert.zip-JAVA版-ClientCustomSSL.java</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * ====================================================================</span><br><span class="line"> * Licensed to the Apache Software Foundation (ASF) under one</span><br><span class="line"> * or more contributor license agreements.  See the NOTICE file</span><br><span class="line"> * distributed with this work for additional information</span><br><span class="line"> * regarding copyright ownership.  The ASF licenses this file</span><br><span class="line"> * to you under the Apache License, Version 2.0 (the</span><br><span class="line"> * &quot;License&quot;); you may not use this file except in compliance</span><br><span class="line"> * with the License.  You may obtain a copy of the License at</span><br><span class="line"> *</span><br><span class="line"> *   http://www.apache.org/licenses/LICENSE-2.0</span><br><span class="line"> *</span><br><span class="line"> * Unless required by applicable law or agreed to in writing,</span><br><span class="line"> * software distributed under the License is distributed on an</span><br><span class="line"> * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span><br><span class="line"> * KIND, either express or implied.  See the License for the</span><br><span class="line"> * specific language governing permissions and limitations</span><br><span class="line"> * under the License.</span><br><span class="line"> * ====================================================================</span><br><span class="line"> *</span><br><span class="line"> * This software consists of voluntary contributions made by many</span><br><span class="line"> * individuals on behalf of the Apache Software Foundation.  For more</span><br><span class="line"> * information on the Apache Software Foundation, please see</span><br><span class="line"> * &lt;http://www.apache.org/&gt;.</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">package httpstest;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.File;</span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line">import java.security.KeyStore;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import javax.net.ssl.SSLContext;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import org.apache.http.HttpEntity;</span><br><span class="line">import org.apache.http.client.methods.CloseableHttpResponse;</span><br><span class="line">import org.apache.http.client.methods.HttpGet;</span><br><span class="line">import org.apache.http.conn.ssl.SSLContexts;</span><br><span class="line">import org.apache.http.conn.ssl.SSLConnectionSocketFactory;</span><br><span class="line">import org.apache.http.impl.client.CloseableHttpClient;</span><br><span class="line">import org.apache.http.impl.client.HttpClients;</span><br><span class="line">import org.apache.http.util.EntityUtils;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * This example demonstrates how to create secure connections with a custom SSL</span><br><span class="line"> * context.</span><br><span class="line"> */</span><br><span class="line">public class ClientCustomSSL &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public final static void main(String[] args) throws Exception &#123;</span><br><span class="line">        KeyStore keyStore  = KeyStore.getInstance(&quot;PKCS12&quot;);</span><br><span class="line">        FileInputStream instream = new FileInputStream(new File(&quot;D:/10016225.p12&quot;));</span><br><span class="line">        try &#123;</span><br><span class="line">            keyStore.load(instream, &quot;10016225&quot;.toCharArray());</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            instream.close();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        // Trust own CA and all self-signed certs</span><br><span class="line">        SSLContext sslcontext = SSLContexts.custom()</span><br><span class="line">                .loadKeyMaterial(keyStore, &quot;10016225&quot;.toCharArray())</span><br><span class="line">                .build();</span><br><span class="line">        // Allow TLSv1 protocol only</span><br><span class="line">        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(</span><br><span class="line">                sslcontext,</span><br><span class="line">                new String[] &#123; &quot;TLSv1&quot; &#125;,</span><br><span class="line">                null,</span><br><span class="line">                SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);</span><br><span class="line">        CloseableHttpClient httpclient = HttpClients.custom()</span><br><span class="line">                .setSSLSocketFactory(sslsf)</span><br><span class="line">                .build();</span><br><span class="line">        try &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            HttpGet httpget = new HttpGet(&quot;https://api.mch.weixin.qq.com/secapi/pay/refund&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            System.out.println(&quot;executing request&quot; + httpget.getRequestLine());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            CloseableHttpResponse response = httpclient.execute(httpget);</span><br><span class="line">            try &#123;</span><br><span class="line">                HttpEntity entity = response.getEntity();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                System.out.println(&quot;----------------------------------------&quot;);</span><br><span class="line">                System.out.println(response.getStatusLine());</span><br><span class="line">                if (entity != null) &#123;</span><br><span class="line">                    System.out.println(&quot;Response content length: &quot; + entity.getContentLength());</span><br><span class="line">                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent()));</span><br><span class="line">                    String text;</span><br><span class="line">                    while ((text = bufferedReader.readLine()) != null) &#123;</span><br><span class="line">                        System.out.println(text);</span><br><span class="line">                    &#125;</span><br><span class="line">                   </span><br><span class="line">                &#125;</span><br><span class="line">                EntityUtils.consume(entity);</span><br><span class="line">            &#125; finally &#123;</span><br><span class="line">                response.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            httpclient.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/06/17/%E7%BA%A2%E9%BB%91%E6%A0%91(Red-Black%20Tree%EF%BC%8C%E7%AE%80%E7%A7%B0R-B%20Tree)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/06/17/%E7%BA%A2%E9%BB%91%E6%A0%91(Red-Black%20Tree%EF%BC%8C%E7%AE%80%E7%A7%B0R-B%20Tree)/" class="post-title-link" itemprop="url">红黑树(Red-Black Tree，简称R-B Tree)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-06-17 00:00:02" itemprop="dateCreated datePublished" datetime="2017-06-17T00:00:02+08:00">2017-06-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="红黑树-Red-Black-Tree，简称R-B-Tree"><a href="#红黑树-Red-Black-Tree，简称R-B-Tree" class="headerlink" title="红黑树(Red-Black Tree，简称R-B Tree)"></a>红黑树(Red-Black Tree，简称R-B Tree)</h1><p>红-黑树的就是这样的一棵平衡树，对一个要插入的数据项，插入例程要检查会不会破坏树的特征，如果破坏了，程序就会进行纠正，根据需要改变树的结构，从而保持树的平衡</p>
-<ul>
-<li><p>【规则】有效的红黑树我们增加了如下的额外要求：</p>
-<ul>
-<li>1.节点是红色或黑色。</li>
-<li>2.根是黑色。</li>
-<li>3.所有叶子都是黑色（叶子是NIL节点）。</li>
-<li>4.每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）</li>
-<li>5.从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。</li>
-</ul>
-</li>
-</ul>
-<p>作用：红黑树的节点是有颜色概念的，即非红即黑。<code>通过颜色的约束，红黑树维持着二叉搜索树的平衡性</code></p>
-<hr>
-<h1 id="分析与理解"><a href="#分析与理解" class="headerlink" title="分析与理解"></a><code>分析与理解</code></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">结合： 【10,85,15,70,20 60,30,50】想象和理解</span><br><span class="line">理想目标是绝对平衡树. 平衡控制主要由`规则5`来约束，假如在不设 规则1的颜色条件下，`绝对平衡树`会出现无法插入单结点只能整层插入。</span><br><span class="line">为提供灵活性，设置红色为弹性元素可插入到新层中，但避免红色的单边蔓延，破坏了层数的平衡。（似2-3-4树 子树结点以元素存在）</span><br><span class="line">通过`规则4`，来仅一步约束平衡。上限时为所有的黑结点提供满树的红色子结点。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">小结：红色的出现是因为`绝对平衡树`不能接受单结点的插入，需要提供入口条件。AVL树的规则是允许平衡因子 BF 允许1层的差。</span><br><span class="line">而红黑树的规则是，通过特殊色(红色)来提供入口，接受新元素) [彩蛋：AVL平衡树也不是绝对平衡BF为1的平衡]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">为了避免层数的蔓延(相对平衡控制)，AVL树通过平衡因子BF差为1来控制，红黑树通过特殊色不能串层出现（`规则4`）。两者目的一样</span><br><span class="line">红黑树，在排除特殊色的情况下，应该处于`绝对平衡树`状态。为方便理解 `绝对平衡树`状态下 层数计算，增加了(`规则3`)-辅助理解</span><br><span class="line">`规则2`是确定了绝对平衡树的基准色(黑色)和特殊色(红色)，根颜色一定是绝对平衡树的基准色.</span><br><span class="line">`规则1`是因为该算法只需要一个特殊色， 再 为了统一知识约定，将其定为红色和黑色。</span><br></pre></td></tr></table></figure>
-
-
-<p>|  绝对平衡树控制  |  插入新结点| 蔓延控制| 统计绝对平衡树层| 优缺点<br>—-|——|—-<br>绝对平衡树 |  根与到各结点的距离一致  | 不允许,会破坏绝对平衡<br> 只能按层插入| 【不需要】| |<br>AVL平衡树 |  (相对平衡)  | 弥补绝对平衡树的不能插入新结点的缺点 <br> 允许新结点加入新层 |  允许加入层差在1以内的新结点 |  总层数-溢出的新结点层(1)  |  更接近绝对平衡(差1层) <br> 平衡维持更频繁<br>红黑平衡树 |  (相对平衡)  | 弥补绝对平衡树的不能插入新结点的缺点 <br> 允许新结点以特殊色(红色)加入新层 |  设置特殊色(红色)不允许串层出现（规则4） <br> 类2-3-4树: <br> 4结点允许3个元素存在后再扩展子树 <br> (红结点类似3元素成员,允许平衡条件下特殊存在) |  黑色结点的层数(规则5) |  接近绝对平衡(最大差除2加1) <br> 平衡维持有特殊色缓冲</p>
-<p>红黑平衡树-规则 | 红黑平衡树-作用或目的<br>—-|——|—-<br>5.从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。|  <code>限定绝对平衡的关键规则</code><br>弥补绝对平衡树的不能插入新结点的缺点<br>允许新结点以特殊色(红色)加入新层<br>4.每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）| 设置<code>特殊色(红色)不允许串层</code>出现,避免蔓延控制<br>类2-3-4树:<br>4结点允许3个元素存在后再扩展子树<br>(<code>红结点类似3元素成员</code>,<code>允许平衡条件下特殊存在</code>)<br>3.所有叶子都是黑色（叶子是NIL节点）。|在排除特殊色的情况下，应该处于<code>绝对平衡树</code>状态。<br>规则3,为方便理解<code>绝对平衡树</code>状态下层数计算<br>2.根是黑色。| 规则2是确定了绝对平衡树的基准色(黑色)和特殊色(红色)，<code>根颜色黑色是绝对平衡树的基准色</code><br>1.节点是红色或黑色。| 规则1是因为<code>该算法只需要一个基准色和一个特殊色</code>。<code>具体颜色再为了统一知识约定</code>，将其定为红色和黑色</p>
-<hr>
-<h1 id="规则冲突时-调整认识"><a href="#规则冲突时-调整认识" class="headerlink" title="规则冲突时,调整认识"></a>规则冲突时,调整认识</h1><p>红黑定义与切换，以及旋转都是随意的，只需要插入或删除结束后符合红黑树的规则(包含二叉排序树规则)<br>各场景该如何切换颜色与旋转，需转换为程序思维，依据场景进行变换（此变换不在红黑树的规则或要求限定以内）</p>
-<p><code>核心思路</code>：先变换颜色,满足[规则4].再检查[规则5]是否<code>提前越层</code>,如果是通过<code>旋转降层</code>恢复.</p>
-<hr>
-<h1 id="插入过程"><a href="#插入过程" class="headerlink" title="插入过程"></a>插入过程</h1><p>见：★  <code>5. 数据结构 - 红黑树 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/f4639d0cc887">http://www.jianshu.com/p/f4639d0cc887</a></p>
-<ul>
-<li>规则5,效果：<br>根据红黑树的性质（5），红黑树要求从根节点到叶子所有叶子节点上经过的黑色节点个数是相同的，因此如果插入的节点着色为黑色，那必然有可能导致某条路径上的黑色节点数量大于其他路径上的黑色节点数量，因此<code>默认插入的节点必须是红色</code>的，以此来维持红黑树的性质（5）</li>
-</ul>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/85695560.jpg"></p>
-<p>( 因为 G 为根节点，那么根据情况 1，将其涂为黑色，完事 )</p>
-<ul>
-<li>规则4,效果：红红冲突，可简单讲父级改色。<br>但又违反了规则5[60子树黑点比10,110,140子树黑点多]， 将60改为红色，可维持规则5</li>
-</ul>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/23714147.jpg"></p>
-<ul>
-<li>规则4,效果：维持了规则5情况下，规则4又出现冲突，但在更上层。 <img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/69586036.jpg"></li>
-</ul>
-<p>直观做法：将40设为黑色，可满足规则4。 120结点也设为黑色，可同时满足规则5。<br>（<code>此时状态，是不完全的平衡树，但满足红黑树规则</code>）</p>
-<ul>
-<li><p>满足规则5的条件下，每个黑点可容纳上下层为红点，是不破坏规则5的。<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/69567185.jpg"></p>
-</li>
-<li><p>示例：插入【10,85,15,70,20 60,30,50】</p>
-<ul>
-<li><p>首个为根，黑色：10</p>
-</li>
-<li><p>85比10大，放右边，默认插入为红色。【红黑特性校验器-正常】     </p>
-</li>
-<li><p>15比10大 比85小，放85左边，默认插入为 红 色。【红黑特性校验器-异常】<br>  <img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/41166636.jpg"></p>
-</li>
-<li><p>【红黑特性校验器-异常】矫正</p>
-<ul>
-<li><p>对新插入节点的父节点进行一次右旋操作</p>
-</li>
-<li><p>新插入节点的父节点着色为黑色，新插入节点的祖父节点着色为红色</p>
-</li>
-<li><p>对新插入节点的祖父节点进行一次左旋操作</p>
-</li>
-</ul>
-<p> <img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/88789764.jpg">   <img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/10442624.jpg"></p>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h1 id="gif-过程【10，85，15，70，20，60，30，50，65，80，90，40，5，55】"><a href="#gif-过程【10，85，15，70，20，60，30，50，65，80，90，40，5，55】" class="headerlink" title="gif 过程【10，85，15，70，20，60，30，50，65，80，90，40，5，55】 "></a>gif 过程【10，85，15，70，20，60，30，50，65，80，90，40，5，55】 <img src="http://upload-images.jianshu.io/upload_images/1630488-0b740e32e6c690cf.gif?imageMogr2/auto-orient/strip"></h1><hr>
-<p><strong>参考</strong></p>
-<p><code>教你初步了解红黑树 - 结构之法 算法之道 - CSDN博客</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/v_july_v/article/details/6105630">http://blog.csdn.net/v_july_v/article/details/6105630</a><br><a target="_blank" rel="noopener" href="https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.01.md#%E6%95%99%E4%BD%A0%E9%80%8F%E5%BD%BB%E4%BA%86%E8%A7%A3%E7%BA%A2%E9%BB%91%E6%A0%91">https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.01.md#教你透彻了解红黑树</a></p>
-<ul>
-<li>五性质<br>★  <code>5. 数据结构 - 红黑树 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/f4639d0cc887">http://www.jianshu.com/p/f4639d0cc887</a></li>
-</ul>
-<p><code>JAVA学习-红黑树详解   - 简书 </code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/4cd37000f4e3">http://www.jianshu.com/p/4cd37000f4e3</a></p>
-<p><code>数据结构-红黑树 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/5e567cc01b50">http://www.jianshu.com/p/5e567cc01b50</a></p>
-<p><code>红黑树(五)之 Java的实现 - 如果天空不死 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/skywang12345/p/3624343.html">http://www.cnblogs.com/skywang12345/p/3624343.html</a></p>
-<ul>
-<li>三性质(<code>特立的定义，会破坏知识的共同认知和沟通</code>)<br>★  <code>图解集合7：红黑树概念、红黑树的插入及旋转操作详细解读 - 五月的仓颉 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/xrq730/p/6867924.html">http://www.cnblogs.com/xrq730/p/6867924.html</a></li>
-</ul>
-<p><code>红黑树数据结构剖析 - Florian - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/fanzhidongyzby/p/3187912.html">http://www.cnblogs.com/fanzhidongyzby/p/3187912.html</a></p>
-<ul>
-<li>四性质 (<code>特立的定义，会破坏知识的共同认知和沟通</code>)</li>
-</ul>
-<p><code>【数据结构和算法05】 红-黑树（看完包懂~） - 倪升武的博客 - 博客频道 - CSDN.NET</code></p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/eson_15/article/details/51144079">http://blog.csdn.net/eson_15/article/details/51144079</a></p>
-<hr>
-<h1 id="红黑树-维基百科"><a href="#红黑树-维基百科" class="headerlink" title="红黑树 - 维基百科"></a>红黑树 - 维基百科</h1><p><code>红黑树 - 维基百科，自由的百科全书</code><br><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91">https://zh.wikipedia.org/wiki/红黑树</a></p>
-<p><code>红黑树 - Wikiwand</code><br><a target="_blank" rel="noopener" href="http://www.wikiwand.com/zh/%E7%BA%A2%E9%BB%91%E6%A0%91">http://www.wikiwand.com/zh/%E7%BA%A2%E9%BB%91%E6%A0%91</a></p>
-<p><code>2-3-4树 - 维基百科，自由的百科全书</code> - 2-3-4 树是红黑树的一种等同<br><a target="_blank" rel="noopener" href="https://zh.mdzz.men/wiki/2-3-4%E6%A0%91">https://zh.mdzz.men/wiki/2-3-4%E6%A0%91</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/06/17/%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91&%E5%A4%9A%E8%B7%AF%E6%90%9C%E7%B4%A2%E6%A0%91(B%E6%A0%91)-%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/06/17/%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91&%E5%A4%9A%E8%B7%AF%E6%90%9C%E7%B4%A2%E6%A0%91(B%E6%A0%91)-%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">树&二叉树&二叉排序树&多路搜索树(B树)-总结</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-06-17 00:00:01" itemprop="dateCreated datePublished" datetime="2017-06-17T00:00:01+08:00">2017-06-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>完整学习见： 《 大话数据结构》 第六章 树</p>
-<hr>
-<h1 id="Tree：根结点-内部节点-终端节点-叶子节点-组成的数据结构"><a href="#Tree：根结点-内部节点-终端节点-叶子节点-组成的数据结构" class="headerlink" title="Tree：根结点-内部节点-终端节点(叶子节点) 组成的数据结构"></a>Tree：根结点-内部节点-终端节点(叶子节点) 组成的数据结构</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/12872520.jpg"></p>
-<hr>
-<h1 id="二叉树【Binary-tree】：每个节点最多有两个子节点"><a href="#二叉树【Binary-tree】：每个节点最多有两个子节点" class="headerlink" title="二叉树【Binary tree】：每个节点最多有两个子节点"></a>二叉树【Binary tree】：每个节点最多有两个子节点</h1><ul>
-<li>遍历二叉树：前序，中序，后续 （利用递归或自循环+ Stack栈回放路径 ）<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/94470744.jpg"></li>
-</ul>
-<hr>
-<h1 id="二叉排序树【Binary-Sort-tree】【BST】：在二叉树的基础上，最左终端结点最小，使用中序遍历的方法可排序元素"><a href="#二叉排序树【Binary-Sort-tree】【BST】：在二叉树的基础上，最左终端结点最小，使用中序遍历的方法可排序元素" class="headerlink" title="二叉排序树【Binary Sort tree】【BST】：在二叉树的基础上，最左终端结点最小，使用中序遍历的方法可排序元素"></a>二叉排序树【Binary Sort tree】【BST】：在二叉树的基础上，最左终端结点最小，使用中序遍历的方法可排序元素</h1><ul>
-<li><p>插入： 致入任意数值，首个为根，后者逐个比较小放左，大放右直至终端结点</p>
-</li>
-<li><p>删除： 叶子结点(直删)  单叶内部结点(子替位)  双叶内部结点(前驱或后继替位)</p>
-</li>
-</ul>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/51153658.jpg"></p>
-<hr>
-<h1 id="二叉平衡树【AVL树】：-是一种高度平衡的二插排序树。子树深度差最大为1"><a href="#二叉平衡树【AVL树】：-是一种高度平衡的二插排序树。子树深度差最大为1" class="headerlink" title="二叉平衡树【AVL树】： 是一种高度平衡的二插排序树。子树深度差最大为1"></a>二叉平衡树【AVL树】： 是一种高度平衡的二插排序树。子树<code>深度差</code>最大为1</h1><ul>
-<li><code>平衡因子（BF）</code>  &#x3D; 左字树深度-右子树深度</li>
-<li><code>BF值为正（即左子树深）</code>，因此为达到平衡将<code>整树右旋</code> &#x2F; 反之  <code>整树左旋</code> 【 目标：找最小不平衡树，进行平衡控制】</li>
-<li>特殊场景：<code>旋转节点的BF值</code>与<code>旋转方向的参考节点的BF值</code>是相反的情况下，需要先统一<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/3065500.jpg"></li>
-</ul>
-<hr>
-<h1 id="多路查找树【-muitl-way-search-tree-】：每个结点可以存储多个元素，孩子数是父结点元素数-1（且必需或全没有）"><a href="#多路查找树【-muitl-way-search-tree-】：每个结点可以存储多个元素，孩子数是父结点元素数-1（且必需或全没有）" class="headerlink" title="多路查找树【 muitl-way search tree 】：每个结点可以存储多个元素，孩子数是父结点元素数+1（且必需或全没有）"></a>多路查找树【 muitl-way search tree 】：每个结点可以存储多个元素，孩子数是父结点元素数+1（且必需或全没有）</h1><ul>
-<li><code>2-3树</code>：结点的孩子树可以为2个或3个，即结点元素可以为1个或2个。<ul>
-<li>2结点如有3孩子,中间字树的范围介于2结点元素的访问之间</li>
-<li>元素 插入 2结点 ： 找到最近小于元素的结点，如为2结点可扩展为3结点，插入到右边&#x2F;无更小值插入2结点的左边</li>
-<li>元素插入3结点：因3结点已经是最大容量，无法再插入新元素，需要拆分。<ul>
-<li><p>情况一：3结点的父结点是2结点， 可将2结点扩展为3结点，再将待插入的元素补入3结点的子树空位</p>
-</li>
-<li><p>情况二：3结点的父结点是3结点，需要再向上找是否有可扩展的2结点。扩展后插入方式同上</p>
-<ul>
-<li>情况三：结合情况1,2，顶层结点均为3结点，无法再插入元素，则整链的3结点都解体为2结点</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>删终端 3结点中元素</code>：不会破坏结构，直删即可</li>
-<li><code>删终端 2结点中元素</code>：会出现不平衡情况，需要<code>平衡补位</code>，补位元素所在结点因由2个结点否则移位后还是不平</li>
-<li><code>删非终端 2结点中元素</code>  ： 会出现不平衡情况，需要<code>平衡补位</code>，前置或后置元素替位</li>
-<li><code>删非终端 3结点中元素</code>  ： 会出现不平衡情况，需要<code>平衡补位</code> ，前置或后置元素 替位</li>
-</ul>
-</li>
-</ul>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/93548120.jpg"></p>
-<ul>
-<li><p><code>2-3-4树</code>：类似<code>2-3树</code>，要么没有孩子要么4个孩子，结点元素可以为1到3个</p>
-<ul>
-<li>插入，删除操作同<code>2-3树</code>逻辑</li>
-</ul>
-</li>
-</ul>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/15573800.jpg"></p>
-<ul>
-<li><p><code>B树【B-tree】</code>： <code>2-3树</code>是3阶B树， <code>2-3-4树</code>是4阶B树。树阶是最大孩子树的数目</p>
-<ul>
-<li><p>查找：根结点开始查找关键字匹配和区间子树结点的递归匹配</p>
-</li>
-<li><p>插入，删除操作同<code>2-3树</code>  <code>2-3-4树</code> 逻辑</p>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/91316945.jpg"></p>
-<ul>
-<li><p><code>B+树</code>：是<code>B树</code>的变形树</p>
-<ul>
-<li>1.每个分支结点的元素会在中序<code>后继者</code>的位置再次列出：<code>随机查找</code>（顶层开始，逐层查找）</li>
-<li>2.每个叶子节点会保存指向下一个叶子节点的指针：<code>范围查找</code>（从起点开始随下一叶子节点位置按顺序找到范围内所有记录）</li>
-</ul>
-</li>
-</ul>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/83935023.jpg"></p>
-<hr>
-<p><strong>参考</strong><br><code>大话数据结构.pdf</code> 第六章 树</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/06/13/Maven-introduces-local-dependency-jar-to-executable-jar-packages/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/06/13/Maven-introduces-local-dependency-jar-to-executable-jar-packages/" class="post-title-link" itemprop="url">Maven引入本地依赖Jar到可执行Jar包中</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-06-13 22:17:24" itemprop="dateCreated datePublished" datetime="2017-06-13T22:17:24+08:00">2017-06-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1141,7 +861,7 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+          <a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a>
         </span>
     </span>
 
@@ -1155,19 +875,17 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>在Maven中，默认地，是不会将依赖的Jar包打入可执行Jar包的，如果需要将依赖打入可执行Jar包，需要在<code>pom</code>中添加<code>maven-assembly-plugin</code>插件，这个很容易实现，但是在正规开发中不推荐这样使用，为什么？因为稍微大型一些的项目都至少有几十个依赖项，而每次打包都将这些Jar包打入可执行Jar，使得最后生成的可执行Jar体积非常大。标准的做法是，将所有的依赖Jar包都打入lib目录中，而在可执行Jar的<code>MANIFEST.MF</code>中指定lib路径即可。这也很容易实现，并不是本文的重点，本文的重点是如何将不在Maven中央仓库中的Jar包，或者说依赖本地的Jar包打入可执行Jar，并更新<code>MANIFEST.MF</code>文件。</p>
-<p>例如在我的Maven项目中，需要依赖本地Jar，首先将依赖的Jar复制到<code>src/main/resources/lib</code>目录下，引用如下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.yuewen<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHORT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;project.basedir&#125;/src/main/resources/lib/lucene-1.0.0-SNAPSHORT.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这里的scope只能是system范围，systemPath属性指定Jar包的路径。</p>
-<p>下一步将所有依赖的Jar包打入lib目录中，方式如下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--将依赖的资源全部打入lib目录--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-dependency-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;/lib<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">excludeTransitive</span>&gt;</span>false<span class="tag">&lt;/<span class="name">excludeTransitive</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">stripVersion</span>&gt;</span>false<span class="tag">&lt;/<span class="name">stripVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-dependencies<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-dependencies<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;project.build.directory&#125;/lib<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">excludeTransitive</span>&gt;</span>false<span class="tag">&lt;/<span class="name">excludeTransitive</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">stripVersion</span>&gt;</span>false<span class="tag">&lt;/<span class="name">stripVersion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>至此，你在Maven项目中，依赖的所有Jar都被打入到<code>target/lib</code>目录下了，剩下的关键一步就是如何添加<code>MANIFEST.MF</code>文件了。在pom中添加如下插件</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--打包插件，在Jar包中添加Class-Path和Main-Class--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-jar-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">archive</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--使用自己的Manifest文件，运行正常--&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--&lt;manifestFile&gt;src/main/resources/META-INF/MANIFEST.MF&lt;/manifestFile&gt;--&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--使用插件添加的Manifest文件，运行正常，一定要注意Manifest中jar包名称和lib文件夹下jar包名称版本号后缀等一定要一致，否则找不到依赖jar，此处有坑--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">addClasspath</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addClasspath</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--指定依赖资源路径前缀--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">classpathPrefix</span>&gt;</span>lib/<span class="tag">&lt;/<span class="name">classpathPrefix</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>cn.codepub.maven.test.Main<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--可以把依赖本地系统的Jar包加入Manifest文件中--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">Class-Path</span>&gt;</span>lib/lucene-1.0.0-SNAPSHORT.jar<span class="tag">&lt;/<span class="name">Class-Path</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">archive</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>运行<code>mvn clean package</code>执行打包，完成之后，将包含依赖资源的lib目录和可执行Jar放在同一级目录下即可，这样在运行<code>java -jar xxx.jar</code>的时候，可执行Jar包可以准确地找到依赖Jar包。并且以这种方式打出来的可执行Jar体积非常小，一般都是几百KB而已。完整的<code>MANIFEST.MF</code>文件如下所示</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Manifest-Version: 1.0</span><br><span class="line">Built-By: wangxu</span><br><span class="line">Class-Path: lib/lombok-1.16.12.jar lib/guava-20.0.jar lib/log4j-api-2.</span><br><span class="line"> 7.jar lib/log4j-core-2.7.jar lib/lucene-1.0.0-SNAPSHORT.jar</span><br><span class="line">Created-By: Apache Maven 3.3.3</span><br><span class="line">Build-Jdk: 1.8.0_45</span><br><span class="line">Main-Class: cn.codepub.maven.test.Main</span><br></pre></td></tr></table></figure>
+          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在一次升级阿里云 k8s 版本之后暴露出来一个问题，一般在 k8s 集群中都会使用<code>service域名</code>来进行服务之间访问，但是为了在本地开发时能访问到这些服务，又会通过<code>ingress</code>暴露在外网中，这样在开发的时候就可以直接使用的<code>ingress</code>暴露的外网域名进行访问。</p>
+<p>按理说本地开发环境的时候使用<code>外网域名</code>，在部署到 k8s 的时候应该使用 k8s 内部的<code>service域名</code>就什么事都没有了，然而在没有强约束的情况下很多项目<code>调用集群内部服务的时候还是使用的外网域名</code>，然而这样可能会导致服务调用失败，没想到吧。对此我们咨询了阿里云，给我们的回答是：<br><img src="/k8s-coredns-cname/2020-06-28-14-26-36.png"></p>
+<p>好吧，按着提示把<code>externalTrafficPolicy</code>选项修改为<code>Cluster</code>，确实问题解决了，但是这样一改又把<code>源IP</code>丢失了，在后端服务中获取的<code>IP</code>都变成了<code>Node IP</code>，这肯定也不行。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/28/k8s-coredns-cname/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1193,7 +911,7 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/06/11/Read-a-brief-history-of-tomorrow/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/06/22/custom-springmvc-requestmappinghandlermapping/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1211,7 +929,7 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/06/11/Read-a-brief-history-of-tomorrow/" class="post-title-link" itemprop="url">读《未来简史》</a>
+          <a href="/2020/06/22/custom-springmvc-requestmappinghandlermapping/" class="post-title-link" itemprop="url">自定义SpringMVC中的RequestMappingHandlerMapping</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1222,14 +940,14 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-06-11 22:35:34" itemprop="dateCreated datePublished" datetime="2017-06-11T22:35:34+08:00">2017-06-11</time>
+      <time title="Created: 2020-06-22 11:29:58" itemprop="dateCreated datePublished" datetime="2020-06-22T11:29:58+08:00">2020-06-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1237,7 +955,7 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
         </span>
     </span>
 
@@ -1251,27 +969,19 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><strong>作者简介：</strong>尤瓦尔•赫拉利，1976年生，青年怪才，全球瞩目的新锐历史学家，牛津大学历史学博士，耶路撒冷希伯来大学历史系教授，著有国际畅销书《人类简史》。其新作《未来简史》，以宏大视角审视人类未来的终极命运，甫一出版就在全球掀起一股风潮，引起广泛关注。</p>
-<h4 id="人类的新议题"><a href="#人类的新议题" class="headerlink" title="人类的新议题"></a>人类的新议题</h4><p>在这一章中，作者提出在21世纪，人类面临的三大议题似乎是不死、快乐和神性。现今因肥胖而死亡的人数已经远超因饥饿而死亡的人数了；同样因自杀而死亡的人数也已经远超因战争和恐怖主义而死亡的人数了，以目前的科技向前推进，在可以想象的未来，也许不死或者说永生可以成为一部分富人可选的一种生活方式呢。至于快乐不仅仅是物质上的，当然也包括精神上的，在这本书中，作者似乎特别喜欢谈动物，比如说松鼠储藏各类坚果不就是为了满足内心的快乐吗？这和人类储藏房产、纸币等等不是异曲同工吗？其实所谓的欲壑难填是有缘由的，在得到快感时，我们的反应不是满足，反而是想得到更多。这就不断的促使我们去持续地追求能够给我们带来快感的东西。在追求幸福和不死的过程中，人类事实上是试着把自己提升到神的地位。这时候的神不仅仅是宗教崇拜中那高高在上的神了，当人类自己能够实现永生并且可以获取无穷无尽的快乐，那么他们的心中估计已经把自己看作是地球的神了，那个时候，也许宗教就自然而然消逝了。</p>
-<h4 id="人类世"><a href="#人类世" class="headerlink" title="人类世"></a>人类世</h4><p>为什么叫人类世，很奇怪的一个名字，科学家将地球的历史分为不同的“世”，例如更新世、上新世和中新世。过去的七万年称为“人类世”，也就是人类的时代。原因在于这几万年来，人类已经成为全球生态变化唯一最重要的因素。现在拜人类所赐，全球大型动物（体重不只是几公斤）有超过90%不是人类就是家畜。全球大型动物数量中，人类约有3亿吨，野生大型动物约有1亿吨，家畜约有7亿吨。好莱坞大片中经常会以外星人入侵啦、或者行星撞击地球啦为噱头，其实完全不必担心，这样的风险小之又小。与其害怕小行星，还不如害怕人类自己。在过去不过短短一世纪，人类造成的影响可能已经超过6500万年前那颗灭绝恐龙的小行星。</p>
-<p>应该说，对地球上除了人类来说的所有其他物种来说，人类是最危险的杀手。在智人全球迁徙的过程中，他们灭掉了所有其他人类物种（现在的人类主要是智人，当年除了智人，还有很多人种）、澳大利亚90%的大型动物、美国75%的大型哺乳动物、全球大约50%的大型陆上哺乳动物；而且此时他们甚至还没开始种小麦，还没开始制作金属工具、还没开始写下任何文字，也还没铸出任何钱币。</p>
-<h4 id="人类的特殊之处"><a href="#人类的特殊之处" class="headerlink" title="人类的特殊之处"></a>人类的特殊之处</h4><p>这一章非常有趣，按理说啊，人类主宰世间万物，那么人类必然有优越于其他所有物种的地方，大多数人都坚信，人类拥有灵魂和心灵，而其他劣等动物并不具备这两者，这在科学上被证明了是胡诌，因为科学家无论怎样实验都无法证明人类拥有灵魂。而心灵和灵魂大不相同，心灵是脑中主观体验的流动。这些心理上的体验，就是各种紧密相连的感觉、情感和思想，忽闪忽现、立刻消失，接着其他体验又倏然浮现与消散，于电光火石间来了又去。把这种种体验集合起来，就构成了意识流。灵魂有人信有人不信，但就意识流来说，几乎所有人都相信。但是在这一点上，所有动物并不输于人类，所有哺乳动物和鸟类以及至少某些爬行动物和鱼类，都具有感觉和情感。就这两点来说，人类和其他各种动物其实是平等的。</p>
-<p>关于意识这个东西，不仅人类无法自证，而且无法他证，什么意思？假设人工智能不断发展，有一天人工智能说自己有意识，我们应该相信吗？早在几千年前，哲学家就已经发现，没有办法明确证明除了自己以外的任何事物具有意识。根据目前的科学定论，我所体验到的一切都是脑活动的结果，所以理论上确实能够模拟出一个我完全无法与“真实”世界分辨的虚拟世界。这不就是各种脑洞大开的电影里所展现的吗，甚至我们其实已经是活在营养液中而不自知呢，我们所感受到的驱壳等等一切行为感受，都是那个泡在营养液的大脑里的神经元之间不断流动的电子所致呢？所有的生老病死等等其实都是人工智能虚拟出来的结果呢？</p>
-<p>在这里作者点出，人类真正胜出的地方在于大规模且灵活的合作，这种合作与蜂群和象群、黑猩猩有所不同，蜜蜂虽然也能进行大规模的合作，但是它们缺乏灵活性，比如无论有多么严重的压迫与剥削，它们从不会把自己的蜂后送上断头台，进而建立共和国；而象群与猩猩很难进行陌生者之间的合作，它们的合作多是基于血缘关系或者是熟知关系，两只不认识的大象，别说进行合作，单是一只大象融入另一个陌生的象群都是难上加难，而只有智人才能进行这种大规模的无数陌生个体之间进行的合作。正是这种实际具体的能力，决定了为何目前主宰地球的是人类，而不是什么永恒的灵魂或是独有的意识。</p>
-<p>关于革命的精髓也是合作，以俄国爆发的十月革命为例，当时俄国中上阶层人数至少有300万人，但共产主义者仅有23000名，然而就是这么一小撮人建立的强大的苏维埃政权。在十月革命之前，俄国有1.8亿农民和工人，仅有300万俄国贵族、官员等，但是这些精英却知道如何合作守卫其共同利益，但那1.8亿平民却无法有效动员，直到23000名共产主义者的出现。想掀起一场革命，只靠人数绝对远远不够。</p>
-<p>智人统治世界，是因为只有智人能编织出互为主体的意义之网：其中的法律、约束力、实体和地点都只存在于他们共同的想象之中。这张网，让所有动物中只有人类能组织十字军、革命和人权运动。除此以外，另一个特殊之处是在所有动物中只有人类能够想象虚幻的东西的存在，例如猎豹埋伏着等待捕获猎物，但是它仅能想象这个世界上真实存在的东西例如羚羊，却无法想象不存在的东西，例如美元、谷歌或欧盟，如果它知道美元能买到大把的羚羊，也许它就不会费那么大力气去亲自捕猎了。到了21世纪，虚构想象有可能成为世界上最强大的力量，甚至超越自然选择。因此，如果我们想了解人类的未来，只是破译基因组、处理各种数据数字还远远不够，我们还必须破解种种赋予世界意义的虚构想象。</p>
-<h4 id="说书人"><a href="#说书人" class="headerlink" title="说书人"></a>说书人</h4><p>所有的现存世界，其立身之本都是依赖于人类虚构出来的各种概念，而且这就像既得利益阶层一样，每一个依靠这种虚构概念上位的人最后都会挺身而出继续维护这种虚构的权威性。虚构有其存在的必要性，正是所有人都在同一个虚构故事的体系之内，智人才能进行更加复杂的合作，因为所有人共同认同的价值体系，为内部的融合以及建立组织提供了先决条件，而动物世界就算是最大的族群也达不到人类组织一场现代化战争的规模，或者说，即便动物世界存在这样的族群，那么其必然无法进行有效的组织，结果就是乱作一团，每只动物都可以自作主张，毫无秩序可言。</p>
-<p>在21世纪，我们还会创造出比以往更强大的虚构概念以及更极权的宗教。在生物科技和计算机算法的帮助下，这些宗教不但会控制我们每分每秒的存在，甚至将塑造我们的身体、大脑和心智，创造出完整的虚拟世界。真要如此，在区分虚构与真实、宗教与科学将会变得更加困难，但又比以往更加重要。也许在不久的世纪里，人工智能统治世界，而人类的大脑仅仅存在于人工智能所为其构建的完美的虚拟世界之中。</p>
-<h4 id="一对冤家"><a href="#一对冤家" class="headerlink" title="一对冤家"></a>一对冤家</h4><p>这里说的一对冤家指的是科学与宗教。在人类的发展进程中，科学与宗教有合作有冲突；科学与宗教追求的都是真理，只是有时候它们追求的是各自推崇且不同的真理。但另外一些时候，科学或宗教都不那么在乎真理，因此二者十分容易妥协、共存甚至合作。宗教最在乎的是秩序，宗教的目的就是创造和维持社会结构；而科学最在乎的则是力量，科学的目的是通过研究得到力量。</p>
-<h4 id="与“现代”的契约"><a href="#与“现代”的契约" class="headerlink" title="与“现代”的契约"></a>与“现代”的契约</h4><p>如今，经济增长在全球已经取得了宗教般的地位，不管一个国家或地区存在什么样的问题，所有的当权者或者领导人都寄希望于经济增长，认为只要经济增长就能解决潜在的问题，包括贫困、落后、纷争、混乱等。所有的领导人都把经济的发展成果看成是一张大饼，只要尽量把这张饼摊得越大就能养活更多的人，所以理所应当的尽一切力量去推动经济的发展。过于关注摊大饼的结果就是，在发展的过程中忽略了其它许多重要的东西，例如维持社会平等、确保生态和谐、维持底层群众的上升通道等。</p>
-<p>科学的力量只是在近代才获得了最完美的体现，其实早期的人类发展中，之所以无法用科学来推动增长，是因为大家误以为各种宗教经典和古老传统里已经提供了世界上所有的重要知识。近代科学真正爆发的原因就是，科学让人类发现了自己的无知。人类发现自己对这个真实的世界所知甚少，就突然有了很好的理由去追求新知识，开启了用科学推动进步的道路。</p>
-<h4 id="人文主义革命"><a href="#人文主义革命" class="headerlink" title="人文主义革命"></a>人文主义革命</h4><p>人文主义把意义和权威的源头从天上转移到人类的内心，这个宇宙的本质也随之改变了。人文主义者认为生命就是一种内在的渐进变化过程，靠着经验，让人从无知走向启蒙。人文主义生活的最高目标，就是通过各式智力、情绪及身体体验，充分发展人的知识。人文主义相信自己的“感觉”，于是我们在与现代性的契约中虽然得利，却无须付出代价。所有的规则，以及远古的上帝都从人民的脑中移除，现在对于任何有关价值观的判断，并没有绝对的是非之分，比如古代同性恋会遭到整个社会的鄙视，而现在呢？管他呢，你觉得舒服，那就做吧，你是同性恋，还不能鄙视你，否则就涉嫌歧视了，所有的判断出发点都是人的主观感受。再比如雇佣童工在早期的资本主义世界很是普遍，现在为什么行不通了？因为虚伪的道德主义逼迫着人去同情这些孩子，并从孩子的角度出发去思考，孩子正在玩乐的年纪却要呆在工厂里，简直丧尽天良，而真实情况呢？对于那些家庭极度贫困的来说，童工可能就是他们家庭的最大收入来源了，也未可知呢，这样从人心出发而不论对错的人文主义，占尽了表面的道德高点，却未必是最好的。</p>
-<h4 id="实验室里的定时炸弹"><a href="#实验室里的定时炸弹" class="headerlink" title="实验室里的定时炸弹"></a>实验室里的定时炸弹</h4><p>所谓人类拥有的自由意识，在本书中作者给出了否定，并列举出了详细的证据，所谓的自由意识并不存在，无非是人类自己忽悠自己而已。人类有的就是一条意识流，欲望会在意识流中起伏来去，并没有什么永远不变的自我能够拥有这些欲望。自由意识流的本质不外乎两点，要么来自于生物预设，也就是说基因携带，天生所有；要么来自于随机发生，一切的自由意识并不是提前准备，而在某一个时刻将之释放出来的。说了这么多废话来证明人类没有自由意识到底是为何呢？如果这个证明正确，那么我们就可以利用药物、基因工程或者直接对脑做出刺激，就能操纵甚至控制人的欲望了。因为这并没有违反任何人类的天性，也没有改变人类的自由，所有利用科技手段对大脑实施的刺激控制等等都是合理且合法的。在过往的时期，自由主义还没有受到致命的威胁，现今面临着科技的进步，会给自由主义带来实实在在的挑战。我们即将拥有各种超级实用的设备、工具和制度，但这些设备、工具和制度并不允许个人自由意志的存在。</p>
-<h4 id="大分离"><a href="#大分离" class="headerlink" title="大分离"></a>大分离</h4><p>自由主义面临着三个实际威胁，一是人类将完全不具价值；二是人类整体仍然有价值，但个人将不再具有权威，而是由外部算法来管理；三是有些人仍然会不可或缺，算法系统也难以了解，而且会形成一个人数极少的特权精英阶层，由升级后的人类组成。</p>
-<p>如果科学发现和科技发展将人类分为两类，一类是绝大多数无用的普通人，另一类是一小部分经过升级的超人类，又或者各种事情的决定权已经完全从人类手中转移到具备高度智能的算法，在这两种情况下，自由主义都将崩溃。尽管现阶段所有人的共识是经济的发展使得穷人与富人的医疗水平差距在逐渐缩小，但这只是在特殊时代背景下的特殊情况，因为现代还需要大量的健康的士兵和产业工人，一旦科技的发展使得高精尖武器或者机器人取代士兵与产业工人，对于富人阶级来说，再继续维持庞大的底层人民的医疗开支将变成一笔巨大的负担，而这才是真正的转折点，当富人阶层不再需要依赖底层的大量人民的时候，不仅仅是医疗水平，各个方面，富人阶层都将开始起飞，而穷人阶层只能原地踏步，这导致的最终结果就是超人类阶层的出现，而这将会是全部由精英阶层所组成。</p>
-<h4 id="意识的海洋"><a href="#意识的海洋" class="headerlink" title="意识的海洋"></a>意识的海洋</h4><p>这一章详尽地探讨了科技人文主义。科技人文主义希望让人类的心智升级，让我们能够接触到目前未知的经验、目前未闻的意识状态。然而想要足够地了解我们的心智已经是一项极其艰巨的任务，在人类目前所知的范围内，已经掌握的知识犹如沧海一粟，真正的未知世界浩瀚无边，在追求改造心智的过程中，也许我们成功地让身体与大脑都升级了，却在过程中失去了心智。科技人文主义到最后可能会造成人类的降级。</p>
-<h4 id="信数据得永生"><a href="#信数据得永生" class="headerlink" title="信数据得永生"></a>信数据得永生</h4><p>在历史进程中，人类创造了一个全球性的网络，不论面对任何事物，都以它在这个网络中有何功能来给予评价。几千年来，这让人充满了自尊和偏见。人类在这个网络中执行着最重要的功能，也就很容易认为自己是这个网络所有成就的主要功臣，并认为自己就是造物的巅峰。至于其他所有动物，因为它们执行的只是网络中次要的功能，于是其生命和经验都遭到低估；只要动物不再能发挥任何功能，就躲不开惨遭灭绝的命运。然而，一旦人类对网络也不再能发挥重要功能，就会发现自己到头来也不是造物巅峰。我们自己设定的标准，会让我们也走上长毛象和白鱀豚的灭绝之路。到时回首过去，人类也只会成为宇宙数据流里的一片小小涟漪。</p>
+          <h2 id="RequestMappingHandlerMapping-介绍"><a href="#RequestMappingHandlerMapping-介绍" class="headerlink" title="RequestMappingHandlerMapping 介绍"></a>RequestMappingHandlerMapping 介绍</h2><p><code>RequestMappingHandlerMapping</code>是<code>SpringMVC</code>中的一个重要组件，作用是扫描<code>@Controller</code>、<code>@RequestMapping</code>注解修饰的类，然后生成<code>请求</code>与<code>方法</code>的对应关系，当有一个 HTTP 请求进入 SpringMVC 时，就会通过请求找到对应的方法进行执行。</p>
+<p>可以简单的想象一下，在<code>RequestMappingHandlerMapping</code>会维护一个<code>Map&lt;String,Handle&gt;</code>，key 存放的是<code>URI</code>，value 存放的是对应处理的<code>handle</code>，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map.put(&quot;GET /user&quot;,UserController#get)</span><br><span class="line">map.put(&quot;POST /user&quot;,UserController#create)</span><br></pre></td></tr></table></figure>
 
+<p>这样通过解析请求就可以很快的找到对应的方法去执行，当然 SpringMVC 的实现肯定不会像上面一样这么简单，不过思路是差不多的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/22/custom-springmvc-requestmappinghandlermapping/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1297,7 +1007,7 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/06/07/java%E6%9E%B6%E6%9E%84%E7%9B%B8%E5%85%B3-%E6%80%A7%E8%83%BD/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2020/06/01/go-http-request-body-stream-writer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1315,7 +1025,7 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/06/07/java%E6%9E%B6%E6%9E%84%E7%9B%B8%E5%85%B3-%E6%80%A7%E8%83%BD/" class="post-title-link" itemprop="url">java架构相关-性能</a>
+          <a href="/2020/06/01/go-http-request-body-stream-writer/" class="post-title-link" itemprop="url">Go语言HTTP请求流式写入body</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1326,14 +1036,23 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-06-07 00:00:05" itemprop="dateCreated datePublished" datetime="2017-06-07T00:00:05+08:00">2017-06-07</time>
+      <time title="Created: 2020-06-01 18:45:16" itemprop="dateCreated datePublished" datetime="2020-06-01T18:45:16+08:00">2020-06-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
     </span>
 
   
@@ -1346,8 +1065,21 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-7/25074587.jpg"></p>
+          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近在开发一个功能时，需要通过 http 协议上报大量的日志内容，但是在 Go 标准库里的 http client 的 API 是这样的：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http.NewRequest(method, url <span class="type">string</span>, body io.Reader)</span><br></pre></td></tr></table></figure>
 
+<p>body 是通过<code>io.Reader</code>接口来传递，并没有暴露一个<code>io.Writer</code>接口来提供写入的办法，先来看看正常情况下怎么写入一个<code>body</code>，示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">buf := bytes.NewBuffer([]<span class="type">byte</span>(<span class="string">&quot;hello&quot;</span>))</span><br><span class="line">http.Post(<span class="string">&quot;localhost:8099/report&quot;</span>,<span class="string">&quot;text/pain&quot;</span>,buf)</span><br></pre></td></tr></table></figure>
+
+<p>需要先把要写入的数据放在<code>Buffer</code>中，放内存缓存着，但是我需要写入<code>大量</code>的数据，如果都放内存里肯定要 OOM 了，http client 并没有提供<code>流式写入</code>的方法，我这么大的数据量直接用<code>Buffer</code>肯定是不行的，最后在 google 了一番之后找到了解决办法。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/01/go-http-request-body-stream-writer/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1366,7 +1098,7 @@ client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><p
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
