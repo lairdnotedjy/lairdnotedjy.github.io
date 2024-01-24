@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="完整学习见： 《 大话数据结构》 第六章 树  Tree：根结点-内部节点-终端节点(叶子节点) 组成的数据结构  二叉树【Binary tree】：每个节点最多有两个子节点 遍历二叉树：前序，中序，后续 （利用递归或自循环+ Stack栈回放路径 ）   二叉排序树【Binary Sort tree】【BST】：在二叉树的基础上，最左终端结点最小，使用中序遍历的方法可排序元素 插入： 致入任意数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树&amp;二叉树&amp;二叉排序树&amp;多路搜索树(B树)-总结">
+<meta property="og:url" content="https://www.sovdating.com/2017/06/17/%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91&%E5%A4%9A%E8%B7%AF%E6%90%9C%E7%B4%A2%E6%A0%91(B%E6%A0%91)-%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="完整学习见： 《 大话数据结构》 第六章 树  Tree：根结点-内部节点-终端节点(叶子节点) 组成的数据结构  二叉树【Binary tree】：每个节点最多有两个子节点 遍历二叉树：前序，中序，后续 （利用递归或自循环+ Stack栈回放路径 ）   二叉排序树【Binary Sort tree】【BST】：在二叉树的基础上，最左终端结点最小，使用中序遍历的方法可排序元素 插入： 致入任意数">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/12872520.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/94470744.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/51153658.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/3065500.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/93548120.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/15573800.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/91316945.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/83935023.jpg">
+<meta property="article:published_time" content="2017-06-16T16:00:01.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.126Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/12872520.jpg">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2017/06/17/%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91&%E5%A4%9A%E8%B7%AF%E6%90%9C%E7%B4%A2%E6%A0%91(B%E6%A0%91)-%E6%80%BB%E7%BB%93/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2017/06/17/%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91&%E5%A4%9A%E8%B7%AF%E6%90%9C%E7%B4%A2%E6%A0%91(B%E6%A0%91)-%E6%80%BB%E7%BB%93/","path":"2017/06/17/树&二叉树&二叉排序树&多路搜索树(B树)-总结/","title":"树&二叉树&二叉排序树&多路搜索树(B树)-总结"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>树&二叉树&二叉排序树&多路搜索树(B树)-总结 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tree%EF%BC%9A%E6%A0%B9%E7%BB%93%E7%82%B9-%E5%86%85%E9%83%A8%E8%8A%82%E7%82%B9-%E7%BB%88%E7%AB%AF%E8%8A%82%E7%82%B9-%E5%8F%B6%E5%AD%90%E8%8A%82%E7%82%B9-%E7%BB%84%E6%88%90%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">Tree：根结点-内部节点-终端节点(叶子节点) 组成的数据结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%90Binary-tree%E3%80%91%EF%BC%9A%E6%AF%8F%E4%B8%AA%E8%8A%82%E7%82%B9%E6%9C%80%E5%A4%9A%E6%9C%89%E4%B8%A4%E4%B8%AA%E5%AD%90%E8%8A%82%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">二叉树【Binary tree】：每个节点最多有两个子节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91%E3%80%90Binary-Sort-tree%E3%80%91%E3%80%90BST%E3%80%91%EF%BC%9A%E5%9C%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B8%8A%EF%BC%8C%E6%9C%80%E5%B7%A6%E7%BB%88%E7%AB%AF%E7%BB%93%E7%82%B9%E6%9C%80%E5%B0%8F%EF%BC%8C%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E7%9A%84%E6%96%B9%E6%B3%95%E5%8F%AF%E6%8E%92%E5%BA%8F%E5%85%83%E7%B4%A0"><span class="nav-number">3.</span> <span class="nav-text">二叉排序树【Binary Sort tree】【BST】：在二叉树的基础上，最左终端结点最小，使用中序遍历的方法可排序元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91%E3%80%90AVL%E6%A0%91%E3%80%91%EF%BC%9A-%E6%98%AF%E4%B8%80%E7%A7%8D%E9%AB%98%E5%BA%A6%E5%B9%B3%E8%A1%A1%E7%9A%84%E4%BA%8C%E6%8F%92%E6%8E%92%E5%BA%8F%E6%A0%91%E3%80%82%E5%AD%90%E6%A0%91%E6%B7%B1%E5%BA%A6%E5%B7%AE%E6%9C%80%E5%A4%A7%E4%B8%BA1"><span class="nav-number">4.</span> <span class="nav-text">二叉平衡树【AVL树】： 是一种高度平衡的二插排序树。子树深度差最大为1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E6%9F%A5%E6%89%BE%E6%A0%91%E3%80%90-muitl-way-search-tree-%E3%80%91%EF%BC%9A%E6%AF%8F%E4%B8%AA%E7%BB%93%E7%82%B9%E5%8F%AF%E4%BB%A5%E5%AD%98%E5%82%A8%E5%A4%9A%E4%B8%AA%E5%85%83%E7%B4%A0%EF%BC%8C%E5%AD%A9%E5%AD%90%E6%95%B0%E6%98%AF%E7%88%B6%E7%BB%93%E7%82%B9%E5%85%83%E7%B4%A0%E6%95%B0-1%EF%BC%88%E4%B8%94%E5%BF%85%E9%9C%80%E6%88%96%E5%85%A8%E6%B2%A1%E6%9C%89%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">多路查找树【 muitl-way search tree 】：每个结点可以存储多个元素，孩子数是父结点元素数+1（且必需或全没有）</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/06/17/%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91&%E5%A4%9A%E8%B7%AF%E6%90%9C%E7%B4%A2%E6%A0%91(B%E6%A0%91)-%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="树&二叉树&二叉排序树&多路搜索树(B树)-总结 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          树&二叉树&二叉排序树&多路搜索树(B树)-总结
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-06-17 00:00:01" itemprop="dateCreated datePublished" datetime="2017-06-17T00:00:01+08:00">2017-06-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>完整学习见： 《 大话数据结构》 第六章 树</p>
+<hr>
+<h1 id="Tree：根结点-内部节点-终端节点-叶子节点-组成的数据结构"><a href="#Tree：根结点-内部节点-终端节点-叶子节点-组成的数据结构" class="headerlink" title="Tree：根结点-内部节点-终端节点(叶子节点) 组成的数据结构"></a>Tree：根结点-内部节点-终端节点(叶子节点) 组成的数据结构</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/12872520.jpg"></p>
+<hr>
+<h1 id="二叉树【Binary-tree】：每个节点最多有两个子节点"><a href="#二叉树【Binary-tree】：每个节点最多有两个子节点" class="headerlink" title="二叉树【Binary tree】：每个节点最多有两个子节点"></a>二叉树【Binary tree】：每个节点最多有两个子节点</h1><ul>
+<li>遍历二叉树：前序，中序，后续 （利用递归或自循环+ Stack栈回放路径 ）<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/94470744.jpg"></li>
+</ul>
+<hr>
+<h1 id="二叉排序树【Binary-Sort-tree】【BST】：在二叉树的基础上，最左终端结点最小，使用中序遍历的方法可排序元素"><a href="#二叉排序树【Binary-Sort-tree】【BST】：在二叉树的基础上，最左终端结点最小，使用中序遍历的方法可排序元素" class="headerlink" title="二叉排序树【Binary Sort tree】【BST】：在二叉树的基础上，最左终端结点最小，使用中序遍历的方法可排序元素"></a>二叉排序树【Binary Sort tree】【BST】：在二叉树的基础上，最左终端结点最小，使用中序遍历的方法可排序元素</h1><ul>
+<li><p>插入： 致入任意数值，首个为根，后者逐个比较小放左，大放右直至终端结点</p>
+</li>
+<li><p>删除： 叶子结点(直删)  单叶内部结点(子替位)  双叶内部结点(前驱或后继替位)</p>
+</li>
+</ul>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/51153658.jpg"></p>
+<hr>
+<h1 id="二叉平衡树【AVL树】：-是一种高度平衡的二插排序树。子树深度差最大为1"><a href="#二叉平衡树【AVL树】：-是一种高度平衡的二插排序树。子树深度差最大为1" class="headerlink" title="二叉平衡树【AVL树】： 是一种高度平衡的二插排序树。子树深度差最大为1"></a>二叉平衡树【AVL树】： 是一种高度平衡的二插排序树。子树<code>深度差</code>最大为1</h1><ul>
+<li><code>平衡因子（BF）</code>  &#x3D; 左字树深度-右子树深度</li>
+<li><code>BF值为正（即左子树深）</code>，因此为达到平衡将<code>整树右旋</code> &#x2F; 反之  <code>整树左旋</code> 【 目标：找最小不平衡树，进行平衡控制】</li>
+<li>特殊场景：<code>旋转节点的BF值</code>与<code>旋转方向的参考节点的BF值</code>是相反的情况下，需要先统一<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/3065500.jpg"></li>
+</ul>
+<hr>
+<h1 id="多路查找树【-muitl-way-search-tree-】：每个结点可以存储多个元素，孩子数是父结点元素数-1（且必需或全没有）"><a href="#多路查找树【-muitl-way-search-tree-】：每个结点可以存储多个元素，孩子数是父结点元素数-1（且必需或全没有）" class="headerlink" title="多路查找树【 muitl-way search tree 】：每个结点可以存储多个元素，孩子数是父结点元素数+1（且必需或全没有）"></a>多路查找树【 muitl-way search tree 】：每个结点可以存储多个元素，孩子数是父结点元素数+1（且必需或全没有）</h1><ul>
+<li><code>2-3树</code>：结点的孩子树可以为2个或3个，即结点元素可以为1个或2个。<ul>
+<li>2结点如有3孩子,中间字树的范围介于2结点元素的访问之间</li>
+<li>元素 插入 2结点 ： 找到最近小于元素的结点，如为2结点可扩展为3结点，插入到右边&#x2F;无更小值插入2结点的左边</li>
+<li>元素插入3结点：因3结点已经是最大容量，无法再插入新元素，需要拆分。<ul>
+<li><p>情况一：3结点的父结点是2结点， 可将2结点扩展为3结点，再将待插入的元素补入3结点的子树空位</p>
+</li>
+<li><p>情况二：3结点的父结点是3结点，需要再向上找是否有可扩展的2结点。扩展后插入方式同上</p>
+<ul>
+<li>情况三：结合情况1,2，顶层结点均为3结点，无法再插入元素，则整链的3结点都解体为2结点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>删终端 3结点中元素</code>：不会破坏结构，直删即可</li>
+<li><code>删终端 2结点中元素</code>：会出现不平衡情况，需要<code>平衡补位</code>，补位元素所在结点因由2个结点否则移位后还是不平</li>
+<li><code>删非终端 2结点中元素</code>  ： 会出现不平衡情况，需要<code>平衡补位</code>，前置或后置元素替位</li>
+<li><code>删非终端 3结点中元素</code>  ： 会出现不平衡情况，需要<code>平衡补位</code> ，前置或后置元素 替位</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/93548120.jpg"></p>
+<ul>
+<li><p><code>2-3-4树</code>：类似<code>2-3树</code>，要么没有孩子要么4个孩子，结点元素可以为1到3个</p>
+<ul>
+<li>插入，删除操作同<code>2-3树</code>逻辑</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/15573800.jpg"></p>
+<ul>
+<li><p><code>B树【B-tree】</code>： <code>2-3树</code>是3阶B树， <code>2-3-4树</code>是4阶B树。树阶是最大孩子树的数目</p>
+<ul>
+<li><p>查找：根结点开始查找关键字匹配和区间子树结点的递归匹配</p>
+</li>
+<li><p>插入，删除操作同<code>2-3树</code>  <code>2-3-4树</code> 逻辑</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/91316945.jpg"></p>
+<ul>
+<li><p><code>B+树</code>：是<code>B树</code>的变形树</p>
+<ul>
+<li>1.每个分支结点的元素会在中序<code>后继者</code>的位置再次列出：<code>随机查找</code>（顶层开始，逐层查找）</li>
+<li>2.每个叶子节点会保存指向下一个叶子节点的指针：<code>范围查找</code>（从起点开始随下一叶子节点位置按顺序找到范围内所有记录）</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-17/83935023.jpg"></p>
+<hr>
+<p><strong>参考</strong><br><code>大话数据结构.pdf</code> 第六章 树</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/06/13/Maven-introduces-local-dependency-jar-to-executable-jar-packages/" rel="prev" title="Maven引入本地依赖Jar到可执行Jar包中">
+                  <i class="fa fa-angle-left"></i> Maven引入本地依赖Jar到可执行Jar包中
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/06/17/%E7%BA%A2%E9%BB%91%E6%A0%91(Red-Black%20Tree%EF%BC%8C%E7%AE%80%E7%A7%B0R-B%20Tree)/" rel="next" title="红黑树(Red-Black Tree，简称R-B Tree)">
+                  红黑树(Red-Black Tree，简称R-B Tree) <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

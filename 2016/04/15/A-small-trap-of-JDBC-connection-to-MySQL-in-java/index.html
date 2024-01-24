@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="**对代码不满足，是任何真正有天才的程序员的根本特征。**   Value ‘0000-00-00’ can not be represented as java.sql.Timestamp在查询MySql数据库某表的timestamp列的时候，发现此异常，问题来源表述如下  先创建一个测试表123456create table test.mytest(id int PRIMARY KEY AU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java之JDBC连接MySQL的一点坑">
+<meta property="og:url" content="https://www.sovdating.com/2016/04/15/A-small-trap-of-JDBC-connection-to-MySQL-in-java/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="**对代码不满足，是任何真正有天才的程序员的根本特征。**   Value ‘0000-00-00’ can not be represented as java.sql.Timestamp在查询MySql数据库某表的timestamp列的时候，发现此异常，问题来源表述如下  先创建一个测试表123456create table test.mytest(id int PRIMARY KEY AU">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-04-15T15:51:11.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:24:42.708Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2016/04/15/A-small-trap-of-JDBC-connection-to-MySQL-in-java/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2016/04/15/A-small-trap-of-JDBC-connection-to-MySQL-in-java/","path":"2016/04/15/A-small-trap-of-JDBC-connection-to-MySQL-in-java/","title":"Java之JDBC连接MySQL的一点坑"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java之JDBC连接MySQL的一点坑 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Value-%E2%80%980000-00-00%E2%80%99-can-not-be-represented-as-java-sql-Timestamp"><span class="nav-number">1.</span> <span class="nav-text">Value ‘0000-00-00’ can not be represented as java.sql.Timestamp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#resultSet-getRow-%E6%80%BB%E6%98%AF%E8%BF%94%E5%9B%9E0"><span class="nav-number">2.</span> <span class="nav-text">resultSet.getRow()总是返回0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#resultSet-getFetchSize-%E6%80%BB%E6%98%AF%E8%BF%94%E5%9B%9E0"><span class="nav-number">3.</span> <span class="nav-text">resultSet.getFetchSize()总是返回0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E8%A1%8C%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">获取查询的数据集的行数</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/04/15/A-small-trap-of-JDBC-connection-to-MySQL-in-java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java之JDBC连接MySQL的一点坑 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java之JDBC连接MySQL的一点坑
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-04-15 23:51:11" itemprop="dateCreated datePublished" datetime="2016-04-15T23:51:11+08:00">2016-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote  class="blockquote-center">
+**对代码不满足，是任何真正有天才的程序员的根本特征。**
+</blockquote>
+
+<h4 id="Value-‘0000-00-00’-can-not-be-represented-as-java-sql-Timestamp"><a href="#Value-‘0000-00-00’-can-not-be-represented-as-java-sql-Timestamp" class="headerlink" title="Value ‘0000-00-00’ can not be represented as java.sql.Timestamp"></a>Value ‘0000-00-00’ can not be represented as java.sql.Timestamp</h4><p>在查询<strong>MySql</strong>数据库某表的<strong>timestamp</strong>列的时候，发现此异常，问题来源表述如下</p>
+<ol>
+<li>先创建一个测试表<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test.mytest(</span><br><span class="line">id <span class="type">int</span> <span class="keyword">PRIMARY</span> KEY AUTO_INCREMENT ,</span><br><span class="line">createtime <span class="type">timestamp</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">default</span> <span class="built_in">current_timestamp</span> , <span class="comment">--创建时间</span></span><br><span class="line">updatetime <span class="type">timestamp</span> <span class="keyword">not</span> <span class="keyword">null</span> , <span class="comment">--更新时间</span></span><br><span class="line">testtime <span class="type">timestamp</span> <span class="keyword">null</span> <span class="comment">--发布时间</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
+<li>插入两条数据，将此<strong>sql</strong>执行两次即可<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into test.mytest(createtime,testtime) values(sysdate(),null);</span><br></pre></td></tr></table></figure></li>
+<li>查询数据<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> mytest;</span><br></pre></td></tr></table></figure>
+<strong>在数据库客户端中使用SELECT查询结果如下：</strong></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>createtime</th>
+<th>updatetime</th>
+<th>testtime</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>16&#x2F;4&#x2F;18 10:28:18</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>16&#x2F;4&#x2F;18 10:28:42</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>虽然说使用<strong>SELECT</strong>语句查询到的<strong>updatetime</strong>列和<strong>testtime</strong>列都是空，但是可以通过查看表结构从而得到各个列的默认值，在<strong>Toad</strong>工具中右击表选<strong>View Details</strong>得到如下表结构，可以看到<strong>Default</strong>列的默认值。</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Collation</th>
+<th>Null</th>
+<th>Key</th>
+<th>Default</th>
+<th>Extra</th>
+<th>Privileges</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>int(11)</td>
+<td>{null}</td>
+<td>NO</td>
+<td>PRI</td>
+<td>{null}</td>
+<td>auto_increment</td>
+<td>select,insert,update,references</td>
+<td>ID，主键</td>
+</tr>
+<tr>
+<td>createtime</td>
+<td>timestamp</td>
+<td>{null}</td>
+<td>NO</td>
+<td></td>
+<td>CURRENT_TIMESTAMP</td>
+<td></td>
+<td>select,insert,update,references</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td>updatetime</td>
+<td>timestamp</td>
+<td>{null}</td>
+<td>NO</td>
+<td></td>
+<td>0000-00-00 00:00:00</td>
+<td></td>
+<td>select,insert,update,references</td>
+<td>更新时间</td>
+</tr>
+<tr>
+<td>testtime</td>
+<td>timestamp</td>
+<td>{null}</td>
+<td>YES</td>
+<td></td>
+<td>{null}</td>
+<td></td>
+<td>select,insert,update,references</td>
+<td>发布时间</td>
+</tr>
+</tbody></table>
+<p><strong>NOTE</strong>：<br>在<strong>MySql</strong>中对于<strong>timestamp</strong>类型的列，如果设置<strong>not null</strong>的话（对应测试表的<strong>updatetime</strong>列），在程序中查询得其默认值是<strong>0000-00-00 00:00:00</strong>；如果<strong>timestamp</strong>的列默认值是<strong>null</strong>的话（对应测试表的<strong>testtime</strong>列），那么<strong>0000-00-00 00:00:00</strong>和<strong>null</strong>值在数据库中都是不显示（由查询结果，可知<strong>updatetime</strong>和<strong>testtime</strong>显示的结果都是空），也就是说在数据库中不管其默认值是<strong>not null</strong>还是<strong>null</strong>，该列值显示的都是空，你无法根据值去判断其类型，并且当是<strong>not null</strong>的时候，在程序中取出来的值实际上是<strong>0000-00-00 00:00:00</strong>，所以使用<strong>resultSet.getString()<strong>方法或其它方法都会报错，</strong>java.sql.SQLException: Value ‘0000-00-00’ can not be represented as java.sql.Timestamp</strong>。</p>
+<p>另外<strong>timestamp</strong>类型要求第一个出现的<strong>timestamp</strong>列必须是<strong>not null default current_timestamp</strong>。</p>
+<p>在<strong>Java</strong>程序中如果取到这种<strong>0000-00-00 00:00:00</strong>数据的话报错，解决办法是修改<strong>jdbc url</strong>为：</p>
+<blockquote>
+<p>jdbc:mysql:&#x2F;&#x2F;yourserver:3306&#x2F;yourdatabase?zeroDateTimeBehavior&#x3D;convertToNull</p>
+</blockquote>
+<p>这样在程序中取出来的数据就是<strong>null</strong>了。</p>
+<h4 id="resultSet-getRow-总是返回0"><a href="#resultSet-getRow-总是返回0" class="headerlink" title="resultSet.getRow()总是返回0"></a>resultSet.getRow()总是返回0</h4><p>在使用**resultSet.getRow()<strong>的时候，发现总是返回0，注意该方法返回的是数据库当前的行数，所以当你没调用</strong>resultSet.next()**的时候，该方法总是返回0。</p>
+<h4 id="resultSet-getFetchSize-总是返回0"><a href="#resultSet-getFetchSize-总是返回0" class="headerlink" title="resultSet.getFetchSize()总是返回0"></a>resultSet.getFetchSize()总是返回0</h4><p>另外使用<strong>resultSet.getFetchSize()<strong>的时候也是每次都返回0，这是怎么回事呢？</strong>getFetchSize()<strong>方法不是获得记录数，而是获得每次抓取的记录数，默认是0，也就是说不限制。可以用</strong>setFetchSize()<strong>来设置，而</strong>getFetchSize()<strong>是用来读出那个设置值。</strong>setFetchSize()<strong>最主要是为了减少网络交互次数设计的，访问</strong>ResultSet</strong>时，如果它每次只从服务器上取一行数据，则会产生大量的开销，<strong>setFetchSize()<strong>的意思是当调用</strong>resultSet.next()<strong>时，</strong>resultSet</strong>会一次性从服务器上取多行数据回来，这样在下次**resultSet.next()**时，它可以直接从内存中获得数据，而不需要网络交互，提高了效率。</p>
+<p><strong>Note</strong>：有时候觉得英文确实表述更准确，请看原汁原味的解释</p>
+<blockquote>
+<p>The fetch size is the number of rows that should be retrieved from the database in each roundtrip. It has nothing to do with the number of rows returned.</p>
+</blockquote>
+<h4 id="获取查询的数据集的行数"><a href="#获取查询的数据集的行数" class="headerlink" title="获取查询的数据集的行数"></a>获取查询的数据集的行数</h4><p>如果你是想获得符合条件的记录数目，最少有三种方法</p>
+<ol>
+<li>自己维护计数器<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(resultSet.next())&#123;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>可以这样<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要设置结果集可滚动</span></span><br><span class="line"><span class="type">Statement</span> <span class="variable">statement</span> <span class="operator">=</span> connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);</span><br><span class="line"><span class="comment">//对于PreparedStatement也需要设置</span></span><br><span class="line"><span class="type">PreparedStatement</span> <span class="variable">preparedStatement</span> <span class="operator">=</span> connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);</span><br><span class="line"><span class="comment">//之后在操作结果集中就可以移动游标了</span></span><br><span class="line">resultSet.last();</span><br><span class="line">rowCount = resultSet.getRow();</span><br><span class="line">resultSet.beforeFirst();<span class="comment">//将数据集重新归位，这样就获取到行数了</span></span><br></pre></td></tr></table></figure>
+有关<strong>ResultSet</strong>设置结果集类型的参数说明</li>
+</ol>
+<ul>
+<li>ResultSet.TYPE_FORWARD_ONLY - 结果集不能滚动，这是默认值</li>
+<li>ResultSet.TYPE_SCROLL_INSENSITIVE - 结果集可以滚动，但ResuleSet对数据库中发生的数据改变不敏感</li>
+<li>ResultSet.TYPE_SCROLL_SENSITIVE -  结果集可以滚动，并且ResuleSet对数据库中发生的改变敏感</li>
+<li>ResultSet.CONCUR_READ_ONLY - 只读结果集，不能用于更新数据库</li>
+<li>ResultSet.CONCUR_UPDATABLE - 可更新结果集，可以用于更新数据库</li>
+<li>当使用TYPE_SCROLL_INSENSITIVE或者TYPE_SCROLL_SENSITIVE来创建Statement对象时，可以使用ResultSet的first()&#x2F;last()&#x2F;beforeFirst()&#x2F;afterLast()&#x2F;relative()&#x2F;absolute()等方法在结果集中随意前后移动</li>
+<li>即使使用了CONCUR_UPDATABLE参数来创建Statement，得到的记录集也并非一定是“可更新的”，如果你的记录集来自于合并查询，即该查询的结果来自多个表格，那么这样的结果集就可能不是可更新的结果集。可以使用ResuleSet类的getConcurrency()方法来确定是否为可更新的的结果集。如果结果集是可更新的，那么可使用ResultSet的updateRow()，insertRow()，moveToCurrentRow()，deleteRow()，cancelRowUpdates()等方法来对数据库进行更新。</li>
+</ul>
+<ol start="3">
+<li>利用SQL查询<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;select count(*) totalCount from table&quot;</span>;</span><br><span class="line">rowCount = resultSet.getInt(<span class="string">&quot;totalCount&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>Note：</strong><br>在<strong>JDBC</strong>中使用可更新的结果集来更新数据库，不能使用<code>select * from table</code>方式的<strong>SQL</strong>语句，必须将它写成如下两种形式之一：</p>
+<ul>
+<li>select table.* from table</li>
+<li>select column1,column2… from table</li>
+</ul>
+<p><strong>参考文献</strong><br>[1] <a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_50267f510100dj1m.html">http://blog.sina.com.cn/s/blog_50267f510100dj1m.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/04/15/Log4j-print-exception-stack-information-to-the-log/" rel="prev" title="Log4j打印异常堆栈信息到日志">
+                  <i class="fa fa-angle-left"></i> Log4j打印异常堆栈信息到日志
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/04/16/Github%20%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/" rel="next" title="Github 搜索技巧">
+                  Github 搜索技巧 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

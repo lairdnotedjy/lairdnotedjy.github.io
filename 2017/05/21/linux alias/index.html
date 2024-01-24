@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="linux 关闭进程的集中方式-alias 进程，killkill -9 &lt;pid&gt; 123456789101112[root@iZ23j23f6aaZ ~]# ps -ef|grep nginx|grep -v grepnobody   25268 28893  0 May11 ?        05:52:46 nginx: worker processroot     28893">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux alias">
+<meta property="og:url" content="https://www.sovdating.com/2017/05/21/linux%20alias/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="linux 关闭进程的集中方式-alias 进程，killkill -9 &lt;pid&gt; 123456789101112[root@iZ23j23f6aaZ ~]# ps -ef|grep nginx|grep -v grepnobody   25268 28893  0 May11 ?        05:52:46 nginx: worker processroot     28893">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-05-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.084Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="alias">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2017/05/21/linux%20alias/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2017/05/21/linux%20alias/","path":"2017/05/21/linux alias/","title":"linux alias"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>linux alias | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux-%E5%85%B3%E9%97%AD%E8%BF%9B%E7%A8%8B%E7%9A%84%E9%9B%86%E4%B8%AD%E6%96%B9%E5%BC%8F-alias"><span class="nav-number">1.</span> <span class="nav-text">linux 关闭进程的集中方式-alias</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%BE%E7%A4%BAshells%E9%9B%86%E5%90%88-%E3%80%90-Shell%E6%9C%89%E8%BF%99%E4%B9%88%E5%87%A0%E7%A7%8D%EF%BC%8Csh%E3%80%81bash%E3%80%81csh%E3%80%91"><span class="nav-number">2.</span> <span class="nav-text">显示shells集合 【 Shell有这么几种，sh、bash、csh】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%B7%B2%E7%BB%8F%E9%85%8D%E7%BD%AE%E7%9A%84alias"><span class="nav-number">3.</span> <span class="nav-text">查看已经配置的alias</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85zsh"><span class="nav-number">4.</span> <span class="nav-text">安装zsh</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/05/21/linux%20alias/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="linux alias | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux alias
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-21 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-21T00:00:00+08:00">2017-05-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="linux-关闭进程的集中方式-alias"><a href="#linux-关闭进程的集中方式-alias" class="headerlink" title="linux 关闭进程的集中方式-alias"></a>linux 关闭进程的集中方式-alias</h1><ul>
+<li><p>进程，kill<br><code>kill -9 &lt;pid&gt;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23j23f6aaZ ~]# ps -ef|grep nginx|grep -v grep</span><br><span class="line">nobody   25268 28893  0 May11 ?        05:52:46 nginx: worker process</span><br><span class="line">root     28893     1  0 Apr08 ?        00:00:00 nginx: master process ./nginx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# pidof nginx</span><br><span class="line">28893 25268</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# pgrep nginx</span><br><span class="line">25268</span><br><span class="line">28893</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>依据服务名， Xargs接受管道符参数 ，kill<br><code>ps -ef | grep &lt;p_name&gt; | grep -v grep |  xargs kill</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep nginx | grep -v grep | awk &#x27;&#123;print $2&#125;&#x27; |  xargs kill  -9</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>系统别名，kill<br><code>alias killng=&quot; ps -ef | grep nginx | grep -v grep | awk &#39;&#123;print $2&#125;&#39; |  xargs kill  -9 &quot;</code></p>
+</li>
+</ul>
+<hr>
+<h1 id="显示shells集合-【-Shell有这么几种，sh、bash、csh】"><a href="#显示shells集合-【-Shell有这么几种，sh、bash、csh】" class="headerlink" title="显示shells集合 【 Shell有这么几种，sh、bash、csh】"></a>显示shells集合 【 Shell有这么几种，sh、bash、csh】</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23j23f6aaZ ~]# cat /etc/shells</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/bash</span><br><span class="line">/sbin/nologin</span><br><span class="line">/bin/dash</span><br><span class="line">/bin/tcsh</span><br><span class="line">/bin/csh</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Mac 多了一个 <code>zsh</code></li>
+</ul>
+<p> Linux 系统和 OS X 系统的默认 Shell 都是 bash，但是真正强大的 Shell 是深藏不露的 zsh， 这货绝对是马车中的跑车，跑车中的飞行车，史称『终极 Shell』</p>
+<p>快速上手的zsh项目，叫做「oh my zsh」<br>Github 网址是： <a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh">https://github.com/robbyrussell/oh-my-zsh</a></p>
+<h1 id="查看已经配置的alias"><a href="#查看已经配置的alias" class="headerlink" title="查看已经配置的alias"></a>查看已经配置的<code>alias</code></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23j23f6aaZ ~]# alias</span><br><span class="line">alias catalog=&#x27;tail -f $&#123;CATALINA_HOME&#125;/logs/catalina.out&#x27;</span><br><span class="line">alias cfg=&#x27;cd $&#123;CFG_HOME&#125;&#x27;</span><br><span class="line">alias class=&#x27;cd $&#123;CATALINA_HOME&#125;/webapps/server/WEB-INF/classes&#x27;</span><br><span class="line">alias cp=&#x27;cp -i&#x27;</span><br><span class="line">alias help=&#x27;sh $&#123;CFG_HOME&#125;/server.sh help&#x27;</span><br><span class="line">alias k12=&#x27;cd /usr/local/apache-tomcat-7.0.59/bin;./shutdown.sh;sleep 1;./startup.sh&#x27;</span><br><span class="line">alias l.=&#x27;ls -d .* --color=auto&#x27;</span><br><span class="line">alias ll=&#x27;ls -l --color=auto&#x27;</span><br><span class="line">alias local=&#x27;cd $&#123;CATALINA_HOME&#125;/local&#x27;</span><br><span class="line">alias log=&#x27;tail -f $&#123;CATALINA_HOME&#125;/local/server.log&#x27;</span><br><span class="line">alias logs=&#x27;cd $&#123;CATALINA_HOME&#125;/logs&#x27;</span><br><span class="line">alias ls=&#x27;ls --color=auto&#x27;</span><br><span class="line">alias mv=&#x27;mv -i&#x27;</span><br><span class="line">alias nginx=&#x27;/usr/local/nginx/sbin/nginx&#x27;</span><br><span class="line">alias nginxid=&#x27;cat /usr/local/nginx/logs/nginx.pid&#x27;</span><br><span class="line">alias pc=&#x27;cd /usr/local/apache-tomcat-7.0.62/bin;./shutdown.sh;sleep 1;./startup.sh&#x27;</span><br><span class="line">alias restart=&#x27;sh $&#123;CFG_HOME&#125;/server.sh restart&#x27;</span><br><span class="line">alias rm=&#x27;rm -i&#x27;</span><br><span class="line">alias start=&#x27;sh $&#123;CFG_HOME&#125;/server.sh start&#x27;</span><br><span class="line">alias status=&#x27;sh $&#123;CFG_HOME&#125;/server.sh status&#x27;</span><br><span class="line">alias stop=&#x27;sh $&#123;CFG_HOME&#125;/server.sh stop&#x27;</span><br><span class="line">alias version=&#x27;java Version&#x27;</span><br><span class="line">alias webapps=&#x27;cd $&#123;CATALINA_HOME&#125;/webapps&#x27;</span><br><span class="line">alias which=&#x27;alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde&#x27;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="安装zsh"><a href="#安装zsh" class="headerlink" title="安装zsh"></a>安装<code>zsh</code></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ ll</span><br><span class="line">total 0</span><br><span class="line">drwx------@  3 liuxiang  staff   102B  7 24 13:26 Applications</span><br><span class="line">drwx------+ 11 liuxiang  staff   374B  7 25 11:19 Desktop</span><br><span class="line">drwx------+  4 liuxiang  staff   136B  7 24 14:31 Documents</span><br><span class="line">drwx------+ 16 liuxiang  staff   544B  7 26 11:25 Downloads</span><br><span class="line">drwx------@ 58 liuxiang  staff   1.9K  7 24 21:38 Library</span><br><span class="line">drwx------+  3 liuxiang  staff   102B  7 24 11:02 Movies</span><br><span class="line">drwx------+  4 liuxiang  staff   136B  7 25 09:08 Music</span><br><span class="line">drwx------+  3 liuxiang  staff   102B  7 24 11:02 Pictures</span><br><span class="line">drwxr-xr-x+  5 liuxiang  staff   170B  7 24 11:02 Public</span><br></pre></td></tr></table></figure>
+<p><code>终极 Shell——ZSH - MacTalk - 知乎专栏 </code><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk">https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk</a></p>
+<p><code>robbyrussell/oh-my-zsh </code><br><a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh">https://github.com/robbyrussell/oh-my-zsh</a></p>
+<p><code>终极 Shell——ZSH - MacTalk - 知乎专栏 </code>  -<code>autojump</code><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk">https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk</a></p>
+<hr>
+<p><strong>参考</strong></p>
+<p><code>【转】linux下杀死进程（kill）的N种方法</code></p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/andy572633/article/details/7211546">http://blog.csdn.net/andy572633/article/details/7211546</a></p>
+<p><code>Oh My Zsh</code><br><a target="_blank" rel="noopener" href="http://ohmyz.sh/">http://ohmyz.sh/</a></p>
+<p><code>终极 Shell——ZSH</code></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk">https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/alias/" rel="tag"># alias</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/05/19/%E9%9B%86%E5%90%88-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="prev" title="集合-数据结构">
+                  <i class="fa fa-angle-left"></i> 集合-数据结构
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/05/23/%E6%89%B9%E5%A4%84%E7%90%86%E8%87%AA%E5%8A%A8%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4%E8%A1%8C/" rel="next" title="批处理自动输入命令行">
+                  批处理自动输入命令行 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

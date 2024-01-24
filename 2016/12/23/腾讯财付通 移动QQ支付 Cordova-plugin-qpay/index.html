@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="腾讯财付通 移动QQ支付 Cordova-plugin-qpay 场景介绍https:&#x2F;&#x2F;qpay.qq.com&#x2F;qpaywiki&#x2F;showdocument.php?pid&#x3D;38&amp;docid&#x3D;160  支付流程https:&#x2F;&#x2F;qpay.qq.com&#x2F;qpaywiki&#x2F;showdocument.php?pid&#x3D;38&amp;docid&#x3D;201    商户接入指引http:&#x2F;&#x2F;kf.qq.co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="腾讯财付通 移动QQ支付 Cordova-plugin-qpay">
+<meta property="og:url" content="https://www.sovdating.com/2016/12/23/%E8%85%BE%E8%AE%AF%E8%B4%A2%E4%BB%98%E9%80%9A%20%E7%A7%BB%E5%8A%A8QQ%E6%94%AF%E4%BB%98%20Cordova-plugin-qpay/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="腾讯财付通 移动QQ支付 Cordova-plugin-qpay 场景介绍https:&#x2F;&#x2F;qpay.qq.com&#x2F;qpaywiki&#x2F;showdocument.php?pid&#x3D;38&amp;docid&#x3D;160  支付流程https:&#x2F;&#x2F;qpay.qq.com&#x2F;qpaywiki&#x2F;showdocument.php?pid&#x3D;38&amp;docid&#x3D;201    商户接入指引http:&#x2F;&#x2F;kf.qq.co">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://p.qpic.cn/qpaywikipic/0/qpaywikipic_582045e17a9263438/0">
+<meta property="og:image" content="http://file.service.qq.com/user-files/uploads/201611/1445a222fa15c23d2a688ee6041eea51.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/16-12-23/82075208-file_1482463058867_b57.png">
+<meta property="article:published_time" content="2016-12-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.129Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="Cordova-plugin-qpay">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://p.qpic.cn/qpaywikipic/0/qpaywikipic_582045e17a9263438/0">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2016/12/23/%E8%85%BE%E8%AE%AF%E8%B4%A2%E4%BB%98%E9%80%9A%20%E7%A7%BB%E5%8A%A8QQ%E6%94%AF%E4%BB%98%20Cordova-plugin-qpay/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2016/12/23/%E8%85%BE%E8%AE%AF%E8%B4%A2%E4%BB%98%E9%80%9A%20%E7%A7%BB%E5%8A%A8QQ%E6%94%AF%E4%BB%98%20Cordova-plugin-qpay/","path":"2016/12/23/腾讯财付通 移动QQ支付 Cordova-plugin-qpay/","title":"腾讯财付通 移动QQ支付 Cordova-plugin-qpay"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>腾讯财付通 移动QQ支付 Cordova-plugin-qpay | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%85%BE%E8%AE%AF%E8%B4%A2%E4%BB%98%E9%80%9A-%E7%A7%BB%E5%8A%A8QQ%E6%94%AF%E4%BB%98-Cordova-plugin-qpay"><span class="nav-number">1.</span> <span class="nav-text">腾讯财付通 移动QQ支付 Cordova-plugin-qpay</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">卸载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E6%B5%8B%E8%AF%95%E8%B4%A6%E5%8F%B7%EF%BC%88%E5%BF%AB%E9%80%9F%E9%AA%8C%E8%AF%81qpay-plugin%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">官方测试账号（快速验证qpay plugin）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%EF%BC%9Aios%E5%8F%AF%E8%B0%83%E8%AF%95%E5%88%B0%E6%94%AF%E4%BB%98%E3%80%82-android%E5%9B%A0%E4%B8%BA%E6%B2%A1%E6%9C%89%E5%AE%98%E6%96%B9%E7%9A%84%E7%AD%BE%E5%90%8D%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E6%AD%A3%E7%A1%AE%E5%8C%B9%E9%85%8Dsha1%EF%BC%8C%E4%BC%9A%E6%8F%90%E7%A4%BA%E5%95%86%E6%88%B7%E4%B8%AD%E6%89%BE%E4%B8%8D%E5%88%B0appid%E3%80%82-1-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6-%E8%8E%B7%E5%8F%96QQ%E6%94%AF%E4%BB%98%E8%AE%A2%E5%8D%95%EF%BC%88orderCode-or-tokenId%EF%BC%89%E8%AE%BF%E9%97%AEdemo%E5%9C%B0%E5%9D%80%E5%8F%AF%E8%8E%B7%E5%BE%97-http-fun-svip-qq-com-mqqopenpay-demo-php-2-%E7%A8%8B%E5%BA%8F%E8%B0%83%E7%94%A8-3-%E6%9B%B4%E6%96%B0ios%E5%BA%94%E7%94%A8%E5%90%8Dconfig-xml-4-%E7%BC%96%E8%AF%91%EF%BC%8Cxcode%E8%BF%90%E8%A1%8C"><span class="nav-number">4.1.</span> <span class="nav-text">注：ios可调试到支付。 android因为没有官方的签名文件导致服务正确匹配sha1，会提示商户中找不到appid。- 1.安装插件1cordova plugin add plugins-ws&#x2F;com.wosai.qpay --variable qpayappid&#x3D;100619284- 获取QQ支付订单（orderCode or tokenId）访问demo地址可获得 http:&#x2F;&#x2F;fun.svip.qq.com&#x2F;mqqopenpay_demo.php- 2.程序调用1QPay.mqqPay({tokenId:&#39;1V39f4eaf286fe3718731871b4fe96dc&#39;} ,function(res){console.log(&quot;res&quot;,res)},function(res){console.log(&quot;error&quot;,res)});- 3.更新ios应用名config.xml1&lt;widget id&#x3D;&quot;com.tencent.qqwallet.example&quot;- 4.编译，xcode运行1ionic build ios
+ </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%BD%E5%8A%9B"><span class="nav-number">5.</span> <span class="nav-text">能力</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AD%BE%E5%90%8D%E7%BA%A0%E6%AD%A3%E5%8A%9F%E8%83%BD-%E5%90%8E%E7%AB%AF%E7%AD%BE%E5%90%8D-%E4%B9%9F%E5%8F%AF%E5%8F%82%E8%80%83%E6%AD%A4%E4%BB%A3%E7%A0%81%E6%AE%B5"><span class="nav-number">6.</span> <span class="nav-text">签名纠正功能(后端签名,也可参考此代码段)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%EF%BC%9A%E7%AD%BE%E5%90%8D%E4%BE%9D%E8%B5%96%E5%AF%86%E9%92%A5%E7%AD%89%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%EF%BC%8C%E5%BB%BA%E8%AE%AE%E5%90%8E%E5%8F%B0%E8%BF%9B%E8%A1%8C%E3%80%82%E6%8F%92%E4%BB%B6%E6%8F%90%E4%BE%9B%E6%AD%A4%E5%8A%9F%E8%83%BD%EF%BC%8C%E4%BB%85%E7%94%A8%E4%BA%8E%E5%90%8E%E5%8F%B0%E7%AD%BE%E5%90%8D%E6%A0%A1%E9%AA%8C%E3%80%82%E4%B8%8A%E7%BA%BF%E8%AF%B7%E5%85%B3%E9%97%ADdebug-false-android-%E8%A7%81qpay-java%E6%B3%A8%EF%BC%9AAPP-KEY%E9%BB%98%E8%AE%A4%E5%A1%AB%E5%86%99%E4%BA%86%E8%AE%BF%E9%97%AE%E7%A4%BA%E4%BE%8B%E4%BD%BF%E7%94%A8%E7%9A%84app-key-%E8%B0%83%E8%AF%95%E8%87%AA%E7%94%B1app%E6%94%AF%E4%BB%98%EF%BC%8C%E8%AF%B7%E4%BF%AE%E6%94%B9%E3%80%82-ios-%E8%A7%81qpay-m%E6%B3%A8%EF%BC%9AAPP-KEY%E9%BB%98%E8%AE%A4%E5%A1%AB%E5%86%99%E4%BA%86%E8%AE%BF%E9%97%AE%E7%A4%BA%E4%BE%8B%E4%BD%BF%E7%94%A8%E7%9A%84app-key-%E8%B0%83%E8%AF%95%E8%87%AA%E7%94%B1app%E6%94%AF%E4%BB%98%EF%BC%8C%E8%AF%B7%E4%BF%AE%E6%94%B9%E3%80%82"><span class="nav-number">6.1.</span> <span class="nav-text">注：签名依赖密钥等敏感信息，建议后台进行。插件提供此功能，仅用于后台签名校验。上线请关闭debug &#x3D; false## android 见qpay.java注：APP_KEY默认填写了访问示例使用的app_key. 调试自由app支付，请修改。12345678boolean debug &#x3D; true;&#x2F;&#x2F; 是否开启debugif (debug) {  String sig_online &#x3D; signApi(api);&#x2F;&#x2F; 请手动更新APP_KEY  if (api.sig !&#x3D; sig_online) {    System.out.println(&quot;签名错误-纠正&quot;);    api.sig &#x3D; sig_online;  }}1234567891011121314151617181920212223242526272829&#x2F;*** 签名步骤建议不要在app上执行，要放在服务器上执行.*&#x2F;public String signApi(PayApi api) throws Exception {  &#x2F;&#x2F; 按key排序  StringBuilder stringBuilder &#x3D; new StringBuilder();  stringBuilder.append(&quot;appId&#x3D;&quot;).append(api.appId);  stringBuilder.append(&quot;&amp;bargainorId&#x3D;&quot;).append(api.bargainorId);  stringBuilder.append(&quot;&amp;nonce&#x3D;&quot;).append(api.nonce);  stringBuilder.append(&quot;&amp;pubAcc&#x3D;&quot;).append(&quot;&quot;);  stringBuilder.append(&quot;&amp;tokenId&#x3D;&quot;).append(api.tokenId);   String APP_KEY &#x3D; &quot;d139ae6fb0175e5659dce2a7c1fe84d5&quot;;&#x2F;&#x2F; 调试使用,应该服务器保护  byte[] byteKey &#x3D; (APP_KEY + &quot;&amp;&quot;).getBytes(&quot;UTF-8&quot;);  &#x2F;&#x2F; 根据给定的字节数组构造一个密钥,第二参数指定一个密钥算法的名称  SecretKey secretKey &#x3D; new SecretKeySpec(byteKey, &quot;HmacSHA1&quot;);  &#x2F;&#x2F; 生成一个指定 Mac 算法 的 Mac 对象  Mac mac &#x3D; Mac.getInstance(&quot;HmacSHA1&quot;);  &#x2F;&#x2F; 用给定密钥初始化 Mac 对象  mac.init(secretKey);  byte[] byteSrc &#x3D; stringBuilder.toString().getBytes(&quot;UTF-8&quot;);  &#x2F;&#x2F; 完成 Mac 操作  byte[] dst &#x3D; mac.doFinal(byteSrc);   &#x2F;&#x2F; Base64  &#x2F;&#x2F; api.sig &#x3D; Base64.encodeToString(dst, Base64.NO_WRAP);  &#x2F;&#x2F; api.sigType &#x3D; &quot;HMAC-SHA1&quot;;  return Base64.encodeToString(dst, Base64.NO_WRAP);}## ios 见qpay.m注：APP_KEY默认填写了访问示例使用的app_key. 调试自由app支付，请修改。12345678910111213141516BOOL debug &#x3D; true;&#x2F;&#x2F; 调试if(debug){    &#x2F;&#x2F; 获取签名串    NSString *appKey &#x3D; @&quot;d139ae6fb0175e5659dce2a7c1fe84d5&quot;;&#x2F;&#x2F; 测试使用，正式环境请删除    NSString *sig_online &#x3D; [self getMySignatureWithAppId:appId                                             bargainorId:bargainorId                                                   nonce:nonce                                                 tokenId:tokenId                                              signingKey:appKey];     if(sig !&#x3D; sig_online){        UIAlertView *alert &#x3D; [[UIAlertView alloc] initWithTitle:@&quot;签名错误－纠正&quot; message:nil delegate:nil cancelButtonTitle:@&quot;OK&quot; otherButtonTitles:nil, nil];        [alert show];        sig &#x3D; sig_online;    }}1234567891011121314151617181920&#x2F;&#x2F; 生成签名串- (NSString *)getMySignatureWithAppId:(NSString *)appId                          bargainorId:(NSString *)bargainorId                                nonce:(NSString *)nonce                              tokenId:(NSString *)tokenId                           signingKey:(NSString *)signingKey{     &#x2F;&#x2F; 1. 将 appId,bargainorId,nonce,tokenId 拼成字符串    NSString *source &#x3D; [NSString stringWithFormat:@&quot;appId&#x3D;%@&amp;bargainorId&#x3D;%@&amp;nonce&#x3D;%@&amp;pubAcc&#x3D;&amp;tokenId&#x3D;%@&quot;,                        appId,bargainorId,nonce,tokenId];     &#x2F;&#x2F; 2. 将刚才拼好的字符串，用key来加密    NSData *signature &#x3D; [source dataUsingEncoding:NSUTF8StringEncoding];    NSData *signingData &#x3D; [[signingKey stringByAppendingString:@&quot;&amp;&quot;] dataUsingEncoding:NSUTF8StringEncoding];  &#x2F;&#x2F; 约定在key末尾拼一个‘&amp;’符号    NSData *digest &#x3D; [self hmacSha1:signature key:signingData];     &#x2F;&#x2F; 3. 将加密后的data以base64形式输出    NSString *signatureBase64 &#x3D; [digest base64Encoding];    return signatureBase64;}
+ </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF%E6%8C%87%E5%BC%95"><span class="nav-number">7.</span> <span class="nav-text">后端指引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%94%9F%E6%88%90%E8%AE%A2%E5%8D%95"><span class="nav-number">7.1.</span> <span class="nav-text">1.生成订单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%B0%83%E8%B5%B7%E6%94%AF%E4%BB%98"><span class="nav-number">7.2.</span> <span class="nav-text">2.调起支付</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-1%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-number">8.</span> <span class="nav-text">2.1代码示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">9.</span> <span class="nav-text">可能遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ios-build-error"><span class="nav-number">9.1.</span> <span class="nav-text">ios build error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cordova-%E6%96%B9%E6%B3%95%E6%8E%A7%E5%88%B6%E5%8F%B0%E9%9C%80%E8%A6%81%E5%9C%A8%E7%AC%AC%E4%BA%8C%E6%AC%A1%E8%B0%83%E7%94%A8%E6%97%B6%E6%89%8D%E4%BC%9A%E5%9B%9E%E8%B0%83%E6%96%B9%E6%B3%95-%E5%8F%AF%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B%E5%87%A0%E4%B8%AA%E6%96%B9%E6%B3%95"><span class="nav-number">9.2.</span> <span class="nav-text">cordova 方法控制台需要在第二次调用时才会回调方法,可测试一下几个方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xcode%E6%8F%92%E4%BB%B6%E5%A4%B1%E6%95%88"><span class="nav-number">9.3.</span> <span class="nav-text">xcode插件失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDK-%E2%80%98iOS-10-0%E2%80%99%E9%97%AE%E9%A2%98"><span class="nav-number">9.4.</span> <span class="nav-text">SDK ‘iOS 10.0’问题</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/23/%E8%85%BE%E8%AE%AF%E8%B4%A2%E4%BB%98%E9%80%9A%20%E7%A7%BB%E5%8A%A8QQ%E6%94%AF%E4%BB%98%20Cordova-plugin-qpay/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="腾讯财付通 移动QQ支付 Cordova-plugin-qpay | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          腾讯财付通 移动QQ支付 Cordova-plugin-qpay
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-12-23 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-23T00:00:00+08:00">2016-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="腾讯财付通-移动QQ支付-Cordova-plugin-qpay"><a href="#腾讯财付通-移动QQ支付-Cordova-plugin-qpay" class="headerlink" title="腾讯财付通 移动QQ支付 Cordova-plugin-qpay"></a>腾讯财付通 移动QQ支付 Cordova-plugin-qpay</h1><ul>
+<li><p>场景介绍<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=160">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=160</a></p>
+</li>
+<li><p>支付流程<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=201">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=201</a><br><img src="http://p.qpic.cn/qpaywikipic/0/qpaywikipic_582045e17a9263438/0">  </p>
+</li>
+<li><p>商户接入指引<br><a target="_blank" rel="noopener" href="http://kf.qq.com/faq/150107UZvUZB160405mumyaq.html">http://kf.qq.com/faq/150107UZvUZB160405mumyaq.html</a></p>
+</li>
+<li><p>普通商户如何接入APP支付？<code>★特别注意,如未填写将无法使用APP支付.且无法变更,只能重新申请</code><br><img src="http://file.service.qq.com/user-files/uploads/201611/1445a222fa15c23d2a688ee6041eea51.jpg"><br><a target="_blank" rel="noopener" href="http://kf.qq.com/faq/150107UZvUZB161117vyEBBR.html">http://kf.qq.com/faq/150107UZvUZB161117vyEBBR.html</a></p>
+</li>
+</ul>
+<hr>
+<h1 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin remove com.wosai.qpay</span><br></pre></td></tr></table></figure>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add https://github.com/liuxiang/cordova-plugin-qpay.git --variable qpayappid=YOUR_QPAY_APPID</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="官方测试账号（快速验证qpay-plugin）"><a href="#官方测试账号（快速验证qpay-plugin）" class="headerlink" title="官方测试账号（快速验证qpay plugin）"></a>官方测试账号（快速验证qpay plugin）</h1><h2 id="注：ios可调试到支付。-android因为没有官方的签名文件导致服务正确匹配sha1，会提示商户中找不到appid。-1-安装插件-获取QQ支付订单（orderCode-or-tokenId）访问demo地址可获得-http-fun-svip-qq-com-mqqopenpay-demo-php-2-程序调用-3-更新ios应用名config-xml-4-编译，xcode运行"><a href="#注：ios可调试到支付。-android因为没有官方的签名文件导致服务正确匹配sha1，会提示商户中找不到appid。-1-安装插件-获取QQ支付订单（orderCode-or-tokenId）访问demo地址可获得-http-fun-svip-qq-com-mqqopenpay-demo-php-2-程序调用-3-更新ios应用名config-xml-4-编译，xcode运行" class="headerlink" title="注：ios可调试到支付。 android因为没有官方的签名文件导致服务正确匹配sha1，会提示商户中找不到appid。- 1.安装插件- 获取QQ支付订单（orderCode or tokenId）访问demo地址可获得 http://fun.svip.qq.com/mqqopenpay_demo.php- 2.程序调用- 3.更新ios应用名config.xml- 4.编译，xcode运行
+ "></a>注：ios可调试到支付。 android因为没有官方的签名文件导致服务正确匹配sha1，会提示商户中找不到appid。<br>- 1.安装插件<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin add plugins-ws/com.wosai.qpay --variable qpayappid=100619284</span><br></pre></td></tr></table></figure><br><br>- 获取QQ支付订单（orderCode or tokenId）<br>访问demo地址可获得 <a target="_blank" rel="noopener" href="http://fun.svip.qq.com/mqqopenpay_demo.php">http://fun.svip.qq.com/mqqopenpay_demo.php</a><br><br>- 2.程序调用<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QPay.mqqPay(&#123;tokenId:&#x27;1V39f4eaf286fe3718731871b4fe96dc&#x27;&#125; ,function(res)&#123;console.log(&quot;res&quot;,res)&#125;,function(res)&#123;console.log(&quot;error&quot;,res)&#125;);</span><br></pre></td></tr></table></figure><br><br>- 3.更新ios应用名<code>config.xml</code><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;widget id=&quot;com.tencent.qqwallet.example&quot;</span><br></pre></td></tr></table></figure><br><br>- 4.编译，xcode运行<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ionic build ios</span><br></pre></td></tr></table></figure>
+ </h2><h1 id="能力"><a href="#能力" class="headerlink" title="能力"></a>能力</h1><ul>
+<li>是否安装QQ(限：android)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QPay.isMqqInstalled(function(res)&#123;console.log(res)&#125;);</span><br></pre></td></tr></table></figure></li>
+<li>是否支持移动QQ支付(限：android)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QPay.isMqqSupportPay(function(res)&#123;console.log(res)&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>获取订单（后端实现，插件留白）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QPay.getOrderno(function(res)&#123;console.log(&quot;res&quot;,res)&#125;,function(res)&#123;console.log(&quot;error&quot;,res)&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>★移动QQ支付（android | ios）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">QPay.mqqPay(&#123;</span><br><span class="line">  tokenId: &#x27;1V39f4eaf286fe3718731871b4fe96dc&#x27;,// 订单号</span><br><span class="line">  nonce: &#x27;&#x27;,// 随机数</span><br><span class="line">  bargainorId: &#x27;1234567890&#x27;,// 商户号</span><br><span class="line">  appKey: &#x27;88888888888888&#x27;,// appkey</span><br><span class="line">  sig: &#x27;&#x27;</span><br><span class="line">&#125;, function (res) &#123;</span><br><span class="line">  alert(&quot;res:&quot; + res)</span><br><span class="line">&#125;, function (res) &#123;</span><br><span class="line">  alert(&quot;error:&quot; + res)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li>建议先用官方测试账号验证（未填字段会在插件中补充-仅限测试）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QPay.mqqPay_demo(&#123;tokenId:&#x27;1V39f4eaf286fe3718731871b4fe96dc&#x27;&#125; ,function(res)&#123;console.log(&quot;res&quot;,res)&#125;,function(res)&#123;console.log(&quot;error&quot;,res)&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="签名纠正功能-后端签名-也可参考此代码段"><a href="#签名纠正功能-后端签名-也可参考此代码段" class="headerlink" title="签名纠正功能(后端签名,也可参考此代码段)"></a>签名纠正功能(后端签名,也可参考此代码段)</h1><h2 id="注：签名依赖密钥等敏感信息，建议后台进行。插件提供此功能，仅用于后台签名校验。上线请关闭debug-false-android-见qpay-java注：APP-KEY默认填写了访问示例使用的app-key-调试自由app支付，请修改。-ios-见qpay-m注：APP-KEY默认填写了访问示例使用的app-key-调试自由app支付，请修改。"><a href="#注：签名依赖密钥等敏感信息，建议后台进行。插件提供此功能，仅用于后台签名校验。上线请关闭debug-false-android-见qpay-java注：APP-KEY默认填写了访问示例使用的app-key-调试自由app支付，请修改。-ios-见qpay-m注：APP-KEY默认填写了访问示例使用的app-key-调试自由app支付，请修改。" class="headerlink" title="注：签名依赖密钥等敏感信息，建议后台进行。插件提供此功能，仅用于后台签名校验。上线请关闭debug = false## android 见qpay.java注：APP_KEY默认填写了访问示例使用的app_key. 调试自由app支付，请修改。## ios 见qpay.m注：APP_KEY默认填写了访问示例使用的app_key. 调试自由app支付，请修改。
+ "></a>注：签名依赖密钥等敏感信息，建议后台进行。插件提供此功能，仅用于后台签名校验。上线请关闭<code>debug = false</code><br>## android 见<code>qpay.java</code><br>注：APP_KEY默认填写了访问示例使用的app_key. 调试自由app支付，请修改。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">boolean debug = true;// 是否开启debug</span><br><span class="line">if (debug) &#123;</span><br><span class="line">  String sig_online = signApi(api);// 请手动更新APP_KEY</span><br><span class="line">  if (api.sig != sig_online) &#123;</span><br><span class="line">    System.out.println(&quot;签名错误-纠正&quot;);</span><br><span class="line">    api.sig = sig_online;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 签名步骤建议不要在app上执行，要放在服务器上执行.</span><br><span class="line">*/</span><br><span class="line">public String signApi(PayApi api) throws Exception &#123;</span><br><span class="line">  // 按key排序</span><br><span class="line">  StringBuilder stringBuilder = new StringBuilder();</span><br><span class="line">  stringBuilder.append(&quot;appId=&quot;).append(api.appId);</span><br><span class="line">  stringBuilder.append(&quot;&amp;bargainorId=&quot;).append(api.bargainorId);</span><br><span class="line">  stringBuilder.append(&quot;&amp;nonce=&quot;).append(api.nonce);</span><br><span class="line">  stringBuilder.append(&quot;&amp;pubAcc=&quot;).append(&quot;&quot;);</span><br><span class="line">  stringBuilder.append(&quot;&amp;tokenId=&quot;).append(api.tokenId);</span><br><span class="line"> </span><br><span class="line">  String APP_KEY = &quot;d139ae6fb0175e5659dce2a7c1fe84d5&quot;;// 调试使用,应该服务器保护</span><br><span class="line">  byte[] byteKey = (APP_KEY + &quot;&amp;&quot;).getBytes(&quot;UTF-8&quot;);</span><br><span class="line">  // 根据给定的字节数组构造一个密钥,第二参数指定一个密钥算法的名称</span><br><span class="line">  SecretKey secretKey = new SecretKeySpec(byteKey, &quot;HmacSHA1&quot;);</span><br><span class="line">  // 生成一个指定 Mac 算法 的 Mac 对象</span><br><span class="line">  Mac mac = Mac.getInstance(&quot;HmacSHA1&quot;);</span><br><span class="line">  // 用给定密钥初始化 Mac 对象</span><br><span class="line">  mac.init(secretKey);</span><br><span class="line">  byte[] byteSrc = stringBuilder.toString().getBytes(&quot;UTF-8&quot;);</span><br><span class="line">  // 完成 Mac 操作</span><br><span class="line">  byte[] dst = mac.doFinal(byteSrc);</span><br><span class="line"> </span><br><span class="line">  // Base64</span><br><span class="line">  // api.sig = Base64.encodeToString(dst, Base64.NO_WRAP);</span><br><span class="line">  // api.sigType = &quot;HMAC-SHA1&quot;;</span><br><span class="line">  return Base64.encodeToString(dst, Base64.NO_WRAP);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br>## ios 见<code>qpay.m</code><br>注：APP_KEY默认填写了访问示例使用的app_key. 调试自由app支付，请修改。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">BOOL debug = true;// 调试</span><br><span class="line">if(debug)&#123;</span><br><span class="line">    // 获取签名串</span><br><span class="line">    NSString *appKey = @&quot;d139ae6fb0175e5659dce2a7c1fe84d5&quot;;// 测试使用，正式环境请删除</span><br><span class="line">    NSString *sig_online = [self getMySignatureWithAppId:appId</span><br><span class="line">                                             bargainorId:bargainorId</span><br><span class="line">                                                   nonce:nonce</span><br><span class="line">                                                 tokenId:tokenId</span><br><span class="line">                                              signingKey:appKey];</span><br><span class="line"> </span><br><span class="line">    if(sig != sig_online)&#123;</span><br><span class="line">        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;签名错误－纠正&quot; message:nil delegate:nil cancelButtonTitle:@&quot;OK&quot; otherButtonTitles:nil, nil];</span><br><span class="line">        [alert show];</span><br><span class="line">        sig = sig_online;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 生成签名串</span><br><span class="line">- (NSString *)getMySignatureWithAppId:(NSString *)appId</span><br><span class="line">                          bargainorId:(NSString *)bargainorId</span><br><span class="line">                                nonce:(NSString *)nonce</span><br><span class="line">                              tokenId:(NSString *)tokenId</span><br><span class="line">                           signingKey:(NSString *)signingKey&#123;</span><br><span class="line"> </span><br><span class="line">    // 1. 将 appId,bargainorId,nonce,tokenId 拼成字符串</span><br><span class="line">    NSString *source = [NSString stringWithFormat:@&quot;appId=%@&amp;bargainorId=%@&amp;nonce=%@&amp;pubAcc=&amp;tokenId=%@&quot;,</span><br><span class="line">                        appId,bargainorId,nonce,tokenId];</span><br><span class="line"> </span><br><span class="line">    // 2. 将刚才拼好的字符串，用key来加密</span><br><span class="line">    NSData *signature = [source dataUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line">    NSData *signingData = [[signingKey stringByAppendingString:@&quot;&amp;&quot;] dataUsingEncoding:NSUTF8StringEncoding];  // 约定在key末尾拼一个‘&amp;’符号</span><br><span class="line">    NSData *digest = [self hmacSha1:signature key:signingData];</span><br><span class="line"> </span><br><span class="line">    // 3. 将加密后的data以base64形式输出</span><br><span class="line">    NSString *signatureBase64 = [digest base64Encoding];</span><br><span class="line">    return signatureBase64;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ </h2><h1 id="后端指引"><a href="#后端指引" class="headerlink" title="后端指引"></a>后端指引</h1><h2 id="1-生成订单"><a href="#1-生成订单" class="headerlink" title="1.生成订单"></a>1.生成订单</h2><ul>
+<li><p>参考统一下单接口<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=58">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=58</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;xml&gt;</span><br><span class="line">  &lt;appid&gt;1111223451&lt;/appid&gt; &lt;!-- 应用ID --&gt;</span><br><span class="line">  &lt;body&gt;123&lt;/body&gt; &lt;!-- 商品描述  --&gt;</span><br><span class="line">  &lt;device_info&gt;1234567890abc&lt;/device_info&gt; &lt;!-- 设备信息 --&gt;</span><br><span class="line">  &lt;limit_pay&gt;&lt;/limit_pay&gt; &lt;!-- 支付方式限制  --&gt;</span><br><span class="line">  &lt;mch_id&gt;1301278501&lt;/mch_id&gt; &lt;!-- 商户ID --&gt;</span><br><span class="line">  &lt;nonce_str&gt;fecf31a13be2309093db5df934848583&lt;/nonce_str&gt; &lt;!-- 随机字符串 --&gt;</span><br><span class="line">  &lt;notify_url&gt;https://qpay.qq.com/cgi-bin/pay/qpay_unified_order.cgi&lt;/notify_url&gt;&lt;!-- 支付结果通知地址 --&gt;</span><br><span class="line">  &lt;out_trade_no&gt;2016061235213702&lt;/out_trade_no&gt; &lt;!-- 商户订单号  --&gt;</span><br><span class="line">  &lt;sign&gt;f0c328d362858713b66feafb802615d8&lt;/sign&gt;&lt;!-- 统一下单签名 --&gt;</span><br><span class="line">  &lt;spbill_create_ip&gt;10.123.9.102&lt;/spbill_create_ip&gt; &lt;!-- 终端ip --&gt;</span><br><span class="line">  &lt;total_fee&gt;1&lt;/total_fee&gt; &lt;!-- 价格  --&gt;</span><br><span class="line">  &lt;trade_type&gt;NATIVE&lt;/trade_type&gt; &lt;!-- 支付场景  --&gt;</span><br><span class="line">&lt;/xml&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>签名规范<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=57">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=57</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">假设传送的参数如下：</span><br><span class="line">appid： d930ea5d5a258f4f</span><br><span class="line">mch_id： 10000100</span><br><span class="line">device_info： 1000</span><br><span class="line">body： test</span><br><span class="line">nonce_str： ibuaiVcKdpRxkhJA</span><br><span class="line"> </span><br><span class="line">第一步：对参数按照key=value的格式，并按照参数名ASCII字典序排序如下：</span><br><span class="line">stringA=&quot;appid=d930ea5d5a258f4f&amp;body=test&amp;device_info=1000&amp;mch_id=10000100&amp;nonce_str=ibuaiVcKdpRxkhJA&quot;;</span><br><span class="line"> </span><br><span class="line">第二步：拼接API密钥：</span><br><span class="line">stringSignTemp=&quot;stringA&amp;key=192006250b4c09247ec02edce69f6a2d&quot;</span><br><span class="line">sign=MD5(stringSignTemp).toUpperCase()=&quot;9A0A8659F005D6984697E2CA0A9CF3B7&quot;</span><br><span class="line"> </span><br><span class="line">最终得到最终发送的数据：</span><br><span class="line">&lt;xml&gt;</span><br><span class="line">&lt;appid&gt;d930ea5d5a258f4f&lt;/appid&gt;</span><br><span class="line">&lt;mch_id&gt;10000100&lt;/mch_id&gt;</span><br><span class="line">&lt;device_info&gt;1000&lt;device_info&gt;</span><br><span class="line">&lt;body&gt;test&lt;/body&gt;</span><br><span class="line">&lt;nonce_str&gt;ibuaiVcKdpRxkhJA&lt;/nonce_str&gt;</span><br><span class="line">&lt;sign&gt;9A0A8659F005D6984697E2CA0A9CF3B7&lt;/sign&gt;</span><br><span class="line">&lt;xml&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>API密钥<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/account/api_cert.shtml">https://qpay.qq.com/account/api_cert.shtml</a></p>
+<!--
+-->
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-12-23/82075208-file_1482463058867_b57.png"></p>
+</li>
+</ul>
+<h2 id="2-调起支付"><a href="#2-调起支付" class="headerlink" title="2.调起支付"></a>2.调起支付</h2><ul>
+<li><p>android<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=165">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=165</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">（1）初始化PayApi，并将数据填写完整：</span><br><span class="line">PayApi api = new PayApi();</span><br><span class="line">api.appId = APP_ID; // 在http://open.qq.com注册的AppId,参与支付签名，签名关键字key为appId</span><br><span class="line">api.serialNumber = ...; // 支付序号,用于标识此次支付</span><br><span class="line">api.callbackScheme = ...; // QQ钱包支付结果回调给urlscheme为callbackScheme的activity.，参看后续的“支付回调结果处理”</span><br><span class="line">api.tokenId = ...; // QQ钱包支付生成的token_id</span><br><span class="line">api.pubAcc = ...; // 手Q公众帐号id.参与支付签名，签名关键字key为pubAcc</span><br><span class="line">api.pubAccHint = ...; // 支付完成页面，展示给用户的提示语：提醒关注公众帐号</span><br><span class="line">api.nonce = ...; // 随机字段串，每次支付时都要不一样.参与支付签名，签名关键字key为nonce</span><br><span class="line">api.timeStamp = ...; // 时间戳，为1970年1月1日00:00到请求发起时间的秒数</span><br><span class="line">api.bargainorId = ...; // 商户号.参与支付签名，签名关键字key为bargainorId</span><br><span class="line">api.sig = ...; // 商户Server下发的数字签名，生成的签名串，参看“数字签名”</span><br><span class="line">api.sigType = &quot;HMAC-SHA1&quot;; // 签名时，使用的加密方式，默认为&quot;HMAC-SHA1&quot;</span><br><span class="line"> </span><br><span class="line">（2）在启动QQ钱包支付前，判断一下数据是否完整，再启动QQ钱包支付：</span><br><span class="line">if (api.checkParams()) &#123;</span><br><span class="line">    openApi.execApi(api);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cordova plugin：com.wosai.qpay</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">QPay.mqqPay(&#123;</span><br><span class="line">  tokenId: &#x27;1V39f4eaf286fe3718731871b4fe96dc&#x27;,// 订单号</span><br><span class="line">  nonce: &#x27;&#x27;,// 随机数</span><br><span class="line">  bargainorId: &#x27;1424912901&#x27;,// 商户号</span><br><span class="line">  appKey: &#x27;CuWbc7F0XrTpnHBa&#x27;,// appkey</span><br><span class="line">  sig: &#x27;&#x27;</span><br><span class="line">&#125;, function (res) &#123;</span><br><span class="line">  alert(&quot;res:&quot; + res)</span><br><span class="line">&#125;, function (res) &#123;</span><br><span class="line">  alert(&quot;error:&quot; + res)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>APP调用QQ钱包支付-签名规范<br><a target="_blank" rel="noopener" href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=165">https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&amp;docid=165</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">数字签名</span><br><span class="line"> </span><br><span class="line">为了保障商户利益与安全，商户App调用QQ钱包支付时启用另一套签名机制。该签名机制与“商户后台与QQ钱包支付后台的签名机制”是不同的。</span><br><span class="line"> </span><br><span class="line">1、源串构造方法</span><br><span class="line">（1）将需要参与签名的所有参数按key进行字典升序排列。</span><br><span class="line">（2）将第1步中排序后的参数(key=value)用&amp;拼接起来；</span><br><span class="line">（3）key中存在大小写字母，保持大小写字母的存在。不要将key进行统一转换为大写或小写操作；</span><br><span class="line">（4）如果value为空, 生成格式为“key=”，这点与后台之间签名方法是不一样的；</span><br><span class="line">（5）签名原始串中，字段名和字段值都采用原始值，不进行URL Encode。</span><br><span class="line"> </span><br><span class="line">举例：</span><br><span class="line">调用某个接口，接口有如下字段：</span><br><span class="line">appId、nonce、tokenId、pubAcc、bargainorId</span><br><span class="line"> </span><br><span class="line">实际调用接口时，各字段的值：</span><br><span class="line">appId=100619284、nonce=ksjfwierwfjk、tokenId=1000000002、pubAcc=、bargainorId=1900000109</span><br><span class="line"> </span><br><span class="line">正确的签名原始串是：</span><br><span class="line">appId=100619284&amp;bargainorId=1900000109&amp;nonce=ksjfwierwfjk&amp;pubAcc=&amp;tokenId=1000000002</span><br><span class="line"> </span><br><span class="line">常见的错误有：</span><br><span class="line">appId=100619284&amp;bargainorId=1900000109&amp;nonce=ksjfwierwfjk&amp;tokenId=1000000002</span><br><span class="line">appid=100619284&amp;bargainorid=1900000109&amp;nonce=ksjfwierwfjk&amp;pubacc=&amp;tokenid=1000000002</span><br><span class="line">appId=100619284&amp;nonce=ksjfwierwfjk&amp;tokenId=1000000002&amp;pubAcc=&amp;bargainorId=1900000109</span><br><span class="line"> </span><br><span class="line">2、 密钥构造方法</span><br><span class="line">（1）在http://open.qq.com申请appId，并获得appKey；</span><br><span class="line">（2）构造到密钥的方式：在应用的appkey末尾加上一个字符的“&amp;”，即appkey&amp;。</span><br><span class="line"> </span><br><span class="line">示例：</span><br><span class="line">appkey 值为 d139ae6fb0175e5659dce2a7c1fe84d5</span><br><span class="line">正确的密钥为：d139ae6fb0175e5659dce2a7c1fe84d5&amp;</span><br><span class="line"> </span><br><span class="line">3、 生成签名值方法</span><br><span class="line">（1）使用HMAC-SHA1加密算法，使用”密钥构造方法“中得到的密钥对“源串构造方法”中得到的源串进行加密（注：一般程序语言中会内置HMAC-SHA1加密算法的函数，例如PHP5.1.2之后的版本可直接调用hash_hmac函数）；</span><br><span class="line">（2）然后将加密后的字符串进行Base64编码（注：一般程序语言中会内置Base64编码函数，例如PHP中可直接调用 base64_encode() 函数）；</span><br><span class="line">（3）最后得到的签名值sig结果如下：</span><br><span class="line">c6xXw0tNABhOMc869h1bfxTp9Mk=</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="2-1代码示例"><a href="#2-1代码示例" class="headerlink" title="2.1代码示例"></a>2.1代码示例</h1><ul>
+<li>android<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 签名步骤建议不要在app上执行，要放在服务器上执行.</span><br><span class="line">*/</span><br><span class="line">public String signApi(PayApi api) throws Exception &#123;</span><br><span class="line">  // 按key排序</span><br><span class="line">  StringBuilder stringBuilder = new StringBuilder();</span><br><span class="line">  stringBuilder.append(&quot;appId=&quot;).append(api.appId);</span><br><span class="line">  stringBuilder.append(&quot;&amp;bargainorId=&quot;).append(api.bargainorId);</span><br><span class="line">  stringBuilder.append(&quot;&amp;nonce=&quot;).append(api.nonce);</span><br><span class="line">  stringBuilder.append(&quot;&amp;pubAcc=&quot;).append(&quot;&quot;);</span><br><span class="line">  stringBuilder.append(&quot;&amp;tokenId=&quot;).append(api.tokenId);</span><br><span class="line"> </span><br><span class="line">  String APP_KEY = &quot;d139ae6fb0175e5659dce2a7c1fe84d5&quot;;// 调试使用,应该服务器保护</span><br><span class="line">  byte[] byteKey = (APP_KEY + &quot;&amp;&quot;).getBytes(&quot;UTF-8&quot;);</span><br><span class="line">  // 根据给定的字节数组构造一个密钥,第二参数指定一个密钥算法的名称</span><br><span class="line">  SecretKey secretKey = new SecretKeySpec(byteKey, &quot;HmacSHA1&quot;);</span><br><span class="line">  // 生成一个指定 Mac 算法 的 Mac 对象</span><br><span class="line">  Mac mac = Mac.getInstance(&quot;HmacSHA1&quot;);</span><br><span class="line">  // 用给定密钥初始化 Mac 对象</span><br><span class="line">  mac.init(secretKey);</span><br><span class="line">  byte[] byteSrc = stringBuilder.toString().getBytes(&quot;UTF-8&quot;);</span><br><span class="line">  // 完成 Mac 操作</span><br><span class="line">  byte[] dst = mac.doFinal(byteSrc);</span><br><span class="line"> </span><br><span class="line">  // Base64</span><br><span class="line">  // api.sig = Base64.encodeToString(dst, Base64.NO_WRAP);</span><br><span class="line">  // api.sigType = &quot;HMAC-SHA1&quot;;</span><br><span class="line">  return Base64.encodeToString(dst, Base64.NO_WRAP);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>ios<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 生成签名串</span><br><span class="line">- (NSString *)getMySignatureWithAppId:(NSString *)appId</span><br><span class="line">                          bargainorId:(NSString *)bargainorId</span><br><span class="line">                                nonce:(NSString *)nonce</span><br><span class="line">                              tokenId:(NSString *)tokenId</span><br><span class="line">                           signingKey:(NSString *)signingKey&#123;</span><br><span class="line"> </span><br><span class="line">    // 1. 将 appId,bargainorId,nonce,tokenId 拼成字符串</span><br><span class="line">    NSString *source = [NSString stringWithFormat:@&quot;appId=%@&amp;bargainorId=%@&amp;nonce=%@&amp;pubAcc=&amp;tokenId=%@&quot;,</span><br><span class="line">                        appId,bargainorId,nonce,tokenId];</span><br><span class="line"> </span><br><span class="line">    // 2. 将刚才拼好的字符串，用key来加密</span><br><span class="line">    NSData *signature = [source dataUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line">    NSData *signingData = [[signingKey stringByAppendingString:@&quot;&amp;&quot;] dataUsingEncoding:NSUTF8StringEncoding];  // 约定在key末尾拼一个‘&amp;’符号</span><br><span class="line">    NSData *digest = [self hmacSha1:signature key:signingData];</span><br><span class="line"> </span><br><span class="line">    // 3. 将加密后的data以base64形式输出</span><br><span class="line">    NSString *signatureBase64 = [digest base64Encoding];</span><br><span class="line">    return signatureBase64;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h1><h2 id="ios-build-error"><a href="#ios-build-error" class="headerlink" title="ios build error"></a>ios build error</h2><ul>
+<li>错误<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Library not found for -lcrt1.3.1.o</span><br></pre></td></tr></table></figure></li>
+<li>解决<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deployment target from ios5.0 then change it to ios6.0 or later</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="cordova-方法控制台需要在第二次调用时才会回调方法-可测试一下几个方法"><a href="#cordova-方法控制台需要在第二次调用时才会回调方法-可测试一下几个方法" class="headerlink" title="cordova 方法控制台需要在第二次调用时才会回调方法,可测试一下几个方法"></a>cordova 方法控制台需要在第二次调用时才会回调方法,可测试一下几个方法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Wechat.isInstalled(function(res)&#123;console.log(&quot;res&quot;,res)&#125;,function(res)&#123;console.log(&quot;error&quot;,res)&#125;)</span><br><span class="line">YCQQ.checkClientInstalled(function(res)&#123;console.log(&quot;res&quot;,res)&#125;,function(res)&#123;console.log(&quot;error&quot;,res)&#125;)</span><br><span class="line"> </span><br><span class="line">QPay.getOrderno(function(res)&#123;console.log(&quot;res&quot;,res)&#125;,function(res)&#123;console.log(&quot;error&quot;,res)&#125;)</span><br><span class="line">QPay.mqqPay(&#123;tokenId:&#x27;1V39f4eaf286fe3718731871b4fe96dc&#x27;&#125; ,function(res)&#123;console.log(&quot;res&quot;,res)&#125;,function(res)&#123;console.log(&quot;error&quot;,res)&#125;);</span><br></pre></td></tr></table></figure>
+<p>注:经测试,代码调用不会出现首次首次失效的情况</p>
+<h2 id="xcode插件失效"><a href="#xcode插件失效" class="headerlink" title="xcode插件失效"></a>xcode插件失效</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2016-12-06 17:15:03.982 xcodebuild[9374:245800] [MT] PluginLoading: Required plug-in compatibility UUID 8A66E736-A720-4B3C-92F1-33D9962C69DF for plug-in at path &#x27;~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/Unity4XC.xcplugin&#x27; not present in DVTPlugInCompatibilityUUIDs</span><br><span class="line">Build settings from command line:</span><br><span class="line">    ARCHS = armv7 armv7s arm64</span><br><span class="line">    CONFIGURATION_BUILD_DIR = /Users/wosai/Desktop/work/hybrid Dev/sxb_physics/platforms/ios/build/device</span><br><span class="line">    SDKROOT = iphoneos10.0</span><br><span class="line">    SHARED_PRECOMPS_DIR = /Users/wosai/Desktop/work/hybrid Dev/sxb_physics/platforms/ios/build/sharedpch</span><br><span class="line">    VALID_ARCHS = armv7 armv7s arm64</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>处理办法1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://raw.githubusercontent.com/ForkPanda/RescueXcodePlug-ins/master/RescueXcode.sh | sh</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/35110910/xcode-7-pluginloading-required-plug-in-compatibility-uuid">http://stackoverflow.com/questions/35110910/xcode-7-pluginloading-required-plug-in-compatibility-uuid</a></p>
+</li>
+<li><p>处理办法2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/20732327/xcode-5-required-plug-in-not-present-in-dvtplugincompatibilityuuids">http://stackoverflow.com/questions/20732327/xcode-5-required-plug-in-not-present-in-dvtplugincompatibilityuuids</a></p>
+</li>
+<li><p>处理办法3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I&#123;&#125; defaults write &#123;&#125; DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID`</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://joeshang.github.io/2015/04/10/fix-xcode-upgrade-plugin-invalid/">http://joeshang.github.io/2015/04/10/fix-xcode-upgrade-plugin-invalid/</a></p>
+</li>
+</ul>
+<h2 id="SDK-‘iOS-10-0’问题"><a href="#SDK-‘iOS-10-0’问题" class="headerlink" title="SDK ‘iOS 10.0’问题"></a>SDK ‘iOS 10.0’问题</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Check dependencies</span><br><span class="line">Signing for &quot;赛学霸物理&quot; requires a development team. Select a development team in the project editor.</span><br><span class="line">Code signing is required for product type &#x27;Application&#x27; in SDK &#x27;iOS 10.0&#x27;</span><br><span class="line"> </span><br><span class="line">** BUILD FAILED **</span><br></pre></td></tr></table></figure>
+<ul>
+<li>解决办法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">打开xcode,General中勾选:Automatically manage signing</span><br></pre></td></tr></table></figure>
+<a target="_blank" rel="noopener" href="http://blog.csdn.net/h643342713/article/details/52728782">http://blog.csdn.net/h643342713/article/details/52728782</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Cordova-plugin-qpay/" rel="tag"># Cordova-plugin-qpay</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/12/21/Read-tencent-biography/" rel="prev" title="读《腾讯传》">
+                  <i class="fa fa-angle-left"></i> 读《腾讯传》
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/12/23/%E5%89%8D%E7%AB%AF%E6%A8%A1%E6%9D%BF%E5%BA%93/" rel="next" title="前端模板库">
+                  前端模板库 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

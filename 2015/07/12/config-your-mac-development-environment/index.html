@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Mac是目前大多数开发者们首选的开发机器，下面就让我们一起来配置你的Mac开发环境吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="配置你的Mac开发环境">
+<meta property="og:url" content="https://www.sovdating.com/2015/07/12/config-your-mac-development-environment/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="Mac是目前大多数开发者们首选的开发机器，下面就让我们一起来配置你的Mac开发环境吧。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2015-07-12T15:44:23.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:14:31.687Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="mac">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2015/07/12/config-your-mac-development-environment/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2015/07/12/config-your-mac-development-environment/","path":"2015/07/12/config-your-mac-development-environment/","title":"配置你的Mac开发环境"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>配置你的Mac开发环境 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Xcode"><span class="nav-number">1.</span> <span class="nav-text">Xcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#homebrew-homebrew-cask"><span class="nav-number">2.</span> <span class="nav-text">homebrew &amp;&amp; homebrew-cask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iTerm2"><span class="nav-number">3.</span> <span class="nav-text">iTerm2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zsh"><span class="nav-number">4.</span> <span class="nav-text">Zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tmux"><span class="nav-number">5.</span> <span class="nav-text">tmux</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2015/07/12/config-your-mac-development-environment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="配置你的Mac开发环境 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          配置你的Mac开发环境
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-07-12 23:44:23" itemprop="dateCreated datePublished" datetime="2015-07-12T23:44:23+08:00">2015-07-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:14:31" itemprop="dateModified" datetime="2024-01-24T10:14:31+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><code>Mac</code>是目前大多数开发者们首选的开发机器，下面就让我们一起来配置你的Mac开发环境吧。</p>
+<span id="more"></span>
+
+<h2 id="Xcode"><a href="#Xcode" class="headerlink" title="Xcode"></a>Xcode</h2><p>如果你使用<code>Mac</code>做开发，<code>Xcode</code>是必不可少的，不管你是不是做<code>ios/osx</code>开发，你可能都需要安装<code>Xcode</code>，因为它会提供一些基础的环境，如<code>svn</code>、<code>git</code>等，你只需要去<code>Mac App Store</code>安装就可以了。</p>
+<h2 id="homebrew-homebrew-cask"><a href="#homebrew-homebrew-cask" class="headerlink" title="homebrew &amp;&amp; homebrew-cask"></a>homebrew &amp;&amp; homebrew-cask</h2><p><code>Mac</code>下面的应用安装体验其实是挺糟糕的，特别是在天朝，<code>App Store</code>的打开速度实在是慢，不过好在有人发明了一个叫<code>homebrew</code>的东西，通过简单的命令就可以安装好你想要的应用程序，十分方便，而且通过<code>homebrew</code>安装应用还有一些其他的好处，比如说权限问题，或者说应用程序的备份恢复，都会变得十分方便。安装<code>homebrew</code>也是需要先安装<code>Xcode</code>的的哦。</p>
+<p>打开<code>homebrew</code>的官网<a target="_blank" rel="noopener" href="http://brew.sh/">http://brew.sh/</a>，我们会看到一条安装命令，通过这条命令我们就可以安装好<code>homebrew</code>了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<p>接下来我们就可以用命令来安装应用程序了，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install wget</span><br></pre></td></tr></table></figure>
+<p>但是还不够完美，因为<code>homebrew</code>本身可直接安装的应用程序不是很多，这时候我们就需要安装<code>homebrew-cask</code>h<a target="_blank" rel="noopener" href="http://caskroom.io/">ttp:&#x2F;&#x2F;caskroom.io&#x2F;</a>来完善下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install caskroom/cask/brew-cask</span><br></pre></td></tr></table></figure>
+<p>接下来我们就可以通过<code>brew cask</code>来安装更多的应用了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">brew cask install google-chrome</span><br><span class="line">brew cask install qq</span><br><span class="line">brew cask install alfred</span><br><span class="line">brew cask install nodejs</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><code>homebrew-cask</code>提供的应用程序很多，但是都是稳定版本的，如果想要安装测试版的应用，你还需要安装<code>homebrew-cask-versions</code><a target="_blank" rel="noopener" href="https://github.com/caskroom/homebrew-versions">https://github.com/caskroom/homebrew-versions</a>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew tap caskroom/versions</span><br></pre></td></tr></table></figure>
+<p>安装完成之后，你就可以安装测试版本的应用了，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew cask install google-chrome-canary</span><br><span class="line">brew cask install sublime-text3</span><br></pre></td></tr></table></figure>
+<p>如果你不太清楚你的应用名字，可以搜索，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask search baidu</span><br></pre></td></tr></table></figure>
+<p>或者你也可以去<a target="_blank" rel="noopener" href="http://caskroom.io/search">http://caskroom.io/search</a>搜索，或者去<a target="_blank" rel="noopener" href="https://github.com/caskroom/homebrew-cask/tree/master/Casks">https://github.com/caskroom/homebrew-cask/tree/master/Casks</a>这里查看。</p>
+<p>还有其它可以使用的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 检测homebrew环境</span><br><span class="line">brew doctor &amp;&amp; brew cask doctor</span><br><span class="line">// 更新 清理</span><br><span class="line">brew update &amp;&amp; brew upgrade brew-cask &amp;&amp; brew cleanup &amp;&amp; brew cask cleanup</span><br><span class="line">// 拆卸</span><br><span class="line">brew cask uninstall qq</span><br></pre></td></tr></table></figure>
+<p>详细的用法可以去这里：<a target="_blank" rel="noopener" href="https://github.com/caskroom/homebrew-cask/blob/master/USAGE.md">https://github.com/caskroom/homebrew-cask/blob/master/USAGE.md</a></p>
+<h2 id="iTerm2"><a href="#iTerm2" class="headerlink" title="iTerm2"></a>iTerm2</h2><p>系统自带的终端功能比较弱，因此我们安装功能更强大的<code>iterm2</code>来替代它，通过<code>brew-cask</code>安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install iterm2</span><br></pre></td></tr></table></figure>
+<p>你可以把<code>iTerm2</code>设置为默认终端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">（菜单栏）iTerm -&gt; Make iTerm2 Default Term</span><br></pre></td></tr></table></figure>
+<p>然后可以去这里选择一套配色方案：<a target="_blank" rel="noopener" href="http://iterm2colorschemes.com/">http://iterm2colorschemes.com/</a>（你也可以自己定制配色方案），下载完成后依次选择：<code>iTerm-&gt;Preferences-&gt;Profiles-&gt;Colors</code>，然后选择下面的<code>Load Presets-&gt;Import</code>，选择下载好的<code>schemes</code>文件夹里面的<code>.itermcolors</code>后缀的文件导入主题即可选择使用。</p>
+<p><code>iTerm2</code>有一些常用的快捷键：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">⌘ + n                   // 新建term窗口</span><br><span class="line">⌘ + t                   // 新建标签页</span><br><span class="line">⌘ + w                   // 关闭标签页或者窗口</span><br><span class="line">⌘ + d / ⌘ + shift + d   // 分屏显示</span><br><span class="line">⌘ + 数字 / ⌘ + &lt;- / -&gt;   // tab标签页之间切换</span><br><span class="line">⌘ + ;                   // 自动补全</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>还可以自定义一些快捷键，在<code>iTerm-&gt;Preferences-&gt;Keys</code>里面设置，你可以通过快捷键来显示&#x2F;隐藏<code>iTerm2</code>，还可以通过快捷键键入命令，如在<code>Global Shortcut Keys</code>里面增加一个自定义的快捷键，<code>Action</code>选择<code>Send Text</code>输入你想要通过快捷键输入的命令就可以了。</p>
+<h2 id="Zsh"><a href="#Zsh" class="headerlink" title="Zsh"></a>Zsh</h2><p><code>zsh</code>是个什么东东呢，它与<code>bash</code>到底有什么区别？有人如是说：</p>
+<blockquote>
+<p><code>zsh</code>是一种更强大的、被成为“终极”的<code>shell</code>，意思是<code>shell</code>能具备的功能它基本都提供了。<code>zsh</code>基本上是兼容<code>bash</code>，有些小细节不同，如果写脚本时需要注意。具体参见：<a target="_blank" rel="noopener" href="http://www.soimort.org/posts/163/">Zsh vs. Bash：不完全对比解析</a>。</p>
+</blockquote>
+<p><code>Mac</code>系统自带了<code>zsh</code>，一般不是最新版，所以我们通过<code>Homebrew</code>来安装最新的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install zsh</span><br></pre></td></tr></table></figure>
+<p>可通过<code>zsh --version</code>命令查看<code>zsh</code>的版本。</p>
+<p>我们需要把<code>bash</code>换成<code>zsh</code>：</p>
+<ul>
+<li>在&#x2F;etc&#x2F;shells文件末尾添加：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/zsh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>执行如下命令：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /usr/local/bin/zsh</span><br></pre></td></tr></table></figure>
+<ul>
+<li>最后记得将<code>~/.bash_prorile</code>或者<code>~/.profile</code>等配置拷贝到<code>~/.zshrc</code>文件中。</li>
+</ul>
+<p><code>zsh</code>功能强大，配置项也很多，不过好在有一个<a target="_blank" rel="noopener" href="http://ohmyz.sh/">oh-my-zsh</a>的东东，它是一个开源的<code>zsh</code>配置管理框架，提供了大量实用的功能，主题等。通过如下命令安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh</span><br></pre></td></tr></table></figure>
+<p>然后你就可以选择自己喜欢的<a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes">主题</a>。只需要修改<code>~/.zshrc</code>文件中的<code>ZSH_THEME</code>即可。</p>
+<p>还可以为一些命令配置别名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.zshrc</span><br></pre></td></tr></table></figure>
+<p>然后加入别名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> subl=<span class="string">&quot;open -a ~/Applications/Sublime\\ Text\\ 3.app&quot;</span></span><br></pre></td></tr></table></figure>
+<p>这样就可以通过命令<code>subl test.md</code>来打开文件了。</p>
+<h2 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h2><p>首先<code>tmux</code>到底是个什么玩意？按照<a target="_blank" rel="noopener" href="http://tmux.github.io/">tmux官网</a>翻译过来：</p>
+<blockquote>
+<p>TMUX是终端复用器</p>
+</blockquote>
+<p>简单来说就是一种管理窗口的程序，那么问题来了：为什么要用<code>tmux</code>，支持多标签？支持窗体内部Panel的分割？但是这些iTerm2都支持啊，那为何还要用<code>tmux</code>呢？看看下面的使用场景。</p>
+<blockquote>
+<p>公司服务器上调试程序，开了一堆窗口。出去吃了个饭，发现<code>ssh</code>超时了，<code>broken pipe</code>。重头开始…FK！如果你之前使用了<code>tmux</code>就不会有这样的问题，<code>attach</code>就能找回原来打开的那些窗口。</p>
+</blockquote>
+<p>首先安装<code>tmux</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install tmux</span><br></pre></td></tr></table></figure>
+<p>然后就可以在命令行操作<code>tmux</code>了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tmux                           // 创建一个默认会话，默认会话名从0开始</span><br><span class="line">tmux new-session -s <span class="built_in">test</span>       // 创建一个名字叫<span class="built_in">test</span>的会话</span><br><span class="line">tmux new-session -s <span class="built_in">test</span> -d    // 在后台创建<span class="built_in">test</span>会话</span><br><span class="line">tmux list-sessions / tmux <span class="built_in">ls</span>   // 列出所有正在运行的会话</span><br><span class="line">tmux a -t <span class="built_in">test</span>                 // 进入<span class="built_in">test</span>会话</span><br><span class="line">tmux kill-session -t <span class="built_in">test</span>      // 关闭<span class="built_in">test</span>会话</span><br><span class="line">tmux kill-server               // 关闭tmux服务，所有的会话将被关闭</span><br></pre></td></tr></table></figure>
+<p>下面是<code>tmux</code>的一些快捷键操作：</p>
+<p><code>Prefix-Command</code>前置操作：所有下面介绍的快捷键，都必须以前置操作开始。<code>tmux</code>默认的前置操作是<code>ctrl + b</code>。例如，我们想要新建一个窗体，就需要先在键盘上摁下<code>ctrl + b</code>，松开后再摁下<code>n</code>键。</p>
+<p>下面所有的<code>prefix</code>均代表<code>ctrl + b</code></p>
+<p><strong>Session相关操作</strong></p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th align="center">快捷键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>查看&#x2F;切换session</td>
+<td align="center"><code>prefix s</code></td>
+</tr>
+<tr>
+<td>离开Session</td>
+<td align="center"><code>prefix d</code></td>
+</tr>
+<tr>
+<td>重命名当前Session</td>
+<td align="center"><code>prefix $</code></td>
+</tr>
+</tbody></table>
+<p><strong>Window相关操作</strong></p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th align="center">快捷键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>切换到下一个窗格</td>
+<td align="center"><code>prefix o</code></td>
+</tr>
+<tr>
+<td>查看所有窗格的编号</td>
+<td align="center"><code>prefix q</code></td>
+</tr>
+<tr>
+<td>垂直拆分出一个新窗格</td>
+<td align="center"><code>prefix “</code></td>
+</tr>
+<tr>
+<td>水平拆分出一个新窗格</td>
+<td align="center"><code>prefix %</code></td>
+</tr>
+<tr>
+<td>暂时把一个窗体放到最大</td>
+<td align="center"><code>prefix z</code></td>
+</tr>
+</tbody></table>
+<p>默认的tmux风格比较朴素甚至有些丑陋。如果希望做一些美化和个性化配置的话，建议使用<a target="_blank" rel="noopener" href="https://github.com/gpakosz/.tmux">gpakosz的tmux配置</a>。它的本质是一个<code>tmux</code>配置文件，安装方式也很简单：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">rm</span> -rf .tmux</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/gpakosz/.tmux.git</span><br><span class="line"><span class="built_in">ln</span> -s .tmux/.tmux.conf</span><br><span class="line"><span class="built_in">cp</span> .tmux/.tmux.conf.local .</span><br></pre></td></tr></table></figure>
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mac/" rel="tag"># mac</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2015/07/07/Python-implementation-string-similarity-edit-distance/" rel="prev" title="Python实现字符串相似度-编辑距离">
+                  <i class="fa fa-angle-left"></i> Python实现字符串相似度-编辑距离
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2015/07/13/Python3-beginner-s-handbook-four/" rel="next" title="Python3入门手册之四">
+                  Python3入门手册之四 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

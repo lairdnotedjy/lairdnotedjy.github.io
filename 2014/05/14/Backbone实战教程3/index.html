@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前面的教程中我已经用Backbone做了一个简单的通讯录案例，隔了这么久也不想继续去解读那个例子的源代码了，所以这个教程就直接进入Backbone的源码解读部分了，希望看过此教程后大家会对Backbone更加熟悉。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Backbone实战教程（三）">
+<meta property="og:url" content="https://www.sovdating.com/2014/05/14/Backbone%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B3/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="前面的教程中我已经用Backbone做了一个简单的通讯录案例，隔了这么久也不想继续去解读那个例子的源代码了，所以这个教程就直接进入Backbone的源码解读部分了，希望看过此教程后大家会对Backbone更加熟悉。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2014-05-14T13:21:21.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:14:31.684Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="backbone">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2014/05/14/Backbone%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2014/05/14/Backbone%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B3/","path":"2014/05/14/Backbone实战教程3/","title":"Backbone实战教程（三）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Backbone实战教程（三） | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E5%85%A5%E5%8F%A3"><span class="nav-number">1.</span> <span class="nav-text">框架入口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2014/05/14/Backbone%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Backbone实战教程（三） | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Backbone实战教程（三）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2014-05-14 21:21:21" itemprop="dateCreated datePublished" datetime="2014-05-14T21:21:21+08:00">2014-05-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:14:31" itemprop="dateModified" datetime="2024-01-24T10:14:31+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>前面的教程中我已经用Backbone做了一个简单的通讯录案例，隔了这么久也不想继续去解读那个例子的源代码了，所以这个教程就直接进入Backbone的源码解读部分了，希望看过此教程后大家会对Backbone更加熟悉。</p>
+<span id="more"></span>
+
+
+<p>Backbone官网也有简单的英文文档对源代码介绍，地址在这里：<a target="_blank" rel="noopener" href="http://backbonejs.org/docs/backbone.html" title="backbone">BACKBONE.JS</a></p>
+<h2 id="框架入口"><a href="#框架入口" class="headerlink" title="框架入口"></a>框架入口</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params">root, factory</span>) &#123;</span><br><span class="line">	...</span><br><span class="line">&#125;(<span class="variable language_">this</span>, <span class="keyword">function</span>(<span class="params">root, Backbone, _, $</span>) &#123;</span><br><span class="line">	<span class="keyword">var</span> previousBackbone = root.<span class="property">Backbone</span>;</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">return</span> <span class="title class_">Backbone</span>;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+
+<p>将上面的代码继续简化将变成：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(</span><br><span class="line">	<span class="keyword">function</span>(<span class="params">root, factory</span>)&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;(<span class="variable language_">this</span>, <span class="keyword">function</span>(<span class="params">...</span>)&#123;&#125;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>到这里大家应该能够清晰的看出来了：</p>
+<p>首先用括号括起来定义一个作用域，在这个作用域里面有个立即执行的函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params">root, factory</span>)(<span class="params"><span class="variable language_">this</span>, <span class="keyword">function</span>()&#123;&#125;</span>));</span><br></pre></td></tr></table></figure>
+
+<p>接收两个参数<code>root</code>和<code>factory</code>，其中<code>root</code>是传过去的<code>this</code>，<code>this</code>一般是<code>window</code>对象（在node.js里面是global对象），<code>factory</code>是传过去的函数</p>
+<p>将这两个对象传过去后我们可以这样来简化代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(<span class="params"><span class="variable language_">window</span>, factory</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">&#x27;function&#x27;</span> &amp;&amp; define.<span class="property">amd</span>) &#123;</span><br><span class="line">		<span class="title function_">define</span>([<span class="string">&#x27;underscore&#x27;</span>, <span class="string">&#x27;jquery&#x27;</span>, <span class="string">&#x27;exports&#x27;</span>], <span class="keyword">function</span>(<span class="params">_, $, <span class="built_in">exports</span></span>) &#123;</span><br><span class="line">			<span class="variable language_">window</span>.<span class="property">Backbone</span> = <span class="title function_">factory</span>(<span class="variable language_">window</span>, <span class="built_in">exports</span>, _, $);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码是检测是否是通过AMD加载器加载的（如requirejs,seajs,…），如果是的话，加载underscore，jquery，exports，并在factory函数中传入这些变量，将factory的返回值赋值给window.Backbone，再简化一下的话是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">Backbone</span> = <span class="keyword">function</span>(<span class="params"><span class="variable language_">window</span>, <span class="built_in">exports</span>, _, $</span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> previousBackbone = root.<span class="property">Backbone</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">var</span> array = [];</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">return</span> <span class="title class_">Backbone</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>继续向下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">exports</span> !== <span class="string">&#x27;undefined&#x27;</span>) &#123;</span><br><span class="line"> 	<span class="keyword">var</span> _ = <span class="built_in">require</span>(<span class="string">&#x27;underscore&#x27;</span>);</span><br><span class="line">	<span class="title function_">factory</span>(root, <span class="built_in">exports</span>, _);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>检测遵循CommonJS规范的，如在Node.js加载不需要jquery。</p>
+<p>最后就是普通浏览器里面直接链接了。</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Backbone</span>.<span class="property">emulateHTTP</span> = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p>对于不支持REST方式的浏览器, 可以设置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Backbone</span>.<span class="property">emulateHTTP</span> = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<p>与服务器请求将以POST方式发送, 并在数据中加入_method参数标识操作名称, 同时也将发送X-HTTP-Method-Override头信息</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Backbone</span>.<span class="property">emulateJSON</span> = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p>对于不支持application&#x2F;json编码的浏览器, 可以设置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Backbone</span>.<span class="property">emulateJSON</span> = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<p>将请求类型设置为application&#x2F;x-www-form-urlencoded, 并将数据放置在model参数中实现兼容。</p>
+<p>今天到此，下次继续吧~~~</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/backbone/" rel="tag"># backbone</a>
+              <a href="/tags/javascript/" rel="tag"># javascript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2014/04/19/CSS%E9%87%8C%E5%86%85%E7%BD%AE%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8/" rel="prev" title="CSS里内置的计数器">
+                  <i class="fa fa-angle-left"></i> CSS里内置的计数器
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2014/05/27/%E4%B8%80%E8%B5%B7%E6%9D%A5%E5%81%9A%E5%8D%9A%E5%AE%A2%E4%B9%8B%E4%B8%BB%E9%A2%98/" rel="next" title="一起来做博客——主题和部署">
+                  一起来做博客——主题和部署 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

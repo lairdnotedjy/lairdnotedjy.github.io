@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Windows安装Redis首先Redis官方并不支持Windows，而Windows版的Redis是由MSOpenTech提供的支持，所以首先去下载一个发布版，我选择的是Redis-x64-3.2.100.zip压缩包，解压缩得到如下文件列表 1234567891011121314EventLog.dllRedis on Windows Release Notes.docxRedis on Wi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows安装Redis服务">
+<meta property="og:url" content="https://www.sovdating.com/2016/11/19/Windows-installs-the-redis-service/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="Windows安装Redis首先Redis官方并不支持Windows，而Windows版的Redis是由MSOpenTech提供的支持，所以首先去下载一个发布版，我选择的是Redis-x64-3.2.100.zip压缩包，解压缩得到如下文件列表 1234567891011121314EventLog.dllRedis on Windows Release Notes.docxRedis on Wi">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-11-19T00:52:32.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:24:42.756Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2016/11/19/Windows-installs-the-redis-service/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2016/11/19/Windows-installs-the-redis-service/","path":"2016/11/19/Windows-installs-the-redis-service/","title":"Windows安装Redis服务"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Windows安装Redis服务 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows%E5%AE%89%E8%A3%85Redis"><span class="nav-number">1.</span> <span class="nav-text">Windows安装Redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%93%8D%E4%BD%9C%E8%84%9A%E6%9C%AC"><span class="nav-number">2.</span> <span class="nav-text">快速操作脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8ERedis"><span class="nav-number">3.</span> <span class="nav-text">Windows配置主从Redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">主从测试</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/11/19/Windows-installs-the-redis-service/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Windows安装Redis服务 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Windows安装Redis服务
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-11-19 08:52:32" itemprop="dateCreated datePublished" datetime="2016-11-19T08:52:32+08:00">2016-11-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="Windows安装Redis"><a href="#Windows安装Redis" class="headerlink" title="Windows安装Redis"></a>Windows安装Redis</h3><p>首先<strong>Redis</strong>官方并不支持<strong>Windows</strong>，而<strong>Windows</strong>版的<strong>Redis</strong>是由<a target="_blank" rel="noopener" href="https://github.com/MSOpenTech"><strong>MSOpenTech</strong></a>提供的支持，所以首先去下载一个<a target="_blank" rel="noopener" href="https://github.com/MSOpenTech/redis/releases">发布版</a>，我选择的是<a target="_blank" rel="noopener" href="https://github.com/MSOpenTech/redis/releases/download/win-3.2.100/Redis-x64-3.2.100.zip"><strong>Redis-x64-3.2.100.zip</strong></a>压缩包，解压缩得到如下文件列表</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">EventLog.dll</span><br><span class="line">Redis on Windows Release Notes.docx</span><br><span class="line">Redis on Windows.docx</span><br><span class="line">redis.windows.conf</span><br><span class="line">redis.windows-service.conf</span><br><span class="line">redis-benchmark.exe</span><br><span class="line">redis-benchmark.pdb</span><br><span class="line">redis-check-aof.exe</span><br><span class="line">redis-check-aof.pdb</span><br><span class="line">redis-cli.exe</span><br><span class="line">redis-cli.pdb</span><br><span class="line">redis-server.exe</span><br><span class="line">redis-server.pdb</span><br><span class="line">Windows Service Documentation.docx</span><br></pre></td></tr></table></figure>
+<p>有了这些文件之后，就可以开始安装服务了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">D:\Redis-x64-3.2.100&gt;redis-server.exe  redis.windows.conf</span><br><span class="line">                _._</span><br><span class="line">           _.-``__ &#x27;&#x27;-._</span><br><span class="line">      _.-``    `.  `_.  &#x27;&#x27;-._           Redis 3.2.100 (00000000/0) 64 bit</span><br><span class="line">  .-`` .-```.  ```\/    _.,_ &#x27;&#x27;-._</span><br><span class="line"> (    &#x27;      ,       .-`  | `,    )     Running in standalone mode</span><br><span class="line"> |`-._`-...-` __...-.``-._|&#x27;` _.-&#x27;|     Port: 6379</span><br><span class="line"> |    `-._   `._    /     _.-&#x27;    |     PID: 33824</span><br><span class="line">  `-._    `-._  `-./  _.-&#x27;    _.-&#x27;</span><br><span class="line"> |`-._`-._    `-.__.-&#x27;    _.-&#x27;_.-&#x27;|</span><br><span class="line"> |    `-._`-._        _.-&#x27;_.-&#x27;    |           http://redis.io</span><br><span class="line">  `-._    `-._`-.__.-&#x27;_.-&#x27;    _.-&#x27;</span><br><span class="line"> |`-._`-._    `-.__.-&#x27;    _.-&#x27;_.-&#x27;|</span><br><span class="line"> |    `-._`-._        _.-&#x27;_.-&#x27;    |</span><br><span class="line">  `-._    `-._`-.__.-&#x27;_.-&#x27;    _.-&#x27;</span><br><span class="line">      `-._    `-.__.-&#x27;    _.-&#x27;</span><br><span class="line">          `-._        _.-&#x27;</span><br><span class="line">              `-.__.-&#x27;</span><br><span class="line"></span><br><span class="line">[33824] 10 Nov 15:32:54.884 # Server started, Redis version 3.2.100</span><br><span class="line">[33824] 10 Nov 15:32:54.885 * The server is now ready to accept connections on p</span><br><span class="line">ort 6379</span><br></pre></td></tr></table></figure>
+<p>在启动成功之后，可以使用自带的客户端工具进行测试。双击打开<strong>“redis-cli.exe”</strong>，如果成功连接上之后就可以进行<strong>set</strong>及<strong>get</strong>等操作了。如果需要帮助，可以输入<strong>help</strong>查看。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set &quot;key&quot; &quot;testValue&quot;</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get &quot;key&quot;</span><br><span class="line">&quot;testValue&quot;</span><br><span class="line">127.0.0.1:6379&gt; help</span><br><span class="line">redis-cli 3.2.100</span><br><span class="line">To get help about Redis commands type:</span><br><span class="line">      &quot;help @&lt;group&gt;&quot; to get a list of commands in &lt;group&gt;</span><br><span class="line">      &quot;help &lt;command&gt;&quot; for help on &lt;command&gt;</span><br><span class="line">      &quot;help &lt;tab&gt;&quot; to get a list of possible help topics</span><br><span class="line">      &quot;quit&quot; to exit</span><br><span class="line"></span><br><span class="line">To set redis-cli perferences:</span><br><span class="line">      &quot;:set hints&quot; enable online hints</span><br><span class="line">      &quot;:set nohints&quot; disable online hints</span><br><span class="line">Set your preferences in ~/.redisclirc</span><br></pre></td></tr></table></figure>
+
+<p>再输入<strong>help</strong>空格，然后敲<strong>tab</strong>键，可以像命令提示符一样显示候选项。通常不需要每次都使用<strong>cmd</strong>界面去操作，所以附上一些快速处理的脚本，注意在安装服务之前先关闭防火墙和杀毒软件，否则安装不成功。</p>
+<h3 id="快速操作脚本"><a href="#快速操作脚本" class="headerlink" title="快速操作脚本"></a>快速操作脚本</h3><p><strong>service-install.bat</strong></p>
+<blockquote>
+<p>redis-server –service-install redis.windows.conf –loglevel verbose<br>pause</p>
+</blockquote>
+<p>安装成功之后输出结果：</p>
+<blockquote>
+<p>D:\Redis-x64-3.2.100&gt;redis-server –service-install redis.windows.conf –logleve<br>l verbose<br>[13868] 26 Dec 09:39:58.364 # Granting read&#x2F;write access to ‘NT AUTHORITY\Networ<br>kService’ on: “D:\Redis-x64-3.2.100” “D:\Redis-x64-3.2.100&quot;<br>[13868] 26 Dec 09:39:58.365 # Redis successfully installed as a service.<br>D:\Redis-x64-3.2.100&gt;pause<br>请按任意键继续. . .</p>
+</blockquote>
+<p><strong>uninstall-service.bat</strong></p>
+<blockquote>
+<p>redis-server –service-uninstall<br>pause</p>
+</blockquote>
+<p>卸载成功之后输出结果：</p>
+<blockquote>
+<p>D:\Redis-x64-3.2.100&gt;redis-server –service-uninstall<br>[11368] 26 Dec 09:45:47.460 # Redis service successfully uninstalled.<br>D:\Redis-x64-3.2.100&gt;pause<br>请按任意键继续. . .</p>
+</blockquote>
+<p>注意在卸载服务之前，需要先去<strong>控制面板|管理工具|服务|停止Redis服务</strong>，然后才能卸载成功。</p>
+<p><strong>starting-service.bat</strong></p>
+<blockquote>
+<p>redis-server –service-start<br>pause</p>
+</blockquote>
+<p>服务启动成功之后输出：</p>
+<blockquote>
+<p>D:\Redis-x64-3.2.100&gt;redis-server –service-start<br>[20120] 26 Dec 10:12:30.946 # Redis service successfully started.<br>D:\Redis-x64-3.2.100&gt;pause<br>请按任意键继续. . .</p>
+</blockquote>
+<p><strong>stopping-service.bat</strong></p>
+<blockquote>
+<p>redis-server –service-stop<br>pause</p>
+</blockquote>
+<p>服务停止成功之后输出：</p>
+<blockquote>
+<p>D:\Redis-x64-3.2.100&gt;redis-server –service-stop<br>[19612] 26 Dec 10:19:27.974 # Redis service successfully stopped.<br>D:\Redis-x64-3.2.100&gt;pause<br>请按任意键继续. . .</p>
+</blockquote>
+<p>命名服务，一个可选的参数可以用来指定安装的服务的名称，这个参数可以跟在service-install、service-start、service-stop或service-uninstall命令的后面。比如以下命令会安装和启动三个独立的Redis实例</p>
+<blockquote>
+<p>redis-server –service-install –service-name redisService1 –port 10001<br>redis-server –service-start –service-name redisService1<br>redis-server –service-install –service-name redisService2 –port 10002<br>redis-server –service-start –service-name redisService2<br>redis-server –service-install –service-name redisService3 –port 10003<br>redis-server –service-start –service-name redisService3</p>
+</blockquote>
+<h3 id="Windows配置主从Redis"><a href="#Windows配置主从Redis" class="headerlink" title="Windows配置主从Redis"></a>Windows配置主从Redis</h3><p>先将Redis目录复制一份，命名为<strong>Redis-x64-3.2-Slave</strong>，并将原Redis目录命名为<strong>Redis-x64-3.2-Master</strong>，注释掉master目录redis.windows.conf文件的集群配置，或者将其设置为<strong>no</strong></p>
+<blockquote>
+<p><strong># cluster-enabled yes</strong><br><strong># 或者设置为no</strong><br><strong>cluster-enabled no</strong></p>
+</blockquote>
+<p>修改slave目录redis.windows.conf的端口号为6380，同样注释掉集群配置或设置为<strong>no</strong>，在slaveof后面添加master机器的IP和端口号</p>
+<blockquote>
+<p><strong>port 6380</strong><br><strong>slaveof 127.0.0.1 6379</strong><br><strong># cluster-enabled yes</strong><br><strong># 或者设置为no</strong><br><strong>cluster-enabled no</strong></p>
+</blockquote>
+<p>然后先启动Master，之后再启动Slave机器，输出如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">D:\Redis-x64-3.2-Master&gt;redis-server redis.windows.conf</span><br><span class="line">[20048] 26 Dec 13:04:49.064 * Node configuration loaded, I&#x27;m f1c7db8c98b01e9fbd5</span><br><span class="line">089b1231ca0e2d23a1766</span><br><span class="line">                _._</span><br><span class="line">           _.-``__ &#x27;&#x27;-._</span><br><span class="line">      _.-``    `.  `_.  &#x27;&#x27;-._           Redis 3.2.100 (00000000/0) 64 bit</span><br><span class="line">  .-`` .-```.  ```\/    _.,_ &#x27;&#x27;-._</span><br><span class="line"> (    &#x27;      ,       .-`  | `,    )     Running in cluster mode</span><br><span class="line"> |`-._`-...-` __...-.``-._|&#x27;` _.-&#x27;|     Port: 6379</span><br><span class="line"> |    `-._   `._    /     _.-&#x27;    |     PID: 20048</span><br><span class="line">  `-._    `-._  `-./  _.-&#x27;    _.-&#x27;</span><br><span class="line"> |`-._`-._    `-.__.-&#x27;    _.-&#x27;_.-&#x27;|</span><br><span class="line"> |    `-._`-._        _.-&#x27;_.-&#x27;    |           http://redis.io</span><br><span class="line">  `-._    `-._`-.__.-&#x27;_.-&#x27;    _.-&#x27;</span><br><span class="line"> |`-._`-._    `-.__.-&#x27;    _.-&#x27;_.-&#x27;|</span><br><span class="line"> |    `-._`-._        _.-&#x27;_.-&#x27;    |</span><br><span class="line">  `-._    `-._`-.__.-&#x27;_.-&#x27;    _.-&#x27;</span><br><span class="line">      `-._    `-.__.-&#x27;    _.-&#x27;</span><br><span class="line">          `-._        _.-&#x27;</span><br><span class="line">              `-.__.-&#x27;</span><br><span class="line"></span><br><span class="line">[20048] 26 Dec 13:04:49.066 # Server started, Redis version 3.2.100</span><br><span class="line">[20048] 26 Dec 13:04:49.067 * DB loaded from disk: 0.000 seconds</span><br><span class="line">[20048] 26 Dec 13:04:49.067 * The server is now ready to accept connections on p</span><br><span class="line">ort 6379</span><br><span class="line">[20048] 26 Dec 13:05:14.723 * Slave 127.0.0.1:6380 asks for synchronization</span><br><span class="line">[20048] 26 Dec 13:05:14.723 * Full resync requested by slave 127.0.0.1:6380</span><br><span class="line">[20048] 26 Dec 13:05:14.724 * Starting BGSAVE for SYNC with target: disk</span><br><span class="line">[20048] 26 Dec 13:05:14.726 * Background saving started by pid 26568</span><br><span class="line">[20048] 26 Dec 13:05:14.867 # fork operation complete</span><br><span class="line">[20048] 26 Dec 13:05:14.867 * Background saving terminated with success</span><br><span class="line">[20048] 26 Dec 13:05:14.869 * Synchronization with slave 127.0.0.1:6380 succeede</span><br><span class="line">d</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">D:\Redis-x64-3.2-Slave&gt;redis-server redis.windows.conf</span><br><span class="line">                _._</span><br><span class="line">           _.-``__ &#x27;&#x27;-._</span><br><span class="line">      _.-``    `.  `_.  &#x27;&#x27;-._           Redis 3.2.100 (00000000/0) 64 bit</span><br><span class="line">  .-`` .-```.  ```\/    _.,_ &#x27;&#x27;-._</span><br><span class="line"> (    &#x27;      ,       .-`  | `,    )     Running in standalone mode</span><br><span class="line"> |`-._`-...-` __...-.``-._|&#x27;` _.-&#x27;|     Port: 6380</span><br><span class="line"> |    `-._   `._    /     _.-&#x27;    |     PID: 21036</span><br><span class="line">  `-._    `-._  `-./  _.-&#x27;    _.-&#x27;</span><br><span class="line"> |`-._`-._    `-.__.-&#x27;    _.-&#x27;_.-&#x27;|</span><br><span class="line"> |    `-._`-._        _.-&#x27;_.-&#x27;    |           http://redis.io</span><br><span class="line">  `-._    `-._`-.__.-&#x27;_.-&#x27;    _.-&#x27;</span><br><span class="line"> |`-._`-._    `-.__.-&#x27;    _.-&#x27;_.-&#x27;|</span><br><span class="line"> |    `-._`-._        _.-&#x27;_.-&#x27;    |</span><br><span class="line">  `-._    `-._`-.__.-&#x27;_.-&#x27;    _.-&#x27;</span><br><span class="line">      `-._    `-.__.-&#x27;    _.-&#x27;</span><br><span class="line">          `-._        _.-&#x27;</span><br><span class="line">              `-.__.-&#x27;</span><br><span class="line"></span><br><span class="line">[21036] 26 Dec 13:05:14.720 # Server started, Redis version 3.2.100</span><br><span class="line">[21036] 26 Dec 13:05:14.721 * DB loaded from disk: 0.001 seconds</span><br><span class="line">[21036] 26 Dec 13:05:14.721 * The server is now ready to accept connections on p</span><br><span class="line">ort 6380</span><br><span class="line">[21036] 26 Dec 13:05:14.721 * Connecting to MASTER 127.0.0.1:6379</span><br><span class="line">[21036] 26 Dec 13:05:14.722 * MASTER &lt;-&gt; SLAVE sync started</span><br><span class="line">[21036] 26 Dec 13:05:14.722 * Non blocking connect for SYNC fired the event.</span><br><span class="line">[21036] 26 Dec 13:05:14.722 * Master replied to PING, replication can continue..</span><br><span class="line">.</span><br><span class="line">[21036] 26 Dec 13:05:14.722 * Partial resynchronization not possible (no cached</span><br><span class="line">master)</span><br><span class="line">[21036] 26 Dec 13:05:14.726 * Full resync from master: a326a4da325133537c655c16b</span><br><span class="line">3a6c2546620f816:1</span><br><span class="line">[21036] 26 Dec 13:05:14.868 * MASTER &lt;-&gt; SLAVE sync: receiving 75 bytes from mas</span><br><span class="line">ter</span><br><span class="line">[21036] 26 Dec 13:05:14.871 * MASTER &lt;-&gt; SLAVE sync: Flushing old data</span><br><span class="line">[21036] 26 Dec 13:05:14.871 * MASTER &lt;-&gt; SLAVE sync: Loading DB in memory</span><br><span class="line">[21036] 26 Dec 13:05:14.872 * MASTER &lt;-&gt; SLAVE sync: Finished with success</span><br></pre></td></tr></table></figure>
+<p>如果在配置中不小心启用了<strong>cluster-enabled yes</strong>的话，会抛<strong>slaveof directive not allowed in cluster mode</strong>和**(error) CLUSTERDOWN Hash slot not served**异常。</p>
+<h3 id="主从测试"><a href="#主从测试" class="headerlink" title="主从测试"></a>主从测试</h3><p>在主机中使用set，添加一个key之后</p>
+<blockquote>
+<p>D:\Redis-x64-3.2-Master&gt;redis-cli<br>127.0.0.1:6379&gt; set “mm” “mm in master”<br>OK</p>
+</blockquote>
+<p>在从机中使用get，得到这个key的value</p>
+<blockquote>
+<p>D:\Redis-x64-3.2-Slave&gt;redis-cli<br>127.0.0.1:6379&gt; get “mm”<br>“mm in master”</p>
+</blockquote>
+<p>反过来，在从机使用set之后也可以同步到master</p>
+<blockquote>
+<p>D:\Redis-x64-3.2-Slave&gt;redis-cli<br>127.0.0.1:6379&gt; set “kk” “mm in slave”<br>OK</p>
+</blockquote>
+<p>在主机get得到value</p>
+<blockquote>
+<p>D:\Redis-x64-3.2-Master&gt;redis-cli<br>127.0.0.1:6379&gt; get “kk”<br>“mm in slave”</p>
+</blockquote>
+<p>注意，redis的主从配置和集群配置方法是不同的，从机一般是只读的，主机用来进行写操作，一个主数据库可以有多个从数据库，而一个从数据库只能有一个主数据库。一般redis的持久化策略是：</p>
+<blockquote>
+<p>save 900 1    #当有一条Keys数据被改变时，900秒刷新到Disk一次<br>save 300 10   #当有10条Keys数据被改变时，300秒刷新到Disk一次<br>save 60 10000 #当有10000条Keys数据被改变时，60秒刷新到Disk一次</p>
+</blockquote>
+<p>Redis的主从复制是建立在内存快照的持久化基础上的，只要有Slave就一定会有内存快照发生。可以很明显的看到，RDB有它的不足，就是一旦数据库出现问题，那么我们的RDB文件中保存的数据并不是全新的。从上次RDB文件生成到Redis停机这段时间的数据全部丢掉了。</p>
+<p>AOF(Append-Only File)比RDB方式有更好的持久化性。由于在使用AOF持久化方式时，Redis会将每一个收到的写命令都通过Write函数追加到文件中，类似于MySQL的binlog。当Redis重启是会通过重新执行文件中保存的写命令来在内存中重建整个数据库的内容。对应的设置参数为：</p>
+<blockquote>
+<p>appendonly yes #启用AOF持久化方式<br>appendfilename appendonly.aof #AOF文件的名称，默认为appendonly.aof<br>appendfsync always #每次收到写命令就立即强制写入磁盘，是最有保证的完全的持久化，但速度也是最慢的，一般不推荐使用。<br>appendfsync everysec #每秒钟强制写入磁盘一次，在性能和持久化方面做了很好的折中，是受推荐的方式。<br>appendfsync no #完全依赖OS的写入，一般为30秒左右一次，性能最好但是持久化最没有保证，不被推荐。</p>
+</blockquote>
+<p>AOF的完全持久化方式同时也带来了另一个问题，持久化文件会变得越来越大。比如我们调用INCR test命令100次，文件中就必须保存全部的100条命令，但其实99条都是多余的。因为要恢复数据库的状态其实文件中保存一条SET test 100就够了。为了压缩AOF的持久化文件，Redis提供了bgrewriteaof命令。收到此命令后Redis将使用与快照类似的方式将内存中的数据以命令的方式保存到临时文件中，最后替换原来的文件，以此来实现控制AOF文件的增长。由于是模拟快照的过程，因此在重写AOF文件时并没有读取旧的AOF文件，而是将整个内存中的数据库内容用命令的方式重写了一个新的AOF文件。</p>
+<blockquote>
+<p>no-appendfsync-on-rewrite yes #在日志重写时，不进行命令追加操作，而只是将其放在缓冲区里，避免与命令的追加造成DISK IO上的冲突。<br>auto-aof-rewrite-percentage 100 #当前AOF文件大小是上次日志重写得到AOF文件大小的二倍时，自动启动新的日志重写过程。<br>auto-aof-rewrite-min-size 64mb #当前AOF文件启动新的日志重写过程的最小值，避免刚刚启动Reids时由于文件尺寸较小导致频繁的重写。</p>
+</blockquote>
+<p><strong>参考文献</strong><br>[1] <a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid-20682890-id-3603246.html">http://blog.chinaunix.net/uid-20682890-id-3603246.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/11/19/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%20ShadowSocks(%E5%85%8D%E8%B4%B9)/" rel="prev" title="科学上网 ShadowSocks(免费)">
+                  <i class="fa fa-angle-left"></i> 科学上网 ShadowSocks(免费)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/11/19/Read-scarcity-why-having-too-little-means-so-much/" rel="next" title="读《稀缺:我们是如何陷入贫穷与忙碌的》">
+                  读《稀缺:我们是如何陷入贫穷与忙碌的》 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

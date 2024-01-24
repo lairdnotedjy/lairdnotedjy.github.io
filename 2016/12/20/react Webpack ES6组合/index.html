@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Webpack介紹 | Webpack 中文指南http:&#x2F;&#x2F;webpackdoc.com&#x2F; 简介Webpack 是当下最热门的前端资源模块化管理和打包工具。它可以将许多松散的模块按照依赖和规则打包成符合生产环境部署的前端资源。还可以将按需加载的模块进行代码分隔，等到实际需要的时候再异步加载。通过 loader 的转换，任何形式的资源都可以视作模块，比如 CommonJs 模块、 AMD 模块、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react Webpack ES6组合">
+<meta property="og:url" content="https://www.sovdating.com/2016/12/20/react%20Webpack%20ES6%E7%BB%84%E5%90%88/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="Webpack介紹 | Webpack 中文指南http:&#x2F;&#x2F;webpackdoc.com&#x2F; 简介Webpack 是当下最热门的前端资源模块化管理和打包工具。它可以将许多松散的模块按照依赖和规则打包成符合生产环境部署的前端资源。还可以将按需加载的模块进行代码分隔，等到实际需要的时候再异步加载。通过 loader 的转换，任何形式的资源都可以视作模块，比如 CommonJs 模块、 AMD 模块、">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-12-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.096Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="webpack">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2016/12/20/react%20Webpack%20ES6%E7%BB%84%E5%90%88/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2016/12/20/react%20Webpack%20ES6%E7%BB%84%E5%90%88/","path":"2016/12/20/react Webpack ES6组合/","title":"react Webpack ES6组合"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>react Webpack ES6组合 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Webpack"><span class="nav-number">1.</span> <span class="nav-text">Webpack</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack%E7%AE%80%E5%8D%95%E7%82%B9%E6%9D%A5%E8%AF%B4%E5%B0%B1%E5%B0%B1%E6%98%AF%E4%B8%80%E4%B8%AA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8C%E6%89%80%E6%9C%89%E7%9A%84%E9%AD%94%E5%8A%9B%E9%83%BD%E6%98%AF%E5%9C%A8%E8%BF%99%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E4%B8%AD%E5%8F%91%E7%94%9F%E7%9A%84%E3%80%82-%E8%BF%99%E4%B8%AA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%BB%E8%A6%81%E5%88%86%E4%B8%BA%E4%B8%89%E5%A4%A7%E5%9D%97"><span class="nav-number">1.3.</span> <span class="nav-text">webpack简单点来说就就是一个配置文件，所有的魔力都是在这一个文件中发生的。 这个配置文件主要分为三大块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#generator-react-webpack%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">generator-react-webpack项目运行过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gulp%E5%92%8Cwebpack%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">Gulp和webpack的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gulp-webpack-demo"><span class="nav-number">4.</span> <span class="nav-text">gulp-webpack-demo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6-%E2%80%94%E2%80%94-gulp-Babel"><span class="nav-number">5.</span> <span class="nav-text">ES6 —— gulp+Babel</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6-%E2%80%94%E2%80%94-webpack-Babel"><span class="nav-number">6.</span> <span class="nav-text">ES6 —— webpack+Babel</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%BB%84%E5%90%88%E6%96%B9%E5%BC%8F"><span class="nav-number">7.</span> <span class="nav-text">常见组合方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%EF%BC%9AES6%EF%BC%88babel%EF%BC%89%E5%B8%B8%E8%A7%81%E7%BB%84%E5%90%88"><span class="nav-number">8.</span> <span class="nav-text">附：ES6（babel）常见组合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9C%A8%E7%BA%BF%E2%80%9D%E7%BC%96%E8%AF%91%E2%80%9D-%E6%A8%A1%E5%9D%97%E7%9A%84%E6%96%B9%E6%A1%88%EF%BC%88-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%8E%AF%E5%A2%83-%EF%BC%89"><span class="nav-number">8.1.</span> <span class="nav-text">一、在线”编译” 模块的方案（ 浏览器环境 ）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%A2%84%E7%BC%96%E8%AF%91%E6%A8%A1%E5%9D%97%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-number">8.2.</span> <span class="nav-text">二、预编译模块的方案</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/12/20/react%20Webpack%20ES6%E7%BB%84%E5%90%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="react Webpack ES6组合 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          react Webpack ES6组合
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-12-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-20T00:00:00+08:00">2016-12-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h1><p><code>介紹 | Webpack 中文指南</code><br><a target="_blank" rel="noopener" href="http://webpackdoc.com/">http://webpackdoc.com/</a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Webpack 是当下最热门的前端资源模块化管理和打包工具。它可以将许多松散的模块按照依赖和规则打包成符合生产环境部署的前端资源。还可以将按需加载的模块进行代码分隔，等到实际需要的时候再异步加载。通过 loader 的转换，任何形式的资源都可以视作模块，比如 CommonJs 模块、 AMD 模块、 ES6 模块、CSS、图片、 JSON、Coffeescript、 LESS 等。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p><code>使用示例</code> <a target="_blank" rel="noopener" href="http://webpackdoc.com/usage.html">http://webpackdoc.com/usage.html</a></p>
+<ul>
+<li><p>index.html</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- index.html --&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>entry.js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">document.write(&#x27;It works.&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>编译 entry.js 并打包到 bundle.js：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ webpack entry.js bundle.js</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>用浏览器打开 index.html 将会看到 It works.</p>
+</blockquote>
+</li>
+<li><p>接下来添加一个模块 module.js 并修改入口 entry.js</p>
+</li>
+<li><p>module.js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#x27;It works from module.js.&#x27;</span><br></pre></td></tr></table></figure></li>
+<li><p>entry.js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">document.write(&#x27;It works.&#x27;)</span><br><span class="line">document.write(require(&#x27;./module.js&#x27;)) // 添加模块</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>重新打包 <code>webpack entry.js bundle.js</code>后刷新页面看到变化 It works.It works from module.js.</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 id="webpack简单点来说就就是一个配置文件，所有的魔力都是在这一个文件中发生的。-这个配置文件主要分为三大块"><a href="#webpack简单点来说就就是一个配置文件，所有的魔力都是在这一个文件中发生的。-这个配置文件主要分为三大块" class="headerlink" title="webpack简单点来说就就是一个配置文件，所有的魔力都是在这一个文件中发生的。 这个配置文件主要分为三大块"></a>webpack简单点来说就就是一个配置文件，所有的魔力都是在这一个文件中发生的。 这个配置文件主要分为三大块</h2><ul>
+<li>entry 入口文件 让webpack用哪个文件作为项目的入口</li>
+<li>output 出口 让webpack把处理完成的文件放在哪里</li>
+<li>module 模块 要用什么不同的模块来处理各种类型的文件</li>
+</ul>
+<p><code>Webpack傻瓜式指南（一） - 前端外刊评论 - 知乎专栏</code><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/20367175?columnSlug=FrontendMagazine">https://zhuanlan.zhihu.com/p/20367175?columnSlug=FrontendMagazine</a></p>
+<p><code>Webpack傻瓜指南（二）开发和部署技巧 - 前端外刊评论 - 知乎专栏</code><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/20397902">https://zhuanlan.zhihu.com/p/20397902</a></p>
+<hr>
+<p><code>React+Webpack快速上手指南 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/418e48e0cef1">http://www.jianshu.com/p/418e48e0cef1</a></p>
+<p><code>Webpack 入门指迷 - 题叶, JiyinYiyong - SegmentFault</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000002551952">https://segmentfault.com/a/1190000002551952</a></p>
+<p><code>轻松入门React和Webpack - 说学逗唱 - SegmentFault</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000002767365">https://segmentfault.com/a/1190000002767365</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">执行打包</span><br><span class="line">如果通过npm install -g webpack方式安装webpack的话，可以通过命令行直接执行打包命令，比如这样：</span><br><span class="line"> </span><br><span class="line">$webpack --config webpack.config.js</span><br><span class="line">这样就会读取当前目录下的webpack.config.js作为配置文件执行打包操作</span><br><span class="line"> </span><br><span class="line">如果是通过gulp插件gulp-webpack，则可以在gulpfile中写上gulp任务：</span><br><span class="line"> </span><br><span class="line">var gulp = require(&#x27;gulp&#x27;);</span><br><span class="line">var webpack = require(&#x27;gulp-webpack&#x27;);</span><br><span class="line">var webpackConfig = require(&#x27;./webpack.config&#x27;);</span><br><span class="line">gulp.task(&quot;webpack&quot;, function() &#123;</span><br><span class="line">    return gulp</span><br><span class="line">        .src(&#x27;./&#x27;)</span><br><span class="line">        .pipe(webpack(webpackConfig))</span><br><span class="line">        .pipe(gulp.dest(&#x27;./build&#x27;));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="generator-react-webpack项目运行过程"><a href="#generator-react-webpack项目运行过程" class="headerlink" title="generator-react-webpack项目运行过程"></a><code>generator-react-webpack</code>项目运行过程</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>package.json</code> - <code>scripts</code> - <code>start</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;start&quot;: &quot;node server.js --env=dev&quot;,</span><br><span class="line">    &quot;test&quot;: &quot;karma start&quot;,</span><br><span class="line">    &quot;serve&quot;: &quot;node server.js --env=dev&quot;,</span><br><span class="line">    &quot;serve:dist&quot;: &quot;node server.js --env=dist&quot;,</span><br><span class="line">    &quot;dist&quot;: &quot;npm run copy &amp; webpack --env=dist&quot;,</span><br><span class="line">    &quot;copy&quot;: &quot;copyfiles -f ./src/index.html ./src/favicon.ico ./dist&quot;,</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></li>
+<li><p><code>server.js --env=dev</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">require(&#x27;core-js/fn/object/assign&#x27;);</span><br><span class="line">const webpack = require(&#x27;webpack&#x27;);</span><br><span class="line">const WebpackDevServer = require(&#x27;webpack-dev-server&#x27;);</span><br><span class="line">const config = require(&#x27;./webpack.config&#x27;);</span><br><span class="line">const open = require(&#x27;open&#x27;);</span><br><span class="line"> </span><br><span class="line">const compiler = webpack(config); // 实例化webpack</span><br><span class="line">new WebpackDevServer(compiler, config.devServer) // 启动服务</span><br></pre></td></tr></table></figure></li>
+<li><p><code>webpack.config.js</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const args = require(&#x27;minimist&#x27;)(process.argv.slice(2)); //  获取输入`dev`</span><br><span class="line">let config = require(path.join(__dirname, &#x27;cfg/&#x27; + validEnv));// 获取cfg模块 `cfg/dev`</span><br><span class="line"> </span><br><span class="line">module.exports = buildConfig(env);// 导出配置</span><br></pre></td></tr></table></figure></li>
+<li><p><code>cfg/dev.js</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">let baseConfig = require(&#x27;./base&#x27;);</span><br><span class="line">let defaultSettings = require(&#x27;./defaults&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 配置初始化(继承`baseConfig`)</span><br><span class="line">let config = Object.assign(&#123;&#125;, baseConfig, &#123;</span><br><span class="line">  entry: [  // 项目 入口</span><br><span class="line">    &#x27;webpack-dev-server/client?http://127.0.0.1:&#x27; + defaultSettings.port,</span><br><span class="line">    &#x27;webpack/hot/only-dev-server&#x27;,</span><br><span class="line">    &#x27;./src/index&#x27;</span><br><span class="line">  ],</span><br><span class="line">  cache: true,</span><br><span class="line">  devtool: &#x27;eval-source-map&#x27;,</span><br><span class="line">  plugins: [</span><br><span class="line">    new webpack.HotModuleReplacementPlugin(),</span><br><span class="line">    new webpack.NoErrorsPlugin(),</span><br><span class="line">    new BowerWebpackPlugin(&#123;</span><br><span class="line">      searchResolveModulesDirectories: false</span><br><span class="line">    &#125;)</span><br><span class="line">  ],</span><br><span class="line">  module: defaultSettings.getDefaultModules() // 项目module 模块</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// Add needed loaders to the defaults here</span><br><span class="line">config.module.loaders.push(&#123;</span><br><span class="line">  test: /\.(js|jsx)$/,</span><br><span class="line">  loader: &#x27;react-hot!babel-loader&#x27;, // hot热加载 &amp;  Babel能够将ES6代码转换成ES5</span><br><span class="line">  include: [].concat(</span><br><span class="line">    config.additionalPaths,</span><br><span class="line">    [ path.join(__dirname, &#x27;/../src&#x27;) ]</span><br><span class="line">  )</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">module.exports = config; // 导出配置</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p><code>cfg/ defaults.js </code>  项目module 模块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  srcPath: srcPath,</span><br><span class="line">  publicPath: &#x27;/assets/&#x27;,</span><br><span class="line">  port: dfltPort,</span><br><span class="line">  getDefaultModules: getDefaultModules // function</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>cfg/base.js</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  additionalPaths: additionalPaths,</span><br><span class="line">  port: defaultSettings.port,</span><br><span class="line">  debug: true, // 是否启用debug</span><br><span class="line">  devtool: &#x27;eval&#x27;,</span><br><span class="line">  output: &#123; // 项目出口</span><br><span class="line">    path: path.join(__dirname, &#x27;/../dist/assets&#x27;),</span><br><span class="line">    filename: &#x27;app.js&#x27;,</span><br><span class="line">    publicPath: defaultSettings.publicPath</span><br><span class="line">  &#125;,</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    contentBase: &#x27;./src/&#x27;,</span><br><span class="line">    historyApiFallback: true,</span><br><span class="line">    hot: true,// 是否支持热加载</span><br><span class="line">    port: defaultSettings.port,</span><br><span class="line">    publicPath: defaultSettings.publicPath,</span><br><span class="line">    noInfo: false</span><br><span class="line">  &#125;,</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    extensions: [&#x27;&#x27;, &#x27;.js&#x27;, &#x27;.jsx&#x27;],</span><br><span class="line">    alias: &#123;</span><br><span class="line">      actions: `$&#123;defaultSettings.srcPath&#125;/actions/`,</span><br><span class="line">      components: `$&#123;defaultSettings.srcPath&#125;/components/`,</span><br><span class="line">      sources: `$&#123;defaultSettings.srcPath&#125;/sources/`,</span><br><span class="line">      stores: `$&#123;defaultSettings.srcPath&#125;/stores/`,</span><br><span class="line">      styles: `$&#123;defaultSettings.srcPath&#125;/styles/`,</span><br><span class="line">      config: `$&#123;defaultSettings.srcPath&#125;/config/` + process.env.REACT_WEBPACK_ENV,</span><br><span class="line">      &#x27;react/lib/ReactMount&#x27;: &#x27;react-dom/lib/ReactMount&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="Gulp和webpack的区别"><a href="#Gulp和webpack的区别" class="headerlink" title="Gulp和webpack的区别"></a>Gulp和webpack的区别</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">背景： 最近收到很多童鞋的问题：gulp和webpack 什么关系，是一种东西吗？可以只用gulp，不用webpack吗 或者反过来？</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">基于此问： 我简单归结了一下区别和概念，让需要的同学阅读理解，从而不把时间浪费到这种模糊不清的选择问题上！</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">gulp是工具链、构建工具，可以配合各种插件做js压缩，css压缩，less编译 替代手工实现自动化工作</span><br><span class="line">1.构建工具</span><br><span class="line">2.自动化</span><br><span class="line">3.提高效率用</span><br><span class="line">webpack是文件打包工具，可以把项目的各种js文、css文件等打包合并成一个或多个文件，主要用于模块化方案，预编译模块的方案</span><br><span class="line">1.打包工具</span><br><span class="line">2.模块化识别</span><br><span class="line">3.编译模块代码方案用</span><br><span class="line">所以定义和用法上来说 都不是一种东西，无可比性 ，更不冲突！【当然，也有相似的功能，比如合并，区分，但各有各的优势】</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">基于此问： 来自知乎的一篇回答！够白话文了：</span><br><span class="line">怎么解释呢？因为 Gulp 和 browserify / webpack 不是一回事</span><br><span class="line">Gulp应该和Grunt比较，他们的区别我就不说了，说说用处吧。Gulp / Grunt 是一种工具，能够优化前端工作流程。比如自动刷新页面、combo、压缩css、js、编译less等等。简单来说，就是使用Gulp/Grunt，然后配置你需要的插件，就可以把以前需要手工做的事情让它帮你做了。</span><br><span class="line">说到 browserify / webpack ，那还要说到 seajs / requirejs 。这四个都是JS模块化的方案。其中seajs / require 是一种类型，browserify / webpack 是另一种类型。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">seajs / require : 是一种在线&quot;编译&quot; 模块的方案，相当于在页面上加载一个 CMD/AMD 解释器。这样浏览器就认识了 define、exports、module 这些东西。也就实现了模块化。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">browserify / webpack : 是一个预编译模块的方案，相比于上面 ，这个方案更加智能。没用过browserify，这里以webpack为例。首先，它是预编译的，不需要在浏览器中加载解释器。另外，你在本地直接写JS，不管是 AMD / CMD / ES6 风格的模块化，它都能认识，并且编译成浏览器认识的JS。这样就知道，Gulp是一个工具，而webpack等等是模块化方案。Gulp也可以配置seajs、requirejs甚至webpack的插件。</span><br></pre></td></tr></table></figure>
+<p><code>Gulp和webpack的区别，是一种工具吗？</code></p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/xllily_11/article/details/51782005">http://blog.csdn.net/xllily_11/article/details/51782005</a></p>
+<hr>
+<h1 id="gulp-webpack-demo"><a href="#gulp-webpack-demo" class="headerlink" title="gulp-webpack-demo"></a>gulp-webpack-demo</h1><p><code>gulp+webpack构建配置 - mask_天俊 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/maskmtj/archive/2016/07/21/5597307.html">http://www.cnblogs.com/maskmtj/archive/2016/07/21/5597307.html</a><br>项目github地址： <a target="_blank" rel="noopener" href="https://github.com/jokermask/gulp_webpack_demo">https://github.com/jokermask/gulp_webpack_demo</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">基本的需求：</span><br><span class="line">css：要能编译sass，要压缩，要能自己补前缀</span><br><span class="line"></span><br><span class="line">js：要压缩，要丑化（就是把变量名换成简单的字母，即省空间又不容易被看懂），要合并</span><br><span class="line"></span><br><span class="line">img： 要压缩</span><br><span class="line"></span><br><span class="line">html：可以引入文件（就解决一开始说的问题，多页面下共同的组件）</span><br><span class="line"></span><br><span class="line">gulp中的watch功能可以监听文件，通过livereload和gulp的监听来实现保存后自动构建并刷新页面十分带感</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">感觉gulp这些功能都蛮不错，但我其实还有一些需求没说，是关于js的</span><br><span class="line">1.模块化（避免命名冲突）</span><br><span class="line">2.要用es6（跟上潮流嘛）</span><br><span class="line">3.js能不能按需加载？比如说我有页面A和页面B，他们都依赖一个base.js，然后又分别各自依赖a.js和b.js，这种情况我用刚才的gulpfile打包以后合并出来的一个公共的js是将三个js都包括了，但显然页面B不需要a.js，所以当用户单独访问页面B的时候加载的js就显得多余了，就多费了流量啊，速度也会慢。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">上述的前两个gulp还是能解决，但是第三个问题好像并不好解决。。。在查找各方资料后我决定用webpack，所以就是其他css，html的部分还是gulp来处理，但是把js交给webpack来处理</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<p><code>gulp + webpack 构建多页面前端项目</code></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/fwon/blog/issues/17">https://github.com/fwon/blog/issues/17</a><br>github: <a target="_blank" rel="noopener" href="https://github.com/fwon/gulp-webpack-demo">https://github.com/fwon/gulp-webpack-demo</a></p>
+<hr>
+<h1 id="ES6-——-gulp-Babel"><a href="#ES6-——-gulp-Babel" class="headerlink" title="ES6 —— gulp+Babel"></a>ES6 —— gulp+Babel</h1><ul>
+<li><code>package.json</code>中的devDependencies<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;babel-preset-es2015&quot;: &quot;^6.5.0&quot;,</span><br><span class="line">    &quot;gulp-load-plugins&quot;: &quot;^1.1.0&quot;,</span><br><span class="line">    &quot;gulp-babel&quot;: &quot;^6.1.2&quot;,</span><br><span class="line">    &quot;gulp-plumber&quot;: &quot;^1.0.1&quot;,</span><br><span class="line">    &quot;gulp-rename&quot;: &quot;^1.2.2&quot;,</span><br><span class="line">    &quot;gulp&quot;: &quot;^3.9.1&quot;,</span><br><span class="line">    &quot;gulp-jshint&quot;: &quot;^2.0.0&quot;,</span><br><span class="line">    &quot;gulp-concat&quot;: &quot;^2.6.0&quot;,</span><br><span class="line">    &quot;gulp-uglify&quot;: &quot;^1.4.1&quot;,</span><br><span class="line">    &quot;gulp-util&quot;: &quot;^3.0.1&quot;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li>gulpfile.js<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var gulp = require(&#x27;gulp&#x27;),</span><br><span class="line">  concat = require(&#x27;gulp-concat&#x27;),</span><br><span class="line">  rename = require(&#x27;gulp-rename&#x27;),</span><br><span class="line">  jshint = require(&#x27;gulp-jshint&#x27;),</span><br><span class="line">  uglify = require(&#x27;gulp-uglify&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// Load plugins</span><br><span class="line">var $ = require(&#x27;gulp-load-plugins&#x27;)();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* es6 */</span><br><span class="line">gulp.task(&#x27;es6&#x27;, function() &#123;</span><br><span class="line">  </span><br><span class="line">  return gulp.src(&#x27;src/es6js/*.js&#x27;)</span><br><span class="line">    .pipe($.plumber())</span><br><span class="line">    .pipe($.babel(&#123;</span><br><span class="line">      presets: [&#x27;es2015&#x27;]</span><br><span class="line">    &#125;))</span><br><span class="line">    .pipe(gulp.dest(&#x27;dist/ztimages/&#x27;));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+我们有了任务，但是怎么执行任务呢？ 在命令行工程目录下输入gulp es6 就可以执行这个任务了。但是我们不能每写一行代码就手动“执行”一下。这样也太麻烦了。我们可以配置一个监听任务。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//监听文件修改</span><br><span class="line">gulp.task(&#x27;watch&#x27;, [&#x27;es6&#x27;], function() &#123;</span><br><span class="line">  gulp.watch([&#x27;src/js/earth.js&#x27;], [&#x27;es6&#x27;]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在命令行工程目录下输入gulp watch就可以执行这个监听任务了。</p>
+</blockquote>
+</li>
+</ul>
+<p><code>ES6 初体验 —— gulp+Babel 搭建ES6环境</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/webARM/p/5305644.html">http://www.cnblogs.com/webARM/p/5305644.html</a></p>
+<hr>
+<h1 id="ES6-——-webpack-Babel"><a href="#ES6-——-webpack-Babel" class="headerlink" title="ES6 —— webpack+Babel"></a>ES6 —— webpack+Babel</h1><p><code>webpack配置文件ES6写法？ - xxxxxxxxx的回答 - SegmentFault</code></p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000004241222/a-1020000004241336">https://segmentfault.com/q/1010000004241222/a-1020000004241336</a></p>
+<p><code>使用webpack 进行ES6开发 - OPEN 开发经验库</code><br><a target="_blank" rel="noopener" href="http://www.open-open.com/lib/view/open1455887871526.html">http://www.open-open.com/lib/view/open1455887871526.html</a></p>
+<hr>
+<h1 id="常见组合方式"><a href="#常见组合方式" class="headerlink" title="常见组合方式"></a>常见组合方式</h1><ul>
+<li>仅使用gulp,解决代码压缩等预编译构建问题。但缺少预编译的模块化能力（webpack）</li>
+<li>仅使用webpack,提供js模块化方案。但缺少代码压缩等预编译能力(gulp)</li>
+<li>gulp + webpack: <a target="_blank" rel="noopener" href="https://github.com/fwon/gulp-webpack-demo">https://github.com/fwon/gulp-webpack-demo</a></li>
+<li>npm script + webpack:  <a target="_blank" rel="noopener" href="https://github.com/react-webpack-generators/generator-react-webpack">https://github.com/react-webpack-generators/generator-react-webpack</a></li>
+</ul>
+<hr>
+<h1 id="附：ES6（babel）常见组合"><a href="#附：ES6（babel）常见组合" class="headerlink" title="附：ES6（babel）常见组合"></a>附：ES6（babel）常见组合</h1><h2 id="一、在线”编译”-模块的方案（-浏览器环境-）"><a href="#一、在线”编译”-模块的方案（-浏览器环境-）" class="headerlink" title="一、在线”编译” 模块的方案（ 浏览器环境 ）"></a>一、在线”编译” 模块的方案（ 浏览器环境 ）</h2><p>1.<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/01/babel.html">babel-polyfill</a> <code>六、babel-polyfill</code></p>
+<blockquote>
+<p>举例来说，ES6在Array对象上新增了Array.from方法。Babel就不会转码这个方法。如果想让这个方法运行，必须使用babel-polyfill，为当前环境提供一个垫片</p>
+</blockquote>
+<p>2.<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/01/babel.html">babel-core&#x2F;browser</a> <code> 七、浏览器环境</code></p>
+<blockquote>
+<p>browser.js是Babel提供的转换器脚本，可以在浏览器运行。用户的ES6脚本放在script标签之中，但是要注明type&#x3D;”text&#x2F;babel”</p>
+</blockquote>
+<p>3.<a target="_blank" rel="noopener" href="https://github.com/babel/babel-standalone">babel-standalone</a></p>
+<blockquote>
+<p>给那些非Node.js环境中使用最新的JavaScript而服务的。<br>注意，网页中实时将ES6代码转为ES5，对性能会有影响。生产环境需要加载已经转码完成的脚本。</p>
+</blockquote>
+<p><code>详见：</code>ES6兼容低版本浏览器.md&#96;</p>
+<h2 id="二、预编译模块的方案"><a href="#二、预编译模块的方案" class="headerlink" title="二、预编译模块的方案"></a>二、预编译模块的方案</h2><ul>
+<li>Babel-cli</li>
+<li>npm script + Babel</li>
+<li>gulp + Babel</li>
+<li>webpack + Babel</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/webpack/" rel="tag"># webpack</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/12/19/Read-shoe-dog/" rel="prev" title="读《鞋狗》">
+                  <i class="fa fa-angle-left"></i> 读《鞋狗》
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/12/20/React%E7%9B%B8%E5%85%B3/" rel="next" title="React相关">
+                  React相关 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

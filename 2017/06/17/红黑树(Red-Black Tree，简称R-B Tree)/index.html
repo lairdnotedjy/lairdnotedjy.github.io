@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="红黑树(Red-Black Tree，简称R-B Tree)红-黑树的就是这样的一棵平衡树，对一个要插入的数据项，插入例程要检查会不会破坏树的特征，如果破坏了，程序就会进行纠正，根据需要改变树的结构，从而保持树的平衡  【规则】有效的红黑树我们增加了如下的额外要求：  1.节点是红色或黑色。 2.根是黑色。 3.所有叶子都是黑色（叶子是NIL节点）。 4.每个红色节点必须有两个黑色的子节点。（从每">
+<meta property="og:type" content="article">
+<meta property="og:title" content="红黑树(Red-Black Tree，简称R-B Tree)">
+<meta property="og:url" content="https://www.sovdating.com/2017/06/17/%E7%BA%A2%E9%BB%91%E6%A0%91(Red-Black%20Tree%EF%BC%8C%E7%AE%80%E7%A7%B0R-B%20Tree)/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="红黑树(Red-Black Tree，简称R-B Tree)红-黑树的就是这样的一棵平衡树，对一个要插入的数据项，插入例程要检查会不会破坏树的特征，如果破坏了，程序就会进行纠正，根据需要改变树的结构，从而保持树的平衡  【规则】有效的红黑树我们增加了如下的额外要求：  1.节点是红色或黑色。 2.根是黑色。 3.所有叶子都是黑色（叶子是NIL节点）。 4.每个红色节点必须有两个黑色的子节点。（从每">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/85695560.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/23714147.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/69586036.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/69567185.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/41166636.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/88789764.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/10442624.jpg">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1630488-0b740e32e6c690cf.gif?imageMogr2/auto-orient/strip">
+<meta property="article:published_time" content="2017-06-16T16:00:02.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.128Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/85695560.jpg">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2017/06/17/%E7%BA%A2%E9%BB%91%E6%A0%91(Red-Black%20Tree%EF%BC%8C%E7%AE%80%E7%A7%B0R-B%20Tree)/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2017/06/17/%E7%BA%A2%E9%BB%91%E6%A0%91(Red-Black%20Tree%EF%BC%8C%E7%AE%80%E7%A7%B0R-B%20Tree)/","path":"2017/06/17/红黑树(Red-Black Tree，简称R-B Tree)/","title":"红黑树(Red-Black Tree，简称R-B Tree)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>红黑树(Red-Black Tree，简称R-B Tree) | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91-Red-Black-Tree%EF%BC%8C%E7%AE%80%E7%A7%B0R-B-Tree"><span class="nav-number">1.</span> <span class="nav-text">红黑树(Red-Black Tree，简称R-B Tree)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E4%B8%8E%E7%90%86%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">分析与理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E5%86%B2%E7%AA%81%E6%97%B6-%E8%B0%83%E6%95%B4%E8%AE%A4%E8%AF%86"><span class="nav-number">3.</span> <span class="nav-text">规则冲突时,调整认识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">插入过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gif-%E8%BF%87%E7%A8%8B%E3%80%9010%EF%BC%8C85%EF%BC%8C15%EF%BC%8C70%EF%BC%8C20%EF%BC%8C60%EF%BC%8C30%EF%BC%8C50%EF%BC%8C65%EF%BC%8C80%EF%BC%8C90%EF%BC%8C40%EF%BC%8C5%EF%BC%8C55%E3%80%91"><span class="nav-number">5.</span> <span class="nav-text">gif 过程【10，85，15，70，20，60，30，50，65，80，90，40，5，55】 </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91-%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91"><span class="nav-number">6.</span> <span class="nav-text">红黑树 - 维基百科</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/06/17/%E7%BA%A2%E9%BB%91%E6%A0%91(Red-Black%20Tree%EF%BC%8C%E7%AE%80%E7%A7%B0R-B%20Tree)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="红黑树(Red-Black Tree，简称R-B Tree) | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          红黑树(Red-Black Tree，简称R-B Tree)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-06-17 00:00:02" itemprop="dateCreated datePublished" datetime="2017-06-17T00:00:02+08:00">2017-06-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="红黑树-Red-Black-Tree，简称R-B-Tree"><a href="#红黑树-Red-Black-Tree，简称R-B-Tree" class="headerlink" title="红黑树(Red-Black Tree，简称R-B Tree)"></a>红黑树(Red-Black Tree，简称R-B Tree)</h1><p>红-黑树的就是这样的一棵平衡树，对一个要插入的数据项，插入例程要检查会不会破坏树的特征，如果破坏了，程序就会进行纠正，根据需要改变树的结构，从而保持树的平衡</p>
+<ul>
+<li><p>【规则】有效的红黑树我们增加了如下的额外要求：</p>
+<ul>
+<li>1.节点是红色或黑色。</li>
+<li>2.根是黑色。</li>
+<li>3.所有叶子都是黑色（叶子是NIL节点）。</li>
+<li>4.每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）</li>
+<li>5.从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。</li>
+</ul>
+</li>
+</ul>
+<p>作用：红黑树的节点是有颜色概念的，即非红即黑。<code>通过颜色的约束，红黑树维持着二叉搜索树的平衡性</code></p>
+<hr>
+<h1 id="分析与理解"><a href="#分析与理解" class="headerlink" title="分析与理解"></a><code>分析与理解</code></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">结合： 【10,85,15,70,20 60,30,50】想象和理解</span><br><span class="line">理想目标是绝对平衡树. 平衡控制主要由`规则5`来约束，假如在不设 规则1的颜色条件下，`绝对平衡树`会出现无法插入单结点只能整层插入。</span><br><span class="line">为提供灵活性，设置红色为弹性元素可插入到新层中，但避免红色的单边蔓延，破坏了层数的平衡。（似2-3-4树 子树结点以元素存在）</span><br><span class="line">通过`规则4`，来仅一步约束平衡。上限时为所有的黑结点提供满树的红色子结点。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">小结：红色的出现是因为`绝对平衡树`不能接受单结点的插入，需要提供入口条件。AVL树的规则是允许平衡因子 BF 允许1层的差。</span><br><span class="line">而红黑树的规则是，通过特殊色(红色)来提供入口，接受新元素) [彩蛋：AVL平衡树也不是绝对平衡BF为1的平衡]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">为了避免层数的蔓延(相对平衡控制)，AVL树通过平衡因子BF差为1来控制，红黑树通过特殊色不能串层出现（`规则4`）。两者目的一样</span><br><span class="line">红黑树，在排除特殊色的情况下，应该处于`绝对平衡树`状态。为方便理解 `绝对平衡树`状态下 层数计算，增加了(`规则3`)-辅助理解</span><br><span class="line">`规则2`是确定了绝对平衡树的基准色(黑色)和特殊色(红色)，根颜色一定是绝对平衡树的基准色.</span><br><span class="line">`规则1`是因为该算法只需要一个特殊色， 再 为了统一知识约定，将其定为红色和黑色。</span><br></pre></td></tr></table></figure>
+
+
+<p>|  绝对平衡树控制  |  插入新结点| 蔓延控制| 统计绝对平衡树层| 优缺点<br>—-|——|—-<br>绝对平衡树 |  根与到各结点的距离一致  | 不允许,会破坏绝对平衡<br> 只能按层插入| 【不需要】| |<br>AVL平衡树 |  (相对平衡)  | 弥补绝对平衡树的不能插入新结点的缺点 <br> 允许新结点加入新层 |  允许加入层差在1以内的新结点 |  总层数-溢出的新结点层(1)  |  更接近绝对平衡(差1层) <br> 平衡维持更频繁<br>红黑平衡树 |  (相对平衡)  | 弥补绝对平衡树的不能插入新结点的缺点 <br> 允许新结点以特殊色(红色)加入新层 |  设置特殊色(红色)不允许串层出现（规则4） <br> 类2-3-4树: <br> 4结点允许3个元素存在后再扩展子树 <br> (红结点类似3元素成员,允许平衡条件下特殊存在) |  黑色结点的层数(规则5) |  接近绝对平衡(最大差除2加1) <br> 平衡维持有特殊色缓冲</p>
+<p>红黑平衡树-规则 | 红黑平衡树-作用或目的<br>—-|——|—-<br>5.从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。|  <code>限定绝对平衡的关键规则</code><br>弥补绝对平衡树的不能插入新结点的缺点<br>允许新结点以特殊色(红色)加入新层<br>4.每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）| 设置<code>特殊色(红色)不允许串层</code>出现,避免蔓延控制<br>类2-3-4树:<br>4结点允许3个元素存在后再扩展子树<br>(<code>红结点类似3元素成员</code>,<code>允许平衡条件下特殊存在</code>)<br>3.所有叶子都是黑色（叶子是NIL节点）。|在排除特殊色的情况下，应该处于<code>绝对平衡树</code>状态。<br>规则3,为方便理解<code>绝对平衡树</code>状态下层数计算<br>2.根是黑色。| 规则2是确定了绝对平衡树的基准色(黑色)和特殊色(红色)，<code>根颜色黑色是绝对平衡树的基准色</code><br>1.节点是红色或黑色。| 规则1是因为<code>该算法只需要一个基准色和一个特殊色</code>。<code>具体颜色再为了统一知识约定</code>，将其定为红色和黑色</p>
+<hr>
+<h1 id="规则冲突时-调整认识"><a href="#规则冲突时-调整认识" class="headerlink" title="规则冲突时,调整认识"></a>规则冲突时,调整认识</h1><p>红黑定义与切换，以及旋转都是随意的，只需要插入或删除结束后符合红黑树的规则(包含二叉排序树规则)<br>各场景该如何切换颜色与旋转，需转换为程序思维，依据场景进行变换（此变换不在红黑树的规则或要求限定以内）</p>
+<p><code>核心思路</code>：先变换颜色,满足[规则4].再检查[规则5]是否<code>提前越层</code>,如果是通过<code>旋转降层</code>恢复.</p>
+<hr>
+<h1 id="插入过程"><a href="#插入过程" class="headerlink" title="插入过程"></a>插入过程</h1><p>见：★  <code>5. 数据结构 - 红黑树 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/f4639d0cc887">http://www.jianshu.com/p/f4639d0cc887</a></p>
+<ul>
+<li>规则5,效果：<br>根据红黑树的性质（5），红黑树要求从根节点到叶子所有叶子节点上经过的黑色节点个数是相同的，因此如果插入的节点着色为黑色，那必然有可能导致某条路径上的黑色节点数量大于其他路径上的黑色节点数量，因此<code>默认插入的节点必须是红色</code>的，以此来维持红黑树的性质（5）</li>
+</ul>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/85695560.jpg"></p>
+<p>( 因为 G 为根节点，那么根据情况 1，将其涂为黑色，完事 )</p>
+<ul>
+<li>规则4,效果：红红冲突，可简单讲父级改色。<br>但又违反了规则5[60子树黑点比10,110,140子树黑点多]， 将60改为红色，可维持规则5</li>
+</ul>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/23714147.jpg"></p>
+<ul>
+<li>规则4,效果：维持了规则5情况下，规则4又出现冲突，但在更上层。 <img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/69586036.jpg"></li>
+</ul>
+<p>直观做法：将40设为黑色，可满足规则4。 120结点也设为黑色，可同时满足规则5。<br>（<code>此时状态，是不完全的平衡树，但满足红黑树规则</code>）</p>
+<ul>
+<li><p>满足规则5的条件下，每个黑点可容纳上下层为红点，是不破坏规则5的。<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/69567185.jpg"></p>
+</li>
+<li><p>示例：插入【10,85,15,70,20 60,30,50】</p>
+<ul>
+<li><p>首个为根，黑色：10</p>
+</li>
+<li><p>85比10大，放右边，默认插入为红色。【红黑特性校验器-正常】     </p>
+</li>
+<li><p>15比10大 比85小，放85左边，默认插入为 红 色。【红黑特性校验器-异常】<br>  <img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/41166636.jpg"></p>
+</li>
+<li><p>【红黑特性校验器-异常】矫正</p>
+<ul>
+<li><p>对新插入节点的父节点进行一次右旋操作</p>
+</li>
+<li><p>新插入节点的父节点着色为黑色，新插入节点的祖父节点着色为红色</p>
+</li>
+<li><p>对新插入节点的祖父节点进行一次左旋操作</p>
+</li>
+</ul>
+<p> <img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/88789764.jpg">   <img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/10442624.jpg"></p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="gif-过程【10，85，15，70，20，60，30，50，65，80，90，40，5，55】"><a href="#gif-过程【10，85，15，70，20，60，30，50，65，80，90，40，5，55】" class="headerlink" title="gif 过程【10，85，15，70，20，60，30，50，65，80，90，40，5，55】 "></a>gif 过程【10，85，15，70，20，60，30，50，65，80，90，40，5，55】 <img src="http://upload-images.jianshu.io/upload_images/1630488-0b740e32e6c690cf.gif?imageMogr2/auto-orient/strip"></h1><hr>
+<p><strong>参考</strong></p>
+<p><code>教你初步了解红黑树 - 结构之法 算法之道 - CSDN博客</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/v_july_v/article/details/6105630">http://blog.csdn.net/v_july_v/article/details/6105630</a><br><a target="_blank" rel="noopener" href="https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.01.md#%E6%95%99%E4%BD%A0%E9%80%8F%E5%BD%BB%E4%BA%86%E8%A7%A3%E7%BA%A2%E9%BB%91%E6%A0%91">https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.01.md#教你透彻了解红黑树</a></p>
+<ul>
+<li>五性质<br>★  <code>5. 数据结构 - 红黑树 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/f4639d0cc887">http://www.jianshu.com/p/f4639d0cc887</a></li>
+</ul>
+<p><code>JAVA学习-红黑树详解   - 简书 </code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/4cd37000f4e3">http://www.jianshu.com/p/4cd37000f4e3</a></p>
+<p><code>数据结构-红黑树 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/5e567cc01b50">http://www.jianshu.com/p/5e567cc01b50</a></p>
+<p><code>红黑树(五)之 Java的实现 - 如果天空不死 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/skywang12345/p/3624343.html">http://www.cnblogs.com/skywang12345/p/3624343.html</a></p>
+<ul>
+<li>三性质(<code>特立的定义，会破坏知识的共同认知和沟通</code>)<br>★  <code>图解集合7：红黑树概念、红黑树的插入及旋转操作详细解读 - 五月的仓颉 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/xrq730/p/6867924.html">http://www.cnblogs.com/xrq730/p/6867924.html</a></li>
+</ul>
+<p><code>红黑树数据结构剖析 - Florian - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/fanzhidongyzby/p/3187912.html">http://www.cnblogs.com/fanzhidongyzby/p/3187912.html</a></p>
+<ul>
+<li>四性质 (<code>特立的定义，会破坏知识的共同认知和沟通</code>)</li>
+</ul>
+<p><code>【数据结构和算法05】 红-黑树（看完包懂~） - 倪升武的博客 - 博客频道 - CSDN.NET</code></p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/eson_15/article/details/51144079">http://blog.csdn.net/eson_15/article/details/51144079</a></p>
+<hr>
+<h1 id="红黑树-维基百科"><a href="#红黑树-维基百科" class="headerlink" title="红黑树 - 维基百科"></a>红黑树 - 维基百科</h1><p><code>红黑树 - 维基百科，自由的百科全书</code><br><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91">https://zh.wikipedia.org/wiki/红黑树</a></p>
+<p><code>红黑树 - Wikiwand</code><br><a target="_blank" rel="noopener" href="http://www.wikiwand.com/zh/%E7%BA%A2%E9%BB%91%E6%A0%91">http://www.wikiwand.com/zh/%E7%BA%A2%E9%BB%91%E6%A0%91</a></p>
+<p><code>2-3-4树 - 维基百科，自由的百科全书</code> - 2-3-4 树是红黑树的一种等同<br><a target="_blank" rel="noopener" href="https://zh.mdzz.men/wiki/2-3-4%E6%A0%91">https://zh.mdzz.men/wiki/2-3-4%E6%A0%91</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/06/17/%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%A0%91&%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91&%E5%A4%9A%E8%B7%AF%E6%90%9C%E7%B4%A2%E6%A0%91(B%E6%A0%91)-%E6%80%BB%E7%BB%93/" rel="prev" title="树&二叉树&二叉排序树&多路搜索树(B树)-总结">
+                  <i class="fa fa-angle-left"></i> 树&二叉树&二叉排序树&多路搜索树(B树)-总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/06/22/https%E8%AF%81%E4%B9%A6%E7%9A%84%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/" rel="next" title="https证书的双向验证">
+                  https证书的双向验证 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

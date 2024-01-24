@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基础环境nodejs      https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F;download&#x2F;Ant      http:&#x2F;&#x2F;mirror.bit.edu.cn&#x2F;apache&#x2F;&#x2F;ant&#x2F;binaries&#x2F;apache-ant-1.9.6-bin.zip java            new jdk8  http:&#x2F;&#x2F;www.oracle.com&#x2F;technetwork&#x2F;java&#x2F;javase&#x2F;d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hybrid——phonegap+ionic 环境安装">
+<meta property="og:url" content="https://www.sovdating.com/2015/10/20/hybrid%E2%80%94%E2%80%94phonegap+ionic%20%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="基础环境nodejs      https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F;download&#x2F;Ant      http:&#x2F;&#x2F;mirror.bit.edu.cn&#x2F;apache&#x2F;&#x2F;ant&#x2F;binaries&#x2F;apache-ant-1.9.6-bin.zip java            new jdk8  http:&#x2F;&#x2F;www.oracle.com&#x2F;technetwork&#x2F;java&#x2F;javase&#x2F;d">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2015-10-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.066Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="ionic">
+<meta property="article:tag" content="hybrid">
+<meta property="article:tag" content="phonegap">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2015/10/20/hybrid%E2%80%94%E2%80%94phonegap+ionic%20%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2015/10/20/hybrid%E2%80%94%E2%80%94phonegap+ionic%20%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/","path":"2015/10/20/hybrid——phonegap+ionic 环境安装/","title":"hybrid——phonegap+ionic 环境安装"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>hybrid——phonegap+ionic 环境安装 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">基础环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">系统环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%A3%80%E6%9F%A5"><span class="nav-number">3.</span> <span class="nav-text">环境检查</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85phonegap"><span class="nav-number">4.</span> <span class="nav-text">安装phonegap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AD%89%E5%BE%85%E5%AE%89%E8%A3%85-%E5%AE%8C%E6%88%90%E5%90%8E%E5%AE%89%E8%A3%85-cordova"><span class="nav-number">5.</span> <span class="nav-text">等待安装   完成后安装 cordova</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E-%E6%A3%80%E9%AA%8C"><span class="nav-number">5.1.</span> <span class="nav-text">安装完成后, 检验:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-phonegap-%E5%B7%A5%E7%A8%8B-%E5%A6%82%E4%BD%BF%E7%94%A8ionic%E8%AF%B7%E8%B7%B3%E8%BF%87"><span class="nav-number">5.1.1.</span> <span class="nav-text">创建 phonegap 工程(如使用ionic请跳过)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85ionic"><span class="nav-number">6.</span> <span class="nav-text">安装ionic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%90%E8%A1%8C%E9%A1%B9%E7%9B%AE"><span class="nav-number">6.1.</span> <span class="nav-text">创建运行项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Android"><span class="nav-number">6.1.0.1.</span> <span class="nav-text">Android</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ios"><span class="nav-number">6.1.1.</span> <span class="nav-text">ios</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web"><span class="nav-number">6.1.2.</span> <span class="nav-text">web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E5%AE%89%E8%A3%85"><span class="nav-number">6.1.3.</span> <span class="nav-text">检查安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0"><span class="nav-number">6.1.4.</span> <span class="nav-text">更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#adb%E5%B8%B8%E8%A7%84%E5%91%BD%E4%BB%A4"><span class="nav-number">6.1.5.</span> <span class="nav-text">adb常规命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86%E7%AF%87-ionic-build-android-%E6%89%A7%E8%A1%8C%E7%A9%BA%E7%99%BD-%E6%97%A0%E5%93%8D%E5%BA%94-%E7%A9%BA%E7%99%BD%E8%BF%94%E5%9B%9E"><span class="nav-number">7.</span> <span class="nav-text">问题处理篇:  ionic build android 执行空白(无响应) (空白返回)</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2015/10/20/hybrid%E2%80%94%E2%80%94phonegap+ionic%20%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="hybrid——phonegap+ionic 环境安装 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hybrid——phonegap+ionic 环境安装
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-10-20 00:00:00" itemprop="dateCreated datePublished" datetime="2015-10-20T00:00:00+08:00">2015-10-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/hybrid/" itemprop="url" rel="index"><span itemprop="name">hybrid</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h1><p><code>nodejs</code>      <a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a><br><code>Ant</code>      <a target="_blank" rel="noopener" href="http://mirror.bit.edu.cn/apache//ant/binaries/apache-ant-1.9.6-bin.zip">http://mirror.bit.edu.cn/apache//ant/binaries/apache-ant-1.9.6-bin.zip</a></p>
+<p><code>java</code>          </p>
+<ul>
+<li><code>new jdk8</code>  <a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></li>
+<li><code>archive</code>  <a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/archive-139210.html">http://www.oracle.com/technetwork/java/javase/archive-139210.html</a></li>
+</ul>
+<hr>
+<p><code>环境搭建</code>  <a target="_blank" rel="noopener" href="http://blog.csdn.net/aaawqqq/article/details/19755179/">http://blog.csdn.net/aaawqqq/article/details/19755179/</a><br><code>学习网站</code>  <a target="_blank" rel="noopener" href="http://www.phonegap100.com/">http://www.phonegap100.com</a> | 第一讲 phonegap 性能优化 以及 phonegap + Angularjs +ionic.pdf</p>
+<h1 id="系统环境变量"><a href="#系统环境变量" class="headerlink" title="系统环境变量"></a>系统环境变量</h1><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#   JAVA_HOME</span></span><br><span class="line">C:\Program Files\Java\jdk1<span class="number">.8</span><span class="number">.0</span>_66</span><br><span class="line">   </span><br><span class="line"><span class="meta">#   ANT_HOME</span></span><br><span class="line">G:\workTool\apache-ant<span class="number">-1.9</span><span class="number">.4</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#   CLASSPATH</span></span><br><span class="line">%JAVA_HOME%\libr; % ANT_HOME %\lib</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta"># path</span></span><br><span class="line"><span class="meta">## 检查nodejs</span></span><br><span class="line">C:\Program Files\nodejs\</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta"># #  java环境</span></span><br><span class="line">%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin</span><br><span class="line">%ANT_HOME%\bin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta"># #  android sdk</span></span><br><span class="line">G:\IDE\adt-bundle\sdk\platform-tools</span><br><span class="line"></span><br><span class="line">G:\IDE\adt-bundle\sdk\tools</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta"># #  未知是否必填</span></span><br><span class="line">G:\IDE\adt-bundle\eclipse\plugins\org.apache.ant_1<span class="number">.8</span><span class="number">.3</span>.v201301120609\bin</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>参考: <a target="_blank" rel="noopener" href="http://blog.csdn.net/aaawqqq/article/details/19755179/">http://blog.csdn.net/aaawqqq/article/details/19755179/</a></p>
+<p>＃cnpm环境变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#  检查cnpm模块安装目标</span><br><span class="line"></span><br><span class="line">C:\Users\Administrator&gt;npm root -g</span><br><span class="line"></span><br><span class="line">C:\Users\Administrator\AppData\Roaming\npm\node_modules</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 配置&lt;用户&gt;path</span><br><span class="line"></span><br><span class="line">C:\Users\Administrator\AppData\Roaming\npm</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">检查:</span><br><span class="line">npm root -g</span><br><span class="line">cnpm root -g</span><br></pre></td></tr></table></figure>
+
+
+<span id="more"></span>
+
+<h1 id="环境检查"><a href="#环境检查" class="headerlink" title="环境检查"></a>环境检查</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br><span class="line">ant -version</span><br><span class="line">adb version</span><br><span class="line">phonegap -version</span><br><span class="line">cordova -version</span><br><span class="line">ionic -version</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator\Desktop\testionic&gt;java -version</span><br><span class="line">java version &quot;1.8.0_66-ea&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_66-ea-b02)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.66-b02, mixed mode)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C:\Users\Administrator\Desktop\testionic&gt;ant -version</span><br><span class="line">Apache Ant(TM) version 1.9.4 compiled on April 29 2014</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C:\Users\Administrator\Desktop\testionic&gt;adb version</span><br><span class="line">Android Debug Bridge version 1.0.31</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C:\Users\Administrator\Desktop\testionic&gt;phonegap -version</span><br><span class="line">5.3.6</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C:\Users\Administrator\Desktop\testionic&gt;cordova -version</span><br><span class="line">5.3.3</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="安装phonegap"><a href="#安装phonegap" class="headerlink" title="安装phonegap"></a>安装phonegap</h1><p>windows&gt;<code>npm install -g phonegap</code><br>Mac使用&gt;<code>sudo npm install -g phonegap</code></p>
+<h1 id="等待安装-完成后安装-cordova"><a href="#等待安装-完成后安装-cordova" class="headerlink" title="等待安装   完成后安装 cordova"></a>等待安装   完成后安装 cordova</h1><p>windows&gt;<code> npm install -g cordova</code><br>Mac使用&gt;<code> sudo npm install -g cordova</code></p>
+<h2 id="安装完成后-检验"><a href="#安装完成后-检验" class="headerlink" title="安装完成后, 检验:"></a>安装完成后, 检验:</h2><p><code>phonegap -version</code><br><code>cordova -version</code></p>
+<h3 id="创建-phonegap-工程-如使用ionic请跳过"><a href="#创建-phonegap-工程-如使用ionic请跳过" class="headerlink" title="创建 phonegap 工程(如使用ionic请跳过)"></a>创建 phonegap 工程(如使用<code>ionic</code>请跳过)</h3><p><code>phonegap create my-app</code><br><code>cd my-app</code><br><code>phonegap run android</code></p>
+<h1 id="安装ionic"><a href="#安装ionic" class="headerlink" title="安装ionic"></a>安装ionic</h1><p>windows&gt;<code> npm install -g ionic</code><br>Mac使用&gt;<code> sudo npm install -g ionic</code></p>
+<h2 id="创建运行项目"><a href="#创建运行项目" class="headerlink" title="创建运行项目"></a>创建运行项目</h2><p><code>ionic start myproject</code><br><code>cd myproject</code></p>
+<p><strong>更多参考</strong><br><a target="_blank" rel="noopener" href="https://github.com/driftyco/ionic-cli">https://github.com/driftyco/ionic-cli</a></p>
+<h4 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h4><ul>
+<li><code>ionic platform add android</code></li>
+<li><code>ionic build android</code></li>
+<li><code>ionic emulate android</code>  # 模拟器运行</li>
+<li><code>ionic run android</code>  # 连接上手机运行</li>
+<li><code>cordova prepare</code> # 刷新前端代码与platform代码同步</li>
+</ul>
+<h3 id="ios"><a href="#ios" class="headerlink" title="ios"></a>ios</h3><ul>
+<li><code>ionic platform add ios</code></li>
+<li><code>ionic build ios</code></li>
+<li><code>ionic emulate ios</code></li>
+</ul>
+<h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><blockquote>
+<p>webstorm - 选择或打开 index.html ,Ctrl+Shift+F10.<br>会打开网页  <a target="_blank" rel="noopener" href="http://localhost:63342/k12student/www/index.html">http://localhost:63342/k12student/www/index.html</a></p>
+</blockquote>
+<blockquote>
+<p>ionic - <code>ionic  serve </code><br>会打开网页 <a target="_blank" rel="noopener" href="http://localhost:8100/#/">http://localhost:8100/#/</a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator\Desktop\testionic\myproject&gt;ionic serve</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Multiple addresses available.</span><br><span class="line">Please select which address to use by entering its number from the list below:</span><br><span class="line"> 1) 169.254.170.223 (VirtualBox Host-Only Network)</span><br><span class="line"> 2) 192.168.3.13 (WLAN)</span><br><span class="line"> 3) localhost</span><br><span class="line">Address Selection:  3</span><br><span class="line">3</span><br><span class="line">Selected address: localhost</span><br><span class="line">Running live reload server: http://localhost:35729</span><br><span class="line">Watching : [ &#x27;www/**/*&#x27;, &#x27;!www/lib/**/*&#x27; ]</span><br><span class="line">Running dev server: http://localhost:8100</span><br><span class="line">Ionic server commands, enter:</span><br><span class="line">  restart or r to restart the client app from the root</span><br><span class="line">  goto or g and a url to have the app navigate to the given url</span><br><span class="line">  consolelogs or c to enable/disable console log output</span><br><span class="line">  serverlogs or s to enable/disable server log output</span><br><span class="line">  quit or q to shutdown the server and exit</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ionic $</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="检查安装"><a href="#检查安装" class="headerlink" title="检查安装"></a>检查安装</h3><p><code>cordova plugin list</code></p>
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p><code>cordova prepare</code></p>
+<blockquote>
+<p>CLI的 prepare 命令把Cordova项目的web应用内容从www文件夹复制到适当的平台文件夹中。每次改动web内容后都要使用这个命令。 prepare 命令由接下来要介绍的许多命令自动调用。</p>
+</blockquote>
+<h3 id="adb常规命令"><a href="#adb常规命令" class="headerlink" title="adb常规命令"></a>adb常规命令</h3><p><code>adb devices </code>  查询模拟器&#x2F;设备实例</p>
+<p>给特定的模拟器&#x2F;设备实例发送命令</p>
+<p><code>adb -s &lt;serialNumber&gt; &lt;command&gt;</code><br><code>adb -s emulator-5556 install helloWorld.apk</code> </p>
+<p>安装&amp; 卸载软件</p>
+<p><code>adb install &lt;path_to_apk&gt;</code><br><code>adb uninstall &lt;软件名/包名&gt;</code></p>
+<p>进入模拟器的shell模式<br><code>adb shell</code></p>
+<p>缷载apk包<br><code>adb shell</code><br><code>cd data/app</code><br><code>rm 123.apk</code></p>
+<p>服务启停<br><code>adb kill-server</code><br><code>adb start-server</code></p>
+<hr>
+<p>工程结构</p>
+<blockquote>
+<p>js是控制层<br>app.js是路由配置页面<br>controllers.js是各个模块的业务逻辑</p>
+</blockquote>
+<p>templates是视图</p>
+<p>线上打 包[ android ,ios]<br><code>http://build.phonegap.com</code>（ ios需要证书）</p>
+<h1 id="问题处理篇-ionic-build-android-执行空白-无响应-空白返回"><a href="#问题处理篇-ionic-build-android-执行空白-无响应-空白返回" class="headerlink" title="问题处理篇:  ionic build android 执行空白(无响应) (空白返回)"></a>问题处理篇:  ionic build android 执行空白(无响应) (空白返回)</h1><p>如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">F:\work\wosai\code.wosai\edu.k12\k12student\k12student&gt;ionic build android</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">F:\work\wosai\code.wosai\edu.k12\k12student\k12student&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>解决思路:<br>在正确的可build的环境中执行,查看执行的内容.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">F:\work\wosai\code.wosai\edu.k12\k12student\k12student&gt;ionic build android</span><br><span class="line">Running command: &quot;C:\Program Files\nodejs\node.exe&quot; F:\work\wosai\code.wosai\edu.k12\k12student\k12student\hooks\after_prepare\010_add_platform_class.js F:\work\wosai\code.wosai\edu.k12\k12student\k12student</span><br><span class="line">add to body class: platform-android</span><br><span class="line">Running command: cmd &quot;/s /c &quot;F:\work\wosai\code.wosai\edu.k12\k12student\k12student\platforms\android\cordova\build.bat&quot;&quot;</span><br><span class="line">ANDROID_HOME=G:\IDE\adt-bundle\sdk</span><br><span class="line">JAVA_HOME=C:\Program Files\Java\jdk1.8.0_66</span><br><span class="line">Running: F:\work\wosai\code.wosai\edu.k12\k12student\k12student\platforms\android\gradlew cdvBuildDebug -b F:\work\wosai\code.wosai\edu.k12\k12student\k12student\platforms\android\build.gradle -Dorg.gradle.daemon=true</span><br><span class="line">:preBuild</span><br><span class="line">:compileDebugNdk UP-TO-DATE</span><br><span class="line">:preDebugBuild</span><br><span class="line">:checkDebugManifest</span><br><span class="line">:CordovaLib:compileLint</span><br><span class="line">:CordovaLib:copyDebugLint UP-TO-DATE</span><br><span class="line">:CordovaLib:mergeDebugProguardFiles UP-TO-DATE</span><br><span class="line">:CordovaLib:preBuild</span><br><span class="line">:CordovaLib:preDebugBuild</span><br><span class="line">:CordovaLib:checkDebugManifest</span><br><span class="line">:CordovaLib:prepareDebugDependencies</span><br><span class="line">:CordovaLib:compileDebugAidl UP-TO-DATE</span><br><span class="line">:CordovaLib:compileDebugRenderscript</span><br></pre></td></tr></table></figure>
+<p>其中关键命令:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &quot;C:\Program Files\nodejs\node.exe&quot; F:\work\wosai\code.wosai\edu.k12\k12student\k12student\hooks\after_prepare\010_add_platform_class.js F:\work\wosai\code.wosai\edu.k12\k12student\k12student</span><br><span class="line"></span><br><span class="line">cmd &quot;/s /c &quot;F:\work\wosai\code.wosai\edu.k12\k12student\k12student\platforms\android\cordova\build.bat&quot; </span><br></pre></td></tr></table></figure>
+<p>将此命令直接在问题机器中尝试:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> D:\k12student\k12student&gt;cmd &quot;/s /c &quot;D:\k12student\k12student \\platforms\android\cordova\build.bat</span><br><span class="line">ANDROID_HOME=C:\adt-bundle-windows-x86-20130917\sdk</span><br><span class="line">JAVA_HOME=C:\Program Files\Java\jdk1.7.0_79</span><br><span class="line">Running: D:\k12student\k12student\platforms\android\gradlew cdvBuildDebug -b D:\k12student\k12student\platforms\android\build.gradle -Dorg.gradle.daemon=true</span><br><span class="line">Download  https://repo1.maven.org/maven2/com/google/guava/guava/17.0/guava-17.0.jar</span><br><span class="line">Download  https://repo1.maven.org/maven2/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0.jar</span><br><span class="line">Download  https://repo1.maven.org/maven2/com/android/tools/layoutlib/layoutlib-api/24.0.0/layoutlib-api-24.0.0.jar</span><br><span class="line">Download https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1.jar</span><br><span class="line">Download  https://repo1.maven.org/maven2/org/apache/httpcomponents/httpmime/4.1/httpmime-4.1.jar</span><br><span class="line">Download  https://repo1.maven.org/maven2/com/android/tools/dvlib/24.0.0/dvlib-24.0.0.jar</span><br><span class="line">Download  https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.jar</span><br><span class="line">&gt; Configuring &gt; 0/2 projects &gt; root project &gt; 303 KB/356 KB downloaded </span><br></pre></td></tr></table></figure>
+<p>执行正常,但在下载编译工具<code> gradle</code>的 依赖. 对于更新慢完善有文章,可离线安装(也可等待完成):<br><code>ionic build android error when download gradle - Stack Overflow</code><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/29874564/ionic-build-android-error-when-download-gradle">http://stackoverflow.com/questions/29874564/ionic-build-android-error-when-download-gradle</a></p>
+<p>完成后或重新执行build:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmd &quot;/s /c &quot;F:\work\wosai\code.wosai\edu.k12\k12student\k12student\platforms\android\cordova\build.bat&quot; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>apk包可正常打出来.</p>
+<p>遗留的问题,  ionic build android 仍旧执行空白</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">F:\work\wosai\code.wosai\edu.k12\k12student\k12student&gt;ionic build android</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">F:\work\wosai\code.wosai\edu.k12\k12student\k12student&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>雷同问题:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> F:\work\wosai\code.wosai\edu.k12\k12student\k12student&gt;ionic run android</span><br><span class="line">Running command: &quot;C:\Program Files\nodejs\node.exe&quot; F:\work\wosai\code.wosai\edu.k12\k12student\k12student\hooks\after_prepare\010_add_platform_class.js F:\work\wosai\code.wosai\edu.k12\k12student\k12student</span><br><span class="line">add to body class: platform-android</span><br><span class="line">Running command: cmd &quot;/s /c &quot;F:\work\wosai\code.wosai\edu.k12\k12student\k12student\platforms\android\cordova\run.bat&quot;&quot;</span><br><span class="line">ANDROID_HOME=G:\IDE\adt-bundle\sdk</span><br><span class="line">JAVA_HOME=C:\Program Files\Java\jdk1.8.0_66 </span><br></pre></td></tr></table></figure>
+<p>关键:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmd &quot;/s /c &quot;F:\work\wosai\code.wosai\edu.k12\k12student\k12student\platforms\android\cordova\run.bat&quot;&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ionic/" rel="tag"># ionic</a>
+              <a href="/tags/hybrid/" rel="tag"># hybrid</a>
+              <a href="/tags/phonegap/" rel="tag"># phonegap</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2015/10/19/java%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B5%84%E6%BA%90%EF%BC%88CPU%EF%BC%8C%E5%86%85%E5%AD%98%EF%BC%89%E4%BD%BF%E7%94%A8%E7%8E%87%E8%BF%87%E9%AB%98%E6%97%B6%EF%BC%8C%E5%AE%9A%E4%BD%8D%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B/" rel="prev" title="java服务器资源（CPU，内存）使用率过高时，定位处理过程">
+                  <i class="fa fa-angle-left"></i> java服务器资源（CPU，内存）使用率过高时，定位处理过程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2015/10/24/2016-campus-recruitment-of-sougou-programming-problem-resolution-big-data-development/" rel="next" title="搜狗2016校园招聘之编程题解析-大数据开发">
+                  搜狗2016校园招聘之编程题解析-大数据开发 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

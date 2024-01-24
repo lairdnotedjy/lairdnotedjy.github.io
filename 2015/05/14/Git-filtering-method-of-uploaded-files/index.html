@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="针对单一工程排除文件针对单一工程排除文件，这种方式会让这个工程的所有修改者在克隆代码的同时，也能克隆到过滤规则，而不用自己再写一份，这就能保证所有修改者应用的都是同一份规则。在工程根目录下建立**.gitignore文件，将要排除的文件或目录写到.gitignore**这个文件中，有两种写入方法：① 使用命令行增加排除文件例如排除以.class结尾的文件 1echo  &quot;*.class&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git过滤上传文件的方法">
+<meta property="og:url" content="https://www.sovdating.com/2015/05/14/Git-filtering-method-of-uploaded-files/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="针对单一工程排除文件针对单一工程排除文件，这种方式会让这个工程的所有修改者在克隆代码的同时，也能克隆到过滤规则，而不用自己再写一份，这就能保证所有修改者应用的都是同一份规则。在工程根目录下建立**.gitignore文件，将要排除的文件或目录写到.gitignore**这个文件中，有两种写入方法：① 使用命令行增加排除文件例如排除以.class结尾的文件 1echo  &quot;*.class&amp;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2015-05-14T05:48:10.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:24:42.713Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2015/05/14/Git-filtering-method-of-uploaded-files/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2015/05/14/Git-filtering-method-of-uploaded-files/","path":"2015/05/14/Git-filtering-method-of-uploaded-files/","title":"Git过滤上传文件的方法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Git过滤上传文件的方法 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%92%88%E5%AF%B9%E5%8D%95%E4%B8%80%E5%B7%A5%E7%A8%8B%E6%8E%92%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">针对单一工程排除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%E6%8E%92%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">全局设置排除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99-gitignore%E8%A7%84%E5%88%99%E6%96%87%E4%BB%B6%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">编写.gitignore规则文件的两种模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitignore%E6%96%87%E4%BB%B6%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">.gitignore文件失效问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2015/05/14/Git-filtering-method-of-uploaded-files/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Git过滤上传文件的方法 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git过滤上传文件的方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-05-14 13:48:10" itemprop="dateCreated datePublished" datetime="2015-05-14T13:48:10+08:00">2015-05-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Git-GitHub/" itemprop="url" rel="index"><span itemprop="name">Git/GitHub</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="针对单一工程排除文件"><a href="#针对单一工程排除文件" class="headerlink" title="针对单一工程排除文件"></a>针对单一工程排除文件</h3><p>针对单一工程排除文件，这种方式会让这个工程的所有修改者在克隆代码的同时，也能克隆到过滤规则，而不用自己再写一份，这就能保证所有修改者应用的都是同一份规则。在工程根目录下建立**.gitignore<strong>文件，将要排除的文件或目录写到</strong>.gitignore**这个文件中，有两种写入方法：<br>① 使用命令行增加排除文件<br>例如排除以.class结尾的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span>  <span class="string">&quot;*.class&quot;</span> &gt; .gitignore</span><br></pre></td></tr></table></figure>
+<p>例如排除bin目录下的所有文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;bin/*&quot;</span> &gt; .gitignore</span><br></pre></td></tr></table></figure>
+<p><em><strong>注意</strong></em>，如果需要排除多级目录下的文件，比如bin&#x2F;classes&#x2F;A.class<br>那么**.gitignore<strong>中的内容应该写全路径，即</strong>bin&#x2F;classes&#x2F;A.class**</p>
+<p>② 最方便的办法是，用记事本打开，增加需要排除的文件或目录，一行增加一个，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*.class</span><br><span class="line">*.apk</span><br><span class="line">bin/*</span><br><span class="line">.settings/*</span><br><span class="line">proguard/*</span><br></pre></td></tr></table></figure>
+<h3 id="全局设置排除文件"><a href="#全局设置排除文件" class="headerlink" title="全局设置排除文件"></a>全局设置排除文件</h3><p>全局设置排除文件，这会在全局起作用，只要是Git管理的工程，在提交时都会自动排除不在控制范围内的文件或目录。这种方法对开发者来说，比较省事，只要一次全局配置，不用每次建立工程都要配置一遍过滤规则。但是这不保证其他的开发者在克隆你的代码后，他们那边的规则跟你的是一样的，这就带来了代码提交过程中的各种冲突问题。配置步骤如下：</p>
+<p>① 同样需要建立一个.gitignore文件，把要排除的文件写进去。但在这里，我们不规定一定要把.gitnore文件放到某个工程下面，而是任何地方，比如我们这里放到了Git默认的Home路径下，在我的<br>__windows__上就是__C:\Users\yourusername__。使用命令方式可以配置全局排除文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.excludesfile ~/.gitignore</span><br></pre></td></tr></table></figure>
+<p>你会发现在~&#x2F;.gitconfig文件中会出现excludesfile &#x3D; C:&#x2F;Users&#x2F;yourusername&#x2F;.gitignore。说明Git把文件过滤规则应用到了Global的规则中。</p>
+<p>② 单个工程设置排除文件，在工程目录下找到.git&#x2F;info&#x2F;exclude，把要排除的文件写进去：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*.class</span><br><span class="line">*.apk</span><br><span class="line">bin/</span><br><span class="line">gen/</span><br></pre></td></tr></table></figure>
+<p>这种方法就不提倡了，只能针对单一工程配置，而且还不能将过滤规则同步到其他开发者，优势不大。</p>
+<h3 id="编写-gitignore规则文件的两种模式"><a href="#编写-gitignore规则文件的两种模式" class="headerlink" title="编写.gitignore规则文件的两种模式"></a>编写.gitignore规则文件的两种模式</h3><p>两种模式分别是开放模式和保守模式</p>
+<p>① 开放模式负责设置过滤哪些文件和文件夹<br>过滤文件夹设置：<br><strong>&#x2F;mtk&#x2F;    表示过滤这个文件夹</strong><br>过滤文件设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*.zip</span><br><span class="line">*.rar</span><br><span class="line">*.err</span><br></pre></td></tr></table></figure>
+<p>指定过滤某个文件：<br><strong>&#x2F;mtk&#x2F;do.doc</strong></p>
+<p>② 保守模式负责设置哪些文件不被过滤，也就是哪些文件要跟踪<br>跟踪某个文件夹：<br><strong>!&#x2F;people&#x2F;master</strong><br>跟踪某类文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">!*.c</span><br><span class="line">!*.h</span><br></pre></td></tr></table></figure>
+<p>跟踪某个指定文件：<br><strong>!&#x2F;people&#x2F;master&#x2F;IT.h</strong><br>采用共享模式与保守模式结合配置的办法。eg：一个文件夹下有很多文件夹和文件，而我只想跟踪其中的一个文件，这样设置就可以满足这种情况，先用共享模式把整个目录 都设置为不跟踪，然后再用保守模式把这个文件夹中想要跟踪的文件设置为被跟踪，配置很简单，就可以跟踪想要跟踪的文件。</p>
+<h3 id="gitignore文件失效问题"><a href="#gitignore文件失效问题" class="headerlink" title=".gitignore文件失效问题"></a>.gitignore文件失效问题</h3><p>比如在一个本地仓库中，产生了诸多的日志记录，而这些记录都是本地操作产生的，我们不必将其提交到远程仓库中，那么我们在***.gitignore<em><strong>中添加了</strong></em>logs&#x2F;20150514.log<em><strong>的过滤规则，但是在使用</strong></em>git status<em><strong>的时候，还是可以看到</strong></em>modified:logs&#x2F;20150514.log***，说明规则没有起作用。</p>
+<p>为什么增加了***.gitignore<em><strong>里的规则却没有效果呢？<br>这是因为</strong></em>.gitignore<em><strong>文件只能作用于</strong></em>Untracked Files***，也就是那些从来没有被Git记录过的文件（自添加以后，从未add及commit过的文件）。</p>
+<p>之所以规则不生效，是因为那些***.log<em><strong>文件曾经被Git记录过，因此</strong></em>.gitignore***对它们完全无效，解决办法如下：</p>
+<ul>
+<li>从Git的数据库中删除对于该文件的追踪；</li>
+<li>把对应的规则写入.gitignore，让忽略真正生效；</li>
+<li>提交+推送</li>
+</ul>
+<p>只有这样做，所有的团队成员才会保持一致而不会有后遗症，也只有这样做，其他的团队成员根本不需要做额外的工作来维持对一个文件的改变忽略。</p>
+<p>最后有一点需要注意的，<em><strong>git rm –cached logs&#x2F;20150514.log</strong></em> 删除的是追踪状态，而不是物理文件；如果你真的是彻底不想要了，你也可以直接 rm＋忽略＋提交。</p>
+<p><strong>参考文献</strong><br>[1] <a target="_blank" rel="noopener" href="http://blog.csdn.net/hustpzb/article/details/8649545">http://blog.csdn.net/hustpzb/article/details/8649545</a><br>[2] <a target="_blank" rel="noopener" href="http://segmentfault.com/q/1010000000430426">http://segmentfault.com/q/1010000000430426</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"># Git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2015/05/13/Local-call-interface-of-LTP4J-project-for-LTML-encapsulation/" rel="prev" title="封装LTP4J的本地LTML调用接口">
+                  <i class="fa fa-angle-left"></i> 封装LTP4J的本地LTML调用接口
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2015/05/19/How-to-load-dll-file-in-Java-Web-Project/" rel="next" title="Java中Web Project如何加载dll/DLL文件">
+                  Java中Web Project如何加载dll/DLL文件 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

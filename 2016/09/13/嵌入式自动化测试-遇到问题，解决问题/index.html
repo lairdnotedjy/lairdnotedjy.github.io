@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="睡眠,停顿 [等待页面元素加载完成]123456789function sleep(delay)&#123;    var start &#x3D; new Date().getTime();    while (new Date().getTime() &lt; start + delay);&#125; &#x2F;&#x2F;usage&#x2F;&#x2F;wait for 3 secondssleep(3000); webdriver">
+<meta property="og:type" content="article">
+<meta property="og:title" content="嵌入式自动化测试-遇到问题，解决问题">
+<meta property="og:url" content="https://www.sovdating.com/2016/09/13/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95-%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%EF%BC%8C%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="睡眠,停顿 [等待页面元素加载完成]123456789function sleep(delay)&#123;    var start &#x3D; new Date().getTime();    while (new Date().getTime() &lt; start + delay);&#125; &#x2F;&#x2F;usage&#x2F;&#x2F;wait for 3 secondssleep(3000); webdriver">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-09-12T16:00:01.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.115Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="自动化测试">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2016/09/13/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95-%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%EF%BC%8C%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2016/09/13/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95-%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%EF%BC%8C%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/","path":"2016/09/13/嵌入式自动化测试-遇到问题，解决问题/","title":"嵌入式自动化测试-遇到问题，解决问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>嵌入式自动化测试-遇到问题，解决问题 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9D%A1%E7%9C%A0-%E5%81%9C%E9%A1%BF-%E7%AD%89%E5%BE%85%E9%A1%B5%E9%9D%A2%E5%85%83%E7%B4%A0%E5%8A%A0%E8%BD%BD%E5%AE%8C%E6%88%90"><span class="nav-number">1.</span> <span class="nav-text">睡眠,停顿 [等待页面元素加载完成]</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%B8%AD-%E9%A1%B5%E9%9D%A2%E5%B9%B6%E4%B8%8D%E5%90%8C%E6%AD%A5%E3%80%82-%E8%81%AA%E6%98%8E%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">js执行过程中,页面并不同步。 聪明的浏览器</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/09/13/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95-%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%EF%BC%8C%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="嵌入式自动化测试-遇到问题，解决问题 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          嵌入式自动化测试-遇到问题，解决问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-09-13 00:00:01" itemprop="dateCreated datePublished" datetime="2016-09-13T00:00:01+08:00">2016-09-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="睡眠-停顿-等待页面元素加载完成"><a href="#睡眠-停顿-等待页面元素加载完成" class="headerlink" title="睡眠,停顿 [等待页面元素加载完成]"></a>睡眠,停顿 [等待页面元素加载完成]</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function sleep(delay)</span><br><span class="line">&#123;</span><br><span class="line">    var start = new Date().getTime();</span><br><span class="line">    while (new Date().getTime() &lt; start + delay);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//usage</span><br><span class="line">//wait for 3 seconds</span><br><span class="line">sleep(3000);</span><br></pre></td></tr></table></figure>
+<p><code>webdriver 的三种等待方式 - 风雨的日志 - 网易博客</code><br><a target="_blank" rel="noopener" href="http://blog.163.com/yang_jianli/blog/static/16199000620157445841592/">http://blog.163.com/yang_jianli/blog/static/16199000620157445841592/</a></p>
+<p><code>Appium 三种wait方法（appium 学习之改造轮子） - to be crazy - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/tobecrazy/p/4596214.html">http://www.cnblogs.com/tobecrazy/p/4596214.html</a></p>
+<p><code>selenium webdriver（Appium）如何等待页面元素加载完成 - 北极的冰箱 - 博客频道 - CSDN.NET </code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/jlminghui/article/details/41821533">http://blog.csdn.net/jlminghui/article/details/41821533</a></p>
+<h1 id="js执行过程中-页面并不同步。-聪明的浏览器"><a href="#js执行过程中-页面并不同步。-聪明的浏览器" class="headerlink" title="js执行过程中,页面并不同步。 聪明的浏览器"></a>js执行过程中,页面并不同步。 聪明的浏览器</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">因为渲染树的改变导致的重绘或重排操作都可能代价很高，浏览器会对这个改动做很多优化。</span><br><span class="line">一个策略就是不要立即做操作，而是批量进行。比如把你的脚本对DOM的修改放入一个队列，在队列所有操作结束后只需要进行一次绘制即可。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">浏览器引擎可能会针对重排做了优化。比如Opera，它会等到有足够数量的变化发生，或者等到一定的时间，或者等一个线程结束，再一起处理，这样就只发生一次重排。但除了渲染树的直接变化，当获取一些属性时，浏览器为取得正确的值也会触发重排。这样就使得浏览器的优化失效了。这些属性包括：offsetTop、offsetLeft、 offsetWidth、offsetHeight、scrollTop、scrollLeft、scrollWidth、scrollHeight、clientTop、clientLeft、clientWidth、clientHeight、getComputedStyle() (currentStyle in IE)。所以，在多次使用这些值时应进行缓存。 </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>解决办法：方法延迟执行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function repeat(func, times, wait) &#123;</span><br><span class="line">    return function (str) &#123;</span><br><span class="line">      for (var i = 0; i &lt; times; i++) &#123;</span><br><span class="line">        setTimeout(function () &#123;</span><br><span class="line">          func(str);</span><br><span class="line">        &#125;, 5000 * i);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  var repeatedFun = repeat(alert, 2, 5000);</span><br><span class="line">  repeatedFun(&quot;hellworld&quot;);//会alert十次 helloworld, 每次间隔5秒</span><br></pre></td></tr></table></figure></li>
+<li>优化， 使用 setInterval,减少循环控制<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function repeat(func, times, wait) &#123;</span><br><span class="line">    return function (str) &#123;</span><br><span class="line">      var handle_num = 0,</span><br><span class="line">        handle =</span><br><span class="line">          setInterval(function () &#123;</span><br><span class="line">            func(str);</span><br><span class="line"> </span><br><span class="line">            if (++handle_num &gt;= times) &#123;</span><br><span class="line">              clearInterval(handle);</span><br><span class="line">              return;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;, wait);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  var repeatedFun = repeat(alert, 2, 5000);</span><br><span class="line">  repeatedFun(&quot;hellworld&quot;);//会alert十次 helloworld, 每次间隔5秒</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<ul>
+<li><p>证实:线程执行完之前浏览器不会刷新ui,需要借助异步线程来完成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">el(&#x27;.nav-bar-title.ng-binding&#x27;).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">el(&#x27;.bookname_content&gt;.bookname&#x27;, 1).triggerHandler(&#x27;click&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">setTimeout(function () &#123;</span><br><span class="line">  el(&#x27;.nav-bar-title.ng-binding&#x27;).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">  el(&#x27;.bookname_content&gt;.bookname&#x27;, 2).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">&#125;, 0);// 上一步页面更新</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>循环控制异步调用(存在问题:循环间不能等差时间调用,后文使用递归解决)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for (var i = 0; i &lt; $(&#x27;.bookname_content&gt;.bookname&#x27;).length; i++) &#123;</span><br><span class="line">  console.log(&#x27;&gt;&#x27;, i);</span><br><span class="line">  setTimeout(function (i) &#123;</span><br><span class="line">    console.log(&quot;ddd&quot;, i);</span><br><span class="line">    el(&#x27;.nav-bar-title.ng-binding&#x27;).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">    el(&#x27;.bookname_content&gt;.bookname&#x27;, i).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">  &#125;, 1000 * i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<ul>
+<li>批量异步方法执行 + 异步函数执行asyn(含 柯里化 ) +  _forEach递归</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 异步执行函数,目的:页面同步刷新</span><br><span class="line"> * @param func</span><br><span class="line"> * @param time</span><br><span class="line"> * @returns &#123;Function&#125;</span><br><span class="line"> */</span><br><span class="line">function asyn(func, time = 1000) &#123;</span><br><span class="line">  return function (prom) &#123;</span><br><span class="line">    setTimeout(function () &#123;</span><br><span class="line">      func(prom)</span><br><span class="line">    &#125;, time)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function _forEach(start, end) &#123;</span><br><span class="line">  asyn(function (prom) &#123;</span><br><span class="line">    // console.log(&#x27;dd&#x27;, prom);</span><br><span class="line">    el(&#x27;.nav-bar-title.ng-binding&#x27;).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">    asyn(function (prom) &#123;</span><br><span class="line">      // console.log(&#x27;dd2&#x27;, prom);</span><br><span class="line">      el(&#x27;.bookname_content&gt;.bookname&#x27;, prom).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">       ++index &lt; length &amp;&amp; _Each(index, length);// 递归调用自己,相比for没有了时间计算</span><br><span class="line">    &#125;)(prom);</span><br><span class="line">  &#125;)(start);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">_forEach(0, 2);// 启动</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>批量异步方法执行 + 异步函数执行asyn(含 柯里化 )    +  _forEach递归  + _forEach 柯里化</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">currying(function _Each(start, end) &#123;</span><br><span class="line">  asyn(function (prom) &#123;</span><br><span class="line">    el(&#x27;.nav-bar-title.ng-binding&#x27;).triggerHandler(&#x27;click&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    asyn(function (prom) &#123;</span><br><span class="line">      el(&#x27;.bookname_content&gt;.bookname&#x27;, prom).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">      //noinspection JSAnnotator</span><br><span class="line">      ++start &lt;= end &amp;&amp; _Each(start, end);// 递归调用自己,相比for没有了时间计算</span><br><span class="line">    &#125;)(prom);</span><br><span class="line">  &#125;)(start);</span><br><span class="line">&#125;)(0, 2);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 柯里化</span><br><span class="line"> * @param func</span><br><span class="line"> * @returns &#123;Function&#125;</span><br><span class="line"> * @private</span><br><span class="line"> */</span><br><span class="line">function currying(func) &#123;</span><br><span class="line">  var _arguments = arguments;</span><br><span class="line">  return function () &#123;</span><br><span class="line">    return func.call(this, ...arguments, ..._arguments);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 异步执行函数,目的:页面同步刷新(柯里化)</span><br><span class="line"> * @param func</span><br><span class="line"> * @param time</span><br><span class="line"> * @returns &#123;Function&#125;</span><br><span class="line"> */</span><br><span class="line">function asyn(func, time = 1000) &#123;</span><br><span class="line">  return function () &#123;</span><br><span class="line">    var _arguments = arguments;</span><br><span class="line">    setTimeout(function () &#123;</span><br><span class="line">      return func.call(this, ..._arguments);</span><br><span class="line">    &#125;, time)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>批量异步方法执行-方法数组封装(失败:无法连续执行)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">currying(function _Each(start, end) &#123;</span><br><span class="line">  var func1 = [function () &#123;</span><br><span class="line">    el(&#x27;.nav-bar-title.ng-binding&#x27;).triggerHandler(&#x27;click&#x27;)</span><br><span class="line">  &#125;];</span><br><span class="line">  var func2 = [function (prom) &#123;</span><br><span class="line">    el(&#x27;.bookname_content&gt;.bookname&#x27;, prom).triggerHandler(&#x27;click&#x27;)</span><br><span class="line">  &#125;, start];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  bachSycFunc(func1, func2);</span><br><span class="line">  ++start &lt;= end &amp;&amp; _Each(start, end);// 递归调用自己,相比for没有了时间计算</span><br><span class="line">  // 问题关键:循环间不能连续</span><br><span class="line">&#125;)(0, 2);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 批量异步方法执行</span><br><span class="line"> * @param funcs</span><br><span class="line"> */</span><br><span class="line">function bachSycFunc(...funcs) &#123;</span><br><span class="line">  currying(function _Each(_funcs, index) &#123;</span><br><span class="line">    asyn(function (_funcs, index) &#123;</span><br><span class="line">      _funcs[index][0](_funcs[index][1]);</span><br><span class="line">      ++index &lt; _funcs.length &amp;&amp; _Each(_funcs, index)</span><br><span class="line">    &#125;)(_funcs, index);</span><br><span class="line">  &#125;)(funcs, 0)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>批量异步方法执行 + 异步函数执行asyn(含 柯里化 )    +  _forEach递归 </p>
+</li>
+<li><ul>
+<li>_forEach 柯里化 +  返回Promise 处理连续的func调用  <code>★  (特技加满,完整版)</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">// 调用示例</span><br><span class="line">currying(function _Each(index, length) &#123;</span><br><span class="line">  </span><br><span class="line">  sycFuncPromise(function () &#123;</span><br><span class="line">    el(&#x27;.nav-bar-title.ng-binding&#x27;).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">  &#125;)()</span><br><span class="line">    .then(function () &#123;</span><br><span class="line">      return sycFuncPromise(function () &#123;</span><br><span class="line">        el(&#x27;.bookname_content&gt;.bookname&#x27;, index).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">        ++index &lt; length &amp;&amp; _Each(index, length);// 递归调用自己,相比for没有了时间计算</span><br><span class="line">      &#125;)()</span><br><span class="line">    &#125;)</span><br><span class="line">    .then(function () &#123;</span><br><span class="line">      // ...</span><br><span class="line">    &#125;)</span><br><span class="line">  </span><br><span class="line">&#125;)(0, $(&#x27;.bookname_content&gt;.bookname&#x27;).length);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/ ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** * * ** ** ** ** ** ** ** **/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 返回Promise的方法,处理连续的func调用</span><br><span class="line"> * @param func</span><br><span class="line"> * @returns &#123;Function&#125;</span><br><span class="line"> */</span><br><span class="line">function sycFuncPromise(func) &#123;</span><br><span class="line">  return function () &#123;</span><br><span class="line">    var _arguments = arguments;</span><br><span class="line">    return new Promise(function (resolve, reject) &#123; // promise方式</span><br><span class="line">      asyn(function () &#123;</span><br><span class="line">        func(_arguments);</span><br><span class="line">        resolve();</span><br><span class="line">      &#125;)();</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 柯里化</span><br><span class="line"> * @param func</span><br><span class="line"> * @returns &#123;Function&#125;</span><br><span class="line"> * @private</span><br><span class="line"> */</span><br><span class="line">function currying(func) &#123;</span><br><span class="line">  var _arguments = arguments;</span><br><span class="line">  return function () &#123;</span><br><span class="line">    return func.call(this, ...arguments, ..._arguments);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 异步执行函数,目的:页面同步刷新(柯里化)</span><br><span class="line"> * @param func</span><br><span class="line"> * @param time</span><br><span class="line"> * @returns &#123;Function&#125;</span><br><span class="line"> */</span><br><span class="line">function asyn(func, time = 1000) &#123;</span><br><span class="line">  return function () &#123;</span><br><span class="line">    var _arguments = arguments;</span><br><span class="line">    setTimeout(function () &#123;</span><br><span class="line">      return func.call(this, ..._arguments);</span><br><span class="line">    &#125;, time)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag"># 自动化测试</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/09/13/angular%20ng-click%E7%A8%8B%E5%BA%8F%E8%A7%A6%E5%8F%91/" rel="prev" title="angular ng-click程序触发">
+                  <i class="fa fa-angle-left"></i> angular ng-click程序触发
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/09/13/aat(async%20auto%20test%20%E5%BC%82%E6%AD%A5%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95)%20%E5%BC%95%E7%94%A8&%E6%BA%90%E7%A0%81/" rel="next" title="aat(async auto test 异步自动化测试) 引用&源码">
+                  aat(async auto test 异步自动化测试) 引用&源码 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

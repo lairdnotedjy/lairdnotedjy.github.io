@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="疑惑性强的示例12345678910111213141516171819202122class SingleTon &#123;     private static SingleTon singleTon &#x3D; new SingleTon();     public static int count1;     public static int count2 &#x3D; 0;      private">
+<meta property="og:type" content="article">
+<meta property="og:title" content="饿加载单例的危险-jvm操作数栈">
+<meta property="og:url" content="https://www.sovdating.com/2017/07/07/%E9%A5%BF%E5%8A%A0%E8%BD%BD%E5%8D%95%E4%BE%8B%E7%9A%84%E5%8D%B1%E9%99%A9-jvm%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="疑惑性强的示例12345678910111213141516171819202122class SingleTon &#123;     private static SingleTon singleTon &#x3D; new SingleTon();     public static int count1;     public static int count2 &#x3D; 0;      private">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-7-7/95411964.jpg">
+<meta property="article:published_time" content="2017-07-06T16:00:02.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.135Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="单例">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-7-7/95411964.jpg">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2017/07/07/%E9%A5%BF%E5%8A%A0%E8%BD%BD%E5%8D%95%E4%BE%8B%E7%9A%84%E5%8D%B1%E9%99%A9-jvm%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2017/07/07/%E9%A5%BF%E5%8A%A0%E8%BD%BD%E5%8D%95%E4%BE%8B%E7%9A%84%E5%8D%B1%E9%99%A9-jvm%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88/","path":"2017/07/07/饿加载单例的危险-jvm操作数栈/","title":"饿加载单例的危险-jvm操作数栈"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>饿加载单例的危险-jvm操作数栈 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%96%91%E6%83%91%E6%80%A7%E5%BC%BA%E7%9A%84%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">疑惑性强的示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E4%BE%BF%E7%9A%84%E7%9C%8B%E6%87%82%E5%8E%9F%E7%90%86-%E8%A6%81%E6%8D%A2%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="nav-number">2.</span> <span class="nav-text">方便的看懂原理,要换个例子</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/07/07/%E9%A5%BF%E5%8A%A0%E8%BD%BD%E5%8D%95%E4%BE%8B%E7%9A%84%E5%8D%B1%E9%99%A9-jvm%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="饿加载单例的危险-jvm操作数栈 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          饿加载单例的危险-jvm操作数栈
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-07-07 00:00:02" itemprop="dateCreated datePublished" datetime="2017-07-07T00:00:02+08:00">2017-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="疑惑性强的示例"><a href="#疑惑性强的示例" class="headerlink" title="疑惑性强的示例"></a>疑惑性强的示例</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class SingleTon &#123; </span><br><span class="line">    private static SingleTon singleTon = new SingleTon(); </span><br><span class="line">    public static int count1; </span><br><span class="line">    public static int count2 = 0; </span><br><span class="line"> </span><br><span class="line">    private SingleTon() &#123; </span><br><span class="line">        count1++; </span><br><span class="line">        count2++; </span><br><span class="line">    &#125; </span><br><span class="line"> </span><br><span class="line">    public static SingleTon getInstance() &#123; </span><br><span class="line">        return singleTon; </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line">public class Test &#123; </span><br><span class="line">    public static void main(String[] args) &#123; </span><br><span class="line">        SingleTon singleTon = SingleTon.getInstance(); </span><br><span class="line">        System.out.println(&quot;count1=&quot; + singleTon.count1); // 1</span><br><span class="line">        System.out.println(&quot;count2=&quot; + singleTon.count2); // 0</span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>简单构想的结果应该是: <code>count=1</code> <code>count2=1</code> 实际的结果是:  <code> count=1</code> <code> count2=0</code></p>
+<hr>
+<h1 id="方便的看懂原理-要换个例子"><a href="#方便的看懂原理-要换个例子" class="headerlink" title="方便的看懂原理,要换个例子"></a>方便的看懂原理,要换个例子</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class SingleTon &#123;</span><br><span class="line"> </span><br><span class="line">    public static int count1 = 170;// 在第5行(即类初始化)前,将数值加入`方法区-运行时常量池`</span><br><span class="line"> </span><br><span class="line">    private static SingleTon singleTon = new SingleTon();</span><br><span class="line"> </span><br><span class="line">    public static int count;// 此时虽然已经完成了初始化,但无赋值操作,将保持`方法区-运行时常量池`中的数值</span><br><span class="line">    public static int count2 = 188;// 此时已经完成了类初始化,再将188赋值,将会覆盖原值</span><br><span class="line"> </span><br><span class="line">    private SingleTon() &#123;</span><br><span class="line">        count++;</span><br><span class="line">        System.out.println(&quot; count++; &quot; + count);// 1</span><br><span class="line">        count1++;</span><br><span class="line">        System.out.println(&quot; count1++; &quot; + count1);// 171</span><br><span class="line">        count2++;</span><br><span class="line">        System.out.println(&quot; count2++; &quot; + count2);// 1(栈帧中的操作数栈,此时还在第5行,还未执行count2的赋值)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public static SingleTon getInstance() &#123;</span><br><span class="line">        return singleTon;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">class SingleTon_Test &#123;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(&quot;count =&quot; + SingleTon.count);// 1 因无赋值操作,所以保持了`方法区-运行时常量池`中的数值</span><br><span class="line">        System.out.println(&quot;count1=&quot; + SingleTon.count1);// 171 count1已经在类初始化前将数值放入了`方法区-运行时常量池`,所以感觉无恙</span><br><span class="line">        System.out.println(&quot;count2=&quot; + SingleTon.count2);// 188 在已经完成了类初始化后,再将188赋值到 `方法区-运行时常量池` ,将会覆盖原值</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简单构想的结果应该是:    <code> count=1</code>  <code> count1  =171</code>   <code> count2=189</code><br>实际上 <code> count2=188</code> 为什么?</p>
+<ul>
+<li><p>通过构造函数的日志可以推断,影响到<code>count2数值</code>的关键确定<code>count2=188</code>是否在类实例化后进行了覆盖<br>如何确定? 这时就可以想到<code>方法区-操作数栈信息</code>这里能直接体现程序在实际运行中 (<code>虚拟机栈-栈帧-操作数帧</code>)的轨迹.</p>
+</li>
+<li><p>如图(方法区信息) :<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-7-7/95411964.jpg"></p>
+</li>
+<li><p>new SingleTon()何时被执行? [即 <code>static属性在方法区的结构</code> ]<br>情况一:<code>所有的static变量</code>在方法区会包装成一个<code>static&#123;&#125;方法</code>,会有自己的<code>虚拟机-操作栈</code>,当其中任何变量被访问.<br>就会执行整个<code>static方法</code>,最终再将返回原访问的<code>static变量</code><br>情况二:主动<code>new Object()</code>时,在执行构造方法前,会先执行<code>static变量的static&#123;&#125;方法</code>.</p>
+</li>
+<li><p>完整方法区信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">G:\liuxiang_code_git\myServer\@jvm\demo-classLoader\target\classes&gt;javap -v SingleTon.class</span><br><span class="line">Classfile /G:/liuxiang_code_git/myServer/@jvm/demo-classLoader/target/classes/SingleTon.class</span><br><span class="line">  Last modified 2017-7-7; size 1023 bytes</span><br><span class="line">  MD5 checksum afb31d9e86dc5fe19907b4d4d78d38e9</span><br><span class="line">  Compiled from &quot;SingleTon.java&quot;</span><br><span class="line">public class SingleTon</span><br><span class="line">  minor version: 0</span><br><span class="line">  major version: 52</span><br><span class="line">  flags: ACC_PUBLIC, ACC_SUPER</span><br><span class="line">Constant pool:</span><br><span class="line">   #1 = Methodref          #18.#36        // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">   #2 = Fieldref           #16.#37        // SingleTon.count:I</span><br><span class="line">   #3 = Fieldref           #38.#39        // java/lang/System.out:Ljava/io/PrintStream;</span><br><span class="line">   #4 = Class              #40            // java/lang/StringBuilder</span><br><span class="line">   #5 = Methodref          #4.#36         // java/lang/StringBuilder.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">   #6 = String             #41            //  count++;</span><br><span class="line">   #7 = Methodref          #4.#42         // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</span><br><span class="line">   #8 = Methodref          #4.#43         // java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;</span><br><span class="line">   #9 = Methodref          #4.#44         // java/lang/StringBuilder.toString:()Ljava/lang/String;</span><br><span class="line">  #10 = Methodref          #45.#46        // java/io/PrintStream.println:(Ljava/lang/String;)V</span><br><span class="line">  #11 = Fieldref           #16.#47        // SingleTon.count1:I</span><br><span class="line">  #12 = String             #48            //  count1++;</span><br><span class="line">  #13 = Fieldref           #16.#49        // SingleTon.count2:I</span><br><span class="line">  #14 = String             #50            //  count2++;</span><br><span class="line">  #15 = Fieldref           #16.#51        // SingleTon.singleTon:LSingleTon;</span><br><span class="line">  #16 = Class              #52            // SingleTon</span><br><span class="line">  #17 = Methodref          #16.#36        // SingleTon.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">  #18 = Class              #53            // java/lang/Object</span><br><span class="line">  #19 = Utf8               count1</span><br><span class="line">  #20 = Utf8               I</span><br><span class="line">  #21 = Utf8               singleTon</span><br><span class="line">  #22 = Utf8               LSingleTon;</span><br><span class="line">  #23 = Utf8               count</span><br><span class="line">  #24 = Utf8               count2</span><br><span class="line">  #25 = Utf8               &lt;init&gt;</span><br><span class="line">  #26 = Utf8               ()V</span><br><span class="line">  #27 = Utf8               Code</span><br><span class="line">  #28 = Utf8               LineNumberTable</span><br><span class="line">  #29 = Utf8               LocalVariableTable</span><br><span class="line">  #30 = Utf8               this</span><br><span class="line">  #31 = Utf8               getInstance</span><br><span class="line">  #32 = Utf8               ()LSingleTon;</span><br><span class="line">  #33 = Utf8               &lt;clinit&gt;</span><br><span class="line">  #34 = Utf8               SourceFile</span><br><span class="line">  #35 = Utf8               SingleTon.java</span><br><span class="line">  #36 = NameAndType        #25:#26        // &quot;&lt;init&gt;&quot;:()V</span><br><span class="line">  #37 = NameAndType        #23:#20        // count:I</span><br><span class="line">  #38 = Class              #54            // java/lang/System</span><br><span class="line">  #39 = NameAndType        #55:#56        // out:Ljava/io/PrintStream;</span><br><span class="line">  #40 = Utf8               java/lang/StringBuilder</span><br><span class="line">  #41 = Utf8                count++;</span><br><span class="line">  #42 = NameAndType        #57:#58        // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</span><br><span class="line">  #43 = NameAndType        #57:#59        // append:(I)Ljava/lang/StringBuilder;</span><br><span class="line">  #44 = NameAndType        #60:#61        // toString:()Ljava/lang/String;</span><br><span class="line">  #45 = Class              #62            // java/io/PrintStream</span><br><span class="line">  #46 = NameAndType        #63:#64        // println:(Ljava/lang/String;)V</span><br><span class="line">  #47 = NameAndType        #19:#20        // count1:I</span><br><span class="line">  #48 = Utf8                count1++;</span><br><span class="line">  #49 = NameAndType        #24:#20        // count2:I</span><br><span class="line">  #50 = Utf8                count2++;</span><br><span class="line">  #51 = NameAndType        #21:#22        // singleTon:LSingleTon;</span><br><span class="line">  #52 = Utf8               SingleTon</span><br><span class="line">  #53 = Utf8               java/lang/Object</span><br><span class="line">  #54 = Utf8               java/lang/System</span><br><span class="line">  #55 = Utf8               out</span><br><span class="line">  #56 = Utf8               Ljava/io/PrintStream;</span><br><span class="line">  #57 = Utf8               append</span><br><span class="line">  #58 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;</span><br><span class="line">  #59 = Utf8               (I)Ljava/lang/StringBuilder;</span><br><span class="line">  #60 = Utf8               toString</span><br><span class="line">  #61 = Utf8               ()Ljava/lang/String;</span><br><span class="line">  #62 = Utf8               java/io/PrintStream</span><br><span class="line">  #63 = Utf8               println</span><br><span class="line">  #64 = Utf8               (Ljava/lang/String;)V</span><br><span class="line">&#123;</span><br><span class="line">  public static int count1;</span><br><span class="line">    descriptor: I</span><br><span class="line">    flags: ACC_PUBLIC, ACC_STATIC</span><br><span class="line"> </span><br><span class="line">  public static int count;</span><br><span class="line">    descriptor: I</span><br><span class="line">    flags: ACC_PUBLIC, ACC_STATIC</span><br><span class="line"> </span><br><span class="line">  public static int count2;</span><br><span class="line">    descriptor: I</span><br><span class="line">    flags: ACC_PUBLIC, ACC_STATIC</span><br><span class="line"> </span><br><span class="line">  public static SingleTon getInstance();</span><br><span class="line">    descriptor: ()LSingleTon;</span><br><span class="line">    flags: ACC_PUBLIC, ACC_STATIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=1, locals=0, args_size=0</span><br><span class="line">         0: getstatic     #15                 // Field singleTon:LSingleTon;</span><br><span class="line">         3: areturn</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 20: 0</span><br><span class="line"> </span><br><span class="line">  static &#123;&#125;;</span><br><span class="line">    descriptor: ()V</span><br><span class="line">    flags: ACC_STATIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=2, locals=0, args_size=0</span><br><span class="line">         0: sipush        170</span><br><span class="line">         3: putstatic     #11                 // Field count1:I</span><br><span class="line">         6: new           #16                 // class SingleTon</span><br><span class="line">         9: dup</span><br><span class="line">        10: invokespecial #17                 // Method &quot;&lt;init&gt;&quot;:()V</span><br><span class="line">        13: putstatic     #15                 // Field singleTon:LSingleTon;</span><br><span class="line">        16: sipush        188</span><br><span class="line">        19: putstatic     #13                 // Field count2:I</span><br><span class="line">        22: return</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 3: 0</span><br><span class="line">        line 5: 6</span><br><span class="line">        line 8: 16</span><br><span class="line">&#125;</span><br><span class="line">SourceFile: &quot;SingleTon.java&quot;</span><br><span class="line"> </span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%95%E4%BE%8B/" rel="tag"># 单例</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/07/05/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%EF%BC%88tcp%E6%8F%A1%E6%89%8B%E9%87%8D%E4%BC%A0,http%E9%95%BF%E7%9F%AD%E9%93%BE%E6%8E%A5,Header%E5%88%86%E7%B1%BB%EF%BC%89/" rel="prev" title="网络相关（tcp握手重传,http长短链接,Header分类）">
+                  <i class="fa fa-angle-left"></i> 网络相关（tcp握手重传,http长短链接,Header分类）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/07/07/%E9%A5%BF%E5%8A%A0%E8%BD%BD%E5%8D%95%E4%BE%8B%E7%9A%84%E8%AF%AF%E8%A7%A3-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" rel="next" title="饿加载单例的误解-类加载机制">
+                  饿加载单例的误解-类加载机制 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="对于IDEA这样的神器，每个人都必然会有很多个性化的配置，那么如何在多台终端同步IDEA的配置呢？配合强大的坚果云同步功能来自动同步你的配置文件吧。另外坚果云免费版虽然对流量有限制，但是同步一个小小的配置文件夹还是足够了。 此方法也适用于JetBrains家的其它IDE系列产品，稍有不同之处请自行调整。  IntelliJ IDEA，一套智慧型的Java整合开发工具，特别专注与强调程序员的开发撰写">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用坚果云同步IntelliJ IDEA的配置文件">
+<meta property="og:url" content="https://www.sovdating.com/2016/08/09/Use-nuts-cloud-sync-IntelliJ-IDEA-configuration-files/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="对于IDEA这样的神器，每个人都必然会有很多个性化的配置，那么如何在多台终端同步IDEA的配置呢？配合强大的坚果云同步功能来自动同步你的配置文件吧。另外坚果云免费版虽然对流量有限制，但是同步一个小小的配置文件夹还是足够了。 此方法也适用于JetBrains家的其它IDE系列产品，稍有不同之处请自行调整。  IntelliJ IDEA，一套智慧型的Java整合开发工具，特别专注与强调程序员的开发撰写">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-08-09T13:50:39.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:24:42.755Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="IntelliJ">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2016/08/09/Use-nuts-cloud-sync-IntelliJ-IDEA-configuration-files/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2016/08/09/Use-nuts-cloud-sync-IntelliJ-IDEA-configuration-files/","path":"2016/08/09/Use-nuts-cloud-sync-IntelliJ-IDEA-configuration-files/","title":"使用坚果云同步IntelliJ IDEA的配置文件"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>使用坚果云同步IntelliJ IDEA的配置文件 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/08/09/Use-nuts-cloud-sync-IntelliJ-IDEA-configuration-files/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="使用坚果云同步IntelliJ IDEA的配置文件 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用坚果云同步IntelliJ IDEA的配置文件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-08-09 21:50:39" itemprop="dateCreated datePublished" datetime="2016-08-09T21:50:39+08:00">2016-08-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>对于IDEA这样的神器，每个人都必然会有很多个性化的配置，那么如何在多台终端同步IDEA的配置呢？配合强大的坚果云同步功能来自动同步你的配置文件吧。另外坚果云免费版虽然对流量有限制，但是同步一个小小的配置文件夹还是足够了。</p>
+<p>此方法也适用于JetBrains家的其它IDE系列产品，稍有不同之处请自行调整。</p>
+<ul>
+<li><strong>IntelliJ IDEA</strong>，一套智慧型的Java整合开发工具，特别专注与强调程序员的开发撰写效率提升</li>
+<li><strong>PHPStorm</strong>，PHP集成开发工具</li>
+<li><strong>PyCharm</strong>，智能Python集成开发工具</li>
+<li><strong>RubyMine</strong>，一个为Ruby和Rails开发者准备的IDE，其带有所有开发者必须的功能，并将之紧密集成于便捷的开发环境中</li>
+<li><strong>WebStorm</strong>，智能HTML&#x2F;CSS&#x2F;JS开发工具</li>
+<li><strong>AppCode</strong>，开发Obj-C的IDE，是一个XCode的替代物</li>
+</ul>
+<p>IDEA 默认配置文件存放位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Windows 保存在 &#x27;%HOMEPATH%/.&lt;product&gt;&lt;version&gt;/config&#x27; 例如&#x27;C:/Users/JohnS/.IntelliJIdea2018.1/config&#x27;</span><br><span class="line">Unix/Linux 保存在 &#x27;~/.&lt;product&gt;&lt;version&gt;/config&#x27; 例如 &#x27;~/.IntelliJIdea2018.1/config&#x27;</span><br><span class="line">Mac 保存在 &#x27;~/Library/Preferences/&lt;product&gt;&lt;version&gt;&#x27; 例如 &#x27;~/Library/Preferences/IntelliJIdea2018.1&#x27;</span><br></pre></td></tr></table></figure>
+<p>坚果云的客户端安装就不说了，关闭IDEA，从你的默认配置目录里剪切config这个目录到你的坚果云同步目录。如果你想要同步多个工具的配置目录，那么可以为config搭配一个父目录使用。如下所示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E:/jianguoyun/IDEA/config        #IDEA的配置文件路径</span><br><span class="line">E:/jianguoyun/PyCharm/config     #PyCharm的配置文件路径</span><br><span class="line">E:/jianguoyun/PHPStorm/config    #PHPStorm的配置文件路径</span><br></pre></td></tr></table></figure>
+
+<p>打开IDEA安装目录<code>C:/Program Files (x86)/JetBrains/IntelliJ IDEA 2016.2/bin/idea.properties</code>，找到第8行，把idea.config.path前面的<code>#</code>号去掉，<code>=</code>号后面的路径修改成之前的配置文件夹的目录，例如IDEA修改为<code>idea.config.path=E:/jianguoyun/IDEA/config</code>。记得把路径中的“\”换成“&#x2F;”。在Mac系统中，IDEA的配置路径<code>~/Library/Preferences/IntelliJIdea2018.1</code>下面并不存在<code>idea.properties</code>，那么新建一个文件即可，内容如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># custom IntelliJ IDEA properties</span><br><span class="line">idea.config.path=/Users/mulai.wx/Nutstore Files/jianguoyun/IDEA/config-mac</span><br></pre></td></tr></table></figure>
+<p>如果有不清楚的地方，可以直接参考IDEA的官方文档 <a target="_blank" rel="noopener" href="https://www.jetbrains.com/help/idea/tuning-the-ide.html#default-dirs"><strong>Default IDE directories</strong></a>。</p>
+<p>那么在公司直接安装坚果云，将IDEA的配置文件夹同步到本地，然后修改<code>idea.properties</code>中的值指向坚果云中正确的配置文件夹路径即可。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/IntelliJ/" rel="tag"># IntelliJ</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/08/09/HTML5-CSS3%20%E7%89%B9%E6%80%A7%E6%A3%80%E6%B5%8B%E5%BA%93(%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95)%20-%20modernizr/" rel="prev" title="HTML5 /CSS3  特性检测库 ( 兼容性测试 ) - modernizr">
+                  <i class="fa fa-angle-left"></i> HTML5 /CSS3  特性检测库 ( 兼容性测试 ) - modernizr
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/08/10/linux%201.%E6%96%B0%E7%A3%81%E7%9B%98%E6%A0%BC%E5%BC%8F%E5%8C%96--2.mount%E6%8C%82%E8%BD%BD--3.%E8%BD%AF%E8%BF%9E%E6%8E%A5ln/" rel="next" title="linux 1.新磁盘格式化->2.mount挂载->3.软连接ln">
+                  linux 1.新磁盘格式化->2.mount挂载->3.软连接ln <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

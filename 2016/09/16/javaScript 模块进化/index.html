@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最初的美好 污染全局变量 123456function bar()&#123;    &#x2F;&#x2F;do something&#125;function log()&#123;    &#x2F;&#x2F;do something&#125;   减少了全局变量 &amp;  暴露所有的模块成员，内部状态可以被外部读写 1234567891011var myModule &#x3D; &#123;    bar: function()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javaScript 模块进化">
+<meta property="og:url" content="https://www.sovdating.com/2016/09/16/javaScript%20%E6%A8%A1%E5%9D%97%E8%BF%9B%E5%8C%96/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="最初的美好 污染全局变量 123456function bar()&#123;    &#x2F;&#x2F;do something&#125;function log()&#123;    &#x2F;&#x2F;do something&#125;   减少了全局变量 &amp;  暴露所有的模块成员，内部状态可以被外部读写 1234567891011var myModule &#x3D; &#123;    bar: function()">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-09-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.076Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="模块化">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2016/09/16/javaScript%20%E6%A8%A1%E5%9D%97%E8%BF%9B%E5%8C%96/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2016/09/16/javaScript%20%E6%A8%A1%E5%9D%97%E8%BF%9B%E5%8C%96/","path":"2016/09/16/javaScript 模块进化/","title":"javaScript 模块进化"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>javaScript 模块进化 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%88%9D%E7%9A%84%E7%BE%8E%E5%A5%BD"><span class="nav-number">1.</span> <span class="nav-text">最初的美好</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CommonJS%E8%A7%84%E8%8C%83%E3%80%81AMD%E8%A7%84%E8%8C%83%E3%80%81CMD%E8%A7%84%E8%8C%83"><span class="nav-number">2.</span> <span class="nav-text">CommonJS规范、AMD规范、CMD规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CommonJS-%E4%BB%A3%E8%A1%A8%E4%BD%9C-Browserify"><span class="nav-number">2.1.</span> <span class="nav-text">CommonJS(代表作: Browserify )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AMD-%E4%BB%A3%E8%A1%A8%E4%BD%9C-RequireJS"><span class="nav-number">2.2.</span> <span class="nav-text">AMD(代表作:RequireJS )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMD-%E4%BB%A3%E8%A1%A8%E4%BD%9C-SeaJS"><span class="nav-number">2.3.</span> <span class="nav-text">CMD(代表作:SeaJS )</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RequireJS%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8F%8Ar-js%E6%8C%87%E5%8D%97"><span class="nav-number">3.</span> <span class="nav-text">RequireJS模块化及r.js指南</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2016/09/16/javaScript%20%E6%A8%A1%E5%9D%97%E8%BF%9B%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="javaScript 模块进化 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          javaScript 模块进化
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-09-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-16T00:00:00+08:00">2016-09-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="最初的美好"><a href="#最初的美好" class="headerlink" title="最初的美好"></a>最初的美好</h1><ul>
+<li><p>污染全局变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function bar()&#123;</span><br><span class="line">    //do something</span><br><span class="line">&#125;</span><br><span class="line">function log()&#123;</span><br><span class="line">    //do something</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>减少了全局变量 &amp;  暴露所有的模块成员，内部状态可以被外部读写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var myModule = &#123;</span><br><span class="line">    bar: function()&#123;</span><br><span class="line">        //do something</span><br><span class="line">    &#125;,</span><br><span class="line">    log: function()&#123;</span><br><span class="line">        //do something</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//调用</span><br><span class="line">myMoudle.bar();</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>匿名闭包的写法（Immediately-Invoked Function Expression，IIFE）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var myModule = (function()&#123;</span><br><span class="line">    var _log = &quot;hello world&quot;;</span><br><span class="line">    var log = function()&#123;</span><br><span class="line">        console.log(_log);</span><br><span class="line">    &#125;;</span><br><span class="line"> </span><br><span class="line">    return &#123;</span><br><span class="line">        log: log</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"> </span><br><span class="line">//引用</span><br><span class="line">myModule.log();//hello world</span><br><span class="line">myModule._log;//undefined</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<ul>
+<li><p>引入依赖关系</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var myModule = (function($)&#123;</span><br><span class="line">    var $log = $(&#x27;.log&#x27;);</span><br><span class="line">    var log = function()&#123;</span><br><span class="line">        console.log($log);</span><br><span class="line">    &#125;;</span><br><span class="line"> </span><br><span class="line">    return &#123;</span><br><span class="line">        log: log</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(jQuery);</span><br><span class="line"> </span><br><span class="line">//引用</span><br><span class="line">myModule.log();</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>依赖管理</p>
+</li>
+<li><p>没有引入一个依赖的 js 文件而导致后面 js 的功能失效. | 请求过多 ，不利于性能优化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;jquery.js&quot;&gt;&lt;script&gt;</span><br><span class="line">&lt;script src=&quot;dialog.js&quot;&gt;&lt;script&gt;</span><br><span class="line">&lt;script src=&quot;tooltip.js&quot;&gt;&lt;script&gt;</span><br><span class="line">&lt;script src=&quot;toast.js&quot;&gt;&lt;script&gt;</span><br><span class="line">&lt;script src=&quot;handlebar.js&quot;&gt;&lt;script&gt;</span><br><span class="line">......</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="CommonJS规范、AMD规范、CMD规范"><a href="#CommonJS规范、AMD规范、CMD规范" class="headerlink" title="CommonJS规范、AMD规范、CMD规范"></a>CommonJS规范、AMD规范、CMD规范</h1><h2 id="CommonJS-代表作-Browserify"><a href="#CommonJS-代表作-Browserify" class="headerlink" title="CommonJS(代表作: Browserify )"></a>CommonJS(代表作: Browserify )</h2><ul>
+<li>服务器端的模块化的规范，是 Nood.js 在实践中推出的，Nood.js 也是首先采用 js 模块化的；</li>
+<li>exports 定义模块</li>
+<li>require 加载模块<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//math.js</span><br><span class="line">exports.add = function(a,b)&#123;</span><br><span class="line">    var c = a + b;</span><br><span class="line">    return c;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//index.js</span><br><span class="line">var add = require(&#x27;math&#x27;).add;//</span><br><span class="line">console.log(add(1,1));//2</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="AMD-代表作-RequireJS"><a href="#AMD-代表作-RequireJS" class="headerlink" title="AMD(代表作:RequireJS )"></a>AMD(代表作:RequireJS )</h2><ul>
+<li><p>Asynchronous Module Definition，即异步的模块定义，是浏览器端的模块化规范，是 RequireJS 在推广过程中对模块定义的规范化产出</p>
+</li>
+<li><p>define 定义模块(同时定义依赖),模块名为文件名</p>
+<ul>
+<li><code>JavaScript模块化－require.js，r.js和打包发布 - 简书</code> <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/7186e5f2f341">http://www.jianshu.com/p/7186e5f2f341</a><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define(id?, dependencies?, factory);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(&#x27;myModule&#x27;,[&#x27;jQuery&#x27;,&#x27;types/Employee&#x27;],function($,Employee)&#123;//定义模块myModule，引入依赖jQuery，types/Employee</span><br><span class="line">   function Programmer()&#123;</span><br><span class="line">            //do something</span><br><span class="line">        &#125;;</span><br><span class="line">        Programmer.prototype = new Employee();</span><br><span class="line">        return Programmer;  //return Constructor</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="CMD-代表作-SeaJS"><a href="#CMD-代表作-SeaJS" class="headerlink" title="CMD(代表作:SeaJS )"></a>CMD(代表作:SeaJS )</h2><ul>
+<li><p>Common Module Definition，即通用模块定义，是浏览器端的模块化规范，是 SeaJS 在推广过程中对模块定义的规范化产出</p>
+</li>
+<li><p>seajs.use模块载入</p>
+<ul>
+<li>seajs.use(‘.&#x2F;a’),require(‘a’), require.asyc(‘.&#x2F;a.js’)</li>
+<li><code>Seajs模块载入方法 - 简书</code> <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/2de0d5b24c8c">http://www.jianshu.com/p/2de0d5b24c8c</a></li>
+</ul>
+</li>
+<li><p>define 定义模块(require提取依赖模块),模块名为文件名</p>
+<ul>
+<li><code>seajs模块加载机制 - 简书</code> <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/1245af09383e">http://www.jianshu.com/p/1245af09383e</a><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">define(factory)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>AMD 是 依赖关系前置，提前执行 ；CMD 是类似于 CommonJS 那样 按需加载，延迟执行 ：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//CMD recommanded</span><br><span class="line">define(function(require, exports, module)&#123;</span><br><span class="line">  var a = require(&#x27;a&#x27;);</span><br><span class="line">  a.doSomething();</span><br><span class="line">  var b = require(&#x27;b&#x27;);</span><br><span class="line">  b.doSomething();    // 依赖就近，延迟执行</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">//AMD recommanded</span><br><span class="line">define([&#x27;a&#x27;, &#x27;b&#x27;], function(a, b)&#123;</span><br><span class="line">    a.doSomething();    // 依赖前置，提前执行</span><br><span class="line">    b.doSomething();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="RequireJS模块化及r-js指南"><a href="#RequireJS模块化及r-js指南" class="headerlink" title="RequireJS模块化及r.js指南"></a>RequireJS模块化及r.js指南</h1><ul>
+<li>在 html 中指定了 RrequireJS 第一次需要加载的模块，也就是通过 data-main 所指定<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- index.html --&gt;</span><br><span class="line">&lt;script data-main=&quot;src/js/app/index&quot; src=&quot;src/js/lib/require.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+<li>index.js<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">requirejs.config(&#123;</span><br><span class="line">  baseUrl: &#x27;src/js&#x27;,</span><br><span class="line">  paths: &#123;</span><br><span class="line">    jquery: &#x27;lib/jquery&#x27;,</span><br><span class="line">    backTop: &#x27;com/backTop&#x27;,</span><br><span class="line">    jumpTo: &#x27;com/jumpTo&#x27;,</span><br><span class="line">    carousel: &#x27;com/carousel&#x27;,</span><br><span class="line">    exposure: &#x27;com/exposure&#x27;,</span><br><span class="line">    navfloor: &#x27;com/navfloor&#x27;,</span><br><span class="line">    waterfall: &#x27;com/waterfall&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li>其中 baseUrl 是改变基准路径，所有的模块相对于 baseUrl 来加载； baseUrl 路径以 index.html 所在的目录为基准；</li>
+<li>其中 requirejs.config() 函数的 paths 属性指定各个模块的加载路径(相对于 baseUrl )，如果没有指定 baseUrl ，路径默认和主模块在同一目录;</li>
+</ul>
+<p>采用了 RequireJS 模块化写法解决了命名冲突和依赖管理的问题，同时也增加了文件数量，这也意味着请求的增多，无疑会带来性能问题；</p>
+<ul>
+<li>打包（优化）工具 r.js ,它可以实现前端文件的压缩与合并,减少服务器请求<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(&#123;</span><br><span class="line">    baseUrl: &quot;./src/js&quot;,</span><br><span class="line">    paths: &#123;</span><br><span class="line">        &#x27;jquery&#x27;: &#x27;lib/bower_components/jquery/dist/jquery.min&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    name: &quot;main&quot;,</span><br><span class="line">    out: &quot;dist/js/merge.js&quot;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>baseUrl 路径设置应与主模块中 require.config() 方法里的 baseUrl 实际路径一致</li>
+<li>nam 指定的是解析入口，这里写了主模块，路径相对于前面指定的 baseUrl</li>
+</ul>
+<hr>
+<p><code>前端模块化之旅（一）：因何生它 - 推酷</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/z2AFRfF">http://www.tuicool.com/articles/z2AFRfF</a></p>
+<p><code>前端模块化之旅（二）：CommonJS、AMD和CMD - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/ZFvIfmz">www.tuicool.com/articles/ZFvIfmz</a></p>
+<p><code>前端模块化之旅（三）：RequireJS模块化及r.js指南 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/qyInuum">http://www.tuicool.com/articles/qyInuum</a></p>
+<p><code>Javascript模块化编程（一）：模块的写法 - 阮一峰的网络日志</code><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html">http://www.ruanyifeng.com/blog/2012/10/javascript_module.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag"># 模块化</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/09/15/ES6%20%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="prev" title="ES6 模块化">
+                  <i class="fa fa-angle-left"></i> ES6 模块化
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/09/16/aat(async%20auto%20test%20%E5%BC%82%E6%AD%A5%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95)%20%E4%BB%8B%E7%BB%8D&%E6%A8%A1%E5%9D%97%E5%8C%96%E5%AE%9E%E8%B7%B5/" rel="next" title="aat(async auto test 异步自动化测试) 介绍&模块化实践">
+                  aat(async auto test 异步自动化测试) 介绍&模块化实践 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

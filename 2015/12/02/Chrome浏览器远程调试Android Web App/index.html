@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="打开,浏览器地址输入: chrome:&#x2F;&#x2F;inspect             Mobile Web 调试指南（2）：远程调试 http:&#x2F;&#x2F;blog.jobbole.com&#x2F;68606 微信web开发者工具-远程调试微信浏览器全面升级至X5 Blink内核，支持远程调试https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;cgi-bin&#x2F;announce?action&#x3D;geta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chrome浏览器远程调试Android Web App">
+<meta property="og:url" content="https://www.sovdating.com/2015/12/02/Chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95Android%20Web%20App/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="打开,浏览器地址输入: chrome:&#x2F;&#x2F;inspect             Mobile Web 调试指南（2）：远程调试 http:&#x2F;&#x2F;blog.jobbole.com&#x2F;68606 微信web开发者工具-远程调试微信浏览器全面升级至X5 Blink内核，支持远程调试https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;cgi-bin&#x2F;announce?action&#x3D;geta">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/15-12-2/40398420.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/15-12-2/46191709.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/16-4-12/71201648.jpg">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz/PiajxSqBRaEIQxibpLbyuSK8jCzLMb60WcZqcAd9Pjl70kibOvcpnrIAgCNkwdichRC63qFQjn7apTcYbO8ibMUOe8Q/0?wx_fmt=jpeg">
+<meta property="article:published_time" content="2015-12-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.048Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="Chrom">
+<meta property="article:tag" content="Android 远程调试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/15-12-2/40398420.jpg">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2015/12/02/Chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95Android%20Web%20App/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2015/12/02/Chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95Android%20Web%20App/","path":"2015/12/02/Chrome浏览器远程调试Android Web App/","title":"Chrome浏览器远程调试Android Web App"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Chrome浏览器远程调试Android Web App | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%93%E5%BC%80-%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E8%BE%93%E5%85%A5-chrome-inspect"><span class="nav-number">1.</span> <span class="nav-text">打开,浏览器地址输入: chrome:&#x2F;&#x2F;inspect</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%AE%E4%BF%A1web%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7-%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">微信web开发者工具-远程调试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A%E7%9A%84chrome%E5%8A%9F%E8%83%BD"><span class="nav-number">3.</span> <span class="nav-text">更多的chrome功能</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2015/12/02/Chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95Android%20Web%20App/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Chrome浏览器远程调试Android Web App | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Chrome浏览器远程调试Android Web App
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-12-02 00:00:00" itemprop="dateCreated datePublished" datetime="2015-12-02T00:00:00+08:00">2015-12-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Chrome/" itemprop="url" rel="index"><span itemprop="name">Chrome</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="打开-浏览器地址输入-chrome-inspect"><a href="#打开-浏览器地址输入-chrome-inspect" class="headerlink" title="打开,浏览器地址输入: chrome:&#x2F;&#x2F;inspect"></a>打开,浏览器地址输入: chrome:&#x2F;&#x2F;inspect</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/15-12-2/40398420.jpg"></p>
+<!--
+
+-->
+
+
+
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/15-12-2/46191709.jpg"></p>
+<!--
+-->
+
+
+
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-4-12/71201648.jpg"></p>
+<!--
+-->
+
+<p><code>Mobile Web 调试指南（2）：远程调试</code> <a target="_blank" rel="noopener" href="http://blog.jobbole.com/68606">http://blog.jobbole.com/68606</a></p>
+<h1 id="微信web开发者工具-远程调试"><a href="#微信web开发者工具-远程调试" class="headerlink" title="微信web开发者工具-远程调试"></a>微信web开发者工具-远程调试</h1><p><code>微信浏览器全面升级至X5 Blink内核，支持远程调试</code><br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&key=1461077225&version=1&lang=zh_CN">https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&amp;key=1461077225&amp;version=1&amp;lang=zh_CN</a></p>
+<p><code>TBS 2.0 版本震撼上线,已经全量发布!</code> <a target="_blank" rel="noopener" href="http://x5.tencent.com/guide?id=4000">http://x5.tencent.com/guide?id=4000</a></p>
+<p><code>微信web开发者工具</code><br><code>new</code>  <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/advanced/wiki?t=t=resource/res_main&id=mp1455784140">https://mp.weixin.qq.com/advanced/wiki?t=t=resource/res_main&amp;id=mp1455784140</a><br><code>old</code>  <a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/wiki/10/e5f772f4521da17fa0d7304f68b97d7e.html">http://mp.weixin.qq.com/wiki/10/e5f772f4521da17fa0d7304f68b97d7e.html</a></p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz/PiajxSqBRaEIQxibpLbyuSK8jCzLMb60WcZqcAd9Pjl70kibOvcpnrIAgCNkwdichRC63qFQjn7apTcYbO8ibMUOe8Q/0?wx_fmt=jpeg"></p>
+<!--
+-->
+
+
+
+
+
+
+<hr>
+<p><strong>更多</strong><br><code>Chrome浏览器 远程调试 Android Web App</code></p>
+<p><a target="_blank" rel="noopener" href="https://developer.chrome.com/devtools/docs/remote-debugging#port-forwarding">https://developer.chrome.com/devtools/docs/remote-debugging#port-forwarding</a></p>
+<p><code>各种 真机远程调试 方法 汇总</code><br><a target="_blank" rel="noopener" href="https://github.com/jieyou/remote_inspect_web_on_real_device">https://github.com/jieyou/remote_inspect_web_on_real_device</a><br><code>知乎</code>  <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24250869">https://www.zhihu.com/question/24250869</a></p>
+<p><code>Mobile Web 调试指南（2）–– 远程调试</code> 含<code>iOS 平台- Safari Mobile</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/UZFnQz">http://www.tuicool.com/articles/UZFnQz</a></p>
+<p><code>远程调试(Remote Debugging) | TID-财付通设计中心</code><br><a target="_blank" rel="noopener" href="http://tid.tenpay.com/?p=6161">http://tid.tenpay.com/?p=6161</a></p>
+<p><code>移动端前端开发调试</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.cocoachina.com/webapp/20141231/10815.html">http://www.cocoachina.com/webapp/20141231/10815.html</a></p>
+<h1 id="更多的chrome功能"><a href="#更多的chrome功能" class="headerlink" title="更多的chrome功能"></a>更多的chrome功能</h1><p><code>chrome://about</code> 关于,更多<br><code>chrome://flags</code> 实验功能开关</p>
+<span id="more"></span>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Chrom/" rel="tag"># Chrom</a>
+              <a href="/tags/Android-%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/" rel="tag"># Android 远程调试</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2015/12/01/%E5%BF%AB%E9%80%9F%E5%90%AF%E5%8A%A8%E2%80%94%E2%80%94%E6%96%B0%E5%93%81%E4%BB%8B%E7%BB%8D%20Wow/" rel="prev" title="快速启动——新品介绍 Wow">
+                  <i class="fa fa-angle-left"></i> 快速启动——新品介绍 Wow
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2015/12/03/win10%E2%80%94%E2%80%94%E5%B0%8F%E5%B8%B8%E8%AF%86/" rel="next" title="Win10——小常识">
+                  Win10——小常识 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

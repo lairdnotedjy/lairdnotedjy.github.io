@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="RAMDirectory和FSDirectory都继承自BaseDirectory，而BaseDirectory继承自Directory，Directory是Lucene中设计的一个顶层抽象类，可以将其看做本地文件系统的一个目录。 RAMDirectory是基于内存实现的，具有较高的存储速度，但是受到内存大小的限制，而FSDirectory是基于文件系统实现的，针对不同的操作系统有不同的具体实现类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用RAMDirectory做缓存提高Lucene性能">
+<meta property="og:url" content="https://www.sovdating.com/2017/06/28/Use-RAMDirectory-to-do-the-cache-to-improve-lucene-s-performance/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="RAMDirectory和FSDirectory都继承自BaseDirectory，而BaseDirectory继承自Directory，Directory是Lucene中设计的一个顶层抽象类，可以将其看做本地文件系统的一个目录。 RAMDirectory是基于内存实现的，具有较高的存储速度，但是受到内存大小的限制，而FSDirectory是基于文件系统实现的，针对不同的操作系统有不同的具体实现类">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-06-28T14:02:21.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:24:42.754Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="Lucene">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/2017/06/28/Use-RAMDirectory-to-do-the-cache-to-improve-lucene-s-performance/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/2017/06/28/Use-RAMDirectory-to-do-the-cache-to-improve-lucene-s-performance/","path":"2017/06/28/Use-RAMDirectory-to-do-the-cache-to-improve-lucene-s-performance/","title":"用RAMDirectory做缓存提高Lucene性能"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>用RAMDirectory做缓存提高Lucene性能 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">330</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2017/06/28/Use-RAMDirectory-to-do-the-cache-to-improve-lucene-s-performance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="用RAMDirectory做缓存提高Lucene性能 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用RAMDirectory做缓存提高Lucene性能
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-06-28 22:02:21" itemprop="dateCreated datePublished" datetime="2017-06-28T22:02:21+08:00">2017-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>RAMDirectory和FSDirectory都继承自BaseDirectory，而BaseDirectory继承自Directory，Directory是Lucene中设计的一个顶层抽象类，可以将其看做本地文件系统的一个目录。</p>
+<p>RAMDirectory是基于内存实现的，具有较高的存储速度，但是受到内存大小的限制，而FSDirectory是基于文件系统实现的，针对不同的操作系统有不同的具体实现类，这些实现类无需用户操心，只需要调用FSDirectory.open(Path path)方法，它就会帮助我们选择最适合的子类，FSDirectory的瓶颈在于磁盘I&#x2F;O。</p>
+<p>如果机器内存足够大的话，那么组合使用RAMDirectory和FSDirectory将能够极大地提高Lucene的性能。组合使用两者的应用场景很多，不同的场景可以分别解决不同的需求，仅列举如下</p>
+<ul>
+<li>批量索引，而无需检索的情况下，先把document存到RAMDirectory中，当达到一定数量之后，再把这些索引一次性加入FSDirectory里</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.lucene.analysis.core.WhitespaceAnalyzer;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.document.Document;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.document.Field;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.document.StringField;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.index.DirectoryReader;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.index.IndexWriter;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.index.IndexWriterConfig;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.search.IndexSearcher;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.search.MatchAllDocsQuery;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.store.FSDirectory;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.store.RAMDirectory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Paths;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Created by wangxu on 2017/06/19 15:31.</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Description: 基于Lucene 6.5开发</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Wang Xu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> V1.0.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> V1.0.0 &lt;br/&gt;</span></span><br><span class="line"><span class="comment"> * WebSite: http://codepub.cn &lt;br&gt;</span></span><br><span class="line"><span class="comment"> * Licence: Apache v2 License</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RamFSDirectoryDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">RAMDirectory</span> <span class="variable">ramDirectory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RAMDirectory</span>();</span><br><span class="line">        <span class="type">IndexWriter</span> <span class="variable">ramWriter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexWriter</span>(ramDirectory, <span class="keyword">new</span> <span class="title class_">IndexWriterConfig</span>(<span class="keyword">new</span> <span class="title class_">WhitespaceAnalyzer</span>()).setOpenMode(IndexWriterConfig.OpenMode.CREATE));</span><br><span class="line"></span><br><span class="line">        <span class="type">FSDirectory</span> <span class="variable">fsDirectory</span> <span class="operator">=</span> FSDirectory.open(Paths.get(<span class="string">&quot;F:/index_RAM_FS&quot;</span>));</span><br><span class="line">        <span class="type">IndexWriter</span> <span class="variable">fsWriter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexWriter</span>(fsDirectory, <span class="keyword">new</span> <span class="title class_">IndexWriterConfig</span>(<span class="keyword">new</span> <span class="title class_">WhitespaceAnalyzer</span>()).setOpenMode(IndexWriterConfig.OpenMode</span><br><span class="line">                .CREATE_OR_APPEND));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//简单起见，这里的数量都比较少，例如索引10000个document，每100个document作为一批</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">tempCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">            <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Document</span>();</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;key&quot;</span>, String.valueOf(i), Field.Store.YES));</span><br><span class="line">            ramWriter.addDocument(document);</span><br><span class="line">            tempCount++;</span><br><span class="line">            <span class="keyword">if</span> (tempCount % <span class="number">100</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                ramWriter.commit();</span><br><span class="line">                ramWriter.close();</span><br><span class="line">                fsWriter.addIndexes(ramDirectory);</span><br><span class="line">                ramDirectory.close();</span><br><span class="line">                fsWriter.commit();</span><br><span class="line">                ramDirectory = <span class="keyword">new</span> <span class="title class_">RAMDirectory</span>();</span><br><span class="line">                ramWriter = <span class="keyword">new</span> <span class="title class_">IndexWriter</span>(ramDirectory, <span class="keyword">new</span> <span class="title class_">IndexWriterConfig</span>(<span class="keyword">new</span> <span class="title class_">WhitespaceAnalyzer</span>()).setOpenMode(IndexWriterConfig.OpenMode.CREATE));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//退出时确保RAMDirectory中内容都被加入本地</span></span><br><span class="line">        <span class="keyword">if</span> (ramWriter != <span class="literal">null</span>) &#123;</span><br><span class="line">            ramWriter.commit();</span><br><span class="line">            ramWriter.close();</span><br><span class="line">            fsWriter.addIndexes(ramDirectory);</span><br><span class="line">            ramDirectory.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">IndexSearcher</span> <span class="variable">indexSearcher</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexSearcher</span>(DirectoryReader.open(fsWriter.getDirectory()));</span><br><span class="line">        fsWriter.close();</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> indexSearcher.count(<span class="keyword">new</span> <span class="title class_">MatchAllDocsQuery</span>());</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>索引的同时需要搜索，前提是内存总量大于索引文件总量，如果要求新加入的索引对搜索可见，即实时搜索，要怎么做呢？显然实时搜索需要writer和searcher共用同一份索引，同时要定时的将内存中索引备份到文件系统，否则机器一旦宕机，内存中所有的索引文件都将丢失。代码实现也很简单，在备份的时候，可以使用调度线程去进行备份操作，同时还不影响主线程继续接受索引请求；备份策略有两种：全量和增量，增量直接比较文件名，将新增文件拷贝到文件系统，同时删除已过时的索引文件即可。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.lucene.analysis.core.WhitespaceAnalyzer;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.document.Document;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.document.Field;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.document.StringField;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.index.*;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.search.IndexSearcher;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.search.MatchAllDocsQuery;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.store.Directory;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.store.FSDirectory;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.store.IOContext;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.store.RAMDirectory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Path;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Paths;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ScheduledExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Created by wangxu on 2017/06/19 15:31.</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Description: 基于Lucene 6.5开发</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Wang Xu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> V1.0.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> V1.0.0 &lt;br/&gt;</span></span><br><span class="line"><span class="comment"> * WebSite: http://codepub.cn &lt;br&gt;</span></span><br><span class="line"><span class="comment"> * Licence: Apache v2 License</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RamFSDirectoryDemo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> IndexWriter ramWriter;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> RAMDirectory ramDirectory;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Backup</span> <span class="variable">backup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Backup</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">//将文件系统中索引文件加载到内存中</span></span><br><span class="line">        <span class="type">FSDirectory</span> <span class="variable">fsDirectory</span> <span class="operator">=</span> FSDirectory.open(Paths.get(<span class="string">&quot;F:/index_RAM_FS&quot;</span>));</span><br><span class="line">        ramDirectory = <span class="keyword">new</span> <span class="title class_">RAMDirectory</span>(fsDirectory, IOContext.READONCE);</span><br><span class="line">        fsDirectory.close();</span><br><span class="line"></span><br><span class="line">        <span class="type">IndexWriterConfig</span> <span class="variable">indexWriterConfig</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexWriterConfig</span>(<span class="keyword">new</span> <span class="title class_">WhitespaceAnalyzer</span>());</span><br><span class="line">        indexWriterConfig.setIndexDeletionPolicy(<span class="keyword">new</span> <span class="title class_">SnapshotDeletionPolicy</span>(<span class="keyword">new</span> <span class="title class_">KeepOnlyLastCommitDeletionPolicy</span>()));</span><br><span class="line">        ramWriter = <span class="keyword">new</span> <span class="title class_">IndexWriter</span>(ramDirectory, indexWriterConfig);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//先添加一条记录</span></span><br><span class="line">        <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Document</span>();</span><br><span class="line">        document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;first&quot;</span>, <span class="string">&quot;first&quot;</span>, Field.Store.YES));</span><br><span class="line">        ramWriter.addDocument(document);</span><br><span class="line">        ramWriter.commit();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//定时备份线程</span></span><br><span class="line">        <span class="type">ScheduledExecutorService</span> <span class="variable">backupThread</span> <span class="operator">=</span> Executors.newSingleThreadScheduledExecutor();</span><br><span class="line">        backupThread.scheduleAtFixedRate(backup, <span class="number">0</span>, <span class="number">2</span>, TimeUnit.SECONDS);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//可以继续接受索引请求</span></span><br><span class="line">        document = <span class="keyword">new</span> <span class="title class_">Document</span>();</span><br><span class="line">        document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;key&quot;</span>, <span class="string">&quot;key&quot;</span>, Field.Store.YES));</span><br><span class="line">        ramWriter.addDocument(document);</span><br><span class="line">        ramWriter.commit();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//等待索引拷贝完成</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//接受搜索请求，可实现实时搜索</span></span><br><span class="line">        <span class="type">IndexSearcher</span> <span class="variable">indexSearcher</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexSearcher</span>(DirectoryReader.open(ramWriter.getDirectory()));</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> indexSearcher.count(<span class="keyword">new</span> <span class="title class_">MatchAllDocsQuery</span>());</span><br><span class="line">        System.out.println(<span class="string">&quot;total hits: &quot;</span> + count);</span><br><span class="line">        System.out.println(<span class="string">&quot;内存中索引文件：&quot;</span> + Arrays.asList(ramDirectory.listAll()));</span><br><span class="line">        <span class="comment">//查看备份索引是否完整，此处有一个注意点，如果需要在备份索引上打开searcher，那么在备份索引文件的时候需要先备份其它文件，最后再备份segments_N文件</span></span><br><span class="line">        <span class="comment">//因为开searcher的时候，会先加载segments_N文件，这种方式可以保证加载完segments_N文件之后，再加载其它文件一定成功</span></span><br><span class="line"></span><br><span class="line">        fsDirectory = FSDirectory.open(Paths.get(<span class="string">&quot;F:/index_RAM_FS&quot;</span>));</span><br><span class="line">        System.out.println(<span class="string">&quot;备份中索引文件：&quot;</span> + Arrays.asList(fsDirectory.listAll()));</span><br><span class="line">        backupThread.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Backup</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">            IndexWriterConfig config;</span><br><span class="line">            <span class="type">SnapshotDeletionPolicy</span> <span class="variable">indexDeletionPolicy</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="type">IndexCommit</span> <span class="variable">snapshot</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                ramWriter.commit();</span><br><span class="line">                config = (IndexWriterConfig) ramWriter.getConfig();</span><br><span class="line">                indexDeletionPolicy = (SnapshotDeletionPolicy) config.getIndexDeletionPolicy();</span><br><span class="line">                snapshot = indexDeletionPolicy.snapshot();</span><br><span class="line">                config.setIndexCommit(snapshot);</span><br><span class="line">                Collection&lt;String&gt; fileNames = snapshot.getFileNames();</span><br><span class="line">                <span class="type">Path</span> <span class="variable">path</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;F:/index_RAM_FS&quot;</span>);</span><br><span class="line">                <span class="comment">//全量增量任选一种即可</span></span><br><span class="line">                <span class="type">boolean</span> <span class="variable">b</span> <span class="operator">=</span> incrementalBackup(fileNames, path);</span><br><span class="line">                <span class="comment">//boolean b = fullBackup(fileNames, path);</span></span><br><span class="line">                <span class="keyword">if</span> (!b) &#123;</span><br><span class="line">                    System.err.println(<span class="string">&quot;Backup occurs error!&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                System.err.println(e.getMessage());</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    indexDeletionPolicy.release(snapshot);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    System.err.println(e.getMessage());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">fullBackup</span><span class="params">(Collection&lt;String&gt; fileNames, Path path)</span> &#123;</span><br><span class="line">            Objects.requireNonNull(path);</span><br><span class="line">            Directory to;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                to = FSDirectory.open(path);</span><br><span class="line">                <span class="comment">// 全量备份，直接清空拷贝</span></span><br><span class="line">                <span class="keyword">for</span> (File file : path.toFile().listFiles()) &#123;</span><br><span class="line">                    file.delete();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span> (String fileName : fileNames) &#123;</span><br><span class="line">                    to.copyFrom(ramDirectory, fileName, fileName, IOContext.DEFAULT);</span><br><span class="line">                &#125;</span><br><span class="line">                to.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">incrementalBackup</span><span class="params">(Collection&lt;String&gt; fileNames, Path path)</span> &#123;</span><br><span class="line">            <span class="comment">// 增量备份，稍微复杂一些，比较文件名，将ramDirectory中新增索引拷贝过去，同时将ramDirectory中不存在的索引但是在path中存在的旧索引删除</span></span><br><span class="line">            Objects.requireNonNull(path);</span><br><span class="line">            <span class="comment">//fileNames被IndexCommit引用，需要重新构造set集合，进行移除操作</span></span><br><span class="line">            Set&lt;String&gt; files = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;(fileNames);</span><br><span class="line">            <span class="keyword">for</span> (File file : path.toFile().listFiles()) &#123;</span><br><span class="line">                <span class="keyword">if</span> (files.contains(file.getName())) &#123;</span><br><span class="line">                    <span class="comment">//该索引已存在，则不拷贝</span></span><br><span class="line">                    files.remove(file.getName());</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//删除已经过时的索引</span></span><br><span class="line">                    file.delete();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//拷贝全部新增索引</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">Directory</span> <span class="variable">to</span> <span class="operator">=</span> FSDirectory.open(path);</span><br><span class="line">                <span class="keyword">for</span> (String file : files) &#123;</span><br><span class="line">                    to.copyFrom(ramDirectory, file, file, IOContext.DEFAULT);</span><br><span class="line">                &#125;</span><br><span class="line">                to.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>如果内存不够大，不能够存放全部的本地文件系统索引，那么如何实现呢？这时候，需要两套IndexWriter，一套用来处理本地文件系统中的索引，另一套在内存中可以接受新的索引请求；对索引的操作无非就是新增、删除、更新这三种，下面分别论述</p>
+</li>
+<li><p>删除索引： 对于删除操作比较简单，两个IndexWriter都执行一次即可，如果其中一个IndexWriter中不存在待删除的索引的话，那么对索引文件不会有任何影响；这时候又分两种情况，一是待删除的索引在内存中，那么删除-提交-重新打开索引，耗时很短；二是待删除索引在硬盘上，这时候删除-提交，到底要不要重新打开，需要视业务而定，因为硬盘上的索引通常是很大的，如果频繁删除频繁重新打开的话，是很耗性能的，而如果不重新打开，这时候删除的索引对searcher是不可见的，也就是说用户仍然可以搜索到已删除的索引，比较好的方式是用一个后台线程去定时的重新打开硬盘索引，然后更新searcher即可，但是这样对于删除操作无法做到准实时，会有一定的延时。</p>
+</li>
+<li><p>新增索引：所有的新增操作都使用内存中的IndexWriter（称为A），然后提交-重新打开索引-更新searcher，一切都是在内存中操作，耗时极短，对于实时搜索是解决了，而且Lucene中已经提供了MultiReader可以组合多个子reader，很适合这种情况；但是当内存中索引尺寸达到一定大小之后，需要将其合并到文件系统中；在合并的时候还需要另外再开一个内存中的IndexWriter（称为B）用来接受索引合并期间的索引新增操作。不过这种方式实现起来很复杂，需要处理很多问题，例如在内存索引 A 和硬盘索引合并期间如果有更新删除操作怎么处理？在合并之后需要更新MultiReader，但是旧的MultiReader上面还挂有搜索请求怎么办？在新开一个内存索引 B 之后，如何让MultiReader覆盖住它？因为在 B 中必须先有索引，然后才能开Reader，进而才能更新MultiReader；若新增索引速度实在太快，在合并过程没有完成的时候，内存索引又满了，要怎么办？除此以外还有很多问题需要考虑。</p>
+</li>
+<li><p>更新索引：更新其实可以看作是两步操作，先删除后新增，这两步可以借鉴上面的论述。更新操作是无法同时应用于两个IndexWriter的，因为在Lucene中更新的逻辑是这样的，如果存在则更新，如果不存在则新增，那么假设一个IndexWriter中存在，另一个不存在，如果两个都应用更新，那么最后的结果很简单就是存在两份一样的document了。</p>
+</li>
+</ul>
+<p>个人理解优雅的程序应该是简单的，越是简单的程序其实越是健壮，这种方案实现起来很复杂，即使这么复杂的程序实现了，其健壮性仍然值得担忧，所以不是特别推荐使用这种方案。比较好的方案当然是上Elasticsearch集群了，Elasticsearch的刷新时间默认是1s钟，也就是说，最迟1s之后，就可以看到新的数据。当然如果非要针对Lucene进行开发，可以参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/forfuture1978/archive/2010/11/29/1891476.html">Linked公司开源的Zoie搜索引擎</a>。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Lucene/" rel="tag"># Lucene</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/06/28/RPC%20%E7%9B%B8%E5%85%B3/" rel="prev" title="RPC 相关">
+                  <i class="fa fa-angle-left"></i> RPC 相关
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/06/29/markdown_tables%E8%A1%A8%E6%A0%BC%E5%B7%A5%E5%85%B7/" rel="next" title="markdown_tables表格工具">
+                  markdown_tables表格工具 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
