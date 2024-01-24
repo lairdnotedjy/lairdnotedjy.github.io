@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="主工程  子模块（web&#x2F;或不选）  预览   Maven 多模块项目参考 iBase4Jhttp:&#x2F;&#x2F;git.oschina.net&#x2F;iBase4J&#x2F;iBase4J  #32 iBase4J 架构研究 [置顶] http:&#x2F;&#x2F;git.oschina.net&#x2F;iBase4J&#x2F;iBase4J&#x2F;issues&#x2F;32 快速构建123456789* 启动命令：     clean package">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java IDEA Maven搭建多模块项目">
+<meta property="og:url" content="https://www.sovdating.com/Java%20IDEA%20Maven%E6%90%AD%E5%BB%BA%E5%A4%9A%E6%A8%A1%E5%9D%97%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="主工程  子模块（web&#x2F;或不选）  预览   Maven 多模块项目参考 iBase4Jhttp:&#x2F;&#x2F;git.oschina.net&#x2F;iBase4J&#x2F;iBase4J  #32 iBase4J 架构研究 [置顶] http:&#x2F;&#x2F;git.oschina.net&#x2F;iBase4J&#x2F;iBase4J&#x2F;issues&#x2F;32 快速构建123456789* 启动命令：     clean package">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/95754311.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/54843808.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/87323924.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/42850945.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/1742924.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/17956154.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/85002761.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-7-21/41633512.jpg">
+<meta property="article:published_time" content="2017-05-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.051Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="Maven">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/95754311.jpg">
+
+
+<link rel="canonical" href="https://www.sovdating.com/Java%20IDEA%20Maven%E6%90%AD%E5%BB%BA%E5%A4%9A%E6%A8%A1%E5%9D%97%E9%A1%B9%E7%9B%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/Java%20IDEA%20Maven%E6%90%AD%E5%BB%BA%E5%A4%9A%E6%A8%A1%E5%9D%97%E9%A1%B9%E7%9B%AE/","path":"Java IDEA Maven搭建多模块项目/","title":"Java IDEA Maven搭建多模块项目"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java IDEA Maven搭建多模块项目 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">主工程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%90%E6%A8%A1%E5%9D%97%EF%BC%88web-%E6%88%96%E4%B8%8D%E9%80%89%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">子模块（web&#x2F;或不选）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%84%E8%A7%88"><span class="nav-number">3.</span> <span class="nav-text">预览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven-%E5%A4%9A%E6%A8%A1%E5%9D%97%E9%A1%B9%E7%9B%AE%E5%8F%82%E8%80%83-iBase4J"><span class="nav-number">4.</span> <span class="nav-text">Maven 多模块项目参考 iBase4J</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA"><span class="nav-number">5.</span> <span class="nav-text">快速构建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">6.</span> <span class="nav-text">小技巧</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Java%20IDEA%20Maven%E6%90%AD%E5%BB%BA%E5%A4%9A%E6%A8%A1%E5%9D%97%E9%A1%B9%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java IDEA Maven搭建多模块项目 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java IDEA Maven搭建多模块项目
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-13 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-13T00:00:00+08:00">2017-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="主工程"><a href="#主工程" class="headerlink" title="主工程"></a>主工程</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/95754311.jpg"></p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/54843808.jpg"></p>
+<h1 id="子模块（web-或不选）"><a href="#子模块（web-或不选）" class="headerlink" title="子模块（web&#x2F;或不选）"></a>子模块（web&#x2F;或不选）</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/87323924.jpg"></p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/42850945.jpg"></p>
+<h1 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/1742924.jpg"></p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/17956154.jpg"></p>
+<hr>
+<h1 id="Maven-多模块项目参考-iBase4J"><a href="#Maven-多模块项目参考-iBase4J" class="headerlink" title="Maven 多模块项目参考 iBase4J"></a>Maven 多模块项目参考 iBase4J</h1><p><a target="_blank" rel="noopener" href="http://git.oschina.net/iBase4J/iBase4J">http://git.oschina.net/iBase4J/iBase4J</a></p>
+<p><code> #32 iBase4J 架构研究 [置顶]</code> <a target="_blank" rel="noopener" href="http://git.oschina.net/iBase4J/iBase4J/issues/32">http://git.oschina.net/iBase4J/iBase4J/issues/32</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/85002761.jpg"></p>
+<h1 id="快速构建"><a href="#快速构建" class="headerlink" title="快速构建"></a>快速构建</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">* 启动命令：</span><br><span class="line">     clean package -P build tomcat7:run-war-only -f pom-sys-service-server.xml</span><br><span class="line">     clean package -P build tomcat7:run-war-only -f pom-sys-web-server.xml</span><br><span class="line">* 打包命令：</span><br><span class="line">     clean package -P build -f pom-sys-service-server.xml</span><br><span class="line">     clean package -P build -f pom-sys-service-server.xml</span><br><span class="line">* 生产环境打包命令：</span><br><span class="line">     clean package -P product -f pom-sys-service-server.xml</span><br><span class="line">     clean package -P product -f pom-sys-service-server.xml</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>pom-sys-service-server.xml (方便在主项目iBase4j中指定具体模块的构建)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">&lt;artifactId&gt;iBase4J-SYS-Service-Server&lt;/artifactId&gt;</span><br><span class="line">&lt;name&gt;$&#123;project.artifactId&#125;&lt;/name&gt;</span><br><span class="line">&lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">&lt;url&gt;http://maven.apache.org&lt;/url&gt;</span><br><span class="line">&lt;parent&gt;</span><br><span class="line">&lt;groupId&gt;org.ibase4j&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;iBase4J&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.1.0&lt;/version&gt;</span><br><span class="line">&lt;relativePath&gt;./&lt;/relativePath&gt;</span><br><span class="line">&lt;/parent&gt;</span><br><span class="line">&lt;modules&gt;</span><br><span class="line">&lt;module&gt;iBase4J-Common&lt;/module&gt;</span><br><span class="line">&lt;module&gt;iBase4J-SYS-Facade&lt;/module&gt;</span><br><span class="line">&lt;module&gt;iBase4J-SYS-Service&lt;/module&gt;</span><br><span class="line">&lt;/modules&gt;</span><br><span class="line">&lt;!-- clean package -P build tomcat7:run-war-only -f pom-sys-service-server.xml --&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h1><p>功能搜索<code>Ctrl+shift+A</code>-<code>reim</code> 选择<code>Reimport</code>即可<code>刷新 工程 maven</code><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-7-21/41633512.jpg"></p>
+<hr>
+<p><strong>参考</strong><br><code>Java一步一步构建web系统 在IDEA下用Maven搭建多模块项目 - 推酷</code>  <code>★</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/FZfiYfF">http://www.tuicool.com/articles/FZfiYfF</a></p>
+<p><code>[工具资源] Intellij IDEA 2016 学习系列之 (一) 创建 maven 多模块项目 - 推酷</code>  <code>★</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/z6ZZzuR">http://www.tuicool.com/articles/z6ZZzuR</a></p>
+<p><code>每日一博 | Maven 多模块项目介绍及搭建 - 推酷</code> <code>★</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/yiIra2">http://www.tuicool.com/articles/yiIra2</a></p>
+<p><code>Maven提高篇系列之（一）——多模块 vs 继承</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/RJBZb2z">www.tuicool.com/articles/RJBZb2z</a></p>
+<p><code>使用命令行快速创建Maven多模块项目 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/Y3Ab2uJ">http://www.tuicool.com/articles/Y3Ab2uJ</a></p>
+<hr>
+<p><code>用idea创建一个maven web项目 - Coder Wu的博客 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/sinat_34596644/article/details/52891274">http://blog.csdn.net/sinat_34596644/article/details/52891274</a></p>
+<p><code>使用IntelliJ IDEA 15和Maven创建Java Web项目 - MyArrow的专栏 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/myarrow/article/details/50824793">http://blog.csdn.net/myarrow/article/details/50824793</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Maven/" rel="tag"># Maven</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/MySQL-pull-the-massive-data-out-of-memory-error/" rel="prev" title="MySQL 拉取海量数据报 OutOfMemoryError">
+                  <i class="fa fa-angle-left"></i> MySQL 拉取海量数据报 OutOfMemoryError
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/spring%E6%B3%A8%E8%A7%A3@ResponseBody%E8%BF%94%E5%9B%9EJSON%20%E8%AE%BE%E7%BD%AE%E4%B8%8D%E8%BF%94%E5%9B%9E%E4%B8%BA%20null%20%E7%9A%84%E5%80%BC/" rel="next" title="spring注解@ResponseBody返回JSON 设置不返回为 null 的值">
+                  spring注解@ResponseBody返回JSON 设置不返回为 null 的值 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

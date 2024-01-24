@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="从windows上往Linux上传送文件的时候，安装openSSH后，在cmd中使用scp命令，需要在命令执行后输入密码，这样就无法在程序中调用。批处理也不是很熟，在网上找了一些资料后结果如下：因为runas命令也有类似情况，网上一般都是以此为例1.http:&#x2F;&#x2F;www.cn-dos.net&#x2F;forum&#x2F;viewthread.php?tid&#x3D;34574 [c-sharp] view plain c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="批处理自动输入命令行">
+<meta property="og:url" content="https://www.sovdating.com/%E6%89%B9%E5%A4%84%E7%90%86%E8%87%AA%E5%8A%A8%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4%E8%A1%8C/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="从windows上往Linux上传送文件的时候，安装openSSH后，在cmd中使用scp命令，需要在命令执行后输入密码，这样就无法在程序中调用。批处理也不是很熟，在网上找了一些资料后结果如下：因为runas命令也有类似情况，网上一般都是以此为例1.http:&#x2F;&#x2F;www.cn-dos.net&#x2F;forum&#x2F;viewthread.php?tid&#x3D;34574 [c-sharp] view plain c">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-05-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.123Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="自动输入">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/%E6%89%B9%E5%A4%84%E7%90%86%E8%87%AA%E5%8A%A8%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4%E8%A1%8C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/%E6%89%B9%E5%A4%84%E7%90%86%E8%87%AA%E5%8A%A8%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4%E8%A1%8C/","path":"批处理自动输入命令行/","title":"批处理自动输入命令行"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>批处理自动输入命令行 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Rem-%E8%A1%A8%E7%99%BD%E8%AE%B0%E4%BA%8B%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">Rem 表白记事本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%BE%93%E5%85%A5-%E8%BF%9E%E7%BB%AD%E6%89%A7%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">自动输入 &amp; 连续执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%B9%E5%A4%84%E7%90%86%E6%B3%A8%E9%87%8A"><span class="nav-number">3.</span> <span class="nav-text">批处理注释</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E6%89%B9%E5%A4%84%E7%90%86%E8%87%AA%E5%8A%A8%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="批处理自动输入命令行 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          批处理自动输入命令行
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-23 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-23T00:00:00+08:00">2017-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>从windows上往Linux上传送文件的时候，安装openSSH后，在cmd中使用scp命令，需要在命令执行后输入密码，这样就无法在程序中调用。批处理也不是很熟，在网上找了一些资料后结果如下：因为runas命令也有类似情况，网上一般都是以此为例<br>1.<a target="_blank" rel="noopener" href="http://www.cn-dos.net/forum/viewthread.php?tid=34574">http://www.cn-dos.net/forum/viewthread.php?tid=34574</a></p>
+<p>[c-sharp] view plain copy</p>
+<ul>
+<li>方法一：使用VBS的SendKeys来输入密码  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo set pws=WScript.CreateObject(&quot;WScript.Shell&quot;)&gt;%temp%/pws.vbs  </span><br><span class="line">echo pws.SendKeys &quot;1&#123;ENTER&#125;&quot;&gt;&gt;%temp%/pws.vbs  </span><br><span class="line">wscript %temp%/pws.vbs&amp;runas /u:test1 cmd.exe  </span><br></pre></td></tr></table></figure></li>
+<li>方法二：使用&#x2F;savecred参数<br>独立用户执行程序时第一次需要建立凭据，其间输入密码是不会回显的，你看不到，输了后回车即可。<br>以后在运行就不需要输入密码了。  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">runas /u:test1 cmd.exe  输入密码并回车  </span><br><span class="line">runas /savecred /u:test1 explorer  不用输密码了  </span><br></pre></td></tr></table></figure></li>
+<li>方法三：用PsTools工具中的PsExec来替代Runas</li>
+</ul>
+<hr>
+<h1 id="Rem-表白记事本"><a href="#Rem-表白记事本" class="headerlink" title="Rem 表白记事本"></a>Rem 表白记事本</h1><p>vbs 用sendkeys 模拟键盘自动输入  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Dim wsh</span><br><span class="line">Set wsh= CreateObject(&quot;wscript.shell&quot;)</span><br><span class="line">wsh.Run &quot;notepad&quot;</span><br><span class="line">WScript.Sleep 100</span><br><span class="line">wsh.SendKeys &quot;I&quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot; &quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot;L&quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot;O&quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot;V&quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot;E&quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot;  &quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot;U&quot;</span><br><span class="line">Set wsh=Nothing</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://blog.163.com/weishao_blog/blog/static/21510302920144711109954/">http://blog.163.com/weishao_blog/blog/static/21510302920144711109954/</a></p>
+<ul>
+<li><p>如何实现自动输入账号密码登陆</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">on error resume next</span><br><span class="line">dim WshShell</span><br><span class="line">set WshShell=CreateObject(&quot;WScript.Shell&quot;)</span><br><span class="line">WshShell.run&quot;http://WWW.BAIDU.COM&quot;</span><br><span class="line">WScript.Sleep 1200</span><br><span class="line">WshShell.Sendkeys&quot;输入帐号&quot;</span><br><span class="line">WScript.Sleep 1000</span><br><span class="line">WshShell.Sendkeys&quot;&#123;Tab&#125;&quot;</span><br><span class="line">WScript.Sleep 1000</span><br><span class="line">WshShell.Sendkeys&quot;输入密码&#123;enter&#125;&quot;</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://tieba.baidu.com/p/3418844408">http://tieba.baidu.com/p/3418844408</a></p>
+</li>
+<li><p>用vbs实现runas命令自动输入密码的问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Const AppPath = &quot;cmd /k runas /user:izual.4@qq.com &quot;&quot;explorer c:\&quot;&quot;&quot;</span><br><span class="line">dim aaa</span><br><span class="line">msgbox AppPath </span><br><span class="line">aaa = InputBox(&quot;请输入巡管帐号的密码&quot;,&quot;输入&quot;)</span><br><span class="line">Set objShell = CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">objshell.Run AppPath</span><br><span class="line">WScript.Sleep 1000</span><br><span class="line">objshell.SendKeys aaa</span><br><span class="line">objshell.SendKeys &quot;&#123;Enter&#125;&quot;</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://tieba.baidu.com/p/1926778758">http://tieba.baidu.com/p/1926778758</a></p>
+</li>
+</ul>
+<hr>
+<h1 id="自动输入-连续执行"><a href="#自动输入-连续执行" class="headerlink" title="自动输入 &amp; 连续执行"></a>自动输入 &amp; 连续执行</h1><ul>
+<li>all 1+.bat.vbs<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x27;call &quot;1.xcopy unsigned.apk.bat&quot;&#x27;</span><br><span class="line">&#x27;call &quot;2.signed.bat&quot;&#x27;</span><br><span class="line">&#x27;call &quot;3.adb install.bat&quot;&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x27;开始&#x27;</span><br><span class="line">Dim wsh</span><br><span class="line">Set wsh= CreateObject(&quot;wscript.shell&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">wsh.run &quot;&quot;&quot;0.cordova build android --release.bat&quot;&quot;&quot;,,true</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">wsh.run &quot;&quot;&quot;1.xcopy unsigned.apk.bat&quot;&quot;&quot;,,true</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">wsh.run &quot;2.signed.bat &amp; 3.adb_install.bat&quot;</span><br><span class="line">WScript.Sleep 500</span><br><span class="line">wsh.SendKeys &quot;**** **** &#123;enter&#125;&#123;enter&#125;&quot;</span><br><span class="line">wsh.SendKeys &quot; **** &#123;enter&#125;&#123;enter&#125;&quot;</span><br></pre></td></tr></table></figure></li>
+<li>VBS注释 ： ‘开始’</li>
+<li>空格路径：<code> &quot;&quot;&quot;* * &quot;&quot;&quot;</code></li>
+<li>连续执行：<code> &quot;2.signed.bat &amp; 3.adb_install.bat&quot;</code></li>
+<li>延迟输入：<code> wsh.SendKeys</code></li>
+</ul>
+<h1 id="批处理注释"><a href="#批处理注释" class="headerlink" title="批处理注释"></a>批处理注释</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1、:: 注释内容（第一个冒号后也可以跟任何一个非字母数字的字符）</span><br><span class="line"> 2、rem 注释内容（不能出现重定向符号和管道符号）</span><br><span class="line"> 3、echo 注释内容（不能出现重定向符号和管道符号）〉nul</span><br><span class="line"> 4、if not exist nul 注释内容（不能出现重定向符号和管道符号）</span><br><span class="line"> 5、:注释内容（注释文本不能与已有标签重名）</span><br><span class="line"> 6、%注释内容%（可以用作行间注释，不能出现重定向符号和管道符号）</span><br><span class="line"> 7、goto 标签 注释内容（可以用作说明goto的条件和执行内容）</span><br><span class="line"> 8、:标签 注释内容（可以用作标签下方段的执行内容）</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<p><code>批处理自动输入命令行 - 潜行 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/bao_qibiao/article/details/5360786">http://blog.csdn.net/bao_qibiao/article/details/5360786</a></p>
+<p><code>使用Runas，告别我心中永远的痛 - 桌面虚拟化杂谈 - 51CTO技术博客</code><br><a target="_blank" rel="noopener" href="http://virtualbus.blog.51cto.com/345374/459234">http://virtualbus.blog.51cto.com/345374/459234</a></p>
+<p><code>VBS中Run和Exec的区别_vbs_脚本之家</code><br><a target="_blank" rel="noopener" href="http://www.jb51.net/article/78086.htm">http://www.jb51.net/article/78086.htm</a></p>
+<p><code>vbs Run方法和Exec方法</code><br><a target="_blank" rel="noopener" href="http://chenpeng.info/html/1928">http://chenpeng.info/html/1928</a></p>
+<p><code>bat批处理的注释语句 - 快乐&amp;&amp;平凡 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/wh_19910525/article/details/8125762">http://blog.csdn.net/wh_19910525/article/details/8125762</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%87%AA%E5%8A%A8%E8%BE%93%E5%85%A5/" rel="tag"># 自动输入</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/linux%20alias/" rel="prev" title="linux alias">
+                  <i class="fa fa-angle-left"></i> linux alias
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/my-library-time-in-SHU/" rel="next" title="我的图书馆时光">
+                  我的图书馆时光 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

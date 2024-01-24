@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="设计模式-归类理解 创建(实例化):  4  （工厂,单例，原型,量产建造）  简单工厂模式（Simple Factory）  工厂方法模式（Factory Method）  抽象工厂模式（Abstract Factory） (集中生产,隐藏了创建过程及复杂度,关心选择)  建造者模式（Builder） (批量建造)  原型模式（Prototype） (深浅复制-clone&#x2F;序列化)  单例模式（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式相关">
+<meta property="og:url" content="https://www.sovdating.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9B%B8%E5%85%B3/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="设计模式-归类理解 创建(实例化):  4  （工厂,单例，原型,量产建造）  简单工厂模式（Simple Factory）  工厂方法模式（Factory Method）  抽象工厂模式（Abstract Factory） (集中生产,隐藏了创建过程及复杂度,关心选择)  建造者模式（Builder） (批量建造)  原型模式（Prototype） (深浅复制-clone&#x2F;序列化)  单例模式（">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-07-03T16:00:02.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.132Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9B%B8%E5%85%B3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9B%B8%E5%85%B3/","path":"设计模式相关/","title":"设计模式相关"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>设计模式相关 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%BD%92%E7%B1%BB%E7%90%86%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">设计模式-归类理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="nav-number">3.</span> <span class="nav-text">面向对象思想设计原则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%86%E7%B1%BB"><span class="nav-number">4.</span> <span class="nav-text">设计模式分类</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="设计模式相关 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          设计模式相关
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-07-04 00:00:02" itemprop="dateCreated datePublished" datetime="2016-07-04T00:00:02+08:00">2016-07-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="设计模式-归类理解"><a href="#设计模式-归类理解" class="headerlink" title="设计模式-归类理解"></a>设计模式-归类理解</h1><ul>
+<li><p>创建(实例化):  4  （<code>工厂,单例，原型,量产建造</code>）</p>
+<ul>
+<li><p>简单工厂模式（Simple Factory）</p>
+</li>
+<li><p>工厂方法模式（Factory Method）</p>
+</li>
+<li><p>抽象工厂模式（Abstract Factory） (集中生产,<code>隐藏了创建过程</code>及复杂度,<code>关心选择</code>)</p>
+</li>
+<li><p>建造者模式（Builder） (<code>批量建造</code>)</p>
+</li>
+<li><p>原型模式（Prototype） (<code>深浅复制-clone/序列化</code>)</p>
+</li>
+<li><p>单例模式（Singleton）(<code>全局单实例</code>)</p>
+</li>
+</ul>
+</li>
+<li><p>结构(类关系) : 7 （<code>能力补偿，动态选择，组合关系 ， 对象共享</code>）</p>
+<ul>
+<li><p><code>能力补偿</code></p>
+<ul>
+<li><p>适配器模式(Adapter) (<code>不匹配接口的兼容补偿</code>)</p>
+</li>
+<li><p>装饰模式(Decorator)(<code>装饰对象持有被装饰对象的实例,并在行为调用时增加能力</code>)</p>
+</li>
+<li><p>代理模式(Proxy) (代理<code>调用切面形成</code>)</p>
+</li>
+</ul>
+</li>
+<li><p><code>动态选择</code></p>
+<ul>
+<li>桥接模式(Bridge) (<code>可 对已经实例化的对象进行动态桥接 mysql,oracle</code> )</li>
+<li>行为类-策略(思想上更偏向规则(或策略)的提取)</li>
+</ul>
+</li>
+<li><p><code>组合关系</code></p>
+<ul>
+<li>组合模式(Composite) (合并或串联等组合 <code>tree+treeNode</code>)<ul>
+<li>外观模式(Facade) (门面&#x2F;子类关系包装,减少子类间复杂关系处理 <code>电脑组装[CPU,disk,Memory]</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code> 对象共享</code></p>
+<ul>
+<li>享元模式(Flyweight) (<code> 实现对象的共享,结合工厂方法, 提供给 消费方</code> )</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>行为(新功能):11 (<code>规则 提取 ,订阅发布,状态行为,链表遍历,中间类,模板/备份/翻译解释</code>)</p>
+<ul>
+<li><p><code>规则 提取</code></p>
+<pre><code>-  策略模式(Strategy)(`不同接口实现的策略提取` / `+-*/计算`策略提取)
+</code></pre>
+</li>
+<li><p><code>订阅发布</code></p>
+<ul>
+<li>观察者模式(Observer) (多订阅,单发布 &#x2F; <code>向所有的订阅者遍历发送调用</code>)</li>
+</ul>
+</li>
+<li><p><code>状态行为</code></p>
+<ul>
+<li>状态模式(State)(<code>方法的执行关联对象的状态,状态不同方法的行为不同</code>)</li>
+</ul>
+<pre><code>- 访问者模式(Visitor)(`被访问类的方法调用,由不同的访客,决定不同的行为.访客捎带访客信息`)
+</code></pre>
+</li>
+<li><p><code>链表遍历</code></p>
+<ul>
+<li>责任链 (Chain of Responsibility) (<code>类似链表,对象下存放着同类对象,在行为调用时,会逐级调用,形成责任链条</code>)</li>
+</ul>
+<pre><code>- 迭代器模式(Iterator) (`聚合对象的遍历`)
+</code></pre>
+</li>
+<li><p><code>中间 类</code></p>
+<ul>
+<li>中介者模式(Mediator) (各类的关系处理交给中介,使其解耦  &#x2F; <code>类将自己的所有方法能力托管给中介类,中介类供消费方调用</code>)</li>
+</ul>
+<pre><code>- 命令模式(Command)(` 消息&gt;命令&gt;处理者&gt;执行`  `司令下任务-&gt;命令-&gt;士兵-&gt;执行`)
+</code></pre>
+</li>
+<li><p><code>模板,备份, 翻译解释</code></p>
+<ul>
+<li><p>模板方法模式(Template Method)(<code>字符串中约定符的替换及字符串的切分和处理[8+8]</code>)</p>
+</li>
+<li><p>备忘录模式(Memento) (<code>存档(或记忆),在类状态改变前,先备份,必要时可还原</code>)</p>
+</li>
+<li><p>解释器模式(Interpreter)( <code>对 内容进行解释(或翻译) </code>  <code> new Plus().interpret(new Context(9, 2)</code> )</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>[练习&amp;理解-代码]</strong><br><a target="_blank" rel="noopener" href="https://github.com/liuxiang/myServer/tree/master/demo-designPatterns/src/main/java">https://github.com/liuxiang/myServer/tree/master/demo-designPatterns/src/main/java</a></p>
+<hr>
+<h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><p>设计模式分三种类型，<code>创建型有</code>工厂单例 建造原型 <code>基本用于</code>简化对象的创建过程。<code>结构型有</code>适配器装饰代理 桥接 <code>基本用于</code>能力的补偿或者扩展。<code>行为型有</code>策略 观察 状态访问者 <code>行为型的11个里</code>这几个相对常用。<code>还有</code>就是常见的生产者消费者这个归属架构模式，体现在会话的解耦，当然程序也是解耦的</p>
+<ul>
+<li>较为完整<br>创建型，工厂单例 原型建造 <code> 基本 用于</code>简化对象的创建方式<br>结构型有，适配器装饰代理 桥接&#x2F;组合外观 亨元 <code> 用于</code> 基本 类的能力补偿或扩展<br>行为型有，策略 观察 状态访问者  &#x2F; 责任链迭代器  中介命令 模板方法备忘录解释器 <code> 行为型的11个里</code> 这几个相对 常用。</li>
+</ul>
+<hr>
+<h1 id="面向对象思想设计原则"><a href="#面向对象思想设计原则" class="headerlink" title="面向对象思想设计原则"></a>面向对象思想设计原则</h1><p>在实际的开发中，我们要想更深入的了解面向对象思想，就必须熟悉前人总结过的面向对象的思想的设计原则，那么都有哪些原则呢，我们就来了解一下</p>
+<ul>
+<li><code>单一职责原则</code><br>其实就是开发人员经常说的”高内聚，低耦合”</li>
+<li><code>开闭原则</code><br>核心思想是：一个对象对扩展开放，对修改关闭。其实开闭原则的意思就是：对类的改动是通过增加代码进行的，而不是修改现有代码。</li>
+<li><code>里氏替换原则</code><br>核心思想：在任何父类出现的地方都可以用它的子类来替代。其实就是说：同一个继承体系中的对象应该有共同的行为特征。</li>
+<li><code>依赖注入原则</code><br>核心思想：要依赖于抽象，不要依赖于具体实现。</li>
+<li><code>接口分离原则</code><br>核心思想：不应该强迫程序依赖它们不需要使用的方法。</li>
+<li><code>迪米特原则</code><br>核心思想：一个对象应当对其他对象尽可能少的了解</li>
+</ul>
+<hr>
+<h1 id="设计模式分类"><a href="#设计模式分类" class="headerlink" title="设计模式分类"></a>设计模式分类</h1><ul>
+<li><p><code>创建设计模式</code><br>创建设计模式(Creational patterns)，用于创建对象时的设计模式。更具体一点，初始化对象流程的设计模式。当程序日益复杂时，需要更加灵活地创建对象，同时减少创建时的依赖。而创建设计模式就是解决此问题的一类设计模式。</p>
+</li>
+<li><p><code>结构设计模式</code><br>结构设计模式(Structural patterns)，用于继承和接口时的设计模式。结构设计模式用于新类的函数方法设计，减少不必要的类定义，减少代码的冗余。</p>
+</li>
+<li><p><code>行为设计模式</code><br>行为设计模式(Behavioral patterns)，用于方法实现以及对应算法的设计模式，同时也是最复杂的设计模式。行为设计模式不仅仅用于定义类的函数行为，同时也用于不同类之间的协议、通信。</p>
+</li>
+<li><p><code>类的设计模式</code><br>类的设计模式(Class patterns)，用于类的具体实现的设计模式。包含了如何设计和定义类，以及父类和子类的设计模式。</p>
+</li>
+<li><p><code>对象设计模式</code><br>对象设计模式(Object patterns)，用于对象的设计模式。与类的设计模式不同，对象设计模式主要用于运行期对象的状态改变、动态行为变更等。</p>
+</li>
+<li><p><code>为什么会重构？</code><br>重构通常是由于现有程序的框架不能很好的适应新需求，虽然可以通过硬编码(hardcode)或者绕过(bypass)的方式来解决一个新需求，但这并不是长久之计。当新需求越来越多时，现在程序会越来越冗余，导致最后的不可维护。</p>
+</li>
+<li><p><code>架构和设计模式的区别</code><br>相比架构(frameworks)，设计模式是一些抽象的组成架构的元素，且更为灵活通用。<br>架构更适合解决具体问题，使用架构构建应用程序将更为快捷，不过相比设计模式，架构牺牲了灵活性。</p>
+</li>
+</ul>
+<hr>
+<p><strong>参考</strong></p>
+<p><code>图说设计模式 — Graphic Design Patterns</code><br><a target="_blank" rel="noopener" href="http://design-patterns.readthedocs.io/zh_CN/latest/index.html">http://design-patterns.readthedocs.io/zh_CN/latest/index.html</a></p>
+<p><code>Java开发中的23种设计模式详解 - ITeye技术网站</code><br><a target="_blank" rel="noopener" href="http://zz563143188.iteye.com/blog/1847029">http://zz563143188.iteye.com/blog/1847029</a><br><a target="_blank" rel="noopener" href="http://panyongzheng.iteye.com/blog/2088954">http://panyongzheng.iteye.com/blog/2088954</a></p>
+<hr>
+<ul>
+<li>一句话模式<br><code>一句话的设计模式 - lzhlyle</code>  <a target="_blank" rel="noopener" href="http://www.cnblogs.com/lzhlyle/p/4696645.html">http://www.cnblogs.com/lzhlyle/p/4696645.html</a><br><code> 【设计模式】设计模式一句话总结 - 琚建飞</code>  <a target="_blank" rel="noopener" href="http://blog.csdn.net/gnd15732625435/article/details/53046008">http://blog.csdn.net/gnd15732625435/article/details/53046008</a></li>
+</ul>
+<p><code>23种设计模式 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/9738f0fadb03">http://www.jianshu.com/p/9738f0fadb03</a></p>
+<hr>
+<p><code> 设计模式之创建型模式总结 - Creational Patterns</code>  <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/6931a72e0132">http://www.jianshu.com/p/6931a72e0132</a><br><code>设计模式之结构型模式总结 - Structural Patterns</code>  <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/23725db5f2a5">http://www.jianshu.com/p/23725db5f2a5</a><br><code>设计模式之行为型模式总结 - Behavioral Patterns</code>  <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/151428e676ca">http://www.jianshu.com/p/151428e676ca</a></p>
+<p>github:  <a target="_blank" rel="noopener" href="http://git.oschina.net/witless/design-patterns/tree/master">http://git.oschina.net/witless/design-patterns/tree/master</a></p>
+<p>— <strong>更多</strong><br><code>设计模式 - 收藏集 - 掘金 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/e683e4411eda">http://www.jianshu.com/p/e683e4411eda</a></p>
+<p><code>设计模式系列1--开篇漫谈 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/844a5df25556">http://www.jianshu.com/p/844a5df25556</a></p>
+<p><code>从零开始学设计模式(7)：设计模式分类 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/9cf24e9f751e">http://www.jianshu.com/p/9cf24e9f751e</a></p>
+<p><code> Java中面向对象思想设计原则、设计模式、简单工厂模式、工厂方法模式、单例设计模式之饿汉式和懒... - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/7dac21388f42">http://www.jianshu.com/p/7dac21388f42</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84-Service,ServiceImpl%E7%9C%8B%E6%B3%95/" rel="prev" title="工程结构-Service,ServiceImpl看法">
+                  <i class="fa fa-angle-left"></i> 工程结构-Service,ServiceImpl看法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E6%88%91%E7%9A%84%E6%8E%A8%E9%85%B7%E6%94%B6%E8%97%8F-jsoup%E6%8A%93%E5%8F%96/" rel="next" title="我的推酷收藏-jsoup抓取">
+                  我的推酷收藏-jsoup抓取 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

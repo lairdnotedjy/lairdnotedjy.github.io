@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前端面试基础 html盒子IE8以下浏览器的盒模型中定义的元素的宽高不包括内边距和边框  文件上传enctype&#x3D;”multipart&#x2F;form-data”  css适配(自适应，响应式)  居中&amp;垂直居中（文字&#x2F;div）position 跟 display、margin collapse、overflow、float 这些特征相互叠加后会怎么样？ css优先">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试">
+<meta property="og:url" content="https://www.sovdating.com/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="前端面试基础 html盒子IE8以下浏览器的盒模型中定义的元素的宽高不包括内边距和边框  文件上传enctype&#x3D;”multipart&#x2F;form-data”  css适配(自适应，响应式)  居中&amp;垂直居中（文字&#x2F;div）position 跟 display、margin collapse、overflow、float 这些特征相互叠加后会怎么样？ css优先">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-03-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.111Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/","path":"前端面试/","title":"前端面试"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>前端面试 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95"><span class="nav-number">1.</span> <span class="nav-text">前端面试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">1.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E6%80%A7%E6%96%B9%E5%90%91"><span class="nav-number">1.2.</span> <span class="nav-text">个性方向</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6"><span class="nav-number">2.</span> <span class="nav-text">框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%8F%E9%AA%8C"><span class="nav-number">2.1.</span> <span class="nav-text">经验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">性能优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E7%A8%8B%E5%8C%96%EF%BC%8C%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="nav-number">2.3.</span> <span class="nav-text">工程化，自动化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E6%83%B3%EF%BC%8C%E8%A7%81%E8%AF%86"><span class="nav-number">2.4.</span> <span class="nav-text">思想，见识</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="前端面试 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前端面试
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-03-10 00:00:00" itemprop="dateCreated datePublished" datetime="2016-03-10T00:00:00+08:00">2016-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">前端面试</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="前端面试"><a href="#前端面试" class="headerlink" title="前端面试"></a>前端面试</h1><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ul>
+<li><code>html</code><br>盒子<br>IE8以下浏览器的盒模型中定义的元素的宽高不包括内边距和边框</li>
+</ul>
+<p>文件上传enctype&#x3D;”multipart&#x2F;form-data”</p>
+<ul>
+<li><code>css</code><br>适配(自适应，响应式)</li>
+</ul>
+<p>居中&amp;垂直居中（文字&#x2F;div）<br>position 跟 display、margin collapse、overflow、float 这些特征相互叠加后会怎么样？</p>
+<p>css优先级法则&amp;!important<br>css兼容性(css hack)（举例）<br>浮动，影响，清除浮动</p>
+<ul>
+<li><code>javaScript</code><br>作用域与变量提升<br>js原型，继承(原型链)<br>闭包，作用域，隐患&#x2F;办法<br>前端存储<br>自定义事件&#x2F; 属性，</li>
+</ul>
+<p>构造函数<br>模块化</p>
+<ul>
+<li><code>ajax</code><br>同步和异步<br>异步编程（callback，Promise，Generator ， ES7中的async和await）<br>跨域，同源</li>
+</ul>
+<h2 id="个性方向"><a href="#个性方向" class="headerlink" title="个性方向"></a>个性方向</h2><p>canvas</p>
+<h1 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jquery ， Bootstrap</span><br><span class="line">angular，React，node，gulp</span><br><span class="line">webpack，require.js</span><br><span class="line"></span><br><span class="line">yoman</span><br><span class="line">nodejs</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><p>模型理解： MVC，MVVM， mvp</p>
+<p>前端测试： 逻辑，性能<br>开发工具及熟练性(定位文件,方法,历史,重构,调试)</p>
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><p>减少页面加载事件的方法（合理引用，减少请求，缩小资源，提速带宽）<br>重排，重绘</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 对面板强行重绘（解决文字重叠问题）</span><br><span class="line">$(&quot;ion-content&quot;).css(&#x27;display&#x27;, &#x27;none&#x27;);</span><br><span class="line">document.body.offsetWidth;// 在样式变化间加入计算,可强制提交之前的样式变化。否则浏览器会进行事务优化，事务前后无变化的不再重绘</span><br><span class="line">$(&quot;ion-content&quot;).css(&#x27;display&#x27;, &#x27;&#x27;);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="工程化，自动化"><a href="#工程化，自动化" class="headerlink" title="工程化，自动化"></a>工程化，自动化</h2><p>“use strict”严格模式，作用<br>模板引擎</p>
+<h2 id="思想，见识"><a href="#思想，见识" class="headerlink" title="思想，见识"></a>思想，见识</h2><p>浏览器对资源下载的并发数(6个)<br>前端安全<br>说说最近最流行的一些东西吧？常去哪些网站？<br>TypeScript,ES5 和 ES6</p>
+<p>Web Component 标准</p>
+<p>前端构建集成： Grunt、Gulp、Fix、Webpack</p>
+<p>模板,范式:CMD, AMD, CommonJS</p>
+<hr>
+<p><strong>参考</strong><br><code>前端开发知识点与面试题集锦</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/UjMNFfB">http://www.tuicool.com/articles/UjMNFfB</a></p>
+<p><code>web前端面试题集锦</code><br><a target="_blank" rel="noopener" href="http://ljinkai.github.io/2015/07/30/front-end-interview/">http://ljinkai.github.io/2015/07/30/front-end-interview/</a></p>
+<p><code>部分面试知识点（web前端工程师）</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/MV73eiu">http://www.tuicool.com/articles/MV73eiu</a></p>
+<p><code>关于前端面试</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/JbARfmU">http://www.tuicool.com/articles/JbARfmU</a></p>
+<p><code>前端面试需要带什么作品？</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/EFFB7v6">http://www.tuicool.com/articles/EFFB7v6</a></p>
+<span id="more"></span>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Chrome%20%20DevTools-%E7%BD%91%E7%BB%9C%E6%8A%93%E5%8C%85%E2%80%94%E2%80%94Betwixt/" rel="prev" title="Chrome  DevTools:网络抓包——Betwixt">
+                  <i class="fa fa-angle-left"></i> Chrome  DevTools:网络抓包——Betwixt
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E5%89%8D%E7%AB%AF%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E5%8F%91%E5%B1%95%E5%8F%B2/" rel="next" title="前端异步编程发展史">
+                  前端异步编程发展史 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

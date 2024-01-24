@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="linux ssh端口修改.md123sudo   sed -i &quot;s&#x2F;#Port 22&#x2F;Port 1997&#x2F;g&quot; &#x2F;etc&#x2F;ssh&#x2F;sshd_configsudo cat &#x2F;etc&#x2F;ssh&#x2F;sshd_config |grep Port    linux ssh禁止root登陆.md 新建替代root的管理用户1234567adduser sysadminpasswd sysa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux 服务器批量安全控制">
+<meta property="og:url" content="https://www.sovdating.com/linux%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%B9%E9%87%8F%E5%AE%89%E5%85%A8%E6%8E%A7%E5%88%B6/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="linux ssh端口修改.md123sudo   sed -i &quot;s&#x2F;#Port 22&#x2F;Port 1997&#x2F;g&quot; &#x2F;etc&#x2F;ssh&#x2F;sshd_configsudo cat &#x2F;etc&#x2F;ssh&#x2F;sshd_config |grep Port    linux ssh禁止root登陆.md 新建替代root的管理用户1234567adduser sysadminpasswd sysa">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-07-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.086Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="安全">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/linux%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%B9%E9%87%8F%E5%AE%89%E5%85%A8%E6%8E%A7%E5%88%B6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/linux%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%B9%E9%87%8F%E5%AE%89%E5%85%A8%E6%8E%A7%E5%88%B6/","path":"linux 服务器批量安全控制/","title":"linux 服务器批量安全控制"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>linux 服务器批量安全控制 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux-ssh%E7%AB%AF%E5%8F%A3%E4%BF%AE%E6%94%B9-md"><span class="nav-number">1.</span> <span class="nav-text">linux ssh端口修改.md</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux-ssh%E7%A6%81%E6%AD%A2root%E7%99%BB%E9%99%86-md"><span class="nav-number">2.</span> <span class="nav-text">linux ssh禁止root登陆.md</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux-%E9%99%90%E5%88%B6%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7su%E5%88%87%E6%8D%A2%E5%88%B0-root-md"><span class="nav-number">3.</span> <span class="nav-text">linux 限制普通用户su切换到 root.md</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux-%E9%98%B2%E7%81%AB%E5%A2%99iptables%E8%AE%BE%E7%BD%AE-md"><span class="nav-number">4.</span> <span class="nav-text">linux 防火墙iptables设置.md</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux-nginx%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5-md"><span class="nav-number">5.</span> <span class="nav-text">linux nginx权限控制策略.md</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D-%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8root%E7%94%A8%E6%88%B7"><span class="nav-number">6.</span> <span class="nav-text">恢复(建议使用root用户)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B-linux-ssh%E7%AB%AF%E5%8F%A3%E4%BF%AE%E6%94%B9-md"><span class="nav-number">7.</span> <span class="nav-text">四 . linux ssh端口修改.md</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-linux-ssh%E7%A6%81%E6%AD%A2root%E7%99%BB%E9%99%86-md"><span class="nav-number">8.</span> <span class="nav-text">二 . linux ssh禁止root登陆.md</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-linux-%E9%99%90%E5%88%B6%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7su%E5%88%87%E6%8D%A2%E5%88%B0-root-md"><span class="nav-number">9.</span> <span class="nav-text">三. linux 限制普通用户su切换到 root.md</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-linux-%E9%98%B2%E7%81%AB%E5%A2%99iptables%E8%AE%BE%E7%BD%AE-md"><span class="nav-number">10.</span> <span class="nav-text">一.linux 防火墙iptables设置.md</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94-linux-nginx%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5-md"><span class="nav-number">11.</span> <span class="nav-text">五. linux nginx权限控制策略.md</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/linux%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%B9%E9%87%8F%E5%AE%89%E5%85%A8%E6%8E%A7%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="linux 服务器批量安全控制 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux 服务器批量安全控制
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-28T00:00:00+08:00">2016-07-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="linux-ssh端口修改-md"><a href="#linux-ssh端口修改-md" class="headerlink" title="linux ssh端口修改.md"></a>linux ssh端口修改.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo   sed -i &quot;s/#Port 22/Port 1997/g&quot; /etc/ssh/sshd_config</span><br><span class="line">sudo cat /etc/ssh/sshd_config |grep Port</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="linux-ssh禁止root登陆-md"><a href="#linux-ssh禁止root登陆-md" class="headerlink" title="linux ssh禁止root登陆.md"></a>linux ssh禁止root登陆.md</h1><ul>
+<li>新建替代root的管理用户<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">adduser sysadmin</span><br><span class="line">passwd sysadmin    # 修改密码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">grep sysadmin /etc/passwd # 查看用户是否存在</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>同步用户环境变量<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp -rf .bashrc /home/sysadmin/</span><br><span class="line">cp -rf cfg /home/sysadmin/</span><br></pre></td></tr></table></figure></li>
+<li>为新建的用户（sysadmin）赋予<code>sudo</code>权限<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;sysadmin  ALL=(ALL)    NOPASSWD:ALL&#x27; &gt;&gt; /etc/sudoers </span><br><span class="line"># 或手动: sudo vim  /etc/sudoers</span><br><span class="line"></span><br><span class="line">sudo cat /etc/sudoers |grep &quot;ALL=(ALL)&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>关闭root用户的ssh通道（即禁止root登陆）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 更新配置</span><br><span class="line">sudo sed -i &quot;s/PermitRootLogin yes/PermitRootLogin no/g&quot; /etc/ssh/sshd_config</span><br><span class="line"># 查看</span><br><span class="line">sudo   cat /etc/ssh/sshd_config |grep PermitRootLogin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 重启生效</span><br><span class="line">sudo /etc/init.d/sshd restart</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="linux-限制普通用户su切换到-root-md"><a href="#linux-限制普通用户su切换到-root-md" class="headerlink" title="linux 限制普通用户su切换到 root.md"></a>linux 限制普通用户su切换到 root.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 修改sysadmin用户分组为wheel</span><br><span class="line">usermod -g  wheel sysadmin</span><br><span class="line"># 查看</span><br><span class="line">id sysadmin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 更新配置（wheel组外用户不允许切换至root）</span><br><span class="line">sudo vim /etc/pam.d/su # auth required pam_wheel.so use_uid (解开此注释)</span><br><span class="line"># 查看</span><br><span class="line">sudo   cat /etc/pam.d/su |grep &#x27;required&#x27;</span><br></pre></td></tr></table></figure>
+
+<h1 id="linux-防火墙iptables设置-md"><a href="#linux-防火墙iptables设置-md" class="headerlink" title="linux 防火墙iptables设置.md"></a>linux 防火墙iptables设置.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">sudo iptables -A INPUT -i lo -j ACCEPT #允许来自于lo接口的数据包</span><br><span class="line">sudo   iptables -A INPUT -p tcp --dport 1997 -j ACCEPT #ssh端口22-&gt;1997</span><br><span class="line">#  sudo  iptables -A INPUT -p tcp --dport 21 -j ACCEPT #FTP端口21</span><br><span class="line">sudo   iptables -A INPUT -p tcp --dport 80 -j ACCEPT #web服务端口80</span><br><span class="line">sudo   iptables -A INPUT -p tcp --dport 8080 -j ACCEPT #tomcat</span><br><span class="line">#  sudo   iptables -A INPUT -p tcp --dport xxxx -j ACCEPT #mysql</span><br><span class="line">#  sudo   iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT #允许icmp包通过,也就是允许ping</span><br><span class="line">#  sudo   iptables -A INPUT -p tcp -s 45.96.174.68 -j ACCEPT #如果要添加内网ip信任（接受其所有TCP请求）</span><br><span class="line">sudo   iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT #允许所有对外请求的返回包</span><br><span class="line">sudo   iptables -P INPUT DROP #过滤所有非以上规则的请求</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看（ 所有iptables以序号标记显示 ）</span><br><span class="line">sudo iptables -L -n --line-numbers</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 开机启动-chkconfig</span><br><span class="line">sudo service iptables save # 保存现状</span><br><span class="line">sudo chkconfig iptables on # 添加到自启动chkconfig</span><br><span class="line">chkconfig --list | grep &#x27;3:on&#x27; # 检查开机启动</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="linux-nginx权限控制策略-md"><a href="#linux-nginx权限控制策略-md" class="headerlink" title="linux nginx权限控制策略.md"></a>linux nginx权限控制策略.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo chown -R sysadmin /usr/local/nginx/html </span><br><span class="line">sudo chown -R sysadmin /usr/local/apache-tomcat-*/webapps</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cd /usr/local/nginx/html &amp;&amp; ll</span><br><span class="line">cd  /usr/local/apache-tomcat-*/webapps  &amp;&amp; ll</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h1 id="恢复-建议使用root用户"><a href="#恢复-建议使用root用户" class="headerlink" title="恢复(建议使用root用户)"></a>恢复(建议使用root用户)</h1><h1 id="四-linux-ssh端口修改-md"><a href="#四-linux-ssh端口修改-md" class="headerlink" title="四 . linux ssh端口修改.md"></a>四 . linux ssh端口修改.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo   sed -i &quot;s/Port 1997/#Port 22/g&quot; /etc/ssh/sshd_config</span><br><span class="line">sudo cat /etc/ssh/sshd_config |grep Port</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo /etc/init.d/sshd restart</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="二-linux-ssh禁止root登陆-md"><a href="#二-linux-ssh禁止root登陆-md" class="headerlink" title="二 . linux ssh禁止root登陆.md"></a>二 . linux ssh禁止root登陆.md</h1><ul>
+<li>恢复root用户的ssh通道（即 恢复 root登陆）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo sed -i &quot;s/PermitRootLogin no/PermitRootLogin yes/g&quot; /etc/ssh/sshd_config</span><br><span class="line">sudo cat /etc/ssh/sshd_config |grep PermitRootLogin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo /etc/init.d/sshd restart</span><br></pre></td></tr></table></figure></li>
+<li>回收：新建的用户（sysadmin）赋予sudo权限</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/sudoers #  手动删除或注释  &#x27;sysadmin  ALL=(ALL)    NOPASSWD:ALL&#x27;  </span><br><span class="line">sudo cat /etc/sudoers |grep &quot;ALL=(ALL)&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>回收：新建替代root的管理用户<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">userdel sysadmin #  仅删除用户帐号，而不删除相关文件。( 需手动删除用户主目录和邮件目录)</span><br><span class="line">#  -f 删除用户登入目录以及目录中所有文件。</span><br><span class="line">rm -rf /home/sysadmin</span><br><span class="line"></span><br><span class="line">rm -rf /var/mail/sysadmin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 或</span><br><span class="line">userdel -r sysadmin # -r 彻底删除（含用户主目录和邮件目录）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">grep sysadmin /etc/passwd</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="三-linux-限制普通用户su切换到-root-md"><a href="#三-linux-限制普通用户su切换到-root-md" class="headerlink" title="三. linux 限制普通用户su切换到 root.md"></a>三. linux 限制普通用户su切换到 root.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo   vim /etc/pam.d/su # auth required pam_wheel.so use_uid (还原注释)</span><br><span class="line"></span><br><span class="line">sudo   cat /etc/pam.d/su |grep &#x27;required&#x27;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="一-linux-防火墙iptables设置-md"><a href="#一-linux-防火墙iptables设置-md" class="headerlink" title="一.linux 防火墙iptables设置.md"></a>一.linux 防火墙iptables设置.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 清空规则(重置)</span><br><span class="line">sudo   iptables -P INPUT ACCEPT # 恢复默认允许访问(不恢复就麻烦了~)</span><br><span class="line">sudo   iptables -F # 清空默认所有规则</span><br><span class="line">sudo   iptables -X # 清空自定义的所有规则</span><br><span class="line">sudo   iptables -Z # 计数器置0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看（ 所有iptables以序号标记显示 ）</span><br><span class="line"></span><br><span class="line">sudo   iptables -L -n --line-numbers</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 开机启动-chkconfig</span><br><span class="line">sudo service iptables save # 保存现状</span><br><span class="line">sudo   chkconfig iptables off # 删除</span><br><span class="line">chkconfig --list | grep &#x27;3:on&#x27; # 检查开机启动</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="五-linux-nginx权限控制策略-md"><a href="#五-linux-nginx权限控制策略-md" class="headerlink" title="五. linux nginx权限控制策略.md"></a>五. linux nginx权限控制策略.md</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo chown -R root /usr/local/nginx/html </span><br><span class="line">sudo chown -R root /usr/local/apache-tomcat-*/webapps</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cd /usr/local/nginx/html &amp;&amp; ll</span><br><span class="line">cd  /usr/local/apache-tomcat-*/webapps  &amp;&amp; ll</span><br></pre></td></tr></table></figure>
+
+
+
+ <span id="more"></span>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/%E5%AE%89%E5%85%A8/" rel="tag"># 安全</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E8%AE%BE%E8%AE%A1%E7%AB%99%E7%82%B9%20&%20%E6%95%88%E6%9E%9C%E5%BA%93/" rel="prev" title="设计站点 & 效果库">
+                  <i class="fa fa-angle-left"></i> 设计站点 & 效果库
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E4%B8%BA%E9%85%8D%E5%90%88%E2%80%9CAndroid6.0%E6%9D%83%E9%99%90%E6%A3%80%E6%9F%A5%E6%9C%BA%E5%88%B6%E6%94%B9%E5%8F%98%E2%80%9D%E6%8F%90%E4%BE%9B%E7%9A%84cordova%E6%9D%83%E9%99%90%E6%8F%92%E4%BB%B6/" rel="next" title="为配合“Android6.0权限检查机制改变”提供的cordova权限插件">
+                  为配合“Android6.0权限检查机制改变”提供的cordova权限插件 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

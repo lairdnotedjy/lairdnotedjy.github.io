@@ -40,7 +40,7 @@
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"page/8/index.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Sovdating Linux</title>
+<title>Sovdating Linux - some code for program</title>
   
 
 
@@ -162,7 +162,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/07/01/go-for-range-trap/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/go-for-range-trap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/07/01/go-for-range-trap/" class="post-title-link" itemprop="url">Go语言中for range的&#34;坑&#34;</a>
+          <a href="/go-for-range-trap/" class="post-title-link" itemprop="url">Go语言中for range的&#34;坑&#34;</a>
         </h2>
 
         <div class="post-meta-container">
@@ -224,7 +224,7 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	arr1 := []<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">	arr2 := <span class="built_in">make</span>([]*<span class="type">int</span>, <span class="built_in">len</span>(arr1))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i, v := <span class="keyword">range</span> arr1 &#123;</span><br><span class="line">		arr2[i] = &amp;v</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> arr2 &#123;</span><br><span class="line">		fmt.Println(*v)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/07/01/go-for-range-trap/#more" rel="contents">
+              <a class="btn" href="/go-for-range-trap/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -255,7 +255,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/06/11/java8-http-proxy-auth/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/java8-http-proxy-auth/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -273,7 +273,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/06/11/java8-http-proxy-auth/" class="post-title-link" itemprop="url">java8下HTTP代理身份验证设置</a>
+          <a href="/java8-http-proxy-auth/" class="post-title-link" itemprop="url">java8下HTTP代理身份验证设置</a>
         </h2>
 
         <div class="post-meta-container">
@@ -316,7 +316,7 @@
           <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>由于公司内部应用要调用钉钉的 API，但是钉钉 API 有一个 <code>IP 白名单</code>限制，而公司的外网 IP 经常变动，每次变动都需要在钉钉的后台配置一个 IP，在开发环境调试非常的麻烦，于是就让运维在一台外网服务器上搭建了一个<code>HTTP代理服务</code>，通过代理服务器转发，只需要设置<code>代理服务器</code>的外网 IP 就可以避免之前的问题了。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/06/11/java8-http-proxy-auth/#more" rel="contents">
+              <a class="btn" href="/java8-http-proxy-auth/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -347,7 +347,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/05/24/fiddler-tutorial/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/fiddler-tutorial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -365,7 +365,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/05/24/fiddler-tutorial/" class="post-title-link" itemprop="url">HTTP调试工具之Fiddler使用教程</a>
+          <a href="/fiddler-tutorial/" class="post-title-link" itemprop="url">HTTP调试工具之Fiddler使用教程</a>
         </h2>
 
         <div class="post-meta-container">
@@ -409,7 +409,7 @@
 <h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p><img src="/fiddler-tutorial/2019-05-25-18-17-30.png"><br>客户端的请求经过 Fiddler 的代理服务器转发，再由<code>Fidder</code>对目标服务器进行请求，得到响应之后再返回给客户端，在整个通讯过程中 Fidder 是一个中间人的角色，可以捕获到所有的请求和响应报文。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/05/24/fiddler-tutorial/#more" rel="contents">
+              <a class="btn" href="/fiddler-tutorial/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -440,7 +440,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2019/05/07/git-summary/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/git-summary/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -458,7 +458,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/05/07/git-summary/" class="post-title-link" itemprop="url">git常用命令集</a>
+          <a href="/git-summary/" class="post-title-link" itemprop="url">git常用命令集</a>
         </h2>
 
         <div class="post-meta-container">
@@ -507,7 +507,7 @@
 <p>它们之间的转化关系如下图：<br><img src="/git-summary/2019-05-17-23-04-35.png"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/05/07/git-summary/#more" rel="contents">
+              <a class="btn" href="/git-summary/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -538,7 +538,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2018/12/02/read-chinese-chives-self-improvement/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/read-chinese-chives-self-improvement/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -556,7 +556,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/02/read-chinese-chives-self-improvement/" class="post-title-link" itemprop="url">读《韭菜的自我修养》</a>
+          <a href="/read-chinese-chives-self-improvement/" class="post-title-link" itemprop="url">读《韭菜的自我修养》</a>
         </h2>
 
         <div class="post-meta-container">
@@ -645,7 +645,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2018/09/05/proxyee-down-3-0-guide/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/proxyee-down-3-0-guide/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -663,7 +663,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/09/05/proxyee-down-3-0-guide/" class="post-title-link" itemprop="url">Proxyee Down 3.0 正式版发布</a>
+          <a href="/proxyee-down-3-0-guide/" class="post-title-link" itemprop="url">Proxyee Down 3.0 正式版发布</a>
         </h2>
 
         <div class="post-meta-container">
@@ -718,7 +718,7 @@
 </ol>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2018/09/05/proxyee-down-3-0-guide/#more" rel="contents">
+              <a class="btn" href="/proxyee-down-3-0-guide/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -749,7 +749,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2018/08/06/hello-elasticsearch-install/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/hello-elasticsearch-install/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -767,7 +767,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/08/06/hello-elasticsearch-install/" class="post-title-link" itemprop="url">Elasticsearch6.x学习笔记 - 安装</a>
+          <a href="/hello-elasticsearch-install/" class="post-title-link" itemprop="url">Elasticsearch6.x学习笔记 - 安装</a>
         </h2>
 
         <div class="post-meta-container">
@@ -810,7 +810,7 @@
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近心血来潮，准备学习下开源届首选的搜索引擎<code>Elasticsearch</code>，在了解相关概念之后就准备在虚拟机装上试一试了。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2018/08/06/hello-elasticsearch-install/#more" rel="contents">
+              <a class="btn" href="/hello-elasticsearch-install/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -841,7 +841,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2018/08/03/vscode-vue-eslint-prettier/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/vscode-vue-eslint-prettier/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -859,7 +859,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/08/03/vscode-vue-eslint-prettier/" class="post-title-link" itemprop="url">如何优雅的使用VS Code+ESLint+Prettier写Vue程序</a>
+          <a href="/vscode-vue-eslint-prettier/" class="post-title-link" itemprop="url">如何优雅的使用VS Code+ESLint+Prettier写Vue程序</a>
         </h2>
 
         <div class="post-meta-container">
@@ -902,7 +902,7 @@
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本人是 JAVA 为主，开发工具用的 IDEA，之前写 Vue 前端的时候也是直接用的 IDEA+Vue 插件来开发的，一般也是写着玩，不是正式项目，所以也从来没用过<code>ESLint</code>和<code>Prettier</code>，然后最近要参与一个前端项目，用 IDEA 导入项目后打开，出于强迫症使用熟悉的<kbd>ctrl</kbd>+<kbd>alt</kbd>+<kbd>L</kbd>格式了下代码，发现代码格式完全对不上啊，调研了下之后，义无反顾的转投<code>VS Code</code>写前端了。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2018/08/03/vscode-vue-eslint-prettier/#more" rel="contents">
+              <a class="btn" href="/vscode-vue-eslint-prettier/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -933,7 +933,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2018/07/25/jvm-dump-class/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/jvm-dump-class/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -951,7 +951,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/07/25/jvm-dump-class/" class="post-title-link" itemprop="url">从JVM中dump出动态代理生成的class</a>
+          <a href="/jvm-dump-class/" class="post-title-link" itemprop="url">从JVM中dump出动态代理生成的class</a>
         </h2>
 
         <div class="post-meta-container">
@@ -994,7 +994,7 @@
           <p>由于动态代理生成的 class 是直接以二进制的方式加载进内存中的，并没有对应的.class 文件生成，所以如果想通过反编译工具查看动态代理生成的代码需要通过特殊的手段来处理。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2018/07/25/jvm-dump-class/#more" rel="contents">
+              <a class="btn" href="/jvm-dump-class/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1025,7 +1025,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/2018/07/23/publish-jar-to-maven/">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/publish-jar-to-maven/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1043,7 +1043,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/07/23/publish-jar-to-maven/" class="post-title-link" itemprop="url">发布jar包到maven中央仓库</a>
+          <a href="/publish-jar-to-maven/" class="post-title-link" itemprop="url">发布jar包到maven中央仓库</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1092,7 +1092,7 @@
 <p>那如果想要发布自己的 jar 包到 maven 仓库应该如何操作呢。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2018/07/23/publish-jar-to-maven/#more" rel="contents">
+              <a class="btn" href="/publish-jar-to-maven/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="通用12345678910111213141516171819202122232425262728&#x2F;&#x2F; 对Date的扩展，将 Date 转化为指定格式的String  &#x2F;&#x2F; 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，  &#x2F;&#x2F; 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)  &#x2F;&#x2F; 例子：  &#x2F;&#x2F; (new D">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javaScript 时间格式化yyyy-mm-dd">
+<meta property="og:url" content="https://www.sovdating.com/javaScript%20%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96yyyy-mm-dd/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="通用12345678910111213141516171819202122232425262728&#x2F;&#x2F; 对Date的扩展，将 Date 转化为指定格式的String  &#x2F;&#x2F; 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，  &#x2F;&#x2F; 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)  &#x2F;&#x2F; 例子：  &#x2F;&#x2F; (new D">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-03-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.076Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="javaScript 时间格式化">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/javaScript%20%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96yyyy-mm-dd/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/javaScript%20%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96yyyy-mm-dd/","path":"javaScript 时间格式化yyyy-mm-dd/","title":"javaScript 时间格式化yyyy-mm-dd"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>javaScript 时间格式化yyyy-mm-dd | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">通用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B7%A5%E5%85%B7-dateUtils-js"><span class="nav-number">3.</span> <span class="nav-text">自定义工具 dateUtils.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E7%AF%87"><span class="nav-number">4.</span> <span class="nav-text">高级篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IE"><span class="nav-number">4.1.</span> <span class="nav-text">IE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%B0%E4%BB%A3%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text"># 现代浏览器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E6%B5%8F%E8%A7%88%E5%99%A8-F12-%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="nav-number">6.</span> <span class="nav-text">打开浏览器-F12-控制台</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/javaScript%20%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96yyyy-mm-dd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="javaScript 时间格式化yyyy-mm-dd | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          javaScript 时间格式化yyyy-mm-dd
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-04-01 00:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T00:00:00+08:00">2016-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javaScript-%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">javaScript 时间格式化</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// 对Date的扩展，将 Date 转化为指定格式的String  </span><br><span class="line">// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，  </span><br><span class="line">// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)  </span><br><span class="line">// 例子：  </span><br><span class="line">// (new Date()).Format(&quot;yyyy-MM-dd hh:mm:ss.S&quot;) ==&gt; 2006-07-02 08:09:04.423  </span><br><span class="line">// (new Date()).Format(&quot;yyyy-M-d h:m:s.S&quot;)      ==&gt; 2006-7-2 8:9:4.18  </span><br><span class="line">Date.prototype.Format = function(fmt)  </span><br><span class="line">&#123; //author: meizz  </span><br><span class="line">  var o = &#123;  </span><br><span class="line">    &quot;M+&quot; : this.getMonth()+1,                 //月份  </span><br><span class="line">    &quot;d+&quot; : this.getDate(),                    //日  </span><br><span class="line">    &quot;h+&quot; : this.getHours(),                   //小时  </span><br><span class="line">    &quot;m+&quot; : this.getMinutes(),                 //分  </span><br><span class="line">    &quot;s+&quot; : this.getSeconds(),                 //秒  </span><br><span class="line">    &quot;q+&quot; : Math.floor((this.getMonth()+3)/3), //季度  </span><br><span class="line">    &quot;S&quot;  : this.getMilliseconds()             //毫秒  </span><br><span class="line">  &#125;;  </span><br><span class="line">  if(/(y+)/.test(fmt))  </span><br><span class="line">    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+&quot;&quot;).substr(4 - RegExp.$1.length));  </span><br><span class="line">  for(var k in o)  </span><br><span class="line">    if(new RegExp(&quot;(&quot;+ k +&quot;)&quot;).test(fmt))  </span><br><span class="line">  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : ((&quot;00&quot;+ o[k]).substr((&quot;&quot;+ o[k]).length)));  </span><br><span class="line">  return fmt;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(new Date().Format(&quot;yyyy-MM-dd hh:mm:ss&quot;));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><p><code>Moment.js</code> <a target="_blank" rel="noopener" href="http://momentjs.com/docs/">http://momentjs.com/docs/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">moment(&quot;2010-10-20 4:30&quot;,       &quot;YYYY-MM-DD HH:mm&quot;);   // parsed as 4:30 local time</span><br><span class="line">moment(&quot;2010-10-20 4:30 +0000&quot;, &quot;YYYY-MM-DD HH:mm Z&quot;); // parsed as 4:30 UTC</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="自定义工具-dateUtils-js"><a href="#自定义工具-dateUtils-js" class="headerlink" title="自定义工具 dateUtils.js"></a>自定义工具 dateUtils.js</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/* 日期时间脚本库方法列表  </span><br><span class="line"> Date.prototype.isLeapYear 判断闰年  </span><br><span class="line"> Date.prototype.FormatString 日期格式化  </span><br><span class="line"> Date.prototype.DateAdd 日期计算  </span><br><span class="line"> Date.prototype.DateDiff 比较日期差  </span><br><span class="line"> Date.prototype.toString 日期转字符串  </span><br><span class="line"> Date.prototype.toArray 日期分割为数组  </span><br><span class="line"> Date.prototype.DatePart 取日期的部分信息  </span><br><span class="line"> Date.prototype.MaxDayOfDate 取日期所在月的最大天数  </span><br><span class="line"> Date.prototype.WeekNumOfYear 判断日期所在年的第几周  </span><br><span class="line"> StringToDate 字符串转日期型  </span><br><span class="line"> IsValidDate 验证日期有效性  </span><br><span class="line"> CheckDateTime 完整日期时间检查  </span><br><span class="line"> daysBetween 日期天数差   </span><br><span class="line"> </span><br><span class="line"> js 代码  */</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br></pre></td><td class="code"><pre><span class="line">//---------------------------------------------------</span><br><span class="line">// 判断闰年</span><br><span class="line">//---------------------------------------------------</span><br><span class="line">Date.prototype.isLeapYear = function()</span><br><span class="line">&#123;</span><br><span class="line">    return (0==this.getYear()%4&amp;&amp;((this.getYear()%100!=0)||(this.getYear()%400==0)));</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//---------------------------------------------------</span><br><span class="line">// 日期格式化</span><br><span class="line">// 格式 YYYY/yyyy/YY/yy 表示年份</span><br><span class="line">// MM/M 月份</span><br><span class="line">// W/w 星期</span><br><span class="line">// dd/DD/d/D 日期</span><br><span class="line">// hh/HH/h/H 时间</span><br><span class="line">// mm/m 分钟</span><br><span class="line">// ss/SS/s/S 秒</span><br><span class="line">//---------------------------------------------------</span><br><span class="line">Date.prototype.Format = function(fmt)</span><br><span class="line">&#123;</span><br><span class="line">    var o = &#123;</span><br><span class="line">        &quot;M+&quot; : this.getMonth()+1,                 //月份</span><br><span class="line">        &quot;d+&quot; : this.getDate(),                    //日</span><br><span class="line">        &quot;h+&quot; : this.getHours(),                   //小时</span><br><span class="line">        &quot;m+&quot; : this.getMinutes(),                 //分</span><br><span class="line">        &quot;s+&quot; : this.getSeconds(),                 //秒</span><br><span class="line">        &quot;q+&quot; : Math.floor((this.getMonth()+3)/3), //季度</span><br><span class="line">        &quot;S&quot;  : this.getMilliseconds()             //毫秒</span><br><span class="line">    &#125;;</span><br><span class="line">    if(/(y+)/.test(fmt))</span><br><span class="line">        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+&quot;&quot;).substr(4 - RegExp.$1.length));</span><br><span class="line">    for(var k in o)</span><br><span class="line">        if(new RegExp(&quot;(&quot;+ k +&quot;)&quot;).test(fmt))</span><br><span class="line">            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : ((&quot;00&quot;+ o[k]).substr((&quot;&quot;+ o[k]).length)));</span><br><span class="line">    return fmt;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">//| 求两个时间的天数差 日期格式为 YYYY-MM-dd</span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">function daysBetween(DateOne,DateTwo)</span><br><span class="line">&#123;</span><br><span class="line">    var OneMonth = DateOne.substring(5,DateOne.lastIndexOf (&#x27;-&#x27;));</span><br><span class="line">    var OneDay = DateOne.substring(DateOne.length,DateOne.lastIndexOf (&#x27;-&#x27;)+1);</span><br><span class="line">    var OneYear = DateOne.substring(0,DateOne.indexOf (&#x27;-&#x27;));</span><br><span class="line"> </span><br><span class="line">    var TwoMonth = DateTwo.substring(5,DateTwo.lastIndexOf (&#x27;-&#x27;));</span><br><span class="line">    var TwoDay = DateTwo.substring(DateTwo.length,DateTwo.lastIndexOf (&#x27;-&#x27;)+1);</span><br><span class="line">    var TwoYear = DateTwo.substring(0,DateTwo.indexOf (&#x27;-&#x27;));</span><br><span class="line"> </span><br><span class="line">    var cha=((Date.parse(OneMonth+&#x27;/&#x27;+OneDay+&#x27;/&#x27;+OneYear)- Date.parse(TwoMonth+&#x27;/&#x27;+TwoDay+&#x27;/&#x27;+TwoYear))/86400000);</span><br><span class="line">    return Math.abs(cha);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">//| 日期计算</span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">Date.prototype.DateAdd = function(strInterval, Number) &#123;</span><br><span class="line">    var dtTmp = this;</span><br><span class="line">    switch (strInterval) &#123;</span><br><span class="line">        case &#x27;s&#x27; :return new Date(Date.parse(dtTmp) + (1000 * Number));</span><br><span class="line">        case &#x27;n&#x27; :return new Date(Date.parse(dtTmp) + (60000 * Number));</span><br><span class="line">        case &#x27;h&#x27; :return new Date(Date.parse(dtTmp) + (3600000 * Number));</span><br><span class="line">        case &#x27;d&#x27; :return new Date(Date.parse(dtTmp) + (86400000 * Number));</span><br><span class="line">        case &#x27;w&#x27; :return new Date(Date.parse(dtTmp) + ((86400000 * 7) * Number));</span><br><span class="line">        case &#x27;q&#x27; :return new Date(dtTmp.getFullYear(), (dtTmp.getMonth()) + Number*3, dtTmp.getDate(), dtTmp.getHours(), dtTmp.getMinutes(), dtTmp.getSeconds());</span><br><span class="line">        case &#x27;m&#x27; :return new Date(dtTmp.getFullYear(), (dtTmp.getMonth()) + Number, dtTmp.getDate(), dtTmp.getHours(), dtTmp.getMinutes(), dtTmp.getSeconds());</span><br><span class="line">        case &#x27;y&#x27; :return new Date((dtTmp.getFullYear() + Number), dtTmp.getMonth(), dtTmp.getDate(), dtTmp.getHours(), dtTmp.getMinutes(), dtTmp.getSeconds());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">//| 比较日期差 dtEnd 格式为日期型或者 有效日期格式字符串</span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">Date.prototype.DateDiff = function(strInterval, dtEnd) &#123;</span><br><span class="line">    var dtStart = this;</span><br><span class="line">    if (typeof dtEnd == &#x27;string&#x27; )//如果是字符串转换为日期型</span><br><span class="line">    &#123;</span><br><span class="line">        dtEnd = StringToDate(dtEnd);</span><br><span class="line">    &#125;</span><br><span class="line">    switch (strInterval) &#123;</span><br><span class="line">        case &#x27;s&#x27; :return parseInt((dtEnd - dtStart) / 1000);</span><br><span class="line">        case &#x27;n&#x27; :return parseInt((dtEnd - dtStart) / 60000);</span><br><span class="line">        case &#x27;h&#x27; :return parseInt((dtEnd - dtStart) / 3600000);</span><br><span class="line">        case &#x27;d&#x27; :return parseInt((dtEnd - dtStart) / 86400000);</span><br><span class="line">        case &#x27;w&#x27; :return parseInt((dtEnd - dtStart) / (86400000 * 7));</span><br><span class="line">        case &#x27;m&#x27; :return (dtEnd.getMonth()+1)+((dtEnd.getFullYear()-dtStart.getFullYear())*12) - (dtStart.getMonth()+1);</span><br><span class="line">        case &#x27;y&#x27; :return dtEnd.getFullYear() - dtStart.getFullYear();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">//| 日期输出字符串，重载了系统的toString方法</span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">Date.prototype.toString = function(showWeek)</span><br><span class="line">&#123;</span><br><span class="line">    var myDate= this;</span><br><span class="line">    var str = myDate.toLocaleDateString();</span><br><span class="line">    if (showWeek)</span><br><span class="line">    &#123;</span><br><span class="line">        var Week = [&#x27;日&#x27;,&#x27;一&#x27;,&#x27;二&#x27;,&#x27;三&#x27;,&#x27;四&#x27;,&#x27;五&#x27;,&#x27;六&#x27;];</span><br><span class="line">        str += &#x27; 星期&#x27; + Week[myDate.getDay()];</span><br><span class="line">    &#125;</span><br><span class="line">    return str;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">//| 日期合法性验证</span><br><span class="line">//| 格式为：YYYY-MM-DD或YYYY/MM/DD</span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">function IsValidDate(DateStr)</span><br><span class="line">&#123;</span><br><span class="line">    var sDate=DateStr.replace(/(^\s+|\s+$)/g,&#x27;&#x27;); //去两边空格;</span><br><span class="line">    if(sDate==&#x27;&#x27;) return true;</span><br><span class="line">//如果格式满足YYYY-(/)MM-(/)DD或YYYY-(/)M-(/)DD或YYYY-(/)M-(/)D或YYYY-(/)MM-(/)D就替换为&#x27;&#x27;</span><br><span class="line">//数据库中，合法日期可以是:YYYY-MM/DD(2003-3/21),数据库会自动转换为YYYY-MM-DD格式</span><br><span class="line">    var s = sDate.replace(/[\d]&#123; 4,4 &#125;[\-/]&#123; 1 &#125;[\d]&#123; 1,2 &#125;[\-/]&#123; 1 &#125;[\d]&#123; 1,2 &#125;/g,&#x27;&#x27;);</span><br><span class="line">    if (s==&#x27;&#x27;) //说明格式满足YYYY-MM-DD或YYYY-M-DD或YYYY-M-D或YYYY-MM-D</span><br><span class="line">    &#123;</span><br><span class="line">        var t=new Date(sDate.replace(/\-/g,&#x27;/&#x27;));</span><br><span class="line">        var ar = sDate.split(/[-/:]/);</span><br><span class="line">        if(ar[0] != t.getYear() || ar[1] != t.getMonth()+1 || ar[2] != t.getDate())</span><br><span class="line">        &#123;</span><br><span class="line">//alert(&#x27;错误的日期格式！格式为：YYYY-MM-DD或YYYY/MM/DD。注意闰年。&#x27;);</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">//alert(&#x27;错误的日期格式！格式为：YYYY-MM-DD或YYYY/MM/DD。注意闰年。&#x27;);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">//| 日期时间检查</span><br><span class="line">//| 格式为：YYYY-MM-DD HH:MM:SS</span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">function CheckDateTime(str)</span><br><span class="line">&#123;</span><br><span class="line">    var reg = /^(\d+)-(\d&#123; 1,2 &#125;)-(\d&#123; 1,2 &#125;) (\d&#123; 1,2 &#125;):(\d&#123; 1,2 &#125;):(\d&#123; 1,2 &#125;)$/;</span><br><span class="line">    var r = str.match(reg);</span><br><span class="line">    if(r==null)return false;</span><br><span class="line">    r[2]=r[2]-1;</span><br><span class="line">    var d= new Date(r[1],r[2],r[3],r[4],r[5],r[6]);</span><br><span class="line">    if(d.getFullYear()!=r[1])return false;</span><br><span class="line">    if(d.getMonth()!=r[2])return false;</span><br><span class="line">    if(d.getDate()!=r[3])return false;</span><br><span class="line">    if(d.getHours()!=r[4])return false;</span><br><span class="line">    if(d.getMinutes()!=r[5])return false;</span><br><span class="line">    if(d.getSeconds()!=r[6])return false;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">//| 把日期分割成数组</span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">Date.prototype.toArray = function()</span><br><span class="line">&#123;</span><br><span class="line">    var myDate = this;</span><br><span class="line">    var myArray = Array();</span><br><span class="line">    myArray[0] = myDate.getFullYear();</span><br><span class="line">    myArray[1] = myDate.getMonth();</span><br><span class="line">    myArray[2] = myDate.getDate();</span><br><span class="line">    myArray[3] = myDate.getHours();</span><br><span class="line">    myArray[4] = myDate.getMinutes();</span><br><span class="line">    myArray[5] = myDate.getSeconds();</span><br><span class="line">    return myArray;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">//| 取得日期数据信息</span><br><span class="line">//| 参数 interval 表示数据类型</span><br><span class="line">//| y 年 m月 d日 w星期 ww周 h时 n分 s秒</span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">Date.prototype.DatePart = function(interval)</span><br><span class="line">&#123;</span><br><span class="line">    var myDate = this;</span><br><span class="line">    var partStr=&#x27;&#x27;;</span><br><span class="line">    var Week = [&#x27;日&#x27;,&#x27;一&#x27;,&#x27;二&#x27;,&#x27;三&#x27;,&#x27;四&#x27;,&#x27;五&#x27;,&#x27;六&#x27;];</span><br><span class="line">    switch (interval)</span><br><span class="line">    &#123;</span><br><span class="line">        case &#x27;y&#x27; :partStr = myDate.getFullYear();break;</span><br><span class="line">        case &#x27;m&#x27; :partStr = myDate.getMonth()+1;break;</span><br><span class="line">        case &#x27;d&#x27; :partStr = myDate.getDate();break;</span><br><span class="line">        case &#x27;w&#x27; :partStr = Week[myDate.getDay()];break;</span><br><span class="line">        case &#x27;ww&#x27; :partStr = myDate.WeekNumOfYear();break;</span><br><span class="line">        case &#x27;h&#x27; :partStr = myDate.getHours();break;</span><br><span class="line">        case &#x27;n&#x27; :partStr = myDate.getMinutes();break;</span><br><span class="line">        case &#x27;s&#x27; :partStr = myDate.getSeconds();break;</span><br><span class="line">    &#125;</span><br><span class="line">    return partStr;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">//| 取得当前日期所在月的最大天数</span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">Date.prototype.MaxDayOfDate = function()</span><br><span class="line">&#123;</span><br><span class="line">    var myDate = this;</span><br><span class="line">    var ary = myDate.toArray();</span><br><span class="line">    var date1 = (new Date(ary[0],ary[1]+1,1));</span><br><span class="line">    var date2 = date1.dateAdd(1,&#x27;m&#x27;,1);</span><br><span class="line">    var result = dateDiff(date1.Format(&#x27;yyyy-MM-dd&#x27;),date2.Format(&#x27;yyyy-MM-dd&#x27;));</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">//| 取得当前日期所在周是一年中的第几周</span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">Date.prototype.WeekNumOfYear = function()</span><br><span class="line">&#123;</span><br><span class="line">    var myDate = this;</span><br><span class="line">    var ary = myDate.toArray();</span><br><span class="line">    var year = ary[0];</span><br><span class="line">    var month = ary[1]+1;</span><br><span class="line">    var day = ary[2];</span><br><span class="line">    document.write(&#x27;&lt; script language=VBScript\&gt; \n&#x27;);</span><br><span class="line">    document.write(&quot;myDate = DateValue(&#x27;&#x27;+month+&#x27;-&#x27;+day+&#x27;-&#x27;+year+&#x27;&#x27;) \n&quot;);</span><br><span class="line">    document.write(&quot;result = DatePart(&#x27;ww&#x27;, myDate) \n&quot;);</span><br><span class="line">    document.write(&#x27; \n&#x27;);</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">//| 字符串转成日期类型</span><br><span class="line">//| 格式 MM/dd/YYYY MM-dd-YYYY YYYY/MM/dd YYYY-MM-dd</span><br><span class="line">//+---------------------------------------------------</span><br><span class="line">function StringToDate(DateStr)</span><br><span class="line">&#123;</span><br><span class="line"> </span><br><span class="line">    var converted = Date.parse(DateStr);</span><br><span class="line">    var myDate = new Date(converted);</span><br><span class="line">    if (isNaN(myDate))</span><br><span class="line">    &#123;</span><br><span class="line">//var delimCahar = DateStr.indexOf(&#x27;/&#x27;)!=-1?&#x27;/&#x27;:&#x27;-&#x27;;</span><br><span class="line">        var arys= DateStr.split(&#x27;-&#x27;);</span><br><span class="line">        myDate = new Date(arys[0],--arys[1],arys[2]);</span><br><span class="line">    &#125;</span><br><span class="line">    return myDate;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>参考</strong><br><code>jsystem_config/dateUtils.js at 781113cb696fa78140be09d387dc930765d80f79 · lynnchae/jsystem_config</code><br><a target="_blank" rel="noopener" href="https://github.com/lynnchae/jsystem_config/blob/781113cb696fa78140be09d387dc930765d80f79/mobanker-config-parent/backStageWeb/src/main/webapp/static/mobanker/js/dateUtils.js">https://github.com/lynnchae/jsystem_config/blob/781113cb696fa78140be09d387dc930765d80f79/mobanker-config-parent/backStageWeb/src/main/webapp/static/mobanker/js/dateUtils.js</a></p>
+<p><code>QmlExplorer/date.js at ae9c040e7fc3add1edf84fb87a01df3ca5f4ca1b · surfsky/QmlExplorer</code><br><a target="_blank" rel="noopener" href="https://github.com/surfsky/QmlExplorer/blob/ae9c040e7fc3add1edf84fb87a01df3ca5f4ca1b/QmlExplorer/Js/date.js">https://github.com/surfsky/QmlExplorer/blob/ae9c040e7fc3add1edf84fb87a01df3ca5f4ca1b/QmlExplorer/Js/date.js</a></p>
+<p><code>basic/Util.js at c86e3cb5135844310517a66092f43b018f2a5133 · wodezbf/basic</code><br><a target="_blank" rel="noopener" href="https://github.com/wodezbf/basic/blob/c86e3cb5135844310517a66092f43b018f2a5133/WebContent/js/util/Util.js">https://github.com/wodezbf/basic/blob/c86e3cb5135844310517a66092f43b018f2a5133/WebContent/js/util/Util.js</a></p>
+<hr>
+<h1 id="高级篇"><a href="#高级篇" class="headerlink" title="高级篇"></a>高级篇</h1><h2 id="IE"><a href="#IE" class="headerlink" title="IE"></a>IE</h2><p>假如要兼容 IE6+，通常会这么写。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function pad(s) &#123; // 补零</span><br><span class="line">  return (&#x27;0&#x27; + s).slice(-2);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">var dt = new Date();</span><br><span class="line">var date = dt.getFullYear() + &#x27;-&#x27; + pad(dt.getMonth() + 1) + &#x27;-&#x27; + pad(dt.getDate());</span><br><span class="line">date += &#x27; &#x27;;</span><br><span class="line">date += pad(dt.getHours()) + &#x27;:&#x27; + pad(dt.getMinutes()) + &#x27;:&#x27; + pad(dt.getSeconds());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(date); // =&gt; 2016-03-25 11:01:01</span><br></pre></td></tr></table></figure>
+<p>大神的文章里是这么写的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var dt = new Date();</span><br><span class="line">var date = [</span><br><span class="line">  [dt.getFullYear(), dt.getMonth() + 1, dt.getDate()].join(&#x27;-&#x27;),</span><br><span class="line">  [dt.getHours(), dt.getMinutes(), dt.getSeconds()].join(&#x27;:&#x27;)</span><br><span class="line">].join(&#x27; &#x27;).replace(/(?=\b\d\b)/g, &#x27;0&#x27;); // 正则补零 (略微改动)</span><br><span class="line"> </span><br><span class="line">console.log(date); // =&gt; 2016-03-25 11:01:01</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="现代浏览器"><a href="#现代浏览器" class="headerlink" title="# 现代浏览器"></a># 现代浏览器</h1><p>假如是 IE9+ 或现代浏览器，那就方便多了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var dt = new Date();</span><br><span class="line">dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset()); // 修正时区偏移</span><br><span class="line">var date = dt.toISOString().slice(0, -5).replace(/[T]/g, &#x27; &#x27;);</span><br><span class="line"> </span><br><span class="line">console.log(date); // =&gt; 2016-03-25 11:01:01</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>参考</strong><br><code>js 生成 yyyy-mm-dd 格式的逼格姿势</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/jiY3EfJ">http://www.tuicool.com/articles/jiY3EfJ</a></p>
+<hr>
+<h1 id="打开浏览器-F12-控制台"><a href="#打开浏览器-F12-控制台" class="headerlink" title="打开浏览器-F12-控制台"></a>打开浏览器-F12-控制台</h1><ul>
+<li><p>当前时间</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Date.now();// 1477644601270</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>依据时间</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new Date(&quot;2016-10-28 11:05:00&quot;).getTime();// 1477623900000</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>验证</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var dt = new Date(1477623900000);</span><br><span class="line">dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset()); // 修正时区偏移</span><br><span class="line">var date = dt.toISOString().slice(0, -5).replace(/[T]/g, &#x27; &#x27;);</span><br><span class="line">console.log(date); // =&gt; 2016-10-28 11:05:00</span><br></pre></td></tr></table></figure>
+<span id="more"></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/javaScript-%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96/" rel="tag"># javaScript 时间格式化</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="prev" title="科学上网">
+                  <i class="fa fa-angle-left"></i> 科学上网
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/css%20tips/" rel="next" title="css tips">
+                  css tips <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

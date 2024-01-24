@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="预览 获取上传前,存在浏览器中的图片地址（或对象） 123456&lt;input type&#x3D;&quot;file&quot;&gt;input.on.(&#x27;change&#x27;, preview);function preview(e) &#123;    var file &#x3D; e.target.files[0];&#x2F;&#x2F; 获取到input-file的文件对象    ...&#125;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javaScript前端图片相关（预览，压缩，Base64，上传，异步加载）">
+<meta property="og:url" content="https://www.sovdating.com/javaScript%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%89%87%E7%9B%B8%E5%85%B3%EF%BC%88%E9%A2%84%E8%A7%88%EF%BC%8C%E5%8E%8B%E7%BC%A9%EF%BC%8CBase64%EF%BC%8C%E4%B8%8A%E4%BC%A0%EF%BC%8C%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%EF%BC%89/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="预览 获取上传前,存在浏览器中的图片地址（或对象） 123456&lt;input type&#x3D;&quot;file&quot;&gt;input.on.(&#x27;change&#x27;, preview);function preview(e) &#123;    var file &#x3D; e.target.files[0];&#x2F;&#x2F; 获取到input-file的文件对象    ...&#125;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/31992448.jpg">
+<meta property="article:published_time" content="2017-03-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.078Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="前端图片">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/31992448.jpg">
+
+
+<link rel="canonical" href="https://www.sovdating.com/javaScript%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%89%87%E7%9B%B8%E5%85%B3%EF%BC%88%E9%A2%84%E8%A7%88%EF%BC%8C%E5%8E%8B%E7%BC%A9%EF%BC%8CBase64%EF%BC%8C%E4%B8%8A%E4%BC%A0%EF%BC%8C%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%EF%BC%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/javaScript%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%89%87%E7%9B%B8%E5%85%B3%EF%BC%88%E9%A2%84%E8%A7%88%EF%BC%8C%E5%8E%8B%E7%BC%A9%EF%BC%8CBase64%EF%BC%8C%E4%B8%8A%E4%BC%A0%EF%BC%8C%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%EF%BC%89/","path":"javaScript前端图片相关（预览，压缩，Base64，上传，异步加载）/","title":"javaScript前端图片相关（预览，压缩，Base64，上传，异步加载）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>javaScript前端图片相关（预览，压缩，Base64，上传，异步加载） | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%84%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">预览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87-%E5%89%8D%E7%AB%AF-%E8%A3%81%E5%89%AA"><span class="nav-number">2.</span> <span class="nav-text">本地图片(前端) 裁剪</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#https-github-com-fengyuanchen-cropper"><span class="nav-number">2.1.</span> <span class="nav-text">https:&#x2F;&#x2F;github.com&#x2F;fengyuanchen&#x2F;cropper
+ </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87-%E5%89%8D%E7%AB%AF-%E5%8E%8B%E7%BC%A9-%E6%96%B9%E5%90%911%EF%BC%9A-%E5%80%9F%E5%8A%A9-canvas-%E5%AF%B9%E9%80%89%E6%8B%A9%E7%9A%84%E5%9B%BE%E7%89%87%E8%BF%9B%E8%A1%8C%E5%A4%84%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">本地图片(前端) 压缩 - 方向1： 借助 canvas 对选择的图片进行处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript-%E5%9C%A8%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%80%8E%E6%A0%B7%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%EF%BC%9F%EF%BC%8C%E8%80%8C%E4%B8%94%E5%9C%A8%E4%B8%8A%E4%BC%A0%E5%89%8D%E6%8A%8A%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E4%B8%80%E5%AE%9A%E7%9A%84%E5%A4%A7%E5%B0%8F%EF%BC%9F-SegmentFaulthttps-segmentfault-com-q-1010000006749744-ea-1139187-%E6%96%B9%E5%90%912%EF%BC%9A%E5%80%9F%E5%8A%A9%E6%8F%92%E4%BB%B6-lrz-mobile-min-js-lrz-bundle-js-%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9-think2011-localResizeIMG-%E5%89%8D%E7%AB%AF%E6%9C%AC%E5%9C%B0%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8E%8B%E7%BC%A9%E5%9B%BE%E7%89%87%EF%BC%8C%E5%85%BC%E5%AE%B9IOS%EF%BC%8CAndroid%EF%BC%8CPC%E3%80%81%E8%87%AA%E5%8A%A8%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD%E6%96%87%E4%BB%B6https-github-com-think2011-LocalResizeIMG"><span class="nav-number">3.1.</span> <span class="nav-text">javascript - 在移动端怎样上传图片？，而且在上传前把图片压缩一定的大小？ - SegmentFaulthttps:&#x2F;&#x2F;segmentfault.com&#x2F;q&#x2F;1010000006749744?_ea&#x3D;1139187- 方向2：借助插件 lrz.mobile.min.js[lrz.bundle.js 前端图片压缩] think2011&#x2F;localResizeIMG: 前端本地客户端压缩图片，兼容IOS，Android，PC、自动按需加载文件https:&#x2F;&#x2F;github.com&#x2F;think2011&#x2F;LocalResizeIMG
+ </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Base64"><span class="nav-number">4.</span> <span class="nav-text">Base64</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A%E8%A7%81%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B0%86%E5%9B%BE%E7%89%87%E5%AF%B9%E8%B1%A1%E8%BD%ACBase64-md-%E5%88%A9%E7%94%A8new-FileReader"><span class="nav-number">4.1.</span> <span class="nav-text">更多见：客户端将图片对象转Base64.md- 利用new FileReader
+ 
+ </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E3%80%81-%E6%A8%A1%E7%B3%8A%E6%98%BE%E7%A4%BA"><span class="nav-number">5.</span> <span class="nav-text">异步加载、 模糊显示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-Lazy-Load-%E5%9B%BE%E7%89%87%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD%E6%9B%B4%E5%A4%9A%E8%A7%81%EF%BC%9A-%E5%9B%BE%E7%89%87%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E6%96%B9%E6%A1%88-md"><span class="nav-number">5.1.</span> <span class="nav-text">jQuery Lazy Load 图片延迟加载更多见： 图片异步加载方案.md
+ </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0"><span class="nav-number">6.</span> <span class="nav-text">上传</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80-%EF%BC%9A-form%E8%A1%A8%E5%8D%95"><span class="nav-number">6.1.</span> <span class="nav-text">方案一 ： form表单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E4%BA%8C-%E5%BC%82%E6%AD%A5%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4-jQuery-form%E6%8F%92%E4%BB%B6%E8%BD%BB%E6%9D%BE%E5%AE%9E%E7%8E%B0%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4-ajaxForm-or-ajaxSubmit-%E4%BD%BF%E7%94%A8jQuery-form%E6%8F%92%E4%BB%B6%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%AE%8C%E7%BE%8E%E7%9A%84%E8%A1%A8%E5%8D%95%E5%BC%82%E6%AD%A5%E6%8F%90%E4%BA%A4-%E6%BB%B4%E7%AD%94%E7%9A%84%E9%9B%A8-%E5%8D%9A%E5%AE%A2%E5%9B%ADhttp-www-cnblogs-com-heyuquan-p-form-plug-async-submit-html"><span class="nav-number">6.2.</span> <span class="nav-text">例二12345678910&#x2F;** * 变更图标库图标 * (前端请求需要注意,文件字段名必须为file,与此声明对应&#x2F;如不声明则需与字段名一致-否则无法获取到文件对象) * * @param layerIconlib * @return *&#x2F;@ResponseBody@RequestMapping(method &#x3D; RequestMethod.POST, value &#x3D; &quot;iconlib&#x2F;save&quot;)public Object saveIconLib(LayerIconlib layerIconlib, @RequestParam(required &#x3D; false, value &#x3D; &quot;file&quot;) MultipartFile file) {- 异步表单提交1234567891011var options &#x3D; {    url: &#39;async_submit_test1.aspx?action&#x3D;SaveUserInfo&#39;,    type: &#39;post&#39;,    dataType: &#39;text&#39;,    data: $(&quot;#form1&quot;).serialize(),    success: function (data) {    if (data.length &gt; 0)        $(&quot;#responseText&quot;).text(data);    }};$.ajax(options);- jQuery.form插件轻松实现表单提交 [ajaxForm or  ajaxSubmit ]1234567891011var options &#x3D; {success: function (data) {$(&quot;#responseText&quot;).text(data);} };  &#x2F;&#x2F; ajaxForm$(&quot;#form1&quot;).ajaxForm(options);  &#x2F;&#x2F; ajaxSubmit$(&quot;#btnAjaxSubmit&quot;).click(function () {    $(&quot;#form1&quot;).ajaxSubmit(options);});使用jQuery.form插件，实现完美的表单异步提交 - 滴答的雨 - 博客园http:&#x2F;&#x2F;www.cnblogs.com&#x2F;heyuquan&#x2F;p&#x2F;form-plug-async-submit.html
+ </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9A-ajax%E4%B8%8A%E4%BC%A0-FileReader-Base64-%EF%BC%88-%E5%BC%82%E6%AD%A5%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">方案二： ajax上传  FileReader( Base64) （ 异步）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#new-FileReader-readAsDataURL-file"><span class="nav-number">6.4.</span> <span class="nav-text">[new FileReader().readAsDataURL(file)]
+ 
+ 
+ </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%89%EF%BC%9Aajax%E4%B8%8A%E4%BC%A0-FormData-%EF%BC%88-%E5%BC%82%E6%AD%A5%EF%BC%89"><span class="nav-number">6.5.</span> <span class="nav-text">方案三：ajax上传 FormData （ 异步）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87-%E9%80%9A%E8%BF%87FileReader%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E7%9A%84base64-simonbaker-%E5%8D%9A%E5%AE%A2%E5%9B%ADhttp-www-cnblogs-com-simonbaker-p-4667849-html-ajax-formData%E8%87%AA%E5%AE%9A%E4%B9%89-%E4%BA%8C%E8%BF%9B%E5%88%B6-%E4%B8%8A%E4%BC%A0base64-%E8%BD%AC-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6%E5%88%A9%E7%94%A8FileReader%E5%92%8CFormData%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E9%A2%84%E8%A7%88%E5%92%8C%E4%B8%8A%E4%BC%A0-%E6%8E%A8%E9%85%B7http-www-tuicool-com-articles-yYR7NnB"><span class="nav-number">6.6.</span> <span class="nav-text">JS上传图片-通过FileReader获取图片的base64 - simonbaker - 博客园http:&#x2F;&#x2F;www.cnblogs.com&#x2F;simonbaker&#x2F;p&#x2F;4667849.html-  [ajax] formData自定义(二进制)上传123var fd &#x3D; new FormData();var blob &#x3D; dataURItoBlob(dataURL);fd.append(&#39;file&#39;, blob);base64 转 二进制文件123456789101112131415&#x2F;*** dataURL to blob, ref to https:&#x2F;&#x2F;gist.github.com&#x2F;fupslot&#x2F;5015897* @param dataURI* @returns {Blob}*&#x2F;function dataURItoBlob(dataURI) {    var byteString &#x3D; atob(dataURI.split(&#39;,&#39;)[1]);    var mimeString &#x3D; dataURI.split(&#39;,&#39;)[0].split(&#39;:&#39;)[1].split(&#39;;&#39;)[0];    var ab &#x3D; new ArrayBuffer(byteString.length);    var ia &#x3D; new Uint8Array(ab);    for (var i &#x3D; 0; i &lt; byteString.length; i++) {        ia[i] &#x3D; byteString.charCodeAt(i);    }    return new Blob([ab], {type: mimeString});}利用FileReader和FormData实现图片预览和上传 - 推酷http:&#x2F;&#x2F;www.tuicool.com&#x2F;articles&#x2F;yYR7NnB
+ </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E5%9B%9B-iframe-%E8%A7%A3%E5%86%B3IE9%E5%8F%8A%E4%BB%A5%E4%B8%8B%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%BC%82%E6%AD%A5%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%94%AF%E6%8C%81"><span class="nav-number">6.7.</span> <span class="nav-text">方案四 iframe (解决IE9及以下浏览器的异步图片上传支持)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cmlenz-jquery-iframe-transport-jQuery-Ajax-transport-plugin-that-supports-file-uploads-through-a-hidden-iframehttps-github-com-cmlenz-jquery-iframe-transport"><span class="nav-number">6.8.</span> <span class="nav-text">cmlenz&#x2F;jquery-iframe-transport: jQuery Ajax transport plugin that supports file uploads through a hidden iframehttps:&#x2F;&#x2F;github.com&#x2F;cmlenz&#x2F;jquery-iframe-transport
+ </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.9.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0base64%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%85%B6%E5%AE%9E%E4%B8%8D%E6%98%AF%E4%B8%80%E4%B8%AA%E5%BE%88%E5%A5%BD%E7%9A%84%E6%96%B9%E6%A1%88%EF%BC%8Cbase64%E7%9A%84%E4%BD%93%E7%A7%AF%E5%BE%88%E5%A4%A7%E3%80%82%E4%B8%8A%E4%BC%A0%E5%89%8D%E7%9A%84%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E9%80%BB%E8%BE%91%E4%B9%8B%E4%B8%80%EF%BC%8C%E5%B0%B1%E6%98%AF%E5%9C%A8%E5%89%8D%E7%AB%AF%E6%8A%8Abase64%E8%BD%AC%E6%88%90%E4%BA%8C%E7%BA%A7%E5%88%B6%E6%95%B0%E6%8D%AE%EF%BC%8C%E8%BF%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E4%BD%93%E7%A7%AF%E7%9B%B8%E6%AF%94base64%E5%B0%8F%E5%BE%88%E5%A4%9A%EF%BC%8C%E8%BF%98%E5%8F%AF%E4%BB%A5%E5%A1%9E%E5%88%B0formdata%E4%B8%AD%E6%8F%90%E4%BA%A4JavaScript-%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E9%97%AE%E9%A2%98%EF%BC%9F-%E7%9F%A5%E4%B9%8Ehttps-www-zhihu-com-question-30692677"><span class="nav-number">6.10.</span> <span class="nav-text">上传base64字符串其实不是一个很好的方案，base64的体积很大。上传前的图片压缩逻辑之一，就是在前端把base64转成二级制数据，这个数据体积相比base64小很多，还可以塞到formdata中提交JavaScript 图片压缩问题？ - 知乎https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;30692677
+ 
+ 
+ </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">7.</span> <span class="nav-text">多文件上传</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">8.</span> <span class="nav-text">附件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%EF%BC%9A%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0"><span class="nav-number">8.1.</span> <span class="nav-text">同：图片上传
+ </span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/javaScript%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%89%87%E7%9B%B8%E5%85%B3%EF%BC%88%E9%A2%84%E8%A7%88%EF%BC%8C%E5%8E%8B%E7%BC%A9%EF%BC%8CBase64%EF%BC%8C%E4%B8%8A%E4%BC%A0%EF%BC%8C%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="javaScript前端图片相关（预览，压缩，Base64，上传，异步加载） | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          javaScript前端图片相关（预览，压缩，Base64，上传，异步加载）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-04-01 00:00:00" itemprop="dateCreated datePublished" datetime="2017-04-01T00:00:00+08:00">2017-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h1><ul>
+<li><p>获取上传前,存在浏览器中的图片地址（或对象）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot;&gt;</span><br><span class="line">input.on.(&#x27;change&#x27;, preview);</span><br><span class="line">function preview(e) &#123;</span><br><span class="line">    var file = e.target.files[0];// 获取到input-file的文件对象</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>浏览器缓存图片的<code>base64</code>  <code>[ window.URL.createObjectURL(file) ]</code> （短）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; name=&quot;imgOne&quot; id=&quot;imgOne&quot; onchange=&quot;preImg(this.id,&#x27;imgPre&#x27;);&quot; /&gt;</span><br><span class="line">&lt;img id=&quot;imgPre&quot; src=&quot;&quot; width=&quot;300px&quot; height=&quot;300px&quot; style=&quot;display: block;&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">window.URL.createObjectURL(document.getElementById(&#x27;imgOne&#x27;).files[0]);</span><br><span class="line">// 结果： &quot;blob:null/1342ae24-b5da-4ec3-b05d-f385387bd881&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(&#x27; imgPre &#x27;).src=&#x27; blob:null/1342ae24-b5da-4ec3-b05d-f385387bd881 &#x27;;</span><br></pre></td></tr></table></figure>
+<p><code>JS预览图像将本地图片显示到浏览器上</code><br><a target="_blank" rel="noopener" href="http://www.jb51.net/article/40864.htm">http://www.jb51.net/article/40864.htm</a></p>
+</li>
+<li><p>实际上传图片的<code>base64</code>  <code>[ new FileReader().readAsDataURL (file) ]</code> （长）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; onchange=&quot;previewFile()&quot;&gt;&lt;br&gt;</span><br><span class="line">&lt;img src=&quot;&quot; height=&quot;200&quot; width=&quot;300&quot; alt=&quot;Image preview...&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var reader = new FileReader();</span><br><span class="line">reader.onloadend = function () &#123;</span><br><span class="line">   preview.src = reader.result;// Base64内容</span><br><span class="line">&#125;</span><br><span class="line">reader.readAsDataURL( document.querySelector(&#x27;input[type=file]&#x27;).files[0] );</span><br></pre></td></tr></table></figure>
+<p><code>轻松实现js图片预览功能</code><br><a target="_blank" rel="noopener" href="http://www.jb51.net/article/78215.htm">http://www.jb51.net/article/78215.htm</a><br><a target="_blank" rel="noopener" href="https://www.oschina.net/code/snippet_819257_22844">https://www.oschina.net/code/snippet_819257_22844</a></p>
+</li>
+</ul>
+<p>注意:<br>在手机设备上读取临时图片数据会存在权限问题</p>
+<p><code>ionic 图片拍照；选择上传 ngcordova cordovaFileTransfer cordovaCamera - u012922981的专栏</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/u012922981/article/details/50924515">http://blog.csdn.net/u012922981/article/details/50924515</a></p>
+<hr>
+<h1 id="本地图片-前端-裁剪"><a href="#本地图片-前端-裁剪" class="headerlink" title="本地图片(前端) 裁剪"></a>本地图片(前端)<code> 裁剪</code></h1><h2 id="https-github-com-fengyuanchen-cropper"><a href="#https-github-com-fengyuanchen-cropper" class="headerlink" title="https://github.com/fengyuanchen/cropper
+ "></a><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/31992448.jpg"><br><a target="_blank" rel="noopener" href="https://github.com/fengyuanchen/cropper">https://github.com/fengyuanchen/cropper</a>
+ </h2><h1 id="本地图片-前端-压缩-方向1：-借助-canvas-对选择的图片进行处理"><a href="#本地图片-前端-压缩-方向1：-借助-canvas-对选择的图片进行处理" class="headerlink" title="本地图片(前端) 压缩 - 方向1： 借助 canvas 对选择的图片进行处理"></a>本地图片(前端)<code> 压缩</code> - 方向1： 借助 canvas 对选择的图片进行处理</h1><h2 id="javascript-在移动端怎样上传图片？，而且在上传前把图片压缩一定的大小？-SegmentFaulthttps-segmentfault-com-q-1010000006749744-ea-1139187-方向2：借助插件-lrz-mobile-min-js-lrz-bundle-js-前端图片压缩-think2011-localResizeIMG-前端本地客户端压缩图片，兼容IOS，Android，PC、自动按需加载文件https-github-com-think2011-LocalResizeIMG"><a href="#javascript-在移动端怎样上传图片？，而且在上传前把图片压缩一定的大小？-SegmentFaulthttps-segmentfault-com-q-1010000006749744-ea-1139187-方向2：借助插件-lrz-mobile-min-js-lrz-bundle-js-前端图片压缩-think2011-localResizeIMG-前端本地客户端压缩图片，兼容IOS，Android，PC、自动按需加载文件https-github-com-think2011-LocalResizeIMG" class="headerlink" title="javascript - 在移动端怎样上传图片？，而且在上传前把图片压缩一定的大小？ - SegmentFaulthttps://segmentfault.com/q/1010000006749744?_ea=1139187- 方向2：借助插件 lrz.mobile.min.js[lrz.bundle.js 前端图片压缩] think2011/localResizeIMG: 前端本地客户端压缩图片，兼容IOS，Android，PC、自动按需加载文件https://github.com/think2011/LocalResizeIMG
+ "></a><code>javascript - 在移动端怎样上传图片？，而且在上传前把图片压缩一定的大小？ - SegmentFault</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000006749744?_ea=1139187">https://segmentfault.com/q/1010000006749744?_ea=1139187</a><br><br><br>- 方向2：借助插件 lrz.mobile.min.js<br><br><code>[lrz.bundle.js 前端图片压缩] think2011/localResizeIMG: 前端本地客户端压缩图片，兼容IOS，Android，PC、自动按需加载文件</code><br><a target="_blank" rel="noopener" href="https://github.com/think2011/LocalResizeIMG">https://github.com/think2011/LocalResizeIMG</a>
+ </h2><h1 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h1><ul>
+<li>利于<code>canvas</code></li>
+</ul>
+<h2 id="更多见：客户端将图片对象转Base64-md-利用new-FileReader"><a href="#更多见：客户端将图片对象转Base64-md-利用new-FileReader" class="headerlink" title="更多见：客户端将图片对象转Base64.md- 利用new FileReader
+ 
+ "></a>更多见：<code>客户端将图片对象转Base64.md</code><br><br>- 利用<code>new FileReader</code>
+ 
+ </h2><h1 id="异步加载、-模糊显示"><a href="#异步加载、-模糊显示" class="headerlink" title="异步加载、 模糊显示"></a>异步加载、 模糊显示</h1><h2 id="jQuery-Lazy-Load-图片延迟加载更多见：-图片异步加载方案-md"><a href="#jQuery-Lazy-Load-图片延迟加载更多见：-图片异步加载方案-md" class="headerlink" title="jQuery Lazy Load 图片延迟加载更多见： 图片异步加载方案.md
+ "></a>jQuery Lazy Load 图片延迟加载<br><br>更多见： <code>图片异步加载方案.md</code>
+ </h2><h1 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h1><h2 id="方案一-：-form表单"><a href="#方案一-：-form表单" class="headerlink" title="方案一 ： form表单"></a>方案一 ： <code>form</code>表单</h2><ul>
+<li>前端<code>form</code>  (非异步，页面被刷新)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;form id=&quot;myForm&quot; action=&quot;$&#123;pageContext.request.contextPath&#125;/message/saveMessage.do&quot; method=&quot;post&quot;&gt;</span><br><span class="line">&lt;input type=&quot;file&quot; name=&quot;file&quot; capture=&quot;camera&quot; id=&quot;inputFile&quot;&gt;上传图片</span><br><span class="line"> </span><br><span class="line">&lt;input type=&quot;submit&quot; class=&quot;btn-submit&quot; value=&quot;提交&quot; id=&quot;submit&quot;&gt;</span><br></pre></td></tr></table></figure>
+后端 <code>MultipartFile</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(method=RequestMethod.POST,value=&quot;/upload/image&quot;)</span><br><span class="line">public void uploadImage(@RequestParam(required = false, value = &quot;file&quot;)MultipartFile file</span><br><span class="line">,HttpServletRequest request,HttpServletResponse response)throws Exception&#123;</span><br><span class="line">String url = getUploadUrl(file, request, response);</span><br><span class="line">if(StringUtil.isEmpty(url))&#123;</span><br><span class="line">return;</span><br><span class="line">&#125;</span><br><span class="line">JsonResult result = initJsonResult(url, 1, 1, Constants.JSON_RESULT_SUCCESS, null);</span><br><span class="line">responseWriter(request, response, result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="例二-异步表单提交-jQuery-form插件轻松实现表单提交-ajaxForm-or-ajaxSubmit-使用jQuery-form插件，实现完美的表单异步提交-滴答的雨-博客园http-www-cnblogs-com-heyuquan-p-form-plug-async-submit-html"><a href="#例二-异步表单提交-jQuery-form插件轻松实现表单提交-ajaxForm-or-ajaxSubmit-使用jQuery-form插件，实现完美的表单异步提交-滴答的雨-博客园http-www-cnblogs-com-heyuquan-p-form-plug-async-submit-html" class="headerlink" title="例二- 异步表单提交- jQuery.form插件轻松实现表单提交 [ajaxForm or  ajaxSubmit ]使用jQuery.form插件，实现完美的表单异步提交 - 滴答的雨 - 博客园http://www.cnblogs.com/heyuquan/p/form-plug-async-submit.html
+ "></a>例二<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 变更图标库图标</span><br><span class="line"> * (前端请求需要注意,文件字段名必须为file,与此声明对应/如不声明则需与字段名一致-否则无法获取到文件对象)</span><br><span class="line"> *</span><br><span class="line"> * @param layerIconlib</span><br><span class="line"> * @return</span><br><span class="line"> */</span><br><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(method = RequestMethod.POST, value = &quot;iconlib/save&quot;)</span><br><span class="line">public Object saveIconLib(LayerIconlib layerIconlib, @RequestParam(required = false, value = &quot;file&quot;) MultipartFile file) &#123;</span><br></pre></td></tr></table></figure><br><br><br>- 异步表单提交<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var options = &#123;</span><br><span class="line">    url: &#x27;async_submit_test1.aspx?action=SaveUserInfo&#x27;,</span><br><span class="line">    type: &#x27;post&#x27;,</span><br><span class="line">    dataType: &#x27;text&#x27;,</span><br><span class="line">    data: $(&quot;#form1&quot;).serialize(),</span><br><span class="line">    success: function (data) &#123;</span><br><span class="line">    if (data.length &gt; 0)</span><br><span class="line">        $(&quot;#responseText&quot;).text(data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">$.ajax(options);</span><br></pre></td></tr></table></figure><br><br><br>- jQuery.form插件轻松实现表单提交 <code>[ajaxForm or  ajaxSubmit ]</code><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var options = &#123;success: function (data) &#123;$(&quot;#responseText&quot;).text(data);&#125; &#125;;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">// ajaxForm</span><br><span class="line">$(&quot;#form1&quot;).ajaxForm(options);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">// ajaxSubmit</span><br><span class="line">$(&quot;#btnAjaxSubmit&quot;).click(function () &#123;</span><br><span class="line">    $(&quot;#form1&quot;).ajaxSubmit(options);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><br><br><br><code>使用jQuery.form插件，实现完美的表单异步提交 - 滴答的雨 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/heyuquan/p/form-plug-async-submit.html">http://www.cnblogs.com/heyuquan/p/form-plug-async-submit.html</a>
+ </h2><h2 id="方案二：-ajax上传-FileReader-Base64-（-异步）"><a href="#方案二：-ajax上传-FileReader-Base64-（-异步）" class="headerlink" title="方案二： ajax上传  FileReader( Base64) （ 异步）"></a>方案二： ajax上传 <code> FileReader( Base64)</code> （ 异步）</h2><h2 id="new-FileReader-readAsDataURL-file"><a href="#new-FileReader-readAsDataURL-file" class="headerlink" title="[new FileReader().readAsDataURL(file)]
+ 
+ 
+ "></a><code>[new FileReader().readAsDataURL(file)]</code>
+ 
+ 
+ </h2><h2 id="方案三：ajax上传-FormData-（-异步）"><a href="#方案三：ajax上传-FormData-（-异步）" class="headerlink" title="方案三：ajax上传 FormData （ 异步）"></a>方案三：ajax上传 <code>FormData</code> （ 异步）</h2><ul>
+<li><p>[ajax]获取elment（file）值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">type: &quot;POST&quot;,</span><br><span class="line">url: &quot;handler/UploadImageHandler.ashx&quot;,</span><br><span class="line">data: &#123; imgPath: $(&quot;#uploadFile&quot;).val() &#125;,</span><br><span class="line">success: function(data) &#123; &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<p><code>Jquery实现异步上传图片 - jack_Meng - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/mq0036/p/3715024.html">http://www.cnblogs.com/mq0036/p/3715024.html</a></p>
+</li>
+<li><p>[ajax] 序列化表单 &amp; 进度显示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 序列化表单 </span><br><span class="line">var serializeData = $(this).serialize();</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">uploadProgress: function (event, position, total, percentComplete)&#123;</span><br><span class="line">   //在这里控制进度条 </span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p><code>使用Ajax异步上传图片的方法(html,javascript,php) - Helkyle的专栏 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/JOUeu/article/details/46858923">http://blog.csdn.net/JOUeu/article/details/46858923</a></p>
+</li>
+<li><p>[ajax] formData上传</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var data = new FormData($(&#x27;#form1&#x27;)[0]);</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">   url: &#x27;server.php&#x27;,</span><br><span class="line">   type: &#x27;POST&#x27;,</span><br><span class="line">   data: data,</span><br><span class="line">   dataType: &#x27;JSON&#x27;,</span><br></pre></td></tr></table></figure>
+<p><code>使用FormData对象提交表单及上传图片 - 傲雪星枫 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/fdipzone/article/details/38910553">http://blog.csdn.net/fdipzone/article/details/38910553</a></p>
+</li>
+<li><p>[ajax] formData将图片转base64上传</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fromData = new FormData();</span><br><span class="line">fromData.append(&quot;base64&quot;, e.target.result);</span><br></pre></td></tr></table></figure>
+<h2 id="JS上传图片-通过FileReader获取图片的base64-simonbaker-博客园http-www-cnblogs-com-simonbaker-p-4667849-html-ajax-formData自定义-二进制-上传base64-转-二进制文件利用FileReader和FormData实现图片预览和上传-推酷http-www-tuicool-com-articles-yYR7NnB"><a href="#JS上传图片-通过FileReader获取图片的base64-simonbaker-博客园http-www-cnblogs-com-simonbaker-p-4667849-html-ajax-formData自定义-二进制-上传base64-转-二进制文件利用FileReader和FormData实现图片预览和上传-推酷http-www-tuicool-com-articles-yYR7NnB" class="headerlink" title="JS上传图片-通过FileReader获取图片的base64 - simonbaker - 博客园http://www.cnblogs.com/simonbaker/p/4667849.html-  [ajax] formData自定义(二进制)上传base64 转 二进制文件利用FileReader和FormData实现图片预览和上传 - 推酷http://www.tuicool.com/articles/yYR7NnB
+ "></a><code>JS上传图片-通过FileReader获取图片的base64 - simonbaker - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/simonbaker/p/4667849.html">http://www.cnblogs.com/simonbaker/p/4667849.html</a><br><br><br>-  [ajax] formData自定义(二进制)上传<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var fd = new FormData();</span><br><span class="line">var blob = dataURItoBlob(dataURL);</span><br><span class="line">fd.append(&#x27;file&#x27;, blob);</span><br></pre></td></tr></table></figure><br>base64 转 二进制文件<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* dataURL to blob, ref to https://gist.github.com/fupslot/5015897</span><br><span class="line">* @param dataURI</span><br><span class="line">* @returns &#123;Blob&#125;</span><br><span class="line">*/</span><br><span class="line">function dataURItoBlob(dataURI) &#123;</span><br><span class="line">    var byteString = atob(dataURI.split(&#x27;,&#x27;)[1]);</span><br><span class="line">    var mimeString = dataURI.split(&#x27;,&#x27;)[0].split(&#x27;:&#x27;)[1].split(&#x27;;&#x27;)[0];</span><br><span class="line">    var ab = new ArrayBuffer(byteString.length);</span><br><span class="line">    var ia = new Uint8Array(ab);</span><br><span class="line">    for (var i = 0; i &lt; byteString.length; i++) &#123;</span><br><span class="line">        ia[i] = byteString.charCodeAt(i);</span><br><span class="line">    &#125;</span><br><span class="line">    return new Blob([ab], &#123;type: mimeString&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><code>利用</code>FileReader<code>和</code>FormData<code>实现图片预览和上传 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/yYR7NnB">http://www.tuicool.com/articles/yYR7NnB</a>
+ </h2><h2 id="方案四-iframe-解决IE9及以下浏览器的异步图片上传支持"><a href="#方案四-iframe-解决IE9及以下浏览器的异步图片上传支持" class="headerlink" title="方案四 iframe (解决IE9及以下浏览器的异步图片上传支持)"></a>方案四 <code>iframe</code> (解决IE9及以下浏览器的异步图片上传支持)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这个jQuery插件实现了一个&lt;iframe&gt;传输，以便$ .ajax（）调用支持使用标准HTML文件输入字段上传文件。 这是通过将交换从XMLHttpRequest切换到包含提交的表单的隐藏iframe元素来完成的。</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<h2 id="cmlenz-jquery-iframe-transport-jQuery-Ajax-transport-plugin-that-supports-file-uploads-through-a-hidden-iframehttps-github-com-cmlenz-jquery-iframe-transport"><a href="#cmlenz-jquery-iframe-transport-jQuery-Ajax-transport-plugin-that-supports-file-uploads-through-a-hidden-iframehttps-github-com-cmlenz-jquery-iframe-transport" class="headerlink" title="cmlenz/jquery-iframe-transport: jQuery Ajax transport plugin that supports file uploads through a hidden iframehttps://github.com/cmlenz/jquery-iframe-transport
+ "></a><code>cmlenz/jquery-iframe-transport: jQuery Ajax transport plugin that supports file uploads through a hidden iframe</code><br><a target="_blank" rel="noopener" href="https://github.com/cmlenz/jquery-iframe-transport">https://github.com/cmlenz/jquery-iframe-transport</a>
+ </h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h2 id="上传base64字符串其实不是一个很好的方案，base64的体积很大。上传前的图片压缩逻辑之一，就是在前端把base64转成二级制数据，这个数据体积相比base64小很多，还可以塞到formdata中提交JavaScript-图片压缩问题？-知乎https-www-zhihu-com-question-30692677"><a href="#上传base64字符串其实不是一个很好的方案，base64的体积很大。上传前的图片压缩逻辑之一，就是在前端把base64转成二级制数据，这个数据体积相比base64小很多，还可以塞到formdata中提交JavaScript-图片压缩问题？-知乎https-www-zhihu-com-question-30692677" class="headerlink" title="上传base64字符串其实不是一个很好的方案，base64的体积很大。上传前的图片压缩逻辑之一，就是在前端把base64转成二级制数据，这个数据体积相比base64小很多，还可以塞到formdata中提交JavaScript 图片压缩问题？ - 知乎https://www.zhihu.com/question/30692677
+ 
+ 
+ "></a>上传base64字符串其实不是一个很好的方案，base64的体积很大。<br><br>上传前的图片压缩逻辑之一，就是在前端把base64转成二级制数据，这个数据体积相比base64小很多，还可以塞到formdata中提交<br><br><code>JavaScript 图片压缩问题？ - 知乎</code><br><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/30692677">https://www.zhihu.com/question/30692677</a>
+ 
+ 
+ </h2><h1 id="多文件上传"><a href="#多文件上传" class="headerlink" title="多文件上传"></a>多文件上传</h1><ul>
+<li><code>multiple</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=&quot;fileImage&quot; type=&quot;file&quot; size=&quot;30&quot; name=&quot;fileselect[]&quot; multiple /&gt;</span><br></pre></td></tr></table></figure>
+<code>基于HTML5的可预览多图片Ajax上传 « 张鑫旭-鑫空间-鑫生活</code><br><a target="_blank" rel="noopener" href="http://www.zhangxinxu.com/wordpress/2011/09/%E5%9F%BA%E4%BA%8Ehtml5%E7%9A%84%E5%8F%AF%E9%A2%84%E8%A7%88%E5%A4%9A%E5%9B%BE%E7%89%87ajax%E4%B8%8A%E4%BC%A0/">http://www.zhangxinxu.com/wordpress/2011/09/%E5%9F%BA%E4%BA%8Ehtml5%E7%9A%84%E5%8F%AF%E9%A2%84%E8%A7%88%E5%A4%9A%E5%9B%BE%E7%89%87ajax%E4%B8%8A%E4%BC%A0/</a></li>
+</ul>
+<hr>
+<h1 id="附件上传"><a href="#附件上传" class="headerlink" title="附件上传"></a>附件上传</h1><h2 id="同：图片上传"><a href="#同：图片上传" class="headerlink" title="同：图片上传
+ "></a>同：图片上传
+ </h2><p><strong>参考</strong><br><code>通过AngularJS实现图片上传及缩略图展示</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/jach/p/5734920.html">http://www.cnblogs.com/jach/p/5734920.html</a></p>
+<p><code>AngularJS图片上传功能的实现 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/jQrQnmf">http://www.tuicool.com/articles/jQrQnmf</a></p>
+<p><code>三种上传文件不刷新页面的方法讨论：iframe/FormData/FileReader - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/UjYzArb">http://www.tuicool.com/articles/UjYzArb</a></p>
+<p><code>详解：怎样实现前端裁剪上传图片功能 - 知乎专栏</code><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23340867">https://zhuanlan.zhihu.com/p/23340867</a></p>
+<p><code>通过AngularJS实现图片上传及缩略图展示 - 程序大大 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/jach/p/5734920.html">http://www.cnblogs.com/jach/p/5734920.html</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; id=&quot;one-input&quot; accept=&quot;image/*&quot; file-model=&quot;images&quot; onchange=&quot;angular.element(this).scope().img_upload(this.files)&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p><code>DataURL与File,Blob,canvas对象之间的互相转换的Javascript - 无心的专栏 - 博客频道 - CSDN.NET </code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/cuixiping/article/details/45932793">http://blog.csdn.net/cuixiping/article/details/45932793</a></p>
+<p><code>理解DOMString、Document、FormData、Blob、File、ArrayBuffer数据类型 « 张鑫旭-鑫空间-鑫生活</code><br><a target="_blank" rel="noopener" href="http://www.zhangxinxu.com/wordpress/2013/10/understand-domstring-document-formdata-blob-file-arraybuffer/">http://www.zhangxinxu.com/wordpress/2013/10/understand-domstring-document-formdata-blob-file-arraybuffer/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%89%87/" rel="tag"># 前端图片</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/yeoman%20%E4%B9%8B%20generator-gulp-angular,%E6%96%B0%E7%BB%84%E5%BB%BA%E5%BC%95%E5%85%A5/" rel="prev" title="yeoman 之 generator-gulp-angular,新组建引入">
+                  <i class="fa fa-angle-left"></i> yeoman 之 generator-gulp-angular,新组建引入
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/maven%E7%9B%B8%E5%85%B3-%E6%89%93%E5%8C%85/" rel="next" title="maven相关-打包">
+                  maven相关-打包 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

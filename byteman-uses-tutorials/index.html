@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Byteman简介Byteman由JBoss出品，JBoss大家应该都熟悉，顶顶大名的应用服务器JBoss也出自其手。Byteman的代码插入能力相比BTrace而言更强，似乎可以在代码中任意的位置插入我们的跟踪代码（当然，你可能需要对Java代码生成、字节码技术有一定的了解），以及访问当前方法中变量的能力（包括方法参数、局部变量、甚至于调用其它函数的参数值、返回值等），而BTrace在这方面的能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Byteman 使用教程">
+<meta property="og:url" content="https://www.sovdating.com/byteman-uses-tutorials/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="Byteman简介Byteman由JBoss出品，JBoss大家应该都熟悉，顶顶大名的应用服务器JBoss也出自其手。Byteman的代码插入能力相比BTrace而言更强，似乎可以在代码中任意的位置插入我们的跟踪代码（当然，你可能需要对Java代码生成、字节码技术有一定的了解），以及访问当前方法中变量的能力（包括方法参数、局部变量、甚至于调用其它函数的参数值、返回值等），而BTrace在这方面的能">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-09-22T13:50:38.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:24:42.759Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="Byteman">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/byteman-uses-tutorials/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/byteman-uses-tutorials/","path":"byteman-uses-tutorials/","title":"Byteman 使用教程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Byteman 使用教程 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Byteman%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Byteman简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Byteman"><span class="nav-number">2.</span> <span class="nav-text">安装Byteman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B%EF%BC%88%E8%AF%BB%E5%8F%96%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">使用示例（读取局部变量）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B%EF%BC%88%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95%E8%80%97%E6%97%B6%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">使用示例（统计方法耗时）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Byteman%E8%84%9A%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="nav-number">5.</span> <span class="nav-text">Byteman脚本介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Byteman%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">6.</span> <span class="nav-text">Byteman环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javaagent%E6%8A%80%E6%9C%AF"><span class="nav-number">7.</span> <span class="nav-text">javaagent技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8javaagent%E5%8A%A0%E8%BD%BD%E8%A7%84%E5%88%99%E6%96%87%E4%BB%B6%E5%B9%B6%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">7.1.</span> <span class="nav-text">用javaagent加载规则文件并启动程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8javaagent%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F%E5%B9%B6%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E8%A7%84%E5%88%99%E6%96%87%E4%BB%B6"><span class="nav-number">7.2.</span> <span class="nav-text">用javaagent启动程序并动态加载规则文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%AE%89%E8%A3%85agent%E5%88%B0%E6%AD%A3%E5%9C%A8%E8%BF%90%E8%A1%8C%E7%9A%84%E7%A8%8B%E5%BA%8F%E4%B8%AD"><span class="nav-number">7.3.</span> <span class="nav-text">动态安装agent到正在运行的程序中</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Byteman%E5%85%B6%E5%AE%83%E5%91%BD%E4%BB%A4"><span class="nav-number">8.</span> <span class="nav-text">Byteman其它命令</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/byteman-uses-tutorials/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Byteman 使用教程 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Byteman 使用教程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-09-22 21:50:38" itemprop="dateCreated datePublished" datetime="2017-09-22T21:50:38+08:00">2017-09-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="Byteman简介"><a href="#Byteman简介" class="headerlink" title="Byteman简介"></a>Byteman简介</h3><p>Byteman由JBoss出品，JBoss大家应该都熟悉，顶顶大名的应用服务器JBoss也出自其手。Byteman的代码插入能力相比BTrace而言更强，似乎可以在代码中任意的位置插入我们的跟踪代码（当然，你可能需要对Java代码生成、字节码技术有一定的了解），以及访问当前方法中变量的能力（包括方法参数、局部变量、甚至于调用其它函数的参数值、返回值等），而BTrace在这方面的能力要弱很多。</p>
+<h3 id="安装Byteman"><a href="#安装Byteman" class="headerlink" title="安装Byteman"></a>安装Byteman</h3><p>首先去<a target="_blank" rel="noopener" href="http://byteman.jboss.org/downloads.html">官网</a>下载最新的压缩包，解压，配置环境变量，开始操练，老熟悉了。新建<code>BYTEMAN_HOME</code>值是<code>E:\byteman-3.0.10</code>，编辑<code>Path</code>环境变量，在末尾添加<code>;%BYTEMAN_HOME%/bin</code>，打开cmd，输入<code>bminstall</code>验证一下</p>
+<blockquote>
+<p>usage: bminstall [-p port] [-h host] [-b] [-s] [-m] [-Dname[&#x3D;value]]* pid<br>  pid is the process id of the target JVM<br>  -h host selects the host name or address the agent listener binds to<br>  -p port selects the port the agent listener binds to<br>  -b adds the byteman jar to the bootstrap classpath<br>  -s sets an access-all-areas security policy for the Byteman agent code<br>  -m activates the byteman JBoss modules plugin<br>  -Dname&#x3D;value can be used to set system properties whose name starts with “org.jboss.byteman.”<br>  expects to find a byteman agent jar and byteman JBoss modules plugin jar (if -m is indicated) in BYTEMAN_HOME</p>
+</blockquote>
+<h3 id="使用示例（读取局部变量）"><a href="#使用示例（读取局部变量）" class="headerlink" title="使用示例（读取局部变量）"></a>使用示例（读取局部变量）</h3><p>为什么选择这个示例呢？因为BTrace无法追踪到局部变量的值，那么为了显示Byteman的强大，必须让它做别人做不到的事。首先编写一个待追踪的示例，这个例子很简单，接收用户的输入内容，并原样输出即可，如果输入中包含end，那么程序自动结束，如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.DataInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BytemanDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">BytemanDemo</span>().start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">start</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="type">DataInputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataInputStream</span>(System.in);</span><br><span class="line">            <span class="type">BufferedReader</span> <span class="variable">buf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(in));</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">next</span> <span class="operator">=</span> buf.readLine();</span><br><span class="line">                <span class="keyword">while</span> (next != <span class="literal">null</span> &amp;&amp; !next.contains(<span class="string">&quot;end&quot;</span>)) &#123;</span><br><span class="line">                    consume(next);</span><br><span class="line">                    next = buf.readLine();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">consume</span><span class="params">(String text)</span> &#123;</span><br><span class="line">        <span class="comment">//这是个局部变量，将会在byteman中追踪她</span></span><br><span class="line">        <span class="keyword">final</span> <span class="type">String</span> <span class="variable">arg</span> <span class="operator">=</span> text;</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; System.out.println(<span class="string">&quot;program confirm &quot;</span> + arg));</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            thread.join();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>好了，启动程序测试一下</p>
+<blockquote>
+<p><em>byteman test demo</em><br>program confirm byteman test demo</p>
+</blockquote>
+<p>那么试想一下，如果程序输出的和我们输入的总是不同，会不会是consume方法中出现了Bug呢？那么如果想要确认传入到consume方法中的参数是否正确要怎么做呢？所以这时候就需要在byteman中读取consume方法中的局部变量<code>arg</code>了。</p>
+<p>首先加载byteman到JVM中，并将它attach到需要监听的进程上，指定byteman监控程序监听55000端口（这个端口是用来对byteman的脚本进行响应的）</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">wangxu</span>&gt;<span class="title">jps</span></span></span><br><span class="line"><span class="function">18592 <span class="title">Jps</span></span></span><br><span class="line"><span class="function">20068 <span class="title">AppMain</span></span></span><br><span class="line"><span class="function">8584</span></span><br><span class="line"><span class="function">18668 <span class="title">Launcher</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">Users</span>\<span class="title">wangxu</span>&gt;<span class="title">bminstall</span> -<span class="title">b</span> -<span class="title">Dorg.jboss.byteman.transform.all</span> -<span class="title">Dorg.jboss.byteman.verbose</span> -<span class="title">p</span> 55000 20068</span></span><br></pre></td></tr></table></figure>
+<p>再回到被监控程序的控制台看到如下输出</p>
+<blockquote>
+<p><em>byteman test demo</em><br>program confirm byteman test demo<br>Setting org.jboss.byteman.transform.all&#x3D;<br>Setting org.jboss.byteman.verbose&#x3D;<br>TransformListener() : accepting requests on localhost:55000</p>
+</blockquote>
+<p>从输出信息中可以看到，byteman监听55000端口，并在该端口接收请求，那就来请求一把呗，打开编辑器，编写byteman的btm脚本，ShowLocalVar.btm，如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">RULE trace line local var</span><br><span class="line"></span><br><span class="line">CLASS BytemanDemo</span><br><span class="line">METHOD consume(String)</span><br><span class="line">AFTER WRITE $arg</span><br><span class="line"></span><br><span class="line">IF TRUE</span><br><span class="line">        DO traceln(&quot;*** transfer value is : &quot; + $arg + &quot; ***&quot;)</span><br><span class="line">ENDRULE</span><br></pre></td></tr></table></figure>
+
+<p>接下来就安装脚本吧，运行bmsubmit提交脚本</p>
+<blockquote>
+<p>C:\Users\wangxu&gt; bmsubmit -p 55000 -l ShowLocalVar.btm<br>install rule trace line local var</p>
+</blockquote>
+<p>再回到被监控程序的控制台，输入一段测试语句”byteman test demo2”查看输出</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">TransformListener() : handling connection on port 55000</span><br><span class="line">retransforming BytemanDemo</span><br><span class="line">org.jboss.byteman.agent.Transformer : possible trigger for rule trace line local var in class BytemanDemo</span><br><span class="line">RuleTriggerMethodAdapter.injectTriggerPoint : inserting trigger into BytemanDemo.consume(java.lang.String) void for rule trace line local var</span><br><span class="line">org.jboss.byteman.agent.Transformer : inserted trigger for trace line local var in class BytemanDemo</span><br><span class="line">byteman test demo2</span><br><span class="line">Rule.execute called for trace line local var_0</span><br><span class="line">HelperManager.install for helper class org.jboss.byteman.rule.helper.Helper</span><br><span class="line">calling activated() for helper class org.jboss.byteman.rule.helper.Helper</span><br><span class="line">Default helper activated</span><br><span class="line">calling installed(trace line local var) for helper classorg.jboss.byteman.rule.helper.Helper</span><br><span class="line">Installed rule using default helper : trace line local var</span><br><span class="line">trace line local var execute</span><br><span class="line">*** transfer value is : byteman test demo2 ***</span><br><span class="line">program confirm byteman test demo2</span><br></pre></td></tr></table></figure>
+
+<p>可以看到星号打头和结尾的那一句，就是监控程序从被监控程序中得到的局部变量，是不是很强大啊。</p>
+<p>当然了可以安装脚本，就可以卸载脚本，同样是使用bmsubmit命令</p>
+<blockquote>
+<p>C:\Users\wangxu&gt; bmsubmit -p 55000 -u ShowLocalVar.btm<br>uninstall RULE trace line local var</p>
+</blockquote>
+<p>卸载完成之后，再回到被监控程序的控制台，输入测试语句</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">TransformListener() : handling connection on port <span class="number">55000</span></span><br><span class="line">retransforming BytemanDemo</span><br><span class="line">HelperManager.uninstall <span class="keyword">for</span> helper class org.jboss.byteman.rule.helper.Helper</span><br><span class="line">calling uninstalled(trace line local var) <span class="keyword">for</span> helper class org.jboss.byteman.rule.helper.Helper</span><br><span class="line">Uninstalled rule using default helper : trace line local var</span><br><span class="line">calling deactivated() <span class="keyword">for</span> helper classorg.jboss.byteman.rule.helper.Helper</span><br><span class="line">Default helper deactivated</span><br><span class="line">byteman test demo3</span><br><span class="line">program confirm byteman test demo3</span><br></pre></td></tr></table></figure>
+
+<p>可以看到程序又回到了最初的摸样，这种完全无侵入式的设计真是太完美了，对于需要被监控的程序来说几乎是透明的，它不需要做任何改变，我们就可以通过动态追踪技术得到我们感兴趣的信息，而且在追踪结束后卸载脚本，被监控程序依然还是最初的摸样。</p>
+<p>注意点：我的被监控程序是在IDEA中运行的，也就是说，IDEA会自动帮我编译源码，我只需要运行即可，那么如果你是使用命令行自己编译的Java源码，很可能无法追踪到局部变量的值，这是因为自己编译的话，需要指定<code>-g</code>参数，也就是像这样<code>javac -g Byteman.java</code>编译出来的class文件才能够被追踪到局部变量。对细节感兴趣的话请看<a target="_blank" rel="noopener" href="https://developer.jboss.org/thread/176913">这里</a>。</p>
+<h3 id="使用示例（统计方法耗时）"><a href="#使用示例（统计方法耗时）" class="headerlink" title="使用示例（统计方法耗时）"></a>使用示例（统计方法耗时）</h3><p>与上例不同，这个例子主要展示如何使用<code>bmjava</code>和<code>bmcheck</code>这两个命令。先上待追踪代码，很简单的例子，working方法模拟工作方法，我们通过动态追踪获得工作方法花费的时间</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.DataInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WorkerDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">WorkerDemo</span> <span class="variable">workerDemo</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">WorkerDemo</span>();</span><br><span class="line">        <span class="type">DataInputStream</span> <span class="variable">dataInputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataInputStream</span>(System.in);</span><br><span class="line">        <span class="type">BufferedReader</span> <span class="variable">bufferedReader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(dataInputStream));</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String next;</span><br><span class="line">            <span class="keyword">while</span> ((next = bufferedReader.readLine()) != <span class="literal">null</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;before working&quot;</span>);</span><br><span class="line">                workerDemo.working();</span><br><span class="line">                System.out.println(<span class="string">&quot;after working&quot;</span>);</span><br><span class="line">                <span class="keyword">if</span> (next.contains(<span class="string">&quot;end&quot;</span>)) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">working</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写byteman脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">RULE trace worker time start</span><br><span class="line"></span><br><span class="line">CLASS WorkerDemo</span><br><span class="line">METHOD working</span><br><span class="line">AT ENTRY</span><br><span class="line"></span><br><span class="line">IF TRUE</span><br><span class="line">DO createTimer($0)</span><br><span class="line">ENDRULE</span><br><span class="line"></span><br><span class="line">RULE trace worker time stop</span><br><span class="line"></span><br><span class="line">CLASS WorkerDemo</span><br><span class="line">METHOD working</span><br><span class="line">AT EXIT</span><br><span class="line"></span><br><span class="line">IF TRUE</span><br><span class="line">DO traceln(&quot;*** working time &quot; + getElapsedTimeFromTimer($0) + &quot; ms ***&quot;);</span><br><span class="line">    deleteTimer($0);</span><br><span class="line">ENDRULE</span><br></pre></td></tr></table></figure>
+<p>注意一点，在规则脚本中用到的方法<code>createTimer</code>，<code>getElapsedTimeFromTimer</code>，<code>deleteTimer</code>都是在<code>org.jboss.byteman.rule.helper.Helper</code>类中定义好的，并且在创建Timer之后，一定要记得删除，这里面方法的形参必须要从0开始，感兴趣的可以看看这几个方法的详细说明</p>
+<ul>
+<li><strong>createTimer</strong> can be called to create a new Timer associated with o. createTimer returns true if a new<br>Timer was created and false if a Timer associated with o already exists.</li>
+<li><strong>getElapsedTimeFromTimer</strong> can be called to obtain the number of elapsed milliseconds since the Timer<br>associated with o was created or since the last call to resetTimer. If no timer associated with o exists a<br>new timer is created before returning the elapsed time.</li>
+<li><strong>resetTimer</strong> can be called to zero the Timer associated with o. It returns the number of seconds since the<br>Timer was created or since the last previous call to resetTimer If no timer associated with o exists a<br>new timer is created before returning the elapsed time.</li>
+<li><strong>deleteTimer</strong> can be called to delete the Timer associated with o. deleteTimer returns true if a new Timer<br>was deleted and false if no Timer associated with o exists.</li>
+</ul>
+<p>将WorkerDemo类和规则脚本置于同一目录下，打开cmd运行命令行，先检查一下规则脚本是否合法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\wangxu&gt;bmcheck -cp . -v TimeTracer.btm</span><br><span class="line">Checking rule trace worker time start against class WorkerDemo</span><br><span class="line">Parsed rule &quot;trace worker time start&quot; for class WorkerDemo</span><br><span class="line">Type checked rule &quot;trace worker time start&quot;</span><br><span class="line"></span><br><span class="line">Checking rule trace worker time stop against class WorkerDemo</span><br><span class="line">Parsed rule &quot;trace worker time stop&quot; for class WorkerDemo</span><br><span class="line">Type checked rule &quot;trace worker time stop&quot;</span><br><span class="line"></span><br><span class="line">TestScript: no errors</span><br></pre></td></tr></table></figure>
+<p><code>bmcheck</code>命令可以在应用规则脚本之前对其进行检查，<code>bmcheck [-cp classpath]* [-p package]* [-v] script1 . . . scriptN</code>，如果是带包名的类，那么需要使用<code>-p</code>参数即可。</p>
+<p>再将脚本和程序一起启动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\wangxu&gt;javac -g WorkerDemo.java</span><br><span class="line"></span><br><span class="line">C:\Users\wangxu&gt;bmjava -l TimeTracer.btm WorkerDemo</span><br><span class="line">trace working time demo</span><br><span class="line">before working</span><br><span class="line">*** working time 5003 ms ***</span><br><span class="line">after working</span><br><span class="line">trace end</span><br><span class="line">before working</span><br><span class="line">*** working time 5000 ms ***</span><br><span class="line">after working</span><br></pre></td></tr></table></figure>
+
+<p>这样操作有一个限制，就是无法追踪已经启动了的程序，如果已经有个程序正在运行，而这时候程序的输出与我们预期的不符，如何用脚本来追踪呢？这时候需要用到<code>bminstall</code>和<code>bmsubmit</code>命令。首先就按最普通的方式启动程序再说</p>
+<blockquote>
+<p>C:\Users\wangxu&gt;java WorkerDemo</p>
+</blockquote>
+<p>再开一个cmd命令行，先把byteman attach到需要追踪的进程上，再提交规则脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\wangxu&gt;jps</span><br><span class="line">11724</span><br><span class="line">1468 Jps</span><br><span class="line">17308 WorkerDemo</span><br><span class="line">5948 Launcher</span><br><span class="line">C:\Users\wangxu&gt;bminstall -b -Dorg.jboss.byteman.tranform.all 17308</span><br><span class="line"></span><br><span class="line">C:\Users\wangxu&gt;bminstall -b -Dorg.jboss.byteman.tranform.all 17308</span><br><span class="line"></span><br><span class="line">C:\Users\wangxu&gt;bmsubmit -l TimeTracer.btm</span><br><span class="line">install rule trace worker time start</span><br><span class="line">install rule trace worker time stop</span><br></pre></td></tr></table></figure>
+<p>这时候再回到启动程序的命令行，可以看到有新的输出</p>
+<blockquote>
+<p>Setting org.jboss.byteman.tranform.all&#x3D;</p>
+</blockquote>
+<p>我们输入一行测试语句试一下，看看规则脚本是否生效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\wangxu&gt;java WorkerDemo</span><br><span class="line">Setting org.jboss.byteman.tranform.all=</span><br><span class="line">trace working time demo2 and then end</span><br><span class="line">before working</span><br><span class="line">*** working time 5007 ms ***</span><br><span class="line">after working</span><br></pre></td></tr></table></figure>
+<p>使用这种方式就可以动态的追踪已经启动的程序了。</p>
+<h3 id="Byteman脚本介绍"><a href="#Byteman脚本介绍" class="headerlink" title="Byteman脚本介绍"></a>Byteman脚本介绍</h3><p>首先了解byteman的脚本结构，如下所示</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">#####################################</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Example Rule Set</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># a single rule definition</span></span></span><br><span class="line">RULE example rule</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">comment line <span class="keyword">in</span> rule body</span></span><br><span class="line">. . .</span><br><span class="line">ENDRULE</span><br></pre></td></tr></table></figure>
+
+<p>其中合法的规则事件可以是如下这些</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rule skeleton</span></span><br><span class="line">RULE &lt;rule name&gt;</span><br><span class="line">CLASS &lt;class name&gt;</span><br><span class="line">METHOD &lt;method name&gt;</span><br><span class="line">BIND &lt;bindings&gt;</span><br><span class="line">IF  &lt;condition&gt;</span><br><span class="line">DO  &lt;actions&gt;</span><br><span class="line">ENDRULE</span><br></pre></td></tr></table></figure>
+
+<p>同样全部的合法定位点或者说注入点如下所示</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">AT ENTRY</span><br><span class="line">AT EXIT</span><br><span class="line">AT LINE number</span><br><span class="line">AT READ [type .] field [count | ALL ]</span><br><span class="line">AT READ $var-or-idx [count | ALL ]</span><br><span class="line">AFTER READ [ type .] field [count | ALL ]</span><br><span class="line">AFTER READ $var-or-idx [count | ALL ]</span><br><span class="line">AT WRITE [ type .] field [count | ALL ]</span><br><span class="line">AT WRITE $var-or-idx [count | ALL ]</span><br><span class="line">AFTER WRITE [ type .] field [count | ALL ]</span><br><span class="line">AFTER WRITE $var-or-idx [count | ALL ]</span><br><span class="line">AT INVOKE [ type .] method [ ( argtypes ) ] [count | ALL ]</span><br><span class="line">AFTER INVOKE [ type .] method [ ( argtypes ) ][count | ALL ]</span><br><span class="line">AT SYNCHRONIZE [count | ALL ]</span><br><span class="line">AFTER SYNCHRONIZE [count | ALL ]</span><br><span class="line">AT THROW [count | ALL ]</span><br><span class="line">AT EXCEPTION EXIT</span><br></pre></td></tr></table></figure>
+
+<p>更多更详细的信息可以去参考Byteman的官方手册。也许你注意到了，在脚本中我们使用了traceln语句，那么这个调用的其实是Byteman的<code>org.jboss.byteman.rule.helper.Helper</code>类的方法，这些方法都是已经内置的，可以直接在脚本中调用。</p>
+<p>当然了如果你觉得这些内置的方法不够用，也可以使用自定义的Helper类，例如官方给出的一个例子是</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">helper example 2</span></span><br><span class="line">RULE help yourself but rely on others</span><br><span class="line">CLASS com.arjuna.wst11.messaging.engines.CoordinatorEngine</span><br><span class="line">METHOD commit</span><br><span class="line">HELPER HelperSub</span><br><span class="line">AT ENTRY</span><br><span class="line">IF NOT flagged($this)</span><br><span class="line">DO debug(&quot;throwing wrong state&quot;);</span><br><span class="line"><span class="meta prompt_"> flag($</span><span class="language-bash">this);</span></span><br><span class="line"> throw new WrongStateException()</span><br><span class="line">ENDRULE</span><br></pre></td></tr></table></figure>
+
+<p>HelperSub的源码示例如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">HelperSub</span> <span class="keyword">extends</span> <span class="title class_">Helper</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">debug</span><span class="params">(String message)</span> &#123;</span><br><span class="line">      <span class="built_in">super</span>(<span class="string">&quot;!!! IMPORTANT EVENT !!! &quot;</span> + message);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Byteman环境变量"><a href="#Byteman环境变量" class="headerlink" title="Byteman环境变量"></a>Byteman环境变量</h3><p>在Byteman中，总共的环境变量有如下这些</p>
+<ul>
+<li>org.jboss.byteman.compileToBytecode</li>
+<li>org.jboss.byteman.dump.generated.classes</li>
+<li>org.jboss.byteman.dump.generated.classes.directory</li>
+<li>org.jboss.byteman.dump.generated.classes.intermediate</li>
+<li>org.jboss.byteman.verbose</li>
+<li>org.jboss.byteman.debug</li>
+<li>org.jboss.byteman.transform.all</li>
+<li>org.jboss.byteman.skip.overriding.rules</li>
+<li>org.jboss.byteman.allow.config.updates</li>
+<li>org.jboss.byteman.sysprops.strict</li>
+</ul>
+<p>而我们已经使用过了其中的两个，就是在bminstall命令中所示的</p>
+<ul>
+<li>org.jboss.byteman.transform.all 如果设置了将允许注入java.lang和其子包的class</li>
+<li>org.jboss.byteman.verbose 如果设置将显示执行的各种跟踪信息到System.out，包括类型检查，编译，和执行规则</li>
+</ul>
+<p>有关更加详细的解释可以到<a target="_blank" rel="noopener" href="http://downloads.jboss.org/byteman/3.0.10/ProgrammersGuide.html#environment-settings">官方网站</a>中的<strong>Environment Settings</strong>一节查看。</p>
+<h3 id="javaagent技术"><a href="#javaagent技术" class="headerlink" title="javaagent技术"></a>javaagent技术</h3><p>简单来说，javaagent 技术是一个开发者可以构建一个独立于应用程序的代理程序（Agent），用来监测和协助运行在 JVM 上的程序，甚至能够替换和修改某些类的定义。有了这样的功能，开发者就可以实现更为灵活的运行时虚拟机监控和 Java 类操作了，这样的特性实际上提供了一种虚拟机级别支持的 AOP 实现方式，使得开发者无需对 JDK 做任何升级和改动，就可以实现某些 AOP 的功能了。有关 javaagent 更详细的介绍，可以参看<a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html">Instrumentation 简介</a>这篇文章。</p>
+<h4 id="用javaagent加载规则文件并启动程序"><a href="#用javaagent加载规则文件并启动程序" class="headerlink" title="用javaagent加载规则文件并启动程序"></a>用javaagent加载规则文件并启动程序</h4><p>javaagent 选项支持在所有的个人机或服务器的JVM中使用Byteman，那么看一下如何使用 javaagent 技术来启动Byteman吧。还是以BytemanDemo为例，BytemanDemo和ShowLocalVar.btm文件都在<code>C:/Users/wangxu</code>路径下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\wangxu&gt;javac -g BytemanDemo.java</span><br><span class="line"></span><br><span class="line">C:\Users\wangxu&gt;java -javaagent:%BYTEMAN_HOME%\lib\byteman.jar=script:ShowLocalVar.btm BytemanDemo</span><br><span class="line">javaagent byteman demo</span><br><span class="line">*** transfer value is : javaagent byteman demo ***</span><br><span class="line">program confirm javaagent byteman demo</span><br></pre></td></tr></table></figure>
+
+<p><code>script</code>用于指示 Byteman 规则文件的位置。Byteman agent 读取到这个选项之后从规则文件中加载和注入Byteman规则。如果要加载多个<code>script:file</code>规则文件，使用逗号（,）分隔即可。</p>
+<h4 id="用javaagent启动程序并动态加载规则文件"><a href="#用javaagent启动程序并动态加载规则文件" class="headerlink" title="用javaagent启动程序并动态加载规则文件"></a>用javaagent启动程序并动态加载规则文件</h4><p>这种方式是将规则文件和需要监控的程序一起启动，那么如果被监控程序已经启动，该如何注入规则文件呢？严格执行如下步骤即可</p>
+<ol>
+<li>需要在启动程序的时候采用<code>java -javaagent</code>方式启动，同样地先编译<code>javac -g BytemanDemo.java</code></li>
+<li>新开cmd，输入<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\wangxu&gt;java -javaagent:%BYTEMAN_HOME%\lib\byteman.jar=listener:true,boot:%BYTEMAN_HOME%\lib\byteman.jar -Dorg.jboss.byteman.transform.all BytemanDemo</span><br></pre></td></tr></table></figure>
+  Linux系统只需要把<code>%BYTEMAN_HOME%</code>换成<code>$&#123;BYTEMAN_HOME&#125;</code>即可，注意Linux上分隔符是正斜杠，这个监听器会开启一个网络监听。注意：当没有规则加载的时候，程序的的行为不会发生任何变化，仅输出我们输入的内容。这时候需要第三步来加载规则文件</li>
+<li>新开cmd，输入<code>C:\Users\wangxu&gt;bmsubmit -l ShowLocalVar.btm</code>，cmd反馈出<code>install rule trace line local var</code>，再回到第二步的cmd窗口，输入测试语句”javaagent byteman demo2”<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\wangxu&gt;java -javaagent:%BYTEMAN_HOME%\lib\byteman.jar=listener:true,boot:%BYTEMAN_HOME%\lib\byteman.jar -Dorg.jboss.byteman.transform.all BytemanDemo</span><br><span class="line">javaagent byteman demo2</span><br><span class="line">*** transfer value is : javaagent byteman demo2 ***</span><br><span class="line">program confirm javaagent byteman demo2</span><br></pre></td></tr></table></figure>
+  可以看到规则已经生效。这种方式虽然可以实现同样地监控，但是还是存在一个明显的弊端，就是要求在启动程序的时候使用<code>javaagent</code>方式，但是通常我们并不会用这种方式，大多数人都是用最普通的<code>java -jar</code>命令，那么且看下节。</li>
+</ol>
+<h4 id="动态安装agent到正在运行的程序中"><a href="#动态安装agent到正在运行的程序中" class="headerlink" title="动态安装agent到正在运行的程序中"></a>动态安装agent到正在运行的程序中</h4><p>如果你启动了一个长时程序，并且没有加载 Byteman agent。你不需要重启程序也可以使用 Byteman。在Byteman的bin目录下有很多脚本，Windows上的是<code>bminstall.bat</code>，Linux上的是<code>bminstall.sh</code>，由于所有线上服务器都是用的Linux，那么接下来我就在CentOS上演示一下动态安装agent技术。</p>
+<p>首先编译，启动程序再说</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[elastic@escluster ~]$ ll</span><br><span class="line">total 12</span><br><span class="line">-rw-rw-r--.  1 elastic elastic 1218 Sep 21 15:59 BytemanDemo.java</span><br><span class="line">drwxr-xr-x. 10 elastic elastic 4096 Aug 29 14:45 elasticsearch</span><br><span class="line">-rw-rw-r--.  1 elastic elastic  171 Sep 21 15:59 ShowLocalVar.btm</span><br><span class="line">[elastic@escluster ~]$ javac -g BytemanDemo.java</span><br><span class="line">[elastic@escluster ~]$ java BytemanDemo</span><br><span class="line">Byteman agent in linux</span><br><span class="line">program confirm Byteman agent in linux</span><br></pre></td></tr></table></figure>
+
+<p>这个时候可见就是一个普通的程序，下面在Linux配置环境变量，编辑<code>/etc/profile</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BYTEMAN_HOME=/usr/program/byteman-3.0.10</span><br><span class="line">PATH=$PATH:$BYTEMAN_HOME/bin</span><br><span class="line">export BYTEMAN_HOME</span><br><span class="line">export PATH</span><br></pre></td></tr></table></figure>
+
+<p>新开一个终端，按如下所示操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[elastic@escluster ~]$ jps</span><br><span class="line">24739 Elasticsearch</span><br><span class="line">12215 BytemanDemo</span><br><span class="line">25128 Elasticsearch</span><br><span class="line">24874 Elasticsearch</span><br><span class="line">12251 Jps</span><br><span class="line">[elastic@escluster ~]$ bminstall.sh -b -Dorg.jboss.byteman.transform.all 12215</span><br><span class="line">[elastic@escluster ~]$ bmsubmit.sh -l ShowLocalVar.btm</span><br><span class="line">install rule trace line local var</span><br></pre></td></tr></table></figure>
+
+<p><code>bminstall.sh</code>并没有加载任何规则脚本，只是开启了agent监听器。然后就可以通过bmsubmit.sh提交规则。在将规则脚本sumbit或者unsubmit到程序中，会看到程序的行为被动态修改了。返回到第一个终端，继续输入测试语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[elastic@escluster ~]$ java BytemanDemo</span><br><span class="line">Byteman agent in linux</span><br><span class="line">program confirm Byteman agent in linux</span><br><span class="line">Setting org.jboss.byteman.transform.all=</span><br><span class="line">Byteman agent in linux after install and submit</span><br><span class="line">*** transfer value is : Byteman agent in linux after install and submit ***</span><br><span class="line">program confirm Byteman agent in linux after install and submit</span><br></pre></td></tr></table></figure>
+
+<p>Perfect规则生效了，无论是Windows还是Linux，Byteman都可以完美地工作。</p>
+<h3 id="Byteman其它命令"><a href="#Byteman其它命令" class="headerlink" title="Byteman其它命令"></a>Byteman其它命令</h3><p>Byteman的启动方式非常多，个人精力有限，我不能一一介绍，想要了解更多的信息，直接去翻阅压缩包中的<code>docs/byteman-programmers-guide.pdf</code>用户指南，上面有详细地介绍。</p>
+<p>在解压的Byteman的bin目录下，有非常多的脚本，简单介绍如下所示</p>
+<ul>
+<li><strong>bmcheck</strong> 在注入规则文件之前，该命令可以在线下对你的规则脚本进行解析和类型检查</li>
+<li><strong>bminstall</strong> 安装agent到一个正在运行的程序中</li>
+<li><strong>bmjava</strong> 该脚本包装了<code>-javaagent</code>选项。它的用法很像java命令，但是它能以<code>-javaagent script:</code>选项的方式接受Byteman规则脚本。并且自动以<code>boot:</code>的方式绑定了Byteman的Jar文件</li>
+<li><strong>bmsetenv</strong> 该脚本用来设置环境，agent对配置其行为的各种环境设置非常敏感</li>
+<li><strong>bmsubmit</strong> 上传和卸载规则脚本</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Byteman/" rel="tag"># Byteman</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/btrace-uses-tutorials/" rel="prev" title="BTrace 使用教程">
+                  <i class="fa fa-angle-left"></i> BTrace 使用教程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017-first-half-random-thoughts/" rel="next" title="2017年中随想">
+                  2017年中随想 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

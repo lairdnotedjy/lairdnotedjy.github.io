@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="CSS 设计模式 OOCSS减少对 HTML 结构的依赖增加 CSS class 重复性的使用 SMACSS前对 SMACSS 的概念仅限于它对 CSS 不同的业务逻辑所做的划分方式   CSS 规范 BEM Aomic   BEM命名规范BEM的意思就是块（block）、元素（element）、修饰符（modifier）。  block:可以理解为一个区域、一个组件或者一个块级元素，具体如何区分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css命名规范">
+<meta property="og:url" content="https://www.sovdating.com/css%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="CSS 设计模式 OOCSS减少对 HTML 结构的依赖增加 CSS class 重复性的使用 SMACSS前对 SMACSS 的概念仅限于它对 CSS 不同的业务逻辑所做的划分方式   CSS 规范 BEM Aomic   BEM命名规范BEM的意思就是块（block）、元素（element）、修饰符（modifier）。  block:可以理解为一个区域、一个组件或者一个块级元素，具体如何区分">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-02-12T16:00:02.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.061Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="前端 规范">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/css%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/css%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/","path":"css命名规范/","title":"css命名规范"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>css命名规范 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">CSS 设计模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS-%E8%A7%84%E8%8C%83"><span class="nav-number">2.</span> <span class="nav-text">CSS 规范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BEM%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="nav-number">3.</span> <span class="nav-text">BEM命名规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.1.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A"><span class="nav-number">4.</span> <span class="nav-text">调查报告</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="nav-number">5.</span> <span class="nav-text">模块化</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/css%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="css命名规范 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          css命名规范
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-02-13 00:00:02" itemprop="dateCreated datePublished" datetime="2017-02-13T00:00:02+08:00">2017-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="CSS-设计模式"><a href="#CSS-设计模式" class="headerlink" title="CSS 设计模式"></a>CSS 设计模式</h1><ul>
+<li>OOCSS<br>减少对 HTML 结构的依赖<br>增加 CSS class 重复性的使用</li>
+<li>SMACSS<br>前对 SMACSS 的概念仅限于它对 CSS 不同的业务逻辑所做的划分方式</li>
+</ul>
+<hr>
+<h1 id="CSS-规范"><a href="#CSS-规范" class="headerlink" title="CSS 规范"></a>CSS 规范</h1><ul>
+<li>BEM</li>
+<li>Aomic</li>
+</ul>
+<hr>
+<h1 id="BEM命名规范"><a href="#BEM命名规范" class="headerlink" title="BEM命名规范"></a>BEM命名规范</h1><p>BEM的意思就是块（block）、元素（element）、修饰符（modifier）。</p>
+<ul>
+<li>block:<br>可以理解为一个区域、一个组件或者一个块级元素，具体如何区分需要根据实际情况具体分析；</li>
+<li>block__element：<br>就是一个上面的block里面的元素，比如说导航（nav：block）里面有a标签（a: element）就是一个元素， block与element使用两个下划线链接；</li>
+<li>block__element–modifier：<br>我的理解是状态或属性。比如element里面的a标签，它有active、hover、normal三种状态，这三种状态就是modifier。midifier是使用两个“–”中横线连接</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.block 代表某个基本的抽象元素；</span><br><span class="line">.block__element 代表 .block 这一整体的一个子元素；</span><br><span class="line">.block--modifier 代表 .block 的某个不同状态。</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- HTML结构 --&gt;</span><br><span class="line">&lt;nav class=&quot;nav&quot;&gt;</span><br><span class="line">  &lt;a href=&quot;#&quot; class=&quot;nav__item nav__item--active&quot;&gt;当前页：active&lt;/a&gt;</span><br><span class="line">  &lt;a href=&quot;#&quot; class=&quot;nav__item nav__item--hover&quot;&gt;假设鼠标在这里要加个hover的class&lt;/a&gt;</span><br><span class="line">  &lt;a href=&quot;#&quot; class=&quot;nav__item nav__item--normal&quot;&gt;假设需要加个normar的状态&lt;/a&gt;</span><br><span class="line">&lt;/nav&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// SASS写法</span><br><span class="line">.nav&#123;</span><br><span class="line">  &amp;__item&#123;</span><br><span class="line">    &amp;--active&#123;</span><br><span class="line">      &lt;!-- active样式 --&gt;</span><br><span class="line">    &#125;</span><br><span class="line">    &amp;--hover&#123;</span><br><span class="line">      &lt;!-- hover样式 --&gt;</span><br><span class="line">    &#125;</span><br><span class="line">    &amp;--normal&#123;</span><br><span class="line">      &lt;!-- normal样式 --&gt;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* 编译后的css */</span><br><span class="line">.nav&#123; &#125;</span><br><span class="line">.nav__item&#123; &#125;</span><br><span class="line">.nav__item--active&#123; &#125;</span><br><span class="line">.nav__item--hover&#123; &#125;</span><br><span class="line">.nav__item--normal&#123; &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><code>一些编写css的建议 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/JFRVraa">http://www.tuicool.com/articles/JFRVraa</a></p>
+<hr>
+<h1 id="调查报告"><a href="#调查报告" class="headerlink" title="调查报告"></a>调查报告</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Q8-CSS 方法论与命名空间使用体验</span><br><span class="line">下一个问题是关注开发者对于下列所有的CSS常见方法论与命名空间的使用体验:</span><br><span class="line">SMACSS</span><br><span class="line"></span><br><span class="line">Object </span><br><span class="line"></span><br><span class="line">Atomic Design</span><br><span class="line"></span><br><span class="line">ITCSS</span><br><span class="line"></span><br><span class="line">CSS Modules</span><br><span class="line"></span><br><span class="line">BEM</span><br><span class="line"></span><br><span class="line">SUIT CSS</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在上表可以看出，BEM算是目前最受欢迎，也是使用体验最好的CSS命名方案之一，基本上在真实的使用者中超过了50%的人表示很满意。不过令我震惊的是，对于OOCSS等常见的CSS方法论有所了解的开发者数量占比仅有不到30%，即使在那些Advanced或者Expert级别的开发者中，没有任何一项方法论的使用度超过了20%。</span><br></pre></td></tr></table></figure>
+
+<p><code>2016 年前端开发者深度调研，看看别人使用什么技术体系 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/mUveAbe">http://www.tuicool.com/articles/mUveAbe</a></p>
+<hr>
+<h1 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h1><ul>
+<li>css模块文件：<code>module/aboutUs.scss</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">@charset &quot;utf-8&quot;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//关于我们</span><br><span class="line">.page-aboutUs&#123;</span><br><span class="line">  .about-us &#123;</span><br><span class="line">    text-align: center;</span><br><span class="line">    padding: 10%;</span><br><span class="line">    .wosai-logo img &#123;</span><br><span class="line">      width: 80px;</span><br><span class="line">      height: 80px;</span><br><span class="line">      @include border-radius(5px);</span><br><span class="line">    &#125;</span><br><span class="line">    .app-version&#123;</span><br><span class="line">      font-size: 16px;</span><br><span class="line">      color: #b0b2b7;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>css应用文件：<code> style.main.scss</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@charset &quot;utf-8&quot;;</span><br><span class="line"></span><br><span class="line">@import &quot;module/aboutUs&quot;;//-----------------------关于页面</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>配合IDE或gulp的<code>css watchers</code>功能，输出<code>style.main.css</code>文件</li>
+</ul>
+<hr>
+<p><strong>参考</strong><br><code>CSS 命名规范总结</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/QN7rAbN">http://www.tuicool.com/articles/QN7rAbN</a></p>
+<p><code>Css设计模式-理论篇之OOCSS、SMACSS与BEM - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/QNBFniY">http://www.tuicool.com/articles/QNBFniY</a></p>
+<p><code>CSS设计模式：OOCSS 和 SMACSS - 新闻 - SegmentFault</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000000389838">https://segmentfault.com/a/1190000000389838</a></p>
+<p><code>编写可维护的CSS - 新闻 - SegmentFault</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000000388784">https://segmentfault.com/a/1190000000388784</a></p>
+<p><code>提升你的 CSS 姿势 - 推酷</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/7fmY32j">http://www.tuicool.com/articles/7fmY32j</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF-%E8%A7%84%E8%8C%83/" rel="tag"># 前端 规范</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81%E9%9D%99%E6%80%81%E8%A7%84%E8%8C%83%E6%A3%80%E6%9F%A5/" rel="prev" title="前端代码静态规范检查">
+                  <i class="fa fa-angle-left"></i> 前端代码静态规范检查
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/MyThread.java%20%E7%BA%BF%E7%A8%8B%EF%BC%8C%E9%94%81%EF%BC%8C%E5%90%8C%E6%AD%A5/" rel="next" title="MyThread.java 线程，锁，同步">
+                  MyThread.java 线程，锁，同步 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="注解相关@Service 用于标注业务层组件@Controller 用于标注控制层组件（如struts中的action）@Repository 用于标注数据访问组件，即DAO组件@Component 泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注。  初始化&lt;context:component-scan标签默认情况下自动扫描指定路径下的包（含所有子包），将带有@Componen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【java脚手架搭建】注解 spring-context-annotation.xml">
+<meta property="og:url" content="https://www.sovdating.com/%E3%80%90java%E8%84%9A%E6%89%8B%E6%9E%B6%E6%90%AD%E5%BB%BA%E3%80%91%E6%B3%A8%E8%A7%A3%20spring-context-annotation.xml/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="注解相关@Service 用于标注业务层组件@Controller 用于标注控制层组件（如struts中的action）@Repository 用于标注数据访问组件，即DAO组件@Component 泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注。  初始化&lt;context:component-scan标签默认情况下自动扫描指定路径下的包（含所有子包），将带有@Componen">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-03-07T16:00:05.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.104Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="脚手架">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/%E3%80%90java%E8%84%9A%E6%89%8B%E6%9E%B6%E6%90%AD%E5%BB%BA%E3%80%91%E6%B3%A8%E8%A7%A3%20spring-context-annotation.xml/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/%E3%80%90java%E8%84%9A%E6%89%8B%E6%9E%B6%E6%90%AD%E5%BB%BA%E3%80%91%E6%B3%A8%E8%A7%A3%20spring-context-annotation.xml/","path":"【java脚手架搭建】注解 spring-context-annotation.xml/","title":"【java脚手架搭建】注解 spring-context-annotation.xml"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【java脚手架搭建】注解 spring-context-annotation.xml | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E8%A7%A3%E7%9B%B8%E5%85%B3"><span class="nav-number">1.</span> <span class="nav-text">注解相关</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E8%A7%A3%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">注解配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MVC%E6%B3%A8%E8%A7%A3%E6%94%AF%E6%8C%81-%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">MVC注解支持 &amp; 数据处理</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E3%80%90java%E8%84%9A%E6%89%8B%E6%9E%B6%E6%90%AD%E5%BB%BA%E3%80%91%E6%B3%A8%E8%A7%A3%20spring-context-annotation.xml/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【java脚手架搭建】注解 spring-context-annotation.xml | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【java脚手架搭建】注解 spring-context-annotation.xml
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-08 00:00:05" itemprop="dateCreated datePublished" datetime="2017-03-08T00:00:05+08:00">2017-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="注解相关"><a href="#注解相关" class="headerlink" title="注解相关"></a>注解相关</h1><p><code>@Service</code> 用于标注业务层组件<br><code>@Controller</code> 用于标注控制层组件（如struts中的action）<br><code>@Repository</code> 用于标注数据访问组件，即DAO组件<br><code>@Component</code> 泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注。</p>
+<ul>
+<li><p>初始化<br><code>&lt;context:component-scan</code>标签默认情况下自动扫描指定路径下的包（含所有子包），将带有<br><code>@Component、@Repository、@Service、@Controller</code><br>标签的类自动注册到spring容器。<br>对标记了<br><code>Spring&#39;s</code> @Required、@Autowired、<br><code>JSR250&#39;s</code> @PostConstruct、@PreDestroy、@Resource、<br><code>JAX-WS&#39;s</code> @WebServiceRef、<br><code>EJB3&#39;s</code> @EJB、<br><code>JPA&#39;s</code> @PersistenceContext、@PersistenceUnit<br>等注解的类进行对应的操作使注解生效（包含了annotation-config标签的作用）。</p>
+</li>
+<li><p>自动注入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Autowired后不需要getter()和setter()方法，Spring也会自动注入</span><br><span class="line">当接口存在两个实现类的时候必须使用@Qualifier指定注入哪个实现类，否则可以省略，只写@Autowired</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>参考</strong><br><code>Spring注解@Component、@Repository、@Service、@Controller区别 - zhang854429783的专栏</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/zhang854429783/article/details/6785574">http://blog.csdn.net/zhang854429783/article/details/6785574</a></p>
+<hr>
+<h1 id="注解配置"><a href="#注解配置" class="headerlink" title="注解配置"></a>注解配置</h1><ul>
+<li><p>支持mvc注解?</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mvc:annotation-driven</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>启用spring mvc 注解?</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 启用spring mvc 注解 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:annotation-config</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>注解获取配置值</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 加载应用属性实例，可通过  @Value(&quot;#&#123;config[&#x27;jdbc.driver&#x27;]&#125;&quot;) String jdbcDriver 方式引用 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">util:properties</span> <span class="attr">id</span>=<span class="string">&quot;config&quot;</span> <span class="attr">location</span>=<span class="string">&quot;classpath:config.properties&quot;</span> <span class="attr">local-override</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>自动Bean注册<code>Annotation</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">`spring-context.xml`</span><br><span class="line"><span class="comment">&lt;!-- `@Service`注解生效 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.wosai.bright.service&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>spring-servlet.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- `@RequestMapping`注解生效(servlet映射) --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.wosai.bright.controller&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或<br><code>spring-context.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用Annotation自动注册Bean，解决事物失效问题：在主容器中不扫描@Controller注解，在SpringMvc中只扫描@Controller注解。  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.thinkgem.jeesite&quot;</span>&gt;</span><span class="comment">&lt;!-- base-package 如果多个，用“,”分隔 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:exclude-filter</span> <span class="attr">type</span>=<span class="string">&quot;annotation&quot;</span> <span class="attr">expression</span>=<span class="string">&quot;org.springframework.stereotype.Controller&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>spring-mvc.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用Annotation自动注册Bean,只扫描@Controller --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.thinkgem.jeesite&quot;</span> <span class="attr">use-default-filters</span>=<span class="string">&quot;false&quot;</span>&gt;</span><span class="comment">&lt;!-- base-package 如果多个，用“,”分隔 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:include-filter</span> <span class="attr">type</span>=<span class="string">&quot;annotation&quot;</span> <span class="attr">expression</span>=<span class="string">&quot;org.springframework.stereotype.Controller&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line">````</span><br><span class="line">- 支持事务注解的（`@Transactional`） </span><br><span class="line">```xml</span><br><span class="line"><span class="tag">&lt;<span class="name">tx:annotation-driven</span>/&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p><code>@Transactional</code>注解的类定义事务</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tx:annotation-driven</span> <span class="attr">transaction-manager</span>=<span class="string">&quot;transactionManager&quot;</span> <span class="attr">proxy-target-class</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p><code>@Aspect</code>注解代理(aspect切面)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 激活自动代理功能:支持class代理(cglib) --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> <span class="attr">proxy-target-class</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>proxy-target-class 作用 - Leo&#39;s Blog - CSDN博客</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/lc0817/article/details/46580735">http://blog.csdn.net/lc0817/article/details/46580735</a></p>
+</li>
+</ul>
+<p>更多</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:advisor</span>&gt;</span> 定义一个AOP通知者 </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:after</span>&gt;</span> 后通知 </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:after-returning</span>&gt;</span> 返回后通知 </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:after-throwing</span>&gt;</span> 抛出后通知 </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:around</span>&gt;</span> 周围通知 </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:aspect</span>&gt;</span>定义一个切面 </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:before</span>&gt;</span>前通知 </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span>顶级配置元素，类似于<span class="tag">&lt;<span class="name">beans</span>&gt;</span>这种东西 </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:pointcut</span>&gt;</span>定义一个切点 </span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>注解：计划任务<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 计划任务配置，用 @Service @Lazy(false)标注类，用@Scheduled(cron = &quot;0 0 2 * * ?&quot;)标注方法 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">task:executor</span> <span class="attr">id</span>=<span class="string">&quot;executor&quot;</span> <span class="attr">pool-size</span>=<span class="string">&quot;10&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">task:scheduler</span> <span class="attr">id</span>=<span class="string">&quot;scheduler&quot;</span> <span class="attr">pool-size</span>=<span class="string">&quot;10&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">task:annotation-driven</span> <span class="attr">scheduler</span>=<span class="string">&quot;scheduler&quot;</span> <span class="attr">executor</span>=<span class="string">&quot;executor&quot;</span> <span class="attr">proxy-target-class</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="MVC注解支持-数据处理"><a href="#MVC注解支持-数据处理" class="headerlink" title="MVC注解支持 &amp; 数据处理"></a>MVC注解支持 &amp; 数据处理</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--RequestMappingHandlerAdapter--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:annotation-driven</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mvc:message-converters</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">&quot;stringHttpMessageConverter&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">&quot;marshallingHttpMessageConverter&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">&quot;mappingJackson2HttpMessageConverter&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mvc:message-converters</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mvc:annotation-driven</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.wosai.framework.controller&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;stringHttpMessageConverter&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">&quot;org.springframework.http.converter.StringHttpMessageConverter&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;marshallingHttpMessageConverter&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">&quot;org.springframework.http.converter.xml.MarshallingHttpMessageConverter&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;marshaller&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;castorMarshaller&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;unmarshaller&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;castorMarshaller&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;mappingJackson2HttpMessageConverter&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">&quot;org.springframework.http.converter.json.MappingJackson2HttpMessageConverter&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;supportedMediaTypes&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>application/json<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>application/xml<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>text/html<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>text/plain<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>text/xml<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;castorMarshaller&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.oxm.castor.CastorMarshaller&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p><code>&lt;mvc:annotation-driven&gt;</code> 标签，controller类相关注解（<code>@RequestMapping</code>,<code>@Controller</code>）及url映射支持<br><code>&lt;mvc:message-converters&gt;</code> 标签，设定字符集和json处理类</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/" rel="tag"># 脚手架</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E3%80%90java%E8%84%9A%E6%89%8B%E6%9E%B6%E6%90%AD%E5%BB%BA%E3%80%91%E6%9D%83%E9%99%90%20spring-context-shiro.xml/" rel="prev" title="【java脚手架搭建】权限 spring-context-shiro.xml">
+                  <i class="fa fa-angle-left"></i> 【java脚手架搭建】权限 spring-context-shiro.xml
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E3%80%90java%E8%84%9A%E6%89%8B%E6%9E%B6%E6%90%AD%E5%BB%BA%E3%80%91%E4%BA%8B%E5%8A%A1%20spring-context-transaction.xml/" rel="next" title="【java脚手架搭建】事务 spring-context-transaction.xml">
+                  【java脚手架搭建】事务 spring-context-transaction.xml <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

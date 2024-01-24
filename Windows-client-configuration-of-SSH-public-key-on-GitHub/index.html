@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="检查SSH keys的设置1$ cd ~&#x2F;.ssh&#x2F; 如果显示”No such file or directory”，跳到第三步，否则继续。 备份和移除原来的SSH key设置如果已经存在key文件，需要备份该数据并删除之 12345$ lsid_rsa  id_rsa.pub  known_hosts$ mkdir key_backup$ cp id_rsa* key_backup&#x2F;$ rm i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows客户端配置GitHub的SSH公钥">
+<meta property="og:url" content="https://www.sovdating.com/Windows-client-configuration-of-SSH-public-key-on-GitHub/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="检查SSH keys的设置1$ cd ~&#x2F;.ssh&#x2F; 如果显示”No such file or directory”，跳到第三步，否则继续。 备份和移除原来的SSH key设置如果已经存在key文件，需要备份该数据并删除之 12345$ lsid_rsa  id_rsa.pub  known_hosts$ mkdir key_backup$ cp id_rsa* key_backup&#x2F;$ rm i">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2015-06-02T07:44:10.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:24:42.756Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/Windows-client-configuration-of-SSH-public-key-on-GitHub/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/Windows-client-configuration-of-SSH-public-key-on-GitHub/","path":"Windows-client-configuration-of-SSH-public-key-on-GitHub/","title":"Windows客户端配置GitHub的SSH公钥"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Windows客户端配置GitHub的SSH公钥 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5SSH-keys%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">检查SSH keys的设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E5%92%8C%E7%A7%BB%E9%99%A4%E5%8E%9F%E6%9D%A5%E7%9A%84SSH-key%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">备份和移除原来的SSH key设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%96%B0%E7%9A%84SSH-key"><span class="nav-number">3.</span> <span class="nav-text">生成新的SSH key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0SSH-key%E5%88%B0GitHub"><span class="nav-number">4.</span> <span class="nav-text">添加SSH key到GitHub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B"><span class="nav-number">5.</span> <span class="nav-text">测试一下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%BD%A0%E7%9A%84%E8%B4%A6%E5%8F%B7%E4%BF%A1%E6%81%AF"><span class="nav-number">6.</span> <span class="nav-text">设置你的账号信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%9C%AC%E5%9C%B0%E5%A4%9A%E4%B8%AASSH-key%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">解决本地多个SSH key问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%9D%E7%84%B6%E9%9C%80%E8%A6%81%E9%85%8D%E7%BD%AEgit%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E9%82%AE%E7%AE%B1"><span class="nav-number">7.1.</span> <span class="nav-text">依然需要配置git用户名和邮箱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90ssh-key%E6%97%B6%E5%90%8C%E6%97%B6%E6%8C%87%E5%AE%9A%E4%BF%9D%E5%AD%98%E7%9A%84%E6%96%87%E4%BB%B6%E5%90%8D"><span class="nav-number">7.2.</span> <span class="nav-text">生成ssh key时同时指定保存的文件名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E5%B9%B6%E9%85%8D%E7%BD%AEconfig%E6%96%87%E4%BB%B6"><span class="nav-number">7.3.</span> <span class="nav-text">新增并配置config文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0key%E5%88%B0%E4%BA%91%E5%B9%B3%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%B9%B6%E6%B5%8B%E8%AF%95"><span class="nav-number">7.4.</span> <span class="nav-text">上传key到云平台后台并测试</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Windows-client-configuration-of-SSH-public-key-on-GitHub/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Windows客户端配置GitHub的SSH公钥 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Windows客户端配置GitHub的SSH公钥
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-06-02 15:44:10" itemprop="dateCreated datePublished" datetime="2015-06-02T15:44:10+08:00">2015-06-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Git-GitHub/" itemprop="url" rel="index"><span itemprop="name">Git/GitHub</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="检查SSH-keys的设置"><a href="#检查SSH-keys的设置" class="headerlink" title="检查SSH keys的设置"></a>检查SSH keys的设置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh/</span><br></pre></td></tr></table></figure>
+<p>如果显示”No such file or directory”，跳到第三步，否则继续。</p>
+<h3 id="备份和移除原来的SSH-key设置"><a href="#备份和移除原来的SSH-key设置" class="headerlink" title="备份和移除原来的SSH key设置"></a>备份和移除原来的SSH key设置</h3><p>如果已经存在key文件，需要备份该数据并删除之</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span></span><br><span class="line">id_rsa  id_rsa.pub  known_hosts</span><br><span class="line">$ <span class="built_in">mkdir</span> key_backup</span><br><span class="line">$ <span class="built_in">cp</span> id_rsa* key_backup/</span><br><span class="line">$ <span class="built_in">rm</span> id_rsa*</span><br></pre></td></tr></table></figure>
+<h3 id="生成新的SSH-key"><a href="#生成新的SSH-key" class="headerlink" title="生成新的SSH key"></a>生成新的SSH key</h3><p>输入下面的代码，可以生成新的key文件，只需要使用默认的设置即可，当需要输入文件名的时候，回车即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;你的邮箱@qq.com&quot;</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/c/Users/WX/.ssh/id_rsa):</span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved <span class="keyword">in</span> /c/Users/WX/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span> /c/Users/WX/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">1d:cc:7e:b3:7e:92:f7:ab:c6:75:56:73:62:30:bc:8c 你的邮箱@qq.com</span><br><span class="line">The key<span class="string">&#x27;s randomart image is:</span></span><br><span class="line"><span class="string">+--[ RSA 2048]----+</span></span><br><span class="line"><span class="string">|           .     |</span></span><br><span class="line"><span class="string">|         o  +    |</span></span><br><span class="line"><span class="string">|          +o +   |</span></span><br><span class="line"><span class="string">|         oE.o o.o|</span></span><br><span class="line"><span class="string">|        S o o. .+|</span></span><br><span class="line"><span class="string">|           . o .o|</span></span><br><span class="line"><span class="string">|            o....|</span></span><br><span class="line"><span class="string">|           .ooo  |</span></span><br><span class="line"><span class="string">|            o=.oo|</span></span><br><span class="line"><span class="string">+-----------------+</span></span><br></pre></td></tr></table></figure>
+<h3 id="添加SSH-key到GitHub"><a href="#添加SSH-key到GitHub" class="headerlink" title="添加SSH key到GitHub"></a>添加SSH key到GitHub</h3><p>用文本编辑工具打开id_rsa.pub文件，如果看不到这个文件，你需要设置显示隐藏文件。准确的复制这个文件的内容，才能保证设置的成功。<br>在GitHub的主页上点击设置按钮，选择SSH Keys项，把复制的内容粘贴进去，然后点击Add Key按钮即可，Title任意选择。</p>
+<h3 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h3><p>输入下面命令，测试是否设置成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br><span class="line">Hi shijiebei2009! You<span class="string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置你的账号信息"><a href="#设置你的账号信息" class="headerlink" title="设置你的账号信息"></a>设置你的账号信息</h3><p>现在你已经可以通过SSH链接到GitHub了，还有一些个人信息需要完善的。</p>
+<p>Git会根据用户的名字和邮箱来记录提交。GitHub也是用这些信息来做权限的处理，输入下面的代码进行个人信息的设置，把名称和邮箱替换成你自己的，名字必须是你的真名，而不是GitHub的昵称。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;你的名字&quot;</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;your_email@youremail.com&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="解决本地多个SSH-key问题"><a href="#解决本地多个SSH-key问题" class="headerlink" title="解决本地多个SSH key问题"></a>解决本地多个SSH key问题</h3><p>如果在eclipse或者其它云平台，可能也需要使用SSH key来认证，如果每次都覆盖原来的is_rsa文件，那么之前的认证就失效了，这个问题可以通过在~&#x2F;.ssh目录下增加config文件来解决。</p>
+<h4 id="依然需要配置git用户名和邮箱"><a href="#依然需要配置git用户名和邮箱" class="headerlink" title="依然需要配置git用户名和邮箱"></a>依然需要配置git用户名和邮箱</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name <span class="string">&quot;用户名&quot;</span></span><br><span class="line">git config user.email <span class="string">&quot;邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="生成ssh-key时同时指定保存的文件名"><a href="#生成ssh-key时同时指定保存的文件名" class="headerlink" title="生成ssh key时同时指定保存的文件名"></a>生成ssh key时同时指定保存的文件名</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f ~/.ssh/id_rsa.codepub -C <span class="string">&quot;email&quot;</span></span><br></pre></td></tr></table></figure>
+<p>上面的id_rsa.codepub就是我们指定的文件名，这时~&#x2F;.ssh目录下会多出id_rsa.codepub和id_rsa.codepub.pub两个文件，id_rsa.codepub.pub里保存的就是我们要使用的key。</p>
+<h4 id="新增并配置config文件"><a href="#新增并配置config文件" class="headerlink" title="新增并配置config文件"></a>新增并配置config文件</h4><p>如果config文件不存在，先添加；存在则直接修改</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> ~/.ssh/config</span><br></pre></td></tr></table></figure>
+<p>在config文件里添加如下内容(User表示你的用户名)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host *.codepub.cn</span><br><span class="line">IdentityFile ~/.ssh/id_rsa.codepub</span><br><span class="line">User admin</span><br></pre></td></tr></table></figure>
+<h4 id="上传key到云平台后台并测试"><a href="#上传key到云平台后台并测试" class="headerlink" title="上传key到云平台后台并测试"></a>上传key到云平台后台并测试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -T git@git.codepub.cn</span><br></pre></td></tr></table></figure>
+<p>成功的话，会输出welcome欢迎信息！<br>日后如需添加，则按照上述配置生成key，并修改config文件即可。</p>
+<p><strong>参考文献</strong><br>[1] <a target="_blank" rel="noopener" href="http://beiyuu.com/github-pages/">http://beiyuu.com/github-pages/</a><br>[2] <a target="_blank" rel="noopener" href="http://riny.net/2014/git-ssh-key/">http://riny.net/2014/git-ssh-key/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"># Git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/How-to-load-dll-file-in-Java-Web-Project/" rel="prev" title="Java中Web Project如何加载dll/DLL文件">
+                  <i class="fa fa-angle-left"></i> Java中Web Project如何加载dll/DLL文件
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Faceted-Project-Problem-Java-Version-Mismatch-Error-Message/" rel="next" title="Faceted Project Problem (Java Version Mismatch) Error Message">
+                  Faceted Project Problem (Java Version Mismatch) Error Message <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

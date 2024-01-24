@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="一句话：分布式环境下生产者消费者** 解耦的中间容器，使用在 发布-订阅的消息服务&#x2F;log4j,nginx,mysql慢SQL各日志收集 等场景中 作用 :   数据缓冲、异步通信、汇集日志、系统解耦  Kafka基本概念 Broker[集群机器]：消息中间件处理结点，一个Kafka节点就是一个broker，多个broker可以组成一个Kafka集群。 Topic[主题]：一类消息，例如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kafka 相关">
+<meta property="og:url" content="https://www.sovdating.com/kafka%20%E7%9B%B8%E5%85%B3/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="一句话：分布式环境下生产者消费者** 解耦的中间容器，使用在 发布-订阅的消息服务&#x2F;log4j,nginx,mysql慢SQL各日志收集 等场景中 作用 :   数据缓冲、异步通信、汇集日志、系统解耦  Kafka基本概念 Broker[集群机器]：消息中间件处理结点，一个Kafka节点就是一个broker，多个broker可以组成一个Kafka集群。 Topic[主题]：一类消息，例如">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://static.oschina.net/uploads/space/2017/0227/154630_xHIL_1403215.png">
+<meta property="og:image" content="https://static.oschina.net/uploads/space/2017/0227/192112_lUmB_1403215.png">
+<meta property="article:published_time" content="2017-06-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.083Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="kafka">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.oschina.net/uploads/space/2017/0227/154630_xHIL_1403215.png">
+
+
+<link rel="canonical" href="https://www.sovdating.com/kafka%20%E7%9B%B8%E5%85%B3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/kafka%20%E7%9B%B8%E5%85%B3/","path":"kafka 相关/","title":"kafka 相关"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>kafka 相关 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">Kafka基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E7%9A%84%E6%9C%BA%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">Kafka消息发送的机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E6%9C%BA%E5%88%B6"><span class="nav-number">3.</span> <span class="nav-text">Kafka消息消费机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka%E6%B6%88%E6%81%AF%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">Kafka消息存储机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E6%A3%80%E7%B4%A2%E8%BF%87%E7%A8%8B%E7%A4%BA%E4%BE%8B"><span class="nav-number">5.</span> <span class="nav-text">消息检索过程示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E5%88%86%E6%9E%90"><span class="nav-number">6.</span> <span class="nav-text">示例分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85"><span class="nav-number">6.1.</span> <span class="nav-text">生产者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85%EF%BC%88kafkaSDK%E6%8E%A5%E5%85%A5zookeeper%EF%BC%89"><span class="nav-number">6.2.</span> <span class="nav-text">消费者（kafkaSDK接入zookeeper）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E4%B8%BB%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">注册主题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E4%B8%8A%E7%BA%BF"><span class="nav-number">8.</span> <span class="nav-text">生产者上线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8A%E7%BA%BF"><span class="nav-number">9.</span> <span class="nav-text">消费者上线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E4%B8%BB%E9%A2%98"><span class="nav-number">10.</span> <span class="nav-text">查看主题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-%E5%90%8E%E5%8F%B0%E5%90%AF%E5%8A%A8kafka"><span class="nav-number">10.1.</span> <span class="nav-text">linux 后台启动kafka</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/kafka%20%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="kafka 相关 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          kafka 相关
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-06-30 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-30T00:00:00+08:00">2017-06-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>一句话：分布式环境下<code>生产者消费者** 解耦</code>的中间容器，使用在<code> 发布-订阅的消息服务</code>&#x2F;<code>log4j,nginx,mysql慢SQL各日志收集</code> 等场景中</p>
+<p>作用 :   数据缓冲、异步通信、汇集日志、系统解耦</p>
+<hr>
+<h1 id="Kafka基本概念"><a href="#Kafka基本概念" class="headerlink" title="Kafka基本概念"></a>Kafka基本概念</h1><ul>
+<li>Broker[<code>集群机器</code>]：消息中间件处理结点，一个Kafka节点就是一个broker，多个broker可以组成一个Kafka集群。</li>
+<li>Topic[<code>主题</code>]：一类消息，例如page view日志、click日志等都可以以topic的形式存在，Kafka集群能够同时负责多个topic的分发。</li>
+<li>Partition[<code> 主题的分目录存储</code> ]：topic物理上的分组，一个topic可以分为多个partition，每个partition是一个有序的队列。</li>
+<li>Segment[<code> 主题消息的文件分组存储</code> ]：partition物理上由多个segment组成。</li>
+<li>offset[<code>消息序号</code>]：每个partition都由一系列有序的、不可变的消息组成，这些消息被连续的追加到partition中。partition中的每个消息都有一个连续的序列号叫做offset,用于partition唯一标识一条消息。</li>
+</ul>
+<h1 id="Kafka消息发送的机制"><a href="#Kafka消息发送的机制" class="headerlink" title="Kafka消息发送的机制"></a>Kafka消息发送的机制</h1><p>首先获取topic的所有<code>Patition</code><br>生产者上线，将数据发布到topic（<code> 指定partition/未 指定 则 余数/自 算法</code> ），消息会路由到 Patition</p>
+<h1 id="Kafka消息消费机制"><a href="#Kafka消息消费机制" class="headerlink" title="Kafka消息消费机制"></a>Kafka消息消费机制</h1><p><img src="https://static.oschina.net/uploads/space/2017/0227/154630_xHIL_1403215.png"></p>
+<p>消费者通过pull的方式，定期从服务器拉取数据,当然在<code>pull数据</code>的时候，服务器会告诉consumer可消费的<code>消息offset</code><br><code>不同 Consumer Group下的消费者可以消费partition中相同的消息</code>，<code>相同的Consumer  Group下的消费者只能消费partition中不同的数据</code>。<br>服务器会记录每个consumer的在每个topic的每个partition下的消费的offset,然后每次去消费去拉取数据时，都会从上次记录的位置 （ 当consumer和partition增加或者删除时,需要重新执行一遍Consumer Rebalance算法 ）</p>
+<h1 id="Kafka消息存储机制"><a href="#Kafka消息存储机制" class="headerlink" title="Kafka消息存储机制"></a>Kafka消息存储机制</h1><p>kafka的消息是存储在磁盘的，所以数据不易丢失<br>partition包含两部分： .index索引文件、.log消息内容文件<br><code>.index</code> 索引文件 (offset消息编号-消息在对应文件中的偏移量)</p>
+<p><code>.log</code> 消息文件(完整消息，位置偏移量) <img src="https://static.oschina.net/uploads/space/2017/0227/192112_lUmB_1403215.png"></p>
+<h1 id="消息检索过程示例"><a href="#消息检索过程示例" class="headerlink" title="消息检索过程示例"></a>消息检索过程示例</h1><p>例如读取<code>offset=368</code>的消息<br>（1）找到第368条消息在哪个<code>segment</code><br>根据<code>二分查找</code>，可以快速定位，第368条消息是在00000000000000000300.log文件中<br>（2）从<code>index文件</code>中找到其物理偏移量<br>读取 00000000000000000300.index 。以368为key，得到value，如299，就是消息的物理位置偏移量<br>（3）到<code>log文件</code>中读取消息内容<br>读取 00000000000000000300.log  从偏移量299开始读取消息内容。完成了消息的检索过程</p>
+<p><code>Kafka消息生成，消费，存储机制 - - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/u013063153/article/details/73799951">http://blog.csdn.net/u013063153/article/details/73799951</a></p>
+<p><code>Kafka学习之一 Kafka是什么，主要应用在什么场景? - 宝哥在路上 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/code52/article/details/50475511">http://blog.csdn.net/code52/article/details/50475511</a></p>
+<p><code>Kafka 高性能吞吐揭秘</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000003985468">https://segmentfault.com/a/1190000003985468</a></p>
+<hr>
+<h1 id="示例分析"><a href="#示例分析" class="headerlink" title="示例分析"></a>示例分析</h1><h2 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h2><ul>
+<li><p>设置配置属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 设置配置属性</span><br><span class="line">Properties props = new Properties();</span><br><span class="line">//		props.put(&quot;metadata.broker.list&quot;,&quot;172.168.63.221:9092,172.168.63.233:9092,172.168.63.234:9092&quot;);</span><br><span class="line">props.put(&quot;metadata.broker.list&quot;,&quot;192.168.3.188:9092&quot;);</span><br><span class="line">props.put(&quot;serializer.class&quot;, &quot;kafka.serializer.StringEncoder&quot;);</span><br><span class="line">// key.serializer.class默认为serializer.class</span><br><span class="line">props.put(&quot;key.serializer.class&quot;, &quot;kafka.serializer.StringEncoder&quot;);</span><br><span class="line">// 可选配置，如果不配置，则使用默认的partitioner</span><br><span class="line">//		props.put(&quot;partitioner.class&quot;, &quot;com.catt.kafka.demo.PartitionerDemo&quot;);</span><br><span class="line">props.put(&quot;partitioner.class&quot;, &quot;example.PartitionerDemo&quot;);// 自算法实现partition选择(默认kafka会取余)</span><br><span class="line">// 触发acknowledgement机制，否则是fire and forget，可能会引起数据丢失</span><br><span class="line">// 值为0,1,-1,可以参考</span><br><span class="line">// http://kafka.apache.org/08/configuration.html</span><br><span class="line">props.put(&quot;request.required.acks&quot;, &quot;1&quot;);</span><br><span class="line">ProducerConfig config = new ProducerConfig(props);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建producer</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 创建producer</span><br><span class="line">Producer&lt;String, String&gt; producer = new Producer&lt;String, String&gt;(config);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>产生并发送消息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">long start=System.currentTimeMillis();</span><br><span class="line">for (long i = 0; i &lt; events; i++) &#123;</span><br><span class="line">    long runtime = new Date().getTime();</span><br><span class="line">    String ip = &quot;192.168.3.&quot; + i;//rnd.nextInt(255);</span><br><span class="line">    String msg = runtime + &quot;,www.example.com,&quot; + ip;</span><br><span class="line">    //如果topic不存在，则会自动创建，默认replication-factor为1，partitions为0</span><br><span class="line">    KeyedMessage&lt;String, String&gt; data = new KeyedMessage&lt;String, String&gt;(</span><br><span class="line">            &quot;page_visits&quot;, ip, msg);</span><br><span class="line">    producer.send(data);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(&quot;耗时:&quot; + (System.currentTimeMillis() - start));</span><br><span class="line"></span><br><span class="line">// 关闭producer</span><br><span class="line">producer.close();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="消费者（kafkaSDK接入zookeeper）"><a href="#消费者（kafkaSDK接入zookeeper）" class="headerlink" title="消费者（kafkaSDK接入zookeeper）"></a>消费者（kafkaSDK接入zookeeper）</h2><ul>
+<li>topic 多路Stream消费<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Integer&gt; topicCountMap = new HashMap&lt;String, Integer&gt;();</span><br><span class="line">topicCountMap.put(topic, new Integer(numThreads));</span><br><span class="line">Map&lt;String, List&lt;KafkaStream&lt;byte[], byte[]&gt;&gt;&gt; consumerMap = consumer.createMessageStreams(topicCountMap);// 多路Stream消费</span><br><span class="line">``` - 固定量线程池对应topic多路Stream 消费</span><br></pre></td></tr></table></figure>
+List&lt;KafkaStream&lt;byte[], byte[]&gt;&gt; streams &#x3D; consumerMap.get(topic);<br>&#x2F;&#x2F; now launch all the threads<br>executor &#x3D; Executors.newFixedThreadPool(numThreads);<br>&#x2F;&#x2F; now create an object to consume the messages<br>int threadNumber &#x3D; 0;<br>for (final KafkaStream stream : streams) {<br> executor.submit(new ConsumerMsgTask(stream, threadNumber));<br> threadNumber++;<br>}<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 消费线程  ConsumerMsgTask  </span><br></pre></td></tr></table></figure>
+public class ConsumerMsgTask implements Runnable {<br> private KafkaStream m_stream;<br> private int m_threadNumber;<br> public ConsumerMsgTask(KafkaStream stream, int threadNumber) {<br> m_threadNumber &#x3D; threadNumber;<br> m_stream &#x3D; stream;<br> }<br> public void run() {<br> ConsumerIterator&lt;byte[], byte[]&gt; it &#x3D; m_stream.iterator();<br> while (it.hasNext())&#x2F;* 消费(在不消费者未shutdown前,会一直监听在此-即阻塞) *&#x2F;<br>     System.out.println(“Thread “ + m_threadNumber + “: “ + new String(it.next().message()));<br> System.out.println(“Shutting down Thread: “ + m_threadNumber);<br> }<br>}<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">`Kafka JAVA客户端代码示例 - 推酷`</span><br><span class="line"></span><br><span class="line">http://www.tuicool.com/articles/FRJzamq</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"># windows 练习</span><br><span class="line">- zookeeper服务启动</span><br><span class="line">&gt; zkServer</span><br><span class="line">- kafka服务启动</span><br><span class="line">&gt; .\bin\windows\kafka-server-start.bat .\config\server.properties</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="注册主题"><a href="#注册主题" class="headerlink" title="注册主题"></a>注册主题</h1><p>.\bin\windows\kafka-topics.bat –create –zookeeper localhost:2181 –replication-factor 1 –partitions 1 –topic test</p>
+<h1 id="生产者上线"><a href="#生产者上线" class="headerlink" title="生产者上线"></a>生产者上线</h1><p>.\bin\windows\kafka-console-producer.bat –broker-list localhost:9092 –topic test</p>
+<h1 id="消费者上线"><a href="#消费者上线" class="headerlink" title="消费者上线"></a>消费者上线</h1><p>.\bin\windows\kafka-console-consumer.bat –zookeeper localhost:2181 –topic test</p>
+<h1 id="查看主题"><a href="#查看主题" class="headerlink" title="查看主题"></a>查看主题</h1><p>.\bin\windows\kafka-topics.bat –list –zookeeper localhost:2181<br>.\bin\windows\kafka-topics.bat –describe –zookeeper localhost:2181 –topic test &#96;&#96;&#96;</p>
+<p>**效果： ** <code>生产者窗口</code>输入消息 &gt;&gt; <code>消费者窗口</code>可立即收到</p>
+<hr>
+<h2 id="linux-后台启动kafka"><a href="#linux-后台启动kafka" class="headerlink" title="linux 后台启动kafka"></a>linux 后台启动kafka</h2><p>前台启动kafka：</p>
+<blockquote>
+<p>.&#x2F;kafka-server-start.sh ..&#x2F;config&#x2F;server.properties</p>
+</blockquote>
+<p>后台启动kafka:</p>
+<blockquote>
+<p>.&#x2F;kafka-server-start.sh ..&#x2F;config&#x2F;server.properties 1&gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/u013063153/article/details/72910748">http://blog.csdn.net/u013063153/article/details/72910748</a></p>
+<hr>
+<p><code>Kafka在Windows安装运行 - 林炳文Evankaka的专栏 - 博客频道 - CSDN.NET</code></p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/evankaka/article/details/52421314">http://blog.csdn.net/evankaka/article/details/52421314</a></p>
+<p><code>kafka windows单机安装测试 - laputa73的专栏 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/laputa73/article/details/48826167">http://blog.csdn.net/laputa73/article/details/48826167</a></p>
+<p><code> Windows安装运行Kafka - OPEN 开发经验库</code><br><a target="_blank" rel="noopener" href="http://www.open-open.com/lib/view/open1455842080261.html">http://www.open-open.com/lib/view/open1455842080261.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/kafka/" rel="tag"># kafka</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/markdown_tables%E8%A1%A8%E6%A0%BC%E5%B7%A5%E5%85%B7/" rel="prev" title="markdown_tables表格工具">
+                  <i class="fa fa-angle-left"></i> markdown_tables表格工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/jvm%E7%9B%B8%E5%85%B3/" rel="next" title="jvm相关">
+                  jvm相关 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

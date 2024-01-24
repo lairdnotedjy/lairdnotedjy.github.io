@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="转载申明 文章转载自互联网，如有侵权，请联系删除本文仅作为学习交流，禁止用于非法用途  1. 背景阿里系当前采用的加密版本是 6.3，6.2 版本的大家几乎都解决了，6.3 的网上资料很少，这里讲讲 6.3 的解密过程  阿里系通用这一套加密算法，主要是 x-sign，x-sgext，x_mini_wua，x_umt 这四个加密参数，解决了其中一个 app，其他的比如淘 X，咸 X 等 app">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[转]安卓逆向某生鲜平台app">
+<meta property="og:url" content="https://www.sovdating.com/android-reverse/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="转载申明 文章转载自互联网，如有侵权，请联系删除本文仅作为学习交流，禁止用于非法用途  1. 背景阿里系当前采用的加密版本是 6.3，6.2 版本的大家几乎都解决了，6.3 的网上资料很少，这里讲讲 6.3 的解密过程  阿里系通用这一套加密算法，主要是 x-sign，x-sgext，x_mini_wua，x_umt 这四个加密参数，解决了其中一个 app，其他的比如淘 X，咸 X 等 app">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.sovdating.com/android-reverse/2023-08-16-10-05-39.png">
+<meta property="og:image" content="https://www.sovdating.com/android-reverse/2023-08-16-10-06-09.png">
+<meta property="og:image" content="https://www.sovdating.com/android-reverse/2023-08-16-10-06-33.png">
+<meta property="og:image" content="https://www.sovdating.com/android-reverse/2023-08-16-10-06-50.png">
+<meta property="og:image" content="https://www.sovdating.com/android-reverse/2023-08-16-10-07-53.png">
+<meta property="og:image" content="https://www.sovdating.com/android-reverse/2023-08-16-10-08-20.png">
+<meta property="og:image" content="https://www.sovdating.com/android-reverse/2023-08-16-10-09-50.png">
+<meta property="og:image" content="https://www.sovdating.com/android-reverse/2023-08-16-10-09-56.png">
+<meta property="og:image" content="https://www.sovdating.com/android-reverse/2023-08-16-10-10-16.png">
+<meta property="og:image" content="https://www.sovdating.com/android-reverse/2023-08-16-10-11-00.png">
+<meta property="article:published_time" content="2023-08-16T02:14:10.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:47:47.754Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="frida">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.sovdating.com/android-reverse/2023-08-16-10-05-39.png">
+
+
+<link rel="canonical" href="https://www.sovdating.com/android-reverse/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/android-reverse/","path":"android-reverse/","title":"[转]安卓逆向某生鲜平台app"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[转]安卓逆向某生鲜平台app | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">1. 背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%80%86%E5%90%91"><span class="nav-number">2.</span> <span class="nav-text">2.逆向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%9F%A5%E6%89%BE%E5%8A%A0%E5%AF%86%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">3.查找加密方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">4.调用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE"><span class="nav-number">5.</span> <span class="nav-text">5.请求数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E7%BB%93%E6%9E%9C"><span class="nav-number">6.</span> <span class="nav-text">6.结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E6%9C%88%E5%9B%9B%E5%8F%B7%E6%9B%B4%E6%96%B0-wua-%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">九月四号更新 wua 加密算法</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/android-reverse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[转]安卓逆向某生鲜平台app | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [转]安卓逆向某生鲜平台app
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-08-16 10:14:10" itemprop="dateCreated datePublished" datetime="2023-08-16T10:14:10+08:00">2023-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%80%86%E5%90%91/" itemprop="url" rel="index"><span itemprop="name">逆向</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p><strong>转载申明</strong></p>
+<p>文章转载自互联网，如有侵权，请联系删除<br>本文仅作为学习交流，禁止用于非法用途</p>
+</blockquote>
+<h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><p>阿里系当前采用的加密版本是 6.3，6.2 版本的大家几乎都解决了，6.3 的网上资料很少，这里讲讲 6.3 的解密过程</p>
+<ol>
+<li>阿里系通用这一套加密算法，主要是 x-sign，x-sgext，x_mini_wua，x_umt 这四个加密参数，解决了其中一个 app，其他的比如淘 X，咸 X 等 app 都相差不大了，改改参数，或者替换不同的方法名称就行；</li>
+<li>使用的是 frida-rpc 主动调用的方法（对加密算法解密的话，难度很高，我没做出来）；</li>
+<li>本次做的是阿里系的某生鲜平台 app， <strong>仅作为学习交流，禁止用于商业使用</strong></li>
+</ol>
+<span id="more"></span>
+
+<p>首先我们抓个包先，可以看到，加密版本是 6.3，加密参数还是我们常见的这四大参数<br>这里请求头具体分析就不说了，直接去逆向</p>
+<p><img src="/android-reverse/2023-08-16-10-05-39.png"></p>
+<h2 id="2-逆向"><a href="#2-逆向" class="headerlink" title="2.逆向"></a>2.逆向</h2><p>1.查壳<br>第一步不用多说，不管什么 app，先查壳，查壳工具 PKID，基本上满足需求，我们运气好，HM 没做什么加壳措施，所以我们直接略过这个步骤；</p>
+<p><img src="/android-reverse/2023-08-16-10-06-09.png"></p>
+<p>如果有遇到加壳的，可以用一下几种办法</p>
+<p><strong>Frida-Unpack</strong><br>firda-unpack 原理是利用 frida hook libart.so 中的 OpenMemory 方法，拿到内存中 dex 的地址，计算出 dex 文件的大小，从内存中将 dex 导出，我们可以查看项目中的 OpenMemory.js 文件中的代码更清晰直观地了解。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GitHub地址：https://github.com/GuoQiang1993/Frida-Apk-Unpack</span><br></pre></td></tr></table></figure>
+
+<p><strong>FRIDA-DEXDump</strong><br>葫芦娃所写，脱壳后的 dex 文件保存在 PC 端 main.py 同一目录下，以包名为文件名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GitHub地址：https://github.com/hluwa/FRIDA-DEXDump</span><br></pre></td></tr></table></figure>
+
+<p><strong>frida_dump</strong><br>会搜索 dex 文件并 dump 下来，保存在 data&#x2F;data&#x2F;packageName&#x2F;files 目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GitHub地址：https://github.com/lasting-yang/frida_dump</span><br></pre></td></tr></table></figure>
+
+<p><strong>Frida_Fart[推荐]</strong><br>寒冰写的， Frida 版的 Fart, 目前只能在 andorid8 上使用该 frida 版 fart 是使用 hook 的方式实现的函数粒度的脱壳，仅仅是对类中的所有函数进行了加载，但依然可以解决绝大多数的抽取保护</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GitHub地址：https://github.com/hanbinglengyue/FART</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.反编译</strong><br>既然 app 没有做加壳措施，那我们直接上手 <code>jadx</code>。</p>
+<p><img src="/android-reverse/2023-08-16-10-06-33.png"></p>
+<p>这里反编译工具推荐使用 Android Killer，jadx，JEB，当你反编译失败的时候，去尝试另外的工具，会发现结果不同哦。<strong>千万别仅使用一个工具；</strong></p>
+<h2 id="3-查找加密方法"><a href="#3-查找加密方法" class="headerlink" title="3.查找加密方法"></a>3.查找加密方法</h2><p>1.在 jadx 里面直接全局搜索 x-sign 吧</p>
+<p><img src="/android-reverse/2023-08-16-10-06-50.png"></p>
+<p>我们很容易就找到这个 getUnifiedSign 函数，仔细分析函数发现是一个接口，那这个函数所在的类 mtopsdk.security.InnerSignImpl 就是我们要找的实现类。</p>
+<p>这里教你们一个小方法，在 jadx 里面对这个 getUnifiedSign 函数直接右击，复制 frida 代码，我们函数找的对不对，直接 hook 一下就知道了</p>
+<p><img src="/android-reverse/2023-08-16-10-07-53.png"></p>
+<p>写一段调用 js 的 python 程序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> frida, sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_message</span>(<span class="params">message, data</span>):</span><br><span class="line">    <span class="keyword">if</span> message[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;send&#x27;</span>:</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[*] &#123;0&#125;&quot;</span>.<span class="built_in">format</span>(message[<span class="string">&#x27;payload&#x27;</span>]))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(message)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">jscode = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Java.perform(function()&#123;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">/**  把该部分替换为刚刚复制的内容即可**、</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">process = frida.get_remote_device().attach(<span class="string">&#x27;app的包名&#x27;</span>)</span><br><span class="line"></span><br><span class="line">script = process.create_script(jscode)</span><br><span class="line"></span><br><span class="line">script.on(<span class="string">&#x27;message&#x27;</span>, on_message)</span><br><span class="line"></span><br><span class="line">script.load()</span><br><span class="line">sys.stdin.read()</span><br></pre></td></tr></table></figure>
+
+<p>运行程序我们查看一下结果</p>
+<p><img src="/android-reverse/2023-08-16-10-08-20.png"></p>
+<p>非常 nice，我们 hook 之后查看输出，这个方法传入了哪些参数，又输出了哪些值，一目了然，x-sign 等加密值都在里面，说明我们方法找对了</p>
+<h2 id="4-调用方法"><a href="#4-调用方法" class="headerlink" title="4.调用方法"></a>4.调用方法</h2><p>这里我们就直接用 rpc 主动调用的方法获取加密值<br>方法我们找到了，传入的参数我们也找到了，那用 rpc 调用也不在话下了<br>直接上代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> frida</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_message</span>(<span class="params">message, data</span>):</span><br><span class="line">    <span class="keyword">if</span> message[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;send&#x27;</span>:</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[*] &#123;0&#125;&quot;</span>.<span class="built_in">format</span>(message[<span class="string">&#x27;payload&#x27;</span>]))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(message)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">start_hook</span>():</span><br><span class="line">	jscode = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">	    rpc.exports = &#123;</span></span><br><span class="line"><span class="string">	        para: function(a,b,c,d,e,f) &#123;</span></span><br><span class="line"><span class="string">	            var ret = &#123;&#125;;</span></span><br><span class="line"><span class="string">	            Java.perform(function() &#123;</span></span><br><span class="line"><span class="string">	                Java.choose(&quot;mtopsdk.security.InnerSignImpl&quot;,&#123;</span></span><br><span class="line"><span class="string">	                onMatch: function(instance)&#123;</span></span><br><span class="line"><span class="string">	                var a= &quot;&quot;;</span></span><br><span class="line"><span class="string">	                var b= &quot;&quot;;</span></span><br><span class="line"><span class="string">	                var c = ;</span></span><br><span class="line"><span class="string">	                var d = ;</span></span><br><span class="line"><span class="string">	                var e = ;</span></span><br><span class="line"><span class="string">	                var f = ;</span></span><br><span class="line"><span class="string">	                //这些都是传入的参数，具体传参内容根据实际修改</span></span><br><span class="line"><span class="string">	                var res = instance.getUnifiedSign(a, b, c, d, e, f).toString();</span></span><br><span class="line"><span class="string">	                </span></span><br><span class="line"><span class="string">	                //console.log(&#x27;getUnifiedSign ret value is &#x27; + res);</span></span><br><span class="line"><span class="string">	                ret[&quot;result&quot;] = res;</span></span><br><span class="line"><span class="string">	                                        &#125;,</span></span><br><span class="line"><span class="string">	                onComplete: function()&#123;</span></span><br><span class="line"><span class="string">	                    //console.log(&#x27;******js load over*****&#x27;)</span></span><br><span class="line"><span class="string">	                                        &#125;</span></span><br><span class="line"><span class="string">	                                        </span></span><br><span class="line"><span class="string">	                                                                 &#125;)</span></span><br><span class="line"><span class="string">	                                    &#125;)</span></span><br><span class="line"><span class="string">	                                    return ret;</span></span><br><span class="line"><span class="string">	                                                                            &#125;</span></span><br><span class="line"><span class="string">	            &#125;;</span></span><br><span class="line"><span class="string">	        &#x27;&#x27;&#x27;</span></span><br><span class="line">	process = frida.get_remote_device().attach(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    script = process.create_script(jscode)</span><br><span class="line"></span><br><span class="line">    script.on(<span class="string">&#x27;message&#x27;</span>, on_message)</span><br><span class="line"></span><br><span class="line">    script.load()</span><br><span class="line">    <span class="keyword">return</span> script</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">result_hook = start_hook().exports.para() <span class="comment"># 可传参进去</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我们现在验证一下 rpc 调用是否可行</p>
+<p>1.首先执行 rpc 调用的代码，打印出其中的部分参数比如时间戳，以及解密后的 x-sign<br><img src="/android-reverse/2023-08-16-10-09-50.png"></p>
+<p>2.于此同时我们查看一下前面部分我们提到的 hook 这个 getUnifiedSign 函数，去查看一下结果<br><img src="/android-reverse/2023-08-16-10-09-56.png"></p>
+<p>我们对比一下，时间戳，x-sign 的值都是一样的，说明传入的参数正常，并能够输出加密参数</p>
+<h2 id="5-请求数据"><a href="#5-请求数据" class="headerlink" title="5.请求数据"></a>5.请求数据</h2><p>上一步实现 frida-rpc 的调用，接下来就可去写请求数据的代码了<br>这个就没有什么好说的，请求头 headers 放进去，rpc 调用一下，替换加密参数，然后直接 request 请求即可。</p>
+<h2 id="6-结果"><a href="#6-结果" class="headerlink" title="6.结果"></a>6.结果</h2><p><img src="/android-reverse/2023-08-16-10-10-16.png"><br>让我们看一下请求后的结果吧!<br>app 里面的数据可以正常的拿到了，这个 app 的逆向我们就大功告成了，有什么问题可以联系我。</p>
+<h2 id="九月四号更新-wua-加密算法"><a href="#九月四号更新-wua-加密算法" class="headerlink" title="九月四号更新 wua 加密算法"></a>九月四号更新 wua 加密算法</h2><p>很多人问我 wua 怎么获取，还是用咱们这一套 rpc 主动调用，在传入的参数中，<strong>有个 z 参数，需要参入 boolen 值，当传入 false 时，不返回 wua 加密参数</strong> 如图</p>
+<p><img src="/android-reverse/2023-08-16-10-11-00.png"></p>
+<p><strong>当传入 true 时，返回 wua 加密参数</strong></p>
+<p>有新的问题可以继续找我，谢谢！</p>
+<p>————————————————<br>版权声明：本文为 CSDN 博主「我想吃橘子味的橙子々」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44130722/article/details/126621134">https://blog.csdn.net/qq_44130722/article/details/126621134</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/android/" rel="tag"># android</a>
+              <a href="/tags/frida/" rel="tag"># frida</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/integrating-firebase-in-vuepress/" rel="prev" title="在vuepress整合firebase analytics">
+                  <i class="fa fa-angle-left"></i> 在vuepress整合firebase analytics
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/android-hack/" rel="next" title="[转]某麦网APK抢票接口加密参数分析">
+                  [转]某麦网APK抢票接口加密参数分析 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="背景在日常开发中，有一些常见的环境，比如Dev、UAT、预发、生产等，当然并不是每个公司都是这样。有时候开发环境一切正常，但是到线上的UAT环境或预发等等会出现各种问题，那么你是不是经常需要进行本地修改代码、提交、编译、打包、上传、运行、查看日志等这一系列步骤呢？这种方式不仅低效、繁琐而且容易引入诸多不可控的因素，比如你在任意一个环节出现问题，可能都会影响到程序最终的运行结果。而如果能有一种神器，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BTrace 使用教程">
+<meta property="og:url" content="https://www.sovdating.com/btrace-uses-tutorials/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="背景在日常开发中，有一些常见的环境，比如Dev、UAT、预发、生产等，当然并不是每个公司都是这样。有时候开发环境一切正常，但是到线上的UAT环境或预发等等会出现各种问题，那么你是不是经常需要进行本地修改代码、提交、编译、打包、上传、运行、查看日志等这一系列步骤呢？这种方式不仅低效、繁琐而且容易引入诸多不可控的因素，比如你在任意一个环节出现问题，可能都会影响到程序最终的运行结果。而如果能有一种神器，">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-09-22T13:48:40.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:24:42.758Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="BTrace">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/btrace-uses-tutorials/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/btrace-uses-tutorials/","path":"btrace-uses-tutorials/","title":"BTrace 使用教程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>BTrace 使用教程 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E8%BF%90%E8%A1%8C%E6%97%B6%E8%BF%BD%E8%B8%AA%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">Java运行时追踪工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BTrace"><span class="nav-number">3.</span> <span class="nav-text">BTrace</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BTrace%E7%AE%80%E4%BB%8B"><span class="nav-number">3.1.</span> <span class="nav-text">BTrace简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85BTrace"><span class="nav-number">3.2.</span> <span class="nav-text">安装BTrace</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.3.</span> <span class="nav-text">使用示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BTrace%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="nav-number">3.4.</span> <span class="nav-text">BTrace命令详解</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/btrace-uses-tutorials/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="BTrace 使用教程 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BTrace 使用教程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-09-22 21:48:40" itemprop="dateCreated datePublished" datetime="2017-09-22T21:48:40+08:00">2017-09-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在日常开发中，有一些常见的环境，比如Dev、UAT、预发、生产等，当然并不是每个公司都是这样。有时候开发环境一切正常，但是到线上的UAT环境或预发等等会出现各种问题，那么你是不是经常需要进行本地修改代码、提交、编译、打包、上传、运行、查看日志等这一系列步骤呢？这种方式不仅低效、繁琐而且容易引入诸多不可控的因素，比如你在任意一个环节出现问题，可能都会影响到程序最终的运行结果。而如果能有一种神器，可以对正在运行的程序，进行动态追踪、错误诊断、性能剖析等，是不是无形中为你延长了生命呢？如果你之前不知道也就罢了，然而如果你看到这里了，却还不学习的话，就是你自己的锅了。</p>
+<h3 id="Java运行时追踪工具"><a href="#Java运行时追踪工具" class="headerlink" title="Java运行时追踪工具"></a>Java运行时追踪工具</h3><p>常见的动态追踪工具有<a target="_blank" rel="noopener" href="https://github.com/btraceio/btrace">BTrace</a>、<a target="_blank" rel="noopener" href="https://github.com/CSUG/HouseMD">HouseMD</a>（该项目已经停止开发）、<a target="_blank" rel="noopener" href="https://github.com/oldmanpushcart/greys-anatomy">Greys-Anatomy</a>（国人开发，个人开发者）、<a target="_blank" rel="noopener" href="http://byteman.jboss.org/">Byteman</a>（JBoss出品），注意Java运行时追踪工具并不限于这几种，但是这几个是相对比较常用的，本文主要介绍BTrace。</p>
+<h3 id="BTrace"><a href="#BTrace" class="headerlink" title="BTrace"></a>BTrace</h3><h4 id="BTrace简介"><a href="#BTrace简介" class="headerlink" title="BTrace简介"></a>BTrace简介</h4><p>BTrace是SUN Kenai云计算开发平台下的一个开源项目，旨在为java提供安全可靠的动态跟踪分析工具。先看一下BTrace的官方定义</p>
+<blockquote>
+<p>BTrace is a safe, dynamic tracing tool for the Java platform. BTrace can be used to dynamically trace a running Java program (similar to DTrace for OpenSolaris applications and OS). BTrace dynamically instruments the classes of the target application to inject tracing code (“bytecode tracing”)</p>
+</blockquote>
+<p>简洁明了，大意是一个Java平台的安全的动态追踪工具。可以用来动态地追踪一个运行的Java程序。BTrace动态调整目标应用程序的类以注入跟踪代码（“字节码跟踪”）。</p>
+<p>动手之前再了解一下BTrace的主要术语</p>
+<ul>
+<li><strong>Probe Point</strong>: “location” or “event” at which a set of tracing statements are executed. Probe point is “place” or “event” of interest where we want to execute some tracing statements.（探测点，就是我们想要执行一些追踪语句的地方或事件）</li>
+<li><strong>Trace Actions or Actions</strong>: Trace statements that are executed whenever a probe “fires”.（当探测触发时执行追踪语句）</li>
+<li><strong>Action Methods</strong>: BTrace trace statements that are executed when a probe fires are defined inside a static method a class. Such methods are called “action” methods.（当在类的静态方法中定义了探测触发时执行的BTrace跟踪语句。这种方法被称为“操作”方法。）</li>
+</ul>
+<h4 id="安装BTrace"><a href="#安装BTrace" class="headerlink" title="安装BTrace"></a>安装BTrace</h4><p>目前，BTrace已经托管在Github上了，主页在<a target="_blank" rel="noopener" href="https://github.com/btraceio/btrace">这里</a>，下载地址在<a target="_blank" rel="noopener" href="https://github.com/btraceio/btrace/releases">这里</a>，目前最新版本是<code>V1.3.9</code>。新建环境变量<code>BTRACE_HOME</code>值为<code>E:/btrace-bin-1.3.9</code>，然后编辑<code>Path</code>变量，在值的末尾追加<code>;%BTRACE_HOME%/bin</code>即可，验证是否安装成功，打开cmd，输入btrace，显示如下则证明配置成功</p>
+<blockquote>
+<p>Usage: btrace <options> <pid> &lt;btrace source or .class file&gt; <btrace arguments><br>where possible options include:<br>  –version             Show the version<br>  -v                    Run in verbose mode<br>  -o <file>             The path to store the probe output (will disable showing the output in console)<br>  -u                    Run in trusted mode<br>  -d <path>             Dump the instrumented classes to the specified path<br>  -pd <path>            The search path for the probe XML descriptors<br>  -classpath <path>     Specify where to find user class files and annotation processors<br>  -cp <path>            Specify where to find user class files and annotation processors<br>  -I <path>             Specify where to find include files<br>  -p <port>             Specify port to which the btrace agent listens for clients<br>  -statsd &lt;host[:port]&gt; Specify the statsd server, if any</p>
+</blockquote>
+<p>根据上面的提示，btrace使用起来很简单，而且官方提供了一个简易的使用指南，在解压下载的压缩包中<code>E:/btrace-bin-1.3.9/docs</code>下有<code>usersguide.html</code>，用浏览器打开即可。BTrace支持四种方式的注解，分别是</p>
+<ul>
+<li><strong>Method Annotations</strong></li>
+<li>@com.sun.btrace.annotations.OnMethod</li>
+<li>@com.sun.btrace.annotations.OnTimer</li>
+<li>@com.sun.btrace.annotations.OnError</li>
+<li>@com.sun.btrace.annotations.OnExit</li>
+<li>@com.sun.btrace.annotations.OnEvent</li>
+<li>@com.sun.btrace.annotations.OnLowMemory</li>
+<li>@com.sun.btrace.annotations.OnProbe</li>
+<li><strong>Argument Annotations</strong></li>
+<li>@com.sun.btrace.annotations.Self</li>
+<li>@com.sun.btrace.annotations.Return</li>
+<li>@com.sun.btrace.annotations.CalledInstance</li>
+<li>@com.sun.btrace.annotations.CalledMethod</li>
+<li><strong>Field Annotations</strong></li>
+<li>@com.sun.btrace.annotations.Export</li>
+<li>@com.sun.btrace.annotations.Property</li>
+<li>@com.sun.btrace.annotations.TLS</li>
+<li><strong>Class Annotations</strong></li>
+<li>@com.sun.btrace.annotations.DTrace</li>
+<li>@com.sun.btrace.annotations.DTraceRef</li>
+<li>@com.sun.btrace.annotations.BTrace</li>
+</ul>
+<p>关于这些注解的具体解释可以去翻看docs目录下的用户指南，好了，废话不多说，下面简单操练起来。</p>
+<h4 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h4><p>如果是在Maven项目中开发，那么首先需要引入BTrace的Jar包，由于Maven的中央仓库中只有1.x版本的BTrace，并没有高版本的，所以一般的做法是自己编译BTrace源码，将高版本的Jar发布到私服（Nexus）中，为简单起见，此处通过Maven指定依赖本地Jar即可，修改pom.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sun.tools.btrace<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>btrace-agent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>E:/btrace-bin-1.3.9/build/btrace-agent.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sun.tools.btrace<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>btrace-boot<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>E:/btrace-bin-1.3.9/build/btrace-boot.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sun.tools.btrace<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>btrace-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>E:/btrace-bin-1.3.9/build/btrace-client.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>首先编写想要追踪的示例，如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BTraceOnMethodDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">15</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;start main method...&quot;</span>);</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再编写追踪代码示例，如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.sun.btrace.annotations.BTrace;</span><br><span class="line"><span class="keyword">import</span> com.sun.btrace.annotations.OnMethod;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> com.sun.btrace.BTraceUtils.println;</span><br><span class="line"></span><br><span class="line"><span class="meta">@BTrace</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tracer</span> &#123;</span><br><span class="line">    <span class="meta">@OnMethod(clazz = &quot;java.lang.Thread&quot;, method = &quot;start&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">onThreadStart</span><span class="params">()</span> &#123;</span><br><span class="line">        println(<span class="string">&quot;tracing method start&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意点</p>
+<ul>
+<li>Tracer类中的println方法并不是JDK中的方法，而是BTraceUtils中的静态方法</li>
+<li>在追踪代码，原则上只能使用BTraceUtils中的静态方法，如果想要使用JDK中的方法，那么在命令行中需要使用<code>-cp</code>指定依赖的Jar</li>
+<li>OnMethod这个注解只会在方法启动的时候被触发，如果该方法已经启动，再运行追踪代码是无法触发的，所以在示例中，先休息了15s钟</li>
+</ul>
+<p>运行BTraceOnMethodDemo，打开cmd，到Tracer类所在的目录下，运行</p>
+<blockquote>
+<p>D:&#x2F;Demo&#x2F;src&#x2F;main&#x2F;java&gt;jps<br>39808 Launcher<br>15480 RemoteMavenServer<br>40280 Jps<br>41880 AppMain<br>4764<br>D:&#x2F;Demo&#x2F;src&#x2F;main&#x2F;java&gt;btrace -v 41880 Tracer.java<br>DEBUG: assuming default port 2020<br>DEBUG: assuming default classpath ‘.’<br>DEBUG: compiling Tracer.java<br>DEBUG: compiled Tracer.java<br>DEBUG: attaching to 41880<br>DEBUG: checking port availability: 2020<br>DEBUG: attached to 41880<br>DEBUG: loading E:\btrace-bin-1.3.9\build\btrace-agent.jar<br>DEBUG: agent args: port&#x3D;2020,statsd&#x3D;,debug&#x3D;true,bootClassPath&#x3D;.,systemClassPath&#x3D;<br>C:\Program Files\Java\jdk1.8.0_45\jre&#x2F;..&#x2F;lib&#x2F;tools.jar,probeDescPath&#x3D;.<br>DEBUG: loaded E:\btrace-bin-1.3.9\build\btrace-agent.jar<br>DEBUG: registering shutdown hook<br>DEBUG: registering signal handler for SIGINT<br>DEBUG: submitting the BTrace program<br>DEBUG: opening socket to 2020<br>DEBUG: setting up client settings<br>DEBUG: sending instrument command<br>DEBUG: entering into command loop<br>DEBUG: received com.sun.btrace.comm.OkayCommand@396f6598<br>DEBUG: received com.sun.btrace.comm.RetransformationStartNotification@394e1a0f<br>DEBUG: received com.sun.btrace.comm.OkayCommand@27a5f880<br>DEBUG: received com.sun.btrace.comm.MessageCommand@53f65459<br>DEBUG: received com.sun.btrace.comm.MessageCommand@3b088d51<br>tracing method start</p>
+</blockquote>
+<p>注意要带上<code>-v</code>参数，否则控制台看不到任何输出，另外还可以利用<code>-o</code>参数将信息输出到指定的文件，运行BTraceOnMethodDemo，打开cmd，到Tracer类的目录下，运行</p>
+<blockquote>
+<p>D:&#x2F;Demo&#x2F;src&#x2F;main&#x2F;java&gt;jps<br>12064 Jps<br>24560 AppMain<br>41764 Launcher<br>15480 RemoteMavenServer<br>4764<br>D:&#x2F;Demo&#x2F;src&#x2F;main&#x2F;java&gt;btrace -o out.csv 24560 Tracer.java</p>
+</blockquote>
+<p>注意这时候out.csv文件时在Tracer.java所在目录的根目录下，也就是在<code>D:/Demo</code>下，在当前目录下是找不到的，是不是很变态。找到out.csv打开看看，就是追踪代码的输出内容</p>
+<blockquote>
+<p>BTrace Log: 17-9-20 下午3:16<br>tracing method start</p>
+</blockquote>
+<p>好了，整个流程就打通了，剩下的就是自己动手实战吧。此处仅给出一个简单示例，详情可以参看BTrace的用户指南，里面给出了更多详细的示例，只要打开动手一一实战即可。</p>
+<p>BTrace虽然功能强大，但是并不完美，这是因为它有着诸多的限制，例如</p>
+<ul>
+<li>can <strong>not</strong> create new objects.</li>
+<li>can <strong>not</strong> create new arrays.</li>
+<li>can <strong>not</strong> throw exceptions.</li>
+<li>can <strong>not</strong> catch exceptions.</li>
+<li>can <strong>not</strong> make arbitrary instance or static method calls - only the <strong>public static</strong> methods of <strong><a href="javadoc/com/sun/btrace/BTraceUtils.html">com.sun.btrace.BTraceUtils</a></strong> class may be called from a BTrace program.</li>
+<li>can <strong>not</strong> assign to static or instance fields of target program’s classes and objects. But, BTrace class can assign to it’s own static fields (“trace state” can be mutated).</li>
+<li>can <strong>not</strong> have instance fields and methods. Only <strong>static public void</strong> returning methods are allowed for a BTrace class. And all fields have to be static.</li>
+<li>can <strong>not</strong> have outer, inner, nested or local classes.</li>
+<li>can <strong>not</strong> have synchronized blocks or synchronized methods.</li>
+<li>can <strong>not</strong> have loops (<strong>for, while, do..while</strong>)</li>
+<li>can <strong>not</strong> extend arbitrary class (super class has to be java.lang.Object)</li>
+<li>can <strong>not</strong> implement interfaces.</li>
+<li>can <strong>not</strong> contains assert statements.</li>
+<li>can <strong>not</strong> use class literals.</li>
+</ul>
+<h4 id="BTrace命令详解"><a href="#BTrace命令详解" class="headerlink" title="BTrace命令详解"></a>BTrace命令详解</h4><ul>
+<li><p><strong>btrace</strong><br>功能：用于运行BTrace跟踪程序。<br>命令格式：<br><code>btrace [-I &lt;include-path&gt;] [-p &lt;port&gt;] [-cp &lt;classpath&gt;] &lt;pid&gt; &lt;btrace-script&gt; [&lt;args&gt;]</code><br>示例：<br><code>btrace -cp build/  1200 AllCalls1.java</code><br>参数含义：<br>include-path指定头文件的路径，用于脚本预处理功能，可选；<br>port指定BTrace agent的服务端监听端口号，用来监听clients，默认为2020，可选；<br>classpath用来指定类加载路径，默认为当前路径，可选；<br>pid表示进程号，可通过jps命令获取；<br>btrace-script即为BTrace脚本；btrace脚本如果以.java结尾，会先编译再提交执行。可使用btracec命令对脚本进行预编译。<br>args是BTrace脚本可选参数，在脚本中可通过<code>$</code>和<code>$length</code>获取参数信息。</p>
+</li>
+<li><p><strong>btracec</strong><br>功能：用于预编译BTrace脚本，用于在编译时期验证脚本正确性。<br><code>btracec [-I &lt;include-path&gt;] [-cp &lt;classpath&gt;] [-d &lt;directory&gt;] &lt;one-or-more-BTrace-.java-files&gt;</code><br>参数意义同btrace命令一致，directory表示编译结果输出目录。</p>
+</li>
+<li><p><strong>btracer</strong><br>功能：btracer命令同时启动应用程序和BTrace脚本，即在应用程序启动过程中使用BTrace脚本。而btrace命令针对已运行程序执行BTrace脚本。<br>命令格式：<br><code>btracer &lt;pre-compiled-btrace.class&gt; &lt;application-main-class&gt; &lt;application-args&gt;</code><br>参数说明：<br>pre-compiled-btrace.class表示经过btracec编译后的BTrace脚本。<br>application-main-class表示应用程序代码；<br>application-args表示应用程序参数。<br>该命令的等价写法为：<br><code>java -javaagent:btrace-agent.jar=script=&lt;pre-compiled-btrace-script1&gt;[,&lt;pre-compiled-btrace-script1&gt;]* &lt;MainClass&gt; &lt;AppArguments&gt;</code></p>
+</li>
+</ul>
+<p>BTrace基本就介绍完了，但是BTrace并不是完美的，比如当你想要追踪一个局部变量的，查看具体值的时候，却无能为力，不仅扼腕叹息，真是天妒英才啊，这么小的一个需求都无法cover？不用着急，后面就介绍一个更加强大的工具，Byteman。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BTrace/" rel="tag"># BTrace</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/digital-ocean-bbr/" rel="prev" title="Digital Ocean开启TCP-BBR拥塞控制算法">
+                  <i class="fa fa-angle-left"></i> Digital Ocean开启TCP-BBR拥塞控制算法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/byteman-uses-tutorials/" rel="next" title="Byteman 使用教程">
+                  Byteman 使用教程 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

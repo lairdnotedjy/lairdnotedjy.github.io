@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="** generator-gulp-angular 首页  **  使用  创建你的项目 yo gulp-angular [app-name]  使用Gulp任务   123456789101112131415gulp或gulp build构建您的应用程序的优化版本&#x2F;distgulp serve 在您的源文件上启动浏览器同步服务器gulp serve:dist 在您优化的应用程序上启动服务器gu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yeoman 之 generator-gulp-angular,介绍">
+<meta property="og:url" content="https://www.sovdating.com/yeoman%20%E4%B9%8B%20generator-gulp-angular,%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="** generator-gulp-angular 首页  **  使用  创建你的项目 yo gulp-angular [app-name]  使用Gulp任务   123456789101112131415gulp或gulp build构建您的应用程序的优化版本&#x2F;distgulp serve 在您的源文件上启动浏览器同步服务器gulp serve:dist 在您优化的应用程序上启动服务器gu">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-7/8010921.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-7/69221993.jpg">
+<meta property="article:published_time" content="2017-03-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.101Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="yeoman">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-7/8010921.jpg">
+
+
+<link rel="canonical" href="https://www.sovdating.com/yeoman%20%E4%B9%8B%20generator-gulp-angular,%E4%BB%8B%E7%BB%8D/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/yeoman%20%E4%B9%8B%20generator-gulp-angular,%E4%BB%8B%E7%BB%8D/","path":"yeoman 之 generator-gulp-angular,介绍/","title":"yeoman 之 generator-gulp-angular,介绍"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>yeoman 之 generator-gulp-angular,介绍 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/yeoman%20%E4%B9%8B%20generator-gulp-angular,%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="yeoman 之 generator-gulp-angular,介绍 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          yeoman 之 generator-gulp-angular,介绍
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-23 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-23T00:00:00+08:00">2017-03-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><a target="_blank" rel="noopener" href="https://github.com/Swiip/generator-gulp-angular/tree/139e2322da3ee2e4be47cbf8fd0beae047c1c41e"> ** <code>generator-gulp-angular 首页 </code> ** </a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Swiip/generator-gulp-angular/blob/139e2322da3ee2e4be47cbf8fd0beae047c1c41e/docs/usage.md"><code>使用</code></a></p>
+<ul>
+<li><p>创建你的项目 yo gulp-angular [app-name]</p>
+</li>
+<li><p>使用Gulp任务</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">gulp或gulp build构建您的应用程序的优化版本/dist</span><br><span class="line"></span><br><span class="line">gulp serve 在您的源文件上启动浏览器同步服务器</span><br><span class="line"></span><br><span class="line">gulp serve:dist 在您优化的应用程序上启动服务器</span><br><span class="line"></span><br><span class="line">gulp test 用Karma启动您的单元测试</span><br><span class="line"></span><br><span class="line">gulp test:auto 以观看模式启动您的单位测试</span><br><span class="line"></span><br><span class="line">gulp protractor 用量角器启动e2e测试</span><br><span class="line"></span><br><span class="line">gulp protractor:dist 使用量角器在dist文件上启动e2e测试</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>gulpfile功能</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">useref：允许在HTML文件的注释中配置文件</span><br><span class="line"></span><br><span class="line">ngAnnotate：将简单注入转换为完整语法以进行细化</span><br><span class="line"></span><br><span class="line">uglify ：优化所有您的JavaScript</span><br><span class="line"></span><br><span class="line">csso：优化所有的CSS</span><br><span class="line"></span><br><span class="line">autoprefixer：将供应商前缀添加到CSS</span><br><span class="line"></span><br><span class="line">rev：在文件名中添加一个哈希，以防止浏览器缓存问题</span><br><span class="line"></span><br><span class="line">watch ：观察您的源文件并自动重新编译</span><br><span class="line"></span><br><span class="line">eslint：可插拔的linting实用程序</span><br><span class="line"></span><br><span class="line">imagemin：您的所有图像将在构建时进行优化</span><br><span class="line"></span><br><span class="line">Unit test (karma) ：开箱即用的测试配置与业力</span><br><span class="line"></span><br><span class="line">e2e test (protractor)：开箱即用e2e测试配置与量角器</span><br><span class="line"></span><br><span class="line">browser sync：功能齐全的开发Web服务器，具有实时装载和设备同步功能</span><br><span class="line"></span><br><span class="line">angular-templatecache：所有HTML部分将被转换为JS，以便在应用程序中捆绑</span><br><span class="line"></span><br><span class="line">TODO lazy：不要处理尽可能没有改变的文件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/Swiip/generator-gulp-angular/blob/139e2322da3ee2e4be47cbf8fd0beae047c1c41e/docs/user-guide.md"><code>用户指南</code></a></p>
+<ul>
+<li><p>Yeoman工作流程</p>
+<ul>
+<li><p>serve 实时重新加载修改的服务器</p>
+</li>
+<li><p>test Karma（with gulp test）进行单元测试</p>
+</li>
+<li><p>build 优化过程</p>
+</li>
+<li><p>inject 通过发送完整的文件注入过程</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/Swiip/generator-gulp-angular/blob/139e2322da3ee2e4be47cbf8fd0beae047c1c41e/docs/how-it-works.md"><code>怎么运行的</code></a></p>
+<ul>
+<li><p>gulpfile.js</p>
+</li>
+<li><p>gulp&#x2F;conf.js</p>
+</li>
+<li><p>gulp&#x2F;inject.js</p>
+<ul>
+<li><p>注入样式</p>
+</li>
+<li><p>注入脚本</p>
+</li>
+<li><p>Wiredep：使用线性流添加Bower依赖项的CSS和JS文件。</p>
+</li>
+<li><p>列出和排序文件进行注入</p>
+</li>
+<li><p>查找位置 index.html</p>
+</li>
+</ul>
+</li>
+<li><p>gulp&#x2F;scripts.js</p>
+<ul>
+<li><p>使用TypeScript</p>
+</li>
+<li><p>与ES6</p>
+</li>
+</ul>
+</li>
+<li><p>gulp&#x2F;styles.js</p>
+<ul>
+<li><p>Injection</p>
+</li>
+<li><p>Style stream</p>
+</li>
+<li><p>Ruby Sass</p>
+</li>
+</ul>
+</li>
+<li><p>gulp&#x2F;markups.js</p>
+</li>
+<li><p>gulp&#x2F;watch.js</p>
+</li>
+<li><p>gulp&#x2F;server.js</p>
+</li>
+<li><p>gulp&#x2F;unit-test.js</p>
+</li>
+<li><p>gulp&#x2F;e2e-tests.js</p>
+</li>
+<li><p>gulp&#x2F;build.js</p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/Swiip/generator-gulp-angular/blob/139e2322da3ee2e4be47cbf8fd0beae047c1c41e/generators/app/templates/gulp/README.md"><code>Gulp任务,各js作用介绍</code></a></p>
+<blockquote>
+<p>因为它gulpfile.js变得巨大，因为我讨厌大文件，所以这个目录包含了所有的gulp任务。gulpfiles.js通过路径配置来通过gulp任务gulp.paths。</p>
+</blockquote>
+<ul>
+<li>build.js  包含构建任务，旨在优化所有项目并创建dist文件夹</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">部分：在一个javascript中编译html部分templateCacheHtml.js</span><br><span class="line"></span><br><span class="line">html：大的useref，rev和uglify。</span><br><span class="line"></span><br><span class="line">图像：使用imagemin优化图像。</span><br><span class="line"></span><br><span class="line">字体：从bower复制字体到dist</span><br><span class="line"></span><br><span class="line">misc：复制其他文件</span><br><span class="line"></span><br><span class="line">clean：删除临时文件</span><br><span class="line"></span><br><span class="line">构建：html +图像+字体+杂项</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>e2e-tests.js  从Gulp启动e2e测试的任务。这意味着启动本地服务器，Selenium和量角器的一个实例。</p>
+</li>
+<li><p>inject.js  注入任务链接项目文件index.html并写入结果.tmp&#x2F;serve&#x2F;index.html</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">项目CSS文件</span><br><span class="line"></span><br><span class="line">项目JS文件</span><br><span class="line"></span><br><span class="line">Bower css和js deps</span><br><span class="line"></span><br><span class="line">警告将src/index.html不会被修改（这是在以前版本的情况下，仍然是在其他发电机的情况下），但注入index.html被放置在.tmp/serve。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>markups.js  编译标记文件（使用HTML预处理器时）。</p>
+</li>
+<li><p>scripts.js  如果您有JS预处理器，请编译脚本。运行短裤 如果使用ES6，还将使用Browserify来捆绑文件。</p>
+</li>
+<li><p>server.js  启动服务器进行开发或e2e测试的Gulp任务。</p>
+</li>
+<li><p>styles.js  使用CSS预处理器编译样式。在指数中使用注射*</p>
+</li>
+<li><p>unit-tests.js  从Gulp开始对Karma进行单元测试的任务。</p>
+</li>
+<li><p>watch.js  监视任务，监视源文件以触发重新编译。</p>
+</li>
+</ul>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://github.com/Swiip/generator-gulp-angular/blob/139e2322da3ee2e4be47cbf8fd0beae047c1c41e/CONTRIBUTING.md"><code>如何贡献</code></a></p>
+<hr>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-7/8010921.jpg"></p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-7/69221993.jpg"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/yeoman/" rel="tag"># yeoman</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E9%9A%A7%E9%81%93(%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F)%20ngrok/" rel="prev" title="隧道(内网穿透) ngrok">
+                  <i class="fa fa-angle-left"></i> 隧道(内网穿透) ngrok
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Transfer-comments-from-duoshuo-to-disqus/" rel="next" title="多说已死，切换Hexo博客评论插件到Disqus">
+                  多说已死，切换Hexo博客评论插件到Disqus <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

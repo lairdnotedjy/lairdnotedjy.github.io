@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="系统函数 系统函数   数据库系统定义的函数，即内置函数  |  函数列别 |     说明  || :——– |  : ——–|| 聚合函数   |   执行的操作是将多个值合并为一个值。例如 COUNT、SUM、MIN 和MAX。| 配置函数   |   是一种标量函数，可返回有关配置设置的信息。|   加密函数   |   支持加密、解密、数字签名和数字签名验证。|   游标函数   |">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql编程学习">
+<meta property="og:url" content="https://www.sovdating.com/sql%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="系统函数 系统函数   数据库系统定义的函数，即内置函数  |  函数列别 |     说明  || :——– |  : ——–|| 聚合函数   |   执行的操作是将多个值合并为一个值。例如 COUNT、SUM、MIN 和MAX。| 配置函数   |   是一种标量函数，可返回有关配置设置的信息。|   加密函数   |   支持加密、解密、数字签名和数字签名验证。|   游标函数   |">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/16-6-16/90252887.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/16-7-1/10071748.jpg">
+<meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/16-6-16/1486632.jpg">
+<meta property="article:published_time" content="2016-06-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:16:43.097Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="sql编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/16-6-16/90252887.jpg">
+
+
+<link rel="canonical" href="https://www.sovdating.com/sql%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/sql%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/","path":"sql编程学习/","title":"sql编程学习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>sql编程学习 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">系统函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%EF%BC%8C%E7%BB%83%E4%B9%A0"><span class="nav-number">1.1.</span> <span class="nav-text">常用函数，练习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80-sql-structured-query-language"><span class="nav-number">2.</span> <span class="nav-text">结构化查询语言-sql(structured query language)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%BC%E5%90%88%E7%BB%83%E4%B9%A0"><span class="nav-number">3.</span> <span class="nav-text">综合练习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tips-%E4%B8%B4%E6%97%B6%E8%A1%A8%EF%BC%8C-%E8%87%AA%E5%8A%A8%E6%A0%87%E8%AE%B0%E5%BA%8F%E5%8F%B7%EF%BC%8C%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="nav-number">3.1.</span> <span class="nav-text">Tips ( 临时表， 自动标记序号，全局变量 )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">时间条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.3.</span> <span class="nav-text">多表查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84-%E8%81%9A%E5%90%88"><span class="nav-number">3.4.</span> <span class="nav-text">分组 &amp; 聚合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#distinct%E5%8E%BB%E9%87%8D"><span class="nav-number">3.5.</span> <span class="nav-text">distinct去重</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%87%8D%E5%A4%8D-%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D"><span class="nav-number">3.6.</span> <span class="nav-text">查询重复 &amp; 删除重复</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE"><span class="nav-number">4.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">存储过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tips-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%BA%AA%E5%BD%95%E6%97%A5%E5%BF%97%E6%96%B9%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">tips: 存储过程中纪录日志方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="nav-number">7.</span> <span class="nav-text">计划任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8"><span class="nav-number">8.</span> <span class="nav-text">数据字典</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6"><span class="nav-number">9.</span> <span class="nav-text">进阶</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/sql%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="sql编程学习 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          sql编程学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-06-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-06-16T00:00:00+08:00">2016-06-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/sql%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">sql编程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="系统函数"><a href="#系统函数" class="headerlink" title="系统函数"></a>系统函数</h1><blockquote>
+<p>系统函数   数据库系统定义的函数，即内置函数</p>
+</blockquote>
+<p>|  函数列别 |     说明  |<br>| :——– |  : ——–|<br>| 聚合函数   |   执行的操作是将多个值合并为一个值。例如 COUNT、SUM、MIN 和MAX。<br>| 配置函数   |   是一种标量函数，可返回有关配置设置的信息。<br>|   加密函数   |   支持加密、解密、数字签名和数字签名验证。<br>|   游标函数   |   返回有关游标状态的信息。<br>|   日期和时间函数   |   可以更改日期和时间的值。<br>|   数学函数   |   执行三角、几何和其他数字运算。<br>|   元数据函数  |    返回数据库和数据库对象的属性信息。<br>|   排名函数   |   是一种非确定性函数，可以返回分区中每一行的排名值。<br>|   行集函数   |   返回可在 Transact-SQL 语句中表引用所在位置使用的行集。<br>|   安全函数  |    返回有关用户和角色的信息。<br>|   字符串函数    |  可更改 char、varchar、nchar、nvarchar、binary 和 varbinary 的值。<br>|   系统函数   |   对系统级的各种选项和对象进行操作或报告。<br>|   系统统计函数   |   返回有关 SQL Server 性能的信息。<br>|   文本和图像函数   |   可更改 text 和 image 的值。</p>
+<h2 id="常用函数，练习"><a href="#常用函数，练习" class="headerlink" title="常用函数，练习"></a>常用函数，练习</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># 字符串函数</span><br><span class="line">select ASCII(&#x27;中&#x27;);    # 返回字符的ASCII码值   </span><br><span class="line">select BIT_LENGTH(&#x27;中&#x27;);    # 返回字符串的比特长度   </span><br><span class="line">select LENGTH(&#x27;中&#x27;);    # 返回字符串str中的字符数   </span><br><span class="line">select CONCAT(&#x27;钓&#x27;,&#x27;鱼&#x27;,&#x27;岛&#x27;);    # 将s1,s2…,sn连接成字符串    任何字符串与NULL进行连接的结果都将是NULL</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 数值函数</span><br><span class="line">select ABS(2);    # 返回x的绝对值</span><br><span class="line">select ABS(-2);    # 返回x的绝对值</span><br><span class="line">select BIN(2); #    返回x的二进制（OCT返回八进制，HEX返回十六进制）</span><br><span class="line">select CEILING(2.2); # 返回大于x的最小整数值</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 日期时间函数</span><br><span class="line">select CURRENT_DATE();# 返回当前的日期</span><br><span class="line">select CURRENT_TIME();#    返回当前的时间</span><br><span class="line">select SYSDATE();# 系统时间</span><br><span class="line">select DATE_ADD(SYSDATE(),INTERVAL 1 day);# 返回日期date加上间隔时间int的结果(int必须按照关键字进行格式化),如：SELECT DATE_ADD(CURRENT_DATE,INTERVAL 6 MONTH);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 流程函数</span><br><span class="line">select (CASE WHEN &#x27;钓鱼岛&#x27; = &#x27;日本&#x27; THEN &#x27;yes&#x27; ELSE &#x27;no&#x27; END); # 如果testN是真，则返回resultN，否则返回default</span><br><span class="line">select (CASE &#x27;钓鱼岛&#x27; WHEN &#x27;日本&#x27; THEN &#x27;yes&#x27; ELSE &#x27;no&#x27; END); # 如果test和valN相等，则返回resultN，否则返回default</span><br><span class="line">select if(&#x27;钓鱼岛&#x27;=&#x27;日本&#x27;,&#x27;yes&#x27;,&#x27;no&#x27;); # 如果test是真，返回t；否则返回 f</span><br><span class="line">select IFNULL(&#x27;true&#x27;,&#x27;空&#x27;); # 如果arg1不是空，返回arg1，否则返回arg2</span><br><span class="line">select IFNULL(null,&#x27;空&#x27;);# 如果arg1不是空，返回arg1，否则返回arg2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 流程控制</span><br><span class="line"></span><br><span class="line">select FLOOR(1+RAND() * (14+1)) into @device_rand;</span><br><span class="line">select @device_rand,(CASE</span><br><span class="line">                        WHEN @device_rand=1 THEN &#x27;Android 6.x&#x27;</span><br><span class="line">                        WHEN 1&lt;@device_rand &amp;&amp; @device_rand&lt;=3 THEN &#x27;iOS 9 (iPad)&#x27;</span><br><span class="line">                        WHEN 3&lt;@device_rand &amp;&amp; @device_rand&lt;=7 THEN &#x27;iOS 9 (iPhone)&#x27;</span><br><span class="line">                        WHEN 7&lt;@device_rand &amp;&amp; @device_rand&lt;=14 THEN &#x27;Android 5.x&#x27;</span><br><span class="line">                        END);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>更多：用户自定义函数， 表值函数， 标量值函数.<br>（详见文章： 关系数据库SQL之可编程性函数（用户自定义函数））</p>
+</blockquote>
+<p><strong>参考</strong><br><code>关系数据库SQL之可编程性函数（用户自定义函数）</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/seayxu/p/5472302.html">http://www.cnblogs.com/seayxu/p/5472302.html</a></p>
+<p><code>MySQL常用函数与运算符</code><br><a target="_blank" rel="noopener" href="http://shanks.leanote.com/post/Mysql%E5%87%BD%E6%95%B0%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6">http://shanks.leanote.com/post/Mysql%E5%87%BD%E6%95%B0%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6</a></p>
+<hr>
+<h1 id="结构化查询语言-sql-structured-query-language"><a href="#结构化查询语言-sql-structured-query-language" class="headerlink" title="结构化查询语言-sql(structured query language)"></a>结构化查询语言-sql(structured query language)</h1><ul>
+<li><p>DDL 数据定义语言<br>create:创建表, drop:删除表 , alter:修改表</p>
+</li>
+<li><p>DML 数据操作语言<br>insert:增 ,delete:删, update:改</p>
+</li>
+<li><p>DQL 数据查询语言<br>select:查</p>
+</li>
+<li><p>DCL 数据控制语言<br>用来设置或者更改数据库用户或角色权限的语句，包括GRANT、DENY、REVOKE等语句，在默认状态下，只有sysadmin、dbcreator、db_owner或db_securityadmin等角色的成员才有权利执行数据控制语言。</p>
+</li>
+<li><p>多表查询</p>
+<ul>
+<li><p>简单联结（inner join，left join）</p>
+</li>
+<li><p>组合级联（union，union all）</p>
+</li>
+<li><p>子查询</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>更多: 索引，试图，导入&#x2F;导出，备份&#x2F;恢复</p>
+</blockquote>
+<p><strong>参考</strong> </p>
+<p><code>sql 语句学习  -持续更新中 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/d00fd0d4f1cc">http://www.jianshu.com/p/d00fd0d4f1cc</a></p>
+<p><code>SQL 学习笔记 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/2dacd3040c74">http://www.jianshu.com/p/2dacd3040c74</a></p>
+<p><code>（大数据工程师学习路径）第四步 SQL基础课程----修改和删除 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/yuUFba2">http://www.tuicool.com/articles/yuUFba2</a></p>
+<p><code>（大数据工程师学习路径）第四步 SQL基础课程----select详解 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/za6Fz2">http://www.tuicool.com/articles/za6Fz2</a></p>
+<p><code>（大数据工程师学习路径）第四步 SQL基础课程----其他（基础练习到此为止） - 爱看球的领带 - 博客园</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/yangxiao99/p/4719347.html">http://www.cnblogs.com/yangxiao99/p/4719347.html</a></p>
+<hr>
+<h1 id="综合练习"><a href="#综合练习" class="headerlink" title="综合练习"></a>综合练习</h1><h2 id="Tips-临时表，-自动标记序号，全局变量"><a href="#Tips-临时表，-自动标记序号，全局变量" class="headerlink" title="Tips ( 临时表， 自动标记序号，全局变量 )"></a>Tips ( 临时表， 自动标记序号，全局变量 )</h2><ul>
+<li><p>临时表 ( 更多请读： oracle函数 with as(临时表)用法 &amp; mysql的变通实现 .md )</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#  临时表 ( 更多请读： oracle函数 with as(临时表)用法 &amp; mysql的变通实现 .md )</span><br><span class="line">drop table if exists tab; create table tab as</span><br><span class="line">select * from(</span><br><span class="line">    select &#x27;张三&#x27; name,&#x27;男&#x27; sex,18 age,SYSDATE() time</span><br><span class="line">    union select &#x27;李四&#x27;,&#x27;女&#x27;,28,date_sub(SYSDATE(),interval 1 day)</span><br><span class="line">) tab;</span><br><span class="line"> </span><br><span class="line">select * from tab;</span><br></pre></td></tr></table></figure></li>
+<li><p>自动标记序号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 自动标记序号</span><br><span class="line">select (@rownum := @rownum+1) AS rowno,temp.* from</span><br><span class="line">(</span><br><span class="line">select * from tab,(Select (@rowNum :=0)) r</span><br><span class="line">) temp</span><br></pre></td></tr></table></figure></li>
+<li><p>全局用户变量  user-variables</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 全局用户变量  user-variables</span><br><span class="line"></span><br><span class="line">SET @t1=1, @t2=2, @t3:=4;</span><br><span class="line">SELECT @t1, @t2, @t3, @t4 := @t1+@t2+@t3;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">set @temp;</span><br><span class="line">select max(age) into @temp from tab;</span><br><span class="line">select @temp;</span><br><span class="line">select * from tabA where age&gt;@temp;</span><br></pre></td></tr></table></figure>
+<p><code>user-variables</code> <a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.7/en/user-variables.html">http://dev.mysql.com/doc/refman/5.7/en/user-variables.html</a></p>
+</li>
+<li><p>系统参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 系统参数</span><br><span class="line">SELECT @@global.sql_mode, @@session.sql_mode, @@sql_mode;</span><br><span class="line">SHOW VARIABLES;</span><br><span class="line">select @@back_log;</span><br><span class="line">SHOW VARIABLES LIKE &#x27;back_log&#x27;;</span><br></pre></td></tr></table></figure>
+<p><code>set-statement</code>  <a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.7/en/set-statement.html">http://dev.mysql.com/doc/refman/5.7/en/set-statement.html</a><br><code>system-variables(完整)</code> <a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.7/en/dynamic-system-variables.html">http://dev.mysql.com/doc/refman/5.7/en/dynamic-system-variables.html</a></p>
+</li>
+<li><p>客户端 编程接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 客户端 编程接口</span><br><span class="line">SET @s = CONCAT(&quot;SELECT &quot;, &#x27;*&#x27;, &quot; FROM tab&quot;);</span><br><span class="line">prepare stmt FROM @s;</span><br><span class="line">execute stmt;</span><br><span class="line">drop prepare stmt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PREPARE stmt1 FROM &#x27;SELECT SQRT(POW(?,2) + POW(?,2)) AS hypotenuse&#x27;;</span><br><span class="line">SET @a = 3,@b = 4;</span><br><span class="line">EXECUTE stmt1 USING @a, @b;</span><br><span class="line"> </span><br><span class="line">SET @s = &#x27;SELECT SQRT(POW(?,2) + POW(?,2)) AS hypotenuse&#x27;;</span><br><span class="line">PREPARE stmt2 FROM @s;</span><br><span class="line">SET @a = 6,@b = 8;</span><br><span class="line">EXECUTE stmt2 USING @a, @b;</span><br></pre></td></tr></table></figure>
+<p><code>prepared-statements</code>  <a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.7/en/sql-syntax-prepared-statements.html">http://dev.mysql.com/doc/refman/5.7/en/sql-syntax-prepared-statements.html</a></p>
+</li>
+</ul>
+<hr>
+<h2 id="时间条件"><a href="#时间条件" class="headerlink" title="时间条件"></a>时间条件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">drop table if exists tab; create table tab as</span><br><span class="line">select * from(</span><br><span class="line">    select &#x27;张三&#x27; name,&#x27;男&#x27; sex,18 age,SYSDATE() time</span><br><span class="line">    union select &#x27;李四&#x27;,&#x27;女&#x27;,28,date_sub(SYSDATE(),interval 1 day)</span><br><span class="line">) tab;</span><br><span class="line">select * from tab;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select * from tab where time &gt; DATE_FORMAT(&#x27;2016-11-30&#x27;,&#x27;%Y-%m-%d %H:%i:%s&#x27;);</span><br><span class="line">select * from tab where time &gt; DATE_FORMAT(str_to_date(&#x27;2016-11-30&#x27;,&#x27;%Y-%m-%d&#x27;),&#x27;%Y-%m-%d %H:%i:%s&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select * from tab where time &gt; str_to_date(&#x27;2016-11-30&#x27;,&#x27;%Y-%m-%d&#x27;);</span><br><span class="line">select * from tab where time &gt; &#x27;2016-11-30&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">drop table if exists tabA; create table tabA as</span><br><span class="line">select * from(</span><br><span class="line">    select 1 id,&#x27;刘一&#x27; name,&#x27;男&#x27; sex,18 age,SYSDATE() time</span><br><span class="line">    union select 2,&#x27;陈二&#x27;,&#x27;女&#x27;,28,date_sub(SYSDATE(),interval 1 day)</span><br><span class="line">    union select 3,&#x27;张三&#x27;,&#x27;女&#x27;,28,date_sub(SYSDATE(),interval 2 day)</span><br><span class="line">    union select 4,&#x27;李四&#x27;,&#x27;女&#x27;,29,date_sub(SYSDATE(),interval 3 day)</span><br><span class="line">    union select 5,&#x27;王五&#x27;,&#x27;女&#x27;,29,date_sub(SYSDATE(),interval 4 day)</span><br><span class="line">    union select 6,&#x27;赵六&#x27;,&#x27;女&#x27;,30,date_sub(SYSDATE(),interval 5 day)</span><br><span class="line">    union select 7,&#x27;孙七&#x27;,&#x27;女&#x27;,30,date_sub(SYSDATE(),interval 6 day)</span><br><span class="line">) tabA;</span><br><span class="line"> </span><br><span class="line">drop table if exists tabB; create table tabB as</span><br><span class="line">select * from(</span><br><span class="line">    select 6 id,&#x27;赵六&#x27; name,&#x27;男&#x27; sex,30 age,SYSDATE() time</span><br><span class="line">    union select 7,&#x27;孙七&#x27;,&#x27;女&#x27;,30,date_sub(SYSDATE(),interval 1 day)</span><br><span class="line">    union select 8,&#x27;周八&#x27;,&#x27;女&#x27;,28,date_sub(SYSDATE(),interval 2 day)</span><br><span class="line">    union select 9,&#x27;吴九&#x27;,&#x27;女&#x27;,28,date_sub(SYSDATE(),interval 3 day)</span><br><span class="line">    union select 10,&#x27;郑十&#x27;,&#x27;女&#x27;,28,date_sub(SYSDATE(),interval 4 day)</span><br><span class="line">) tabB;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select * from tabA a,tabB b where a.id=b.id;             # 简写内联</span><br><span class="line">select * from tabA a inner join tabB b on a.id=b.id;    # 内联</span><br><span class="line">select * from tabA a left join tabB b on a.id=b.id;       # 左外</span><br><span class="line">select * from tabA a right join tabB b on a.id=b.id;     # 右外</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="分组-聚合"><a href="#分组-聚合" class="headerlink" title="分组 &amp; 聚合"></a>分组 &amp; 聚合</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 分组 group by *</span><br><span class="line">select age,count(*) from tabA group by age;# 除分组列可直接展示外,其它字段都只能在函数计算成单值才能显示(count,max,sum)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 聚合函数 group_concat</span><br><span class="line">select age,count(*),group_concat(name) from tabA group by age;# 合并数值(聚合)</span><br><span class="line">select age,count(*),group_concat(name separator &#x27;;&#x27;) from tabA group by age;# 改变分隔符</span><br><span class="line">select age,count(*),group_concat(name order by time) from tabA group by age;# 时间升序</span><br><span class="line">select age,count(*),group_concat(name order by time desc) from tabA group by age;# 时间降序</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="distinct去重"><a href="#distinct去重" class="headerlink" title="distinct去重"></a>distinct去重</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select * from tabA;</span><br><span class="line">select count(*) from tabA;</span><br><span class="line">select count(distinct name) from tabA;</span><br><span class="line">select count(distinct age) from tabA;</span><br></pre></td></tr></table></figure>
+<h2 id="查询重复-删除重复"><a href="#查询重复-删除重复" class="headerlink" title="查询重复 &amp; 删除重复"></a>查询重复 &amp; 删除重复</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 查找(仅显示重复)</span><br><span class="line">select age,count(age),group_concat(name) from tabA group by age having count(age) &gt; 1;</span><br><span class="line">select * from tabA where age in (select age from tabA group by age having count(age) &gt; 1);</span><br><span class="line"> </span><br><span class="line"># 去重(mysql缺省-非分组字段显示组内第一条)</span><br><span class="line">select * from tabA group by age</span><br><span class="line"> </span><br><span class="line"># 去重-重复项中显示最早一条数据[min(Id)]或最近一条数据[max(id)]</span><br><span class="line">select * from tabA a where a.id = (select min(id) from tabA b where a.age=b.age); # 最早一条数据[min(Id)]</span><br><span class="line">select * from tabA a where a.id = (select max(id) from tabA b where a.age=b.age); # 最近一条数据[max(id)]</span><br><span class="line"> </span><br><span class="line"># 删除重复</span><br><span class="line">select * from tabA a where a.id &gt; (select min(id) from tabA b where a.age=b.age);</span><br><span class="line">delete from tabA a where a.id &gt; (select min(id) from tabA b where a.age=b.age);# oralce正常,mysql语法错误</span><br><span class="line">delete from tabA where id in</span><br><span class="line">    (select id from (select * from tabA) a where a.id &gt; (select min(id) from (select * from tabA) b where a.age=b.age));# 改成这样(/恶心)</span><br><span class="line"> </span><br><span class="line">## 检查</span><br><span class="line">select * from tabA;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 删除已存在 视图  &amp; 创建新视图</span><br><span class="line">Drop view if exists v_tabAB; create view v_tabAB as</span><br><span class="line">select a.* from tabA a,tabB b where a.name=b.name;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select * from v_tabAB;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">drop PROCEDURE IF EXISTS  simpleproc ;</span><br><span class="line">delimiter //</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CREATE PROCEDURE simpleproc (OUT o_param1 INT)</span><br><span class="line">BEGIN</span><br><span class="line">SELECT COUNT(*) into o_param1 FROM tab;</span><br><span class="line">END//</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">delimiter ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CALL simpleproc(@a);</span><br><span class="line">select @a;</span><br></pre></td></tr></table></figure>
+<p><code>create-procedure</code> <a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.7/en/create-procedure.html">http://dev.mysql.com/doc/refman/5.7/en/create-procedure.html</a></p>
+<ul>
+<li><p>扩展阅读 <code>MySql delimiter的作用是什么</code>  <a target="_blank" rel="noopener" href="http://www.jb51.net/article/24815.htm">http://www.jb51.net/article/24815.htm</a></p>
+</li>
+<li><p>带参存储过程，几种执行方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">CREATE PROCEDURE p (OUT o_ver_param VARCHAR(25), INOUT incr_param INT)</span><br><span class="line">BEGIN</span><br><span class="line">  SELECT VERSION() INTO o_ver_param;</span><br><span class="line">  SET incr_param = incr_param + 1;</span><br><span class="line">END;</span><br><span class="line"> </span><br><span class="line"># 参数引用传递</span><br><span class="line">SET @increment = 10;</span><br><span class="line">CALL p(@version, @increment);</span><br><span class="line">SELECT @version, @increment;</span><br><span class="line"> </span><br><span class="line"># 带参使用（prepare 编程接口）</span><br><span class="line">SET @increment = 10;</span><br><span class="line">PREPARE s FROM &#x27;CALL p(?, ?)&#x27;;</span><br><span class="line">EXECUTE s USING @version, @increment;</span><br><span class="line">SELECT @version, @increment;</span><br><span class="line"> </span><br><span class="line">SET @increment = 10;</span><br><span class="line">PREPARE s FROM &#x27;CALL p(@version, @increment)&#x27;;</span><br><span class="line">EXECUTE s;</span><br><span class="line">SELECT @version, @increment;</span><br></pre></td></tr></table></figure>
+<p><code>call</code>  <a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.7/en/call.html">http://dev.mysql.com/doc/refman/5.7/en/call.html</a></p>
+</li>
+<li><p>游标 Cursors</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">CREATE PROCEDURE curdemo()</span><br><span class="line">BEGIN</span><br><span class="line">  DECLARE done INT DEFAULT FALSE;</span><br><span class="line">  DECLARE a CHAR(16);</span><br><span class="line">  DECLARE b, c INT;</span><br><span class="line">  DECLARE cur1 CURSOR FOR SELECT id,data FROM test.t1;</span><br><span class="line">  DECLARE cur2 CURSOR FOR SELECT i FROM test.t2;</span><br><span class="line">  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;</span><br><span class="line"> </span><br><span class="line">  OPEN cur1;</span><br><span class="line">  OPEN cur2;</span><br><span class="line"> </span><br><span class="line">  read_loop: LOOP</span><br><span class="line">    FETCH cur1 INTO a, b;</span><br><span class="line">    FETCH cur2 INTO c;</span><br><span class="line">    IF done THEN</span><br><span class="line">      LEAVE read_loop;</span><br><span class="line">    END IF;</span><br><span class="line">    IF b &lt; c THEN</span><br><span class="line">      INSERT INTO test.t3 VALUES (a,b);</span><br><span class="line">    ELSE</span><br><span class="line">      INSERT INTO test.t3 VALUES (a,c);</span><br><span class="line">    END IF;</span><br><span class="line">  END LOOP;</span><br><span class="line"> </span><br><span class="line">  CLOSE cur1;</span><br><span class="line">  CLOSE cur2;</span><br><span class="line">END;</span><br></pre></td></tr></table></figure>
+<p><code>Cursors</code> <a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.7/en/cursors.html">http://dev.mysql.com/doc/refman/5.7/en/cursors.html</a></p>
+</li>
+<li><p>扩展阅读 <code>mysql循环方式</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">三个标准的循环方式：WHILE循环，LOOP循环以及REPEAT循环。</span><br><span class="line">一 个 非标准的循环方式：GOTO</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">WHILE……DO……END WHILE</span><br><span class="line">REPEAT……UNTIL END REPEAT</span><br><span class="line">LOOP……END LOOP</span><br><span class="line">GOTO</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://www.soso.io/article/13660.html">http://www.soso.io/article/13660.html</a><br><a target="_blank" rel="noopener" href="http://www.blogjava.net/rain1102/archive/2011/05/16/350301.html">http://www.blogjava.net/rain1102/archive/2011/05/16/350301.html</a></p>
+</li>
+</ul>
+<h1 id="tips-存储过程中纪录日志方法"><a href="#tips-存储过程中纪录日志方法" class="headerlink" title="tips: 存储过程中纪录日志方法"></a>tips: 存储过程中纪录日志方法</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 初始化</span><br><span class="line">drop table if exists p_log;</span><br><span class="line">create table p_log as select 1 &#x27;id&#x27;,&#x27;p_name&#x27;,&#x27;log&#x27; ,SYSDATE() date;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select * from p_log; # 存储过程,进度监控</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 标记主键,更新长度</span><br><span class="line">ALTER TABLE `p_log`</span><br><span class="line">MODIFY COLUMN `id`  int(1) NOT NULL AUTO_INCREMENT FIRST ,</span><br><span class="line">MODIFY COLUMN `p_name`  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT &#x27;&#x27; AFTER `id`,</span><br><span class="line">MODIFY COLUMN `log`  varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT &#x27;&#x27; AFTER `p_name`,</span><br><span class="line">ADD PRIMARY KEY (`id`);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 插入测试</span><br><span class="line">insert into p_log value(null,&#x27;p_name&#x27;,&#x27;log&#x27;,SYSDATE());</span><br><span class="line">select * from p_log; ```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 流程控制</span><br></pre></td></tr></table></figure>
+<p>14.6.5.1 CASE Syntax # 分支（同switch case）<br>14.6.5.2 IF Syntax<br>14.6.5.3 ITERATE Syntax    # 重新开始循环（同continue）<br>14.6.5.4 LEAVE Syntax  #  LEAVE    结束标签（同break）<br>14.6.5.5 LOOP Syntax # 循环（同for）<br>14.6.5.6 REPEAT Syntax    # 循环<br>14.6.5.7 RETURN Syntax<br>14.6.5.8 WHILE Syntax     # 循环</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">CREATE PROCEDURE doiterate(p1 INT)</span><br><span class="line">BEGIN</span><br><span class="line">  label1: LOOP</span><br><span class="line">    SET p1 = p1 + 1;</span><br><span class="line">    IF p1 &lt; 10 THEN</span><br><span class="line">      ITERATE label1; # 重新开始循环（同continue）</span><br><span class="line">    END IF;</span><br><span class="line">    LEAVE label1; #  LEAVE    结束标签（同break）</span><br><span class="line">  END LOOP label1;</span><br><span class="line">  SET @x = p1;</span><br><span class="line">END;</span><br></pre></td></tr></table></figure>
+<p><code>MySQL :: MySQL 5.7 Reference Manual :: 14.6.5 Flow Control Statements</code><br><a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.7/en/flow-control-statements.html">http://dev.mysql.com/doc/refman/5.7/en/flow-control-statements.html</a></p>
+<p><code>MySQL :: MySQL 5.7 Reference Manual :: 14.6.5.5 LOOP Syntax</code><br><a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.7/en/loop.html">http://dev.mysql.com/doc/refman/5.7/en/loop.html</a></p>
+<h1 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">drop EVENT IF EXISTS e_test;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CREATE EVENT `e_test`</span><br><span class="line">    ON SCHEDULE EVERY 5 SECOND</span><br><span class="line">    ON COMPLETION NOT PRESERVE</span><br><span class="line">    ENABLE</span><br><span class="line">    DO</span><br><span class="line">    insert into p_log value(&#x27;event&#x27;,&#x27;x&#x27;,SYSDATE());</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#1) 临时关闭事件</span><br><span class="line">ALTER EVENT e_test DISABLE;</span><br><span class="line"> </span><br><span class="line"># 2) 开启事件</span><br><span class="line">ALTER EVENT e_test ENABLE;</span><br></pre></td></tr></table></figure>
+<p><code>MySQL :: MySQL 5.7 Reference Manual :: 14.1.12 CREATE EVENT Syntax</code><br><a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.7/en/create-event.html">http://dev.mysql.com/doc/refman/5.7/en/create-event.html</a></p>
+<p><code>详解 MySQL 的计划任务 - 开源中国社区</code><br><a target="_blank" rel="noopener" href="http://www.oschina.net/question/4873_20927">http://www.oschina.net/question/4873_20927</a></p>
+<h1 id="数据字典"><a href="#数据字典" class="headerlink" title="数据字典"></a>数据字典</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 其中常用字典库 [information_schema]</span><br><span class="line">select * from INFORMATION_SCHEMA.SCHEMATA;  # 数据库中所有数据库信息</span><br><span class="line">select * from INFORMATION_SCHEMA.TABLES; # 存放数据库中所有数据库表信息</span><br><span class="line">select * from INFORMATION_SCHEMA.COLUMNS;  # 所有数据库表的列信息</span><br><span class="line">select * from INFORMATION_SCHEMA.STATISTICS;# 存放索引信息</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 获取表信息</span><br><span class="line">select TABLE_SCHEMA DB,TABLE_NAME 表名,TABLE_COMMENT 描述,TABLE_ROWS 数据条数,concat(round(data_length/(1024*1024),2),&#x27;M&#x27;) 容量</span><br><span class="line">from INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA=&#x27;k12_platform&#x27; ;</span><br><span class="line"> </span><br><span class="line"># 获取表中字段信息</span><br><span class="line">select TABLE_SCHEMA DB,COLUMN_NAME 列名,TABLE_NAME 表名,COLUMN_COMMENT 备注,COLUMN_TYPE 类型,is_nullable 可否为空,CHARACTER_MAXIMUM_LENGTH 最大值长度</span><br><span class="line">from INFORMATION_SCHEMA.COLUMNS</span><br><span class="line">where 1=1</span><br><span class="line">and TABLE_SCHEMA=&#x27;k12_platform&#x27;</span><br><span class="line">and TABLE_NAME =&#x27;user&#x27;                 # 表名(查看表中所有字段信息)</span><br><span class="line">and COLUMN_COMMENT like &#x27;%昵称%&#x27; # 描述列(依据描述,找具体字段及所在表)</span><br><span class="line">and COLUMN_NAME like &#x27;nick_name&#x27;; # 描述列(依据字段,查找周边关系表)</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><ul>
+<li><p>工具掌握(PL&#x2F;sql，Navicat..)</p>
+</li>
+<li><p>数据字典</p>
+</li>
+<li><p>存储过程(逻辑语句， 事务控制 )</p>
+</li>
+<li><p>执行计划</p>
+</li>
+<li><p>性能调优（索引，分区，分表）</p>
+</li>
+<li><p>数据库设计</p>
+</li>
+<li><p>场景问题解决方案（去重，分组，聚合..）</p>
+</li>
+<li><p>数据库管理(锁表&#x2F;释放 )</p>
+</li>
+<li><p>数据库安全</p>
+</li>
+<li><p>数据库规范&amp;案例</p>
+</li>
+<li><p>nosql延伸</p>
+</li>
+</ul>
+<hr>
+<p><strong>参考</strong><br><code>MySQL 5.7参考手册(MySQL 5.7 Reference Manual)</code></p>
+<p><a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.7/en/create-table.html">http://dev.mysql.com/doc/refman/5.7/en/create-table.html</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-6-16/90252887.jpg"></p>
+<p>第三方分类  <a target="_blank" rel="noopener" href="http://overapi.com/mysql">http://overapi.com/mysql</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-7-1/10071748.jpg"></p>
+<p>** Oracle    Database SQL Reference 数据库 SQL参考（完全 参考手册 ）**<br><code>oracle Database - Functions 函数</code><br><a target="_blank" rel="noopener" href="http://docs.oracle.com/cd/E11882_01/timesten.112/e21642/function.htm#TTSQL446">http://docs.oracle.com/cd/E11882_01/timesten.112/e21642/function.htm#TTSQL446</a></p>
+<p><code>oracle Database - SQL Statements SQL语句</code><br><a target="_blank" rel="noopener" href="http://docs.oracle.com/cd/E11882_01/timesten.112/e21642/state.htm#TTSQL277">http://docs.oracle.com/cd/E11882_01/timesten.112/e21642/state.htm#TTSQL277</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-6-16/1486632.jpg"></p>
+<span id="more"></span>
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/sql%E7%BC%96%E7%A8%8B/" rel="tag"># sql编程</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/nginx%20%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE%E7%AD%96%E7%95%A5%E8%AE%A8%E8%AE%BA/" rel="prev" title="nginx 域名配置策略讨论">
+                  <i class="fa fa-angle-left"></i> nginx 域名配置策略讨论
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E6%9C%89%E6%95%88%E6%B8%85%E7%90%86%E5%BE%AE%E4%BF%A1%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%88x5%E5%86%85%E6%A0%B8%EF%BC%89%E7%BC%93%E5%AD%98%E5%8A%9E%E6%B3%95/" rel="next" title="有效清理微信内置浏览器（x5内核）缓存办法">
+                  有效清理微信内置浏览器（x5内核）缓存办法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

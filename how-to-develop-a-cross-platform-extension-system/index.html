@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2426182848439341"
+     crossorigin="anonymous"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言前一段时间给我的开源下载器 Gopeed 实现了一套扩展系统，相关设计草案可以在这里查看，基于这套扩展系统可以很方便的通过javascript来实现一些定制化的功能，目前已经实现的扩展有：   百度网盘扩展 油管扩展 推特扩展  然后重点是这些扩展也是全平台支持的，这意味着你可以在windows、mac、linux、android、ios、web平台上安装和使用这些扩展，是不是很酷？接下来就来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我是如何给我的开源下载器实现扩展系统的">
+<meta property="og:url" content="https://www.sovdating.com/how-to-develop-a-cross-platform-extension-system/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="前言前一段时间给我的开源下载器 Gopeed 实现了一套扩展系统，相关设计草案可以在这里查看，基于这套扩展系统可以很方便的通过javascript来实现一些定制化的功能，目前已经实现的扩展有：   百度网盘扩展 油管扩展 推特扩展  然后重点是这些扩展也是全平台支持的，这意味着你可以在windows、mac、linux、android、ios、web平台上安装和使用这些扩展，是不是很酷？接下来就来">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.sovdating.com/how-to-develop-a-cross-platform-extension-system/2023-12-14-10-40-23.png">
+<meta property="og:image" content="https://www.sovdating.com/how-to-develop-a-cross-platform-extension-system/2023-12-16-11-37-17.png">
+<meta property="og:image" content="https://www.sovdating.com/how-to-develop-a-cross-platform-extension-system/2023-12-16-12-04-36.png">
+<meta property="og:image" content="https://www.sovdating.com/how-to-develop-a-cross-platform-extension-system/2023-12-14-14-25-25.gif">
+<meta property="og:image" content="https://www.sovdating.com/how-to-develop-a-cross-platform-extension-system/2023-12-15-17-20-18.gif">
+<meta property="og:image" content="https://www.sovdating.com/how-to-develop-a-cross-platform-extension-system/2023-12-16-16-14-52.gif">
+<meta property="article:published_time" content="2023-12-14T02:04:44.000Z">
+<meta property="article:modified_time" content="2024-01-24T02:47:47.865Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="gopeed">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="golang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.sovdating.com/how-to-develop-a-cross-platform-extension-system/2023-12-14-10-40-23.png">
+
+
+<link rel="canonical" href="https://www.sovdating.com/how-to-develop-a-cross-platform-extension-system/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/how-to-develop-a-cross-platform-extension-system/","path":"how-to-develop-a-cross-platform-extension-system/","title":"我是如何给我的开源下载器实现扩展系统的"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>我是如何给我的开源下载器实现扩展系统的 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">扩展系统设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%A0%87%E5%87%86"><span class="nav-number">2.1.</span> <span class="nav-text">扩展标准</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.1.</span> <span class="nav-text">去中心化设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%A7%E5%A6%99%E5%88%A9%E7%94%A8-Topic-%E5%88%86%E5%8F%91%E6%89%A9%E5%B1%95"><span class="nav-number">2.1.2.</span> <span class="nav-text">巧妙利用 Topic 分发扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.3.</span> <span class="nav-text">扩展配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E9%87%8D%E5%90%8D%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.4.</span> <span class="nav-text">扩展重名问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#monorepo-%E6%94%AF%E6%8C%81"><span class="nav-number">2.1.5.</span> <span class="nav-text">monorepo 支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C%E5%85%A5%E5%8F%A3"><span class="nav-number">2.1.6.</span> <span class="nav-text">扩展脚本执行入口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.1.7.</span> <span class="nav-text">扩展设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E8%84%9A%E6%9C%AC%E5%BC%95%E6%93%8E"><span class="nav-number">2.2.</span> <span class="nav-text">扩展脚本引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E5%85%A8%E5%B1%80%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.1.</span> <span class="nav-text">注入全局对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E5%BC%95%E6%93%8E%E5%92%8C-Golang-%E7%9A%84%E4%BA%A4%E4%BA%92"><span class="nav-number">2.2.2.</span> <span class="nav-text">脚本引擎和 Golang 的交互</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">扩展管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%89%A9%E5%B1%95"><span class="nav-number">2.3.1.</span> <span class="nav-text">安装扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%89%A9%E5%B1%95"><span class="nav-number">2.3.2.</span> <span class="nav-text">更新扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BD%E6%89%A9%E5%B1%95"><span class="nav-number">2.3.3.</span> <span class="nav-text">卸载扩展</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E5%8C%85"><span class="nav-number">2.4.</span> <span class="nav-text">扩展开发工具包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%84%9A%E6%89%8B%E6%9E%B6"><span class="nav-number">2.4.1.</span> <span class="nav-text">脚手架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E7%B1%BB%E5%9E%8B%E5%A3%B0%E6%98%8E"><span class="nav-number">2.4.2.</span> <span class="nav-text">扩展类型声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Polyfill-%E6%8F%92%E4%BB%B6"><span class="nav-number">2.4.3.</span> <span class="nav-text">Polyfill 插件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">3.</span> <span class="nav-text">结语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5"><span class="nav-number">3.1.</span> <span class="nav-text">相关链接</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/how-to-develop-a-cross-platform-extension-system/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="我是如何给我的开源下载器实现扩展系统的 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          我是如何给我的开源下载器实现扩展系统的
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-12-14 10:04:44" itemprop="dateCreated datePublished" datetime="2023-12-14T10:04:44+08:00">2023-12-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 10:47:47" itemprop="dateModified" datetime="2024-01-24T10:47:47+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前一段时间给我的开源下载器 <a target="_blank" rel="noopener" href="https://github.com/GopeedLab/gopeed">Gopeed</a> 实现了一套扩展系统，相关设计草案可以在<a target="_blank" rel="noopener" href="https://github.com/GopeedLab/gopeed/issues/107">这里</a>查看，基于这套扩展系统可以很方便的通过<code>javascript</code>来实现一些定制化的功能，目前已经实现的扩展有：</p>
+<p><img src="/how-to-develop-a-cross-platform-extension-system/2023-12-14-10-40-23.png"></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/monkeyWie/gopeed-extension-baiduwp">百度网盘扩展</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/monkeyWie/gopeed-extension-youtube">油管扩展</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/monkeyWie/gopeed-extension-twitter">推特扩展</a></li>
+</ul>
+<p>然后重点是这些扩展也是全平台支持的，这意味着你可以在<code>windows</code>、<code>mac</code>、<code>linux</code>、<code>android</code>、<code>ios</code>、<code>web</code>平台上安装和使用这些扩展，是不是很酷？接下来就来介绍下我是如何实现这套扩展系统的。</p>
+<span id="more"></span>
+
+<h2 id="扩展系统设计"><a href="#扩展系统设计" class="headerlink" title="扩展系统设计"></a>扩展系统设计</h2><p>从大体上来说，扩展系统分为四个部分：</p>
+<ul>
+<li>扩展标准</li>
+<li>扩展脚本引擎</li>
+<li>扩展管理器</li>
+<li>扩展开发工具包</li>
+</ul>
+<h3 id="扩展标准"><a href="#扩展标准" class="headerlink" title="扩展标准"></a>扩展标准</h3><p>要实现一个扩展系统，首先要定义一个扩展标准，这个标准包括扩展的目录结构、扩展的配置文件、扩展的脚本文件等等，这一部分我参照（抄）了<code>Chrome</code>的扩展标准，即扩展由一个文件夹组成，文件夹中必须包含一个<code>manifest.json</code>声明文件，最简单的扩展目录结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">├── index.js</span><br><span class="line">└── manifest.json</span><br></pre></td></tr></table></figure>
+
+<h4 id="去中心化设计"><a href="#去中心化设计" class="headerlink" title="去中心化设计"></a>去中心化设计</h4><p>市面上大多数软件的扩展系统都是中心化的，比如：<code>Chrome 扩展</code>、<code>VS Code 扩展</code>，这样的好处是可以很方便检索和分发扩展，不过我觉得<code>Gopeed</code>作为一个下载器，中心化的扩展系统一点也没有<code>BitTorrent</code>协议的去中心化精神，而且我也不想去维护一个中心化的扩展仓库，所以我决定基于<code>git</code>来实现一个去中心化的扩展系统。</p>
+<p><code>git</code>作为一个分布式版本控制系统，完美契合了去中心化的需求，每个扩展都是一个<code>git</code>仓库，扩展的安装和更新都是通过<code>git clone</code>来实现，这样只需要把扩展托管到<code>github</code>、<code>gitlab</code>、<code>gitee</code>等平台上，就可以实现扩展的分发和更新了。</p>
+<h4 id="巧妙利用-Topic-分发扩展"><a href="#巧妙利用-Topic-分发扩展" class="headerlink" title="巧妙利用 Topic 分发扩展"></a>巧妙利用 Topic 分发扩展</h4><p>去中心化之后没有一个类似扩展商店的平台来分发扩展，那么用户要怎么找到扩展呢？这里巧妙利用了<code>Github Topic</code>功能，只要给扩展项目仓库打上<code>gopeed-extension</code>的主题标签，然后通过<a target="_blank" rel="noopener" href="https://github.com/topics/gopeed-extension">topics&#x2F;gopeed-extension</a>就可以让用户找到你的扩展了：</p>
+<p><img src="/how-to-develop-a-cross-platform-extension-system/2023-12-16-11-37-17.png"></p>
+<p>有个问题就是没法通过关键字来搜索扩展，庆幸的是<code>Github</code>有着强大的搜索功能，可以通过<code>topic</code>和关键字进行搜索，例如：搜索<code>youtube</code>关键字，输入<code>topic:gopeed-extension youtube</code>，就可以找到<code>youtube</code>相关的扩展了：</p>
+<p><img src="/how-to-develop-a-cross-platform-extension-system/2023-12-16-12-04-36.png"></p>
+<h4 id="扩展配置文件"><a href="#扩展配置文件" class="headerlink" title="扩展配置文件"></a>扩展配置文件</h4><p>扩展配置文件是一个<code>json</code>文件，用来声明扩展的一些基本信息，例如：扩展的名称、版本、描述、图标、脚本文件等等，这里我贴一个上面<code>Youtube</code>扩展的配置文件：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;youtube&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;author&quot;</span><span class="punctuation">:</span> <span class="string">&quot;monkeyWie&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Youtube&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Youtube video download&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;icon&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.4&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;homepage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://github.com/monkeyWie/gopeed-extension-youtube&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;repository&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://github.com/monkeyWie/gopeed-extension-youtube&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;event&quot;</span><span class="punctuation">:</span> <span class="string">&quot;onResolve&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;match&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;urls&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">          <span class="string">&quot;*://youtube.com/watch/*&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="string">&quot;*://m.youtube.com/watch/*&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="string">&quot;*://www.youtube.com/watch/*&quot;</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;entry&quot;</span><span class="punctuation">:</span> <span class="string">&quot;dist/index.js&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;settings&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;quality&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Quality&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Video quality&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;highest&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Highest&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;highest&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Lowest&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;lowest&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>配置里有几个关键字段：</p>
+<ul>
+<li><code>name</code>：扩展的名称。</li>
+<li><code>author</code>：扩展的作者。</li>
+<li><code>repository</code>：扩展的仓库地址，用来检测扩展是否有更新。</li>
+<li><code>scripts</code>：扩展的脚本文件，用来配置脚本的入口和匹配规则。</li>
+<li><code>settings</code>：扩展的设置声明，在下载器中生成对应的界面提供给用户进行设置。</li>
+</ul>
+<h4 id="扩展重名问题"><a href="#扩展重名问题" class="headerlink" title="扩展重名问题"></a>扩展重名问题</h4><p>由于扩展是去中心化的，就有可能存在扩展重名的问题，所以我在扩展的配置文件里增加了一个<code>author</code>字段，用来区分扩展的作者，通过<code>name</code>和<code>author</code>来作为扩展的一个唯一标识，例如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;youtube&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;author&quot;</span><span class="punctuation">:</span> <span class="string">&quot;monkeyWie&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个扩展的唯一标识是<code>monkeyWie@youtube</code>，这样就可以降低扩展重名的概率了，当然这并不能完全避免扩展重名的问题，不过先这样吧，以后如果扩展数量真的多到一定程度了，再考虑其他的解决方案。</p>
+<h4 id="monorepo-支持"><a href="#monorepo-支持" class="headerlink" title="monorepo 支持"></a>monorepo 支持</h4><p>考虑到有可能在一个仓库里开发多个扩展，所以我也对这种情况进行了支持，通过<code>repository</code>里的<code>path</code>字段来支持<code>monorepo</code>，例如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;repository&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://github.com/GopeedLab/gopeed-extension-samples&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;github-release-sample&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在安装扩展的时候只需要用<code>#</code>来拼接<code>url</code>和<code>path</code>即可，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/GopeedLab/gopeed-extension-samples#github-release-sample</span><br></pre></td></tr></table></figure>
+
+<h4 id="扩展脚本执行入口"><a href="#扩展脚本执行入口" class="headerlink" title="扩展脚本执行入口"></a>扩展脚本执行入口</h4><p>现在有了脚本，但是还需要配置一个脚本的运行入口，也就是脚本在什么时候才会被执行，目前我定了三个入口：</p>
+<ul>
+<li><code>onResolve</code>：当解析一个下载链接时触发。</li>
+<li><code>onStart</code>：当开始下载时触发。</li>
+<li><code>onError</code>：当下载失败时触发。</li>
+</ul>
+<p>执行入口有了，但是你肯定不希望脚本在所有的下载任务中都执行，所以还需要配置一个匹配规则，目前支持两种匹配规则：</p>
+<ul>
+<li><code>urls</code>：按下载链接匹配，规则和 chrome 扩展的<a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/extensions/mv3/match_patterns/">匹配规则</a>一致。</li>
+<li><code>labels</code>：按下载任务标签匹配。</li>
+</ul>
+<p>拿上面<code>Youtube</code>扩展来举例，这个扩展的脚本入口配置如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;event&quot;</span><span class="punctuation">:</span> <span class="string">&quot;onResolve&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;match&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;urls&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">          <span class="string">&quot;*://youtube.com/watch/*&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="string">&quot;*://m.youtube.com/watch/*&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="string">&quot;*://www.youtube.com/watch/*&quot;</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;entry&quot;</span><span class="punctuation">:</span> <span class="string">&quot;dist/index.js&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>表示当解析一个<code>Youtube</code>的视频链接时，就会执行<code>dist/index.js</code>脚本，效果如下：</p>
+<p><img src="/how-to-develop-a-cross-platform-extension-system/2023-12-14-14-25-25.gif"></p>
+<h4 id="扩展设置"><a href="#扩展设置" class="headerlink" title="扩展设置"></a>扩展设置</h4><p>有时候扩展需要用户提供一些基本的设置，比如<code>Cookie</code>、<code>默认清晰度</code>等等，所以我设计了一套标准化的扩展声明，用来声明扩展的设置，这样下载器就可以根据声明来生成对应的界面，让用户进行设置，然后在扩展脚本里可以获取到用户设置的值，这样就可以实现一些定制化的功能了。</p>
+<p>还是拿上面的<code>Youtube</code>扩展来举例，这个扩展的设置声明如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;settings&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;quality&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Quality&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Video quality&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;highest&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Highest&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;highest&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Lowest&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;lowest&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>表示这个扩展有一个<code>quality</code>的设置，类型是<code>string</code>，默认值是<code>highest</code>，用户可以在<code>highest</code>和<code>lowest</code>中选择一个，然后在扩展脚本里获取用户设置的值，这样就可以实现根据用户设置的清晰度来下载视频了，效果如下：</p>
+<p><img src="/how-to-develop-a-cross-platform-extension-system/2023-12-15-17-20-18.gif"></p>
+<h3 id="扩展脚本引擎"><a href="#扩展脚本引擎" class="headerlink" title="扩展脚本引擎"></a>扩展脚本引擎</h3><p>要支持灵活的扩展开发需求，肯定是需要一个图灵完备的脚本编程语言，常用的有<code>lua</code>、<code>python</code>、<code>javascript</code>等，这里我选择了<code>javascript</code>，因为<code>javascript</code>是一门非常流行的脚本语言，而且有着非常丰富的生态，当然还有个很重要的原因就是有一个非常优秀的<code>javascript</code>解释器库 <a target="_blank" rel="noopener" href="https://github.com/dop251/goja">goja</a>，性能非常好，而且支持完整的<code>ES5.1</code>标准和大部分<code>ES6+</code>标准，得益于它是纯<code>golang</code>实现的，所以可以很方便的进行跨平台编译。</p>
+<h4 id="注入全局对象"><a href="#注入全局对象" class="headerlink" title="注入全局对象"></a>注入全局对象</h4><p><code>goja</code>只是一个纯粹的<code>javascript</code>解释器，它不像在<code>浏览器</code>或者<code>Node.js</code>环境一样内置了特殊的<code>API</code>，比如<code>XMLHttpRequest</code>、<code>fetch</code>、<code>setTimeout</code>等等，所以我需要在<code>golang</code>中实现这些<code>API</code>，然后注入到全局对象中，这样才能让扩展脚本能像在浏览器环境一样使用这些<code>API</code>。</p>
+<p>当然我不可能完全模拟一个<code>浏览器</code>环境，目前只实现了一些常用的<code>API</code>，例如：<code>XMLHttpRequest</code>、<code>fetch</code>、<code>setTimeout</code>、<code>setInterval</code>、<code>crypto</code>、<code>Buffer</code>、<code>console</code>等等，这样就得到了一个阉割版的<code>浏览器</code>环境的<code>javascript</code>解释器。</p>
+<p>这里有个很有意思的地方，其中<code>XMLHttpRequest</code>是用<code>golang</code>实现的，然后<code>fetch</code>是通过<code>whatwg-fetch</code>这个 npm 包做的<code>polyfill</code>，不得不感叹<code>js</code>还是好玩，各种奇技淫巧，而且偷偷告诉你，<code>react-native</code>也是用<code>whatwg-fetch</code>来实现的<code>fetch</code>，别问我怎么知道的，因为我就是借鉴（抄）的它。</p>
+<blockquote>
+<p>关于这部分具体实现，大家如果有兴趣可以看下<a target="_blank" rel="noopener" href="https://github.com/GopeedLab/gopeed/tree/main/pkg/download/engine">源码</a>。</p>
+</blockquote>
+<h4 id="脚本引擎和-Golang-的交互"><a href="#脚本引擎和-Golang-的交互" class="headerlink" title="脚本引擎和 Golang 的交互"></a>脚本引擎和 Golang 的交互</h4><p>脚本引擎准备好了，回到之前脚本入口配置，每当满足匹配规则时，就会执行对应的脚本，这里就需要脚本引擎和 Golang 的交互了，我需要把<code>Golang</code>中的对象传递给脚本引擎，然后脚本引擎访问和修改这些对象，这样就可以实现脚本和 Golang 的交互了。</p>
+<p>比如在<code>onResovle</code>入口中，我需要把<code>Golang</code>中的<code>Request</code>对象传递给脚本引擎，先来看看扩展的脚本：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">gopeed.<span class="property">events</span>.<span class="title function_">onResolve</span>(<span class="function">(<span class="params">ctx</span>) =&gt;</span> &#123;</span><br><span class="line">  ctx.<span class="property">res</span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;example&quot;</span>,</span><br><span class="line">    <span class="attr">files</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;index.html&quot;</span>,</span><br><span class="line">        <span class="attr">req</span>: &#123;</span><br><span class="line">          <span class="attr">url</span>: <span class="string">&quot;https://example.com&quot;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>脚本引擎执行<code>gopeed.events.onResolve()</code>来注册一个回调函数，然后在<code>Golang</code>中获取到回调函数，并在执行的时候把上下文<code>ctx</code>作为参数传递进去，示例代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Request <span class="keyword">struct</span> &#123;</span><br><span class="line">  URL     <span class="type">string</span> <span class="string">`json:&quot;url&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> FileInfo <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name <span class="type">string</span> <span class="string">`json:&quot;name&quot;`</span></span><br><span class="line">	Path <span class="type">string</span> <span class="string">`json:&quot;path&quot;`</span></span><br><span class="line">	Size <span class="type">int64</span>  <span class="string">`json:&quot;size&quot;`</span></span><br><span class="line"></span><br><span class="line">	Req *Request <span class="string">`json:&quot;req&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Resource <span class="keyword">struct</span> &#123;</span><br><span class="line">  Name <span class="type">string</span> <span class="string">`json:&quot;name&quot;`</span></span><br><span class="line">	Size <span class="type">int64</span>  <span class="string">`json:&quot;size&quot;`</span></span><br><span class="line">	Files []*FileInfo <span class="string">`json:&quot;files&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> OnResolveContext <span class="keyword">struct</span> &#123;</span><br><span class="line">	Req *Request  <span class="string">`json:&quot;req&quot;`</span></span><br><span class="line">	Res *Resource <span class="string">`json:&quot;res&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当触发解析任务时，执行扩展脚本，以下为伪代码</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Download)</span></span> Resolve(req *Request) *Response&#123;</span><br><span class="line">  <span class="comment">// 1. 按照规则匹配生效的扩展</span></span><br><span class="line">  ext := d.matchExt(req)</span><br><span class="line">  <span class="keyword">if</span> ext != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="comment">// 2. 注入 gopeed 全局对象</span></span><br><span class="line">    gopeed := &amp;Gopeed&#123;</span><br><span class="line">      events: <span class="keyword">map</span>[<span class="type">string</span>]goja.Callable</span><br><span class="line">    &#125;</span><br><span class="line">    d.engine.Set(<span class="string">&quot;gopeed&quot;</span>, gopeed)</span><br><span class="line">    <span class="comment">// 3. 执行扩展脚本拿到回调函数</span></span><br><span class="line">    d.engine.RunScript(ext.script)</span><br><span class="line">    onResolve := gopeed.events[<span class="string">&quot;onResolve&quot;</span>]</span><br><span class="line">    <span class="comment">// 4. 执行回调函数，传入上下文参数</span></span><br><span class="line">    ctx := &amp;OnResolveContext&#123;</span><br><span class="line">      Req: &amp;Request&#123;</span><br><span class="line">        URL: <span class="string">&quot;https://example.com&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    d.engine.CallFunction(onResolve, ctx)</span><br><span class="line">    <span class="comment">// 5. 获取上下文结果进行处理</span></span><br><span class="line">    <span class="keyword">if</span> ctx.Res != <span class="literal">nil</span> &#123;</span><br><span class="line">      <span class="comment">// 如果扩展脚本返回了解析结果，就直接返回</span></span><br><span class="line">      <span class="keyword">return</span> ctx.Res</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ... 正常解析逻辑</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上就是一个扩展脚本的执行流程，这里只是举例了<code>onResolve</code>入口，其他入口的执行流程也是类似的。</p>
+<h3 id="扩展管理器"><a href="#扩展管理器" class="headerlink" title="扩展管理器"></a>扩展管理器</h3><p>扩展的基本功能已经有了，接下来就需要一个扩展管理器来管理扩展的安装、更新、卸载等等。</p>
+<h4 id="安装扩展"><a href="#安装扩展" class="headerlink" title="安装扩展"></a>安装扩展</h4><p>前面说过，扩展是通过<code>git clone</code>来进行安装的，这里我通过<a target="_blank" rel="noopener" href="https://github.com/go-git/go-git">go-git</a>这个库来进行<code>git</code>相关操作，步骤如下：</p>
+<ol>
+<li>通过<code>git clone</code>把扩展仓库克隆到本地临时目录。</li>
+<li>读取<code>manifest.json</code>配置文件，解析扩展的基本信息。</li>
+<li>如果是一个有效的扩展项目，就把扩展移动到下载器扩展文件夹下，并按照扩展的唯一标识重命名扩展文件夹。</li>
+<li>把扩展信息写入到本地数据库中。</li>
+</ol>
+<h4 id="更新扩展"><a href="#更新扩展" class="headerlink" title="更新扩展"></a>更新扩展</h4><p>更新扩展和安装扩展步骤类似，区别就是第 3 步做<code>diff</code>操作，找出需要新增、修改、删除的文件，然后进行相应的操作。</p>
+<blockquote>
+<p>这里可能会有人疑问为啥不直接用 git pull 来做更新，因为考虑到要支持直接通过本地文件夹安装扩展，而这种方式安装的扩展不一定是个 git 仓库，所以就自己实现了一套更新逻辑，也就是说我只依赖 git clone 来作为一种扩展安装方式，这样的话抛开 git 扩展系统也是可以正常工作的。</p>
+</blockquote>
+<h4 id="卸载扩展"><a href="#卸载扩展" class="headerlink" title="卸载扩展"></a>卸载扩展</h4><p>这个就比较简单了，只需要把扩展文件夹删除，然后从数据库中删除扩展信息即可。</p>
+<h3 id="扩展开发工具包"><a href="#扩展开发工具包" class="headerlink" title="扩展开发工具包"></a>扩展开发工具包</h3><p>前面说过扩展引擎是一个阉割版的<code>浏览器</code>环境，并且只支持部分<code>es6+</code>语法，如果是纯手写<code>javascript</code>来开发扩展，那么开发体验肯定是非常糟糕的，就像在<code>IE 8</code>上用着<code>es5</code>语法开发一样，所以为了能提升扩展开发体验，我开发了一个配套的<a target="_blank" rel="noopener" href="https://github.com/GopeedLab/gopeed-js">javascript 库</a>，这个库是由<code>pnpm monorepo</code>管理的，里面包含多个<code>npm</code>包，接下来我会一一介绍。</p>
+<h4 id="脚手架"><a href="#脚手架" class="headerlink" title="脚手架"></a><a target="_blank" rel="noopener" href="https://github.com/GopeedLab/gopeed-js/tree/main/packages/create-gopeed-ext">脚手架</a></h4><p>首先是一个脚手架，用来初始化一个扩展项目，只需要执行以下命令即可快速初始化一个扩展项目：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">npx create-gopeed-ext@latest</span><br><span class="line"></span><br><span class="line">√ Project name (gopeed-extension-demo) ...</span><br><span class="line">√ Choose a template » Webpack</span><br><span class="line"></span><br><span class="line">Success! Created gopeed-extension-demo at D:\code\study\js\gopeed-extension-demo</span><br><span class="line">Inside that directory, you can run several commands:</span><br><span class="line"></span><br><span class="line">  git init</span><br><span class="line">    Initialize git repository</span><br><span class="line"></span><br><span class="line">  npm install</span><br><span class="line">    Install dependencies</span><br><span class="line"></span><br><span class="line">  npm run dev</span><br><span class="line">    Compiles and hot-reloads <span class="keyword">for</span> development.</span><br><span class="line"></span><br><span class="line">  npm run build</span><br><span class="line">    Compiles and minifies <span class="keyword">for</span> production.</span><br><span class="line"></span><br><span class="line">We suggest that you begin by typing:</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cd</span> gopeed-extension-demo</span><br><span class="line"></span><br><span class="line">Happy coding!</span><br></pre></td></tr></table></figure>
+
+<p>里面提供了两种模板：</p>
+<ul>
+<li><p>Webpack：</p>
+<p>内置了<code>webpack</code>+<code>babel</code>+<code>eslint</code>+<code>prettier</code>的模版，对于有前端开发经验的同学来说应该很熟悉了，有了<code>webpack</code>+<code>babel</code>，可以随意使用最新的<code>es</code>语法开发扩展，而且还可以使用<code>npm</code>包，webpack 配置好了<a target="_blank" rel="noopener" href="https://github.com/GopeedLab/gopeed-polyfill-webpack-plugin">GopeedPolyfillPlugin</a>，它会自动垫片上<code>node</code>环境下才有的<code>API</code>，比如<code>http</code>、<code>path</code>等等，这样就可以在扩展脚本里使用这些<code>API</code>了。</p>
+</li>
+<li><p>Pure：<br>纯<code>javascript</code>的模版，没有任何依赖，适合那些不想用装<code>node</code>环境的同学，当然只适合开发一些简单的扩展，如果要用到<code>npm</code>包，还是推荐用<code>Webpack</code>模版。</p>
+</li>
+</ul>
+<h4 id="扩展类型声明"><a href="#扩展类型声明" class="headerlink" title="扩展类型声明"></a><a target="_blank" rel="noopener" href="https://github.com/GopeedLab/gopeed-js/tree/main/packages/gopeed">扩展类型声明</a></h4><p>没有类型提示的开发体验是非常糟糕的，我用<code>typescript</code>写了一个配套的类型声明库，这样在<code>vscode</code>里就可以有完整的类型提示了，由于我注入的是全局对象，在<code>typescript</code>中需要这样声明：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">declare</span> <span class="variable language_">global</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="attr">gopeed</span>: <span class="title class_">Gopeed</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在安装完依赖之后，无需显示引用就可以获得类型提示，效果如下：</p>
+<p><img src="/how-to-develop-a-cross-platform-extension-system/2023-12-16-16-14-52.gif"></p>
+<h4 id="Polyfill-插件"><a href="#Polyfill-插件" class="headerlink" title="Polyfill 插件"></a><a target="_blank" rel="noopener" href="https://github.com/GopeedLab/gopeed-polyfill-webpack-plugin">Polyfill 插件</a></h4><p>此仓库<code>fork</code>自<a target="_blank" rel="noopener" href="https://github.com/Richienb/node-polyfill-webpack-plugin">node-polyfill-webpack-plugin</a>，用于垫片<code>node</code>环境的 API，比如<code>http</code>、<code>path</code>等等，在<code>webpack</code>生态中这已经是一套非常成熟的垫片方案了，但是由于<code>Gopeed</code>的扩展环境并不是真正的<code>浏览器环境</code>，所以在使用这些垫片方案时碰到了一些问题，比如说有个<code>vm</code>模块，它是<code>node</code>环境下用来环境隔离的，基于浏览器环境的垫片实现是通过<code>iframe</code>来实现的，但是<code>Gopeed</code>扩展环境是没有<code>iframe</code>的，导致此垫片方案都不适用，我就<code>fork</code>了一份来为<code>Gopeed</code>定制了一套<code>vm</code>垫片方案，当然我还修改了部分垫片实现，使其更适合<code>Gopeed</code>的扩展环境。</p>
+<p>总的来说就是我要让<code>Gopeed</code>扩展环境尽可能对齐<code>浏览器</code>环境，然后其它的都通过垫片来实现，如果有需要特殊处理的垫片，就做定制化开发处理，有了这套垫片方案，就可以愉快的使用大部分<code>npm</code>包了，目前我开发的几个扩展都是基于<code>npm</code>包来实现的，效果还是不错的。</p>
+<p>后续如果有更多的垫片需求，我会继续完善这个库。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>我花费了大量的时间和精力来实现这套扩展系统，希望<code>Gopeed</code>能像油猴那样有一个完善的扩展生态，目前我开发的几个扩展只是抛砖引玉，毕竟我一个人的力量还是有限的，希望能有更多感兴趣的同学参与进来开发扩展，让<code>Gopeed</code>的功能更加强大，最后的最后，希望大家能给 <a target="_blank" rel="noopener" href="https://github.com/GopeedLab/gopeed">Gopeed</a> 点个<code>star</code>支持一下，十分感谢！</p>
+<h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/GopeedLab/gopeed">Gopeed</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.gopeed.com/zh/dev-extension.html">Gopeed 扩展开发指南</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/gopeed/" rel="tag"># gopeed</a>
+              <a href="/tags/js/" rel="tag"># js</a>
+              <a href="/tags/golang/" rel="tag"># golang</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/gopeed-excited-to-release/" rel="prev" title="Gopeed 令人兴奋的新版本发布">
+                  <i class="fa fa-angle-left"></i> Gopeed 令人兴奋的新版本发布
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/fix-next-leancloud-counter/" rel="next" title="修复Next主题LeanCloud计数的问题">
+                  修复Next主题LeanCloud计数的问题 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
