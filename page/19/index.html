@@ -137,7 +137,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-count">546</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -165,111 +165,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/linux%E6%96%87%E6%9C%AC%E6%93%8D%E4%BD%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux%E6%96%87%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">linux文本操作</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-02-09 00:00:00" itemprop="dateCreated datePublished" datetime="2017-02-09T00:00:00+08:00">2017-02-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="显示最后10000行"><a href="#显示最后10000行" class="headerlink" title="显示最后10000行"></a>显示最后<code>10000</code>行</h1><p><code>tail -n 10000 catalina.out</code><br>或 <code>tail -10000 catalina.out</code></p>
-<ul>
-<li>输出文件</li>
-</ul>
-<p><code>tail -10000 catalina.out &gt; catalina.out.0209</code></p>
-<h1 id="查询文件总行数"><a href="#查询文件总行数" class="headerlink" title="查询文件总行数"></a>查询文件总行数</h1><p><code>wc -l catalina.out</code></p>
-<h1 id="查询目标字符串行数位置2017-02-09-12-00-06"><a href="#查询目标字符串行数位置2017-02-09-12-00-06" class="headerlink" title="查询目标字符串行数位置2017-02-09 12:00:06"></a>查询目标字符串行数位置<code>2017-02-09 12:00:06</code></h1><p>注意：<code>时间选择需要精确,否则会卡死控制台，耗死服务器，锁死文件</code></p>
-<p>起点行数：<code>grep -n &quot;2017-02-09 12:00:06&quot; catalina.out</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23ult4m4yZ logs]# grep -n &quot;2017-02-09 12:00:06&quot; catalina.out</span><br><span class="line">210048:[k12Service] 2017-02-09 12:00:06,285 WARN  [com.wosai.teach.dao.VersionDao.getVersionByCode()] (VersionDao.java:54)     - list.size() &gt; 0 || code is app</span><br></pre></td></tr></table></figure>
-<p>终点行数：<code>grep -n &quot;2017-02-09 12:59:59,3&quot; catalina.out</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23ult4m4yZ logs]# grep -n &quot;2017-02-09 12:59:59, 3 &quot; catalina.out</span><br><span class="line">312707:[k12Service] 2017-02-09 12:59:59,344 INFO  [com.wosai.teach.restful.CommonInterface.checkVersion()] (CommonInterface.java:71)     - </span><br><span class="line"></span><br><span class="line">312712:[k12Service] 2017-02-09 12:59:59,345 WARN  [com.wosai.teach.restful.CommonInterface.checkVersion()] (CommonInterface.java:74)     - 版本信息不完全,可能是非法访问</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="打印出起始行和结束行之间的内容"><a href="#打印出起始行和结束行之间的内容" class="headerlink" title="打印出起始行和结束行之间的内容"></a>打印出起始行和结束行之间的内容</h1><p><code>sed -n  &#39; 210048 , 210049 p&#39;   catalina.out </code></p>
-<ul>
-<li>输出文件</li>
-</ul>
-<p><code>sed -n  &#39; 210048 , 312712 p&#39;   catalina.out &gt;  catalina.out.0209.12 </code></p>
-<h1 id="过滤打印"><a href="#过滤打印" class="headerlink" title="过滤打印"></a>过滤打印</h1><p><code>cat catalina.out.0209.12 | grep 操作 计时 </code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[k12Service]  操作计时：188ms  类名: com.wosai.teach.restful.knowPoint.KnowPointLoadExpReadInterFace  方法名:getMain() result:</span><br><span class="line">[k12Service]  操作计时：29ms  类名: com.wosai.teach.restful.sys.SysConfigInterface  方法名:sysConfig() result:</span><br><span class="line">[k12Service]  操作计时：120ms  类名: com.wosai.teach.restful.order.FindProductListInterface  方法名:getMain() result:</span><br><span class="line">[k12Service]  操作计时：112ms  类名: com.wosai.teach.restful.order.FindProductListInterface  方法名:getMain() result:</span><br><span class="line">[k12Service]  操作计时：224ms  类名: com.wosai.teach.restful.knowPoint.KnowPointLoadExpReadInterFace  方法名:getMain() result:</span><br></pre></td></tr></table></figure>
-<ul>
-<li>输出文件<br><code> cat catalina.out.0209.12 | grep 操作 计时 &gt;  catalina.out.0209.12.grep</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23ult4m4yZ logs]# vi catalina.out</span><br><span class="line">catalina.out               catalina.out.0209.12       catalina.out.0209.12.grep </span><br></pre></td></tr></table></figure></li>
-<li>下载文件<br><code>sz catalina.out.0209.12.grep</code></li>
-</ul>
-<hr>
-<p><strong>参考</strong><br><code>linux基本命令-文本过滤与处理 - halazi100 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/halazi100/article/details/42266885">http://blog.csdn.net/halazi100/article/details/42266885</a></p>
-<p><code>Linux下查看文件内容的命令 - 梨璐2012 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/luying--lulu/p/5314963.html">http://www.cnblogs.com/luying--lulu/p/5314963.html</a></p>
-<p><code>linux中查看文件指定行的数据_百度经验</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/15622f24125872fdfdbea560.html">http://jingyan.baidu.com/article/15622f24125872fdfdbea560.html</a></p>
-<p><code> Linux 中查看文件第n行内容的命令</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/fireblue1990/article/details/51534271">http://blog.csdn.net/fireblue1990/article/details/51534271</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -308,14 +203,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-01-24 00:00:02" itemprop="dateCreated datePublished" datetime="2017-01-24T00:00:02+08:00">2017-01-24</time>
+      <time title="Created: 2017-01-24 00:00:02" itemprop="dateCreated datePublished" datetime="2017-01-24T00:00:02+00:00">2017-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
     </span>
 
   
@@ -397,14 +292,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-01-24 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-24T00:00:00+08:00">2017-01-24</time>
+      <time title="Created: 2017-01-24 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-24T00:00:00+00:00">2017-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
     </span>
 
   
@@ -502,14 +397,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-01-20 23:14:15" itemprop="dateCreated datePublished" datetime="2017-01-20T23:14:15+08:00">2017-01-20</time>
+      <time title="Created: 2017-01-20 23:14:15" itemprop="dateCreated datePublished" datetime="2017-01-20T23:14:15+00:00">2017-01-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:27" itemprop="dateModified" datetime="2024-01-26T12:42:27+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -625,14 +520,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-01-20 14:56:30" itemprop="dateCreated datePublished" datetime="2017-01-20T14:56:30+08:00">2017-01-20</time>
+      <time title="Created: 2017-01-20 14:56:30" itemprop="dateCreated datePublished" datetime="2017-01-20T14:56:30+00:00">2017-01-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:14:31" itemprop="dateModified" datetime="2024-01-24T10:14:31+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -717,14 +612,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-01-19 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-19T00:00:00+08:00">2017-01-19</time>
+      <time title="Created: 2017-01-19 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-19T00:00:00+00:00">2017-01-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
     </span>
 
   
@@ -795,14 +690,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-01-18 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-18T00:00:00+08:00">2017-01-18</time>
+      <time title="Created: 2017-01-18 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-18T00:00:00+00:00">2017-01-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
     </span>
 
   
@@ -877,14 +772,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-01-12 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-12T00:00:00+08:00">2017-01-12</time>
+      <time title="Created: 2017-01-12 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-12T00:00:00+00:00">2017-01-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
     </span>
 
   
@@ -960,14 +855,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-01-11 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-11T00:00:00+08:00">2017-01-11</time>
+      <time title="Created: 2017-01-11 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-11T00:00:00+00:00">2017-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
     </span>
 
   
@@ -1045,14 +940,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-01-07 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-07T00:00:00+08:00">2017-01-07</time>
+      <time title="Created: 2017-01-07 00:00:00" itemprop="dateCreated datePublished" datetime="2017-01-07T00:00:00+00:00">2017-01-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:21" itemprop="dateModified" datetime="2024-01-26T12:42:21+00:00">2024-01-26</time>
     </span>
 
   
@@ -1069,6 +964,108 @@
 
 
 <p><code>测试代码</code><br><a target="_blank" rel="noopener" href="http://www.runoob.com/try/try.php?filename=tryhtml5_av_event_timeupdate">http://www.runoob.com/try/try.php?filename=tryhtml5_av_event_timeupdate</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Read-the-innovator-s-dilemma/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Read-the-innovator-s-dilemma/" class="post-title-link" itemprop="url">读《创新者的窘境》</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-01-04 22:38:05" itemprop="dateCreated datePublished" datetime="2017-01-04T22:38:05+00:00">2017-01-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>作者简介：</strong> 克莱顿•克里斯坦森：哈佛商学院教授，因其在企业创新方面的深入研究和独到见解，被尊称为“创新大师”。1997年，当《创新者的窘境》英文版出版时，克莱顿•克里斯坦森只是哈佛商学院的助理教授。而此书一出，就确立了他在创新技术管理领域的权威地位 。</p>
+<blockquote  class="blockquote-center">
+**就算我们把每件事情都做对了仍有可能错失城池，面对新技术和新市场，往往导致失败的恰好是完美无瑕的管理。**
+</blockquote>
+
+<p>非常值得推荐的一本书，该书并不研究一些管理落后的企业衰败的原因或者并不占据行业主导地位的企业衰败的原因，而主要谈的是为何成功的企业、管理优秀的企业、占据行业龙头的企业、同时也在不断创新的企业最后衰败的原因。前者其最终衰败看来是必然，如若从此点切入，此书必然难成大器；而从后者这一非常困难的角度切入，注定了该书起点不低。另外书中主要以硬盘驱动器这一行业作为研究案例，因为在现实世界中只有该产业急剧发展，不断涌现出大批优秀企业并不断被新的后来者所替代，其周期之短是绝佳的研究案例。整本书逻辑缜密、结构清晰、层层推进，读来不仅心生赞叹。</p>
+<h3 id="为什么大企业会失败"><a href="#为什么大企业会失败" class="headerlink" title="为什么大企业会失败"></a>为什么大企业会失败</h3><h4 id="大企业为什么会失败？"><a href="#大企业为什么会失败？" class="headerlink" title="大企业为什么会失败？"></a>大企业为什么会失败？</h4><p>实际上，成熟企业在应对各种类型的延续性创新时可以做到锐意进取、积极创新、认真听取客户意见，但它们似乎无法成功解决的问题是为新产品找到新的应用领域和新的市场，这些是企业在刚刚进入市场时所普遍具备，但是在时过境迁后又明显丧失了的一种能力。这些领先企业似乎被它们的客户牵绊住了手脚，从而在破坏性技术出现时给了具有攻击性的新兴企业颠覆主流行业领先企业的可乘之机。</p>
+<h4 id="价值网和创新推动力"><a href="#价值网和创新推动力" class="headerlink" title="价值网和创新推动力"></a>价值网和创新推动力</h4><p>除新技术和创新机构所具有的必备能力外，面临破坏性技术创新的企业必须分析创新对其相关价值网的影响。关键问题是创新活动尚未明确的性能属性在新兴企业已经建立的价值网中是否能得到重视；为了实现创新的价值，是否必须进入其它价值网，或建立新的价值网；市场和技术轨线是否可能最终交汇，从而使无法解决消费者当前需求的技术最终能够解决他们在未来的需求。</p>
+<h4 id="机械挖掘机行业的破坏性技术变革"><a href="#机械挖掘机行业的破坏性技术变革" class="headerlink" title="机械挖掘机行业的破坏性技术变革"></a>机械挖掘机行业的破坏性技术变革</h4><p>更努力地工作、更聪明地管理、更积极地投资、更认真地听取客户的建议，这些都是应对新型延续性技术所带来的问题的解决之道。但这些良好的管理范式在应对破坏性技术时却完全失效，而且在很多情况下甚至还会不利于问题的解决 。</p>
+<h4 id="回不去的低端市场"><a href="#回不去的低端市场" class="headerlink" title="回不去的低端市场"></a>回不去的低端市场</h4><p>一个企业要完成推出新产品这样一个浩大的工程，其后勤、人力和推动力都必须跟上新产品推进的过程。因此，成熟企业并不仅仅受到客户需求的制约，还受到它们参与竞争价值网所固有的财务结构和企业文化的制约——这个制约因素能够湮没任何及时投资下一轮破坏性技术浪潮的理性的声音。</p>
+<h3 id="管理破坏性技术变革"><a href="#管理破坏性技术变革" class="headerlink" title="管理破坏性技术变革"></a>管理破坏性技术变革</h3><p>尽管破坏性技术能够改变基本特征完全不同的各个行业的发展趋势，但在遭遇破坏性技术时，这些行业导致成败的因素都是一致的。成功的企业希望集中资源来开展能够满足消费者需求的活动，因为这些活动能带来更高的利润，在技术上更具可行性，而且能帮助它们保持在重要市场上的竞争力。这些企业也建立了一整套流程来帮助它们实现这些目标，但寄希望于这套流程同样能够成功地培育出破坏性技术无异于古人手缚羽翼、挥动翅膀的飞行痴梦。这些期望违背了成功的企业运作方式和性能评估机制的基本趋势。</p>
+<h4 id="把开发破坏性技术的职责赋予存在客户需求的机构"><a href="#把开发破坏性技术的职责赋予存在客户需求的机构" class="headerlink" title="把开发破坏性技术的职责赋予存在客户需求的机构"></a>把开发破坏性技术的职责赋予存在客户需求的机构</h4><p>在面对消费者明确说“不”的破坏性技术时，管理者应该创建一个独立的机构，使这个机构直接面对确实需要这种技术的新兴消费者群体。有无数实例证明，大多数公司在开发破坏性技术的同时，力图保持它们在主流市场的竞争力，这条道路基本上是一条死胡同；它们在其中一个市场上的市场地位将被削弱，除非企业成立两个彼此独立的机构（从属于相应的价值网）来吸引不同的目标客户。</p>
+<h4 id="如何使机构与市场的规模相匹配"><a href="#如何使机构与市场的规模相匹配" class="headerlink" title="如何使机构与市场的规模相匹配"></a>如何使机构与市场的规模相匹配</h4><p>在延续性变革中，专注于扩展传统技术的性能，并选择在新的延续性技术出现时充当追随者的企业也能继续保持其领先地位和竞争优势。但在破坏性技术变革中，情况则大不相同。在破坏性技术刚刚出现时就率先进入这些新兴市场的企业将赢得巨大的汇报，并建立起明显的先发优势。</p>
+<h4 id="发现新的新兴市场"><a href="#发现新的新兴市场" class="headerlink" title="发现新的新兴市场"></a>发现新的新兴市场</h4><p>没有人——不论是我们，还是我们的消费者——能够在真正使用之前了解破坏性产品是否能够投入使用、怎样使用，或者使用量有多大。一些面临这种不确定性的管理人员更倾向于在其他公司切实找到相关市场之后再行进入。但考虑到破坏性技术的领导者能够建立起巨大的先发优势，面临破坏性技术创新的管理者应走出实验室和跟踪调研小组调研，利用发现驱动型方法进入市场，直接了解有关新消费者和新应用领域的知识。</p>
+<h4 id="如何评估机构的能力与缺陷"><a href="#如何评估机构的能力与缺陷" class="headerlink" title="如何评估机构的能力与缺陷"></a>如何评估机构的能力与缺陷</h4><p>当机构遭遇变革时，管理者首先必须要确定他们是否具备成功所需的资源。然后，他们需要再问一个不同的问题：机构是否具备能成功所需的流程和价值观？对于成熟企业来说，创新之所以总是看起来困难重重，其原因就在于它们聘用了能力很强的人，并将设计初衷与他们肩负的使命不相匹配的流程和价值观强加给他们。在这个日新月异的时代，应对变革的能力已成为事关企业成败的关键一环，确保能者适得其所亦是企业肩负的一项重要责任。</p>
+<h4 id="产品性能、市场需求和生命周期"><a href="#产品性能、市场需求和生命周期" class="headerlink" title="产品性能、市场需求和生命周期"></a>产品性能、市场需求和生命周期</h4><p>在性能过度供给给破坏性技术带来威胁或机遇时，还会导致产品市场的竞争基础发生根本性变化。消费者选择产品或服务时所遵循的各种标准的排序将发生变化，从而标志着产品生命周期从一个阶段过渡到另一个阶段。换句话说，企业提供的性能轨线和市场要求的性能轨线的交汇，是引发产品生命周期从一个阶段过渡到另一个阶段的根本原因。</p>
+<h4 id="管理破坏性技术变革：案例研究"><a href="#管理破坏性技术变革：案例研究" class="headerlink" title="管理破坏性技术变革：案例研究"></a>管理破坏性技术变革：案例研究</h4><p>能力不足、官僚作风、傲慢自大、管理队伍老化、规划不合理和投资短视显然是导致许多企业最终失败的主要原因。但我们已经知道，即使是最优秀的管理者也会受到某些法则的制约，而且这些法则会加大破坏性创新的难度。当优秀的管理者不能理解，或者试图抗拒这些法则的力量时，他们领导下的企业距离失败也就为期不远了。</p>
+<h4 id="创新者的窘境：概要"><a href="#创新者的窘境：概要" class="headerlink" title="创新者的窘境：概要"></a>创新者的窘境：概要</h4><p>《创新者的窘境》一书阐述了破坏性技术取代原有技术的过程，以及管理良好的企业内部所蕴含的强大力量是如何阻碍它们开发破坏性技术的。克里斯坦森教授构建了一个包含四项破坏性技术原则的框架，并以此来解释为什么开发成熟技术上最为有效的管理方法反而会阻碍对破坏性技术的开发。最后，他提出，管理者可利用这些原则，使他们所在的企业能够更加有效地开发代表未来市场发展趋势的新技术。</p>
 
       
     </div>

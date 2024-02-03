@@ -137,7 +137,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-count">546</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -165,235 +165,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/nginx%20%E5%B8%B8%E8%A7%81%E8%BD%AC%E5%8F%91%E7%AD%96%E7%95%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/nginx%20%E5%B8%B8%E8%A7%81%E8%BD%AC%E5%8F%91%E7%AD%96%E7%95%A5/" class="post-title-link" itemprop="url">nginx 常见转发策略</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-12-23 00:00:02" itemprop="dateCreated datePublished" datetime="2015-12-23T00:00:02+08:00">2015-12-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/nginx/" itemprop="url" rel="index"><span itemprop="name">nginx</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="nginx-常见转发策略"><a href="#nginx-常见转发策略" class="headerlink" title="nginx 常见转发策略"></a>nginx 常见转发策略</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    root   html/wosai;</span><br><span class="line">    index  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">        location /uncle &#123;</span><br><span class="line">                        proxy_pass http://backend;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        location /ws_wxService&#123;</span><br><span class="line">                       #proxy_pass http://127.0.0.1:8080;</span><br><span class="line">                       proxy_pass http://x.wosaitech.cn;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        # 地址栏重写</span><br><span class="line">        location /release&#123;</span><br><span class="line">                       #proxy_pass https://git.oschina.net/wosaitech/release;</span><br><span class="line">                        rewrite ^(.*)$  https://git.oschina.net/wosaitech/release;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="无www域名，自动重定向到带www域名下。注意后缀要留"><a href="#无www域名，自动重定向到带www域名下。注意后缀要留" class="headerlink" title="无www域名，自动重定向到带www域名下。注意后缀要留"></a>无<code>www</code>域名，自动重定向到带<code>www</code>域名下。注意后缀要留</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  saixueba.com;</span><br><span class="line">    location / &#123;</span><br><span class="line">         rewrite ^(.*)$ http://www.saixueba.com/$1 permanent;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h1><p>位置: vim &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">    #include host-conf/tomcat.conf;</span><br><span class="line">    upstream tomcat&#123;</span><br><span class="line">        server 125.210.208.44:8080;</span><br><span class="line">        server 125.210.208.44:28081;</span><br><span class="line">    &#125;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       8081;</span><br><span class="line">        server_name  tomcat;</span><br><span class="line"> </span><br><span class="line">         location / &#123;</span><br><span class="line">    proxy_pass http://tomcat;</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">或(Tengine):</span><br><span class="line">upstream backend &#123;</span><br><span class="line">        server 127.0.0.1:8080;</span><br><span class="line">        server 127.0.0.1:28080;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">            #程序类</span><br><span class="line">                location / &#123;</span><br><span class="line">                                proxy_pass http://backend;</span><br><span class="line">                &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-
-<h1 id="多server配置"><a href="#多server配置" class="headerlink" title="多server配置"></a>多server配置</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"> </span><br><span class="line">        #charset koi8-r;</span><br><span class="line"> </span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"> </span><br><span class="line">        location / &#123;</span><br><span class="line">            root   html/;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  hzwomao.com www.hzwomao.com;</span><br><span class="line"> </span><br><span class="line">        location /&#123;</span><br><span class="line">                        proxy_pass http://127.0.0.1:8099;</span><br><span class="line">        &#125;   </span><br><span class="line"> </span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  wosaitech.com www.wosaitech.com;</span><br><span class="line"> </span><br><span class="line">        #charset koi8-r;</span><br><span class="line"> </span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"> </span><br><span class="line">        location / &#123;</span><br><span class="line">            root   html/wosai;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
-<h2 id="下载centos服务器配置"><a href="#下载centos服务器配置" class="headerlink" title="下载centos服务器配置"></a>下载centos服务器配置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sz /usr/local/nginx/conf/nginx.conf</span><br><span class="line">sz /usr/local/nginx/conf/host-conf/tomcat.conf</span><br></pre></td></tr></table></figure>
-<h1 id="赠品"><a href="#赠品" class="headerlink" title="赠品"></a>赠品</h1><h2 id="前端与后端交互-使用路径几种方式"><a href="#前端与后端交互-使用路径几种方式" class="headerlink" title="前端与后端交互,使用路径几种方式"></a>前端与后端交互,使用路径几种方式</h2><ul>
-<li>${pageContext.request.contextPath}     <code>jsp可用</code> <code>js不可用</code> <font color=red><code>遇到代码封装到js中EL表达式不可用</code></font></li>
-<li>window.document.location.href             <code>jsp不可用</code> <code>js可用</code> <font color=red><code>遇到服务器转发配置是,会出错</code></font></li>
-<li>相对路径 <code>jsp可用</code> <code>js可用</code><blockquote>
-<p>注意事项: 相对的前缀路径不是地址栏显示的路径而是后端打开的页面路径.<br>(如果系统是单页应用时,相对的路径都是index.html页面所在路径)</p>
-</blockquote>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/nginx%20%E5%B8%B8%E8%A7%81%E8%BD%AC%E5%8F%91%E7%AD%96%E7%95%A5/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E7%89%88%E6%9C%AC%E5%8D%8F%E4%BD%9C%E5%B7%A5%E5%85%B7(svn,git)%E4%B8%ADtag%E5%92%8Cbranch%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E7%89%88%E6%9C%AC%E5%8D%8F%E4%BD%9C%E5%B7%A5%E5%85%B7(svn,git)%E4%B8%ADtag%E5%92%8Cbranch%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" class="post-title-link" itemprop="url">版本协作工具(svn,git)中tag和branch的应用场景</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-12-23 00:00:00" itemprop="dateCreated datePublished" datetime="2015-12-23T00:00:00+08:00">2015-12-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/svn/" itemprop="url" rel="index"><span itemprop="name">svn</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="tag-标记"><a href="#tag-标记" class="headerlink" title="tag: 标记"></a>tag: 标记</h1><p>常用于build打包后.目的是事后能随时获取到版本包的代码</p>
-<h1 id="branch-分支"><a href="#branch-分支" class="headerlink" title="branch:分支"></a>branch:分支</h1><h2 id="场景一"><a href="#场景一" class="headerlink" title="场景一:"></a>场景一:</h2><p>常用于线上版本同步分支.目的是遇到问题时,有同步与运营的代码,进行针对性问题的修改而不会受到主干开发版本的干扰.</p>
-<blockquote>
-<p>一定程度上也可以使用tag标记,区别在于tag标记是在主干,迁出后不方便多人协作.因为修改的代码不允许提交.<br>(提交前需更新到当前分支最新状态,更新后又包含了日常开发代码,不能用于版本补丁)<br> 适用单人修改问题,补丁上线后,更新代码,再提交修改问题代码到当前分支.</p>
-</blockquote>
-<h2 id="场景二"><a href="#场景二" class="headerlink" title="场景二:"></a>场景二:</h2><p>新技术或实验性功能,可迁出branch分支进行,如果结果满意,分支合并到主干.不满意,废弃即可,不影响主干能力.</p>
-<blockquote>
-<p>需要注意的是,修改的范围,如果可预见造成大规模的冲突或目录重构等,就不建议分支主干并行开发,因为带来的合并冲突解决会非常的困难.</p>
-</blockquote>
-<hr>
-<h2 id="git打tag"><a href="#git打tag" class="headerlink" title="git打tag"></a>git打tag</h2><p>使用 <code>git tag</code> 命令来添加新标签<br><code>git tag -a v1.4 -m &#39;version 1.4&#39;</code><br>使用 <code>git push</code> 命令来将标签推送到远程仓库<br><code>git push origin v1.4:v1.4</code></p>
-<h2 id="git建分支"><a href="#git建分支" class="headerlink" title="git建分支"></a>git建分支</h2><p><code>创建分支</code>    git branch test</p>
-<h2 id="git分支合并"><a href="#git分支合并" class="headerlink" title="git分支合并"></a>git分支合并</h2><ul>
-<li>怎样手动合并此 Pull Request</li>
-</ul>
-<p>git checkout master<br>git pull <a target="_blank" rel="noopener" href="http://git.oschina.net/liuxiang7/auction.git">http://git.oschina.net/liuxiang7/auction.git</a> auctionbak<br>git push origin master</p>
-<h2 id="git分支控制常规命令"><a href="#git分支控制常规命令" class="headerlink" title="git分支控制常规命令"></a>git分支控制常规命令</h2><p><code>查看远程分支</code>    git branch -a<br><code>查看本地分支</code>    git branch<br><code>创建分支</code>    git branch test<br><code>查看本地分支</code>    git branch<br><code>线面是把分支推到远程分支</code>    git push origin test<br><code>切换分支到test</code>    git checkout test<br><code>删除本地分支</code>   git branch -d test<br><code>看出来origin其实就是远程的git地址的一个别名</code> git remote  -v </p>
-<p><code>git 查看远程分支、本地分支、创建分支、把分支推到远程repository、删除本地分支</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/arkblue/article/details/9568249">http://blog.csdn.net/arkblue/article/details/9568249</a></p>
-<p><code>3.2 Git 分支 - 分支的新建与合并</code><br><a target="_blank" rel="noopener" href="http://git-scm.com/book/zh/ch3-2.html">http://git-scm.com/book/zh/ch3-2.html</a></p>
-<hr>
-<h2 id="svn打Branch-Tag-一体"><a href="#svn打Branch-Tag-一体" class="headerlink" title="svn打Branch/Tag 一体"></a>svn打<code>Branch/Tag</code> 一体</h2><p><code>创建</code> 目录 右键-TortoiseSVN- 分支&#x2F;标记-目标路径,备注-确定<br><code>查看</code> 版本库浏览器</p>
-<h2 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h2><p>目录 右键-TortoiseSVN-合并-选择来源的代码库-合并</p>
-<p><code>svn 命令行创建和删除 分支和tags</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/yangzhongxuan/article/details/7519948">http://blog.csdn.net/yangzhongxuan/article/details/7519948</a></p>
-<p><code>TortoiseSVN中分支和合并实践</code><br><a target="_blank" rel="noopener" href="http://www.open-open.com/lib/view/open1346982569725.html">http://www.open-open.com/lib/view/open1346982569725.html</a></p>
-<hr>
-<p><code>SVN在团队项目中的使用技巧：[2]Tag操作</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/fa4125acbf509e28ac709290.html">http://jingyan.baidu.com/article/fa4125acbf509e28ac709290.html</a></p>
-<p><code>SVN之tag打包</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/636f38bb4738e1d6b846100f.html">http://jingyan.baidu.com/article/636f38bb4738e1d6b846100f.html</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/%E7%89%88%E6%9C%AC%E5%8D%8F%E4%BD%9C%E5%B7%A5%E5%85%B7(svn,git)%E4%B8%ADtag%E5%92%8Cbranch%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -432,14 +203,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2015-12-21 23:27:52" itemprop="dateCreated datePublished" datetime="2015-12-21T23:27:52+08:00">2015-12-21</time>
+      <time title="Created: 2015-12-21 23:27:52" itemprop="dateCreated datePublished" datetime="2015-12-21T23:27:52+00:00">2015-12-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:21" itemprop="dateModified" datetime="2024-01-26T12:42:21+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -542,14 +313,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2015-12-18 00:00:02" itemprop="dateCreated datePublished" datetime="2015-12-18T00:00:02+08:00">2015-12-18</time>
+      <time title="Created: 2015-12-18 00:00:02" itemprop="dateCreated datePublished" datetime="2015-12-18T00:00:02+00:00">2015-12-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -638,14 +409,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2015-12-18 00:00:00" itemprop="dateCreated datePublished" datetime="2015-12-18T00:00:00+08:00">2015-12-18</time>
+      <time title="Created: 2015-12-18 00:00:00" itemprop="dateCreated datePublished" datetime="2015-12-18T00:00:00+00:00">2015-12-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -801,14 +572,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2015-12-15 00:00:02" itemprop="dateCreated datePublished" datetime="2015-12-15T00:00:02+08:00">2015-12-15</time>
+      <time title="Created: 2015-12-15 00:00:02" itemprop="dateCreated datePublished" datetime="2015-12-15T00:00:02+00:00">2015-12-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -928,14 +699,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2015-12-15 00:00:00" itemprop="dateCreated datePublished" datetime="2015-12-15T00:00:00+08:00">2015-12-15</time>
+      <time title="Created: 2015-12-15 00:00:00" itemprop="dateCreated datePublished" datetime="2015-12-15T00:00:00+00:00">2015-12-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1050,14 +821,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2015-12-14 00:00:05" itemprop="dateCreated datePublished" datetime="2015-12-14T00:00:05+08:00">2015-12-14</time>
+      <time title="Created: 2015-12-14 00:00:05" itemprop="dateCreated datePublished" datetime="2015-12-14T00:00:05+00:00">2015-12-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1150,14 +921,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2015-12-14 00:00:04" itemprop="dateCreated datePublished" datetime="2015-12-14T00:00:04+08:00">2015-12-14</time>
+      <time title="Created: 2015-12-14 00:00:04" itemprop="dateCreated datePublished" datetime="2015-12-14T00:00:04+00:00">2015-12-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1243,14 +1014,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2015-12-14 00:00:03" itemprop="dateCreated datePublished" datetime="2015-12-14T00:00:03+08:00">2015-12-14</time>
+      <time title="Created: 2015-12-14 00:00:03" itemprop="dateCreated datePublished" datetime="2015-12-14T00:00:03+00:00">2015-12-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1334,6 +1105,222 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/ios%E5%85%8DApp%20Store%E5%AE%A1%E6%A0%B8%E5%AE%89%E8%A3%85%E5%87%A0%E7%A7%8D%E9%80%94%E5%BE%84/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ios%E8%AF%81%E4%B9%A6%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ios%E8%AF%81%E4%B9%A6%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">ios证书结构</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-12-14 00:00:02" itemprop="dateCreated datePublished" datetime="2015-12-14T00:00:02+00:00">2015-12-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ios/" itemprop="url" rel="index"><span itemprop="name">ios</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Provisioning-Profiles-证书"><a href="#Provisioning-Profiles-证书" class="headerlink" title="Provisioning Profiles 证书"></a>Provisioning Profiles 证书</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/15-12-14/99305824.jpg"></p>
+<p>Development 开发 -不可上app Store</p>
+<ul>
+<li>iOS App Development      可添加测试设备 (免审核安装)-用于真机调试</li>
+</ul>
+<p>Distribution 发布 -  可上app Store</p>
+<ul>
+<li>App Store     不可添加 测试 设备</li>
+<li>Ad Hoc          可添加 测试 设备(免审核安装)
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/ios%E8%AF%81%E4%B9%A6%E7%BB%93%E6%9E%84/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ios%E7%BC%96%E8%AF%91-%E6%89%93%E5%8C%85%E9%97%AE%E9%A2%98%E7%AC%94%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ios%E7%BC%96%E8%AF%91-%E6%89%93%E5%8C%85%E9%97%AE%E9%A2%98%E7%AC%94%E5%BD%95/" class="post-title-link" itemprop="url">ios 编译/打包问题笔录</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-12-14 00:00:01" itemprop="dateCreated datePublished" datetime="2015-12-14T00:00:01+00:00">2015-12-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ios/" itemprop="url" rel="index"><span itemprop="name">ios</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="UUID找不到"><a href="#UUID找不到" class="headerlink" title="UUID找不到?"></a>UUID找不到?</h1><p>错误:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Code Sign error: No matching provisioning profile found: Your build settings specify a provisioning profile with the UUID “5789f696-49dc-4b81-977c-48f780c54273”, however, no such provisioning profile was found.</span><br></pre></td></tr></table></figure>
+<h2 id="UUID-“-5789f696-49dc-4b81-977c-48f780c54273-”-是什么"><a href="#UUID-“-5789f696-49dc-4b81-977c-48f780c54273-”-是什么" class="headerlink" title="UUID   “ 5789f696-49dc-4b81-977c-48f780c54273 ” 是什么?"></a>UUID   “ 5789f696-49dc-4b81-977c-48f780c54273 ” 是什么?</h2><p>UUID是”Provisioning Profile”对应的实际文件名,证明:<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/15-12-14/94102932.jpg"></p>
+<h2 id="解决问题-清理无效的UUID"><a href="#解决问题-清理无效的UUID" class="headerlink" title="解决问题, 清理无效的UUID"></a>解决问题, 清理无效的UUID</h2><p>1.打开路径<code>cd   /Users/*/Library/MobileDevice</code> <code>open Provisioning Profiles</code> ,<br>2.删除” 5789f696-49dc-4b81-977c-48f780c54273.mobileprovision “文件.<br>3.重新到<code>苹果开发者网站</code>下载新的<code>Provisionning Profiles</code>文件,  download 会自定更新xcode<br>4.再试报错的行为(打包),看此错误是否解决.</p>
+<p>** 次级处理方式： ** （ 见：mac项目编译 UUID 找不到,解决办法.md ）<br>Your build settings specify a provisioning profile with the UUID, no provisioning profile was found - rbyyy(Create produce different)</p>
+<ul>
+<li>清理project.pbxproj文件中UUID：文件中配置“PROVISIONING_PROFILE”项清理</li>
+</ul>
+<hr>
+<h1 id="Command-usr-bin-codesign-failed-with-exit-code-1"><a href="#Command-usr-bin-codesign-failed-with-exit-code-1" class="headerlink" title="Command &#x2F;usr&#x2F;bin&#x2F;codesign failed with exit code 1"></a>Command &#x2F;usr&#x2F;bin&#x2F;codesign failed with exit code 1</h1><p>报错原因：codesign 证书找不到<br>证书指：打包使用的Provisioning Profiles 文件 中所配置依赖的Certificates证书<br>找不到指：本机设备 （mac） 中找不到，正常在钥匙扣中。<br>注意事项： Certificates 证书存在开发（dev）与发布（dis）两种，具体查看PP 文件 中所配置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CodeSign /Users/wosai/Library/Developer/Xcode/DerivedData/爱科学-fhrouhlgzqrnrqcorivoclqidoop/Build/Products/Debug-iphoneos/爱科学.app</span><br><span class="line">    cd &quot;/Users/wosai/Desktop/work/hybrid Dev/k12student/platforms/ios&quot;</span><br><span class="line">    export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/codesign_allocate</span><br><span class="line">    export PATH=&quot;/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin&quot;</span><br><span class="line"> </span><br><span class="line">Signing Identity:     &quot;iPhone Developer: Xiang Liu (W66R7RU3TA)&quot;</span><br><span class="line">Provisioning Profile: &quot;aikexue_dev&quot;</span><br><span class="line">                      (48442213-e40e-4b23-97d1-bb8b90b535b7)</span><br><span class="line"> </span><br><span class="line">    /usr/bin/codesign --force --sign 046D9F6D7C99A7C383E4FF8D76A80878BBFCB0BF --entitlements /Users/wosai/Library/Developer/Xcode/DerivedData/爱科学-fhrouhlgzqrnrqcorivoclqidoop/Build/Intermediates/爱科学.build/Debug-iphoneos/爱科学.build/爱科学.app.xcent --timestamp=none /Users/wosai/Library/Developer/Xcode/DerivedData/爱科学-fhrouhlgzqrnrqcorivoclqidoop/Build/Products/Debug-iphoneos/爱科学.app</span><br><span class="line"> </span><br><span class="line">046D9F6D7C99A7C383E4FF8D76A80878BBFCB0BF: no identity found</span><br><span class="line">Command /usr/bin/codesign failed with exit code 1</span><br></pre></td></tr></table></figure>
+
+
+<p><code>IOS 开发 证书显示 此证书签发者无效 解决办法</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/ddd998/article/details/50673592">http://blog.csdn.net/ddd998/article/details/50673592</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">钥匙串中的所有证书 都 提示此证书签发者无效</span><br><span class="line">经查找得知系统证书WWDR在2016年2月14日失效，需要更新WWDR系统证书</span><br><span class="line">下载证书地址https://developer.apple.com/certificationauthority/AppleWWDRCA.cer下载之后 双击安装</span><br><span class="line">到这  还需要一步</span><br><span class="line">1.在登录里面删除过期的证书WWDR</span><br><span class="line">2.在系统里面 删除过期的证书WWDR 就可以完美的解决了。所有的证书 都可以使用了</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">找不到过期证书？点击显示--&gt;显示已过期的证书。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="使用的PP-文件-中配置的Certificates证书，没有下载到本机钥匙扣。"><a href="#使用的PP-文件-中配置的Certificates证书，没有下载到本机钥匙扣。" class="headerlink" title="使用的PP 文件 中配置的Certificates证书，没有下载到本机钥匙扣。"></a>使用的PP 文件 中配置的Certificates证书，没有下载到本机钥匙扣。</h1><ul>
+<li>no identities from profile</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">No identities from profile</span><br><span class="line">Build Settings|CodeSigning的Provisioning Profile中选择了本地安装的provisioning profile之后，Code Signing Identity中下拉提示No identities from profile “…”or No identities from keychain.</span><br><span class="line">Xcode配置指定UDID的provisioning profile中的DeveloperCertificates在本地KeyChain中不存在（No identities are available）或不一致（KeyPair中的Private Key丢失），此时需去网站检查ProvisioningProfile中的App ID-Certificate-Device配置是否正确。如果是别人提供的共享账号（*.developerprofile）或共享证书(*.p12)，请确保导出了对应Key Pair中的Private Key。必要时也直接在Xcode中Fix issue予以解决（可能自动生成iOS Team ProvisioningProfile）。</span><br></pre></td></tr></table></figure>
+
+
+<p>**参考 **<br><code>iOS Provisioning Profile(Certificate)与Code Signing详解 - pilqc2009的专栏 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/pilqc2009/article/details/46698541">http://blog.csdn.net/pilqc2009/article/details/46698541</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/ios%E7%BC%96%E8%AF%91-%E6%89%93%E5%8C%85%E9%97%AE%E9%A2%98%E7%AC%94%E5%BD%95/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

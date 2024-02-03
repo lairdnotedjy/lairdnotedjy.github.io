@@ -137,7 +137,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-count">546</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -165,110 +165,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E7%8E%B0%E4%BB%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E5%86%85%E7%BD%AE%E7%9A%84%E5%87%A0%E4%B8%AA%E5%8F%AF%E4%BB%A5%E7%AD%89%E6%95%88%E6%9B%BF%E4%BB%A3jQuery%E7%9A%84%E5%8A%9F%E8%83%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E7%8E%B0%E4%BB%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E5%86%85%E7%BD%AE%E7%9A%84%E5%87%A0%E4%B8%AA%E5%8F%AF%E4%BB%A5%E7%AD%89%E6%95%88%E6%9B%BF%E4%BB%A3jQuery%E7%9A%84%E5%8A%9F%E8%83%BD/" class="post-title-link" itemprop="url">现代浏览器中内置的几个可以等效替代jQuery的功能</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-08-30 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-30T00:00:00+08:00">2016-08-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="获取元素选择器是一样的-selector选择器"><a href="#获取元素选择器是一样的-selector选择器" class="headerlink" title="获取元素选择器是一样的[selector选择器] &#96;&#96;&#96;"></a>获取元素选择器是一样的[selector选择器] &#96;&#96;&#96;</h1><p>$(‘.contant&gt;h1’);<br>[<h1>现代浏览器中内置的几个可以等效替代jQuery的功能</h1>]</p>
-<p>document.querySelector(‘.contant&gt;h1’);</p>
-<h1>现代浏览器中内置的几个可以等效替代jQuery的功能</h1>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"># API依然存在差异</span><br></pre></td></tr></table></figure>
-<p>&#x2F;&#x2F; jQuery</p>
-<p>$(‘.contant&gt;h1’).html();<br>“现代浏览器中内置的几个可以等效替代jQuery的功能”</p>
-<p>&#x2F;&#x2F; querySelector<br>document.querySelector(‘.contant&gt;h1’).html();<br>VM1257:1 Uncaught TypeError: document.querySelector(…).html is not a function(…)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">// jQuery</span><br><span class="line"></span><br><span class="line">$(&quot;.contant&gt;h1&quot;).css(&#x27;background-color&#x27;,&quot;salmon&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// querySelector</span><br><span class="line">document.querySelector(&#x27;.contant&gt;h1&#x27;).style.backgroundColor=&quot;salmon&quot;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// jQuery方式</span><br><span class="line">$(&quot;#picture&quot;).attr(&quot;src&quot;, &quot;http://placekitten.com/200/200&quot;);</span><br><span class="line"> </span><br><span class="line">//使用将querySelector映射为$的原生js方式</span><br><span class="line">$(&quot;#picture&quot;).src = &quot;http://placekitten.com/200/200&quot;;</span><br></pre></td></tr></table></figure>
-<h1 id="表达式-统一"><a href="#表达式-统一" class="headerlink" title="表达式 $ 统一"></a>表达式 <code>$</code> 统一</h1><blockquote>
-<p>并不建议,因为除选择器以外的API都不一样.而使用统样的表达式<code>$</code>程序员容易混淆,犯错</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  // 创建全局的 &#x27;$&#x27; 变量</span><br><span class="line">  window.$ = function(selector) &#123;</span><br><span class="line">    return document.querySelector(selector);</span><br><span class="line">  &#125;;</span><br><span class="line"> </span><br><span class="line">  (function() &#123;</span><br><span class="line">    // 通过id查找item1，将它的背景颜色修改为浅红</span><br><span class="line">    var item = $(&quot;#salmon&quot;).style.backgroundColor=&quot;salmon&quot;;</span><br><span class="line">    console.log(item);</span><br><span class="line">  &#125;()); </span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="document-queryselectorall-返回的是一个节点列表"><a href="#document-queryselectorall-返回的是一个节点列表" class="headerlink" title="document.queryselectorall 返回的是一个节点列表"></a>document.queryselectorall 返回的是一个节点列表</h1><p>一个很巧妙的做法是将querySelector映射为$，而将querySelectorAll函数映射为$$。但它返回的是一个节点列表，不如jQuery里返回的Array格式好用，我们可以使用Array.prototype.slice.call(nodeList)方法加工一下，让它更方便。</p>
-<p><code>现代浏览器中内置的几个可以等效替代jQuery的功能 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/2y2Qvy2">http://www.tuicool.com/articles/2y2Qvy2</a></p>
-<hr>
-<h1 id="angular环境使用-angular-element"><a href="#angular环境使用-angular-element" class="headerlink" title="angular环境使用 angular.element()"></a>angular环境使用<code> angular.element()</code></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">angular.element()</span><br><span class="line">JQLite &#123;&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">方法一：</span><br><span class="line"></span><br><span class="line">var test = angular.element(document.querySelector(&#x27;#testId&#x27;));</span><br><span class="line">test.addClass(‘testClass’);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">方法二：</span><br><span class="line"></span><br><span class="line">var test = angular.element(document.getElementById(&#x27;test&#x27;);</span><br><span class="line">test.addClass(‘testClass’);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">方法三：</span><br><span class="line"></span><br><span class="line">angular.forEach(angular.element(document).find(&#x27;div&#x27;),function(node)&#123;</span><br><span class="line">            if(node.id == &#x27;testId&#x27;)&#123;</span><br><span class="line">                     node.addClass(&#x27;testClass&#x27;);</span><br><span class="line">            &#125;</span><br><span class="line">if(node.className == ‘testClass’)&#123;</span><br><span class="line">node.removeClass(‘testClass’)</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">方法四：使用$documen.</span><br><span class="line"></span><br><span class="line">$document就和angular.element(document)是一样的</span><br><span class="line"></span><br><span class="line">angular.forEach($document.find(&#x27;div&#x27;),function(node)&#123;</span><br><span class="line">            if(node.id == &#x27;testId&#x27;)&#123;</span><br><span class="line">                     node.addClass(&#x27;testClass&#x27;);</span><br><span class="line">            &#125;</span><br><span class="line">if(node.className == &#x27;testClass&#x27;)&#123;</span><br><span class="line">node.removeClass(‘testClass’)</span><br><span class="line">&#125;</span><br><span class="line">           &#125;)</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<p><code>Angular.element和$document的使用方法分析，代替jquery - Simon_ITer的个人空间 - 开源中国社区</code><br><a target="_blank" rel="noopener" href="http://my.oschina.net/keysITer/blog/626746">http://my.oschina.net/keysITer/blog/626746</a></p>
-<p><code>Angular&#39;s jqLite</code><br><a target="_blank" rel="noopener" href="http://devdocs.io/angularjs~1.5/api/ng/function/angular.element">http://devdocs.io/angularjs~1.5/api/ng/function/angular.element</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/ys-ys/p/4918985.html">http://www.cnblogs.com/ys-ys/p/4918985.html</a></p>
-<p><code>angular源码分析：angular的整个加载流程 - 王大鹏 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/web2-developer/p/angular-7.html">http://www.cnblogs.com/web2-developer/p/angular-7.html</a></p>
-<p><code>angular源码分析：angular中jqLite的实现——你可以丢掉jQuery了 - 王大鹏 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/web2-developer/archive/2015/11/09/angular-5.html">http://www.cnblogs.com/web2-developer/archive/2015/11/09/angular-5.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -307,14 +203,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-08-27 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-27T00:00:00+08:00">2016-08-27</time>
+      <time title="Created: 2016-08-27 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-27T00:00:00+00:00">2016-08-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:28" itemprop="dateModified" datetime="2024-01-26T12:42:28+00:00">2024-01-26</time>
     </span>
 
   
@@ -499,14 +395,14 @@ RouteData.transcript &#x3D; {questionRoot: questionRoot};<br>localStorageService
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-08-26 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-26T00:00:00+08:00">2016-08-26</time>
+      <time title="Created: 2016-08-26 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-26T00:00:00+00:00">2016-08-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:17" itemprop="dateModified" datetime="2024-01-26T12:42:17+00:00">2024-01-26</time>
     </span>
 
   
@@ -610,14 +506,14 @@ RouteData.transcript &#x3D; {questionRoot: questionRoot};<br>localStorageService
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-08-24 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-24T00:00:00+08:00">2016-08-24</time>
+      <time title="Created: 2016-08-24 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-24T00:00:00+00:00">2016-08-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:21" itemprop="dateModified" datetime="2024-01-26T12:42:21+00:00">2024-01-26</time>
     </span>
 
   
@@ -729,14 +625,14 @@ RouteData.transcript &#x3D; {questionRoot: questionRoot};<br>localStorageService
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-08-23 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-23T00:00:00+08:00">2016-08-23</time>
+      <time title="Created: 2016-08-23 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-23T00:00:00+00:00">2016-08-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
     </span>
 
   
@@ -828,14 +724,14 @@ RouteData.transcript &#x3D; {questionRoot: questionRoot};<br>localStorageService
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-08-18 21:19:01" itemprop="dateCreated datePublished" datetime="2016-08-18T21:19:01+08:00">2016-08-18</time>
+      <time title="Created: 2016-08-18 21:19:01" itemprop="dateCreated datePublished" datetime="2016-08-18T21:19:01+00:00">2016-08-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -932,14 +828,14 @@ RouteData.transcript &#x3D; {questionRoot: questionRoot};<br>localStorageService
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-08-18 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-18T00:00:00+08:00">2016-08-18</time>
+      <time title="Created: 2016-08-18 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-18T00:00:00+00:00">2016-08-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
     </span>
 
   
@@ -1028,14 +924,14 @@ RouteData.transcript &#x3D; {questionRoot: questionRoot};<br>localStorageService
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-08-12 22:52:23" itemprop="dateCreated datePublished" datetime="2016-08-12T22:52:23+08:00">2016-08-12</time>
+      <time title="Created: 2016-08-12 22:52:23" itemprop="dateCreated datePublished" datetime="2016-08-12T22:52:23+00:00">2016-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:26" itemprop="dateModified" datetime="2024-01-26T12:42:26+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1295,14 +1191,14 @@ RouteData.transcript &#x3D; {questionRoot: questionRoot};<br>localStorageService
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-08-12 22:47:34" itemprop="dateCreated datePublished" datetime="2016-08-12T22:47:34+08:00">2016-08-12</time>
+      <time title="Created: 2016-08-12 22:47:34" itemprop="dateCreated datePublished" datetime="2016-08-12T22:47:34+00:00">2016-08-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1385,14 +1281,14 @@ RouteData.transcript &#x3D; {questionRoot: questionRoot};<br>localStorageService
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-08-10 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-10T00:00:00+08:00">2016-08-10</time>
+      <time title="Created: 2016-08-10 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-10T00:00:00+00:00">2016-08-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
     </span>
 
   
@@ -1449,6 +1345,109 @@ RouteData.transcript &#x3D; {questionRoot: questionRoot};<br>localStorageService
 <p><code>云服务器 ECS_快速入门(Linux)_步骤 4：格式化和挂载数据盘-阿里云产品文档</code><br><a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/25426.html">https://help.aliyun.com/document_detail/25426.html</a></p>
 <p><code>阿里云ECS挂载磁盘 - Tony打豆豆 - SegmentFault</code><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000004692786">https://segmentfault.com/a/1190000004692786</a></p>
 <p><code>[原]linux删除文件后没有释放空间 - 冰刀(skate) - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/wyzxg/article/details/4971843">http://blog.csdn.net/wyzxg/article/details/4971843</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Use-nuts-cloud-sync-IntelliJ-IDEA-configuration-files/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Use-nuts-cloud-sync-IntelliJ-IDEA-configuration-files/" class="post-title-link" itemprop="url">使用坚果云同步IntelliJ IDEA的配置文件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-08-09 21:50:39" itemprop="dateCreated datePublished" datetime="2016-08-09T21:50:39+00:00">2016-08-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:17" itemprop="dateModified" datetime="2024-01-26T12:42:17+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>对于IDEA这样的神器，每个人都必然会有很多个性化的配置，那么如何在多台终端同步IDEA的配置呢？配合强大的坚果云同步功能来自动同步你的配置文件吧。另外坚果云免费版虽然对流量有限制，但是同步一个小小的配置文件夹还是足够了。</p>
+<p>此方法也适用于JetBrains家的其它IDE系列产品，稍有不同之处请自行调整。</p>
+<ul>
+<li><strong>IntelliJ IDEA</strong>，一套智慧型的Java整合开发工具，特别专注与强调程序员的开发撰写效率提升</li>
+<li><strong>PHPStorm</strong>，PHP集成开发工具</li>
+<li><strong>PyCharm</strong>，智能Python集成开发工具</li>
+<li><strong>RubyMine</strong>，一个为Ruby和Rails开发者准备的IDE，其带有所有开发者必须的功能，并将之紧密集成于便捷的开发环境中</li>
+<li><strong>WebStorm</strong>，智能HTML&#x2F;CSS&#x2F;JS开发工具</li>
+<li><strong>AppCode</strong>，开发Obj-C的IDE，是一个XCode的替代物</li>
+</ul>
+<p>IDEA 默认配置文件存放位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Windows 保存在 &#x27;%HOMEPATH%/.&lt;product&gt;&lt;version&gt;/config&#x27; 例如&#x27;C:/Users/JohnS/.IntelliJIdea2018.1/config&#x27;</span><br><span class="line">Unix/Linux 保存在 &#x27;~/.&lt;product&gt;&lt;version&gt;/config&#x27; 例如 &#x27;~/.IntelliJIdea2018.1/config&#x27;</span><br><span class="line">Mac 保存在 &#x27;~/Library/Preferences/&lt;product&gt;&lt;version&gt;&#x27; 例如 &#x27;~/Library/Preferences/IntelliJIdea2018.1&#x27;</span><br></pre></td></tr></table></figure>
+<p>坚果云的客户端安装就不说了，关闭IDEA，从你的默认配置目录里剪切config这个目录到你的坚果云同步目录。如果你想要同步多个工具的配置目录，那么可以为config搭配一个父目录使用。如下所示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E:/jianguoyun/IDEA/config        #IDEA的配置文件路径</span><br><span class="line">E:/jianguoyun/PyCharm/config     #PyCharm的配置文件路径</span><br><span class="line">E:/jianguoyun/PHPStorm/config    #PHPStorm的配置文件路径</span><br></pre></td></tr></table></figure>
+
+<p>打开IDEA安装目录<code>C:/Program Files (x86)/JetBrains/IntelliJ IDEA 2016.2/bin/idea.properties</code>，找到第8行，把idea.config.path前面的<code>#</code>号去掉，<code>=</code>号后面的路径修改成之前的配置文件夹的目录，例如IDEA修改为<code>idea.config.path=E:/jianguoyun/IDEA/config</code>。记得把路径中的“\”换成“&#x2F;”。在Mac系统中，IDEA的配置路径<code>~/Library/Preferences/IntelliJIdea2018.1</code>下面并不存在<code>idea.properties</code>，那么新建一个文件即可，内容如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># custom IntelliJ IDEA properties</span><br><span class="line">idea.config.path=/Users/mulai.wx/Nutstore Files/jianguoyun/IDEA/config-mac</span><br></pre></td></tr></table></figure>
+<p>如果有不清楚的地方，可以直接参考IDEA的官方文档 <a target="_blank" rel="noopener" href="https://www.jetbrains.com/help/idea/tuning-the-ide.html#default-dirs"><strong>Default IDE directories</strong></a>。</p>
+<p>那么在公司直接安装坚果云，将IDEA的配置文件夹同步到本地，然后修改<code>idea.properties</code>中的值指向坚果云中正确的配置文件夹路径即可。</p>
 
       
     </div>

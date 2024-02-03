@@ -137,7 +137,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-count">546</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -165,93 +165,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/SpringMVC%E8%BF%94%E5%9B%9EJSON/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/SpringMVC%E8%BF%94%E5%9B%9EJSON/" class="post-title-link" itemprop="url">SpringMVC返回JSON</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-20T00:00:00+08:00">2017-03-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!--RequestMappingHandlerAdapter--&gt;</span><br><span class="line">&lt;!-- 默认的注解映射的支持，org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping --&gt;</span><br><span class="line">&lt;mvc:annotation-driven&gt;</span><br><span class="line">       &lt;!-- 消息转换(常用于:返回字符串,对象转json) --&gt;</span><br><span class="line"></span><br><span class="line">&lt;mvc:message-converters&gt;</span><br><span class="line">&lt;ref bean=&quot;stringHttpMessageConverter&quot;/&gt;</span><br><span class="line">&lt;ref bean=&quot;marshallingHttpMessageConverter&quot;/&gt;</span><br><span class="line">&lt;ref bean=&quot;mappingJackson2HttpMessageConverter&quot;/&gt;</span><br><span class="line">&lt;/mvc:message-converters&gt;</span><br><span class="line">&lt;/mvc:annotation-driven&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;bean id=&quot;stringHttpMessageConverter&quot;</span><br><span class="line"> class=&quot;org.springframework.http.converter.StringHttpMessageConverter&quot;/&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;bean id=&quot;marshallingHttpMessageConverter&quot;</span><br><span class="line"> class=&quot;org.springframework.http.converter.xml.MarshallingHttpMessageConverter&quot;&gt;</span><br><span class="line">&lt;property name=&quot;marshaller&quot; ref=&quot;castorMarshaller&quot;/&gt;</span><br><span class="line">&lt;property name=&quot;unmarshaller&quot; ref=&quot;castorMarshaller&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;bean id=&quot;mappingJackson2HttpMessageConverter&quot;</span><br><span class="line"> class=&quot;org.springframework.http.converter.json.MappingJackson2HttpMessageConverter&quot;&gt;</span><br><span class="line">&lt;property name=&quot;supportedMediaTypes&quot;&gt;</span><br><span class="line">&lt;list&gt;</span><br><span class="line">&lt;value&gt;application/json&lt;/value&gt;</span><br><span class="line">&lt;value&gt;application/xml&lt;/value&gt;</span><br><span class="line">&lt;value&gt;text/html&lt;/value&gt;</span><br><span class="line">&lt;value&gt;text/plain&lt;/value&gt;</span><br><span class="line">&lt;value&gt;text/xml&lt;/value&gt;</span><br><span class="line">&lt;/list&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;bean id=&quot;castorMarshaller&quot; class=&quot;org.springframework.oxm.castor.CastorMarshaller&quot;/&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- REST中根据URL后缀自动判定Content-Type及相应的View --&gt;</span><br><span class="line">&lt;bean id=&quot;contentNegotiationManager&quot; class=&quot;org.springframework.web.accept.ContentNegotiationManagerFactoryBean&quot;&gt;</span><br><span class="line">&lt;property name=&quot;mediaTypes&quot; &gt;</span><br><span class="line">&lt;map&gt;</span><br><span class="line">&lt;entry key=&quot;xml&quot; value=&quot;application/xml&quot;/&gt;</span><br><span class="line">&lt;entry key=&quot;json&quot; value=&quot;application/json&quot;/&gt;</span><br><span class="line">&lt;/map&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;ignoreAcceptHeader&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">&lt;property name=&quot;favorPathExtension&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>关键配置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;mappingJackson2HttpMessageConverter&quot;</span><br><span class="line"> class=&quot;org.springframework.http.converter.json.MappingJackson2HttpMessageConverter&quot;&gt;</span><br><span class="line">&lt;property name=&quot;supportedMediaTypes&quot;&gt;</span><br><span class="line">&lt;list&gt;</span><br><span class="line">&lt;value&gt;application/json&lt;/value&gt;</span><br><span class="line">&lt;value&gt;application/xml&lt;/value&gt;</span><br><span class="line">&lt;value&gt;text/html&lt;/value&gt;</span><br><span class="line">&lt;value&gt;text/plain&lt;/value&gt;</span><br><span class="line">&lt;value&gt;text/xml&lt;/value&gt;</span><br><span class="line">&lt;/list&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="使用-关键-ResponseBody"><a href="#使用-关键-ResponseBody" class="headerlink" title="使用(关键@ResponseBody)"></a>使用(关键<code>@ResponseBody</code>)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(method = RequestMethod.GET, value = &#123;&quot;sysConfig&quot;&#125;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public List sysConfig(HttpServletRequest request, HttpServletResponse response) &#123;</span><br><span class="line">    List&lt;SysConfig&gt; sysConfigList = sysConfigService.selectByExample(new Example(SysConfig.class));</span><br><span class="line">    return sysConfigList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>或</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(method = RequestMethod.GET, value = &#123;&quot;sysConfig2&quot;&#125;)</span><br><span class="line">public @ResponseBody List sysConfig2(HttpServletRequest request, HttpServletResponse response) &#123;</span><br><span class="line">    List&lt;SysConfig&gt; sysConfigList = sysConfigService.selectByExample(new Example(SysConfig.class));</span><br><span class="line">    return sysConfigList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<p><strong>参考</strong><br><code>配置SpringMVC返回JSON遇到的坑</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/caiwenfeng_for_23/article/details/43492973">http://blog.csdn.net/caiwenfeng_for_23/article/details/43492973</a></p>
-<p><code>maven与springMVC之HttpMessageConverter解析json - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/w2865673691/article/details/48466563">http://blog.csdn.net/w2865673691/article/details/48466563</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -290,14 +203,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-03-18 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-18T00:00:00+08:00">2017-03-18</time>
+      <time title="Created: 2017-03-18 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-18T00:00:00+00:00">2017-03-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
     </span>
 
   
@@ -375,14 +288,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-03-15 00:00:02" itemprop="dateCreated datePublished" datetime="2017-03-15T00:00:02+08:00">2017-03-15</time>
+      <time title="Created: 2017-03-15 00:00:02" itemprop="dateCreated datePublished" datetime="2017-03-15T00:00:02+00:00">2017-03-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
     </span>
 
   
@@ -506,14 +419,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-03-15 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-15T00:00:00+08:00">2017-03-15</time>
+      <time title="Created: 2017-03-15 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-15T00:00:00+00:00">2017-03-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
     </span>
 
   
@@ -610,14 +523,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-03-09 00:00:02" itemprop="dateCreated datePublished" datetime="2017-03-09T00:00:02+08:00">2017-03-09</time>
+      <time title="Created: 2017-03-09 00:00:02" itemprop="dateCreated datePublished" datetime="2017-03-09T00:00:02+00:00">2017-03-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
     </span>
 
   
@@ -703,14 +616,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-03-09 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-09T00:00:00+08:00">2017-03-09</time>
+      <time title="Created: 2017-03-09 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-09T00:00:00+00:00">2017-03-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
     </span>
 
   
@@ -933,14 +846,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-03-08 22:18:55" itemprop="dateCreated datePublished" datetime="2017-03-08T22:18:55+08:00">2017-03-08</time>
+      <time title="Created: 2017-03-08 22:18:55" itemprop="dateCreated datePublished" datetime="2017-03-08T22:18:55+00:00">2017-03-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1041,14 +954,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-03-08 00:00:06" itemprop="dateCreated datePublished" datetime="2017-03-08T00:00:06+08:00">2017-03-08</time>
+      <time title="Created: 2017-03-08 00:00:06" itemprop="dateCreated datePublished" datetime="2017-03-08T00:00:06+00:00">2017-03-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
     </span>
 
   
@@ -1131,14 +1044,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-03-08 00:00:05" itemprop="dateCreated datePublished" datetime="2017-03-08T00:00:05+08:00">2017-03-08</time>
+      <time title="Created: 2017-03-08 00:00:05" itemprop="dateCreated datePublished" datetime="2017-03-08T00:00:05+00:00">2017-03-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
     </span>
 
   
@@ -1257,14 +1170,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-03-08 00:00:04" itemprop="dateCreated datePublished" datetime="2017-03-08T00:00:04+08:00">2017-03-08</time>
+      <time title="Created: 2017-03-08 00:00:04" itemprop="dateCreated datePublished" datetime="2017-03-08T00:00:04+00:00">2017-03-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:21" itemprop="dateModified" datetime="2024-01-26T12:42:21+00:00">2024-01-26</time>
     </span>
 
   
@@ -1342,6 +1255,113 @@ http://www.springframework.org/schema/mvc
 </bean>
 </beans>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"># [jeesite]spring-content-shiro.xml</span><br><span class="line">```xml</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">xmlns:context=&quot;http://www.springframework.org/schema/context&quot; xsi:schemaLocation=&quot;</span><br><span class="line">http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd</span><br><span class="line">http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.1.xsd&quot;</span><br><span class="line">default-lazy-init=&quot;true&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;description&gt;Shiro Configuration&lt;/description&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;!-- 加载配置属性文件 --&gt;</span><br><span class="line">&lt;context:property-placeholder ignore-unresolvable=&quot;true&quot; location=&quot;classpath:jeesite.properties&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Shiro权限过滤过滤器定义 --&gt;</span><br><span class="line">&lt;bean name=&quot;shiroFilterChainDefinitions&quot; class=&quot;java.lang.String&quot;&gt;</span><br><span class="line">&lt;constructor-arg&gt;</span><br><span class="line">&lt;value&gt;</span><br><span class="line">/static/** = anon</span><br><span class="line">/userfiles/** = anon</span><br><span class="line">$&#123;adminPath&#125;/cas = cas</span><br><span class="line">$&#123;adminPath&#125;/login = authc</span><br><span class="line">$&#123;adminPath&#125;/logout = logout</span><br><span class="line">$&#123;adminPath&#125;/** = user</span><br><span class="line">/act/editor/** = user</span><br><span class="line">/ReportServer/** = user</span><br><span class="line">&lt;/value&gt;</span><br><span class="line">&lt;/constructor-arg&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 安全认证过滤器 --&gt;</span><br><span class="line">&lt;bean id=&quot;shiroFilter&quot; class=&quot;org.apache.shiro.spring.web.ShiroFilterFactoryBean&quot;&gt;</span><br><span class="line">&lt;property name=&quot;securityManager&quot; ref=&quot;securityManager&quot; /&gt;&lt;!-- </span><br><span class="line">&lt;property name=&quot;loginUrl&quot; value=&quot;$&#123;cas.server.url&#125;?service=$&#123;cas.project.url&#125;$&#123;adminPath&#125;/cas&quot; /&gt; --&gt;</span><br><span class="line">&lt;property name=&quot;loginUrl&quot; value=&quot;$&#123;adminPath&#125;/login&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;successUrl&quot; value=&quot;$&#123;adminPath&#125;?login&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;filters&quot;&gt;</span><br><span class="line">            &lt;map&gt;</span><br><span class="line">                &lt;entry key=&quot;cas&quot; value-ref=&quot;casFilter&quot;/&gt;</span><br><span class="line">                &lt;entry key=&quot;authc&quot; value-ref=&quot;formAuthenticationFilter&quot;/&gt;</span><br><span class="line">            &lt;/map&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;filterChainDefinitions&quot;&gt;</span><br><span class="line">&lt;ref bean=&quot;shiroFilterChainDefinitions&quot;/&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- CAS认证过滤器 --&gt;  </span><br><span class="line">&lt;bean id=&quot;casFilter&quot; class=&quot;org.apache.shiro.cas.CasFilter&quot;&gt;  </span><br><span class="line">&lt;property name=&quot;failureUrl&quot; value=&quot;$&#123;adminPath&#125;/login&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 定义Shiro安全管理配置 --&gt;</span><br><span class="line">&lt;bean id=&quot;securityManager&quot; class=&quot;org.apache.shiro.web.mgt.DefaultWebSecurityManager&quot;&gt;</span><br><span class="line">&lt;property name=&quot;realm&quot; ref=&quot;systemAuthorizingRealm&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;sessionManager&quot; ref=&quot;sessionManager&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;cacheManager&quot; ref=&quot;shiroCacheManager&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 自定义会话管理配置 --&gt;</span><br><span class="line">&lt;bean id=&quot;sessionManager&quot; class=&quot;com.thinkgem.jeesite.common.security.shiro.session.SessionManager&quot;&gt; </span><br><span class="line">&lt;property name=&quot;sessionDAO&quot; ref=&quot;sessionDAO&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 会话超时时间，单位：毫秒  --&gt;</span><br><span class="line">&lt;property name=&quot;globalSessionTimeout&quot; value=&quot;$&#123;session.sessionTimeout&#125;&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 定时清理失效会话, 清理用户直接关闭浏览器造成的孤立会话   --&gt;</span><br><span class="line">&lt;property name=&quot;sessionValidationInterval&quot; value=&quot;$&#123;session.sessionTimeoutClean&#125;&quot;/&gt;</span><br><span class="line">&lt;!--   &lt;property name=&quot;sessionValidationSchedulerEnabled&quot; value=&quot;false&quot;/&gt; --&gt;</span><br><span class="line">  &lt;property name=&quot;sessionValidationSchedulerEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line"> </span><br><span class="line">&lt;property name=&quot;sessionIdCookie&quot; ref=&quot;sessionIdCookie&quot;/&gt;</span><br><span class="line">&lt;property name=&quot;sessionIdCookieEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 指定本系统SESSIONID, 默认为: JSESSIONID 问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID,</span><br><span class="line">当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失! --&gt;</span><br><span class="line">&lt;bean id=&quot;sessionIdCookie&quot; class=&quot;org.apache.shiro.web.servlet.SimpleCookie&quot;&gt;</span><br><span class="line">   &lt;constructor-arg name=&quot;name&quot; value=&quot;jeesite.session.id&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- 自定义Session存储容器 --&gt;</span><br><span class="line">&lt;!-- &lt;bean id=&quot;sessionDAO&quot; class=&quot;com.thinkgem.jeesite.common.security.shiro.session.JedisSessionDAO&quot;&gt; --&gt;</span><br><span class="line">&lt;!-- &lt;property name=&quot;sessionIdGenerator&quot; ref=&quot;idGen&quot; /&gt; --&gt;</span><br><span class="line">&lt;!-- &lt;property name=&quot;sessionKeyPrefix&quot; value=&quot;$&#123;redis.keyPrefix&#125;_session_&quot; /&gt; --&gt;</span><br><span class="line">&lt;!-- &lt;/bean&gt; --&gt;</span><br><span class="line">&lt;bean id=&quot;sessionDAO&quot; class=&quot;com.thinkgem.jeesite.common.security.shiro.session.CacheSessionDAO&quot;&gt;</span><br><span class="line">&lt;property name=&quot;sessionIdGenerator&quot; ref=&quot;idGen&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;activeSessionsCacheName&quot; value=&quot;activeSessionsCache&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;cacheManager&quot; ref=&quot;shiroCacheManager&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 自定义系统缓存管理器--&gt;</span><br><span class="line">&lt;!-- &lt;bean id=&quot;shiroCacheManager&quot; class=&quot;com.thinkgem.jeesite.common.security.shiro.cache.JedisCacheManager&quot;&gt; --&gt;</span><br><span class="line">&lt;!-- &lt;property name=&quot;cacheKeyPrefix&quot; value=&quot;$&#123;redis.keyPrefix&#125;_cache_&quot; /&gt; --&gt;</span><br><span class="line">&lt;!-- &lt;/bean&gt; --&gt;</span><br><span class="line">&lt;bean id=&quot;shiroCacheManager&quot; class=&quot;org.apache.shiro.cache.ehcache.EhCacheManager&quot;&gt;</span><br><span class="line">&lt;property name=&quot;cacheManager&quot; ref=&quot;cacheManager&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 保证实现了Shiro内部lifecycle函数的bean执行 --&gt;</span><br><span class="line">&lt;bean id=&quot;lifecycleBeanPostProcessor&quot; class=&quot;org.apache.shiro.spring.LifecycleBeanPostProcessor&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- AOP式方法级权限检查  --&gt;</span><br><span class="line">&lt;bean class=&quot;org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator&quot; depends-on=&quot;lifecycleBeanPostProcessor&quot;&gt;</span><br><span class="line">&lt;property name=&quot;proxyTargetClass&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line">&lt;bean class=&quot;org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;securityManager&quot; ref=&quot;securityManager&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E3%80%90java%E8%84%9A%E6%89%8B%E6%9E%B6%E6%90%AD%E5%BB%BA%E3%80%91%E8%B0%83%E5%BA%A6%20spring-servlet.xml/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/%E3%80%90java%E8%84%9A%E6%89%8B%E6%9E%B6%E6%90%AD%E5%BB%BA%E3%80%91%E8%B0%83%E5%BA%A6%20spring-servlet.xml/" class="post-title-link" itemprop="url">【java脚手架搭建】调度 spring-servlet.xml</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-08 00:00:03" itemprop="dateCreated datePublished" datetime="2017-03-08T00:00:03+00:00">2017-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:26" itemprop="dateModified" datetime="2024-01-26T12:42:26+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="spring-servlet-xml-或spring-mvc-xml相关配置"><a href="#spring-servlet-xml-或spring-mvc-xml相关配置" class="headerlink" title="spring-servlet.xml 或spring-mvc.xml相关配置"></a><code>spring-servlet.xml</code> 或<code>spring-mvc.xml</code>相关配置</h1><h2 id="MVC注解支持-数据处理"><a href="#MVC注解支持-数据处理" class="headerlink" title="MVC注解支持 &amp; 数据处理"></a>MVC注解支持 &amp; 数据处理</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--RequestMappingHandlerAdapter--&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 默认的注解映射的支持，org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:annotation-driven</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 消息转换(常用于:返回字符串,对象转json) --&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">mvc:message-converters</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">&quot;stringHttpMessageConverter&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">&quot;marshallingHttpMessageConverter&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">&quot;mappingJackson2HttpMessageConverter&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mvc:message-converters</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mvc:annotation-driven</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- `@RequestMapping`注解生效(servlet映射) --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.wosai.bright.controller&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;stringHttpMessageConverter&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">&quot;org.springframework.http.converter.StringHttpMessageConverter&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;marshallingHttpMessageConverter&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">&quot;org.springframework.http.converter.xml.MarshallingHttpMessageConverter&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;marshaller&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;castorMarshaller&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;unmarshaller&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;castorMarshaller&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;mappingJackson2HttpMessageConverter&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">&quot;org.springframework.http.converter.json.MappingJackson2HttpMessageConverter&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;supportedMediaTypes&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>application/json<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>application/xml<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>text/html<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>text/plain<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>text/xml<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;castorMarshaller&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.oxm.castor.CastorMarshaller&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="REST中根据URL后缀自动判定Content-Type及相应的View"><a href="#REST中根据URL后缀自动判定Content-Type及相应的View" class="headerlink" title="REST中根据URL后缀自动判定Content-Type及相应的View"></a>REST中根据URL后缀自动判定Content-Type及相应的View</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- REST中根据URL后缀自动判定Content-Type及相应的View --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;contentNegotiationManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.web.accept.ContentNegotiationManagerFactoryBean&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;mediaTypes&quot;</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">map</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;xml&quot;</span> <span class="attr">value</span>=<span class="string">&quot;application/xml&quot;</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;json&quot;</span> <span class="attr">value</span>=<span class="string">&quot;application/json&quot;</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;ignoreAcceptHeader&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;favorPathExtension&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h2 id="定义视图文件解析"><a href="#定义视图文件解析" class="headerlink" title="定义视图文件解析"></a>定义视图文件解析</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 定义视图文件解析 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;prefix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;web.view.prefix&#125;&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suffix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;web.view.suffix&#125;&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">web.view.prefix</span>=<span class="string">/WEB-INF/views/</span></span><br><span class="line"><span class="attr">web.view.suffix</span>=<span class="string">.jsp</span></span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;internalResourceViewResolver&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;prefix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/WEB-INF/views/&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 取消自动后缀,程序主动填写能同时使用.jsp和.html的文件 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!--&lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot; /&gt;--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--文件上传--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;multipartResolver&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;maxUploadSize&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100000&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 上传文件拦截，设置最大上传文件大小   10M=10*1024*1024(B)=10485760 bytes --&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;multipartResolver&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;maxUploadSize&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;web.maxUploadSize&#125;&quot;</span> /&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--国际化--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;messageSource&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">&quot;org.springframework.context.support.ResourceBundleMessageSource&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;defaultEncoding&quot;</span> <span class="attr">value</span>=<span class="string">&quot;UTF-8&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basenames&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>messages.welcome<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="静态资源-不经过servlet-filter"><a href="#静态资源-不经过servlet-filter" class="headerlink" title="静态资源(不经过servlet,filter)"></a>静态资源(不经过servlet,filter)</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:default-servlet-handler</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 静态资源映射 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:resources</span> <span class="attr">mapping</span>=<span class="string">&quot;/static/**&quot;</span> <span class="attr">location</span>=<span class="string">&quot;/static/&quot;</span> <span class="attr">cache-period</span>=<span class="string">&quot;31536000&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 定义无Controller的path&lt;-&gt;view直接映射 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:view-controller</span> <span class="attr">path</span>=<span class="string">&quot;/&quot;</span> <span class="attr">view-name</span>=<span class="string">&quot;redirect:$&#123;web.view.index&#125;&quot;</span>/&gt;</span> <span class="comment">&lt;!-- redirect:/index --&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 静态资源 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:resources</span> <span class="attr">location</span>=<span class="string">&quot;/oss/js/&quot;</span> <span class="attr">mapping</span>=<span class="string">&quot;/oss/js/**&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:resources</span> <span class="attr">location</span>=<span class="string">&quot;/oss/temp/&quot;</span> <span class="attr">mapping</span>=<span class="string">&quot;/oss/temp/**&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:resources</span> <span class="attr">location</span>=<span class="string">&quot;/oss/images/&quot;</span> <span class="attr">mapping</span>=<span class="string">&quot;/oss/images/**&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:resources</span> <span class="attr">location</span>=<span class="string">&quot;/oss/B-JUI/&quot;</span> <span class="attr">mapping</span>=<span class="string">&quot;/oss/B-JUI/**&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:resources</span> <span class="attr">location</span>=<span class="string">&quot;/oss/lib/&quot;</span> <span class="attr">mapping</span>=<span class="string">&quot;/oss/lib/**&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:resources</span> <span class="attr">location</span>=<span class="string">&quot;/oss/emoji/&quot;</span> <span class="attr">mapping</span>=<span class="string">&quot;/oss/emoji/**&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:resources</span> <span class="attr">location</span>=<span class="string">&quot;/oss/ueditor/&quot;</span> <span class="attr">mapping</span>=<span class="string">&quot;/oss/ueditor/**&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:resources</span> <span class="attr">location</span>=<span class="string">&quot;/upload/&quot;</span> <span class="attr">mapping</span>=<span class="string">&quot;/upload/**&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="mvc-interceptors拦截器"><a href="#mvc-interceptors拦截器" class="headerlink" title="mvc:interceptors拦截器"></a><code>mvc:interceptors</code>拦截器</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 拦截器配置，拦截顺序：先执行后定义的，排在第一位的最后执行。--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:interceptors</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">&quot;$&#123;adminPath&#125;/**&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:exclude-mapping</span> <span class="attr">path</span>=<span class="string">&quot;$&#123;adminPath&#125;/&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:exclude-mapping</span> <span class="attr">path</span>=<span class="string">&quot;$&#123;adminPath&#125;/login&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:exclude-mapping</span> <span class="attr">path</span>=<span class="string">&quot;$&#123;adminPath&#125;/sys/menu/tree&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:exclude-mapping</span> <span class="attr">path</span>=<span class="string">&quot;$&#123;adminPath&#125;/sys/menu/treeData&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:exclude-mapping</span> <span class="attr">path</span>=<span class="string">&quot;$&#123;adminPath&#125;/oa/oaNotify/self/count&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;com.thinkgem.jeesite.modules.sys.interceptor.LogInterceptor&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 手机视图拦截器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">&quot;/**&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;com.thinkgem.jeesite.modules.sys.interceptor.MobileInterceptor&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mvc:interceptors</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = &quot;$&#123;adminPath&#125;/login&quot;, method = RequestMethod.GET)</span></span><br></pre></td></tr></table></figure>
+<p><code>config.properties</code></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">adminPath</span> = <span class="string">/a</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="支持Shiro对Controller的方法级AOP安全控制"><a href="#支持Shiro对Controller的方法级AOP安全控制" class="headerlink" title="支持Shiro对Controller的方法级AOP安全控制"></a>支持Shiro对Controller的方法级AOP安全控制</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 支持Shiro对Controller的方法级AOP安全控制 begin--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator&quot;</span> <span class="attr">depends-on</span>=<span class="string">&quot;lifecycleBeanPostProcessor&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;proxyTargetClass&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="异常控制-转发"><a href="#异常控制-转发" class="headerlink" title="异常控制(转发)"></a>异常控制(转发)</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 异常控制(转发) --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.web.servlet.handler.SimpleMappingExceptionResolver&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;exceptionMappings&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;org.apache.shiro.authz.UnauthorizedException&quot;</span>&gt;</span>error/403<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">&quot;java.lang.Throwable&quot;</span>&gt;</span>error/500<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 

@@ -137,7 +137,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-count">546</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -165,220 +165,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/A-small-trap-of-JDBC-connection-to-MySQL-in-java/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/A-small-trap-of-JDBC-connection-to-MySQL-in-java/" class="post-title-link" itemprop="url">Java之JDBC连接MySQL的一点坑</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-04-15 23:51:11" itemprop="dateCreated datePublished" datetime="2016-04-15T23:51:11+08:00">2016-04-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote  class="blockquote-center">
-**对代码不满足，是任何真正有天才的程序员的根本特征。**
-</blockquote>
-
-<h4 id="Value-‘0000-00-00’-can-not-be-represented-as-java-sql-Timestamp"><a href="#Value-‘0000-00-00’-can-not-be-represented-as-java-sql-Timestamp" class="headerlink" title="Value ‘0000-00-00’ can not be represented as java.sql.Timestamp"></a>Value ‘0000-00-00’ can not be represented as java.sql.Timestamp</h4><p>在查询<strong>MySql</strong>数据库某表的<strong>timestamp</strong>列的时候，发现此异常，问题来源表述如下</p>
-<ol>
-<li>先创建一个测试表<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test.mytest(</span><br><span class="line">id <span class="type">int</span> <span class="keyword">PRIMARY</span> KEY AUTO_INCREMENT ,</span><br><span class="line">createtime <span class="type">timestamp</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">default</span> <span class="built_in">current_timestamp</span> , <span class="comment">--创建时间</span></span><br><span class="line">updatetime <span class="type">timestamp</span> <span class="keyword">not</span> <span class="keyword">null</span> , <span class="comment">--更新时间</span></span><br><span class="line">testtime <span class="type">timestamp</span> <span class="keyword">null</span> <span class="comment">--发布时间</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
-<li>插入两条数据，将此<strong>sql</strong>执行两次即可<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into test.mytest(createtime,testtime) values(sysdate(),null);</span><br></pre></td></tr></table></figure></li>
-<li>查询数据<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> mytest;</span><br></pre></td></tr></table></figure>
-<strong>在数据库客户端中使用SELECT查询结果如下：</strong></li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>id</th>
-<th>createtime</th>
-<th>updatetime</th>
-<th>testtime</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>16&#x2F;4&#x2F;18 10:28:18</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>2</td>
-<td>16&#x2F;4&#x2F;18 10:28:42</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>虽然说使用<strong>SELECT</strong>语句查询到的<strong>updatetime</strong>列和<strong>testtime</strong>列都是空，但是可以通过查看表结构从而得到各个列的默认值，在<strong>Toad</strong>工具中右击表选<strong>View Details</strong>得到如下表结构，可以看到<strong>Default</strong>列的默认值。</p>
-<table>
-<thead>
-<tr>
-<th>Column</th>
-<th>Type</th>
-<th>Collation</th>
-<th>Null</th>
-<th>Key</th>
-<th>Default</th>
-<th>Extra</th>
-<th>Privileges</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>id</td>
-<td>int(11)</td>
-<td>{null}</td>
-<td>NO</td>
-<td>PRI</td>
-<td>{null}</td>
-<td>auto_increment</td>
-<td>select,insert,update,references</td>
-<td>ID，主键</td>
-</tr>
-<tr>
-<td>createtime</td>
-<td>timestamp</td>
-<td>{null}</td>
-<td>NO</td>
-<td></td>
-<td>CURRENT_TIMESTAMP</td>
-<td></td>
-<td>select,insert,update,references</td>
-<td>创建时间</td>
-</tr>
-<tr>
-<td>updatetime</td>
-<td>timestamp</td>
-<td>{null}</td>
-<td>NO</td>
-<td></td>
-<td>0000-00-00 00:00:00</td>
-<td></td>
-<td>select,insert,update,references</td>
-<td>更新时间</td>
-</tr>
-<tr>
-<td>testtime</td>
-<td>timestamp</td>
-<td>{null}</td>
-<td>YES</td>
-<td></td>
-<td>{null}</td>
-<td></td>
-<td>select,insert,update,references</td>
-<td>发布时间</td>
-</tr>
-</tbody></table>
-<p><strong>NOTE</strong>：<br>在<strong>MySql</strong>中对于<strong>timestamp</strong>类型的列，如果设置<strong>not null</strong>的话（对应测试表的<strong>updatetime</strong>列），在程序中查询得其默认值是<strong>0000-00-00 00:00:00</strong>；如果<strong>timestamp</strong>的列默认值是<strong>null</strong>的话（对应测试表的<strong>testtime</strong>列），那么<strong>0000-00-00 00:00:00</strong>和<strong>null</strong>值在数据库中都是不显示（由查询结果，可知<strong>updatetime</strong>和<strong>testtime</strong>显示的结果都是空），也就是说在数据库中不管其默认值是<strong>not null</strong>还是<strong>null</strong>，该列值显示的都是空，你无法根据值去判断其类型，并且当是<strong>not null</strong>的时候，在程序中取出来的值实际上是<strong>0000-00-00 00:00:00</strong>，所以使用<strong>resultSet.getString()<strong>方法或其它方法都会报错，</strong>java.sql.SQLException: Value ‘0000-00-00’ can not be represented as java.sql.Timestamp</strong>。</p>
-<p>另外<strong>timestamp</strong>类型要求第一个出现的<strong>timestamp</strong>列必须是<strong>not null default current_timestamp</strong>。</p>
-<p>在<strong>Java</strong>程序中如果取到这种<strong>0000-00-00 00:00:00</strong>数据的话报错，解决办法是修改<strong>jdbc url</strong>为：</p>
-<blockquote>
-<p>jdbc:mysql:&#x2F;&#x2F;yourserver:3306&#x2F;yourdatabase?zeroDateTimeBehavior&#x3D;convertToNull</p>
-</blockquote>
-<p>这样在程序中取出来的数据就是<strong>null</strong>了。</p>
-<h4 id="resultSet-getRow-总是返回0"><a href="#resultSet-getRow-总是返回0" class="headerlink" title="resultSet.getRow()总是返回0"></a>resultSet.getRow()总是返回0</h4><p>在使用**resultSet.getRow()<strong>的时候，发现总是返回0，注意该方法返回的是数据库当前的行数，所以当你没调用</strong>resultSet.next()**的时候，该方法总是返回0。</p>
-<h4 id="resultSet-getFetchSize-总是返回0"><a href="#resultSet-getFetchSize-总是返回0" class="headerlink" title="resultSet.getFetchSize()总是返回0"></a>resultSet.getFetchSize()总是返回0</h4><p>另外使用<strong>resultSet.getFetchSize()<strong>的时候也是每次都返回0，这是怎么回事呢？</strong>getFetchSize()<strong>方法不是获得记录数，而是获得每次抓取的记录数，默认是0，也就是说不限制。可以用</strong>setFetchSize()<strong>来设置，而</strong>getFetchSize()<strong>是用来读出那个设置值。</strong>setFetchSize()<strong>最主要是为了减少网络交互次数设计的，访问</strong>ResultSet</strong>时，如果它每次只从服务器上取一行数据，则会产生大量的开销，<strong>setFetchSize()<strong>的意思是当调用</strong>resultSet.next()<strong>时，</strong>resultSet</strong>会一次性从服务器上取多行数据回来，这样在下次**resultSet.next()**时，它可以直接从内存中获得数据，而不需要网络交互，提高了效率。</p>
-<p><strong>Note</strong>：有时候觉得英文确实表述更准确，请看原汁原味的解释</p>
-<blockquote>
-<p>The fetch size is the number of rows that should be retrieved from the database in each roundtrip. It has nothing to do with the number of rows returned.</p>
-</blockquote>
-<h4 id="获取查询的数据集的行数"><a href="#获取查询的数据集的行数" class="headerlink" title="获取查询的数据集的行数"></a>获取查询的数据集的行数</h4><p>如果你是想获得符合条件的记录数目，最少有三种方法</p>
-<ol>
-<li>自己维护计数器<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(resultSet.next())&#123;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>可以这样<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要设置结果集可滚动</span></span><br><span class="line"><span class="type">Statement</span> <span class="variable">statement</span> <span class="operator">=</span> connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);</span><br><span class="line"><span class="comment">//对于PreparedStatement也需要设置</span></span><br><span class="line"><span class="type">PreparedStatement</span> <span class="variable">preparedStatement</span> <span class="operator">=</span> connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);</span><br><span class="line"><span class="comment">//之后在操作结果集中就可以移动游标了</span></span><br><span class="line">resultSet.last();</span><br><span class="line">rowCount = resultSet.getRow();</span><br><span class="line">resultSet.beforeFirst();<span class="comment">//将数据集重新归位，这样就获取到行数了</span></span><br></pre></td></tr></table></figure>
-有关<strong>ResultSet</strong>设置结果集类型的参数说明</li>
-</ol>
-<ul>
-<li>ResultSet.TYPE_FORWARD_ONLY - 结果集不能滚动，这是默认值</li>
-<li>ResultSet.TYPE_SCROLL_INSENSITIVE - 结果集可以滚动，但ResuleSet对数据库中发生的数据改变不敏感</li>
-<li>ResultSet.TYPE_SCROLL_SENSITIVE -  结果集可以滚动，并且ResuleSet对数据库中发生的改变敏感</li>
-<li>ResultSet.CONCUR_READ_ONLY - 只读结果集，不能用于更新数据库</li>
-<li>ResultSet.CONCUR_UPDATABLE - 可更新结果集，可以用于更新数据库</li>
-<li>当使用TYPE_SCROLL_INSENSITIVE或者TYPE_SCROLL_SENSITIVE来创建Statement对象时，可以使用ResultSet的first()&#x2F;last()&#x2F;beforeFirst()&#x2F;afterLast()&#x2F;relative()&#x2F;absolute()等方法在结果集中随意前后移动</li>
-<li>即使使用了CONCUR_UPDATABLE参数来创建Statement，得到的记录集也并非一定是“可更新的”，如果你的记录集来自于合并查询，即该查询的结果来自多个表格，那么这样的结果集就可能不是可更新的结果集。可以使用ResuleSet类的getConcurrency()方法来确定是否为可更新的的结果集。如果结果集是可更新的，那么可使用ResultSet的updateRow()，insertRow()，moveToCurrentRow()，deleteRow()，cancelRowUpdates()等方法来对数据库进行更新。</li>
-</ul>
-<ol start="3">
-<li>利用SQL查询<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;select count(*) totalCount from table&quot;</span>;</span><br><span class="line">rowCount = resultSet.getInt(<span class="string">&quot;totalCount&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p><strong>Note：</strong><br>在<strong>JDBC</strong>中使用可更新的结果集来更新数据库，不能使用<code>select * from table</code>方式的<strong>SQL</strong>语句，必须将它写成如下两种形式之一：</p>
-<ul>
-<li>select table.* from table</li>
-<li>select column1,column2… from table</li>
-</ul>
-<p><strong>参考文献</strong><br>[1] <a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_50267f510100dj1m.html">http://blog.sina.com.cn/s/blog_50267f510100dj1m.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -417,14 +203,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-04-15 23:38:41" itemprop="dateCreated datePublished" datetime="2016-04-15T23:38:41+08:00">2016-04-15</time>
+      <time title="Created: 2016-04-15 23:38:41" itemprop="dateCreated datePublished" datetime="2016-04-15T23:38:41+00:00">2016-04-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -521,14 +307,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-04-15 00:00:00" itemprop="dateCreated datePublished" datetime="2016-04-15T00:00:00+08:00">2016-04-15</time>
+      <time title="Created: 2016-04-15 00:00:00" itemprop="dateCreated datePublished" datetime="2016-04-15T00:00:00+00:00">2016-04-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -626,14 +412,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-04-14 02:00:00" itemprop="dateCreated datePublished" datetime="2016-04-14T02:00:00+08:00">2016-04-14</time>
+      <time title="Created: 2016-04-14 02:00:00" itemprop="dateCreated datePublished" datetime="2016-04-14T02:00:00+00:00">2016-04-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -678,12 +464,12 @@
 <li>apidoc  <code>离线</code>  <a target="_blank" rel="noopener" href="http://apidocjs.com/">http://apidocjs.com/</a><br>使用说明  <a target="_blank" rel="noopener" href="http://apidoc.tools/">http://apidoc.tools/</a><br><code>Web API文档生成工具apidoc - 简书</code>  <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/bb5a4f5e588a">http://www.jianshu.com/p/bb5a4f5e588a</a></li>
 </ul>
 <h2 id="在线"><a href="#在线" class="headerlink" title="在线"></a>在线</h2><ul>
-<li><p>showdoc   <a target="_blank" rel="noopener" href="https://www.showdoc.cc/">https://www.showdoc.cc/</a><br><a href="mailto:&#108;&#105;&#117;&#120;&#105;&#x61;&#x6e;&#x67;&#x2e;&#x31;&#x32;&#x32;&#x37;&#x40;&#113;&#113;&#x2e;&#x63;&#x6f;&#x6d;">&#108;&#105;&#117;&#120;&#105;&#x61;&#x6e;&#x67;&#x2e;&#x31;&#x32;&#x32;&#x37;&#x40;&#113;&#113;&#x2e;&#x63;&#x6f;&#x6d;</a>&gt;&lt;123456<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/28232803.jpg"></p>
+<li><p>showdoc   <a target="_blank" rel="noopener" href="https://www.showdoc.cc/">https://www.showdoc.cc/</a><br><a href="mailto:&#x6c;&#x69;&#x75;&#x78;&#x69;&#97;&#110;&#x67;&#46;&#x31;&#x32;&#50;&#x37;&#64;&#113;&#113;&#46;&#x63;&#111;&#109;">&#x6c;&#x69;&#x75;&#x78;&#x69;&#97;&#110;&#x67;&#46;&#x31;&#x32;&#50;&#x37;&#64;&#113;&#113;&#46;&#x63;&#111;&#109;</a>&gt;&lt;123456<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/28232803.jpg"></p>
 </li>
 <li><p>apizza  <code>在线</code>  <a target="_blank" rel="noopener" href="http://apizza.cc/">http://apizza.cc/</a></p>
 </li>
 </ul>
-<p><a href="mailto:&#108;&#x69;&#117;&#120;&#x69;&#x61;&#x6e;&#103;&#46;&#x31;&#x32;&#x32;&#55;&#64;&#113;&#113;&#x2e;&#x63;&#111;&#109;">&#108;&#x69;&#117;&#120;&#x69;&#x61;&#x6e;&#103;&#46;&#x31;&#x32;&#x32;&#55;&#64;&#113;&#113;&#x2e;&#x63;&#111;&#109;</a>&gt;&lt;apidoc</p>
+<p><a href="mailto:&#108;&#105;&#117;&#120;&#x69;&#97;&#110;&#x67;&#x2e;&#x31;&#x32;&#x32;&#x37;&#x40;&#x71;&#113;&#46;&#x63;&#111;&#x6d;">&#108;&#105;&#117;&#120;&#x69;&#97;&#110;&#x67;&#x2e;&#x31;&#x32;&#x32;&#x37;&#x40;&#x71;&#113;&#46;&#x63;&#111;&#x6d;</a>&gt;&lt;apidoc</p>
 <p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/57231848.jpg"></p>
 <ul>
 <li><p>ShowDoc  <a target="_blank" rel="noopener" href="http://www.showdoc.cc/">http://www.showdoc.cc/</a></p>
@@ -771,14 +557,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-04-09 02:00:00" itemprop="dateCreated datePublished" datetime="2016-04-09T02:00:00+08:00">2016-04-09</time>
+      <time title="Created: 2016-04-09 02:00:00" itemprop="dateCreated datePublished" datetime="2016-04-09T02:00:00+00:00">2016-04-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:21" itemprop="dateModified" datetime="2024-01-26T12:42:21+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -855,14 +641,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-04-09 00:00:00" itemprop="dateCreated datePublished" datetime="2016-04-09T00:00:00+08:00">2016-04-09</time>
+      <time title="Created: 2016-04-09 00:00:00" itemprop="dateCreated datePublished" datetime="2016-04-09T00:00:00+00:00">2016-04-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -947,14 +733,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-04-08 00:00:00" itemprop="dateCreated datePublished" datetime="2016-04-08T00:00:00+08:00">2016-04-08</time>
+      <time title="Created: 2016-04-08 00:00:00" itemprop="dateCreated datePublished" datetime="2016-04-08T00:00:00+00:00">2016-04-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:27" itemprop="dateModified" datetime="2024-01-26T12:42:27+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1130,14 +916,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-04-07 00:00:00" itemprop="dateCreated datePublished" datetime="2016-04-07T00:00:00+08:00">2016-04-07</time>
+      <time title="Created: 2016-04-07 00:00:00" itemprop="dateCreated datePublished" datetime="2016-04-07T00:00:00+00:00">2016-04-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:28" itemprop="dateModified" datetime="2024-01-26T12:42:28+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1268,14 +1054,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-04-01 00:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T00:00:00+08:00">2016-04-01</time>
+      <time title="Created: 2016-04-01 00:00:00" itemprop="dateCreated datePublished" datetime="2016-04-01T00:00:00+00:00">2016-04-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1396,14 +1182,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-03-29 00:00:00" itemprop="dateCreated datePublished" datetime="2016-03-29T00:00:00+08:00">2016-03-29</time>
+      <time title="Created: 2016-03-29 00:00:00" itemprop="dateCreated datePublished" datetime="2016-03-29T00:00:00+00:00">2016-03-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1447,7 +1233,7 @@
 <h1 id="更多web-hosts"><a href="#更多web-hosts" class="headerlink" title="更多web - hosts"></a>更多web - hosts</h1><p><a target="_blank" rel="noopener" href="https://github.com/racaljk/hosts/blob/master/hosts">https://github.com/racaljk/hosts/blob/master/hosts</a></p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/racaljk/hosts/master/hosts">https://raw.githubusercontent.com/racaljk/hosts/master/hosts</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/StevenBlack/hosts/blob/master/hosts">https://github.com/StevenBlack/hosts/blob/master/hosts</a></p>
-<h1 id="Ping-VPN"><a href="#Ping-VPN" class="headerlink" title="Ping VPN"></a>Ping VPN</h1><p><a href="mailto:&#x6c;&#105;&#x75;&#120;&#105;&#x61;&#x6e;&#x67;&#x2e;&#49;&#x32;&#50;&#x37;&#x40;&#x71;&#113;&#x2e;&#99;&#111;&#109;">&#x6c;&#105;&#x75;&#120;&#105;&#x61;&#x6e;&#x67;&#x2e;&#49;&#x32;&#50;&#x37;&#x40;&#x71;&#113;&#x2e;&#99;&#111;&#109;</a>&gt;&lt;google</p>
+<h1 id="Ping-VPN"><a href="#Ping-VPN" class="headerlink" title="Ping VPN"></a>Ping VPN</h1><p><a href="mailto:&#108;&#x69;&#117;&#120;&#105;&#x61;&#x6e;&#103;&#46;&#x31;&#50;&#x32;&#x37;&#x40;&#113;&#x71;&#46;&#99;&#111;&#x6d;">&#108;&#x69;&#117;&#120;&#105;&#x61;&#x6e;&#103;&#46;&#x31;&#50;&#x32;&#x37;&#x40;&#113;&#x71;&#46;&#99;&#111;&#x6d;</a>&gt;&lt;google</p>
 <h1 id="壁虎漫步-chrome浏览器插件"><a href="#壁虎漫步-chrome浏览器插件" class="headerlink" title="壁虎漫步 (chrome浏览器插件)"></a>壁虎漫步 (chrome浏览器插件)</h1><p><a target="_blank" rel="noopener" href="http://45.124.67.101:8080/?code=JTCB136VTElC4fEvYQrxt1avWqWdrhdO&index=0">http://45.124.67.101:8080/?code=JTCB136VTElC4fEvYQrxt1avWqWdrhdO&amp;index=0</a></p>
 <h1 id="开眼-chrome浏览器插件"><a href="#开眼-chrome浏览器插件" class="headerlink" title="开眼   (chrome浏览器插件)"></a>开眼   (chrome浏览器插件)</h1><p>开眼chrome插件官方及下载地址:seeworld.co<br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/%E5%BC%80%E7%9C%BC/kpamljbkjaaljbcgobdealnpalcgicna">https://chrome.google.com/webstore/detail/%E5%BC%80%E7%9C%BC/kpamljbkjaaljbcgobdealnpalcgicna</a></p>
 <h1 id="更多chrome插件-青杏-枸杞-云游-穿越"><a href="#更多chrome插件-青杏-枸杞-云游-穿越" class="headerlink" title="更多chrome插件: 青杏,枸杞,云游,穿越"></a>更多chrome插件: 青杏,枸杞,云游,穿越</h1><h1 id="windows-蓝灯-Lantern"><a href="#windows-蓝灯-Lantern" class="headerlink" title="windows | 蓝灯(Lantern)"></a>windows | 蓝灯(Lantern)</h1><hr>
@@ -1465,6 +1251,226 @@
             </div>
           <!--/noindex-->
         
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Read-the-programmer-you-can-not-afford-injuries/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Read-the-programmer-you-can-not-afford-injuries/" class="post-title-link" itemprop="url">读《程序员，你伤不起》</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-03-27 12:53:21" itemprop="dateCreated datePublished" datetime="2016-03-27T12:53:21+00:00">2016-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li><strong>作者简介</strong>：<strong>吉日嘎拉</strong>（蒙古族）<strong>2000</strong>年毕业于黑龙江大学计算机软件专业。<strong>微软MVP</strong>。博客园知名博主。争议性人物。现定居杭州。13年软件开发经验。外企5年。上市公司3年。独立经营软件公司2年。主持研发部门管理工作5年以上。<br/><br>行走江湖安身立命的作品是历经十余年不断完善的通用权限管理系统组件。该产品于2003年发布，目前已是国内用户最多的权限管理系统，被广大支持者称为权限管理系统中的“<strong>走火入魔级权限管理系统</strong>”精心维护10余年，不懈的推广，20万行经典业务逻辑积累，上万次的调试修正，将权限管理与工作流程管理做到我能力的极致，就是我的目标。<br/></li>
+</ul>
+<blockquote  class="blockquote-center">
+**我相信，一个人的一生只能做好很少的几件事。**
+</blockquote>
+
+<ul>
+<li>你不能老是换方向，一方面你啥都不精，日常工作也很累，东一榔头，西一棒子，十年后，结果你啥都懂，啥都没有，别人需要啥，你都需要从零开发，你俩手空空进入<strong>IT</strong>行业，又俩手空空离开<strong>IT</strong>行业。我很害怕这个，所以，从2002年开始写的代码，几乎都在电脑里，2003年写的系统，也经常在维护着，与时俱进。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：想想自己不也是这样吗？一直都在重复造轮子，学习计算机也有七年了，本科四年，研究生三年，拿得出手的作品还真是没有，如果让我做东西的话也能做，只是一切从零开始，这想来是极其耗费精力的事情，好在我以前的代码都还留着，不管多烂也舍不得丢弃，只是一直没有整理维护之，这也正是我害怕的地方，随着时间的流逝，越来越没有心思与劲头去完善它们，谁让咱温饱都没解决呢，谁有精力去经营那些虚无的东西，人这一辈子，尤其是底层的人可能时间都用来挣钱去解决最基本的衣食住行了，这是多么可悲的事情。</p>
+</blockquote>
+<ul>
+<li>开发软件，本来就是人来一拨走一拨，春风吹又生，一年换一拨人，一拨又一拨。所以你必须要事先想好人员的变动因素，自己如何积累经验成果，公司如何积累经验成果，都是很深的学问。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：说的很对，不是技术导向型的公司往往无法理解技术人员真正的价值，以及技术人员之间的本质区别，顶级程序员与平庸程序员之间的差距是极大的，这是普通人所无法理解的，就像世界上跑的最快的人和平常人百米赛跑，他们花费的时间差距也不会超过两倍，这就是体力劳动的先天限制，而脑力劳动则全然不是，世界上最聪明的人和平常人的智力差距，必然是指数级的，这毫无疑问。我并不想说技术人员多牛逼多屌，而想说的是智力劳动，千兵易得，一将难求，要善于发现并珍惜重视人才。</p>
+</blockquote>
+<ul>
+<li>大家都讲，做日本外包学不到知识，只是低级的编码工作，我从来不认同这个观念。我做日本外包大概有一年多时间，这期间也是我提高非常快的一段时间。自从接触日本外包后，我才觉得自己终于变成软件人才了，脑子里也懂了点东西，有些内容了，知道什么叫规范，什么叫质量，什么叫规模化生产，什么样的人才是软件人才，当然也见到了管理类软件开发领域的顶尖人物。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：给那些不断打压贬低外包的人一记响亮的耳光，我常说人与人最本质的区别就在于<strong>人的能动性</strong>，无论在什么境遇下，都要充分发挥自己的能动性，在现有条件或水平内，做到最好，你就是最棒的，英雄不问出处，没人能左右自己的出身，不论出身如何，我只顾风雨兼程。</p>
+</blockquote>
+<ul>
+<li>在日本，一个人的工资换算成人民币有两三万元，加班还要有加班工资，一个员工一年下来，公司可能要支出20万元给他，所以公司肯花10万元来购买软件，这样不仅仅是省了费用，而且软件可以24小时不间断工作，效率也提高了很多。但是在国内，两万就可以搞定一个人干一年的费用，而且还可以安排他干其他事情，所以国内的软件市场，跟我们的人力成本是有些关系的，人力成本越高，软件越有竞争力。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：这段话的重点不是工资，重点是这个观点很新颖，原来我一直没注意到，<strong>人力成本越高，软件越有竞争力</strong>。想想现在的机器人代替工人其实不正是这个原理吗？机器人本质也都靠软件驱动，常年无休、可靠、任劳任怨，可以大大的降低人工成本，这必然会是未来的一大趋势。</p>
+</blockquote>
+<ul>
+<li>做公司不是做技术，更多的是做人，我做人本就不够到位，做公司是必败的。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：技术人员创业确有成功案例，小扎、马化腾、李彦宏都是技术出身，但是可能存在更多的技术人员创业失败的案例，只是不为人知晓而已，如果可以的话，技术人员最好找个合作伙伴，大家一起创业。</p>
+</blockquote>
+<ul>
+<li>人没必要野心太大，做事业没有那么容易，特别是在<strong>IT</strong>行业，成功概率太低了。并且就算做大了，公司上市了，其实大多都是在亏损的，最终玩的就是资本运作。所以想靠公司的技术或者产品来赢得胜利是很难的，只能走资本运作路线。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：从2015年的诸多互联网第一第二名并购案例就可以看出，最后玩的不是情怀、不是梦想、不是技术、不是产品，而是市场占有率、盈利能力以及背后对应的资本。</p>
+</blockquote>
+<ul>
+<li>程序是技术（说的是后台开发），设计是艺术（说的是前台开发）。技术可以批量生产，艺术无法批量制造啊。在没有高科技的开发里，还是艺术更值钱一些。有艺术细胞，还会一点儿技术，那才是人才！</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：其实之所以出现这种状况，还是因为常人都是非技术人员，他们所能理解的仅仅限于前台的设计，对于后台的架构技术则是完全不懂的，所以导致现在重前台而抑后台，对应的导致前端开发的工资超越了后端开发的工资。只有上了一定量级的公司，例如天猫淘宝，才会极度的重视后台的架构设计，因为不论前台多漂亮，都是难以支撑秒杀的。</p>
+</blockquote>
+<ul>
+<li>日程生活中，多关注人情世故，多关心我的同事、我的家人、我的朋友，与他们保持联系，努力建设和谐社会。工作不是生活的全部，写程序更是很小的一部分。做人比做事更重要，人脉比技术更重要，有个良好的人脉，干啥都容易，说俗了人脉就是金钱。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：虽然这个话题很俗，但是在天朝，这确实是一个很大的问题，无论怎样，你都免不了花费精力去处理人际关系问题。</p>
+</blockquote>
+<ul>
+<li>晚上回家吃饭、上网娱乐、看电影、运动健身、看电视、睡觉，第二天起床上班，周末陪老婆看电影、逛街散步。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：看似很简单的事情，估计天朝有很多人是享受不到这种待遇的，你是否享受到了呢？</p>
+</blockquote>
+<ul>
+<li>不要做过于廉价的劳动力，那是在破坏市场，尊重自己尊重别人，免费给别人做当然可以，但如果那样做，<strong>IT</strong>软件就更不值钱了。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：我觉得咨询也是一种服务，所以就有了<a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=deYv_tekVMgyiMFiC3mTs_fmFR92n4OcEl0RlRBCsUEtRZfnGVAR4HhUv_ftXL8Y-FD0DOpc338Vnko58OUi4q">ThoughtWorks</a>这类公司，但是这类毕竟是极其专业的咨询。日常开发生活中，我们其实也会碰到诸多的咨询，但是国人往往忽视了咨询的代价，代码调不通、环境不会配、测试通不过……从来不会尝试着自己先解决一下或者Google一下，而是第一就想到了去找别人咨询或者帮助，张口即问，伸手即来，殊不知，鲁迅先生说过，浪费别人的时间无异于谋财害命。</p>
+</blockquote>
+<ul>
+<li>与领导沟通好，报告写好，比拼命干活效果好几十倍。别总是埋头苦干，干得累死累活，没人知道你多么辛苦，及时向领导汇报情况，周报月报下足功夫写。平时跟领导走得近一些，领导在想啥，你在想啥，及时沟通，这样被提拔的机会多。被提拔了，发展的空间也就大了。地里干活的牛辛苦不？光干活不行，性格倔强更没前途，就别提了。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：算是厚黑学吗？</p>
+</blockquote>
+<ul>
+<li>开源一方面是好事情，另一方面是害死一大片的，微软很多东西都可以开源，它为什么不搞开源的操作系统？为什么不搞开源的办公软件？论坛现在几乎是一分钱不值了，大家也不用太费心机折腾论坛了。用友财务软件开源了，那谁还会花钱去买金蝶？还会去买其他小财务软件？那用友也赚不到啥钱，金蝶也可能会倒闭，做财务软件的人就有可能失业了，跟做论坛一样。商业化的东西，别乱搞开源，学习入门级别的东西，你开源是可以的，小技巧你开源可以，自己辛苦积累别轻易搞开源，那是损人害己。<br/>公司的成果更不能搞开源，那是老板烧了很多钱积累下来的成果，你三下两下就开源了，别以为你开源了，就为社会做贡献了，你很可能是在给自己挖掘坟墓，在污染自己的生存行业，恶化生存环境，破坏商业规则。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：说的很好，现在大家有点盲目开源了，貌似不开源技术就不行，貌似不开源就没人知道自己的牛逼之处，貌似不开源就是软件世界里的恶势力一样，这些都是错误的思想，任何事情都没有绝对的，开源同样不是百利而无一害。</p>
+</blockquote>
+<ul>
+<li>软件是个庞大的工程，不像盖小民房，看得见摸的着，软件是一个看不见的庞大工程，所以一个像样的项目，一般没那么容易就能搞定的。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：虽说现在有了软件工程的概念，但是对于大多数人来说，并没有真正意识到一个软件的复杂度。就我而言，可能有的软件项目成功了，但是根本谈不上完美的程度，可能其扩展性、复用性、维护性各方面都存在大量问题，而有的项目只是要当前上线运行即可，至于以后，谁管呢？说不定项目经理早已跳槽，开发人员早已换人。</p>
+</blockquote>
+<ul>
+<li>公司里往往耕地的牛是不讨主人喜欢的，汪汪乱叫的小狗却会讨主人的疼爱，主人会更喜好小狗。但是做软件项目是需要牛的，不是靠小狗叫叫就可以了。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：至于做牛做狗，每个人都有自己的选择权，但是我觉得这和人的秉性有很大的关系，就我来说，情商不够高，做狗可能做不来，那么我只能被动的选择去做一头牛了。但是做牛的好处就是踏实干活，把本事学到手，这样不论到哪里，不论什么境地，哪怕经济危机也罢，至少我有谋生的手段，饿不死，积财千万不如薄技在身。</p>
+</blockquote>
+<ul>
+<li>其实打工也是创业的开始，每个月都能拿到钱，还可以学到知识。公司的股份都是空话，没几个小公司能成功，开起来了也过不了三年就得分家。除非真的有科技含量或者是客户资源的，否则股份一文钱不值，每个月能按时拿到工资才是硬道理。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：有些人总是想着期权，还是<strong>too young</strong>、<strong>too simple</strong>啊，并不是说期权不好，而是真正能让期权有着其对应价值的公司很少。可能大多数的公司都等不到<strong>IPO</strong>的那天，就因为各种各样的原因而中途寿终正寝了。即便真的给了你期权，也会有诸多限制条件，比如分五年领取，或者<strong>IPO</strong>之后三年的禁售期等等。</p>
+</blockquote>
+<ul>
+<li>哪个都懂一些，就不容易成为专才。所以，我没有被各种诱惑误导，放弃**.NET<strong>奔向</strong>Java<strong>，只做</strong>.NET<strong>就可以了，</strong>Java**的不关我的事，我精力也有限，没必要接那么多项目，我也消化不了。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：跟我的方向也是一致的，我就不做<strong>C++&#x2F;C</strong>，谈不上讨厌或其它，只是精力有限，不可能全部精通，而且不会<strong>C++&#x2F;C</strong>也并不影响你成为全栈工程师。不管是**.NET<strong>或者</strong>Java**，找准方向，深钻下去，都会有所收获。</p>
+</blockquote>
+<ul>
+<li>当上级与下属发生争执后，公司解决问题的方法很简单：开除下属。因为公司没办法开除上级，开除上级带来的损失会更大。集团公司需要有一定的规矩，有一定的执行力度，就是靠下属服从上级领导为原则的。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：很正常，毕竟哪个最容易替换就换哪个，哪个更换成本最低就换哪个，所以你要尽力做那个并不容易替代的人。</p>
+</blockquote>
+<ul>
+<li>打工，有时候需要按部就班。你想出人头地，就要做得非常优秀。不只是技术上，还要在为人处世上。要不然，你想做出点成绩，不是老板压制你，就是身边的人看你不顺眼，是很难成功的。要想提高，不只是需要有量的变化，还需要有质的变化。量的变化可以靠蛮力，质的变化需要有头脑。只有蛮力是不会带来质的飞跃的，顶多只是量的积累。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：对于多数人来说，都可以认为是一个打工者，我们能做的有限，除了做好本职工作之外，可能很多事情都是难以控制的，你想往上爬，别人也想往上爬，反而有时候是心理最阴暗的人爬上去了，因为搞技术的都不是人际关系的能手。唯有默默的积累吧，待量变到一定地步或许会带来质变。其实老板也不是那么好当的，别只看到花开后的灿烂，而忽视了为花开的那一刻所做的努力。要想人前显贵，必须人后受罪。</p>
+</blockquote>
+<ul>
+<li>创业更需要的不是技术、干劲，而是商业模式。你想在<strong>IT</strong>行业创业，最好别干靠人的买卖。人是最不可靠的，最好是靠产品。创业也要讲个层次，越是高层次的创业越会顺利一些，越是层次低的越累，越容易失败。因为竞争对手太多，低层次的创业，别人可能会因为多给一千、两千，员工就会出卖你，签订的劳动合同，就当是废纸一张了，啥合同、啥信用都不讲了。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：其实说的就是门槛嘛，门槛越高能进入的人必然越少，而且相对来说都是高素质的竞争中；门槛越低，必然竞争者遍地，难免鱼龙混杂，低素质者也大量涌入。</p>
+</blockquote>
+<ul>
+<li>即使一个人写代码，也建议用版本管理器。最明显的好处就是操作失误便于恢复代码。</li>
+</ul>
+<blockquote>
+<p><strong>我</strong>：废话不说，举双手赞同。</p>
+</blockquote>
+<ul>
+<li>关于朋友借钱的原则，整理如下</li>
+<li>不是非常好的朋友我是理也不理。借是不可能的事情，因为我自身还有银行的几十万债务要还</li>
+<li>若真是亲人要借钱，比如自己家里人，能给多少给多少，毕竟一家人需要患难与共</li>
+<li>若是好朋友借钱，遇到苦难了，向我借十万，我白送五千元，这钱不用还，我表示一下心意，希望能对你有所帮助</li>
+<li>有时候钱借出去了，收不回来，还会损失一个朋友</li>
+<li>若是一般的朋友，当你借出去了，就要做好要不回来的打算</li>
+</ul>
+<p><strong>吉日嘎拉</strong>博客园地址：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/jirigala/">http://www.cnblogs.com/jirigala/</a></p>
+
       
     </div>
 

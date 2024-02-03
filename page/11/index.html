@@ -137,7 +137,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-count">546</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -165,197 +165,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E9%9D%A2%E8%AF%95%E7%AC%AC%E4%B8%80%E9%A2%98%20-%20HashMap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E9%9D%A2%E8%AF%95%E7%AC%AC%E4%B8%80%E9%A2%98%20-%20HashMap/" class="post-title-link" itemprop="url">面试第一题 - HashMap</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-07-19 00:00:00" itemprop="dateCreated datePublished" datetime="2017-07-19T00:00:00+08:00">2017-07-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="考察"><a href="#考察" class="headerlink" title="考察"></a>考察</h1><ul>
-<li><p>集合类的<code> 日常 使用</code>及场景理解：</p>
-<ul>
-<li><p>数组&#x2F;link双向链表&#x2F;Tree&#x2F; statck ：数据结构差异带来的<code>有序无序</code>，<code>可否重复</code>，<code>查询与删除效率</code>，<code> 先进后出</code> 差异</p>
-</li>
-<li><p>线程安全的并发支持差异： Vector- Stack   、HashTable、Properties</p>
-</li>
-<li><p>快速失败、安全失败的差异</p>
-</li>
-</ul>
-</li>
-<li><p><code>技术实现原理认识</code>：</p>
-<ul>
-<li><p>默认 hash 数组长度及增长因子</p>
-</li>
-<li><p>hash数组的定位-位运算 (size-1) 取模</p>
-</li>
-<li><p>hash冲突的处理机制（拉链，Tree）</p>
-</li>
-<li><p>resize的hash数组的扩容和元素位移策略-位运算size取模</p>
-</li>
-</ul>
-</li>
-<li><p><code>思想利用（举一反三）</code></p>
-<ul>
-<li><p>hash table 通用的hash索引技术</p>
-</li>
-<li><p>（size-1）取模，范围内随机定位的最高效方法</p>
-</li>
-<li><p>数据结构：红黑树，优秀的最坏情况排序方法</p>
-</li>
-</ul>
-</li>
-<li><p><code>进阶探索</code></p>
-<ul>
-<li><p><code>线程安全( java.util.concurrent )</code>：hashTable，ConcurrentHashMap</p>
-<ul>
-<li>并发锁，分段锁，CAS锁</li>
-</ul>
-</li>
-<li><p><code>skiplist（跳表）</code>： ConcurrentSkipListMap， ConcurrentSkipListSet    </p>
-<ul>
-<li>数据结构： SkipList跳表，接近红黑树的排序性能，但具备更简单的数据结构</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><code>总结</code>：<br>不同层次的技术员，会要求不同层次的认知。更重要的是， 其它掌握的技术要求深度会于此等同。<br>作为一个技术员，因及时评估自己掌握或触及的知识，是否过于浅薄。把学习心态做的日常</p>
-<hr>
-<h1 id="HashMap-数据结构、扩展策略-Hash-冲突攻击如何防范-如何实现线程安全的-HashMap"><a href="#HashMap-数据结构、扩展策略-Hash-冲突攻击如何防范-如何实现线程安全的-HashMap" class="headerlink" title="HashMap 数据结构、扩展策略,Hash 冲突攻击如何防范,如何实现线程安全的 HashMap?"></a>HashMap 数据结构、扩展策略,Hash 冲突攻击如何防范,如何实现线程安全的 HashMap?</h1><p>结构: <code>数组加链表</code>(java8 中链表长度超过8 时, 会改成平衡树实现)<br>扩展: <code>resize</code> , 当超过loadfactor 因子时,默认 0.75 , 触发扩展,rehash , 将旧的元素迁移到新的<br>hash collision attack : 修改hash 非随机算法, 限制post 参数个数,大小 , 防火前检测异常请求<br>使用 ConcurrentHashMap : <code>CHM 实现采用了 segment 锁</code> , 8 之后采用的<code>CAS 技术</code><br>哈希冲突解决方法: <code>链表法</code>(java 当前实现),建立公共溢出区 , 开发<code>定址法</code>。</p>
-<h2 id="双hash"><a href="#双hash" class="headerlink" title="双hash"></a>双hash</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">static final int hash(Object key) &#123;</span><br><span class="line">    int h;</span><br><span class="line">    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对Object的hashCode进行16位的<code>无符号右移&gt;&gt;&gt;</code> 再与hashCode进行<code>位异（^）10&gt;1</code>运算</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">计算key.hashCode（）和扩展（XOR）更高的散列比特到较低。 由于该表使用二次幂掩蔽，所以仅在当前掩码之上的位数变化的散列集将总是相冲突。 （其中已知的例子是在小型表格中保持连续整数的浮点键集合）。因此，我们应用一种将高位的影响向下扩展的变换。 速度，效用和位扩展质量之间存在权衡。 因为许多常见的散列集合已经合理分配（因此不会受益于扩散），并且因为我们使用树来处理大量的冲突，所以我们只是以最便宜的方式将XOR移位，以减少系统损失， 以及包含由于表格界限而无法在索引计算中使用的最高位的影响。</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Integer i=100;</span><br><span class="line">int ihc =i.hashCode();</span><br><span class="line">System.out.println(ihc);</span><br><span class="line">System.out.println((ihc&gt;&gt;&gt;16) ^ ihc);// 仅会影响到高16位存在数值的对象 </span><br><span class="line">// 作用：jdk的hashCode算法原因,有可能存在大量对象hashcode的变化体现在高16位,而低16位相对稳定,如此会造成hash表分配的不均匀</span><br></pre></td></tr></table></figure>
-<p>jdk1.8 这样设计保证了对象的hashCode的高16位的变化能反应到低16位中，相比较而言减少了过多的位运算，是一种折中的设计。</p>
-<p><code>Java中hashCode()方法以及HashMap()中hash()方法 - TonyLuis - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/tonyluis/p/5671873.html">http://www.cnblogs.com/tonyluis/p/5671873.html</a></p>
-<p><code>HashMap hash方法分析 - Java综合 - Java - ITeye论坛</code><br><a target="_blank" rel="noopener" href="http://www.iteye.com/topic/709945">http://www.iteye.com/topic/709945</a></p>
-<h2 id="数组定位"><a href="#数组定位" class="headerlink" title="数组定位"></a>数组定位</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HashMap.Node&lt;K,V&gt;[] tab; HashMap.Node&lt;K,V&gt; p; int n, i;</span><br><span class="line">if ((tab = table) == null || (n = tab.length) == 0)</span><br><span class="line">    n = (tab = resize()).length;</span><br><span class="line">if ((p = tab[i = (n - 1) &amp; hash]) == null)</span><br><span class="line">    tab[i] = newNode(hash, key, value, null);</span><br><span class="line">else &#123;</span><br></pre></td></tr></table></figure>
-<p>关键：<code>tab[i = (n - 1) &amp; hash])</code><br>数字长度与hash进行<code> 位与( &amp; 11&gt;1 )</code> 运算（取模运算） ，作用：结果值一定会在（n-1）的范围以内<br>分配均匀，通过利用hashCode的高16位和低16位的<code>位异(^)</code>来保障。如下图示意：</p>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/15348420.jpg"></p>
-<h2 id="数组位已经占用，处理机制"><a href="#数组位已经占用，处理机制" class="headerlink" title="数组位已经占用，处理机制"></a>数组位已经占用，处理机制</h2><ul>
-<li><p>hash相同，key内存地址相同或key值equals相同则覆盖</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (p.hash == hash &amp;&amp;</span><br><span class="line">        ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">    e = p;</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>如果对象类型是TreeNode类型，说明已经是红黑树代替了链表，并向其中插入结点</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">else if (p instanceof TreeNode)</span><br><span class="line">                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>非空，非树，那么就是链表，将新值插入到next中。逐个比较，hash相同，key内存地址相同或key值equals相关进行替换，为null时直接存放。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">else &#123;</span><br><span class="line">    for (int binCount = 0; ; ++binCount) &#123;</span><br><span class="line">        if ((e = p.next) == null) &#123;</span><br><span class="line">            p.next = newNode(hash, key, value, null);</span><br><span class="line">            if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</span><br><span class="line">                treeifyBin(tab, hash);</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        if (e.hash == hash &amp;&amp;</span><br><span class="line">                ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">            break;</span><br><span class="line">        p = e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h2 id="resize"><a href="#resize" class="headerlink" title="resize"></a>resize</h2><ul>
-<li><p><code>调用 时机</code>：超出负载值</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if (++size &gt; threshold)</span><br><span class="line">    resize();</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p><code>处理内容</code>：计算扩容大小 - 新建hash表 - 将老数据填充过去<br><code>技巧</code>：扩容前后的hash 位与(<code>&amp;</code>)运算，结果为0即位置不变，否则位置+原hash表length</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">int threshold; </span><br><span class="line">static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30; </span><br><span class="line">static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16 </span><br><span class="line">static final float DEFAULT_LOAD_FACTOR = 0.75f; </span><br><span class="line">final float loadFactor; </span><br><span class="line"> </span><br><span class="line">// 扩容方法，不能被重写 </span><br><span class="line">     final Node&lt;K, V&gt;[] resize() &#123; </span><br><span class="line">           Node&lt;K, V&gt;[] oldTab = table; </span><br><span class="line">           // 获取当前容量 </span><br><span class="line">           int oldCap = (oldTab == null) ? 0 : oldTab.length; </span><br><span class="line">           // 获取扩容阀值，默认0 </span><br><span class="line">           int oldThr = threshold; </span><br><span class="line">           // newCap 新容量 newThr 新阀值 </span><br><span class="line">           int newCap, newThr = 0; </span><br><span class="line"> </span><br><span class="line">           if (oldCap &gt; 0) &#123; </span><br><span class="line">                // 判断其容量如果大于最大值就将扩容阀值设置为Integer最大值 </span><br><span class="line">                if (oldCap &gt;= MAXIMUM_CAPACITY) &#123; </span><br><span class="line">                      threshold = Integer.MAX_VALUE; </span><br><span class="line">                      return oldTab; </span><br><span class="line">                      // 判断当前容量的两倍是否小于最大容量限定，并且当前容量是否大于等于默认的16 ，满足条件就将当前容量扩大一倍 </span><br><span class="line">                &#125; else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp; oldCap &gt;= DEFAULT_INITIAL_CAPACITY) </span><br><span class="line">                      newThr = oldThr &lt;&lt; 1; // double threshold </span><br><span class="line">           &#125; else if (oldThr &gt; 0) // initial capacity was placed in threshold </span><br><span class="line">                newCap = oldThr; </span><br><span class="line">           // 走到这代表是个新map首次创建 </span><br><span class="line">           else &#123; // zero initial threshold signifies using defaults </span><br><span class="line">                      // 初始化容量16 </span><br><span class="line">                newCap = DEFAULT_INITIAL_CAPACITY; </span><br><span class="line">                // 初始化计算扩容阀值12 </span><br><span class="line">                newThr = (int) (DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY); </span><br><span class="line">           &#125; </span><br><span class="line">           if (newThr == 0) &#123; </span><br><span class="line">                float ft = newCap * loadFactor; </span><br><span class="line">                newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; MAXIMUM_CAPACITY ? (int) ft : Integer.MAX_VALUE); </span><br><span class="line">           &#125; </span><br><span class="line">           threshold = newThr; </span><br><span class="line">           @SuppressWarnings(&#123; &quot;rawtypes&quot;, &quot;unchecked&quot; &#125;) </span><br><span class="line">           Node&lt;K, V&gt;[] newTab = new Node[newCap]; </span><br><span class="line">           // 赋值扩容完的node[]给teble </span><br><span class="line">           table = newTab; </span><br><span class="line">           // 判断当前table是否为空，如果为null说明是新建，否则为扩容 </span><br><span class="line">           if (oldTab != null) &#123; </span><br><span class="line">                // 根据当前容量循环Node </span><br><span class="line">                for (int j = 0; j &lt; oldCap; ++j) &#123; </span><br><span class="line">                      Node&lt;K, V&gt; e; </span><br><span class="line">                      // 先将老对象赋值给成员变量，然后判断其是否为null </span><br><span class="line">                      if ((e = oldTab[j]) != null) &#123; </span><br><span class="line">                           // 将老对象设置为null，方便垃圾回收 </span><br><span class="line">                           oldTab[j] = null; </span><br><span class="line">                           // 如果当前元素没有下一个元素，计算出其index并赋值给新node[] </span><br><span class="line">                           if (e.next == null) </span><br><span class="line">                                 newTab[e.hash &amp; (newCap - 1)] = e; </span><br><span class="line">                           // 判断其是否为红黑树 </span><br><span class="line">                           else if (e instanceof TreeNode) </span><br><span class="line">                                 ((TreeNode&lt;K, V&gt;) e).split(this, newTab, j, oldCap); </span><br><span class="line">                           else &#123; // preserve order 保持顺序 </span><br><span class="line">                                 Node&lt;K, V&gt; loHead = null, loTail = null; </span><br><span class="line">                                 Node&lt;K, V&gt; hiHead = null, hiTail = null; </span><br><span class="line">                                 Node&lt;K, V&gt; next; </span><br><span class="line">                                 do &#123; </span><br><span class="line">                                      next = e.next; </span><br><span class="line">                                      // 根据hash oldCap计算出结果，将符合结果的元素组建成为新的链表lo </span><br><span class="line">                                      if ((e.hash &amp; oldCap) == 0) &#123; </span><br><span class="line">                                            if (loTail == null) </span><br><span class="line">                                                 loHead = e; </span><br><span class="line">                                            else </span><br><span class="line">                                                 loTail.next = e; </span><br><span class="line">                                            loTail = e; </span><br><span class="line">                                      &#125; else &#123; </span><br><span class="line">                                            // 将不为0的元素组建成为链表hi </span><br><span class="line">                                            if (hiTail == null) </span><br><span class="line">                                                 hiHead = e; </span><br><span class="line">                                            else </span><br><span class="line">                                                 hiTail.next = e; </span><br><span class="line">                                            hiTail = e; </span><br><span class="line">                                      &#125; </span><br><span class="line">                                 &#125; while ((e = next) != null); </span><br><span class="line">                                 // 将链表放到原位 </span><br><span class="line">                                 if (loTail != null) &#123; </span><br><span class="line">                                      loTail.next = null; </span><br><span class="line">                                      newTab[j] = loHead; </span><br><span class="line">                                 &#125; </span><br><span class="line">                                 if (hiTail != null) &#123; </span><br><span class="line">                                      hiTail.next = null; </span><br><span class="line">                                      newTab[j + oldCap] = hiHead; </span><br><span class="line">                                 &#125; </span><br><span class="line">                           &#125; </span><br><span class="line">                      &#125; </span><br><span class="line">                &#125; </span><br><span class="line">           &#125; </span><br><span class="line">           return newTab; </span><br><span class="line">     &#125; </span><br></pre></td></tr></table></figure>
-<p><code> 基础知识(一) HashMap 源码详解 - 我勒个去啊_强 - CSDN博客</code></p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/luqiang81191293/article/details/62417147">http://blog.csdn.net/luqiang81191293/article/details/62417147</a></p>
-<ul>
-<li>链表位置重新计算<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">do &#123;</span><br><span class="line">    next = e.next;</span><br><span class="line">    if ((e.hash &amp; oldCap) == 0) &#123;</span><br><span class="line">        if (loTail == null)</span><br><span class="line">            loHead = e;</span><br><span class="line">        else</span><br><span class="line">            loTail.next = e;</span><br><span class="line">        loTail = e;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        if (hiTail == null)</span><br><span class="line">            hiHead = e;</span><br><span class="line">        else</span><br><span class="line">            hiTail.next = e;</span><br><span class="line">        hiTail = e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; while ((e = next) != null);</span><br><span class="line">if (loTail != null) &#123;</span><br><span class="line">    loTail.next = null;</span><br><span class="line">    newTab[j] = loHead;</span><br><span class="line">&#125;</span><br><span class="line">if (hiTail != null) &#123;</span><br><span class="line">    hiTail.next = null;</span><br><span class="line">    newTab[j + oldCap] = hiHead;</span><br><span class="line">&#125;</span><br><span class="line">``` ` if ((e.hash &amp; oldCap) == 0) `  </span><br><span class="line">作用：判断是否会在下次扩容后，重新去摸hash表位置是否会发生变化。巧妙之处可见下文分析二进制位运算。理解还在进行中. 原来的hash值新增的那个bit是1还是0就好了，是0的话索引没变，是1的话索引变成“原索引+oldCap”</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">由于`新增的1bit是0还是1可以认为是随机的`，因此resize的过程，`均匀的把之前的冲突的节点分散到新的bucket了`。这一块就是JDK1.8新增的优化点。有一点注意区别，JDK1.7中rehash的时候，旧链表迁移新链表的时候，如果在新表的数组索引位置相同，则链表元素会倒置，但是从上图可以看出，JDK1.8不会倒置。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">- 对`16-32-64-128-256`几次扩容的位运算解析</span><br></pre></td></tr></table></figure>
-Integer i&#x3D;100;<br>int ihc &#x3D;i.hashCode();<br>System.out.println(“            “+Integer.toBinaryString(ihc));&#x2F;&#x2F; 1100100<br>System.out.println(“hash表分配(15):”+Integer.toBinaryString(15)+” “+(ihc&amp;15)+” “+Integer.toBinaryString((ihc&amp;15)));    &#x2F;&#x2F; hash表分配(15):1111 4 100<br>System.out.println(“resize分配(16):”+Integer.toBinaryString(16)+” “+(ihc&amp;16)+” “+Integer.toBinaryString((ihc&amp;16)));&#x2F;&#x2F; resize分配(16):10000 0 0<br>System.out.println(“hash表分配(31):”+Integer.toBinaryString(31)+” “+(ihc&amp;31)+” “+Integer.toBinaryString((ihc&amp;31)));&#x2F;&#x2F; hash表分配(31):11111 4 100<br>System.out.println(“resize分配(32):”+Integer.toBinaryString(32)+” “+(ihc&amp;32)+” “+Integer.toBinaryString((ihc&amp;32)));&#x2F;&#x2F; resize分配(32):100000 32 100000<br>System.out.println(“resize分配(63):”+Integer.toBinaryString(63)+” “+(ihc&amp;63)+” “+Integer.toBinaryString((ihc&amp;63)));&#x2F;&#x2F; resize分配(63):111111 36 100100<br>System.out.println(“resize分配(64):”+Integer.toBinaryString(64)+” “+(ihc&amp;64)+” “+Integer.toBinaryString((ihc&amp;64)));&#x2F;&#x2F; resize分配(64):1000000 64 1000000<br>System.out.println(“resize分配(127):”+Integer.toBinaryString(127)+” “+(ihc&amp;127)+” “+Integer.toBinaryString((ihc&amp;127)));&#x2F;&#x2F; resize分配(127):1111111 100 1100100<br>System.out.println(“resize分配(128):”+Integer.toBinaryString(128)+” “+(ihc&amp;128)+” “+Integer.toBinaryString((ihc&amp;128)));&#x2F;&#x2F; resize分配(128):10000000 0 0<br>System.out.println(“resize分配(255):”+Integer.toBinaryString(255)+” “+(ihc&amp;255)+” “+Integer.toBinaryString((ihc&amp;255)));&#x2F;&#x2F; resize分配(255):11111111 100 1100100<br>System.out.println(“resize分配(256):”+Integer.toBinaryString(256)+” “+(ihc&amp;256)+” “+Integer.toBinaryString((ihc&amp;256)));&#x2F;&#x2F; resize分配(256):100000000 0 0<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">- 随机测试，hashMap在大于12位后resize扩容。`观察新老数据的重新去摸定位hash表情况`</span><br></pre></td></tr></table></figure>
-HashMap hashMap&#x3D;new HashMap();<br>for (int i &#x3D; 0; i &lt; 50; i++) {<br>  int kv &#x3D; (int)(Math.random()*10000);<br>  System.out.println(i+” “+kv);<br>  hashMap.put(kv,kv);<br>}</li>
-</ul>
-<pre><code>
-
----
-**参考**
-` Java 8系列之重新认识HashMap - 简书 `
-http://www.jianshu.com/p/24f5bd05b860
-http://www.jianshu.com/p/30bffabb2e5c
-
-
-` Java集合干货系列-（三）HashMap源码解析 - 简书 `
-http://www.jianshu.com/p/e6536af1018f
-
-`java的一份面试题 - 今日头条(www.toutiao.com)`
-http://www.toutiao.com/i6442518207210193421/
-
-` 5分钟快速实现一个哈希表 - longmon的个人页面`
-https://my.oschina.net/longmon/blog/804684
-
-
-` Java集合中那些类是线程安全的 - Mexican的博客 - CSDN博客`
-http://blog.csdn.net/mexican_ok/article/details/12859351
-
-
-` Java集合（实现类线程安全性） - yuyibinggooo的博客 - CSDN博客 `
-http://blog.csdn.net/yuyibing888/article/details/50565021
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -394,14 +203,14 @@ http://blog.csdn.net/yuyibing888/article/details/50565021
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-07-09 18:20:40" itemprop="dateCreated datePublished" datetime="2017-07-09T18:20:40+08:00">2017-07-09</time>
+      <time title="Created: 2017-07-09 18:20:40" itemprop="dateCreated datePublished" datetime="2017-07-09T18:20:40+00:00">2017-07-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -594,14 +403,14 @@ http://blog.csdn.net/yuyibing888/article/details/50565021
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-07-08 00:00:00" itemprop="dateCreated datePublished" datetime="2017-07-08T00:00:00+08:00">2017-07-08</time>
+      <time title="Created: 2017-07-08 00:00:00" itemprop="dateCreated datePublished" datetime="2017-07-08T00:00:00+00:00">2017-07-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
     </span>
 
   
@@ -970,14 +779,14 @@ http://blog.csdn.net/yuyibing888/article/details/50565021
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-07-07 00:00:03" itemprop="dateCreated datePublished" datetime="2017-07-07T00:00:03+08:00">2017-07-07</time>
+      <time title="Created: 2017-07-07 00:00:03" itemprop="dateCreated datePublished" datetime="2017-07-07T00:00:03+00:00">2017-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
     </span>
 
   
@@ -1062,14 +871,14 @@ http://blog.csdn.net/yuyibing888/article/details/50565021
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-07-07 00:00:02" itemprop="dateCreated datePublished" datetime="2017-07-07T00:00:02+08:00">2017-07-07</time>
+      <time title="Created: 2017-07-07 00:00:02" itemprop="dateCreated datePublished" datetime="2017-07-07T00:00:02+00:00">2017-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
     </span>
 
   
@@ -1152,14 +961,14 @@ http://blog.csdn.net/yuyibing888/article/details/50565021
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-07-05 00:00:00" itemprop="dateCreated datePublished" datetime="2017-07-05T00:00:00+08:00">2017-07-05</time>
+      <time title="Created: 2017-07-05 00:00:00" itemprop="dateCreated datePublished" datetime="2017-07-05T00:00:00+00:00">2017-07-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
     </span>
 
   
@@ -1381,7 +1190,7 @@ http://blog.csdn.net/yuyibing888/article/details/50565021
 <tr>
 <td></td>
 <td>自方信息 <br> (时间,期望,请求方信息,目标域,设备,代理)</td>
-<td>Date: Tue, 15 Nov 1994 08:12:31   GMT     <br>Expect: 100-continue     <br>From: <a href="mailto:&#x75;&#x73;&#x65;&#x72;&#x40;&#x65;&#120;&#97;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#99;&#111;&#109;">&#x75;&#x73;&#x65;&#x72;&#x40;&#x65;&#120;&#97;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#99;&#111;&#109;</a>     <br>Host:en.wikipedia.org:80     <br>Host: en.wikipedia.org     <br>Referer: <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Main_Page">http://en.wikipedia.org/wiki/Main_Page</a>     <br>User-Agent: Mozilla&#x2F;5.0 (X11; Linux x86_64; rv:12.0)   Gecko&#x2F;20100101 Firefox&#x2F;21.0     <br>     <br>Max-Forwards: 10     <br>Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ&#x3D;&#x3D;     <br>Via: 1.0 fred, 1.1 example.com (Apache&#x2F;1.1)     <br>     <br>Range: bytes&#x3D;500-999     <br>Pragma: no-cache     <br>Warning: 199 Miscellaneous warning</td>
+<td>Date: Tue, 15 Nov 1994 08:12:31   GMT     <br>Expect: 100-continue     <br>From: <a href="mailto:&#x75;&#x73;&#101;&#114;&#x40;&#101;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#x75;&#x73;&#101;&#114;&#x40;&#101;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;</a>     <br>Host:en.wikipedia.org:80     <br>Host: en.wikipedia.org     <br>Referer: <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Main_Page">http://en.wikipedia.org/wiki/Main_Page</a>     <br>User-Agent: Mozilla&#x2F;5.0 (X11; Linux x86_64; rv:12.0)   Gecko&#x2F;20100101 Firefox&#x2F;21.0     <br>     <br>Max-Forwards: 10     <br>Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ&#x3D;&#x3D;     <br>Via: 1.0 fred, 1.1 example.com (Apache&#x2F;1.1)     <br>     <br>Range: bytes&#x3D;500-999     <br>Pragma: no-cache     <br>Warning: 199 Miscellaneous warning</td>
 </tr>
 </tbody></table>
 <p>**响应 字段(Response) **</p>
@@ -1488,14 +1297,14 @@ http://blog.csdn.net/yuyibing888/article/details/50565021
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-07-02 00:00:00" itemprop="dateCreated datePublished" datetime="2017-07-02T00:00:00+08:00">2017-07-02</time>
+      <time title="Created: 2017-07-02 00:00:00" itemprop="dateCreated datePublished" datetime="2017-07-02T00:00:00+00:00">2017-07-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:28" itemprop="dateModified" datetime="2024-01-26T12:42:28+00:00">2024-01-26</time>
     </span>
 
   
@@ -1577,14 +1386,14 @@ http://blog.csdn.net/yuyibing888/article/details/50565021
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-06-30 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-30T00:00:00+08:00">2017-06-30</time>
+      <time title="Created: 2017-06-30 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-30T00:00:00+00:00">2017-06-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
     </span>
 
   
@@ -1707,14 +1516,14 @@ public class ConsumerMsgTask implements Runnable {<br> private KafkaStream m_str
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-06-29 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-29T00:00:00+08:00">2017-06-29</time>
+      <time title="Created: 2017-06-29 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-29T00:00:00+00:00">2017-06-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:17" itemprop="dateModified" datetime="2024-01-26T12:42:17+00:00">2024-01-26</time>
     </span>
 
   
@@ -1838,14 +1647,14 @@ public class ConsumerMsgTask implements Runnable {<br> private KafkaStream m_str
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2017-06-28 22:02:21" itemprop="dateCreated datePublished" datetime="2017-06-28T22:02:21+08:00">2017-06-28</time>
+      <time title="Created: 2017-06-28 22:02:21" itemprop="dateCreated datePublished" datetime="2017-06-28T22:02:21+00:00">2017-06-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1891,6 +1700,194 @@ public class ConsumerMsgTask implements Runnable {<br> private KafkaStream m_str
 </li>
 </ul>
 <p>个人理解优雅的程序应该是简单的，越是简单的程序其实越是健壮，这种方案实现起来很复杂，即使这么复杂的程序实现了，其健壮性仍然值得担忧，所以不是特别推荐使用这种方案。比较好的方案当然是上Elasticsearch集群了，Elasticsearch的刷新时间默认是1s钟，也就是说，最迟1s之后，就可以看到新的数据。当然如果非要针对Lucene进行开发，可以参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/forfuture1978/archive/2010/11/29/1891476.html">Linked公司开源的Zoie搜索引擎</a>。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/RPC%20%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/RPC%20%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">RPC 相关</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-06-28 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-28T00:00:00+00:00">2017-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h1><ul>
+<li>远程调用过程<br>服务消费方（client）以本地调用方式调用远程服务 -<code>[...]</code>- server stub根据解码结果调用本地的服务并响应</li>
+<li>所谓RPC框架即是完成中间过程的过程<br>【提供client请求目标的方式-(反)序列化消息体-网络客户端】【网络服务端-(反)序列化消息体-调用服务端-提供服务注册方式】</li>
+</ul>
+<p>序列化方式：json、xml、hession、protobuf、thrift、text、bytes</p>
+<p><img src="http://img0.tuicool.com/qaiMFfA.png!web"></p>
+<p>| | | 提供client请求目标的方式 | (反)序列化消息体 | 网络服务 | 暴露服务&#x2F;服务发现 | (反)序列化消息体 | 提供server服务注册方式 | RPC框架初始化 |<br>|:—————:|————————–|—————–|——————-|——————-|——————|—————————|—————|<br>| Dubbo | spring-Bean |  类方法属性(行为)-&gt; <br> Object&lt;-二进制  | tcp(dubbo), nio | zookeeper |  类方法属性(行为)-&gt;反射 <br> 二进制&lt;-Object  | spring-Bean(&gt;ZK) | spring-Schema |<br>| webService-Axis | axis.client.Call | Object-soap(xml) | http | proName.wsdl描述 | soap(xml)-Object | Apache Axis:deploy.wsdd部署<br>或 JAX-WS (注解)   <br>   @WebService,@WebMethod | servlet |<br>| java.rmi | Naming.lookup | 类方法属性(行为)-&gt; <br> Object&lt;-二进制  | tcp(rmi) | rmi_doc | 类方法属性(行为)-&gt;反射 <br> 二进制&lt;-Object  | LocateRegistry.createRegistry <br> Naming.rebind | thread |<br>| RESTful | httpClient | json | http | api_doc | json | spring mvc | servlet |</p>
+<p><code>你应该知道的RPC原理 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/Z3QBVv">http://www.tuicool.com/articles/Z3QBVv</a></p>
+<hr>
+<p><code>一个虐你千百遍的问题：“RPC好，还是RESTful好？” - 王启军 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/douliw/article/details/52592188---">http://blog.csdn.net/douliw/article/details/52592188---</a></p>
+<hr>
+<h1 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h1><ul>
+<li><p>节点角色说明<br>Provider:  暴露服务的服务提供方。<br>Consumer:  调用远程服务的服务消费方。<br>Registry:  服务注册与发现的注册中心。<br>Monitor:  统计服务的调用次调和调用时间的监控中心。<br>Container:  服务运行容器</p>
+</li>
+<li><p>核心部分<br>远程通讯: 提供对多种基于长连接的<code>NIO框架</code>抽象封装，包括多种线程模型，<code>序列化</code>，以及“请求-响应”模式的信息交换方式。<br>集群容错: 提供基于接口方法的透明远程过程调用，包括多协议支持，以及<code>软负载均衡</code>，失败容错，地址路由，动态配置等集群支持。<br>自动发现: 基于<code>注册中心</code>目录服务，使服务消费方能动态的查找服务提供方，使地址透明，使服务提供方可以平滑增加或减少机器。</p>
+</li>
+</ul>
+<h2 id="Dubbo-负载均衡策略提供下列四种方式"><a href="#Dubbo-负载均衡策略提供下列四种方式" class="headerlink" title="Dubbo 负载均衡策略提供下列四种方式"></a>Dubbo 负载均衡策略提供下列四种方式</h2><ul>
+<li>Random LoadBalance <code>随机[ 权重 ]</code>，按权重设置随机概率。 Dubbo的默认负载均衡策略</li>
+</ul>
+<p>在一个截面上碰撞的概率高，但调用量越大分布越均匀，而且按概率使用权重后也比较均匀，有利于动态调整提供者权重。</p>
+<ul>
+<li>RoundRobin LoadBalance <code>轮循</code>，按公约后的权重设置轮循比率。</li>
+</ul>
+<p>存在慢的提供者累积请求问题，比如：第二台机器很慢，但没挂，当请求调到第二台时就卡在那，久而久之，所有请求都卡在调到第二台上。</p>
+<ul>
+<li>LeastActive LoadBalance <code>最少活跃调用数</code>，相同活跃数的随机，活跃数指调用前后计数差。</li>
+</ul>
+<p>使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大。</p>
+<ul>
+<li>ConsistentHash LoadBalance <code>一致性Hash</code>，相同参数的请求总是发到同一提供者。</li>
+</ul>
+<p>当某一台提供者挂时，原本发往该提供者的请求，基于虚拟节点，平摊到其它提供者，不会引起剧烈变动。</p>
+<p><code>Dubbo负载均衡策略 - 清风部落 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/qingfengbuluo/p/5527930.html">http://www.cnblogs.com/qingfengbuluo/p/5527930.html</a></p>
+<h2 id="Dubbo的Spring初始化"><a href="#Dubbo的Spring初始化" class="headerlink" title="Dubbo的Spring初始化"></a>Dubbo的Spring初始化</h2><blockquote>
+<p>dubbo使用了spring的自定义的Schema完成了dubbo配置的初始化<br><code>dubbo-2.5.3.jar!\META-INF\spring.handlers</code></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http\://code.alibabatech.com/schema/dubbo=com.alibaba.dubbo.config.spring.schema.DubboNamespaceHandler ```</span><br></pre></td></tr></table></figure>
+<p>public class DubboNamespaceHandler extends NamespaceHandlerSupport {<br>    public DubboNamespaceHandler() {<br>}</p>
+<p>public void init() {<br>    this.registerBeanDefinitionParser(“application”, new DubboBeanDefinitionParser(ApplicationConfig.class, true));<br>    this.registerBeanDefinitionParser(“module”, new DubboBeanDefinitionParser(ModuleConfig.class, true));<br>    this.registerBeanDefinitionParser(“registry”, new DubboBeanDefinitionParser(RegistryConfig.class, true));<br>    this.registerBeanDefinitionParser(“monitor”, new DubboBeanDefinitionParser(MonitorConfig.class, true));<br>    this.registerBeanDefinitionParser(“provider”, new DubboBeanDefinitionParser(ProviderConfig.class, true));<br>    this.registerBeanDefinitionParser(“consumer”, new DubboBeanDefinitionParser(ConsumerConfig.class, true));<br>    this.registerBeanDefinitionParser(“protocol”, new DubboBeanDefinitionParser(ProtocolConfig.class, true));<br>    this.registerBeanDefinitionParser(“service”, new DubboBeanDefinitionParser(ServiceBean.class, true));<br>    this.registerBeanDefinitionParser(“reference”, new DubboBeanDefinitionParser(ReferenceBean.class, false));<br>    this.registerBeanDefinitionParser(“annotation”, new DubboBeanDefinitionParser(AnnotationBean.class, true));<br>}</p>
+<p>static {</p>
+<pre><code>Version.checkDuplicate(DubboNamespaceHandler.class);
+</code></pre>
+<p>}<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">this.finishRefresh();</span><br><span class="line">this.invokeListener(listener, event);// 对 ApplicationListeners触发 Event  </span><br><span class="line">listener.onApplicationEvent(event);</span><br></pre></td></tr></table></figure>
+<p><code>com.alibaba.dubbo.config.spring.ServiceBean</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public void onApplicationEvent(ApplicationEvent event) &#123;</span><br><span class="line">    if (ContextRefreshedEvent.class.getName().equals(event.getClass().getName()) &amp;&amp; this.isDelay() &amp;&amp; !this.isExported() &amp;&amp; !this.isUnexported()) &#123;</span><br><span class="line">        if (logger.isInfoEnabled()) &#123;</span><br><span class="line">            logger.info(&quot;The service ready on spring started. service: &quot; + this.getInterface());</span><br><span class="line">        &#125;</span><br><span class="line">        this.export();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><code>4. dubbo在spring中的初始代</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/u012325403/article/details/55261916">http://blog.csdn.net/u012325403/article/details/55261916</a></p>
+<hr>
+<h1 id="Dubbo-使用示例"><a href="#Dubbo-使用示例" class="headerlink" title="Dubbo 使用示例"></a>Dubbo 使用示例</h1><ul>
+<li><p>Service</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 提供方应用信息，用于计算依赖关系 --&gt;</span><br><span class="line">&lt;dubbo:application name=&quot;dubbo-server&quot;/&gt;</span><br><span class="line">&lt;!-- 使用multicast广播注册中心暴露服务地址 --&gt;</span><br><span class="line">&lt;dubbo:registry address=&quot;zookeeper://localhost:2181&quot;/&gt;</span><br><span class="line">&lt;!-- 用dubbo协议在20880端口暴露服务 --&gt;</span><br><span class="line">&lt;dubbo:protocol name=&quot;dubbo&quot; port=&quot;20880&quot;/&gt;</span><br><span class="line">&lt;!-- 声明需要暴露的服务接口 --&gt;</span><br><span class="line">&lt;dubbo:service interface=&quot;com.fengjx.dubbo.service.HelloService&quot; ref=&quot;helloService&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    &lt;!-- 和本地bean一样实现服务 --&gt;</span><br><span class="line">    &lt;bean id=&quot;helloService&quot; class=&quot;com.fengjx.dubbo.service.impl.HelloServiceImpl&quot;/&gt;</span><br><span class="line">``` ```</span><br><span class="line">public class HelloServiceImpl implements HelloService &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 暴露的接口</span><br><span class="line">     *</span><br><span class="line">     * @param name</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public String sayHello(String name) &#123;</span><br><span class="line">        System.out.println(&quot;call sayHello&quot;);</span><br><span class="line">        return &quot;Hello &quot; + name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>Client</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 --&gt;</span><br><span class="line">&lt;dubbo:application name=&quot;dubbo-client&quot;/&gt;</span><br><span class="line">&lt;!-- 使用multicast广播注册中心暴露发现服务地址 --&gt;</span><br><span class="line">&lt;dubbo:registry address=&quot;zookeeper://localhost:2181&quot;/&gt;</span><br><span class="line">&lt;!-- 生成远程服务代理，可以和本地bean一样使用demoService --&gt;</span><br><span class="line">&lt;dubbo:reference id=&quot;helloService&quot; interface=&quot;com.fengjx.dubbo.service.HelloService&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;helloServiceConsumer&quot; class=&quot;com.fengjx.dubbo.service.HelloServiceConsumer&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;helloService&quot; ref=&quot;helloService&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringJUnit4ClassRunner.class)</span><br><span class="line">@ContextConfiguration(&quot;/spring.xml&quot;)</span><br><span class="line">public class HelloServiceConsumerTest &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private HelloServiceConsumer helloServiceConsumer;</span><br><span class="line">    @Test</span><br><span class="line">    public void test()&#123;</span><br><span class="line">        String res = helloServiceConsumer.helloFjx();</span><br><span class="line">        System.out.println(res);</span><br><span class="line">        assertEquals(&quot;Hello fengjx&quot;,res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><code>dubbo接口简单示例，maven + intellj构建</code><br><a target="_blank" rel="noopener" href="https://git.oschina.net/fengjx/dubbo-demo.git">https://git.oschina.net/fengjx/dubbo-demo.git</a></p>
+<p><code>Spring+Dubbo+TestNG接口测试 - LangSand的博客 - CSDN博客 </code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/langsand/article/details/72470720">http://blog.csdn.net/langsand/article/details/72470720</a></p>
+<hr>
+<h1 id="webService"><a href="#webService" class="headerlink" title="webService"></a>webService</h1><ul>
+<li>HelloWorld.java [ JAX-WS ]<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import javax.jws.WebMethod;</span><br><span class="line">import javax.jws.WebService;</span><br><span class="line">import javax.xml.ws.Endpoint;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@WebService(targetNamespace = &quot;http://localhost:9000/HelloWorld&quot;)</span><br><span class="line">public class HelloWorld &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@WebMethod</span><br><span class="line">public String sayHello(String name) &#123;</span><br><span class="line">System.out.println(name + &quot;,你好&quot;);</span><br><span class="line">return name + &quot;,你好&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public static void main(String args[])&#123;</span><br><span class="line">Object hello = new HelloWorld();</span><br><span class="line">String address = &quot;http://localhost:9000/HelloWorld&quot;;// 发布到的地址</span><br><span class="line">Endpoint.publish(address, hello);</span><br><span class="line">System.out.println(&quot;发布成功,http://localhost:8989/HelloWorld?wsdl&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+server依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.apache.axis/axis --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.apache.axis&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;axis&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.apache.axis/axis-jaxrpc --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.apache.axis&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;axis-jaxrpc&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- https://mvnrepository.com/artifact/axis/axis-wsdl4j --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;axis&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;axis-wsdl4j&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.5.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+client依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/commons-logging/commons-logging-api --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;commons-logging&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;commons-logging-api&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- https://mvnrepository.com/artifact/commons-discovery/commons-discovery --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;commons-discovery&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;commons-discovery&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;0.5&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>生成<code>HelloWorld.wsdl</code> (右键-WebServices<code>-Generate WSDL Form Java Code</code>)</p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/58767281.jpg"></p>
+<ul>
+<li><p>浏览器即可访问(工具:Wizdler)<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/51287937.jpg"></p>
+</li>
+<li><p>postman也可访问<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/84860502.jpg"></p>
+</li>
+</ul>
+<h1 id="生成客户端"><a href="#生成客户端" class="headerlink" title="生成客户端"></a>生成客户端</h1><ul>
+<li><p>方式一： 选择<code>HelloWorld.wsdl</code>右键-<code>Generate Java Code Form Wsdl</code><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/124167.jpg"></p>
+</li>
+<li><p>方式二：  新建工程（<code>Apache Axis为web方式</code>，<code>JAX-WS为注解方式</code>）</p>
+</li>
+</ul>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/19095284.jpg"></p>
+<p><code> intellij 开发webservice - 先知后觉 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/linxiaoyang/p/4167016.html">http://www.cnblogs.com/linxiaoyang/p/4167016.html</a></p>
+<p><code>如何用IDEA一步一步开发WebService服务器端</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/u010323023/article/details/52926051">http://blog.csdn.net/u010323023/article/details/52926051</a><br><a target="_blank" rel="noopener" href="http://www.biliyu.com/article/986.html">http://www.biliyu.com/article/986.html</a></p>
+<p><code>Intellij Idea 下 生成WebServiceClient (WS客户端) - NotFound404 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/qq_35067322/article/details/53558775">http://blog.csdn.net/qq_35067322/article/details/53558775</a></p>
+<hr>
+<h1 id="RMI"><a href="#RMI" class="headerlink" title="RMI"></a>RMI</h1><p><code>java RMI原理详解 - xinghun_4的专栏 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/xinghun_4/article/details/45787549">http://blog.csdn.net/xinghun_4/article/details/45787549</a></p>
+<p><code>Java RMI详解 - 怀揣梦想，努力前行 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/a19881029/article/details/9465663">http://blog.csdn.net/a19881029/article/details/9465663</a></p>
+<p><code>Java RMI之HelloWorld篇 - 熔 岩 - 51CTO技术博客</code><br><a target="_blank" rel="noopener" href="http://lavasoft.blog.51cto.com/62575/91679/">http://lavasoft.blog.51cto.com/62575/91679/</a></p>
+<hr>
+<h1 id="dubbo-与-WebService区别-跨平台思考"><a href="#dubbo-与-WebService区别-跨平台思考" class="headerlink" title="dubbo 与 WebService区别 跨平台思考?"></a>dubbo 与 WebService区别 跨平台思考?</h1><p>Dubbo提供基于接口的透明的远程过程调用，支持<code>多种协议</code>，包括Dubbo、RMI、<code>WebService</code>、Hessian、Http、Thrift、Redis、Memcached。<br>Dubbo基于注册中心的目录服务，使服务消费方能动态的查找服务提供方，支持平滑的减少或增加服务器。</p>
+<p><code>分布式服务框架Dubbo入门实践 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/d357dada2ff5">http://www.jianshu.com/p/d357dada2ff5</a></p>
+<hr>
+<h1 id="EJB"><a href="#EJB" class="headerlink" title="EJB"></a>EJB</h1><p><code>EJB分布式工作原理 - Senssic - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/senssic/article/details/11850131">http://blog.csdn.net/senssic/article/details/11850131</a></p>
+<p><code>EJB 工作原理 - 企业应用 - Java - ITeye论坛</code><br><a target="_blank" rel="noopener" href="http://www.iteye.com/topic/3832">http://www.iteye.com/topic/3832</a></p>
+<p><code>EJB工作原理学习笔记 - 天下无贼 - 51CTO技术博客</code><br><a target="_blank" rel="noopener" href="http://guojuanjun.blog.51cto.com/277646/1351245">http://guojuanjun.blog.51cto.com/277646/1351245</a></p>
+<p><code>EJB工作原理学习笔记! - 李晓辉的Blog - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/tolixiaohui/article/details/211957">http://blog.csdn.net/tolixiaohui/article/details/211957</a></p>
+<ul>
+<li><p><code>Weblogic</code><br>WebLogic是美国Oracle公司出品的一个application server，确切的说是一个基于JAVAEE架构的中间件 同类有:tomcat</p>
+</li>
+<li><p><code> XDoclet</code><br>  XDoclet 是一个通用的代码生成实用程序,是一个扩展的Javadoc Doclet引擎，它允许您使用象 JavaDoc 标记之类的东西来向诸如类、方法和字段之类的语言特征添加元数据<br>  XDoclet 继承了 JavaDoc 引擎的思想，允许根据定制 JavaDoc 标记生成代码和其他文件。当然，XDoclet 也可以访问整个解析树。这样，它就可以访问类、类的包结构和类的方法。</p>
+</li>
+</ul>
+<p><code>XDoclet是什么? - yangjuqi的日志 - 网易博客</code></p>
+<p><a target="_blank" rel="noopener" href="http://blog.163.com/yangjuqi@126/blog/static/28452285200791192152923/">http://blog.163.com/yangjuqi@126/blog/static/28452285200791192152923/</a></p>
+<hr>
+<p><strong>参考</strong><br><code>Dubbo初探 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/VrQrUv">http://www.tuicool.com/articles/VrQrUv</a></p>
+<p><code>Dubbo源码学习--集群负载均衡算法的实现</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/javanoob/p/dubbo_loadbalance.html">http://www.cnblogs.com/javanoob/p/dubbo_loadbalance.html</a></p>
+<p><code>RPC框架与Dubbo完整使用</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/u010297957/article/details/51702076">http://blog.csdn.net/u010297957/article/details/51702076</a></p>
+<p><code>Java RMI 框架（远程方法调用） - 蚂蚁 - 51CTO技术博客</code><br><a target="_blank" rel="noopener" href="http://haolloyin.blog.51cto.com/1177454/332426/">http://haolloyin.blog.51cto.com/1177454/332426/</a></p>
 
       
     </div>

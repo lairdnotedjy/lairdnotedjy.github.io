@@ -137,7 +137,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-count">546</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -165,109 +165,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Use-nuts-cloud-sync-IntelliJ-IDEA-configuration-files/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Use-nuts-cloud-sync-IntelliJ-IDEA-configuration-files/" class="post-title-link" itemprop="url">使用坚果云同步IntelliJ IDEA的配置文件</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-08-09 21:50:39" itemprop="dateCreated datePublished" datetime="2016-08-09T21:50:39+08:00">2016-08-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>对于IDEA这样的神器，每个人都必然会有很多个性化的配置，那么如何在多台终端同步IDEA的配置呢？配合强大的坚果云同步功能来自动同步你的配置文件吧。另外坚果云免费版虽然对流量有限制，但是同步一个小小的配置文件夹还是足够了。</p>
-<p>此方法也适用于JetBrains家的其它IDE系列产品，稍有不同之处请自行调整。</p>
-<ul>
-<li><strong>IntelliJ IDEA</strong>，一套智慧型的Java整合开发工具，特别专注与强调程序员的开发撰写效率提升</li>
-<li><strong>PHPStorm</strong>，PHP集成开发工具</li>
-<li><strong>PyCharm</strong>，智能Python集成开发工具</li>
-<li><strong>RubyMine</strong>，一个为Ruby和Rails开发者准备的IDE，其带有所有开发者必须的功能，并将之紧密集成于便捷的开发环境中</li>
-<li><strong>WebStorm</strong>，智能HTML&#x2F;CSS&#x2F;JS开发工具</li>
-<li><strong>AppCode</strong>，开发Obj-C的IDE，是一个XCode的替代物</li>
-</ul>
-<p>IDEA 默认配置文件存放位置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Windows 保存在 &#x27;%HOMEPATH%/.&lt;product&gt;&lt;version&gt;/config&#x27; 例如&#x27;C:/Users/JohnS/.IntelliJIdea2018.1/config&#x27;</span><br><span class="line">Unix/Linux 保存在 &#x27;~/.&lt;product&gt;&lt;version&gt;/config&#x27; 例如 &#x27;~/.IntelliJIdea2018.1/config&#x27;</span><br><span class="line">Mac 保存在 &#x27;~/Library/Preferences/&lt;product&gt;&lt;version&gt;&#x27; 例如 &#x27;~/Library/Preferences/IntelliJIdea2018.1&#x27;</span><br></pre></td></tr></table></figure>
-<p>坚果云的客户端安装就不说了，关闭IDEA，从你的默认配置目录里剪切config这个目录到你的坚果云同步目录。如果你想要同步多个工具的配置目录，那么可以为config搭配一个父目录使用。如下所示</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E:/jianguoyun/IDEA/config        #IDEA的配置文件路径</span><br><span class="line">E:/jianguoyun/PyCharm/config     #PyCharm的配置文件路径</span><br><span class="line">E:/jianguoyun/PHPStorm/config    #PHPStorm的配置文件路径</span><br></pre></td></tr></table></figure>
-
-<p>打开IDEA安装目录<code>C:/Program Files (x86)/JetBrains/IntelliJ IDEA 2016.2/bin/idea.properties</code>，找到第8行，把idea.config.path前面的<code>#</code>号去掉，<code>=</code>号后面的路径修改成之前的配置文件夹的目录，例如IDEA修改为<code>idea.config.path=E:/jianguoyun/IDEA/config</code>。记得把路径中的“\”换成“&#x2F;”。在Mac系统中，IDEA的配置路径<code>~/Library/Preferences/IntelliJIdea2018.1</code>下面并不存在<code>idea.properties</code>，那么新建一个文件即可，内容如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># custom IntelliJ IDEA properties</span><br><span class="line">idea.config.path=/Users/mulai.wx/Nutstore Files/jianguoyun/IDEA/config-mac</span><br></pre></td></tr></table></figure>
-<p>如果有不清楚的地方，可以直接参考IDEA的官方文档 <a target="_blank" rel="noopener" href="https://www.jetbrains.com/help/idea/tuning-the-ide.html#default-dirs"><strong>Default IDE directories</strong></a>。</p>
-<p>那么在公司直接安装坚果云，将IDEA的配置文件夹同步到本地，然后修改<code>idea.properties</code>中的值指向坚果云中正确的配置文件夹路径即可。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -306,14 +203,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-08-09 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-09T00:00:00+08:00">2016-08-09</time>
+      <time title="Created: 2016-08-09 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-09T00:00:00+00:00">2016-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
     </span>
 
   
@@ -410,14 +307,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-08-09 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-09T00:00:00+08:00">2016-08-09</time>
+      <time title="Created: 2016-08-09 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-09T00:00:00+00:00">2016-08-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
     </span>
 
   
@@ -497,14 +394,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-29T00:00:00+08:00">2016-07-29</time>
+      <time title="Created: 2016-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-29T00:00:00+00:00">2016-07-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
     </span>
 
   
@@ -591,14 +488,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-28T00:00:00+08:00">2016-07-28</time>
+      <time title="Created: 2016-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-28T00:00:00+00:00">2016-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
     </span>
 
   
@@ -714,14 +611,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-07-26 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-26T00:00:00+08:00">2016-07-26</time>
+      <time title="Created: 2016-07-26 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-26T00:00:00+00:00">2016-07-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:28" itemprop="dateModified" datetime="2024-01-26T12:42:28+00:00">2024-01-26</time>
     </span>
 
   
@@ -852,14 +749,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-07-25 00:00:03" itemprop="dateCreated datePublished" datetime="2016-07-25T00:00:03+08:00">2016-07-25</time>
+      <time title="Created: 2016-07-25 00:00:03" itemprop="dateCreated datePublished" datetime="2016-07-25T00:00:03+00:00">2016-07-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
     </span>
 
   
@@ -935,14 +832,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-07-25 00:00:02" itemprop="dateCreated datePublished" datetime="2016-07-25T00:00:02+08:00">2016-07-25</time>
+      <time title="Created: 2016-07-25 00:00:02" itemprop="dateCreated datePublished" datetime="2016-07-25T00:00:02+00:00">2016-07-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
     </span>
 
   
@@ -1045,14 +942,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-07-25 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-25T00:00:00+08:00">2016-07-25</time>
+      <time title="Created: 2016-07-25 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-25T00:00:00+00:00">2016-07-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
     </span>
 
   
@@ -1215,14 +1112,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-07-22 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-22T00:00:00+08:00">2016-07-22</time>
+      <time title="Created: 2016-07-22 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-22T00:00:00+00:00">2016-07-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
     </span>
 
   
@@ -1269,6 +1166,107 @@
 &lt;!-- more --&gt;
 </code></pre>
 
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/linux%20nginx%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux%20nginx%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/" class="post-title-link" itemprop="url">linux nginx权限控制策略</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-07-21 00:00:03" itemprop="dateCreated datePublished" datetime="2016-07-21T00:00:03+00:00">2016-07-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:27" itemprop="dateModified" datetime="2024-01-26T12:42:27+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="方式一：更改目录权限，开放其它用户访问"><a href="#方式一：更改目录权限，开放其它用户访问" class="headerlink" title="方式一：更改目录权限，开放其它用户访问"></a>方式一：更改目录权限，开放<code>其它用户</code>访问</h1><ul>
+<li>优点：可以提供给所有者(root)以外的用户进行维护</li>
+<li>缺点：<code>其它用户</code>包含了定义的管理员用户和其它所有用户.存在安全隐患</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 nginx</span><br></pre></td></tr></table></figure>
+
+<h1 id="方式二：更改html目录所有者-（推荐）"><a href="#方式二：更改html目录所有者-（推荐）" class="headerlink" title="方式二：更改html目录所有者 （推荐）"></a>方式二：更改<code>html</code>目录所有者 （推荐）</h1><ul>
+<li>优点:区别于其它用户的权限,避免了权限公开</li>
+<li>缺点:文件的原所有者(非root)将失去管理权.但可以还原所有者来归还权限<ul>
+<li>root用户具备ALL权限,可以操作其他用户的文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R sysadmin /usr/local/nginx/html </span><br><span class="line">sudo chown -R  sysadmin: sysadmin   /usr/local/nginx /html  #  群组一并修改</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>tomcat 同理<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R sysadmin  /usr/local/apache-tomcat-*/webapps</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="方式三：更改目录安装位置，于维护用户的目录下"><a href="#方式三：更改目录安装位置，于维护用户的目录下" class="headerlink" title="方式三：更改目录安装位置，于维护用户的目录下"></a>方式三：更改目录安装位置，于维护用户的目录下</h1><ul>
+<li>优点：由<code>nginx</code>专有用户 管理（前提依然需要更换文件所有者）</li>
+<li>缺点：更像是<code>nginx</code>独有的服务，且在维护其它服务时会频繁的切换用户<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">./configure  --prefix=/home/nginx/nginx   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo chown -R sysadmin nginx/</span><br><span class="line"></span><br><span class="line">sudo chown -R sysadmin: sysadmin  nginx/ #  群组一并修改</span><br></pre></td></tr></table></figure></li>
+<li>注意问题<br><code>nginx 部署的项目无法加载jquery.js或加载出片段问题,多个解决办法.md   </code></li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/linux%20nginx%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

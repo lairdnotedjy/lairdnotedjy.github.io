@@ -137,7 +137,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-count">546</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -165,267 +165,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Java-NIO-development-Precautions/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Java-NIO-development-Precautions/" class="post-title-link" itemprop="url">Java NIO开发注意点</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-02-01 22:16:14" itemprop="dateCreated datePublished" datetime="2016-02-01T22:16:14+08:00">2016-02-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="Java-NIO的介绍"><a href="#Java-NIO的介绍" class="headerlink" title="Java NIO的介绍"></a>Java NIO的介绍</h4><p>首先要搞清楚两个概念，一个是<code>NIO</code>，另一个是<code>NIO 2</code>。<code>NIO = New I/O</code>是在<code>JDK1.4</code>中引入，也就是同步非阻塞<code>I/O</code>，简称<code>NIO</code>；而<code>NIO 2</code>是<code>NIO</code>的升级版，在<code>JDK1.7</code>中引入，也就是异步非阻塞<code>I/O</code>，简称<code>AIO</code>；而最早最传统的<code>I/O</code>属于同步阻塞<code>I/O</code>，简称<code>BIO</code>。</p>
-<h4 id="Java-NIO的优势"><a href="#Java-NIO的优势" class="headerlink" title="Java-NIO的优势"></a>Java-NIO的优势</h4><ul>
-<li>事件驱动模型<ul>
-<li>避免多线程</li>
-<li>单线程处理多任务</li>
-</ul>
-</li>
-<li>非阻塞<code>I/O</code>，<code>I/O</code>读写不再阻塞，而是返回0</li>
-<li>基于<code>block</code>的传输，通常比基于流的传输更高效</li>
-<li>更高级的<code>I/O</code>函数，<code>zero-copy</code></li>
-<li><code>I/O</code>多路复用大大提高了Java网络应用的可伸缩性和实用性</li>
-</ul>
-<h4 id="NIO工作原理"><a href="#NIO工作原理" class="headerlink" title="NIO工作原理"></a>NIO工作原理</h4><ul>
-<li>由一个专门的线程来处理所有的<code>I/O</code>事件，并负责分发</li>
-<li>事件驱动机制：事件到的时候触发，而不是同步的去监视事件</li>
-<li>线程通讯：线程之间通过<code>wait</code>，<code>notify</code>等方式通讯。保证每次上下文切换都是有意义的，减少无谓的线程切换</li>
-</ul>
-<h4 id="NIO开发相关模糊知识点"><a href="#NIO开发相关模糊知识点" class="headerlink" title="NIO开发相关模糊知识点"></a>NIO开发相关模糊知识点</h4><ol>
-<li><p>首先<code>Selector.open()</code>并不是单例模式，当你每次调用该静态方法时候，都返回一个全新的<code>Selector</code>实例</p>
-</li>
-<li><p><code>configureBlocking()</code>方法用来设置通道的阻塞模式，该方法会调用<code>implConfigureBlocking</code>方法，<code>implConfigureBlocking</code>方法会更改阻塞模式为新传入的值，如：默认为true，传入false，那么该通道将调整为非阻塞，可以通过调用<code>isBlocking()</code>方法来判断某个<code>socket</code>通道当前处于哪种模式</p>
-</li>
-<li><p>NIO的最大优势就是其是非阻塞模型，所以一般来说都需要设置<code>SocketChannel.configureBlocking(false);</code></p>
-</li>
-<li><p>传统的<code>Java IO</code>中通道是阻塞的，那么NIO提供了非阻塞的通道到底有什么作用呢？非阻塞<code>I/O</code>是许多复杂的、高性能的程序构建的基础</p>
-</li>
-<li><p><code>remove()</code>方法的作用 ① <code>Set selectedKeys = selector.selectedKeys(); Iterator iter = selectedKeys.iterator();</code> ② <code>SelectionKey key = iter.next();</code> ③ <code>iter.remove();</code> 注意每次迭代之后要移除当前迭代的对象，原因是<code>Selector</code>不会自己从已选择键集中移除<code>SelectionKey</code>实例。必须在处理完通道时自己移除。下次该通道变成就绪时，<code>Selector</code>会再次将其放入已选择键集中</p>
-</li>
-<li><p>服务端和客户端是否维护着同一份<code>Selector</code>，答案是否定的，服务端和客户端各自维护着一个<code>Selector</code>对象，并且注意在多线程并发的时候，不要让多个客户端共享<code>Selector</code></p>
-</li>
-<li><p><code>ByteBuffer byteBuffer = ByteBuffer.allocate(1);</code>在从通道往<code>buffer</code>中读入之后，使用<code>byteBuffer.get()</code>获取的时候，不可重复调用，因为<code>get()</code>方法会移动<code>position</code>，使得多次调用<code>get()</code>方法获取的内容是不同的</p>
-</li>
-<li><p>在<code>ByteBuffer</code>中，<code>put(int index, byte b)</code>方法不会移动<code>position</code>，但是<code>put(byte b)</code>会移动<code>position</code></p>
-</li>
-<li><p><code>channel.read()</code>函数会返回-1，那么什么时候会读到-1呢？针对服务器端而言，当客户端调用了<code>channel.close()</code>关闭连接时，这时候服务器端返回的读取数是-1，表示已经到了末尾。那么此时需要把对应的<code>SelectionKey</code>给<code>cancel</code>掉，表示<code>selector</code>不再监听这个<code>channel</code>上的读事件，并且关闭<code>channel</code></p>
-</li>
-<li><p><code>ByteBuffer.allocate(int capacity)</code>和<code>ByteBuffer.allocateDirect(int capacity)</code>的区别：使用<code>allocate</code>来创建缓冲区，并不是一下子就分配给缓冲区<code>capacity</code>大小的空间，而是根据缓冲区中存储数据的情况来动态分配缓冲区的大小（实际上，在底层Java采用了数据结构中的堆来管理缓冲区的大小），因此，这个<code>capacity</code>可以是一个很大的值，如<code>1024*1024（1M）</code>。使用<code>allocateDirect</code>方法可以一次性分配<code>capacity</code>大小的连续字节空间。通过<code>allocateDirect</code>方法来创建具有连续空间的<code>ByteBuffer</code>对象虽然可以在一定程度上提高效率，但这种方式并不是平台独立的。也就是说，在一些操作系统平台上使用<code>allocateDirect</code>方法来创建<code>ByteBuffer</code>对象会使效率大幅度提高，而在另一些操作系统平台上，性能会表现得非常差。而且<code>allocateDirect</code>方法需要较长的时间来分配内存空间，在释放空间时也较慢。因此，在使用<code>allocateDirect</code>方法时应谨慎</p>
-</li>
-<li><p>与缓冲区不同，通道不能被重复使用，一个打开的通道即代表与一个特定<code>I/O</code>服务的特定连接并封装该连接的状态。当通道关闭时，那个连接会丢失，然后通道将不再连接任何东西</p>
-</li>
-<li><p>通道的<code>read()</code>和<code>write()</code>方法的数据流向是怎么样的？<code>read()</code>表示该通道读就绪，可以从通道中读取内容到缓冲区，而<code>wirte()</code>表示该通道写就绪，可以将缓冲区中的内容写入通道</p>
-</li>
-<li><p>虽然说一个通道可以被注册到多个选择器上，但对每个选择器而言只能被注册一次</p>
-</li>
-<li><p>选择键封装了特定的通道与特定的选择器的注册关系。选择键对象被<code>SelectableChannel.register(Selector sel, int ops)</code>返回并提供一个表示这种注册关系的标记。选择键包含了两个比特集（以整数的形式进行编码），指示了该注册关系所关心的通道操作，以及通道已经准备好的操作</p>
-</li>
-<li><p>注意<code>select()</code>是一个阻塞操作，那么如何停止<code>select()</code>操作所在的线程呢？主要有三种方法 ①使用<code>volatile boolean</code>变量来标识线程是否停止 ②停止线程时，需要调用停止线程的<code>interrupt()</code>方法，因为线程有可能在<code>wait()</code>或<code>sleep()</code>，提高停止线程的及时性 ③处于<code>Blocking IO</code>的处理，尽量使用<code>InterruptibleChannel</code>来代替<code>Blocking IO</code>，对于NIO来说，如果线程处于<code>select()</code>阻塞状态，这时候无法及时的检测到条件变量的变化，那么需要人工调用<code>wakeup()</code>方法，唤醒线程，使得其可以检测到条件变量</p>
-</li>
-<li><p>当通道关闭时，所有相关的键会自动取消；当选择器关闭时，所有被注册到该选择器的通道都将被注销，并且相关的键将立即被无效化</p>
-</li>
-<li><p>注意<code>select()</code>操作返回值不是已经准备好的通道的总数，而是从上一个<code>select()</code>调用之后进入就绪状态的通道的数量。之前的调用中就绪的，并且在本次调用中仍然就绪的通道不会被计入，而那些在前一次调用中已经就绪但已经不再处于就绪状态的通道也不会计入。这些通道可能仍然在已选择的键的集合中，但不会被计入返回值中，返回值可能是0</p>
-</li>
-<li><p>推荐使用内部的已取消的键的集合来延迟注销，是一种防止线程在取消键时阻塞，并防止与正在进行的选择操作冲突的优化</p>
-</li>
-<li><p><code>Selector</code>选择器对象是线程安全的，但它们包含的键集合不是。通过<code>keys()</code>和<code>selectKeys()</code>返回的键的集合是<code>Selector</code>对象内部的私有的<code>Set</code>对象集合的直接引用。这些集合可能在任意时间被改变。已注册的键的集合是只读的</p>
-</li>
-<li><p>如果在多个线程并发地访问一个选择器的键的集合的时候存在任何问题，可以采用同步的方式进行访问，在执行选择操作时，选择器在<code>Selector</code>对象上进行同步，然后是已注册的键的集合，最后是已选择的键的集合</p>
-</li>
-<li><p>在并发量大的时候，使用同一个线程处理连接请求以及消息服务，可能会出现拒绝连接的情况，这是因为当该线程在处理消息服务的时候，可能会无法及时处理连接请求，从而导致超时；一个更好的策略是对所有的可选择通道使用一个选择器，并将对就绪通道的服务委托给其它线程。只需一个线程监控通道的就绪状态并使用一个协调好的的工作线程池来处理接收及发送数据</p>
-</li>
-<li><p><code>Selector.wakeup()</code>的主要作用：①解除阻塞在<code>Selector.select()/select(long)</code>上的线程，立即返回 ②两次成功的<code>select</code>之间多次调用<code>wakeup</code>等价于一次调用 ③如果当前没有阻塞在<code>select</code>上，则本次<code>wakeup</code>调用将作用于下一次<code>select</code>操作</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E6%AD%A3%E5%88%99%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%9B%BE%E4%B9%A6%E7%9B%AE%E5%BD%95%202%20xmind%20%E4%B9%8B%20%E7%9B%AE%E5%BD%95%E6%A0%BC%E5%BC%8F%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E6%AD%A3%E5%88%99%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%9B%BE%E4%B9%A6%E7%9B%AE%E5%BD%95%202%20xmind%20%E4%B9%8B%20%E7%9B%AE%E5%BD%95%E6%A0%BC%E5%BC%8F%E5%8C%96/" class="post-title-link" itemprop="url">正则格式化图书目录 2 xmind 之 目录格式化</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-02-01 00:00:02" itemprop="dateCreated datePublished" datetime="2016-02-01T00:00:02+08:00">2016-02-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%AD%A3%E5%88%99/" itemprop="url" rel="index"><span itemprop="name">正则</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="目录格式化"><a href="#目录格式化" class="headerlink" title="目录格式化"></a>目录格式化</h1><p>素材(来源:各网络书店,豆瓣)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">第1章　简介</span><br><span class="line">1.1　并发简史</span><br><span class="line">1.2　线程的优势</span><br><span class="line">1.2.1　发挥多处理器的强大能力</span><br><span class="line">1.2.2　建模的简单性</span><br><span class="line">1.2.3　异步事件的简化处理</span><br><span class="line">1.2.4　响应更灵敏的用户界面</span><br><span class="line">1.3　线程带来的风险</span><br><span class="line">1.3.1　安全性问题</span><br><span class="line">1.3.2　活跃性问题</span><br><span class="line">1.3.3　性能问题</span><br><span class="line">1.4　线程无处不在</span><br><span class="line">第一部分　基础知识</span><br><span class="line">第2章　线程安全性</span><br><span class="line">2.1　什么是线程安全性</span><br><span class="line">2.2　原子性</span><br><span class="line">2.2.1　竞态条件</span><br><span class="line">2.2.2　示例：延迟初始化中的竞态条件</span><br><span class="line">2.2.3　复合操作</span><br><span class="line">2.3　加锁机制</span><br><span class="line">2.3.1　内置锁</span><br><span class="line">2.3.2　重入</span><br><span class="line">2.4　用锁来保护状态</span><br><span class="line">2.5　活跃性与性能</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="替换-一回"><a href="#替换-一回" class="headerlink" title="替换-一回"></a>替换-一回</h1><p>定位:换行开始,后面为数字(\d)点(.)-但不包含(?&#x3D;pattern)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">(?=\d*[\.|．])</span><br></pre></td></tr></table></figure>
-<p>替换为: 换行+Table</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-2-23/27375558.jpg"></p>
-<p>效果1:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">第1章　简介</span><br><span class="line">1.1　并发简史</span><br><span class="line">1.2　线程的优势</span><br><span class="line">1.2.1　发挥多处理器的强大能力</span><br><span class="line">1.2.2　建模的简单性</span><br><span class="line">1.2.3　异步事件的简化处理</span><br><span class="line">1.2.4　响应更灵敏的用户界面</span><br><span class="line">1.3　线程带来的风险</span><br><span class="line">1.3.1　安全性问题</span><br><span class="line">1.3.2　活跃性问题</span><br><span class="line">1.3.3　性能问题</span><br><span class="line">1.4　线程无处不在</span><br><span class="line">第一部分　基础知识</span><br><span class="line">第2章　线程安全性</span><br><span class="line">2.1　什么是线程安全性</span><br><span class="line">2.2　原子性</span><br><span class="line">2.2.1　竞态条件</span><br><span class="line">2.2.2　示例：延迟初始化中的竞态条件</span><br><span class="line">2.2.3　复合操作</span><br><span class="line">2.3　加锁机制</span><br><span class="line">2.3.1　内置锁</span><br><span class="line">2.3.2　重入</span><br><span class="line">2.4　用锁来保护状态</span><br><span class="line">2.5　活跃性与性能</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="替换-二回"><a href="#替换-二回" class="headerlink" title="替换-二回"></a>替换-二回</h1><p>数字加. 数字加. 前加两个空格</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?=\d*[\.|．]\d*[\.|．])</span><br></pre></td></tr></table></figure>
-<p>替换为:两个Tab</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-2-23/38014154.jpg"></p>
-<p>效果2:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">第1章　简介</span><br><span class="line">1.1　并发简史</span><br><span class="line">1.2　线程的优势</span><br><span class="line">1.2.1　发挥多处理器的强大能力</span><br><span class="line">1.2.2　建模的简单性</span><br><span class="line">1.2.3　异步事件的简化处理</span><br><span class="line">1.2.4　响应更灵敏的用户界面</span><br><span class="line">1.3　线程带来的风险</span><br><span class="line">1.3.1　安全性问题</span><br><span class="line">1.3.2　活跃性问题</span><br><span class="line">1.3.3　性能问题</span><br><span class="line">1.4　线程无处不在</span><br><span class="line">第一部分　基础知识</span><br><span class="line">第2章　线程安全性</span><br><span class="line">2.1　什么是线程安全性</span><br><span class="line">2.2　原子性</span><br><span class="line">2.2.1　竞态条件</span><br><span class="line">2.2.2　示例：延迟初始化中的竞态条件</span><br><span class="line">2.2.3　复合操作</span><br><span class="line">2.3　加锁机制</span><br><span class="line">2.3.1　内置锁</span><br><span class="line">2.3.2　重入</span><br><span class="line">2.4　用锁来保护状态</span><br><span class="line">2.5　活跃性与性能</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="最终2xmind效果"><a href="#最终2xmind效果" class="headerlink" title="最终2xmind效果"></a>最终2xmind效果</h1><p>复制上文,到剪切板 - 选中xmind主题 - 粘贴 - 查看效果<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-2-23/27382676.jpg"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/%E6%AD%A3%E5%88%99%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%9B%BE%E4%B9%A6%E7%9B%AE%E5%BD%95%202%20xmind%20%E4%B9%8B%20%E7%9B%AE%E5%BD%95%E6%A0%BC%E5%BC%8F%E5%8C%96/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -464,14 +203,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-02-01 00:00:00" itemprop="dateCreated datePublished" datetime="2016-02-01T00:00:00+08:00">2016-02-01</time>
+      <time title="Created: 2016-02-01 00:00:00" itemprop="dateCreated datePublished" datetime="2016-02-01T00:00:00+00:00">2016-02-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -574,14 +313,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-01-21 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-21T00:00:00+08:00">2016-01-21</time>
+      <time title="Created: 2016-01-21 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-21T00:00:00+00:00">2016-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -681,14 +420,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-01-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-16T00:00:00+08:00">2016-01-16</time>
+      <time title="Created: 2016-01-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-16T00:00:00+00:00">2016-01-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -801,14 +540,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-01-14 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-14T00:00:00+08:00">2016-01-14</time>
+      <time title="Created: 2016-01-14 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-14T00:00:00+00:00">2016-01-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
     </span>
 
   
@@ -908,14 +647,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-01-13 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-13T00:00:00+08:00">2016-01-13</time>
+      <time title="Created: 2016-01-13 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-13T00:00:00+00:00">2016-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1008,14 +747,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-01-09 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-09T00:00:00+08:00">2016-01-09</time>
+      <time title="Created: 2016-01-09 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-09T00:00:00+00:00">2016-01-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:21" itemprop="dateModified" datetime="2024-01-26T12:42:21+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1125,14 +864,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-01-08 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-08T00:00:00+08:00">2016-01-08</time>
+      <time title="Created: 2016-01-08 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-08T00:00:00+00:00">2016-01-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1228,14 +967,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-01-07 00:00:04" itemprop="dateCreated datePublished" datetime="2016-01-07T00:00:04+08:00">2016-01-07</time>
+      <time title="Created: 2016-01-07 00:00:04" itemprop="dateCreated datePublished" datetime="2016-01-07T00:00:04+00:00">2016-01-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1267,6 +1006,228 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/ionic%E9%97%AE%E9%A2%98%E2%80%94%E2%80%94Popups%E6%97%A0%E6%B3%95%E5%85%B3%E9%97%AD/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/package.json%E7%BB%B4%E6%8A%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/package.json%E7%BB%B4%E6%8A%A4/" class="post-title-link" itemprop="url">package.json维护</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-01-07 00:00:03" itemprop="dateCreated datePublished" datetime="2016-01-07T00:00:03+00:00">2016-01-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ionic/" itemprop="url" rel="index"><span itemprop="name">ionic</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="ionic项目同步更新package-or-依据package"><a href="#ionic项目同步更新package-or-依据package" class="headerlink" title="ionic项目同步更新package or 依据package"></a>ionic项目同步更新package or 依据package</h1><h1 id="同步更新package-json"><a href="#同步更新package-json" class="headerlink" title="同步更新package.json"></a>同步更新package.json</h1><p><strong>npm部分</strong></p>
+<blockquote>
+<p>方式一: 删除<code>package.json</code>中的<code>dependencies</code>项,再<code>npm init</code>会依据<code>node_modules</code>的实际安装情况,更新<code>dependencies</code>配置项.但会多余配置部分信息,可能与原文件不一致,会出现覆盖.</p>
+</blockquote>
+<blockquote>
+<p>方式二: 为减少误操作,可先备份(或重命名)<code>package.json</code>,再<code>npm init</code>同样会依据<code>node_modules</code>的实际安装情况,更新<code>dependencies</code>配置项</p>
+</blockquote>
+<p><strong>cordova部分</strong></p>
+<blockquote>
+<p><code>ionic state save</code> 更新package.json<br>会依据<code>plugins</code>的实际安装情况,更新<code>package.json</code>中的<code>cordovaPlugins</code>项</p>
+</blockquote>
+<h1 id="依据package-json-安装plugin或module"><a href="#依据package-json-安装plugin或module" class="headerlink" title="依据package.json,安装plugin或module"></a>依据package.json,安装plugin或module</h1><p><strong>npm部分</strong><br><code>npm install</code> 或 <code>cnpm install</code></p>
+<p><strong>cordova部分</strong><br><code>ionic state restore</code> 恢复及安装</p>
+<blockquote>
+<p>依据package.json文件中的cordovaPlugins和cordovaPlatforms属性.来恢复应用程序的plugins 和 platforms.<br>可以手工填充cordovaPlugins和cordovaPlatforms属性,再使用<code>ionic state restore</code>恢复安装</p>
+</blockquote>
+<p><code>ionic state reset</code> 重置(慎用)</p>
+<blockquote>
+<p><font color=red>重置方法首先将删除您的平台和插件文件夹.</font><br>然后会依据你的package.json文件指定的 plugins 和 platforms重新安装</p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/package.json%E7%BB%B4%E6%8A%A4/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/npm%20%E4%B9%8B%20package.json/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/npm%20%E4%B9%8B%20package.json/" class="post-title-link" itemprop="url">npm 之 package.json</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-01-07 00:00:02" itemprop="dateCreated datePublished" datetime="2016-01-07T00:00:02+00:00">2016-01-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/npm/" itemprop="url" rel="index"><span itemprop="name">npm</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>npm 之 package.json.md</p>
+<h1 id="package-json-帮助查看"><a href="#package-json-帮助查看" class="headerlink" title="package.json 帮助查看"></a><code>package.json</code> 帮助查看</h1><p><code>npm help json</code></p>
+<h1 id="npm-init-新建-更新-package-json"><a href="#npm-init-新建-更新-package-json" class="headerlink" title="npm init 新建(&#x2F;更新) package.json"></a><code>npm init</code> 新建(&#x2F;更新) <code>package.json</code></h1><blockquote>
+<p>如果<code>package.json</code>文件依据存在不会改变未设置的配置项</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">F:\work\wosai\code.wosai\edu.k12\k12student&gt;npm init</span><br><span class="line">This utility will walk you through creating a package.json file.</span><br><span class="line">It only covers the most common items, and tries to guess sensible defaults.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">See `npm help json` for definitive documentation on these fields</span><br><span class="line">and exactly what they do.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Use `npm install &lt;pkg&gt; --save` afterwards to install a package and</span><br><span class="line">save it as a dependency in the package.json file.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Press ^C at any time to quit.</span><br><span class="line">name: (tabs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">version: (1.0.0)</span><br><span class="line">keywords:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">author:</span><br><span class="line">license: (ISC)</span><br><span class="line">About to write to F:\work\wosai\code.wosai\edu.k12\k12student\package.json:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;tabs&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;tabs: An Ionic project&quot;,</span><br><span class="line">  &quot;cordovaPlugins&quot;: [</span><br><span class="line">    &quot;cordova-plugin-device&quot;,</span><br><span class="line">    &quot;cordova-plugin-console&quot;,</span><br><span class="line">    &quot;cordova-plugin-whitelist&quot;,</span><br><span class="line">    &quot;cordova-plugin-splashscreen&quot;,</span><br><span class="line">    &quot;com.ionic.keyboard&quot;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;locator&quot;: &quot;https://github.com/mrwutong/cordova-qdc-alipay.git&quot;,</span><br><span class="line">      &quot;id&quot;: &quot;com.qdc.plugins.alipay&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  &quot;cordovaPlatforms&quot;: [</span><br><span class="line">    &quot;android&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;main&quot;: &quot;gulpfile.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;repository&quot;: &#123;</span><br><span class="line">    &quot;type&quot;: &quot;git&quot;,</span><br><span class="line">    &quot;url&quot;: &quot;https://git.oschina.net/xwill/k12student.git&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;author&quot;: &quot;&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;gulp&quot;: &quot;^3.9.0&quot;,</span><br><span class="line">    &quot;gulp-imagemin&quot;: &quot;^2.4.0&quot;,</span><br><span class="line">    &quot;gulp-concat&quot;: &quot;^2.6.0&quot;,</span><br><span class="line">    &quot;gulp-jshint&quot;: &quot;^1.11.2&quot;,</span><br><span class="line">    &quot;gulp-minify-css&quot;: &quot;^0.3.13&quot;,</span><br><span class="line">    &quot;gulp-minify-html&quot;: &quot;^1.0.4&quot;,</span><br><span class="line">    &quot;gulp-rename&quot;: &quot;^1.2.2&quot;,</span><br><span class="line">    &quot;gulp-sass&quot;: &quot;^1.3.3&quot;,</span><br><span class="line">    &quot;gulp-uglify&quot;: &quot;^1.4.2&quot;,</span><br><span class="line">    &quot;gulp-util&quot;: &quot;^3.0.7&quot;,</span><br><span class="line">    &quot;gulp-watch&quot;: &quot;^4.3.5&quot;,</span><br><span class="line">    &quot;imagemin-pngquant&quot;: &quot;^4.2.0&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Is this ok? (yes)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="奇淫技巧"><a href="#奇淫技巧" class="headerlink" title="奇淫技巧"></a>奇淫技巧</h1><blockquote>
+<p>方式一: 删除<code>package.json</code>中的<code>dependencies</code>项,再<code>npm init</code>会依据<code>node_modules</code>的实际安装情况,更新<code>dependencies</code>配置项.但会多余配置部分信息,可能与原文件不一致,会出现覆盖.</p>
+</blockquote>
+<blockquote>
+<p>方式二: 为减少误操作,可先备份(或重命名)<code>package.json</code>,再 <code>npm init</code>同样会 依据<code>node_modules</code>的实际安装情况,更新<code>dependencies</code>配置项</p>
+</blockquote>
+<blockquote>
+<p>如何把node_module所有模块的版本信息更新到package.json中？<br>重新执行npm init</p>
+</blockquote>
+<h1 id="未能解决的问题"><a href="#未能解决的问题" class="headerlink" title="未能解决的问题"></a>未能解决的问题</h1><ul>
+<li>依据<code>node_modules</code>的实际安装情况恢复配置项时无法信息判断恢复位置[ dependencies,devD ependencies ]</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/npm%20%E4%B9%8B%20package.json/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

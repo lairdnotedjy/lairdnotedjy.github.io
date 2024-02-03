@@ -43,8 +43,8 @@
 <meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/16-5-10/52737274.jpg">
 <meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/16-5-10/91724998.jpg">
 <meta property="og:image" content="http://7xnbs3.com1.z0.glb.clouddn.com/16-5-10/61352120.jpg">
-<meta property="article:published_time" content="2016-05-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-24T02:16:43.066Z">
+<meta property="article:published_time" content="2016-05-10T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-26T12:42:19.100Z">
 <meta property="article:author" content="DJY">
 <meta property="article:tag" content="前端 加密 混淆 ， gulp， ionic ，cordova hook">
 <meta name="twitter:card" content="summary">
@@ -144,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-count">546</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -211,14 +211,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-05-10 00:00:00" itemprop="dateCreated datePublished" datetime="2016-05-10T00:00:00+08:00">2016-05-10</time>
+      <time title="Created: 2016-05-10 00:00:00" itemprop="dateCreated datePublished" datetime="2016-05-10T00:00:00+00:00">2016-05-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -343,7 +343,7 @@
 <p>启用angular ng-strict-di<br>在我们进行代码压缩之前，我们需要启用angular的ng-strict-di，即严格依赖注入，使用ng-strict-di使得工程中依赖注入不会有问题，更多关于ng-strict-di可以看这里。</p>
 </blockquote>
 <h1 id="gulp-useref-插件效果-合并js文件以及css文件-时常配合-gulp-watch一起使用"><a href="#gulp-useref-插件效果-合并js文件以及css文件-时常配合-gulp-watch一起使用" class="headerlink" title="gulp-useref 插件效果( 合并js文件以及css文件 ) &amp; 时常配合 gulp.watch一起使用"></a><code>gulp-useref</code> 插件效果( 合并js文件以及css文件 ) &amp; 时常配合 <code>gulp.watch</code>一起使用</h1><h2 id="效果："><a href="#效果：" class="headerlink" title="效果："></a>效果：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- build:css dist_css/styles.css --&gt;</span><br><span class="line">&lt;link href=&quot;css/style.css&quot; rel=&quot;stylesheet&quot;&gt;</span><br><span class="line">&lt;link href=&quot;css/ionic.app.css&quot; rel=&quot;stylesheet&quot;&gt;</span><br><span class="line">&lt;!-- endbuild --&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- your app&#x27;s js --&gt;</span><br><span class="line">&lt;!-- build:js dist_js/app.js --&gt;</span><br><span class="line">&lt;script src=&quot;dist/dist_js/app/app.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;dist/dist_js/app/controllers.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;dist/dist_js/app/services.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;dist/dist_js/app/templates.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;!-- endbuild --&gt;</span><br></pre></td></tr></table></figure><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;dist_css/styles.css&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- your app&#x27;s js --&gt;</span><br><span class="line">&lt;script src=&quot;dist_js/app.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></h2><p>问题：platforms\android\assets\www\dist_css\styles.css 经过<code>060_uglify.js</code>后内容消失<br>显示：<code>[object Object]</code></p>
-<p>原因：依据代码引用，因<code>clean-css</code>插件问题<br>最大支持版本<a href="mailto:&#x63;&#108;&#x65;&#x61;&#110;&#x2d;&#99;&#115;&#x73;&#x40;&#x32;&#x2e;&#50;&#x2e;&#x32;&#x32;">&#x63;&#108;&#x65;&#x61;&#110;&#x2d;&#99;&#115;&#x73;&#x40;&#x32;&#x2e;&#50;&#x2e;&#x32;&#x32;</a>，以上都会出此错误.(或了解新版本，使用新函数)<br><a target="_blank" rel="noopener" href="https://github.com/jakubpawlowicz/clean-css/blob/master/History.md">https://github.com/jakubpawlowicz/clean-css/blob/master/History.md</a></p>
+<p>原因：依据代码引用，因<code>clean-css</code>插件问题<br>最大支持版本<a href="mailto:&#99;&#108;&#101;&#97;&#x6e;&#x2d;&#99;&#x73;&#x73;&#64;&#x32;&#x2e;&#x32;&#x2e;&#50;&#50;">&#99;&#108;&#101;&#97;&#x6e;&#x2d;&#99;&#x73;&#x73;&#64;&#x32;&#x2e;&#x32;&#x2e;&#50;&#50;</a>，以上都会出此错误.(或了解新版本，使用新函数)<br><a target="_blank" rel="noopener" href="https://github.com/jakubpawlowicz/clean-css/blob/master/History.md">https://github.com/jakubpawlowicz/clean-css/blob/master/History.md</a></p>
 <hr>
 <p><code>源码</code>  <a target="_blank" rel="noopener" href="https://github.com/liuxiang/ionic-demo-gulp.git">https://github.com/liuxiang/ionic-demo-gulp.git</a></p>
 <p><code>附件</code> &lt;见源码&gt;</p>

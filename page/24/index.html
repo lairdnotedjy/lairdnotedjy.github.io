@@ -137,7 +137,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-count">546</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -165,178 +165,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Windows-installs-the-redis-service/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Windows-installs-the-redis-service/" class="post-title-link" itemprop="url">Windows安装Redis服务</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-11-19 08:52:32" itemprop="dateCreated datePublished" datetime="2016-11-19T08:52:32+08:00">2016-11-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="Windows安装Redis"><a href="#Windows安装Redis" class="headerlink" title="Windows安装Redis"></a>Windows安装Redis</h3><p>首先<strong>Redis</strong>官方并不支持<strong>Windows</strong>，而<strong>Windows</strong>版的<strong>Redis</strong>是由<a target="_blank" rel="noopener" href="https://github.com/MSOpenTech"><strong>MSOpenTech</strong></a>提供的支持，所以首先去下载一个<a target="_blank" rel="noopener" href="https://github.com/MSOpenTech/redis/releases">发布版</a>，我选择的是<a target="_blank" rel="noopener" href="https://github.com/MSOpenTech/redis/releases/download/win-3.2.100/Redis-x64-3.2.100.zip"><strong>Redis-x64-3.2.100.zip</strong></a>压缩包，解压缩得到如下文件列表</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">EventLog.dll</span><br><span class="line">Redis on Windows Release Notes.docx</span><br><span class="line">Redis on Windows.docx</span><br><span class="line">redis.windows.conf</span><br><span class="line">redis.windows-service.conf</span><br><span class="line">redis-benchmark.exe</span><br><span class="line">redis-benchmark.pdb</span><br><span class="line">redis-check-aof.exe</span><br><span class="line">redis-check-aof.pdb</span><br><span class="line">redis-cli.exe</span><br><span class="line">redis-cli.pdb</span><br><span class="line">redis-server.exe</span><br><span class="line">redis-server.pdb</span><br><span class="line">Windows Service Documentation.docx</span><br></pre></td></tr></table></figure>
-<p>有了这些文件之后，就可以开始安装服务了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">D:\Redis-x64-3.2.100&gt;redis-server.exe  redis.windows.conf</span><br><span class="line">                _._</span><br><span class="line">           _.-``__ &#x27;&#x27;-._</span><br><span class="line">      _.-``    `.  `_.  &#x27;&#x27;-._           Redis 3.2.100 (00000000/0) 64 bit</span><br><span class="line">  .-`` .-```.  ```\/    _.,_ &#x27;&#x27;-._</span><br><span class="line"> (    &#x27;      ,       .-`  | `,    )     Running in standalone mode</span><br><span class="line"> |`-._`-...-` __...-.``-._|&#x27;` _.-&#x27;|     Port: 6379</span><br><span class="line"> |    `-._   `._    /     _.-&#x27;    |     PID: 33824</span><br><span class="line">  `-._    `-._  `-./  _.-&#x27;    _.-&#x27;</span><br><span class="line"> |`-._`-._    `-.__.-&#x27;    _.-&#x27;_.-&#x27;|</span><br><span class="line"> |    `-._`-._        _.-&#x27;_.-&#x27;    |           http://redis.io</span><br><span class="line">  `-._    `-._`-.__.-&#x27;_.-&#x27;    _.-&#x27;</span><br><span class="line"> |`-._`-._    `-.__.-&#x27;    _.-&#x27;_.-&#x27;|</span><br><span class="line"> |    `-._`-._        _.-&#x27;_.-&#x27;    |</span><br><span class="line">  `-._    `-._`-.__.-&#x27;_.-&#x27;    _.-&#x27;</span><br><span class="line">      `-._    `-.__.-&#x27;    _.-&#x27;</span><br><span class="line">          `-._        _.-&#x27;</span><br><span class="line">              `-.__.-&#x27;</span><br><span class="line"></span><br><span class="line">[33824] 10 Nov 15:32:54.884 # Server started, Redis version 3.2.100</span><br><span class="line">[33824] 10 Nov 15:32:54.885 * The server is now ready to accept connections on p</span><br><span class="line">ort 6379</span><br></pre></td></tr></table></figure>
-<p>在启动成功之后，可以使用自带的客户端工具进行测试。双击打开<strong>“redis-cli.exe”</strong>，如果成功连接上之后就可以进行<strong>set</strong>及<strong>get</strong>等操作了。如果需要帮助，可以输入<strong>help</strong>查看。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set &quot;key&quot; &quot;testValue&quot;</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get &quot;key&quot;</span><br><span class="line">&quot;testValue&quot;</span><br><span class="line">127.0.0.1:6379&gt; help</span><br><span class="line">redis-cli 3.2.100</span><br><span class="line">To get help about Redis commands type:</span><br><span class="line">      &quot;help @&lt;group&gt;&quot; to get a list of commands in &lt;group&gt;</span><br><span class="line">      &quot;help &lt;command&gt;&quot; for help on &lt;command&gt;</span><br><span class="line">      &quot;help &lt;tab&gt;&quot; to get a list of possible help topics</span><br><span class="line">      &quot;quit&quot; to exit</span><br><span class="line"></span><br><span class="line">To set redis-cli perferences:</span><br><span class="line">      &quot;:set hints&quot; enable online hints</span><br><span class="line">      &quot;:set nohints&quot; disable online hints</span><br><span class="line">Set your preferences in ~/.redisclirc</span><br></pre></td></tr></table></figure>
-
-<p>再输入<strong>help</strong>空格，然后敲<strong>tab</strong>键，可以像命令提示符一样显示候选项。通常不需要每次都使用<strong>cmd</strong>界面去操作，所以附上一些快速处理的脚本，注意在安装服务之前先关闭防火墙和杀毒软件，否则安装不成功。</p>
-<h3 id="快速操作脚本"><a href="#快速操作脚本" class="headerlink" title="快速操作脚本"></a>快速操作脚本</h3><p><strong>service-install.bat</strong></p>
-<blockquote>
-<p>redis-server –service-install redis.windows.conf –loglevel verbose<br>pause</p>
-</blockquote>
-<p>安装成功之后输出结果：</p>
-<blockquote>
-<p>D:\Redis-x64-3.2.100&gt;redis-server –service-install redis.windows.conf –logleve<br>l verbose<br>[13868] 26 Dec 09:39:58.364 # Granting read&#x2F;write access to ‘NT AUTHORITY\Networ<br>kService’ on: “D:\Redis-x64-3.2.100” “D:\Redis-x64-3.2.100&quot;<br>[13868] 26 Dec 09:39:58.365 # Redis successfully installed as a service.<br>D:\Redis-x64-3.2.100&gt;pause<br>请按任意键继续. . .</p>
-</blockquote>
-<p><strong>uninstall-service.bat</strong></p>
-<blockquote>
-<p>redis-server –service-uninstall<br>pause</p>
-</blockquote>
-<p>卸载成功之后输出结果：</p>
-<blockquote>
-<p>D:\Redis-x64-3.2.100&gt;redis-server –service-uninstall<br>[11368] 26 Dec 09:45:47.460 # Redis service successfully uninstalled.<br>D:\Redis-x64-3.2.100&gt;pause<br>请按任意键继续. . .</p>
-</blockquote>
-<p>注意在卸载服务之前，需要先去<strong>控制面板|管理工具|服务|停止Redis服务</strong>，然后才能卸载成功。</p>
-<p><strong>starting-service.bat</strong></p>
-<blockquote>
-<p>redis-server –service-start<br>pause</p>
-</blockquote>
-<p>服务启动成功之后输出：</p>
-<blockquote>
-<p>D:\Redis-x64-3.2.100&gt;redis-server –service-start<br>[20120] 26 Dec 10:12:30.946 # Redis service successfully started.<br>D:\Redis-x64-3.2.100&gt;pause<br>请按任意键继续. . .</p>
-</blockquote>
-<p><strong>stopping-service.bat</strong></p>
-<blockquote>
-<p>redis-server –service-stop<br>pause</p>
-</blockquote>
-<p>服务停止成功之后输出：</p>
-<blockquote>
-<p>D:\Redis-x64-3.2.100&gt;redis-server –service-stop<br>[19612] 26 Dec 10:19:27.974 # Redis service successfully stopped.<br>D:\Redis-x64-3.2.100&gt;pause<br>请按任意键继续. . .</p>
-</blockquote>
-<p>命名服务，一个可选的参数可以用来指定安装的服务的名称，这个参数可以跟在service-install、service-start、service-stop或service-uninstall命令的后面。比如以下命令会安装和启动三个独立的Redis实例</p>
-<blockquote>
-<p>redis-server –service-install –service-name redisService1 –port 10001<br>redis-server –service-start –service-name redisService1<br>redis-server –service-install –service-name redisService2 –port 10002<br>redis-server –service-start –service-name redisService2<br>redis-server –service-install –service-name redisService3 –port 10003<br>redis-server –service-start –service-name redisService3</p>
-</blockquote>
-<h3 id="Windows配置主从Redis"><a href="#Windows配置主从Redis" class="headerlink" title="Windows配置主从Redis"></a>Windows配置主从Redis</h3><p>先将Redis目录复制一份，命名为<strong>Redis-x64-3.2-Slave</strong>，并将原Redis目录命名为<strong>Redis-x64-3.2-Master</strong>，注释掉master目录redis.windows.conf文件的集群配置，或者将其设置为<strong>no</strong></p>
-<blockquote>
-<p><strong># cluster-enabled yes</strong><br><strong># 或者设置为no</strong><br><strong>cluster-enabled no</strong></p>
-</blockquote>
-<p>修改slave目录redis.windows.conf的端口号为6380，同样注释掉集群配置或设置为<strong>no</strong>，在slaveof后面添加master机器的IP和端口号</p>
-<blockquote>
-<p><strong>port 6380</strong><br><strong>slaveof 127.0.0.1 6379</strong><br><strong># cluster-enabled yes</strong><br><strong># 或者设置为no</strong><br><strong>cluster-enabled no</strong></p>
-</blockquote>
-<p>然后先启动Master，之后再启动Slave机器，输出如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">D:\Redis-x64-3.2-Master&gt;redis-server redis.windows.conf</span><br><span class="line">[20048] 26 Dec 13:04:49.064 * Node configuration loaded, I&#x27;m f1c7db8c98b01e9fbd5</span><br><span class="line">089b1231ca0e2d23a1766</span><br><span class="line">                _._</span><br><span class="line">           _.-``__ &#x27;&#x27;-._</span><br><span class="line">      _.-``    `.  `_.  &#x27;&#x27;-._           Redis 3.2.100 (00000000/0) 64 bit</span><br><span class="line">  .-`` .-```.  ```\/    _.,_ &#x27;&#x27;-._</span><br><span class="line"> (    &#x27;      ,       .-`  | `,    )     Running in cluster mode</span><br><span class="line"> |`-._`-...-` __...-.``-._|&#x27;` _.-&#x27;|     Port: 6379</span><br><span class="line"> |    `-._   `._    /     _.-&#x27;    |     PID: 20048</span><br><span class="line">  `-._    `-._  `-./  _.-&#x27;    _.-&#x27;</span><br><span class="line"> |`-._`-._    `-.__.-&#x27;    _.-&#x27;_.-&#x27;|</span><br><span class="line"> |    `-._`-._        _.-&#x27;_.-&#x27;    |           http://redis.io</span><br><span class="line">  `-._    `-._`-.__.-&#x27;_.-&#x27;    _.-&#x27;</span><br><span class="line"> |`-._`-._    `-.__.-&#x27;    _.-&#x27;_.-&#x27;|</span><br><span class="line"> |    `-._`-._        _.-&#x27;_.-&#x27;    |</span><br><span class="line">  `-._    `-._`-.__.-&#x27;_.-&#x27;    _.-&#x27;</span><br><span class="line">      `-._    `-.__.-&#x27;    _.-&#x27;</span><br><span class="line">          `-._        _.-&#x27;</span><br><span class="line">              `-.__.-&#x27;</span><br><span class="line"></span><br><span class="line">[20048] 26 Dec 13:04:49.066 # Server started, Redis version 3.2.100</span><br><span class="line">[20048] 26 Dec 13:04:49.067 * DB loaded from disk: 0.000 seconds</span><br><span class="line">[20048] 26 Dec 13:04:49.067 * The server is now ready to accept connections on p</span><br><span class="line">ort 6379</span><br><span class="line">[20048] 26 Dec 13:05:14.723 * Slave 127.0.0.1:6380 asks for synchronization</span><br><span class="line">[20048] 26 Dec 13:05:14.723 * Full resync requested by slave 127.0.0.1:6380</span><br><span class="line">[20048] 26 Dec 13:05:14.724 * Starting BGSAVE for SYNC with target: disk</span><br><span class="line">[20048] 26 Dec 13:05:14.726 * Background saving started by pid 26568</span><br><span class="line">[20048] 26 Dec 13:05:14.867 # fork operation complete</span><br><span class="line">[20048] 26 Dec 13:05:14.867 * Background saving terminated with success</span><br><span class="line">[20048] 26 Dec 13:05:14.869 * Synchronization with slave 127.0.0.1:6380 succeede</span><br><span class="line">d</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">D:\Redis-x64-3.2-Slave&gt;redis-server redis.windows.conf</span><br><span class="line">                _._</span><br><span class="line">           _.-``__ &#x27;&#x27;-._</span><br><span class="line">      _.-``    `.  `_.  &#x27;&#x27;-._           Redis 3.2.100 (00000000/0) 64 bit</span><br><span class="line">  .-`` .-```.  ```\/    _.,_ &#x27;&#x27;-._</span><br><span class="line"> (    &#x27;      ,       .-`  | `,    )     Running in standalone mode</span><br><span class="line"> |`-._`-...-` __...-.``-._|&#x27;` _.-&#x27;|     Port: 6380</span><br><span class="line"> |    `-._   `._    /     _.-&#x27;    |     PID: 21036</span><br><span class="line">  `-._    `-._  `-./  _.-&#x27;    _.-&#x27;</span><br><span class="line"> |`-._`-._    `-.__.-&#x27;    _.-&#x27;_.-&#x27;|</span><br><span class="line"> |    `-._`-._        _.-&#x27;_.-&#x27;    |           http://redis.io</span><br><span class="line">  `-._    `-._`-.__.-&#x27;_.-&#x27;    _.-&#x27;</span><br><span class="line"> |`-._`-._    `-.__.-&#x27;    _.-&#x27;_.-&#x27;|</span><br><span class="line"> |    `-._`-._        _.-&#x27;_.-&#x27;    |</span><br><span class="line">  `-._    `-._`-.__.-&#x27;_.-&#x27;    _.-&#x27;</span><br><span class="line">      `-._    `-.__.-&#x27;    _.-&#x27;</span><br><span class="line">          `-._        _.-&#x27;</span><br><span class="line">              `-.__.-&#x27;</span><br><span class="line"></span><br><span class="line">[21036] 26 Dec 13:05:14.720 # Server started, Redis version 3.2.100</span><br><span class="line">[21036] 26 Dec 13:05:14.721 * DB loaded from disk: 0.001 seconds</span><br><span class="line">[21036] 26 Dec 13:05:14.721 * The server is now ready to accept connections on p</span><br><span class="line">ort 6380</span><br><span class="line">[21036] 26 Dec 13:05:14.721 * Connecting to MASTER 127.0.0.1:6379</span><br><span class="line">[21036] 26 Dec 13:05:14.722 * MASTER &lt;-&gt; SLAVE sync started</span><br><span class="line">[21036] 26 Dec 13:05:14.722 * Non blocking connect for SYNC fired the event.</span><br><span class="line">[21036] 26 Dec 13:05:14.722 * Master replied to PING, replication can continue..</span><br><span class="line">.</span><br><span class="line">[21036] 26 Dec 13:05:14.722 * Partial resynchronization not possible (no cached</span><br><span class="line">master)</span><br><span class="line">[21036] 26 Dec 13:05:14.726 * Full resync from master: a326a4da325133537c655c16b</span><br><span class="line">3a6c2546620f816:1</span><br><span class="line">[21036] 26 Dec 13:05:14.868 * MASTER &lt;-&gt; SLAVE sync: receiving 75 bytes from mas</span><br><span class="line">ter</span><br><span class="line">[21036] 26 Dec 13:05:14.871 * MASTER &lt;-&gt; SLAVE sync: Flushing old data</span><br><span class="line">[21036] 26 Dec 13:05:14.871 * MASTER &lt;-&gt; SLAVE sync: Loading DB in memory</span><br><span class="line">[21036] 26 Dec 13:05:14.872 * MASTER &lt;-&gt; SLAVE sync: Finished with success</span><br></pre></td></tr></table></figure>
-<p>如果在配置中不小心启用了<strong>cluster-enabled yes</strong>的话，会抛<strong>slaveof directive not allowed in cluster mode</strong>和**(error) CLUSTERDOWN Hash slot not served**异常。</p>
-<h3 id="主从测试"><a href="#主从测试" class="headerlink" title="主从测试"></a>主从测试</h3><p>在主机中使用set，添加一个key之后</p>
-<blockquote>
-<p>D:\Redis-x64-3.2-Master&gt;redis-cli<br>127.0.0.1:6379&gt; set “mm” “mm in master”<br>OK</p>
-</blockquote>
-<p>在从机中使用get，得到这个key的value</p>
-<blockquote>
-<p>D:\Redis-x64-3.2-Slave&gt;redis-cli<br>127.0.0.1:6379&gt; get “mm”<br>“mm in master”</p>
-</blockquote>
-<p>反过来，在从机使用set之后也可以同步到master</p>
-<blockquote>
-<p>D:\Redis-x64-3.2-Slave&gt;redis-cli<br>127.0.0.1:6379&gt; set “kk” “mm in slave”<br>OK</p>
-</blockquote>
-<p>在主机get得到value</p>
-<blockquote>
-<p>D:\Redis-x64-3.2-Master&gt;redis-cli<br>127.0.0.1:6379&gt; get “kk”<br>“mm in slave”</p>
-</blockquote>
-<p>注意，redis的主从配置和集群配置方法是不同的，从机一般是只读的，主机用来进行写操作，一个主数据库可以有多个从数据库，而一个从数据库只能有一个主数据库。一般redis的持久化策略是：</p>
-<blockquote>
-<p>save 900 1    #当有一条Keys数据被改变时，900秒刷新到Disk一次<br>save 300 10   #当有10条Keys数据被改变时，300秒刷新到Disk一次<br>save 60 10000 #当有10000条Keys数据被改变时，60秒刷新到Disk一次</p>
-</blockquote>
-<p>Redis的主从复制是建立在内存快照的持久化基础上的，只要有Slave就一定会有内存快照发生。可以很明显的看到，RDB有它的不足，就是一旦数据库出现问题，那么我们的RDB文件中保存的数据并不是全新的。从上次RDB文件生成到Redis停机这段时间的数据全部丢掉了。</p>
-<p>AOF(Append-Only File)比RDB方式有更好的持久化性。由于在使用AOF持久化方式时，Redis会将每一个收到的写命令都通过Write函数追加到文件中，类似于MySQL的binlog。当Redis重启是会通过重新执行文件中保存的写命令来在内存中重建整个数据库的内容。对应的设置参数为：</p>
-<blockquote>
-<p>appendonly yes #启用AOF持久化方式<br>appendfilename appendonly.aof #AOF文件的名称，默认为appendonly.aof<br>appendfsync always #每次收到写命令就立即强制写入磁盘，是最有保证的完全的持久化，但速度也是最慢的，一般不推荐使用。<br>appendfsync everysec #每秒钟强制写入磁盘一次，在性能和持久化方面做了很好的折中，是受推荐的方式。<br>appendfsync no #完全依赖OS的写入，一般为30秒左右一次，性能最好但是持久化最没有保证，不被推荐。</p>
-</blockquote>
-<p>AOF的完全持久化方式同时也带来了另一个问题，持久化文件会变得越来越大。比如我们调用INCR test命令100次，文件中就必须保存全部的100条命令，但其实99条都是多余的。因为要恢复数据库的状态其实文件中保存一条SET test 100就够了。为了压缩AOF的持久化文件，Redis提供了bgrewriteaof命令。收到此命令后Redis将使用与快照类似的方式将内存中的数据以命令的方式保存到临时文件中，最后替换原来的文件，以此来实现控制AOF文件的增长。由于是模拟快照的过程，因此在重写AOF文件时并没有读取旧的AOF文件，而是将整个内存中的数据库内容用命令的方式重写了一个新的AOF文件。</p>
-<blockquote>
-<p>no-appendfsync-on-rewrite yes #在日志重写时，不进行命令追加操作，而只是将其放在缓冲区里，避免与命令的追加造成DISK IO上的冲突。<br>auto-aof-rewrite-percentage 100 #当前AOF文件大小是上次日志重写得到AOF文件大小的二倍时，自动启动新的日志重写过程。<br>auto-aof-rewrite-min-size 64mb #当前AOF文件启动新的日志重写过程的最小值，避免刚刚启动Reids时由于文件尺寸较小导致频繁的重写。</p>
-</blockquote>
-<p><strong>参考文献</strong><br>[1] <a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid-20682890-id-3603246.html">http://blog.chinaunix.net/uid-20682890-id-3603246.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -375,14 +203,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-11-19 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-19T00:00:00+08:00">2016-11-19</time>
+      <time title="Created: 2016-11-19 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-19T00:00:00+00:00">2016-11-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
     </span>
 
   
@@ -481,14 +309,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-11-18 00:00:02" itemprop="dateCreated datePublished" datetime="2016-11-18T00:00:02+08:00">2016-11-18</time>
+      <time title="Created: 2016-11-18 00:00:02" itemprop="dateCreated datePublished" datetime="2016-11-18T00:00:02+00:00">2016-11-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:21" itemprop="dateModified" datetime="2024-01-26T12:42:21+00:00">2024-01-26</time>
     </span>
 
   
@@ -564,14 +392,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-11-18 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-18T00:00:00+08:00">2016-11-18</time>
+      <time title="Created: 2016-11-18 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-18T00:00:00+00:00">2016-11-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:28" itemprop="dateModified" datetime="2024-01-26T12:42:28+00:00">2024-01-26</time>
     </span>
 
   
@@ -650,14 +478,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-11-17 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-17T00:00:00+08:00">2016-11-17</time>
+      <time title="Created: 2016-11-17 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-17T00:00:00+00:00">2016-11-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
     </span>
 
   
@@ -736,14 +564,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-11-07 22:49:24" itemprop="dateCreated datePublished" datetime="2016-11-07T22:49:24+08:00">2016-11-07</time>
+      <time title="Created: 2016-11-07 22:49:24" itemprop="dateCreated datePublished" datetime="2016-11-07T22:49:24+00:00">2016-11-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:28" itemprop="dateModified" datetime="2024-01-26T12:42:28+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -832,14 +660,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-11-04 22:17:25" itemprop="dateCreated datePublished" datetime="2016-11-04T22:17:25+08:00">2016-11-04</time>
+      <time title="Created: 2016-11-04 22:17:25" itemprop="dateCreated datePublished" datetime="2016-11-04T22:17:25+00:00">2016-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -922,14 +750,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-11-04 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-04T00:00:00+08:00">2016-11-04</time>
+      <time title="Created: 2016-11-04 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-04T00:00:00+00:00">2016-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
     </span>
 
   
@@ -1022,14 +850,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-11-03 20:52:36" itemprop="dateCreated datePublished" datetime="2016-11-03T20:52:36+08:00">2016-11-03</time>
+      <time title="Created: 2016-11-03 20:52:36" itemprop="dateCreated datePublished" datetime="2016-11-03T20:52:36+00:00">2016-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1320,14 +1148,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-10-29 16:56:32" itemprop="dateCreated datePublished" datetime="2016-10-29T16:56:32+08:00">2016-10-29</time>
+      <time title="Created: 2016-10-29 16:56:32" itemprop="dateCreated datePublished" datetime="2016-10-29T16:56:32+00:00">2016-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1377,6 +1205,96 @@
 </ul>
 <p>实现财务自由很难吗？是的，很难。但是，如果不去努力，会更难。努力提高自己很苦，但是混吃等死更苦。雁过留声，人过留名。在这个世界上空走一遭是悲哀的，为生活的意义全力以赴才是可取的。只有这样，我们才能完成自己的使命，我们的生活才有意义。满足和惰性使一个人区别于另一个人，并最终造成人们生活的差距。我们应当永不满足。成千上万的人自甘穷困潦倒。如果你的周围都是穷人，你也会沉沦，然后在不停的抱怨中了此残生。仅仅阅读此书不能使你致富。你必须付诸行动，而且越快越好。最重要的是：你必须创造一种督促自己成功的环境。平凡的生活使大多数人迅速湮没在人群之中。“知识就是力量”这句话其实并不确切。正确的说法应当是：“应用知识就是力量”。</p>
 <p>大多数人高估了他们在一年内能做的事情，而低估了他们在10年里能做的事情。竹子就是一个形象的例子。竹农栽下竹苗，然后用土覆盖。竹苗要在地下沉睡四年之久。竹农每天早晨给它浇水，4年里每天如此。4年后的某一天，竹苗终于破土而出。然后，它在90天的时间里疯长到20米高。在长达4年的时间里，竹农根本不知道竹苗是死是活。但他坚信竹苗终有一天会破土而出，因此坚持浇水、永不言弃。一位目光远大的思想家需要有这样的信念。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Jealousy-of-human-nature/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Jealousy-of-human-nature/" class="post-title-link" itemprop="url">人性的嫉妒</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-10-21 20:59:36" itemprop="dateCreated datePublished" datetime="2016-10-21T20:59:36+00:00">2016-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>有感而发，之前在网上看到过类似文章，深以为然。起因是一次扣费事件，事情是这样的，新接的通知<em>党员交纳党费的比例为：每月工资收入在3000元以下(含3000元)者，交纳月工资收入的0.5%；3000元以上至5000元(含5000元)者，交纳1%；5000元以上至10000元(含10000元)者，交纳1.5%；10000元以上者，交纳2%。</em>如果按照这个标准，我要缴2%，对此我不讳言，一份死工资，处处受剥削，本已所剩无几，还要存钱买房，于是我发了个朋友圈论及此事。</p>
+<p>好了，结果来了，某些熟人观点总结如下（真心的好朋友还是有的）：① 你工资高多缴点；这是什么神逻辑，工资高低是我的事，和你半毛钱关系？不论工资高低那是自己挣来的，不是天上掉下来的，他们宁愿你的钱被多扣点也不愿看到你挣钱多，这样显得和你的差距也并没有这么大了，总之如果有件事，可以让你或陌生人受益，那么他们宁愿便宜陌生人，因为毕竟陌生人和他们无有交集，眼不见心不烦，但是如果熟人受益的话，这个梗总是存在，如刺在喉 ② 跟你挣的比，这些都是小钱；我每月就这点死工资，养老金、医疗金、失业金、公积金、个税扣除四千，房租生活费扣除三千，你有没有看到我税后到手多少？不管大钱小钱那不是你能定义的，对于攒首付的来说，我觉得每一笔扣除的钱都不是小钱，你简单一句话完全无视别人的努力与付出，仅仅一句拿别人的努力结果说事，照你这逻辑，反而是没本事没能力挣钱的人理直气壮了？ ③ 你就哭穷吧，潜台词是工资那么高，还在我们面前装穷；其一我从没觉得工资高；其二我也没说我是穷光蛋，我只是表达不乐意被剥削而已；其三，燕雀安知鸿鹄之志哉，他们总是会潜意识中将你的收入套在他们所处的物价水平之上，而不晓得大上海的生活成本有多高。大上海这个房价，我工资就是翻倍，也未必买的起，换个角度，与上海这房价相比，我还真的是穷光蛋了。你心里见得别人工资高，然后一看在你所处的地方买房还挺容易啊，于是别人说没钱的时候在你的心里就变成装穷了。《庄子·秋水》有云：<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/928982.htm">惠子相梁</a>，<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/2760.htm">庄子</a>往见之，或谓惠子曰‘庄子来，欲待子相’。于是<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/353627.htm">惠子</a>恐，搜于国中，三日三夜，<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/2760.htm">庄子</a>往见之，曰：‘南方有鸟，其名<a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=tEaWmL2uR6KGMx9cioHE7fH2xwH9G9q8BN7buBWuoQfwQsrq9FUz_i1gr9VD0Bv11q2IB9SmOHouzaPz_jqYa48-3mZr1H-h_KaJDXf0Dva">鹓鶵</a>（yuān chú，神鸟），子知之乎？夫鹓鶵发于南海而飞于北海，非梧桐不止，非练食不食，非醴泉不饮，于是鸱（chī）得腐鼠，鹓鶵过之，仰而视之曰：“吓！”今子欲以子之梁国吓我邪？’。你潜意识中拿我和你作比，却不知道我从没把你当做对手，因为你还够不了和我同台竞技的资格。</p>
+<p>当今之世，每个人身边都有很多熟人，或是昔日同窗或是今日同事。当你取得一点点成绩在与人分享时，总会有同事会背地里八卦你：切，我还不知道他那几把刷子，狗屎运罢了。有同学会私下里嘲讽你：他上学时就是个白痴，真是瞎猫撞上死耗子了。有些熟人是不愿意承认怎么身边那个平平无奇的他突然变的比我好这么多了？提拔这么快，赚了这么多，这怎么可以？“只要你过得比我好，我就受不了！！”我就要诋毁你讽刺你，想办法拉低你，就像和美人拍合影一样，我高不了瘦不了，那我得把你拖下来！</p>
+<p>这样的嘲讽和诋毁根本不值得在意，他们自己不会去努力不会去付出，也看不见你的努力和付出，但见你的成绩却会不舒服，他们会劝你何必这么拼命啊，何必牺牲那么多时间去学习去充电啊，一起喝喝啤酒享受玩乐多愉快，他们心里也会自我安慰：我之所以没有取得好的成就，只是我不屑于付出和那傻逼一样的努力罢了。</p>
+<p>人无完人，而任性、懒惰、嫉妒这人性的三大弱点相辅相生，并没有完全的独立开来，任性可以衍生固执。固执本身就是一种懒惰，是思维的懒惰，固执己见不愿换位思考，在某种程度上讨厌思考的麻烦，人的懒惰首先是思想的懒惰；固执的人总是相信自己是最正确的，认为别人的都不如自己，一旦发现别人差就会在心里强制否认别人，尽管他们自己也清楚别人在某方面比自己强，但就是不愿对自己承认和妥协，于是嫉妒心理就产生了。同样懒惰可以衍生任性，嫉妒可以衍生任性固执。</p>
+<p>这些人不求上进，当你们本来处于同一水平而你通过自己的努力，一骑绝尘将他远远甩于身后之时，人的嫉妒之心便暴露无遗，这样的人总是存在，你很难避免，他们不求上进同样也看不得别人上进。俗话说远的崇拜，近的嫉妒；够不着的崇拜，够得着的嫉妒。对方比你强，但强不了多少，你的小心眼里会嘀咕『这孙子，看上去一点也不高大上，和我一样普通，咋就骑我头上了呢？』——你因为不服，所以会嫉妒。只有当差距大到他们难以企及之时，才会由嫉妒转为崇拜吧，所以借此督促自己，继续奋勇向前。所有的嫉妒都源于比较，嫉妒之心，人皆有之，不愿苛求别人，但如果我的朋友中有这些人，那我只能敬而远之了。我们所能做的仅仅是真心的对待身边的好友，默默的远离这些嫉妒心大于友情的人吧。</p>
 
       
     </div>

@@ -137,7 +137,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">548</span>
+          <span class="site-state-item-count">546</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -165,90 +165,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ionic%20hooks%E9%92%A9%E5%AD%90%E6%96%87%E4%BB%B6-%E6%B8%85%E7%90%86%E6%BA%90%E4%BB%A3%E7%A0%81,%E5%8F%91%E5%B8%83dist/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/ionic%20hooks%E9%92%A9%E5%AD%90%E6%96%87%E4%BB%B6-%E6%B8%85%E7%90%86%E6%BA%90%E4%BB%A3%E7%A0%81,%E5%8F%91%E5%B8%83dist/" class="post-title-link" itemprop="url">ionic hooks钩子文件-清理源代码,发布dist</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-10-08 00:00:00" itemprop="dateCreated datePublished" datetime="2016-10-08T00:00:00+08:00">2016-10-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>020_dist_to_platforms_v2.js</code> </p>
-<ul>
-<li>策略不同,避开 mv_path() 同步控制, 效果一样<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env node</span><br><span class="line"> </span><br><span class="line">&#123;</span><br><span class="line">  var fs = require(&#x27;fs&#x27;);</span><br><span class="line">  var path = require(&#x27;path&#x27;);</span><br><span class="line">  var mv = require(&#x27;mv&#x27;);</span><br><span class="line"> </span><br><span class="line">  var iosPlatformsDir_dist = path.resolve(__dirname, &#x27;../../platforms/ios/www/dist&#x27;);</span><br><span class="line">  var iosPlatformsDir = path.resolve(__dirname, &#x27;../../platforms/ios/www&#x27;);</span><br><span class="line"> </span><br><span class="line">  var androidPlatformsDir_dist = path.resolve(__dirname, &#x27;../../platforms/android/assets/www/dist&#x27;);</span><br><span class="line">  var androidPlatformsDir = path.resolve(__dirname, &#x27;../../platforms/android/assets/www&#x27;);</span><br><span class="line"> </span><br><span class="line">  /** ios ****************************************************************************/</span><br><span class="line">  action(iosPlatformsDir, iosPlatformsDir_dist)</span><br><span class="line">  /** android ****************************************************************************/</span><br><span class="line">  action(androidPlatformsDir, androidPlatformsDir_dist)</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">function action(platformsDir, platformsDir_dist) &#123;</span><br><span class="line">  // 1.先删除(因为删除是同步的,移动是异步)</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/app&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/app_module&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/autoTest&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/css&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/js&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/templates&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir_dist + &#x27;/img&#x27;);//  使用源文件资源,不需要dist中资源</span><br><span class="line">  deleteFolderRecursive(platformsDir_dist + &#x27;/lib&#x27;);//  使用源文件资源,不需要dist中资源</span><br><span class="line"> </span><br><span class="line">  // 2.移动dist目录中资源为主资源</span><br><span class="line">  mv_path(platformsDir_dist + &#x27;/dist_css&#x27;, platformsDir + &#x27;/dist_css&#x27;);</span><br><span class="line">  mv_path(platformsDir_dist + &#x27;/dist_js&#x27;, platformsDir + &#x27;/dist_js&#x27;);</span><br><span class="line">  mv_path(platformsDir_dist + &#x27;/index.html&#x27;, platformsDir + &#x27;/index.html&#x27;);</span><br><span class="line"> </span><br><span class="line">  // 3.清理lib(仅保留字体)</span><br><span class="line">  mv_path(platformsDir + &#x27;/lib/ionic/fonts&#x27;, platformsDir + &#x27;/_lib/ionic/fonts&#x27;,function()&#123;</span><br><span class="line">    deleteFolderRecursive(platformsDir + &#x27;/lib&#x27;);</span><br><span class="line">    mv_path(platformsDir + &#x27;/_lib&#x27;, platformsDir + &#x27;/lib&#x27;);// 还原保留</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">/** 移动文件 */</span><br><span class="line">function mv_path(source, target, callback) &#123;</span><br><span class="line">  mv(source, target, &#123;mkdirp: true&#125;, function (err) &#123;</span><br><span class="line">    if (typeof err != &#x27;undefined&#x27;) &#123;</span><br><span class="line">      console.log(&quot;err&quot;);</span><br><span class="line">      console.log(err);</span><br><span class="line">      console.log(&quot;ERROR when moving CSS folder to iOS platform&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">      console.log(&quot;CSS folder moved OK to iOS platform&quot;);</span><br><span class="line">      callback &amp;&amp; callback();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">/** 删除文件 */</span><br><span class="line">function deleteFolderRecursive(removePath) &#123;</span><br><span class="line">  if (fs.existsSync(removePath)) &#123;</span><br><span class="line">    fs.readdirSync(removePath).forEach(function (file, index) &#123;</span><br><span class="line">      var curPath = path.join(removePath, file);</span><br><span class="line">      if (fs.lstatSync(curPath).isDirectory()) &#123; // recurse</span><br><span class="line">        deleteFolderRecursive(curPath);</span><br><span class="line">      &#125; else &#123; // delete file</span><br><span class="line">        fs.unlinkSync(curPath);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    fs.rmdirSync(removePath);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<p><code>020_dist_to_platforms_v1.js</code></p>
-<ul>
-<li>脏代码:mv_path() 同步控制</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env node</span><br><span class="line"> </span><br><span class="line">&#123;</span><br><span class="line">  var fs = require(&#x27;fs&#x27;);</span><br><span class="line">  var path = require(&#x27;path&#x27;);</span><br><span class="line">  var mv = require(&#x27;mv&#x27;);</span><br><span class="line"> </span><br><span class="line">  var iosPlatformsDir_dist = path.resolve(__dirname, &#x27;../../platforms/ios/www/dist&#x27;);</span><br><span class="line">  var iosPlatformsDir_temp = path.resolve(__dirname, &#x27;../../platforms/ios/_www_dist&#x27;);</span><br><span class="line">  var iosPlatformsDir = path.resolve(__dirname, &#x27;../../platforms/ios/www&#x27;);</span><br><span class="line"> </span><br><span class="line">  var androidPlatformsDir_dist = path.resolve(__dirname, &#x27;../../platforms/android/assets/www/dist&#x27;);</span><br><span class="line">  var androidPlatformsDir_temp = path.resolve(__dirname, &#x27;../../platforms/android/assets/_www_dist&#x27;);</span><br><span class="line">  var androidPlatformsDir = path.resolve(__dirname, &#x27;../../platforms/android/assets/www&#x27;);</span><br><span class="line"> </span><br><span class="line">  var cordova_js = &#x27;/cordova.js&#x27;, cordova_plugins = &#x27;/cordova_plugins.js&#x27;;</span><br><span class="line"> </span><br><span class="line">  // 0.转移`cordova.js,cordova_plugins.js`两核心文件</span><br><span class="line">  mv_path(iosPlatformsDir + cordova_js, iosPlatformsDir_dist + cordova_js, function () &#123;</span><br><span class="line">    mv_path(iosPlatformsDir + cordova_plugins, iosPlatformsDir_dist + cordova_plugins, function () &#123;</span><br><span class="line">      mv_path(iosPlatformsDir + &#x27;/plugins&#x27;, iosPlatformsDir_dist + &#x27;/plugins&#x27;, function () &#123;</span><br><span class="line">        mv_path(iosPlatformsDir + &#x27;/cordova-js-src&#x27;, iosPlatformsDir_dist + &#x27;/cordova-js-src&#x27;, function () &#123;</span><br><span class="line"> </span><br><span class="line">          // 1.转移dist目录</span><br><span class="line">          mv_path(iosPlatformsDir_dist, iosPlatformsDir_temp, function () &#123;</span><br><span class="line">            // 2.删除dist外源码</span><br><span class="line">            deleteFolderRecursive(iosPlatformsDir);</span><br><span class="line">            // 3.dist`转正`</span><br><span class="line">            mv_path(iosPlatformsDir_temp, iosPlatformsDir);</span><br><span class="line">          &#125;);</span><br><span class="line"> </span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  // 0.转移`cordova.js,cordova_plugins.js`两核心文件</span><br><span class="line">  mv_path(iosPlatformsDir + cordova_js, iosPlatformsDir_dist + cordova_js, function () &#123;</span><br><span class="line">    mv_path(iosPlatformsDir + cordova_plugins, iosPlatformsDir_dist + cordova_plugins, function () &#123;</span><br><span class="line">      mv_path(iosPlatformsDir + &#x27;/plugins&#x27;, iosPlatformsDir_dist + &#x27;/plugins&#x27;, function () &#123;</span><br><span class="line">        mv_path(iosPlatformsDir + &#x27;/cordova-js-src&#x27;, iosPlatformsDir_dist + &#x27;/cordova-js-src&#x27;, function () &#123;</span><br><span class="line"> </span><br><span class="line">          mv_path(androidPlatformsDir_dist, androidPlatformsDir_temp, function () &#123;</span><br><span class="line">            deleteFolderRecursive(androidPlatformsDir);</span><br><span class="line">            mv_path(androidPlatformsDir_temp, androidPlatformsDir);</span><br><span class="line">          &#125;);</span><br><span class="line"> </span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">/** 移动文件 */</span><br><span class="line">function mv_path(source, target, callback) &#123;</span><br><span class="line">  mv(source, target, &#123;mkdirp: true&#125;, function (err) &#123;</span><br><span class="line">    if (typeof err != &#x27;undefined&#x27;) &#123;</span><br><span class="line">      console.log(&quot;err&quot;);</span><br><span class="line">      console.log(err);</span><br><span class="line">      console.log(&quot;ERROR when moving CSS folder to iOS platform&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">      console.log(&quot;CSS folder moved OK to iOS platform&quot;);</span><br><span class="line">      callback &amp;&amp; callback();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">/** 删除文件 */</span><br><span class="line">function deleteFolderRecursive(removePath) &#123;</span><br><span class="line">  if (fs.existsSync(removePath)) &#123;</span><br><span class="line">    fs.readdirSync(removePath).forEach(function (file, index) &#123;</span><br><span class="line">      var curPath = path.join(removePath, file);</span><br><span class="line">      if (fs.lstatSync(curPath).isDirectory()) &#123; // recurse</span><br><span class="line">        deleteFolderRecursive(curPath);</span><br><span class="line">      &#125; else &#123; // delete file</span><br><span class="line">        fs.unlinkSync(curPath);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    fs.rmdirSync(removePath);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -287,14 +203,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-10-07 20:15:59" itemprop="dateCreated datePublished" datetime="2016-10-07T20:15:59+08:00">2016-10-07</time>
+      <time title="Created: 2016-10-07 20:15:59" itemprop="dateCreated datePublished" datetime="2016-10-07T20:15:59+00:00">2016-10-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -391,14 +307,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-09-27 22:50:26" itemprop="dateCreated datePublished" datetime="2016-09-27T22:50:26+08:00">2016-09-27</time>
+      <time title="Created: 2016-09-27 22:50:26" itemprop="dateCreated datePublished" datetime="2016-09-27T22:50:26+00:00">2016-09-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -550,14 +466,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-09-23 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-23T00:00:00+08:00">2016-09-23</time>
+      <time title="Created: 2016-09-23 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-23T00:00:00+00:00">2016-09-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:26" itemprop="dateModified" datetime="2024-01-26T12:42:26+00:00">2024-01-26</time>
     </span>
 
   
@@ -646,14 +562,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-09-22 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-22T00:00:00+08:00">2016-09-22</time>
+      <time title="Created: 2016-09-22 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-22T00:00:00+00:00">2016-09-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
     </span>
 
   
@@ -729,14 +645,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-09-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-20T00:00:00+08:00">2016-09-20</time>
+      <time title="Created: 2016-09-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-20T00:00:00+00:00">2016-09-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:26" itemprop="dateModified" datetime="2024-01-26T12:42:26+00:00">2024-01-26</time>
     </span>
 
   
@@ -812,14 +728,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-09-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-16T00:00:00+08:00">2016-09-16</time>
+      <time title="Created: 2016-09-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-16T00:00:00+00:00">2016-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
     </span>
 
   
@@ -965,14 +881,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-09-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-16T00:00:00+08:00">2016-09-16</time>
+      <time title="Created: 2016-09-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-16T00:00:00+00:00">2016-09-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
     </span>
 
   
@@ -1115,14 +1031,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-15T00:00:00+08:00">2016-09-15</time>
+      <time title="Created: 2016-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-15T00:00:00+00:00">2016-09-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:16:43" itemprop="dateModified" datetime="2024-01-24T10:16:43+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:17" itemprop="dateModified" datetime="2024-01-26T12:42:17+00:00">2024-01-26</time>
     </span>
 
   
@@ -1219,14 +1135,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2016-09-14 21:02:08" itemprop="dateCreated datePublished" datetime="2016-09-14T21:02:08+08:00">2016-09-14</time>
+      <time title="Created: 2016-09-14 21:02:08" itemprop="dateCreated datePublished" datetime="2016-09-14T21:02:08+00:00">2016-09-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-24 10:24:42" itemprop="dateModified" datetime="2024-01-24T10:24:42+08:00">2024-01-24</time>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1264,6 +1180,127 @@
 </embed>
 <br/>
 </center>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ionic%20Icon%20and%20Splash%E5%AE%8C%E6%95%B4%E6%94%B6%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ionic%20Icon%20and%20Splash%E5%AE%8C%E6%95%B4%E6%94%B6%E9%9B%86/" class="post-title-link" itemprop="url">ionic Icon and Splash完整收集</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-09-14 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-14T00:00:00+00:00">2016-09-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="ionic-Icon-and-Splash-Screen-Image-Generation完整收集"><a href="#ionic-Icon-and-Splash-Screen-Image-Generation完整收集" class="headerlink" title="ionic Icon and Splash Screen Image Generation完整收集"></a>ionic Icon and Splash Screen Image Generation完整收集</h1><hr>
+<h1 id="ionic-Icon-and-Splash-Screen-Image-Generation官方说明"><a href="#ionic-Icon-and-Splash-Screen-Image-Generation官方说明" class="headerlink" title="ionic Icon and Splash Screen Image Generation官方说明"></a>ionic Icon and Splash Screen Image Generation官方说明</h1><ul>
+<li><p>使用命令（支持png、psd和ai，尺寸越大越好）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ionic resources --icon</span><br><span class="line">$ ionic resources --splash</span><br><span class="line">$ ionic resources</span><br><span class="line">$ ionic resources ios</span><br><span class="line">$ ionic resources --default</span><br><span class="line">$ ionic resources --default --force</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>使用PSD模板</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="http://code.ionicframework.com/resources/splash.psd">Photoshop Splash Screen Template</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://code.ionicframework.com/resources/icon.psd">Photoshop Icon Template</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/driftyco/ionic-cli#icon-and-splash-screen-image-generation">https://github.com/driftyco/ionic-cli#icon-and-splash-screen-image-generation</a></p>
+<p><code>介绍 博客</code><br><a target="_blank" rel="noopener" href="http://blog.ionic.io/automating-icons-and-splash-screens/">http://blog.ionic.io/automating-icons-and-splash-screens/</a></p>
+<p><code>自定义图标 Customize Icons</code><br><a target="_blank" rel="noopener" href="http://cordova.apache.org/docs/en/dev/config_ref/images.html#Icons%20and%20Splash%20Screens">http://cordova.apache.org/docs/en/dev/config_ref/images.html#Icons%20and%20Splash%20Screens</a>_</p>
+<hr>
+<h1 id="在线生成工具"><a href="#在线生成工具" class="headerlink" title="在线生成工具"></a>在线生成工具</h1><p><code>图标工场 - 移动应用图标生成工具，一键生成所有尺寸的应用图标</code>  ★ ★<br><a target="_blank" rel="noopener" href="http://icon.wuruihong.com/">http://icon.wuruihong.com/</a></p>
+<p><code>在线批量生成各种尺寸iOS、Android APP图表集合 - aTool在线工具</code><br><a target="_blank" rel="noopener" href="http://www.atool.org/ios_logo.php">http://www.atool.org/ios_logo.php</a></p>
+<hr>
+<h1 id="开源工具"><a href="#开源工具" class="headerlink" title="开源工具"></a>开源工具</h1><p><code>cordova-icon-splash-generator</code><br><a target="_blank" rel="noopener" href="https://github.com/collingreen/cordova-icon-splash-generator">https://github.com/collingreen/cordova-icon-splash-generator</a></p>
+<p><code>busterc/cordova-resource-generators</code> - liunx,mac <code>35star</code><br><a target="_blank" rel="noopener" href="https://github.com/busterc/cordova-resource-generators">https://github.com/busterc/cordova-resource-generators</a></p>
+<p><code>gulp-cordova-resources</code><br><a target="_blank" rel="noopener" href="https://github.com/david-alexander/gulp-cordova-resources">https://github.com/david-alexander/gulp-cordova-resources</a></p>
+<p><code>cordova-ionic-maven-archetype | cordova-icon-splash 生成器</code> ★<br><a target="_blank" rel="noopener" href="https://github.com/zhoujianhui/cordova-ionic-maven-archetype/blob/52d5186c785d1d27d06336916a2056c6c15d4980/test-cordova-ionic-maven-archetype/icon-splash/README.md">https://github.com/zhoujianhui/cordova-ionic-maven-archetype/blob/52d5186c785d1d27d06336916a2056c6c15d4980/test-cordova-ionic-maven-archetype/icon-splash/README.md</a></p>
+<p><code>cordova-splash</code>  <code>207star</code>  ★<br><a target="_blank" rel="noopener" href="https://github.com/AlexDisler/cordova-splash">https://github.com/AlexDisler/cordova-splash</a></p>
+<p><code>AlexDisler/cordova-icon</code> 404star  ★ ★ <code>for Android and iOS, at least 192*192px (512*512px recommended)</code><br><a target="_blank" rel="noopener" href="https://github.com/AlexDisler/cordova-icon">https://github.com/AlexDisler/cordova-icon</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova-icon --config=config.xml --icon= resources/ icon.png</span><br></pre></td></tr></table></figure>
+
+
+<p><code>AlexDisler/cordova-splash</code> 207star  ★ ★ <code> Create a splash screen (2208x2208)</code><br><a target="_blank" rel="noopener" href="https://github.com/AlexDisler/cordova-splash">https://github.com/AlexDisler/cordova-splash</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cordova-splash --config=config.xml --splash=resources/splash.png</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>(生成后直接应用于platform中,需要手动取出.按规格存放resources)</p>
+<p><code>Icon-Splash-Resize</code><br><a target="_blank" rel="noopener" href="https://github.com/dericeira/Icon-Splash-Resize">https://github.com/dericeira/Icon-Splash-Resize</a></p>
+<p><code>github搜索:cordova splash 生成</code><br><a target="_blank" rel="noopener" href="https://github.com/search?utf8=%E2%9C%93&q=cordova+splash+%E7%94%9F%E6%88%90&type=Code&ref=searchresults">https://github.com/search?utf8=%E2%9C%93&amp;q=cordova+splash+%E7%94%9F%E6%88%90&amp;type=Code&amp;ref=searchresults</a></p>
+<hr>
+<p><code>ionic框架iOS所需icon与splash规格（命名与尺寸）</code><br><a target="_blank" rel="noopener" href="http://blog.leanote.com/freemem">http://blog.leanote.com/freemem</a></p>
+<p><code>App各种Icon及Launch image的尺寸和用途 移动端尺寸基础知识</code></p>
+<p><a target="_blank" rel="noopener" href="https://my.oschina.net/u/2252309/blog/402724">https://my.oschina.net/u/2252309/blog/402724</a></p>
+<hr>
+<h1 id="文章介绍"><a href="#文章介绍" class="headerlink" title="文章介绍"></a>文章介绍</h1><p><code>Cordova 3.x 基础（2） -- 应用图标icon和启动页面SplashScreen - Fish Where The Fish Are - ITeye技术网站</code><br><a target="_blank" rel="noopener" href="http://rensanning.iteye.com/blog/2017380">http://rensanning.iteye.com/blog/2017380</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">如果你本地安装了ImageMagick，CLI还会自动调用ImageMagick来做成不同尺寸的图像。</span><br><span class="line">需要注意的是：</span><br><span class="line">（1）图像的路径是相对于工程根目录不是根据www</span><br><span class="line">（2）不要和PhoneGap CLI的设置混淆</span><br></pre></td></tr></table></figure>
+<p><code>Ionic Framework的一些命令行解释 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/FFfiquu">http://www.tuicool.com/articles/FFfiquu</a></p>
+<p><code>【Ionic】图标-名称-启动画修改_百度经验</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/fdffd1f85ee24ef3e88ca164.html">http://jingyan.baidu.com/article/fdffd1f85ee24ef3e88ca164.html</a></p>
+<p><code>【Ionic】App应用名字+应用图标+启动画的修改_百度经验</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/c35dbcb0ec59438916fcbcaf.html">http://jingyan.baidu.com/article/c35dbcb0ec59438916fcbcaf.html</a></p>
 
       
     </div>
