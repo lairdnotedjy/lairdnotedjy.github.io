@@ -136,18 +136,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">546</span>
+          <span class="site-state-item-count">554</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-count">389</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -164,6 +164,896 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/cocos%20ios%E7%A8%8B%E5%BA%8Fhome%E9%94%AE%E5%90%8E%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8-%E9%97%AA%E9%80%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/cocos%20ios%E7%A8%8B%E5%BA%8Fhome%E9%94%AE%E5%90%8E%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8-%E9%97%AA%E9%80%80/" class="post-title-link" itemprop="url">cocos ios程序home键后程序异常/闪退</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-09-23 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-23T00:00:00+00:00">2016-09-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:26" itemprop="dateModified" datetime="2024-01-26T12:42:26+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="home键后程序异常日志"><a href="#home键后程序异常日志" class="headerlink" title="home键后程序异常日志"></a>home键后程序异常日志</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">libGPUSupportMercury.dylib`gpus_ReturnNotPermittedKillClient:</span><br><span class="line">    0x2f3df76c &lt;+0&gt;:  movw   r0, #0xbeef</span><br><span class="line">    0x2f3df770 &lt;+4&gt;:  movs   r1, #0x1</span><br><span class="line">    0x2f3df772 &lt;+6&gt;:  movt   r0, #0xdead</span><br><span class="line">-&gt;  0x2f3df776 &lt;+10&gt;: str    r0, [r1]</span><br><span class="line">    0x2f3df778 &lt;+12&gt;: bx     lr</span><br><span class="line">    0x2f3df77a &lt;+14&gt;: nop   </span><br><span class="line"> </span><br><span class="line">webThread(9):exc_bad_access(code=1,address=0x1)</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<p>director在app切换至后台时若被pause，它其实并没有真正暂停，而是仍保持着每秒4帧的绘制速率。但在app处于后台时，ios是不允许app调opengl的。这个原因引发了上述问题。</p>
+<ul>
+<li>解决方法：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[cpp] view plain copy</span><br><span class="line">void AppDelegate::applicationDidEnterBackground() </span><br><span class="line">&#123; </span><br><span class="line">    CCDirector::sharedDirector()-&gt;stopAnimation(); </span><br><span class="line">&#125; </span><br><span class="line">void AppDelegate::applicationWillEnterForeground() </span><br><span class="line">&#123; </span><br><span class="line">    CCDirector::sharedDirector()-&gt;startAnimation(); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<code>按Home键切换到后台后会触发libGPUSupportMercury.dylib: gpus_ReturnNotPermittedKillClient导致crash - Mr_Ray的IT专栏 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/world_liu/article/details/8960786">http://blog.csdn.net/world_liu/article/details/8960786</a></li>
+</ul>
+<hr>
+<h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><p>在cocos2d-x 2.0.4版本上，当点击HOME键将程序切换后台，有时会导致crash，程序停在在<br>gpus_ReturnNotPermittedKillClient函数，搜了一下此问题原因，有几篇文章比较好，</p>
+<p><a target="_blank" rel="noopener" href="http://blog.k-res.net/archives/1193.html%EF%BC%8C%E8%BF%99%E7%89%87%E6%96%87%E7%AB%A0%E8%AF%B4%E4%BA%86%E6%AD%A4%E9%97%AE%E9%A2%98%E7%9A%84%E5%8E%9F%E5%9B%A0%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%85%B6%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E3%80%82">http://blog.k-res.net/archives/1193.html，这片文章说了此问题的原因，以及其在项目中的解决方案。</a></p>
+<p>Implementing a Multitasking-aware OpenGL ES Application，这个是苹果对于此问题的解释，以及部分解决方案。</p>
+<p>以上文章对于此问题做了比较详细的分析与解释，虽然不能解决游戏中此问题，但是对于了解问题本质很有帮助。</p>
+<p>对于cocos2d-x中解决vi问题，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在AppDelegate::applicationDidEnterBackground()中增加CCDirector::sharedDirector()-&gt;stopAnimation()；</span><br><span class="line">在AppDelegate::applicationWillEnterForeground()中增加CCDirector::sharedDirector()-&gt;resume()。</span><br></pre></td></tr></table></figure>
+
+
+<p>原因是在applicationDidEnterBackground函数中原来调用了CCDirector::sharedDirector()-&gt;pause()函数，此函数并没有真正停止动画，而是以1&#x2F;4秒在继续运行，这样就会导致程序在后台渲染，这是apple不允许的，所以导致crash。</p>
+<p><code>cocos2d-x 2.0.4按home键切换后台导致gpus_ReturnNotPermittedKillClient crash_游戏症候群_新浪博客</code><br><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_62b2318d0101lc0n.html">http://blog.sina.com.cn/s/blog_62b2318d0101lc0n.html</a></p>
+<p><code>官网描述</code><br><a target="_blank" rel="noopener" href="https://developer.apple.com/library/content/qa/qa1766/_index.html">https://developer.apple.com/library/content/qa/qa1766/_index.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/emoji%E8%A1%A8%E6%83%85mysql%E6%94%AF%E6%8C%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/emoji%E8%A1%A8%E6%83%85mysql%E6%94%AF%E6%8C%81/" class="post-title-link" itemprop="url">emoji表情mysql支持</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-09-22 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-22T00:00:00+00:00">2016-09-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="异常-：mysql-Incorrect-string-value-xF0-x9F-x98-x84-xF0-x9F"><a href="#异常-：mysql-Incorrect-string-value-xF0-x9F-x98-x84-xF0-x9F" class="headerlink" title="异常 ：mysql Incorrect string value \xF0\x9F\x98\x84\xF0\x9F"></a>异常 ：mysql Incorrect string value \xF0\x9F\x98\x84\xF0\x9F</h1><p>尝试插入 类似 这样的string（其实是emoji表情），这些uft8 占位过多，数据库如果用标准utf8 格式插入不了这样的字符串</p>
+<ul>
+<li>解决<br>使用uft8mb4 格式<br>(1)设置表格式为utf8mb4<br>(2)设置连接格式为utf8mb4</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/taitoubiyan1/article/details/50595407">http://blog.csdn.net/taitoubiyan1/article/details/50595407</a></p>
+<p><code>mysql - java.sql.SQLException: Incorrect string value: &#39;\xF0\x9F\x91\xBD\xF0\x9F...&#39; - Stack Overflow</code><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/13653712/java-sql-sqlexception-incorrect-string-value-xf0-x9f-x91-xbd-xf0-x9f">http://stackoverflow.com/questions/13653712/java-sql-sqlexception-incorrect-string-value-xf0-x9f-x91-xbd-xf0-x9f</a></p>
+<p><code>【emoji表情】阿里云数据库RDS支持emoji表情 - 推酷</code>  ★ ★ ★<br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/2qYbQ3I">http://www.tuicool.com/articles/2qYbQ3I</a></p>
+<p><code>搜索 - 推酷 : mysql emoji</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/search?kw=mysql+emoji&t=1">http://www.tuicool.com/search?kw=mysql+emoji&amp;t=1</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/web%E7%BD%91%E7%BB%9C%E5%8A%AB%E6%8C%81,%E8%A2%AB%E5%B5%8C%E5%85%A5%E5%B9%BF%E5%91%8A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/web%E7%BD%91%E7%BB%9C%E5%8A%AB%E6%8C%81,%E8%A2%AB%E5%B5%8C%E5%85%A5%E5%B9%BF%E5%91%8A/" class="post-title-link" itemprop="url">web网络劫持,被嵌入广告</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-09-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-20T00:00:00+00:00">2016-09-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:26" itemprop="dateModified" datetime="2024-01-26T12:42:26+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="常见源头"><a href="#常见源头" class="headerlink" title="常见源头:"></a>常见源头:</h1><p>1.是不是我们项目中的第三方jar非官方版本，被植入了一些广告代码   (★)<br>2.dns劫持  (★★★)<br>3.http劫持 (★★★★)</p>
+<h1 id="排查"><a href="#排查" class="headerlink" title="排查:"></a>排查:</h1><p>检查DNS,替换安全DNS观察广告是否存在<br>启用使用https服务,观察广告是否存在</p>
+<h1 id="防护办法"><a href="#防护办法" class="headerlink" title="防护办法:"></a>防护办法:</h1><blockquote>
+<p>替换安全DNS<br>使用https服务<br>nginx出口网络过滤<br>使用第三方官方工具<br>ios&#x2F;android webView过滤<br>前端页面javaScript主动防御</p>
+</blockquote>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-9-24/55107594.jpg"></p>
+<p><code>让那些烦人的广告，滚出我们的APP！ - 吴焱的博客 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/wy1002003/article/details/51783623">http://blog.csdn.net/wy1002003/article/details/51783623</a></p>
+<p><code> 联通宽带劫持网页，JS 弹窗广告，该如何解决？ - 知乎</code><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23197534">https://www.zhihu.com/question/23197534</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/aat(async%20auto%20test%20%E5%BC%82%E6%AD%A5%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95)%20%E4%BB%8B%E7%BB%8D&%E6%A8%A1%E5%9D%97%E5%8C%96%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/aat(async%20auto%20test%20%E5%BC%82%E6%AD%A5%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95)%20%E4%BB%8B%E7%BB%8D&%E6%A8%A1%E5%9D%97%E5%8C%96%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">aat(async auto test 异步自动化测试) 介绍&模块化实践</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-09-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-16T00:00:00+00:00">2016-09-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="关键描述"><a href="#关键描述" class="headerlink" title="关键描述"></a>关键描述</h1><ul>
+<li><p>async 步执行函数,目的:页面同步刷新(柯里化)</p>
+</li>
+<li><p>sycFuncPromise 返回Promise的方法,处理连续的异步func调用.(可完全替代async)</p>
+</li>
+<li><p>currying 柯里化,单行定义函数且执行函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function _Each(index, length) &#123;</span><br><span class="line">  sycFuncPromise(function () &#123;</span><br><span class="line">    el(&#x27;.nav-bar-title.ng-binding&#x27;).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">  &#125;)()</span><br><span class="line">    .then(function () &#123;</span><br><span class="line">      return sycFuncPromise(function () &#123;</span><br><span class="line">        el(&#x27;.bookname_content&gt;.bookname&#x27;, index).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">        ++index &lt; length &amp;&amp; _Each(index, length);// 递归调用自己,相比for没有了时间计算</span><br><span class="line">      &#125;)()</span><br><span class="line">    &#125;)</span><br><span class="line">    .then(function () &#123;</span><br><span class="line">      // ...</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">_Each(0, $(&#x27;.bookname_content&gt;.bookname&#x27;).length);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">currying(function _Each(index, length) &#123;</span><br><span class="line"> </span><br><span class="line">  sycFuncPromise(function () &#123;</span><br><span class="line">    el(&#x27;.nav-bar-title.ng-binding&#x27;).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">  &#125;)()</span><br><span class="line">    .then(function () &#123;</span><br><span class="line">      return sycFuncPromise(function () &#123;</span><br><span class="line">        el(&#x27;.bookname_content&gt;.bookname&#x27;, index).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">        ++index &lt; length &amp;&amp; _Each(index, length);// 递归调用自己,相比for没有了时间计算</span><br><span class="line">      &#125;)()</span><br><span class="line">    &#125;)</span><br><span class="line">    .then(function () &#123;</span><br><span class="line">      // ...</span><br><span class="line">    &#125;)</span><br><span class="line"> </span><br><span class="line">&#125;)(0, $(&#x27;.bookname_content&gt;.bookname&#x27;).length);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>el 简化选择器(支持angular选择器,jquery,querySelector)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 简化选择器</span><br><span class="line">* @param selector</span><br><span class="line">* @param index</span><br><span class="line">* @returns &#123;*&#125;</span><br><span class="line">*/</span><br><span class="line">function el(selector, index) &#123;</span><br><span class="line">  var index = arguments.length &lt;= 1 || arguments[1] === undefined ? 0 : arguments[1];</span><br><span class="line">  return window.angular ? angular.element(document.querySelectorAll(selector)[index]) : $(selector);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">exports.el = el;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h2><ul>
+<li><p>index.html</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;autoTest/core.aat.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;autoTest/task.aat.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>core.aat.js (直接引用情况下会exports会使用window)</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &#x27;object&#x27; &amp;&amp; typeof module !== &#x27;undefined&#x27; ? factory(exports) :// CommonJS</span><br><span class="line">    typeof define === &#x27;function&#x27; &amp;&amp; define.amd ? define([&#x27;exports&#x27;], factory) : // AMD</span><br><span class="line">      (factory((global.aat = global.aat || &#123;&#125;))); // window</span><br><span class="line">&#125;(this, (function (exports) &#123;</span><br><span class="line">  &#x27;use strict&#x27;;</span><br><span class="line"> </span><br><span class="line">  exports.xxx = &#x27;&#x27;;</span><br><span class="line"> </span><br><span class="line">&#125;)));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// ---</span><br><span class="line">或者,直接使用window进行赋值.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>task.aat.js   (直接引用情况下会exports会使用window)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &#x27;object&#x27; &amp;&amp; typeof module !== &#x27;undefined&#x27; ? factory(exports) :// CommonJS</span><br><span class="line">    typeof define === &#x27;function&#x27; &amp;&amp; define.amd ? define([&#x27;exports&#x27;], factory) : // AMD</span><br><span class="line">      (factory((global.aat = global.aat || &#123;&#125;))); // window</span><br><span class="line">&#125;(this, (function (exports) &#123;</span><br><span class="line">  &#x27;use strict&#x27;;</span><br><span class="line"> </span><br><span class="line">  exports.sss = &#x27;&#x27;;</span><br><span class="line"> </span><br><span class="line">&#125;)));</span><br><span class="line">// ---</span><br><span class="line">或者,直接使用window进行赋值.</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h2><hr>
+<h1 id="require-js-模块化方式"><a href="#require-js-模块化方式" class="headerlink" title="require.js 模块化方式"></a>require.js 模块化方式</h1><ul>
+<li>index.html<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script data-main=&quot;js/index&quot; src=&quot;lib/require.js&quot;&gt;&lt;/script&gt;&lt;!--  模块化入口 --&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>js&#x2F;index.js 配置初始化</li>
+<li>requirejs([‘aat_core’, ‘aat’], function (aat_core, task) 对象初始化 &#96;&#96;&#96;<br>requirejs.config({<br>baseUrl: ‘’,<br>paths: {<br>  aat_core: ‘autoTest&#x2F;core.aat’,<br>  aat: ‘autoTest&#x2F;task.aat’<br>}<br>});</li>
+</ul>
+<p>&#x2F;&#x2F; Start the main app<br>requirejs([‘aat_core’, ‘aat’], function (aat_core,  aat ) {<br>  console.log( aat );&#x2F;&#x2F; 初始化验证<br>  window.aat &#x3D;  aat ;<br>});</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- core.aat.js (模块化引用情况下会exports会使用 AMD )</span><br></pre></td></tr></table></figure>
+<p>(function (global, factory) {<br>  typeof exports &#x3D;&#x3D;&#x3D; ‘object’ &amp;&amp; typeof module !&#x3D;&#x3D; ‘undefined’ ? factory(exports) :&#x2F;&#x2F; CommonJS<br>    typeof define &#x3D;&#x3D;&#x3D; ‘function’ &amp;&amp; define.amd ? define([‘exports’], factory) : &#x2F;&#x2F; AMD<br>      (factory((global.aat &#x3D; global.aat || {}))); &#x2F;&#x2F; window<br>}(this, (function (exports) {<br>  ‘use strict’;</p>
+<p>  exports.xxx &#x3D; ‘’;</p>
+<p>})));</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- task.aat.js   ( 模块化 引用情况下会exports会使用 AMD )</span><br><span class="line">&gt; require(&#x27;aat_core&#x27;) 注意需要 requirejs.config初始化`aat_core`且 ` requirejs([&#x27;aat_core&#x27;, &#x27;aat&#x27;], function (aat_core,  aat )`完成初始化</span><br></pre></td></tr></table></figure>
+<p>(function (global, factory) {<br>  typeof exports &#x3D;&#x3D;&#x3D; ‘object’ &amp;&amp; typeof module !&#x3D;&#x3D; ‘undefined’ ? factory(exports) :&#x2F;&#x2F; CommonJS<br>    typeof define &#x3D;&#x3D;&#x3D; ‘function’ &amp;&amp; define.amd ? define([‘exports’], factory) : &#x2F;&#x2F; AMD<br>      (factory((global.aat &#x3D; global.aat || {}))); &#x2F;&#x2F; window<br>}(this, (function (exports) {<br>  ‘use strict’;</p>
+<pre><code>/** 引入模块接口(规范模块化,兼容AMD) */
+</code></pre>
+<p>  var core &#x3D; (typeof require &#x3D;&#x3D;&#x3D; ‘function’) ? require(‘aat_core’) : exports;<br>  var sycFuncPromise &#x3D; core.sycFuncPromise;<br>  var async &#x3D; core.async;<br>  var currying &#x3D; core.currying;<br>  var el &#x3D; core.el;</p>
+<p>  exports.sss &#x3D; ‘’;</p>
+<p>})));</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">--- </span><br><span class="line"># 使用时初始化(使用文件名)</span><br><span class="line">例: ` task.aat.js`  </span><br><span class="line">&gt;define(function (require, exports, module) &#123;  require(&#x27;path/filename&#x27;);  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- js/index.js 配置初始化</span><br><span class="line">- requirejs([&#x27;aat&#x27;], function ( aat ) 对象初始化(仅初始化主函数) ```</span><br><span class="line">requirejs.config(&#123;</span><br><span class="line">  baseUrl: &#x27;&#x27;,</span><br><span class="line">  paths: &#123;</span><br><span class="line">    aat: &#x27;autoTest/task.aat&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">// Start the main app</span><br><span class="line">requirejs([&#x27;aat&#x27;], function ( aat ) &#123;</span><br><span class="line">  console.log( aat );// 初始化验证</span><br><span class="line">  window.aat =  aat ;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>task.aat.js   ( 模块化 引用情况下会exports会使用 AMD )<blockquote>
+<p>require(‘ autoTest&#x2F;aat_core’ ‘) 可不需要 requirejs.config初始化<code>aat_core</code>及 <code> requirejs([&#39;aat_core&#39;, &#39;aat&#39;], function (aat_core,  aat )</code></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &#x27;object&#x27; &amp;&amp; typeof module !== &#x27;undefined&#x27; ? factory(exports) :// CommonJS</span><br><span class="line">    typeof define === &#x27;function&#x27; &amp;&amp; define.amd ? define(factory) : // AMD</span><br><span class="line">      (factory(null,(global.aat = global.aat || &#123;&#125;))); // window</span><br><span class="line">&#125;(this, (function ( require, exports) &#123;</span><br><span class="line">  &#x27;use strict&#x27;;</span><br><span class="line"> </span><br><span class="line">    /** 引入模块接口(规范模块化,兼容AMD) */</span><br><span class="line">  var core = require(&#x27;autoTest/aat_core&#x27;)</span><br><span class="line">  var sycFuncPromise = core.sycFuncPromise;</span><br><span class="line">  var async = core.async;</span><br><span class="line">  var currying = core.currying;</span><br><span class="line">  var el = core.el;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  exports.sss = &#x27;&#x27;;</span><br><span class="line"> </span><br><span class="line">&#125;)));</span><br></pre></td></tr></table></figure></li>
+<li>简易参考<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//这里按照commonjs的形式让requirejs自己去搜一遍，再引入third.js</span><br><span class="line">define(function (require, exports, module) &#123;</span><br><span class="line">    var third =require(&#x27;third&#x27;);</span><br><span class="line">    third();</span><br><span class="line">    module.exports.action = function () &#123;console.log(22)&#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="可能遇到问题-处理办法"><a href="#可能遇到问题-处理办法" class="headerlink" title="可能遇到问题 &amp; 处理办法"></a>可能遇到问题 &amp; 处理办法</h1><h2 id="启动异常-Uncaught-Error-Mismatched-anonymous-define-module-function"><a href="#启动异常-Uncaught-Error-Mismatched-anonymous-define-module-function" class="headerlink" title="启动异常:Uncaught Error: Mismatched anonymous define() module: function"></a>启动异常:Uncaught Error: Mismatched anonymous define() module: function</h2><h3 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h3><p>引入<code> require.js</code>后,所有的<code> define()</code>定义模块都应该使用<code>requirejs([&#39;aat_core&#39;, &#39;aat&#39;],</code>初始化,不应该<Script>直接引入</p>
+<ul>
+<li>分析:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">引用的requirejs跟引用的其他js引起了冲突,其他js中也定义的define这个变量.</span><br><span class="line">比如你引用了这样的js:</span><br><span class="line">&lt;script src=&quot;services/require.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;services/Utility.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">出现了Mismatched anonymous define() module这种错误.那么意味着Utility.js中也定义了define这样的变量.所以在使用中你只引用require.js</span><br><span class="line">然后 require([&#x27;Utility&#x27;],function()&#123;&#125;) 使用Utility.js 就不会出现错误了.</span><br><span class="line">该错误归根结底就是 define已经被定义了.或者在之后的js中被重写了.</span><br></pre></td></tr></table></figure>
+<code>Mismatched anonymous define() module:这个怎么解决requirejs中的_百度知道</code><br><a target="_blank" rel="noopener" href="http://zhidao.baidu.com/link?url=g9Lh6tofr3U7-nPUDqbqk6ifHxLH8PLwkDQ039biy3bhwwCGRyfDkonLaDUFMgoDj-UyiajnmSjO0MvtcCjdjXKvTlNOoMDMk_YpGlyODi7">http://zhidao.baidu.com/link?url=g9Lh6tofr3U7-nPUDqbqk6ifHxLH8PLwkDQ039biy3bhwwCGRyfDkonLaDUFMgoDj-UyiajnmSjO0MvtcCjdjXKvTlNOoMDMk_YpGlyODi7</a></li>
+</ul>
+<h3 id="处理办法"><a href="#处理办法" class="headerlink" title="处理办法"></a>处理办法</h3><p>方法一: 调整<code>&lt;script src=&quot;require.js&quot;&gt;&lt;/script&gt;</code>引入时机</p>
+<p>方法二: 依据规范,通过 <code>requirejs([&#39;aat_core&#39;, &#39;aat&#39;],</code>初始化<br><code>javascript - Uncaught Error: Mismatched anonymous define() module: function definition(name, global) - Stack Overflow</code><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/23796019/uncaught-error-mismatched-anonymous-define-module-function-definitionname">http://stackoverflow.com/questions/23796019/uncaught-error-mismatched-anonymous-define-module-function-definitionname</a></p>
+<p>方法三: 修改<code>&lt;Script&gt;</code>引入方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  var ace = require(&quot;./path/to/ace&quot;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><code>javascript - loading Ace causes Uncaught Error: Mismatched anonymous define() module: - Stack Overflow</code><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/23224341/loading-ace-causes-uncaught-error-mismatched-anonymous-define-module">http://stackoverflow.com/questions/23224341/loading-ace-causes-uncaught-error-mismatched-anonymous-define-module</a></p>
+<hr>
+<h2 id="启动异常-Uncaught-Error-Module-name-aat-core-has-not-been-loaded-yet-for-context-Use-require"><a href="#启动异常-Uncaught-Error-Module-name-aat-core-has-not-been-loaded-yet-for-context-Use-require" class="headerlink" title="启动异常:Uncaught Error: Module name "aat_core" has not been loaded yet for context: _. Use require([])"></a>启动异常:Uncaught Error: Module name "aat_core" has not been loaded yet for context: _. Use require([])</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">require.js:168 Uncaught Error: Module name &quot;aat_core&quot; has not been loaded yet for context: _. Use require([])</span><br><span class="line">http://requirejs.org/docs/errors.html#notloadedmakeError</span><br><span class="line">     @ require.js:168localRequire</span><br><span class="line">     @ require.js:1433requirejs</span><br><span class="line">     @ require.js:1794(anonymous function)</span><br><span class="line">    @ task.aat.js:18execCb</span><br><span class="line">    @ require.js:1693check</span><br><span class="line">    @ require.js:881enable</span><br><span class="line">    @ require.js:1173init</span><br><span class="line">    @ require.js:786callGetModule</span><br><span class="line">    @ require.js:1200completeLoad</span><br><span class="line">    @ require.js:1587onScriptLoad</span><br><span class="line">    @ require.js:1714</span><br><span class="line">ng_http.factory.js:276 response: 34 0.397s 查询成功 Object &#123;object: Object&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>问题原因</li>
+</ul>
+<p>偶现：资源的异步加载，当使用了未初始化的对象时异常<br>依赖：未明确依赖，需要维护依赖关系</p>
+<ul>
+<li>解决办法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &#x27;object&#x27; &amp;&amp; typeof module !== &#x27;undefined&#x27; ? factory(exports) :// CommonJS</span><br><span class="line">    typeof define === &#x27;function&#x27; &amp;&amp; define.amd ? define([&#x27;exports&#x27;,&#x27;aat_core&#x27;], factory) : // AMD</span><br><span class="line">      (factory((global.aat = global.aat || &#123;&#125;))); // window</span><br><span class="line">&#125;(this, (function (exports) &#123;</span><br><span class="line">  &#x27;use strict&#x27;;</span><br><span class="line"> </span><br><span class="line">  var core = (typeof require === &#x27;function&#x27;) ? require(&#x27;aat_core&#x27;) : exports;</span><br><span class="line">  /** 引入模块接口(规范模块化,兼容AMD) */</span><br><span class="line">  var sycFuncPromise = core.sycFuncPromise;</span><br><span class="line">  var async = core.async;</span><br><span class="line">  var currying = core.currying;</span><br><span class="line">  var el = core.el;</span><br><span class="line"> </span><br><span class="line">  // ...</span><br><span class="line"> </span><br><span class="line">&#125;)))</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><code>理解和解决requireJS的报错:MODULE NAME HAS NOT BEEN LOADED YET FOR CONTEXT</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/aitangyong/article/details/40708025">http://blog.csdn.net/aitangyong/article/details/40708025</a></p>
+<p><code>javascript - Dynamic require in RequireJS, getting &quot;Module name has not been loaded yet for context&quot; error? - Stack Overflow</code><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/17446844/dynamic-require-in-requirejs-getting-module-name-has-not-been-loaded-yet-for-c">http://stackoverflow.com/questions/17446844/dynamic-require-in-requirejs-getting-module-name-has-not-been-loaded-yet-for-c</a></p>
+<hr>
+<h1 id="类似技术-开源技术"><a href="#类似技术-开源技术" class="headerlink" title="类似技术,开源技术"></a>类似技术,开源技术</h1><p><code>搭建基于Karma和Jasmine的前端单元测试 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/a7ffb564734e">www.jianshu.com/p/a7ffb564734e</a></p>
+<p>更多:<code>  简书-搜索: karma</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/search?q=karma&page=1&type=notes">http://www.jianshu.com/search?q=karma&amp;page=1&amp;type=notes</a></p>
+<p><code>webpro/Automated-SPA-Testing: Automated unit &amp; functional testing for web applications</code><br><a target="_blank" rel="noopener" href="https://github.com/webpro/Automated-SPA-Testing">https://github.com/webpro/Automated-SPA-Testing</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/javaScript%20%E6%A8%A1%E5%9D%97%E8%BF%9B%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/javaScript%20%E6%A8%A1%E5%9D%97%E8%BF%9B%E5%8C%96/" class="post-title-link" itemprop="url">javaScript 模块进化</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-09-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-16T00:00:00+00:00">2016-09-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="最初的美好"><a href="#最初的美好" class="headerlink" title="最初的美好"></a>最初的美好</h1><ul>
+<li><p>污染全局变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function bar()&#123;</span><br><span class="line">    //do something</span><br><span class="line">&#125;</span><br><span class="line">function log()&#123;</span><br><span class="line">    //do something</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>减少了全局变量 &amp;  暴露所有的模块成员，内部状态可以被外部读写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var myModule = &#123;</span><br><span class="line">    bar: function()&#123;</span><br><span class="line">        //do something</span><br><span class="line">    &#125;,</span><br><span class="line">    log: function()&#123;</span><br><span class="line">        //do something</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//调用</span><br><span class="line">myMoudle.bar();</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>匿名闭包的写法（Immediately-Invoked Function Expression，IIFE）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var myModule = (function()&#123;</span><br><span class="line">    var _log = &quot;hello world&quot;;</span><br><span class="line">    var log = function()&#123;</span><br><span class="line">        console.log(_log);</span><br><span class="line">    &#125;;</span><br><span class="line"> </span><br><span class="line">    return &#123;</span><br><span class="line">        log: log</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"> </span><br><span class="line">//引用</span><br><span class="line">myModule.log();//hello world</span><br><span class="line">myModule._log;//undefined</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<ul>
+<li><p>引入依赖关系</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var myModule = (function($)&#123;</span><br><span class="line">    var $log = $(&#x27;.log&#x27;);</span><br><span class="line">    var log = function()&#123;</span><br><span class="line">        console.log($log);</span><br><span class="line">    &#125;;</span><br><span class="line"> </span><br><span class="line">    return &#123;</span><br><span class="line">        log: log</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(jQuery);</span><br><span class="line"> </span><br><span class="line">//引用</span><br><span class="line">myModule.log();</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>依赖管理</p>
+</li>
+<li><p>没有引入一个依赖的 js 文件而导致后面 js 的功能失效. | 请求过多 ，不利于性能优化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;jquery.js&quot;&gt;&lt;script&gt;</span><br><span class="line">&lt;script src=&quot;dialog.js&quot;&gt;&lt;script&gt;</span><br><span class="line">&lt;script src=&quot;tooltip.js&quot;&gt;&lt;script&gt;</span><br><span class="line">&lt;script src=&quot;toast.js&quot;&gt;&lt;script&gt;</span><br><span class="line">&lt;script src=&quot;handlebar.js&quot;&gt;&lt;script&gt;</span><br><span class="line">......</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="CommonJS规范、AMD规范、CMD规范"><a href="#CommonJS规范、AMD规范、CMD规范" class="headerlink" title="CommonJS规范、AMD规范、CMD规范"></a>CommonJS规范、AMD规范、CMD规范</h1><h2 id="CommonJS-代表作-Browserify"><a href="#CommonJS-代表作-Browserify" class="headerlink" title="CommonJS(代表作: Browserify )"></a>CommonJS(代表作: Browserify )</h2><ul>
+<li>服务器端的模块化的规范，是 Nood.js 在实践中推出的，Nood.js 也是首先采用 js 模块化的；</li>
+<li>exports 定义模块</li>
+<li>require 加载模块<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//math.js</span><br><span class="line">exports.add = function(a,b)&#123;</span><br><span class="line">    var c = a + b;</span><br><span class="line">    return c;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//index.js</span><br><span class="line">var add = require(&#x27;math&#x27;).add;//</span><br><span class="line">console.log(add(1,1));//2</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="AMD-代表作-RequireJS"><a href="#AMD-代表作-RequireJS" class="headerlink" title="AMD(代表作:RequireJS )"></a>AMD(代表作:RequireJS )</h2><ul>
+<li><p>Asynchronous Module Definition，即异步的模块定义，是浏览器端的模块化规范，是 RequireJS 在推广过程中对模块定义的规范化产出</p>
+</li>
+<li><p>define 定义模块(同时定义依赖),模块名为文件名</p>
+<ul>
+<li><code>JavaScript模块化－require.js，r.js和打包发布 - 简书</code> <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/7186e5f2f341">http://www.jianshu.com/p/7186e5f2f341</a><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define(id?, dependencies?, factory);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(&#x27;myModule&#x27;,[&#x27;jQuery&#x27;,&#x27;types/Employee&#x27;],function($,Employee)&#123;//定义模块myModule，引入依赖jQuery，types/Employee</span><br><span class="line">   function Programmer()&#123;</span><br><span class="line">            //do something</span><br><span class="line">        &#125;;</span><br><span class="line">        Programmer.prototype = new Employee();</span><br><span class="line">        return Programmer;  //return Constructor</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="CMD-代表作-SeaJS"><a href="#CMD-代表作-SeaJS" class="headerlink" title="CMD(代表作:SeaJS )"></a>CMD(代表作:SeaJS )</h2><ul>
+<li><p>Common Module Definition，即通用模块定义，是浏览器端的模块化规范，是 SeaJS 在推广过程中对模块定义的规范化产出</p>
+</li>
+<li><p>seajs.use模块载入</p>
+<ul>
+<li>seajs.use(‘.&#x2F;a’),require(‘a’), require.asyc(‘.&#x2F;a.js’)</li>
+<li><code>Seajs模块载入方法 - 简书</code> <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/2de0d5b24c8c">http://www.jianshu.com/p/2de0d5b24c8c</a></li>
+</ul>
+</li>
+<li><p>define 定义模块(require提取依赖模块),模块名为文件名</p>
+<ul>
+<li><code>seajs模块加载机制 - 简书</code> <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/1245af09383e">http://www.jianshu.com/p/1245af09383e</a><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">define(factory)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>AMD 是 依赖关系前置，提前执行 ；CMD 是类似于 CommonJS 那样 按需加载，延迟执行 ：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//CMD recommanded</span><br><span class="line">define(function(require, exports, module)&#123;</span><br><span class="line">  var a = require(&#x27;a&#x27;);</span><br><span class="line">  a.doSomething();</span><br><span class="line">  var b = require(&#x27;b&#x27;);</span><br><span class="line">  b.doSomething();    // 依赖就近，延迟执行</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">//AMD recommanded</span><br><span class="line">define([&#x27;a&#x27;, &#x27;b&#x27;], function(a, b)&#123;</span><br><span class="line">    a.doSomething();    // 依赖前置，提前执行</span><br><span class="line">    b.doSomething();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="RequireJS模块化及r-js指南"><a href="#RequireJS模块化及r-js指南" class="headerlink" title="RequireJS模块化及r.js指南"></a>RequireJS模块化及r.js指南</h1><ul>
+<li>在 html 中指定了 RrequireJS 第一次需要加载的模块，也就是通过 data-main 所指定<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- index.html --&gt;</span><br><span class="line">&lt;script data-main=&quot;src/js/app/index&quot; src=&quot;src/js/lib/require.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+<li>index.js<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">requirejs.config(&#123;</span><br><span class="line">  baseUrl: &#x27;src/js&#x27;,</span><br><span class="line">  paths: &#123;</span><br><span class="line">    jquery: &#x27;lib/jquery&#x27;,</span><br><span class="line">    backTop: &#x27;com/backTop&#x27;,</span><br><span class="line">    jumpTo: &#x27;com/jumpTo&#x27;,</span><br><span class="line">    carousel: &#x27;com/carousel&#x27;,</span><br><span class="line">    exposure: &#x27;com/exposure&#x27;,</span><br><span class="line">    navfloor: &#x27;com/navfloor&#x27;,</span><br><span class="line">    waterfall: &#x27;com/waterfall&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li>其中 baseUrl 是改变基准路径，所有的模块相对于 baseUrl 来加载； baseUrl 路径以 index.html 所在的目录为基准；</li>
+<li>其中 requirejs.config() 函数的 paths 属性指定各个模块的加载路径(相对于 baseUrl )，如果没有指定 baseUrl ，路径默认和主模块在同一目录;</li>
+</ul>
+<p>采用了 RequireJS 模块化写法解决了命名冲突和依赖管理的问题，同时也增加了文件数量，这也意味着请求的增多，无疑会带来性能问题；</p>
+<ul>
+<li>打包（优化）工具 r.js ,它可以实现前端文件的压缩与合并,减少服务器请求<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(&#123;</span><br><span class="line">    baseUrl: &quot;./src/js&quot;,</span><br><span class="line">    paths: &#123;</span><br><span class="line">        &#x27;jquery&#x27;: &#x27;lib/bower_components/jquery/dist/jquery.min&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    name: &quot;main&quot;,</span><br><span class="line">    out: &quot;dist/js/merge.js&quot;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>baseUrl 路径设置应与主模块中 require.config() 方法里的 baseUrl 实际路径一致</li>
+<li>nam 指定的是解析入口，这里写了主模块，路径相对于前面指定的 baseUrl</li>
+</ul>
+<hr>
+<p><code>前端模块化之旅（一）：因何生它 - 推酷</code></p>
+<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/z2AFRfF">http://www.tuicool.com/articles/z2AFRfF</a></p>
+<p><code>前端模块化之旅（二）：CommonJS、AMD和CMD - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/ZFvIfmz">www.tuicool.com/articles/ZFvIfmz</a></p>
+<p><code>前端模块化之旅（三）：RequireJS模块化及r.js指南 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/qyInuum">http://www.tuicool.com/articles/qyInuum</a></p>
+<p><code>Javascript模块化编程（一）：模块的写法 - 阮一峰的网络日志</code><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html">http://www.ruanyifeng.com/blog/2012/10/javascript_module.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ES6%20%E6%A8%A1%E5%9D%97%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ES6%20%E6%A8%A1%E5%9D%97%E5%8C%96/" class="post-title-link" itemprop="url">ES6 模块化</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-15T00:00:00+00:00">2016-09-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:17" itemprop="dateModified" datetime="2024-01-26T12:42:17+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="示例-https-github-com-tildeio-rsvp-js-downloads-ES6编写-支持-CommonJS-AMD模块化规范"><a href="#示例-https-github-com-tildeio-rsvp-js-downloads-ES6编写-支持-CommonJS-AMD模块化规范" class="headerlink" title="示例:  https://github.com/tildeio/rsvp.js  #downloads- ES6编写- 支持 CommonJS, AMD模块化规范"></a>示例:  <a target="_blank" rel="noopener" href="https://github.com/tildeio/rsvp.js">https://github.com/tildeio/rsvp.js</a>  #downloads<br>- ES6编写<br>- 支持 CommonJS, AMD模块化规范<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &#x27;object&#x27; &amp;&amp; typeof module !== &#x27;undefined&#x27; ? factory(exports) :// CommonJS</span><br><span class="line">    typeof define === &#x27;function&#x27; &amp;&amp; define.amd ? define([&#x27;exports&#x27;], factory) : // AMD</span><br><span class="line">      (factory((global.RSVP = global.RSVP || &#123;&#125;))); // window</span><br><span class="line">&#125;(this, (function (exports) &#123;</span><br><span class="line">  &#x27;use strict&#x27;;</span><br><span class="line">&#125;)));</span><br></pre></td></tr></table></figure></h2><p>现代浏览器对模块(module)支持程度不同， 目前都是使用babelJS， 或者Traceur把ES6代码转化为兼容ES5版本的js代码;</p>
+<h1 id="ES6的模块化的基本规则或特点"><a href="#ES6的模块化的基本规则或特点" class="headerlink" title="ES6的模块化的基本规则或特点"></a>ES6的模块化的基本规则或特点</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//lib.js</span><br><span class="line">//导出常量</span><br><span class="line">export const sqrt = Math.sqrt;</span><br><span class="line">//导出函数</span><br><span class="line">export function square(x) &#123;</span><br><span class="line">    return x * x;</span><br><span class="line">&#125;</span><br><span class="line">//导出函数</span><br><span class="line">export function diag(x, y) &#123;</span><br><span class="line">    return sqrt(square(x) + square(y));</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//main.js</span><br><span class="line">import &#123; square, diag &#125; from &#x27;./lib&#x27;;</span><br><span class="line">console.log(square(11)); // 121</span><br><span class="line">console.log(diag(4, 3)); // 5</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="import和export的基本语法"><a href="#import和export的基本语法" class="headerlink" title="import和export的基本语法"></a>import和export的基本语法</h1><ul>
+<li>export{} 导出方式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//lib.js 文件</span><br><span class="line">let bar = &quot;stringBar&quot;;</span><br><span class="line">let foo = &quot;stringFoo&quot;;</span><br><span class="line">let fn0 = function() &#123;</span><br><span class="line">    console.log(&quot;fn0&quot;);</span><br><span class="line">&#125;;</span><br><span class="line">let fn1 = function() &#123;</span><br><span class="line">    console.log(&quot;fn1&quot;);</span><br><span class="line">&#125;;</span><br><span class="line">export&#123; bar , foo, fn0, fn1&#125;</span><br><span class="line"> </span><br><span class="line">//main.js文件</span><br><span class="line">import &#123;bar,foo, fn0, fn1&#125; from &quot;./lib&quot;;</span><br><span class="line">console.log(bar+&quot;_&quot;+foo);</span><br><span class="line">fn0();</span><br><span class="line">fn1();</span><br></pre></td></tr></table></figure></li>
+<li>export{} 导出方式 + 别名<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//lib.js文件</span><br><span class="line">let fn0 = function() &#123;</span><br><span class="line">    console.log(&quot;fn0&quot;);</span><br><span class="line">&#125;;</span><br><span class="line">let obj0 = &#123;&#125;</span><br><span class="line">export &#123; fn0 as foo, obj0 as bar&#125;;</span><br><span class="line"> </span><br><span class="line">//main.js文件</span><br><span class="line">import &#123;foo, bar&#125; from &quot;./lib&quot;;</span><br><span class="line">foo();</span><br><span class="line">console.log(bar);</span><br></pre></td></tr></table></figure></li>
+<li>单行导出<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//lib.js文件</span><br><span class="line">export let foo = ()=&gt; &#123;console.log(&quot;fnFoo&quot;) ;return &quot;foo&quot;&#125;,bar = &quot;stringBar&quot;;</span><br><span class="line"> </span><br><span class="line">//main.js文件</span><br><span class="line">import &#123;foo, bar&#125; from &quot;./lib&quot;;</span><br><span class="line">console.log(foo());</span><br><span class="line">console.log(bar);</span><br></pre></td></tr></table></figure></li>
+<li>default匿名导出<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//lib.js</span><br><span class="line">export default &quot;string&quot;;</span><br><span class="line"> </span><br><span class="line">//main.js</span><br><span class="line">import defaultString from &quot;./lib&quot;;</span><br><span class="line">console.log(defaultString);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//lib.js</span><br><span class="line">let fn = () =&gt; &quot;string&quot;;</span><br><span class="line">export &#123;fn as default&#125;;</span><br><span class="line"> </span><br><span class="line">//main.js</span><br><span class="line">import defaultFn from &quot;./lib&quot;;</span><br><span class="line">console.log(defaultFn());</span><br></pre></td></tr></table></figure></li>
+<li>通配符导出所有<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//lib.js</span><br><span class="line">export * from &quot;./other&quot;;</span><br><span class="line">//如果只想导出部分接口， 只要把接口名字列出来</span><br><span class="line">//export &#123;foo,fnFoo&#125; from &quot;./other&quot;;</span><br><span class="line"> </span><br><span class="line">//other.js</span><br><span class="line">export let foo = &quot;stringFoo&quot;, fnFoo = function() &#123;console.log(&quot;fnFoo&quot;)&#125;;</span><br><span class="line"> </span><br><span class="line">//main.js</span><br><span class="line">import &#123;foo, fnFoo&#125; from &quot;./lib&quot;;</span><br><span class="line">console.log(foo);</span><br><span class="line">console.log(fnFoo());</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import * as obj from &quot;./lib&quot;;</span><br><span class="line">console.log(obj);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="ES6导入的模块都是属于引用"><a href="#ES6导入的模块都是属于引用" class="headerlink" title="ES6导入的模块都是属于引用"></a>ES6导入的模块都是属于引用</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//lib.js</span><br><span class="line">export let counter = 3;</span><br><span class="line">export function incCounter() &#123;</span><br><span class="line">    counter++;</span><br><span class="line">&#125;</span><br><span class="line">export function setCounter(value) &#123;</span><br><span class="line">    counter = value;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">//main.js</span><br><span class="line">import &#123; counter, incCounter ,setCounter&#125; from &#x27;./lib&#x27;;</span><br><span class="line"> </span><br><span class="line">// The imported value `counter` is live</span><br><span class="line">console.log(counter); // 3</span><br><span class="line">incCounter();</span><br><span class="line">console.log(counter); // 4</span><br><span class="line">setCounter(0);</span><br><span class="line">console.log(counter); // 0</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="循环依赖的问题"><a href="#循环依赖的问题" class="headerlink" title="循环依赖的问题"></a>循环依赖的问题</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">//index.html</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;&lt;/title&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;/&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script data-main=&quot;cyclic&quot; src=&quot;//cdn.bootcss.com/require.js/2.2.0/require.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">//cyclic.js</span><br><span class="line">require([&quot;file0&quot;], function(file0) &#123;</span><br><span class="line">    console.log(file0)</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">//file0.js</span><br><span class="line">define([&quot;file1&quot;], function(file1) &#123;</span><br><span class="line">    console.log(file1)</span><br><span class="line">    return &#123;</span><br><span class="line">        file0 : &quot;file0&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">//file1.js</span><br><span class="line">define([&quot;file0&quot;], function(file0) &#123;</span><br><span class="line">    console.log(file0);</span><br><span class="line">    return &#123;</span><br><span class="line">        file1 : &quot;file1&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">undefined</span><br><span class="line">Object &#123; file1: &quot;file1&quot; &#125;</span><br><span class="line">Object &#123; file0: &quot;file0&quot; &#125;</span><br></pre></td></tr></table></figure>
+<p>在执行file1.js的时候file0.js还没执行完， 所以输出了undefined， 这种输出结果和NodeJS输出的情况是一样的；</p>
+<hr>
+<p><code>ES6新特性：使用export和import实现模块化 - 方方和圆圆 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/diligenceday/p/5503777.htm">http://www.cnblogs.com/diligenceday/p/5503777.htm</a> l<br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/EryUniv">http://www.tuicool.com/articles/EryUniv</a></p>
+<ul>
+<li>ES6的模块化的基本规则或特点：</li>
+<li>下面列出几种import和export的基本语法：</li>
+<li>ES6导入的模块都是属于引用：</li>
+<li>循环依赖的问题：</li>
+<li>浏览器兼容：</li>
+<li>参考：</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Programmers-financial-management/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Programmers-financial-management/" class="post-title-link" itemprop="url">程序员理财之道</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-09-14 21:02:08" itemprop="dateCreated datePublished" datetime="2016-09-14T21:02:08+00:00">2016-09-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="为什么要理财"><a href="#为什么要理财" class="headerlink" title="为什么要理财"></a>为什么要理财</h3><p>关于这方面的废话我就不多说了，如果你资产低于千万，必然难以通过境外投资达到增保值的目的，亦很难通过多处房产达到增保值的目的，对于我们这些工薪狗仅仅几万块的资产真的是啥也做不了，每月工资在被强奸之后（险、金、税），到手已所剩无几，但也不能坐等让通胀把我们的辛苦钱统统吃掉，所以会点投资理财才是当前可行之道。</p>
+<h3 id="投资渠道"><a href="#投资渠道" class="headerlink" title="投资渠道"></a>投资渠道</h3><p>至于银行的理财产品和某宝的收益率就不多说了，扣掉<a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=FQ9Yf8c67E7TWjUVzcB5J8DmP8lRLcKTAZiM7Nxf80wcDUJqM4N0Qb-8-P1qChIU4F0Rl6YlAj3ABfhXVfIaiJXKKXju_GMX6l2nQdNx679DXDETLncVUi3BEjUjUmJR">CPI</a>基本收益无几，而且我天朝公布的CPI数据一项注水，实际通胀率应该远在公布的CPI之上，所以你的投资收益率必须要跑赢通胀才能达到资金保值甚至增值的目的。其它渠道要么是风险低收益低，要么是风险高收益高，还有就是那专坑散户的股票市场，所以可投的渠道其实并不多，但是对于资金有限的工薪阶层来说已经够了，我目前投资的有黄金、P2P、基金。</p>
+<h3 id="我的理财"><a href="#我的理财" class="headerlink" title="我的理财"></a>我的理财</h3><h4 id="陆金所"><a href="#陆金所" class="headerlink" title="陆金所"></a>陆金所</h4><p>这个不多说，有平安背书，常年盘踞各大P2P平台第一名，收益率在4-9个点左右。具体投资项目，请君自选。如您有意，可通过下面链接跳转注册，平安陆金所新人注册可领100投资券（可抵本金使用），7天有效。&lt;新手专区&gt;首投零活宝-芝麻开花理财计划，额外奖励最高960投资券，快去看看，<a target="_blank" rel="noopener" href="http://t.lu.com/r/qvTZ1=J">点我注册</a>。</p>
+<h4 id="人人贷"><a href="#人人贷" class="headerlink" title="人人贷"></a>人人贷</h4><p>人人贷，唯一上市的P2P投资平台，靠谱。收益率在5-10个点左右，定投期限不同，任君选购。由民生银行资金存管，中国互联网协会AAA级信用平台，新人红包高达4999元，新手专享标年化收益9.6%，<a target="_blank" rel="noopener" href="http://www.we.com/regPageLandingD.action?inviteCode=11j3Fs7zKEz0Q">点我注册</a>。</p>
+<h4 id="挖财"><a href="#挖财" class="headerlink" title="挖财"></a>挖财</h4><p>投资挖财很简单，因为他们是国内为数不多的使用Scala语言的公司，试问哪一家要跑路的平台会使用这么强大新颖的技术，此家公司必然是有着长久的打算的，所以放心投资。收益率在6-12个点左右，新手注册就送20元红包，可抵扣本金，另外还有新手专享12%年化收益的新人宝（最高送150现金）等着你，<a target="_blank" rel="noopener" href="https://8.wacai.com/finance/newInvitation/do_invRegIndex.action?u=beb5ca977df7c722&a_f=yq0hy$-01-004">点我注册</a>。</p>
+<h4 id="招财宝"><a href="#招财宝" class="headerlink" title="招财宝"></a>招财宝</h4><p>蚂蚁金服旗下的蚂蚁聚宝，在上面可以买基金、黄金、定期、股票等，由阿里巴巴背书。收益还不错，就是期限有点长，一直在投姚秋博士的封闭基金。招财宝是蚂蚁聚宝上的一个子平台，该平台的主要投资品种是企业和个人直接或通过推荐机构发布的借款类产品，以及部分金融机构根据监管法律法规发行的其他产品。</p>
+<h4 id="存金宝"><a href="#存金宝" class="headerlink" title="存金宝"></a>存金宝</h4><p>黄金从年初一直涨到现在，苦于没钱投资，只能干看着别人挣钱，哎，都是泪啊。存金宝也是蚂蚁聚宝上的一个子平台，该平台主要提供黄金买卖服务。当你买入存金宝即购买了博时黄金ETF的I类份额。博时黄金ETF基金是一款投资现货黄金的ETF基金，为用户提供1元起买、买卖均0手续费的便捷服务，还给其持有者提供“买黄金生黄金”的权益。</p>
+<h4 id="京东金融"><a href="#京东金融" class="headerlink" title="京东金融"></a>京东金融</h4><p>京东金融是京东金融集团打造的“一站式”在线投融资平台，以“成为国内最值得信赖的互联网投融资平台”为使命，依托京东集团强大的资源，发挥整合和协同效应优势，将传统金融业务与互联网技术相结合，探索全新的互联网金融发展模式，致力于为个人和企业用户提供安全、高收益、定制化的金融服务，让投资理财变得简单快乐。该平台稳定安全，投资渠道种类都很多，值的推荐。</p>
+<h4 id="稳赚不赔"><a href="#稳赚不赔" class="headerlink" title="稳赚不赔"></a>稳赚不赔</h4><p>最大的投资就是投资自己，投资自己包括身体上（吃、喝、健身）、学识上（学习、充电）、精神上（音乐会、舞台剧、演唱会）等，试想，万一在退休前挂了，那么所上交了半辈子的险基本上是免费贡献给国家了，这还是在没有延退的情况下。所以人生苦短，没有经历过的还是很值得去尝试享受一番的。</p>
+<p><strong>声明</strong>：各位如果想注册的话，请走我的推荐链接，谢谢。以上仅是个人投资项目，仅供参考。</p>
+<h3 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h3><p>在「卢冠廷BEYOND IMAGINATION LIVE 2016演唱会」上，已经年过花甲的卢冠廷重新演唱了经典的《一生所爱》，听来不禁让人潸然泪下，奉献给大家。</p>
+<center>
+<embed src="http://static.video.qq.com/TPout.swf?vid=k0199hnmf8m&auto=0" allowFullScreen="true" quality="high" width="720" height="600" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash">
+</embed>
+<br/>
+</center>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ionic%20Icon%20and%20Splash%E5%AE%8C%E6%95%B4%E6%94%B6%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ionic%20Icon%20and%20Splash%E5%AE%8C%E6%95%B4%E6%94%B6%E9%9B%86/" class="post-title-link" itemprop="url">ionic Icon and Splash完整收集</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-09-14 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-14T00:00:00+00:00">2016-09-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="ionic-Icon-and-Splash-Screen-Image-Generation完整收集"><a href="#ionic-Icon-and-Splash-Screen-Image-Generation完整收集" class="headerlink" title="ionic Icon and Splash Screen Image Generation完整收集"></a>ionic Icon and Splash Screen Image Generation完整收集</h1><hr>
+<h1 id="ionic-Icon-and-Splash-Screen-Image-Generation官方说明"><a href="#ionic-Icon-and-Splash-Screen-Image-Generation官方说明" class="headerlink" title="ionic Icon and Splash Screen Image Generation官方说明"></a>ionic Icon and Splash Screen Image Generation官方说明</h1><ul>
+<li><p>使用命令（支持png、psd和ai，尺寸越大越好）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ionic resources --icon</span><br><span class="line">$ ionic resources --splash</span><br><span class="line">$ ionic resources</span><br><span class="line">$ ionic resources ios</span><br><span class="line">$ ionic resources --default</span><br><span class="line">$ ionic resources --default --force</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>使用PSD模板</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="http://code.ionicframework.com/resources/splash.psd">Photoshop Splash Screen Template</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://code.ionicframework.com/resources/icon.psd">Photoshop Icon Template</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/driftyco/ionic-cli#icon-and-splash-screen-image-generation">https://github.com/driftyco/ionic-cli#icon-and-splash-screen-image-generation</a></p>
+<p><code>介绍 博客</code><br><a target="_blank" rel="noopener" href="http://blog.ionic.io/automating-icons-and-splash-screens/">http://blog.ionic.io/automating-icons-and-splash-screens/</a></p>
+<p><code>自定义图标 Customize Icons</code><br><a target="_blank" rel="noopener" href="http://cordova.apache.org/docs/en/dev/config_ref/images.html#Icons%20and%20Splash%20Screens">http://cordova.apache.org/docs/en/dev/config_ref/images.html#Icons%20and%20Splash%20Screens</a>_</p>
+<hr>
+<h1 id="在线生成工具"><a href="#在线生成工具" class="headerlink" title="在线生成工具"></a>在线生成工具</h1><p><code>图标工场 - 移动应用图标生成工具，一键生成所有尺寸的应用图标</code>  ★ ★<br><a target="_blank" rel="noopener" href="http://icon.wuruihong.com/">http://icon.wuruihong.com/</a></p>
+<p><code>在线批量生成各种尺寸iOS、Android APP图表集合 - aTool在线工具</code><br><a target="_blank" rel="noopener" href="http://www.atool.org/ios_logo.php">http://www.atool.org/ios_logo.php</a></p>
+<hr>
+<h1 id="开源工具"><a href="#开源工具" class="headerlink" title="开源工具"></a>开源工具</h1><p><code>cordova-icon-splash-generator</code><br><a target="_blank" rel="noopener" href="https://github.com/collingreen/cordova-icon-splash-generator">https://github.com/collingreen/cordova-icon-splash-generator</a></p>
+<p><code>busterc/cordova-resource-generators</code> - liunx,mac <code>35star</code><br><a target="_blank" rel="noopener" href="https://github.com/busterc/cordova-resource-generators">https://github.com/busterc/cordova-resource-generators</a></p>
+<p><code>gulp-cordova-resources</code><br><a target="_blank" rel="noopener" href="https://github.com/david-alexander/gulp-cordova-resources">https://github.com/david-alexander/gulp-cordova-resources</a></p>
+<p><code>cordova-ionic-maven-archetype | cordova-icon-splash 生成器</code> ★<br><a target="_blank" rel="noopener" href="https://github.com/zhoujianhui/cordova-ionic-maven-archetype/blob/52d5186c785d1d27d06336916a2056c6c15d4980/test-cordova-ionic-maven-archetype/icon-splash/README.md">https://github.com/zhoujianhui/cordova-ionic-maven-archetype/blob/52d5186c785d1d27d06336916a2056c6c15d4980/test-cordova-ionic-maven-archetype/icon-splash/README.md</a></p>
+<p><code>cordova-splash</code>  <code>207star</code>  ★<br><a target="_blank" rel="noopener" href="https://github.com/AlexDisler/cordova-splash">https://github.com/AlexDisler/cordova-splash</a></p>
+<p><code>AlexDisler/cordova-icon</code> 404star  ★ ★ <code>for Android and iOS, at least 192*192px (512*512px recommended)</code><br><a target="_blank" rel="noopener" href="https://github.com/AlexDisler/cordova-icon">https://github.com/AlexDisler/cordova-icon</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova-icon --config=config.xml --icon= resources/ icon.png</span><br></pre></td></tr></table></figure>
+
+
+<p><code>AlexDisler/cordova-splash</code> 207star  ★ ★ <code> Create a splash screen (2208x2208)</code><br><a target="_blank" rel="noopener" href="https://github.com/AlexDisler/cordova-splash">https://github.com/AlexDisler/cordova-splash</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cordova-splash --config=config.xml --splash=resources/splash.png</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>(生成后直接应用于platform中,需要手动取出.按规格存放resources)</p>
+<p><code>Icon-Splash-Resize</code><br><a target="_blank" rel="noopener" href="https://github.com/dericeira/Icon-Splash-Resize">https://github.com/dericeira/Icon-Splash-Resize</a></p>
+<p><code>github搜索:cordova splash 生成</code><br><a target="_blank" rel="noopener" href="https://github.com/search?utf8=%E2%9C%93&q=cordova+splash+%E7%94%9F%E6%88%90&type=Code&ref=searchresults">https://github.com/search?utf8=%E2%9C%93&amp;q=cordova+splash+%E7%94%9F%E6%88%90&amp;type=Code&amp;ref=searchresults</a></p>
+<hr>
+<p><code>ionic框架iOS所需icon与splash规格（命名与尺寸）</code><br><a target="_blank" rel="noopener" href="http://blog.leanote.com/freemem">http://blog.leanote.com/freemem</a></p>
+<p><code>App各种Icon及Launch image的尺寸和用途 移动端尺寸基础知识</code></p>
+<p><a target="_blank" rel="noopener" href="https://my.oschina.net/u/2252309/blog/402724">https://my.oschina.net/u/2252309/blog/402724</a></p>
+<hr>
+<h1 id="文章介绍"><a href="#文章介绍" class="headerlink" title="文章介绍"></a>文章介绍</h1><p><code>Cordova 3.x 基础（2） -- 应用图标icon和启动页面SplashScreen - Fish Where The Fish Are - ITeye技术网站</code><br><a target="_blank" rel="noopener" href="http://rensanning.iteye.com/blog/2017380">http://rensanning.iteye.com/blog/2017380</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">如果你本地安装了ImageMagick，CLI还会自动调用ImageMagick来做成不同尺寸的图像。</span><br><span class="line">需要注意的是：</span><br><span class="line">（1）图像的路径是相对于工程根目录不是根据www</span><br><span class="line">（2）不要和PhoneGap CLI的设置混淆</span><br></pre></td></tr></table></figure>
+<p><code>Ionic Framework的一些命令行解释 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/FFfiquu">http://www.tuicool.com/articles/FFfiquu</a></p>
+<p><code>【Ionic】图标-名称-启动画修改_百度经验</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/fdffd1f85ee24ef3e88ca164.html">http://jingyan.baidu.com/article/fdffd1f85ee24ef3e88ca164.html</a></p>
+<p><code>【Ionic】App应用名字+应用图标+启动画的修改_百度经验</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/c35dbcb0ec59438916fcbcaf.html">http://jingyan.baidu.com/article/c35dbcb0ec59438916fcbcaf.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -379,815 +1269,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/angular%20ng-click%E7%A8%8B%E5%BA%8F%E8%A7%A6%E5%8F%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/angular%20ng-click%E7%A8%8B%E5%BA%8F%E8%A7%A6%E5%8F%91/" class="post-title-link" itemprop="url">angular ng-click程序触发</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-09-13 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-13T00:00:00+00:00">2016-09-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:27" itemprop="dateModified" datetime="2024-01-26T12:42:27+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="angular-ng-click程序触发-方法"><a href="#angular-ng-click程序触发-方法" class="headerlink" title="angular ng-click程序触发,方法"></a>angular ng-click程序触发,方法</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">document.querySelector(&#x27;.nav-bar-title.ng-binding&#x27;).click();// no</span><br><span class="line">$(&#x27;.nav-bar-title.ng-binding&#x27;).click();// no</span><br><span class="line">$(&#x27;.nav-bar-title.ng-binding&#x27;).trigger(&#x27;click&#x27;,function()&#123;&#125;);// no</span><br><span class="line">$(&#x27;.nav-bar-title.ng-binding&#x27;).triggerHandler(&#x27;click&#x27;); // no</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">angular.element( document.querySelector(&#x27;.nav-bar-title.ng-binding&#x27;) ).triggerHandler(&#x27;click&#x27;);// ok</span><br><span class="line">angular.element($(&#x27;.nav-bar-title.ng-binding&#x27;)).triggerHandler(&#x27;click&#x27;);// ok</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h1 id="差异"><a href="#差异" class="headerlink" title="差异"></a>差异</h1><p>triggerHandler() 方法与 trigger() 方法类似。不同的是它不会触发事件（比如表单提交）的默认行为，而且只影响第一个匹配元素。事件不会在 DOM 树中冒泡</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bind()    向元素添加事件处理程序</span><br><span class="line"></span><br><span class="line">unbind()    从被选元素上移除添加的事件处理程序</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">on()    向元素添加事件处理程序</span><br><span class="line"></span><br><span class="line">off()    移除通过 on() 方法添加的事件处理程序</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">click()    添加/触发 click 事件</span><br><span class="line"></span><br><span class="line">trigger()    触发绑定到被选元素的所有事件</span><br><span class="line">triggerHandler()    触发绑定到被选元素的指定事件上的所有函数</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">event.stopPropagation()    阻止事件向上冒泡到 DOM 树，阻止任何父处理程序被事件通知</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="http://www.runoob.com/jquery/jquery-ref-events.html">http://www.runoob.com/jquery/jquery-ref-events.html</a></p>
-<hr>
-<h1 id="选择器比较"><a href="#选择器比较" class="headerlink" title="选择器比较"></a>选择器比较</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">console.dir(document.querySelector(&#x27;.sections&#x27;))</span><br><span class="line">VM8305:1 div.sections</span><br><span class="line">console.dir(document.querySelector(&#x27;.sections:nth-child(1)&#x27;))</span><br><span class="line">VM8432:1 div.sections</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.dir(document.querySelectorAll(&#x27;.sections&#x27;))</span><br><span class="line">VM8433:1 NodeList[38]</span><br><span class="line">console.dir(document.querySelectorAll(&#x27;.sections&#x27;)[1])</span><br><span class="line">VM8434:1 div.sections</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.dir($(&#x27;.sections&#x27;))</span><br><span class="line">VM8306:1 init[38]</span><br><span class="line">console.dir($(&#x27;.sections)&#x27;)[0])</span><br><span class="line">VM8428:1 div.sections</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-9-24/86121546.jpg"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95Appium/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95Appium/" class="post-title-link" itemprop="url">自动化测试Appium</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-09-12 00:00:01" itemprop="dateCreated datePublished" datetime="2016-09-12T00:00:01+00:00">2016-09-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="平台信息"><a href="#平台信息" class="headerlink" title="平台信息"></a>平台信息</h1><p>官网  <a target="_blank" rel="noopener" href="http://appium.io/index.html?lang=zh">http://appium.io/index.html?lang=zh</a><br>github <a target="_blank" rel="noopener" href="https://github.com/appium/appium">https://github.com/appium/appium</a></p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><blockquote>
-<p>brew install node      # get node.js<br>npm install -g appium  # get appium<br>npm install wd         # get appium client<br>appium &amp;               # start appium<br>node your-appium-test.js</p>
-</blockquote>
-<h1 id="下载客户端"><a href="#下载客户端" class="headerlink" title="下载客户端"></a>下载客户端</h1><p><a target="_blank" rel="noopener" href="http://appium.io/downloads.html">http://appium.io/downloads.html</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-9-24/43180156.jpg"></p>
-<hr>
-<h1 id="Appium测试程序范例"><a href="#Appium测试程序范例" class="headerlink" title="Appium测试程序范例"></a>Appium测试程序范例</h1><blockquote>
-<p>dotnet,java,node,perl,php,python,ruby</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/appium/sample-code/tree/master/sample-code/examples">https://github.com/appium/sample-code/tree/master/sample-code/examples</a></p>
-<h1 id="examples-node-android-webview-js"><a href="#examples-node-android-webview-js" class="headerlink" title="examples&#x2F;node&#x2F;android-webview.js"></a>examples&#x2F;node&#x2F;android-webview.js</h1><p><a target="_blank" rel="noopener" href="https://github.com/appium/sample-code/blob/master/sample-code/examples/node/android-webview.js">https://github.com/appium/sample-code/blob/master/sample-code/examples/node/android-webview.js</a></p>
-<hr>
-<h1 id="脚本语言API"><a href="#脚本语言API" class="headerlink" title="脚本语言API"></a>脚本语言API</h1><p><code>java</code> <code>Java io.appium</code><br><a target="_blank" rel="noopener" href="https://search.maven.org/#search%7Cga%7C1%7Cg%3Aio.appium%20a%3Ajava-client">https://search.maven.org/#search%7Cga%7C1%7Cg%3Aio.appium%20a%3Ajava-client</a></p>
-<p><code>python</code> <code>Appium-Python-Client</code><br><a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/Appium-Python-Client">https://pypi.python.org/pypi/Appium-Python-Client</a></p>
-<p><code>javaScript(node)</code> <code>WebDriver/Selenium 2 node.js client (js脚本API)</code><br><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/wd">https://www.npmjs.com/package/wd</a></p>
-<p>–</p>
-<h1 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#coding=utf-8</span><br><span class="line">from appium import webdriver</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">desired_caps = &#123;&#125;</span><br><span class="line">desired_caps[&#x27;platformName&#x27;] = &#x27;Android&#x27;</span><br><span class="line">desired_caps[&#x27;platformVersion&#x27;] = &#x27;4.4.2&#x27;</span><br><span class="line">desired_caps[&#x27;deviceName&#x27;] = &#x27;Android Emulator&#x27;</span><br><span class="line">desired_caps[&#x27;appPackage&#x27;] = &#x27;com.android.calculator2&#x27;</span><br><span class="line">desired_caps[&#x27;appActivity&#x27;] = &#x27;.Calculator&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">driver = webdriver.Remote(&#x27;http://localhost:4723/wd/hub&#x27;, desired_caps)</span><br><span class="line">driver.find_element_by_name(&quot;1&quot;).click()</span><br><span class="line">driver.find_element_by_name(&quot;5&quot;).click()</span><br><span class="line">driver.find_element_by_name(&quot;9&quot;).click()</span><br><span class="line">driver.find_element_by_name(&quot;delete&quot;).click()</span><br><span class="line">driver.find_element_by_name(&quot;9&quot;).click()</span><br><span class="line">driver.find_element_by_name(&quot;5&quot;).click()</span><br><span class="line">driver.find_element_by_name(&quot;+&quot;).click()</span><br><span class="line">driver.find_element_by_name(&quot;6&quot;).click()</span><br><span class="line">driver.find_element_by_name(&quot;=&quot;).click()</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
-
-
-<p><code>Appium移动自动化测试（四）--one demo - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/jYBRfiu">http://www.tuicool.com/articles/jYBRfiu</a></p>
-<hr>
-<p><code>android 自动化测试 appium - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/6bAnAb">http://www.tuicool.com/articles/6bAnAb</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95selenium/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95selenium/" class="post-title-link" itemprop="url">自动化测试selenium</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-09-12 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-12T00:00:00+00:00">2016-09-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="官方"><a href="#官方" class="headerlink" title="官方"></a>官方</h1><p><code>官网</code><br><a target="_blank" rel="noopener" href="http://www.seleniumhq.org/">http://www.seleniumhq.org/</a><br><a target="_blank" rel="noopener" href="http://www.seleniumhq.org/download/">http://www.seleniumhq.org/download/</a></p>
-<p><code>github</code><br><a target="_blank" rel="noopener" href="https://github.com/SeleniumHQ/selenium">https://github.com/SeleniumHQ/selenium</a></p>
-<p><code>独立服务器(Selenium Standalone Server)</code><br><a target="_blank" rel="noopener" href="http://selenium-release.storage.googleapis.com/3.0-beta3/selenium-server-standalone-3.0.0-beta3.jar">http://selenium-release.storage.googleapis.com/3.0-beta3/selenium-server-standalone-3.0.0-beta3.jar</a></p>
-<blockquote>
-<p>java -jar selenium-server-standalone-2.45.0.jar</p>
-</blockquote>
-<p><code>Selenium grid for selenium1 and webdriver</code><br><a target="_blank" rel="noopener" href="https://github.com/SeleniumHQ/selenium/wiki/Grid2">https://github.com/SeleniumHQ/selenium/wiki/Grid2</a></p>
-<hr>
-<h1 id="开发指导"><a href="#开发指导" class="headerlink" title="开发指导"></a>开发指导</h1><p><code>github示例</code><br><a target="_blank" rel="noopener" href="https://github.com/SeleniumHQ/selenium/tree/c10e8a955883f004452cdde18096d70738397788/javascript/node/selenium-webdriver">https://github.com/SeleniumHQ/selenium/tree/c10e8a955883f004452cdde18096d70738397788/javascript/node/selenium-webdriver</a></p>
-<p><code>javaScript(node) API docs</code><br><a target="_blank" rel="noopener" href="http://seleniumhq.github.io/selenium/docs/api/javascript/index.html">http://seleniumhq.github.io/selenium/docs/api/javascript/index.html</a></p>
-<p><code>javaScript开发指导</code><br><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/selenium-webdriver">https://www.npmjs.com/package/selenium-webdriver</a></p>
-<p><code>基于chromedriver 开发指导</code><br><a target="_blank" rel="noopener" href="https://sites.google.com/a/chromium.org/chromedriver/getting-started/getting-started---android">https://sites.google.com/a/chromium.org/chromedriver/getting-started/getting-started---android</a></p>
-<hr>
-<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><ul>
-<li><p>安装selenium</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install selenium-webdriver</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>下载driver<br><a target="_blank" rel="noopener" href="http://chromedriver.storage.googleapis.com/index.html">http://chromedriver.storage.googleapis.com/index.html</a><br>(已下载,见:<code>bin/chromedriver.exe</code>)</p>
-</li>
-<li><p>添加环境变量Path</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path=%path%;%cd%\bin\chromedriver.exe</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>安装node</p>
-</li>
-</ul>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><ul>
-<li><p>行为指定(脚本-js语言) <code>baidu.js</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var webdriver = require(&#x27;selenium-webdriver&#x27;),</span><br><span class="line">    By = webdriver.By,</span><br><span class="line">    until = webdriver.until;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var driver = new webdriver.Builder()</span><br><span class="line">    .forBrowser(&#x27;chrome&#x27;)</span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">driver.get(&#x27;https://www.baidu.com&#x27;);</span><br><span class="line">driver.findElement(By.id(&#x27;kw&#x27;)).sendKeys(&#x27;webdriver&#x27;);</span><br><span class="line">driver.findElement(By.id(&#x27;su&#x27;)).click();</span><br><span class="line">driver.wait(until.titleIs(&#x27;webdriver_百度搜索&#x27;), 1000);</span><br><span class="line">driver.quit();</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node baidu.js</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="webdriver通过class获取元素"><a href="#webdriver通过class获取元素" class="headerlink" title="webdriver通过class获取元素"></a>webdriver通过class获取元素</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">通过webdriver 取得页面元素的时候，有时候由于某些元素只有样式类，没有ID和NAME。这个时候我们就需要通过特别的方式获取该元素了。</span><br><span class="line">1：当元素只有一个样式，比如 class=&quot;style1&quot; ，这个时候可以通过：</span><br><span class="line">find_element_by_class_name(&quot;style1&quot;)   获取</span><br><span class="line">2：当元素多个样式的时候，比如 class=&quot;style1 style2 style3&quot; ，这个时候可以通过：</span><br><span class="line"> driver.find_element_by_css_selector(&quot;.style1.style2.style3&quot;)   获取</span><br></pre></td></tr></table></figure>
-<ul>
-<li>cssSelector<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">driver.findElement(By.className(&quot;current  time&quot;)).click();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">WebElement element = driver.findElement(By.cssSelector(&quot;input[class=&#x27;current time&#x27;]&quot;));</span><br><span class="line">element.click();</span><br></pre></td></tr></table></figure></li>
-<li>xpath<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WebElement element = driver.findElement(By.xpath(&quot;//a[@class=&#x27;current time&#x27;]&quot;));</span><br><span class="line">element.click();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">WebElement element = driver.findElement(By.xpath(&quot;//a[text() = &#x27;url&#x27;]&quot;));</span><br><span class="line">element.click();</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="error-Info"><a href="#error-Info" class="headerlink" title="error Info"></a>error Info</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WebDriverError: unknown error: cannot parse capability: chromeOptions</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>webdriver版本问题</p>
-</blockquote>
-<hr>
-<p><code>JavaScript（Node.js）+ Selenium自动化测试 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/ieqiiq3">http://www.tuicool.com/articles/ieqiiq3</a></p>
-<p><code>Selenium + Python 自动化测试环境搭建 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/QRrQJzV">http://www.tuicool.com/articles/QRrQJzV</a></p>
-<p><code>Selenium Webdriver 基于浏览器的自动化测试 - 推酷</code>-java<br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/amuuEve">http://www.tuicool.com/articles/amuuEve</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">自动化测试</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-09-07 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-07T00:00:00+00:00">2016-09-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Android基于UI层面的自动化测试工具，都可以理解为是基于Android控件层面的，涉及Widgets和WebView两大类。其主流的测试方法主要有以下几种。一种是通过Android提供的各种服务，来获取当前窗口的视图信息。然后，在当前视图内查找目标控件，并根据该控件属性信息计算出该控件中心点的坐标，进而构造出一个Android Input事件来实现对应用的自动化测试。其主要特点是：测试代码和被测应用各自运行在各自的进程内，相互独立。其代表有Uiautomator。另一种则是基于Instrumentation，通过把测试代码和应用代码，确切地说是测试APK和被测APK，运行在同一个进程中，通过Java反射机制，来获取当前窗口所有视图，并根据该视图查找到目标控件的属性信息，并计算出目标控件中心点坐标。然后，利用Instrument内部接口，实现点击操作。其代表有Robotium</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>几种常见的Android自动化测试框架及其应用_星空物语_新浪博客</code><br><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_44d19b500102v75z.html">http://blog.sina.com.cn/s/blog_44d19b500102v75z.html</a></p>
-<p><code>移动APP自动化测试框架对比 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/Mziemyu">http://www.tuicool.com/articles/Mziemyu</a></p>
-<p><code>如何进行前端自动化测试？ - 知乎</code><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/29922082">https://www.zhihu.com/question/29922082</a></p>
-<h2 id=""><a href="#" class="headerlink" title="
- "></a><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-9-24/1580136.jpg">
- </h2><h1 id="android"><a href="#android" class="headerlink" title="android"></a>android</h1><ul>
-<li>稳定性测试利器——Monkey★</li>
-<li>Monkey之子——MonkeyRunner</li>
-</ul>
-<p><code>手把手教你Android标准App的四大自动化测试法宝 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/RBZNzaj">http://www.tuicool.com/articles/RBZNzaj</a></p>
-<p><code>Android 手机自动化测试工具有哪几种？ - 知乎</code><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/19716849">https://www.zhihu.com/question/19716849</a></p>
-<h1 id="Web-UI"><a href="#Web-UI" class="headerlink" title="Web UI"></a>Web UI</h1><ul>
-<li>★ selenium<ul>
-<li>selenium IDE :  selenium IDE 是嵌入到Firefox浏览器中的一个插件( 录制并导出脚本 )</li>
-<li>selenium Grid :  Selenium Grid是一种自动化的测试辅助工具</li>
-<li>selenium RC :  selenium RC 支持多种不同的语言编写自动化测试脚本</li>
-</ul>
-</li>
-<li>selenium 2.0 &#x3D; selenium 1.0 + WebDriver</li>
-</ul>
-<p><code>在做自动化测试之前你需要知道的 - 虫师 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/fnng/p/3653793.html">http://www.cnblogs.com/fnng/p/3653793.html</a></p>
-<p><code>「UI 测试自动化selenium」汇总 - 虫师 - 博客园</code></p>
-<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/fnng/p/3157639.html">www.cnblogs.com/fnng/p/3157639.html</a></p>
-<p><code>一个Web自动化测试的简单方法</code>-展示如何通过Selenium IDE测试Web应用程序</p>
-<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/M7vq2a">http://www.tuicool.com/articles/M7vq2a</a></p>
-<p><code>海豚-Web UI自动化测试工具</code></p>
-<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/jA7nauq">http://www.tuicool.com/articles/jA7nauq</a></p>
-<h1 id="Hybird-App-webview"><a href="#Hybird-App-webview" class="headerlink" title="Hybird App &#x2F; webview"></a>Hybird App &#x2F; webview</h1><ul>
-<li>★appium</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://github.com/appium/appium/tree/master/docs/cn">https://github.com/appium/appium/tree/master/docs/cn</a></p>
-<ul>
-<li><p>Macaca logo自动化测试解决方案 Macaca</p>
-<blockquote>
-<p>支持移动端和PC端<br>支持Native, Hybrid, H5 等多种应用类型<br>提供客户端工具和持续集成服务<br><a target="_blank" rel="noopener" href="http://www.oschina.net/p/macaca?fromerr=3mYZucrK">http://www.oschina.net/p/macaca?fromerr=3mYZucrK</a></p>
-</blockquote>
-</li>
-<li><p>Selendroid<br>基于Instrumentation的测试框架，可以测试Native App、Hybird App、Web App，但是网上资料较少，社区活跃度也不大</p>
-</li>
-<li><p>Robotium</p>
-</li>
-</ul>
-<hr>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">自动化测试面试题</span><br><span class="line"> </span><br><span class="line">1. 你比较熟悉那种自动化测试工具？</span><br><span class="line">2. 你在你以前工作中是如何使用自动化测试工具的？</span><br><span class="line">3. 介绍一下你在利用自动化测试工具的过程中遇到的一些问题</span><br><span class="line">4. 你是如何计划自动化测试的？</span><br><span class="line">5. 自动化测试能提高测试效率吗？</span><br><span class="line">6. 什么是data-driven automoation(数据启动自动化)？</span><br><span class="line">7. 测试自动化的主要特征有哪些？</span><br><span class="line">8. 自动化测试可以代替手工测试吗？</span><br><span class="line">9.自动化测试的好处是什么？</span><br><span class="line">10. 自动化测试容易出现的误区有哪些？</span><br><span class="line">11. 介绍一下测试自动化的常见问题？</span><br><span class="line">12. 你知道哪些测试自动化的脚本技术？</span><br><span class="line">13. 测试用例的设计可以自动化吗？</span><br><span class="line"> </span><br><span class="line">　自动化测试框架都有哪些?</span><br><span class="line">　　答：自动化测试框架主要分为以下几种，可以根据项目需要进行选择</span><br><span class="line">　　1.模块化框架(test script modularity)。</span><br><span class="line">　　2.函数库结构框架(test library architecture)。</span><br><span class="line">　　3.关键字驱动测试框架(keyword-driven/table-driven testing)。</span><br><span class="line">　　4.数据驱动测试框架(data-driven testing)。</span><br><span class="line">　　5.混合型框架(hybrid test automation)。</span><br><span class="line">　　请列举你曾经做过的自动化功能测试项目的相关经验</span><br><span class="line">　　你认为什么情况下适合进行自动化功能测试?请解释原因</span><br><span class="line">　　请问自动化测试在实现过程中会遇到的难点有哪些?</span><br><span class="line">　　请问：怎么在自动测试中实现数据驱动?</span><br><span class="line">　　你会计算自动测试工程的投入回报比吗?怎么计算?</span><br><span class="line">　　请比较 Rational Robot 与 MI QTP 的优缺点</span><br><span class="line">　　你认为 Robot 在数据参数化的时候有什么不便之处吗?</span><br><span class="line">　　请问 QTP 中如何不用录制的方法启动 IE ，并对 IE 窗口进行操作</span><br><span class="line">　　在用自动测试工具制作测试脚本的时候，当需要对某个界面上的对象进行操作时，如何保证操作成功?</span><br><span class="line">　　请选择一个自动功能测试工具并用该测试工具的脚本语言写一个脚本：每天早上 9 点弹出对话框，提示“现在 9 点了”。说明在测试工具中使用你的脚本的方式</span><br></pre></td></tr></table></figure>
-<p><code>自动化测试面试题 - 雅如 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/yaru/p/5311122.html">http://www.cnblogs.com/yaru/p/5311122.html</a></p>
-<p><code>自动化测试框架/工具选择 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/meyoung01/article/details/47279107">http://blog.csdn.net/meyoung01/article/details/47279107</a></p>
-<p><code>百度脑图－便捷的思维工具</code><br><a target="_blank" rel="noopener" href="http://naotu.baidu.com/file/cb87a4a39a01140d2d795404fe8649f7?token=6020d97dc88fe8d9">http://naotu.baidu.com/file/cb87a4a39a01140d2d795404fe8649f7?token=6020d97dc88fe8d9</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/JavaScript%20console%E6%8E%A7%E5%88%B6%E5%BC%80%E5%85%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/JavaScript%20console%E6%8E%A7%E5%88%B6%E5%BC%80%E5%85%B3/" class="post-title-link" itemprop="url">JavaScript console控制开关</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-09-06 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-06T00:00:00+00:00">2016-09-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:26" itemprop="dateModified" datetime="2024-01-26T12:42:26+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li><p>console.js &#96;&#96;&#96;<br>&#x2F;&#x2F; Avoid <code>console</code> errors in browsers that lack a console.<br>(function (window) {<br>var method;<br>var noop &#x3D; function () {<br>};<br>var methods &#x3D; [<br>  ‘assert’, ‘clear’, ‘count’, ‘debug’, ‘dir’, ‘dirxml’, ‘error’,<br>  ‘exception’, ‘group’, ‘groupCollapsed’, ‘groupEnd’, ‘info’, ‘log’,<br>  ‘markTimeline’, ‘profile’, ‘profileEnd’, ‘table’, ‘time’, ‘timeEnd’,<br>  ‘timeline’, ‘timelineEnd’, ‘timeStamp’, ‘trace’, ‘warn’<br>];<br>var length &#x3D; methods.length;<br>var console &#x3D; (window.console &#x3D; window.console || {});</p>
-<p>while (length–) {<br>  method &#x3D; methods[length];</p>
-<p>  &#x2F;&#x2F; Only stub undefined methods.<br>  if (!console[method]) {<br>console[method] &#x3D; noop;<br>  }<br>}</p>
-<p>&#x2F;* 关闭日志输出(关闭所有副作用很大,会导致部分项目无法启动) *&#x2F;<br>function consoleClose() {<br>  console[‘debug’] &#x3D; noop;<br>  console[‘error’] &#x3D; noop;<br>  console[‘info’] &#x3D; noop;<br>  console[‘log’] &#x3D; noop;<br>  console[‘warn’] &#x3D; noop;<br>  console[‘trace’] &#x3D; noop;<br>}</p>
-<p>window.consoleClose &#x3D; consoleClose;</p>
-</li>
-</ul>
-<p>}(window));<br>&#x2F;&#x2F; Place any jQuery&#x2F;helper plugins in here.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- config.js</span><br></pre></td></tr></table></figure>
-<p>window.consoleClose();&#x2F;* 关闭console日志 *&#x2F;</p>
-<pre><code>
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E5%8A%A8%E6%80%81%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E4%BD%8D%E7%BD%AE%E9%A2%9C%E8%89%B2%E5%80%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E5%8A%A8%E6%80%81%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E4%BD%8D%E7%BD%AE%E9%A2%9C%E8%89%B2%E5%80%BC/" class="post-title-link" itemprop="url">动态获取图片位置颜色值</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-08-31 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-31T00:00:00+00:00">2016-08-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="动态获取图片位置颜色值"><a href="#动态获取图片位置颜色值" class="headerlink" title="动态获取图片位置颜色值"></a>动态获取图片位置颜色值</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var ctxt = canvas.getContext(&#x27;2d&#x27;);</span><br><span class="line">var img = $0;</span><br><span class="line">ctxt.drawImage(img, 0, 0);</span><br><span class="line">var data = ctxt.getImageData(canvas.width/2, 10, 10, 10).data;</span><br><span class="line">console.log(data[0],data[1],data[2],data[3]); // VM8554:5 111 185 6 255</span><br><span class="line"> </span><br><span class="line">ctxt.fillStyle=&quot;red&quot;;</span><br><span class="line">ctxt.fillRect(canvas.width/2, 10, 10, 10); </span><br></pre></td></tr></table></figure>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-9-24/70487007.jpg"></p>
-<h1 id="完整示例"><a href="#完整示例" class="headerlink" title="完整示例"></a>完整示例</h1><ul>
-<li>index.html<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;canvas id=&quot;canvas&quot; hidden&gt;对不起 ，你的浏览器不支持Canvas&lt;/canvas&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>getImgColor.js （含 rgbToHex ）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">(function (window) &#123;</span><br><span class="line">  &#x27;use strict&#x27;;</span><br><span class="line"> </span><br><span class="line">  function getImgColor(img) &#123;</span><br><span class="line"> </span><br><span class="line">    if (!canvas) &#123;</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    var ctxt = canvas.getContext(&#x27;2d&#x27;);</span><br><span class="line">    // var img = $0;</span><br><span class="line">    ctxt.drawImage(img, 0, 0);</span><br><span class="line">    var data = ctxt.getImageData(canvas.width / 2, 10, 10, 10).data;</span><br><span class="line">    console.log(data[0], data[1], data[2], data[3]);</span><br><span class="line"> </span><br><span class="line">    // 测试描点位置</span><br><span class="line">    ctxt.fillStyle = &quot;red&quot;;</span><br><span class="line">    ctxt.fillRect(canvas.width / 2, 10, 10, 10);</span><br><span class="line"> </span><br><span class="line">    return rgbToHex(data[0], data[1], data[2]);</span><br><span class="line"> </span><br><span class="line">    function rgbToHex(r, g, b) &#123;</span><br><span class="line">      console.log(&quot;#&quot; + ((1 &lt;&lt; 24) + (r &lt;&lt; 16) + (g &lt;&lt; 8) + b).toString(16).slice(1));</span><br><span class="line">      return &quot;#&quot; + ((1 &lt;&lt; 24) + (r &lt;&lt; 16) + (g &lt;&lt; 8) + b).toString(16).slice(1);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  window._getImgColor = getImgColor;</span><br><span class="line"> </span><br><span class="line">&#125;)(window);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function rgbToHex(r, g, b) &#123;</span><br><span class="line">    return &quot;#&quot; + ((1 &lt;&lt; 24) + (r &lt;&lt; 16) + (g &lt;&lt; 8) + b).toString(16).slice(1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>javascript - RGB to Hex and Hex to RGB - Stack Overflow</code><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb">http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb</a></p>
-<hr>
-<h1 id="异常：The-canvas-has-been-tainted-by-cross-origin-data"><a href="#异常：The-canvas-has-been-tainted-by-cross-origin-data" class="headerlink" title="异常：The canvas has been tainted by cross-origin data"></a>异常：The canvas has been tainted by cross-origin data</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VM1375:1 Uncaught DOMException: Failed to execute &#x27;getImageData&#x27; on &#x27;CanvasRenderingContext2D&#x27;: The canvas has been tainted by cross-origin data.(…)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>问题原因： 图片跨域</li>
-<li>解决办法：图片于应用一并部署</li>
-</ul>
-<hr>
-<p><code>HTML5 canvas getImageData() 方法</code><br><a target="_blank" rel="noopener" href="http://www.w3school.com.cn/tags/canvas_getimagedata.asp">http://www.w3school.com.cn/tags/canvas_getimagedata.asp</a></p>
-<p><code>javascript加载图片查看具体某一点RGB值_百度知道</code><br><a target="_blank" rel="noopener" href="http://zhidao.baidu.com/link?url=P2-V1hm2S-DVfWEJpYYrqAiMUkv9vRI">http://zhidao.baidu.com/link?url=P2-V1hm2S-DVfWEJpYYrqAiMUkv9vRI</a> mZnnWbxQc99EgFqddpvW-4NcQ3Sr1e9HTtAghpoNPSfwFFGZwI4FT-Xd1tRG9PZEL154wx5V8ALG</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E5%9F%BA%E4%BA%8Eangular%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%B9%E7%AA%97%E5%B1%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E5%9F%BA%E4%BA%8Eangular%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%B9%E7%AA%97%E5%B1%82/" class="post-title-link" itemprop="url">基于angular的自定义弹窗层</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-08-30 00:00:01" itemprop="dateCreated datePublished" datetime="2016-08-30T00:00:01+00:00">2016-08-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:27" itemprop="dateModified" datetime="2024-01-26T12:42:27+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="angular-自定义弹窗层"><a href="#angular-自定义弹窗层" class="headerlink" title="angular 自定义弹窗层"></a>angular 自定义弹窗层</h1><ul>
-<li>*controller.js</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 弹出公共的金币奖励提示</span><br><span class="line"> */</span><br><span class="line">$http.get(&#x27;app_module/gold/gold.html&#x27;, (&#123;cache: $templateCache&#125; || &#123;&#125;)).then(function (response) &#123;</span><br><span class="line">  // 1.获取 template 标签(也是新建)</span><br><span class="line">  var goldEL = angular.element(response.data);</span><br><span class="line"> </span><br><span class="line">  // 1.2 更新金币数量</span><br><span class="line">  $scope.number = Math.floor(Math.random() * 5) + 1;</span><br><span class="line">  $compile(goldEL)($scope);// $scope双向绑定</span><br><span class="line"> </span><br><span class="line">  // 2.动态添加template 标签</span><br><span class="line">  angular.element(document).find(&#x27;body&#x27;).append(goldEL);</span><br><span class="line"> </span><br><span class="line">  // 3.3s后自动删除此标签</span><br><span class="line">  $timeout(function () &#123;</span><br><span class="line">    goldEL.remove();</span><br><span class="line">  &#125;, 1500);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>app_module&#x2F;gold&#x2F;gold.html</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .gold_panel &#123;</span><br><span class="line">    position: fixed;</span><br><span class="line">    left: 50%;</span><br><span class="line">    top: 50%;</span><br><span class="line">    transform: translate(-50%, -50%);</span><br><span class="line">    /*background-color: red;*/</span><br><span class="line">    z-index: 999;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  .gold_panel &gt; img &#123;</span><br><span class="line">    width: 50vw;</span><br><span class="line">    height: 50vw;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"> </span><br><span class="line">&lt;div class=&quot;gold_panel&quot;&gt;</span><br><span class="line">  &lt;img class=&quot;_slideDown&quot; src=&quot;img/transcript/level-&#123;&#123;number&#125;&#125;.png&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>angular模块化封装<br>AutoDiv.md</p>
-</li>
-</ul>
-<hr>
-<h1 id="ionic弹窗层可基于-ionicPopup重写"><a href="#ionic弹窗层可基于-ionicPopup重写" class="headerlink" title="ionic弹窗层可基于$ionicPopup重写"></a>ionic弹窗层可基于$ionicPopup重写</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$scope.showPopup = function() &#123;</span><br><span class="line">    var myPopup = $ionicPopup.show(&#123;</span><br><span class="line">        cssClass:&#x27;er-popup&#x27;,</span><br><span class="line">        templateUrl: &#x27;templates/er_modal.html&#x27;,</span><br><span class="line">        scope: $scope</span><br><span class="line">    &#125;);</span><br><span class="line">    myPopup.then(function(res) &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><code>ionic使用记录----popup - mainpro126的专栏 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/mainpro126/article/details/46342157">http://blog.csdn.net/mainpro126/article/details/46342157</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E7%8E%B0%E4%BB%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E5%86%85%E7%BD%AE%E7%9A%84%E5%87%A0%E4%B8%AA%E5%8F%AF%E4%BB%A5%E7%AD%89%E6%95%88%E6%9B%BF%E4%BB%A3jQuery%E7%9A%84%E5%8A%9F%E8%83%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E7%8E%B0%E4%BB%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E5%86%85%E7%BD%AE%E7%9A%84%E5%87%A0%E4%B8%AA%E5%8F%AF%E4%BB%A5%E7%AD%89%E6%95%88%E6%9B%BF%E4%BB%A3jQuery%E7%9A%84%E5%8A%9F%E8%83%BD/" class="post-title-link" itemprop="url">现代浏览器中内置的几个可以等效替代jQuery的功能</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-08-30 00:00:00" itemprop="dateCreated datePublished" datetime="2016-08-30T00:00:00+00:00">2016-08-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="获取元素选择器是一样的-selector选择器"><a href="#获取元素选择器是一样的-selector选择器" class="headerlink" title="获取元素选择器是一样的[selector选择器] &#96;&#96;&#96;"></a>获取元素选择器是一样的[selector选择器] &#96;&#96;&#96;</h1><p>$(‘.contant&gt;h1’);<br>[<h1>现代浏览器中内置的几个可以等效替代jQuery的功能</h1>]</p>
-<p>document.querySelector(‘.contant&gt;h1’);</p>
-<h1>现代浏览器中内置的几个可以等效替代jQuery的功能</h1>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"># API依然存在差异</span><br></pre></td></tr></table></figure>
-<p>&#x2F;&#x2F; jQuery</p>
-<p>$(‘.contant&gt;h1’).html();<br>“现代浏览器中内置的几个可以等效替代jQuery的功能”</p>
-<p>&#x2F;&#x2F; querySelector<br>document.querySelector(‘.contant&gt;h1’).html();<br>VM1257:1 Uncaught TypeError: document.querySelector(…).html is not a function(…)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">// jQuery</span><br><span class="line"></span><br><span class="line">$(&quot;.contant&gt;h1&quot;).css(&#x27;background-color&#x27;,&quot;salmon&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// querySelector</span><br><span class="line">document.querySelector(&#x27;.contant&gt;h1&#x27;).style.backgroundColor=&quot;salmon&quot;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// jQuery方式</span><br><span class="line">$(&quot;#picture&quot;).attr(&quot;src&quot;, &quot;http://placekitten.com/200/200&quot;);</span><br><span class="line"> </span><br><span class="line">//使用将querySelector映射为$的原生js方式</span><br><span class="line">$(&quot;#picture&quot;).src = &quot;http://placekitten.com/200/200&quot;;</span><br></pre></td></tr></table></figure>
-<h1 id="表达式-统一"><a href="#表达式-统一" class="headerlink" title="表达式 $ 统一"></a>表达式 <code>$</code> 统一</h1><blockquote>
-<p>并不建议,因为除选择器以外的API都不一样.而使用统样的表达式<code>$</code>程序员容易混淆,犯错</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  // 创建全局的 &#x27;$&#x27; 变量</span><br><span class="line">  window.$ = function(selector) &#123;</span><br><span class="line">    return document.querySelector(selector);</span><br><span class="line">  &#125;;</span><br><span class="line"> </span><br><span class="line">  (function() &#123;</span><br><span class="line">    // 通过id查找item1，将它的背景颜色修改为浅红</span><br><span class="line">    var item = $(&quot;#salmon&quot;).style.backgroundColor=&quot;salmon&quot;;</span><br><span class="line">    console.log(item);</span><br><span class="line">  &#125;()); </span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="document-queryselectorall-返回的是一个节点列表"><a href="#document-queryselectorall-返回的是一个节点列表" class="headerlink" title="document.queryselectorall 返回的是一个节点列表"></a>document.queryselectorall 返回的是一个节点列表</h1><p>一个很巧妙的做法是将querySelector映射为$，而将querySelectorAll函数映射为$$。但它返回的是一个节点列表，不如jQuery里返回的Array格式好用，我们可以使用Array.prototype.slice.call(nodeList)方法加工一下，让它更方便。</p>
-<p><code>现代浏览器中内置的几个可以等效替代jQuery的功能 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/2y2Qvy2">http://www.tuicool.com/articles/2y2Qvy2</a></p>
-<hr>
-<h1 id="angular环境使用-angular-element"><a href="#angular环境使用-angular-element" class="headerlink" title="angular环境使用 angular.element()"></a>angular环境使用<code> angular.element()</code></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">angular.element()</span><br><span class="line">JQLite &#123;&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">方法一：</span><br><span class="line"></span><br><span class="line">var test = angular.element(document.querySelector(&#x27;#testId&#x27;));</span><br><span class="line">test.addClass(‘testClass’);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">方法二：</span><br><span class="line"></span><br><span class="line">var test = angular.element(document.getElementById(&#x27;test&#x27;);</span><br><span class="line">test.addClass(‘testClass’);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">方法三：</span><br><span class="line"></span><br><span class="line">angular.forEach(angular.element(document).find(&#x27;div&#x27;),function(node)&#123;</span><br><span class="line">            if(node.id == &#x27;testId&#x27;)&#123;</span><br><span class="line">                     node.addClass(&#x27;testClass&#x27;);</span><br><span class="line">            &#125;</span><br><span class="line">if(node.className == ‘testClass’)&#123;</span><br><span class="line">node.removeClass(‘testClass’)</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">方法四：使用$documen.</span><br><span class="line"></span><br><span class="line">$document就和angular.element(document)是一样的</span><br><span class="line"></span><br><span class="line">angular.forEach($document.find(&#x27;div&#x27;),function(node)&#123;</span><br><span class="line">            if(node.id == &#x27;testId&#x27;)&#123;</span><br><span class="line">                     node.addClass(&#x27;testClass&#x27;);</span><br><span class="line">            &#125;</span><br><span class="line">if(node.className == &#x27;testClass&#x27;)&#123;</span><br><span class="line">node.removeClass(‘testClass’)</span><br><span class="line">&#125;</span><br><span class="line">           &#125;)</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<p><code>Angular.element和$document的使用方法分析，代替jquery - Simon_ITer的个人空间 - 开源中国社区</code><br><a target="_blank" rel="noopener" href="http://my.oschina.net/keysITer/blog/626746">http://my.oschina.net/keysITer/blog/626746</a></p>
-<p><code>Angular&#39;s jqLite</code><br><a target="_blank" rel="noopener" href="http://devdocs.io/angularjs~1.5/api/ng/function/angular.element">http://devdocs.io/angularjs~1.5/api/ng/function/angular.element</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/ys-ys/p/4918985.html">http://www.cnblogs.com/ys-ys/p/4918985.html</a></p>
-<p><code>angular源码分析：angular的整个加载流程 - 王大鹏 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/web2-developer/p/angular-7.html">http://www.cnblogs.com/web2-developer/p/angular-7.html</a></p>
-<p><code>angular源码分析：angular中jqLite的实现——你可以丢掉jQuery了 - 王大鹏 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/web2-developer/archive/2015/11/09/angular-5.html">http://www.cnblogs.com/web2-developer/archive/2015/11/09/angular-5.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/26/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/28/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/26/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/56/">56</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/28/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

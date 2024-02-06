@@ -136,18 +136,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">546</span>
+          <span class="site-state-item-count">554</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-count">389</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -164,6 +164,795 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/js-big-number/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/js-big-number/" class="post-title-link" itemprop="url">深究浏览器长整型数值精度丢失问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-04 00:00:00" itemprop="dateCreated datePublished" datetime="2024-02-04T00:00:00+00:00">2024-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-02-06 00:53:01" itemprop="dateModified" datetime="2024-02-06T00:53:01+00:00">2024-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">技术人生</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p><code>alert(28443422041709109)</code>会输出什么？</p>
+</blockquote>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在<a href="/2017/06/06/js-max-number/">上一篇博文</a>里我记录了一个诡异的前后端数据不一致的问题，最终定位为前端js精度丢失。但只说了原因及结论并没有深入研究这个问题。<br>这一篇博文准备在此基础上，深入探寻一番，彻底弄清楚这个问题发生的本质。</p>
+<h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>让我们先来看几个小问题热热身：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">## js环境下运行,输出结果是什么？</span><br><span class="line">1. console.log(1 === 1.0);</span><br><span class="line"></span><br><span class="line">2. console.log(0.1 + 0.2 === 0.3);</span><br><span class="line"></span><br><span class="line">3. console.log(9007199254740992);</span><br><span class="line"></span><br><span class="line">4. console.log(9007199254740992 + 1);</span><br><span class="line"></span><br><span class="line">5. console.log(9007199254740992 + 2);</span><br><span class="line"></span><br><span class="line">6. console.log(9007199254740992 + 3);</span><br><span class="line"></span><br><span class="line">7. console.log(9007199254740992 + 4);</span><br><span class="line">... ...</span><br></pre></td></tr></table></figure>
+<p>浏览器环境下运行下看看是不是有点颠覆了三观？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/js-big-number/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/js-device/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/js-device/" class="post-title-link" itemprop="url">js区分访问设备</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-04 00:00:00" itemprop="dateCreated datePublished" datetime="2024-02-04T00:00:00+00:00">2024-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-02-06 00:53:01" itemprop="dateModified" datetime="2024-02-06T00:53:01+00:00">2024-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">技术人生</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote class="blockquote-center">
+<p>需求是王道，有需求才有折腾的动力。  </p>
+
+</blockquote>
+
+<p>昨天在写结婚照分享的页面时，布局采用了一行三章的方式，于是每张照片的宽度定义为33%。</p>
+<p>PC下访问一切ok，但是换用手机端访问后发现有问题，三张照片有两张在一行上，另一张就掉到下一行去了。看起来很怪异。<br>于是想给PC访问和移动端访问做一个自适应设计。移动端屏幕下，一行就显示一张就可以了。</p>
+<h4 id="判断方法"><a href="#判断方法" class="headerlink" title="判断方法"></a>判断方法</h4><p>判断访问终端是手机还是PC，大体上有以下几种方法：</p>
+<ol>
+<li>终端平台</li>
+<li>操作系统</li>
+<li>浏览器内核</li>
+<li>userAgent<br>……</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/js-device/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/js-encode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/js-encode/" class="post-title-link" itemprop="url">javascript中几个编码函数encodeURI、encodeURIComponent以及escape的区别</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-04 00:00:00" itemprop="dateCreated datePublished" datetime="2024-02-04T00:00:00+00:00">2024-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-02-06 00:53:01" itemprop="dateModified" datetime="2024-02-06T00:53:01+00:00">2024-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">技术人生</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>今天平台在向调用的平台发送回调请求的时候，发现有问题，排查了一会儿发现并不是所有的回调请求都会有问题。基本上纯字母或数字的回调都没有问题，而出问题的请求包含”&amp;”,”-“等特殊字符，于是第一时间想到是不是解析特殊字符的问题。</p>
+<p>于是跟接收方约定，我将请求encode后发送，接收方接收后decode后再解析。</p>
+<h4 id="TEST1"><a href="#TEST1" class="headerlink" title="TEST1"></a>TEST1</h4><p>代码片段：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> resParams = &#123;<span class="string">&quot;name&quot;</span>:<span class="built_in">encodeURI</span>(out.<span class="property">name</span>),<span class="string">&quot;blockId&quot;</span>:blockId,<span class="string">&quot;total&quot;</span>:<span class="number">1</span>,<span class="string">&quot;detail&quot;</span>:<span class="built_in">encodeURI</span>(reportPath)&#125;;</span><br></pre></td></tr></table></figure>
+<p>发布后，重新触发，查看日志：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...<span class="string">&quot;detail&quot;</span>:<span class="string">&quot;http://(绿色围墙)/detail?id=1&amp;suffix=1438601805325&quot;</span>...&#125;</span><br></pre></td></tr></table></figure>
+<p>怎么貌似请求串没有改变？</p>
+<p>第一反应，怀疑是不是编码没有成功，但我之前一直都是使用<code>encodeURI</code>编码，并不会别的什么方法，于是百度了下，发现还有个<code>encodeURIComponent以及escape的区别</code>方法。</p>
+<h4 id="TEST2"><a href="#TEST2" class="headerlink" title="TEST2"></a>TEST2</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> resParams = &#123;<span class="string">&quot;name&quot;</span>:<span class="built_in">encodeURIComponent</span>(out.<span class="property">name</span>),<span class="string">&quot;blockId&quot;</span>:blockId,<span class="string">&quot;total&quot;</span>:<span class="number">1</span>,<span class="string">&quot;detail&quot;</span>:<span class="built_in">encodeURIComponent</span>(reportPath)&#125;;</span><br></pre></td></tr></table></figure>
+<p>发布后，重新触发，查看日志：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...<span class="string">&quot;detail&quot;</span>:<span class="string">&quot;http://(绿色围墙)/detail%3Fid%3D1%26suffix%3D1438601805325&quot;</span>...&#125;</span><br></pre></td></tr></table></figure>
+<p>起效了~</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><blockquote>
+<p>javascript中有三种编码的函数，分别是：*<code>escape()</code><em>,</em><code>encodeURI()</code><em>以及</em><code>encodeURIComponent()</code>*。</p>
+</blockquote>
+<ol>
+<li><p>escape<br>该方法不对ASCII字母和数字编码，也不会对ASCII标点符号编码，除此之外的所有字符均会被编码。<br>基本上该方法已经被javascript标准所遗弃，从ECMAScript v3开始，标准就建议使用encodeURI和encodeURIComponent代替。</p>
+</li>
+<li><p>encodeURI<br>该方法不会对字母和数字编码，也不会对这些ASCII标点符号编码：** -_.!~*’() **<br>该方法的目的是对URI进行完整的编码，对URI中具有特殊含义的标点符号不进行转义。<br>因此正如我遇到的问题一样，如果URI中含有分隔符，则应当使用<code>encodeURIComponent</code>方法编码。</p>
+</li>
+<li><p>encodeURIComponent<br>该方法不会对字母和数字编码，也不会对这些ASCII标点符号编码：** -_.!~<em>‘() **<br>其他字符，如</em>* ;&#x2F;?:@&amp;&#x3D;+$,# **这些用于分隔 URI 组件的标点符号，都会由十六进制转义替换。<br>encodeURIComponent除了编码标准的URI之外，对于它的参数也都一并进行处理。</p>
+</li>
+</ol>
+<p>他们对应的解码函数分别是：<br><em><code>unescape()</code></em>,<em><code>decodeURI()</code></em>,<em><code>decodeURIComponent()</code></em></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/js-for-in/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/js-for-in/" class="post-title-link" itemprop="url">javascript中for..in循环获取对象属性顺序问题的探讨</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-04 00:00:00" itemprop="dateCreated datePublished" datetime="2024-02-04T00:00:00+00:00">2024-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-02-06 00:53:01" itemprop="dateModified" datetime="2024-02-06T00:53:01+00:00">2024-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">技术人生</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>#背景<br>在项目开发过程中，有一个需求是这样的：</p>
+<blockquote>
+<p>平台接受用户输入的一串JSON字符，然后解析JSON串的key-value展示到平台上，并支持用户修改value值再更新。</p>
+</blockquote>
+<p>效果图如下：<br><img src="http://ww3.sinaimg.cn/large/62d95157gw1eu1746ujtwj20km064gml.jpg"><br>在调试过程中发现，一旦提交更新展示的字段顺序就跟前一次不一样，再提交一次更新貌似又能恢复，这是咋回事呢？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/js-for-in/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/js-lib-share/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/js-lib-share/" class="post-title-link" itemprop="url">分享我收藏的小而美JS库[一] -- notie</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-04 00:00:00" itemprop="dateCreated datePublished" datetime="2024-02-04T00:00:00+00:00">2024-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-02-06 00:53:01" itemprop="dateModified" datetime="2024-02-06T00:53:01+00:00">2024-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">技术人生</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><i class="iconfont" style="color: #1296db">&#xe65d;</i>  14&#x2F;53，每周一篇博，坚持！</p>
+<p>每周一篇博文的目标还是比较艰巨的，有时候时间比较紧张的时候根本来不及想主题。。<img class="emoji" src="https://emojipedia-us.s3.amazonaws.com/thumbs/320/apple/129/face-with-tears-of-joy_1f602.png" align="absmiddle"></p>
+<p>准备开一个系列，介绍下我收藏的那些小而美的JS开源库。这是第一篇，关于一个设计良好的美观实用PC、移动兼容良好的弹框库–<a target="_blank" rel="noopener" href="https://github.com/jaredreich/notie">notie</a>。</p>
+<h4 id="关于notie"><a href="#关于notie" class="headerlink" title="关于notie"></a>关于notie</h4><p>众所周知，浏览器默认的弹框–alert是异常丑陋的，我们在业务中通常是不会直接使用alert来显示应用弹框消息的，一般都会重新设计应用自己的弹框来替代之。<br>notie就是一款用来替代alert的消息弹框库。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/js-lib-share/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/js-lib-share2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/js-lib-share2/" class="post-title-link" itemprop="url">分享我收藏的小而美JS库[二] -- KeyPress</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-04 00:00:00" itemprop="dateCreated datePublished" datetime="2024-02-04T00:00:00+00:00">2024-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-02-06 00:53:01" itemprop="dateModified" datetime="2024-02-06T00:53:01+00:00">2024-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">技术人生</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><i class="iconfont" style="color: #1296db">&#xe65d;</i>  17&#x2F;53，每周一篇博，坚持！</p>
+<p>这一篇博文是小而美的库分享第二篇，准备分享一个JS键盘事件捕获的库，名字就叫做<a target="_blank" rel="noopener" href="http://dmauro.github.io/Keypress/">KeyPress</a>。</p>
+<h4 id="关于KeyPress"><a href="#关于KeyPress" class="headerlink" title="关于KeyPress"></a>关于KeyPress</h4><p>我们在web开发过程中，为了给用户带来良好的用户体验，通常就不仅仅需要响应用户的鼠标操作，更多的是需要响应用户的键盘操作。通常这时候我们总是需要各种搜索查询键盘上各个按键对应的键码。<br>这是一个很繁琐而又没什么技术含量的事。而”KeyPress”这个库基本上就让我们摆脱了查询键码的繁琐过程，托管了我们对键盘映射的响应。<br>“非常容易使用，大小合理(9kb)，没有任何依赖，健壮性良好的键盘输入捕获JS库”，这是KeyPress的自我评价。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/js-lib-share2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/js-lib-share3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/js-lib-share3/" class="post-title-link" itemprop="url">分享我收藏的小而美JS库[三] -- Vivid.js</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-04 00:00:00" itemprop="dateCreated datePublished" datetime="2024-02-04T00:00:00+00:00">2024-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-02-06 00:53:01" itemprop="dateModified" datetime="2024-02-06T00:53:01+00:00">2024-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">技术人生</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><i class="iconfont" style="color: #1296db">&#xe65d;</i>  18&#x2F;53，每周一篇博，坚持！</p>
+<p>今天七月一号了，不知不觉2018年又已经过去了一半了，工作后压力大感觉时间都过的快了些。想来也是，上了年纪了，现在的一年占你所剩人生的比例越来越重了，不由得让人对时间的流逝关注起来。大家都加油，与诸君共勉。</p>
+<p>这一篇博文是小而美的库分享第三篇，准备分享一个SVG图标的库，名字叫做<a target="_blank" rel="noopener" href="https://webkul.github.io/vivid/">Vivid.js</a>。</p>
+<h4 id="关于Vivid-js"><a href="#关于Vivid-js" class="headerlink" title="关于Vivid.js"></a>关于Vivid.js</h4><p>现如今，我们在web开发过程中，需要用到图标的时候已经很少直接插入一张图片了，更多的时候使用的都是SVG、iconfont形式的图标了。这种图标的好处就是可以自定义大小、颜色等样式。<br>这其中，国内有阿里开源的<a target="_blank" rel="noopener" href="http://iconfont.cn/home/index">阿里巴巴矢量图标库</a>，也有<a target="_blank" rel="noopener" href="https://v3.bootcss.com/">bootstrap</a>之类好用的图标库。<br>Vivid.js也是一款优秀的矢量图标库，可以作为备选之一。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/js-lib-share3/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/js-max-number/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/js-max-number/" class="post-title-link" itemprop="url">一个诡异的前后端数据不一致问题的排查</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-04 00:00:00" itemprop="dateCreated datePublished" datetime="2024-02-04T00:00:00+00:00">2024-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-02-06 00:53:01" itemprop="dateModified" datetime="2024-02-06T00:53:01+00:00">2024-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">技术人生</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>这是我转战JAVA以来的第一篇博文，纪念一下。</p>
+</blockquote>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>组织变动，转战JAVA差不多有一个月了，做了一个小需求，遇到一个诡异的问题。本文记录一下排查经过，顺便提醒自己后续开发中避免这样的坑。</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>JAVA后端需要给前端返回一串数据，其中有个交易订单号，该交易订单在返回给前端后跟后端吐出的值不一致。直观地来看，最后的几个数字被0取代了。<br>一开始以为取错了交易订单号，然而从DEBUG的过程来看，后端的处理结果没有问题，返回了正确的结果给前端。<br>如下图所示：<br><img src="http://wx3.sinaimg.cn/mw690/62d95157gy1fgblq39u2kj208l02x74g.jpg"><br><img src="http://wx1.sinaimg.cn/mw690/62d95157gy1fgblq2d5a7j20ho07ngmi.jpg"></p>
+<p>当时也并没有纠结问题的根本原因，下意识地将交易订单号类型从<code>List&lt;Long&gt;</code>换成了<code>List&lt;String&gt;</code>返回就正常了。</p>
+<p>发布以后觉得这里可能是个坑，于是研究了一下果然是有缘由的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/js-max-number/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -358,770 +1147,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/gopeed-excited-to-release/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/gopeed-excited-to-release/" class="post-title-link" itemprop="url">Gopeed 令人兴奋的新版本发布</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-10-24 17:27:30" itemprop="dateCreated datePublished" datetime="2023-10-24T17:27:30+00:00">2023-10-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">杂谈</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>经过近三年的迭代，<a target="_blank" rel="noopener" href="https://github.com/GopeedLab/gopeed">Gopeed</a> 终于迎来了我觉得比较满意的一个版本 <code>v1.4.3</code>，早在 <a target="_blank" rel="noopener" href="https://github.com/proxyee-down-org/proxyee-down">proxyee-down</a> 停更的时候，我就立下了一个<code>flag</code>要用 Golang 来重写一个下载器：</p>
-<p><img src="/gopeed-excited-to-release/2023-10-24-17-34-08.png"></p>
-<p>当时刚接触 Golang 就被深深吸引了，它优秀的网络编程、协程和交叉编译等特性，不经感叹这简直就是开发下载器的天选编程语言，于是就有了这个项目，刚开始的时候想着就做一个类似<code>aria2</code>这样的命令行工具，后来<code>flutter</code>异军突起，我就一直在调研用<code>flutter</code>来开发一个支持所有平台的下载器的可行性，一开始<code>flutter desktop</code>还不是很成熟，我甚至有考虑过用<code>electron</code>做桌面端，<code>flutter</code>做移动端，后来<code>flutter 2.0</code>发布之后，<code>flutter desktop</code>也正式发布了，测了下基本没啥大坑，觉得这是一个很好的机会，就开始把命令行工具改造成<code>GUI</code>，更方便用户使用，最终不出所望，通过 Golang + flutter 的组合，实现了一个支持所有平台的下载器。</p>
-<blockquote>
-<p>相关链接：<br>官网 -&gt; <a target="_blank" rel="noopener" href="https://gopeed.com/">https://gopeed.com</a><br>Github -&gt; <a target="_blank" rel="noopener" href="https://github.com/GopeedLab/gopeed">https://github.com/GopeedLab/gopeed</a></p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/gopeed-excited-to-release/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/android-hack/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/android-hack/" class="post-title-link" itemprop="url">[转]某麦网APK抢票接口加密参数分析</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-08-16 10:14:10" itemprop="dateCreated datePublished" datetime="2023-08-16T10:14:10+00:00">2023-08-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%80%86%E5%90%91/" itemprop="url" rel="index"><span itemprop="name">逆向</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p><strong>转载申明</strong></p>
-<p>文章转载自互联网，如有侵权，请联系删除<br>本文仅作为学习交流，禁止用于非法用途</p>
-</blockquote>
-<h1 id="0x00-概述"><a href="#0x00-概述" class="headerlink" title="0x00 概述"></a>0x00 概述</h1><p>针对某麦网部分演唱会门票仅能在 app 渠道抢票的问题，本文研究了 APK 的抢票接口并编写了抢票工具。本文介绍的顺序为环境搭建、抓包、trace 分析、接口参数获取、rpc 调用实现，以及最终的功能实现。通过阅读本文，你将学到反抓包技术破解、Frida hook、jadx apk 逆向技术，并能对淘系 APP 的运行逻辑有所了解。本文仅用于学习交流，严禁用于非法用途。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/android-hack/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/android-reverse/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/android-reverse/" class="post-title-link" itemprop="url">[转]安卓逆向某生鲜平台app</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-08-16 10:14:10" itemprop="dateCreated datePublished" datetime="2023-08-16T10:14:10+00:00">2023-08-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%80%86%E5%90%91/" itemprop="url" rel="index"><span itemprop="name">逆向</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p><strong>转载申明</strong></p>
-<p>文章转载自互联网，如有侵权，请联系删除<br>本文仅作为学习交流，禁止用于非法用途</p>
-</blockquote>
-<h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><p>阿里系当前采用的加密版本是 6.3，6.2 版本的大家几乎都解决了，6.3 的网上资料很少，这里讲讲 6.3 的解密过程</p>
-<ol>
-<li>阿里系通用这一套加密算法，主要是 x-sign，x-sgext，x_mini_wua，x_umt 这四个加密参数，解决了其中一个 app，其他的比如淘 X，咸 X 等 app 都相差不大了，改改参数，或者替换不同的方法名称就行；</li>
-<li>使用的是 frida-rpc 主动调用的方法（对加密算法解密的话，难度很高，我没做出来）；</li>
-<li>本次做的是阿里系的某生鲜平台 app， <strong>仅作为学习交流，禁止用于商业使用</strong></li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/android-reverse/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/integrating-firebase-in-vuepress/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/integrating-firebase-in-vuepress/" class="post-title-link" itemprop="url">在vuepress整合firebase analytics</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-06-30 20:24:27" itemprop="dateCreated datePublished" datetime="2023-06-30T20:24:27+00:00">2023-06-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近想给<code>gopeed</code>的文档网站添加一个统计用户的访问量的功能，所以就想到了 firebase 的 analytics，但是在 vuepress 中整合 firebase 的 analytics 并不是很简单，所以就有了这篇文章。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/integrating-firebase-in-vuepress/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/wsl-bash-no-suchffile-or-directory/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/wsl-bash-no-suchffile-or-directory/" class="post-title-link" itemprop="url">wsl终端运行命令提示 'bash\r' No such file or directory</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-05-22 15:05:39" itemprop="dateCreated datePublished" datetime="2023-05-22T15:05:39+00:00">2023-05-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>想在 wsl 上安装 flutter 跑一跑我的<code>gopeed</code>项目，在安装完 flutter 并设置好环境变量后，运行<code>flutter doctor</code>提示<code>bash\r: No such file or directory</code>，搜索了一番发现没有找到解决方案，于是自己摸索了一番，记录下来。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/wsl-bash-no-suchffile-or-directory/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/go-assign-interface-pointer-value/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/go-assign-interface-pointer-value/" class="post-title-link" itemprop="url">Go语言中interface{}指针赋值</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-09-30 17:45:18" itemprop="dateCreated datePublished" datetime="2022-09-30T17:45:18+00:00">2022-09-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在 Go 中，可以通过传递指针来改变函数外部变量的值，例如：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> a <span class="type">int</span> = <span class="number">1</span></span><br><span class="line">    fmt.Println(a) <span class="comment">// 1</span></span><br><span class="line">    change(&amp;a,<span class="number">2</span>)</span><br><span class="line">    fmt.Println(a) <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">change</span><span class="params">(a *<span class="type">int</span>, b <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">   <span class="comment">// 通过解引用来改变外部变量的值</span></span><br><span class="line">    *a = b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>但是在某些情况下，我们可能需要传递<code>interface&#123;&#125;</code>来接收任意的指针变量，这时候就会遇到一个问题，<code>interface&#123;&#125;</code>类型声明的变量是不能直接赋值指针的，例如：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> a <span class="type">int</span> = <span class="number">1</span></span><br><span class="line">    fmt.Println(a) <span class="comment">// 1</span></span><br><span class="line">    change(&amp;a,<span class="number">2</span>)</span><br><span class="line">    fmt.Println(a) <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">change</span><span class="params">(a <span class="keyword">interface</span>&#123;&#125;,b <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 这一行会报错: invalid operation: cannot indirect a (variable of type interface&#123;&#125;)</span></span><br><span class="line">    *a = b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/go-assign-interface-pointer-value/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/break-through-cf-firewall/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/break-through-cf-firewall/" class="post-title-link" itemprop="url">突破神奇的Cloudflare防火墙</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-05-18 16:07:10" itemprop="dateCreated datePublished" datetime="2022-05-18T16:07:10+00:00">2022-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近碰到一个神奇的网站，在浏览器可以打开，但是通过 curl 或者 代码访问就直接 403，我估摸着这肯定是做了<code>UA校验</code>，于是请求的时候把浏览器的 UA 给带上，然后访问发现还是 403，不过这也难不倒我，肯定是还有校验其它的请求头，直接浏览器打开 network，把所有的请求头复制过来并且带上，确保我和浏览器在 http 协议层面的请求完全一样，这样不可能会失败了吧，然而运行完发现还是 403。</p>
-<blockquote>
-<p>放个地址: <a target="_blank" rel="noopener" href="https://pixabay.com/">https://pixabay.com</a></p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/break-through-cf-firewall/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/vuetify-ues-local-resource/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/vuetify-ues-local-resource/" class="post-title-link" itemprop="url">vuetify使用本地图标和字体文件</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-02-22 14:11:53" itemprop="dateCreated datePublished" datetime="2022-02-22T14:11:53+00:00">2022-02-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>为了开发公司的一些效率工具 UI，我选择了 Vuetify，它是一个基于 Vue 的 UI 框架，它提供了一个简单的组件库，可以让我们快速开发出一些简单并且好看的 material design 的 UI。</p>
-<p>但是通过官方脚手架生成的项目，默认是通过引入外网 cdn 的方式导入图标以及字体文件，然而国内的网络访问这些资源比较慢，所以就想把这些资源放到本地，提高访问速度。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/vuetify-ues-local-resource/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/56/">56</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

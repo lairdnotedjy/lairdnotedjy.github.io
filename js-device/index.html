@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="baidu-site-verification" content="codeva-6wmKWl5hmx" />
+<meta name="bytedance-verification-code" content="GcOf/MpQ8shZ5Hh/2hvr" />
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4522670236044605"
+     crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-33RJLY0818"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-33RJLY0818');
+</script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="需求是王道，有需求才有折腾的动力。      昨天在写结婚照分享的页面时，布局采用了一行三章的方式，于是每张照片的宽度定义为33%。 PC下访问一切ok，但是换用手机端访问后发现有问题，三张照片有两张在一行上，另一张就掉到下一行去了。看起来很怪异。于是想给PC访问和移动端访问做一个自适应设计。移动端屏幕下，一行就显示一张就可以了。 判断方法判断访问终端是手机还是PC，大体上有以下几种方法：  终">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js区分访问设备">
+<meta property="og:url" content="https://www.sovdating.com/js-device/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="需求是王道，有需求才有折腾的动力。      昨天在写结婚照分享的页面时，布局采用了一行三章的方式，于是每张照片的宽度定义为33%。 PC下访问一切ok，但是换用手机端访问后发现有问题，三张照片有两张在一行上，另一张就掉到下一行去了。看起来很怪异。于是想给PC访问和移动端访问做一个自适应设计。移动端屏幕下，一行就显示一张就可以了。 判断方法判断访问终端是手机还是PC，大体上有以下几种方法：  终">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/62d95157gw1eyue0nqiegj209n07kaab.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/mw690/62d95157gw1eyue4s75yjj20oz05gjrx.jpg">
+<meta property="article:published_time" content="2024-02-04T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-06T00:53:01.036Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="区分访问设备">
+<meta property="article:tag" content="获取访问设备">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/mw690/62d95157gw1eyue0nqiegj209n07kaab.jpg">
+
+
+<link rel="canonical" href="https://www.sovdating.com/js-device/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/js-device/","path":"js-device/","title":"js区分访问设备"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>js区分访问设备 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">判断方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">代码实例</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">554</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">94</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">389</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/js-device/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="js区分访问设备 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          js区分访问设备
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-04 00:00:00" itemprop="dateCreated datePublished" datetime="2024-02-04T00:00:00+00:00">2024-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-02-06 00:53:01" itemprop="dateModified" datetime="2024-02-06T00:53:01+00:00">2024-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">技术人生</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote class="blockquote-center">
+<p>需求是王道，有需求才有折腾的动力。  </p>
+
+</blockquote>
+
+<p>昨天在写结婚照分享的页面时，布局采用了一行三章的方式，于是每张照片的宽度定义为33%。</p>
+<p>PC下访问一切ok，但是换用手机端访问后发现有问题，三张照片有两张在一行上，另一张就掉到下一行去了。看起来很怪异。<br>于是想给PC访问和移动端访问做一个自适应设计。移动端屏幕下，一行就显示一张就可以了。</p>
+<h4 id="判断方法"><a href="#判断方法" class="headerlink" title="判断方法"></a>判断方法</h4><p>判断访问终端是手机还是PC，大体上有以下几种方法：</p>
+<ol>
+<li>终端平台</li>
+<li>操作系统</li>
+<li>浏览器内核</li>
+<li>userAgent<br>……</li>
+</ol>
+<span id="more"></span>
+
+<p>这几种方法都需要利用到js的navigator对象来获取相应的信息，具体的navigator知识可以参考：<a target="_blank" rel="noopener" href="http://www.w3school.com.cn/jsref/dom_obj_navigator.asp">w3school Navigator对象</a><br>navigator都有哪些可以使用的属性可以在浏览器的终端里查看下。<img src="http://ww1.sinaimg.cn/mw690/62d95157gw1eyue0nqiegj209n07kaab.jpg"><br>经我实验，appName，platform，appVersion，useragent等可以获得当前设备信息。<br><img src="http://ww2.sinaimg.cn/mw690/62d95157gw1eyue4s75yjj20oz05gjrx.jpg"><br>但有些信息准确度上就不好说了。appName和platform的误差可能会有，上图中我的64bit Chrome，appName和platform分别是”Netscape”、”Win32”。</p>
+<h4 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h4><p>采用userAgent获取设备信息判断终端类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">isPc</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> userAgentInfo = navigator.<span class="property">userAgent</span>;</span><br><span class="line">	<span class="comment">//可识别的移动终端，支持以下</span></span><br><span class="line">	<span class="keyword">var</span> agents = [<span class="string">&quot;Android&quot;</span>, <span class="string">&quot;iPhone&quot;</span>, <span class="string">&quot;SymbianOS&quot;</span>, <span class="string">&quot;Windows Phone&quot;</span>, <span class="string">&quot;iPad&quot;</span>, <span class="string">&quot;iPod&quot;</span>];</span><br><span class="line">	<span class="keyword">var</span> flag = <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,len=agents.<span class="property">length</span>;i&lt;len;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(userAgentInfo.<span class="title function_">indexOf</span>(agents[i]) != -<span class="number">1</span>)&#123;</span><br><span class="line">			flag = <span class="literal">false</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>获取到了设备信息后，在判断出是移动端访问后，将宽度33%的设置去除，恢复100%，于是移动端的访问体验也恢复了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/javascript/" rel="tag"># javascript</a>
+              <a href="/tags/js/" rel="tag"># js</a>
+              <a href="/tags/%E5%8C%BA%E5%88%86%E8%AE%BF%E9%97%AE%E8%AE%BE%E5%A4%87/" rel="tag"># 区分访问设备</a>
+              <a href="/tags/%E8%8E%B7%E5%8F%96%E8%AE%BF%E9%97%AE%E8%AE%BE%E5%A4%87/" rel="tag"># 获取访问设备</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/js-encode/" rel="prev" title="javascript中几个编码函数encodeURI、encodeURIComponent以及escape的区别">
+                  <i class="fa fa-angle-left"></i> javascript中几个编码函数encodeURI、encodeURIComponent以及escape的区别
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/js-big-number/" rel="next" title="深究浏览器长整型数值精度丢失问题">
+                  深究浏览器长整型数值精度丢失问题 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -136,18 +136,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">546</span>
+          <span class="site-state-item-count">554</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-count">389</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -164,6 +164,806 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Java-8-configure-maven-java-doc-plugin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Java-8-configure-maven-java-doc-plugin/" class="post-title-link" itemprop="url">Java 8 配置Maven-javadoc-plugin</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-10-18 22:41:30" itemprop="dateCreated datePublished" datetime="2016-10-18T22:41:30+00:00">2016-10-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在升级JDK至1.8之后，使用<code>Maven-javadoc-plugin</code>插件打包报错，**[ERROR] Failed to execute goal org.apache.maven.plugins:maven-javadoc-plugin:2.10.4:jar (attach-javadocs) on project<br>**详细信息如下</p>
+<blockquote>
+<p>[ERROR] Failed to execute goal org.apache.maven.plugins:maven-javadoc-plugin:2.10.4:jar (attach-javadocs) on project StatisticsReport: MavenReportException: Error while generating Javadoc:<br>[ERROR] Exit code: 1 - D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:29: 警告: @param 没有说明<br>[ERROR] * @param preparedStatement<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:30: 警告: @param 没有说明<br>[ERROR] * @param params<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:31: 警告: @return 没有说明<br>[ERROR] * @return<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:32: 警告: @throws 没有说明<br>[ERROR] * @throws SQLException<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:34: 警告: logFlag没有 @param<br>[ERROR] public static ResultSet pullData(PreparedStatement preparedStatement, boolean logFlag, String… params) throws SQLException {<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:51: 警告: @param 没有说明<br>[ERROR] * @param preparedStatement<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:52: 警告: @param 没有说明<br>[ERROR] * @param params<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:53: 警告: @return 没有说明<br>[ERROR] * @return<br>[ERROR] ^</p>
+</blockquote>
+<p>经查得知，在JDK 8中，Javadoc中添加了<em>doclint</em>，而这个工具的主要目的是旨在获得符合W3C HTML 4.01标准规范的HTML文档，在JDK 8中，已经无法获取如下的Javadoc，除非它满足<em>doclint</em>：</p>
+<ul>
+<li>不能有自关闭的HTML tags，例如<code>&lt;br/&gt;</code>或者<code>&lt;a id=&quot;x&quot;/&gt;</code></li>
+<li>不能有未关闭的HTML tags，例如有<code>&lt;ul&gt;</code>而没有<code>&lt;/ul&gt;</code></li>
+<li>不能有非法的HTML end tags，例如<code>&lt;/br&gt;</code></li>
+<li>不能有非法的HTML attributes，需要符合doclint基于W3C HTML 4.01的实现</li>
+<li>不能有重复的HTML id attribute</li>
+<li>不能有空的HTML href attribute</li>
+<li>不能有不正确的嵌套标题，例如类的文档说明中必须有<code>&lt;h3&gt;</code>而不是<code>&lt;h4&gt;</code></li>
+<li>不能有非法的HTML tags，例如<code>List&lt;String&gt;</code>需要用<code>&lt;&gt;</code>对应的实体符号</li>
+<li>不能有损坏的<code>@link references</code></li>
+<li>不能有损坏的<code>@param references</code>，它们必须匹配实际的参数名称</li>
+<li>不能有损坏的<code>@throws references</code>，第一个词必须是一个类名称</li>
+</ul>
+<p>注意违反这些规则的话，将不会得到Javadoc的输出。</p>
+<p>一种解决办法就是关闭<em>doclint</em>，如果你在Maven中运行，你需要使用<code>additionalparam</code>设置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>disable-javadoc-doclint<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>[1.8,)<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">additionalparam</span>&gt;</span>-Xdoclint:none<span class="tag">&lt;/<span class="name">additionalparam</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或者是添加到<code>maven-javadoc-plugin</code>中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-javadoc-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.10.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>$&#123;chartset.UTF8&#125;<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aggregate</span>&gt;</span>true<span class="tag">&lt;/<span class="name">aggregate</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">charset</span>&gt;</span>$&#123;chartset.UTF8&#125;<span class="tag">&lt;/<span class="name">charset</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">docencoding</span>&gt;</span>$&#123;chartset.UTF8&#125;<span class="tag">&lt;/<span class="name">docencoding</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span>&gt;</span>attach-javadocs<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">goal</span>&gt;</span>jar<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">additionalparam</span>&gt;</span>-Xdoclint:none<span class="tag">&lt;/<span class="name">additionalparam</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/docker%E7%8E%AF%E5%A2%83CoreOS%E3%80%81CentOS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/docker%E7%8E%AF%E5%A2%83CoreOS%E3%80%81CentOS/" class="post-title-link" itemprop="url">docker环境CoreOS、CentOS</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-10-17 00:00:00" itemprop="dateCreated datePublished" datetime="2016-10-17T00:00:00+00:00">2016-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li><p>systemd  容器进行管理</p>
+</li>
+<li><p>fleet  容器进行管理， 服务发现和配置信息共享</p>
+</li>
+<li><p>Vagrantfile</p>
+</li>
+<li><p>state partition 状态分区,CoreOS非只读区</p>
+</li>
+</ul>
+<hr>
+<p>CoreOS<br>CoreOS是一种新的、架构体系重新设计的Linux发行版，可以运行在既有的硬件或者云上。CoreOS不提供类似yum或者apt类似的包管理工具，用户不需要在CoreOS中安装软件，而是让程序都在Docker容器中去运行。CoreOS使用systemd和fleet来对容器进行管理，通过etcd进行服务发现和配置信息共享。CoreOS目前风头正劲，目前已经获得融资并于上周宣布收购私有Docker仓库服务商Quay.io，进军企业级的Registry。另外，CoreOS的etcd等组件也获得了社区的认可，并得到了大规模使用。CoreOS已经发布首个稳定版本，目前主流的云服务商都提供了对CoreOS的支持。</p>
+<p><code>十大基于Docker的开发工具</code><br><a target="_blank" rel="noopener" href="http://www.infoq.com/cn/news/2014/08/top-10-open-source-docker/">http://www.infoq.com/cn/news/2014/08/top-10-open-source-docker/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">为什么选择 CoreOS?</span><br><span class="line">CoreOS有几个很牛的特点. 它以只读模式运行, 除了“state partition”, 这个地方，我们基本上使用它来存放系统单元文件，包括启动监视你的docker容器, 另外还有docker’的本地图片缓存和一些固定的区域。我喜欢只读文件系统，因为这意味着，他们很稳定，并且几乎不可能被破坏. 另外, CoreOS会自动更新而且它重用了ChromeOS的更新器. </span><br></pre></td></tr></table></figure>
+<p><code>CoreOS 和 Docker 入门 - 开源中国社区</code><br><a target="_blank" rel="noopener" href="http://www.oschina.net/translate/coreos_and_docker_first_steps?cmp">http://www.oschina.net/translate/coreos_and_docker_first_steps?cmp</a></p>
+<p><code>Docker和CoreOS一直在争夺,为何不互补-阿里云资讯网</code><br><a target="_blank" rel="noopener" href="https://www.aliyun.com/zixun/content/1_1_1038419.html">https://www.aliyun.com/zixun/content/1_1_1038419.html</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最流行最基础的Docker镜像还是“Ubuntu”</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">老外在这里强烈推荐CoreOS，说怎么怎么好，我还是推荐先使用ubuntu或者在windows上装个vbox在用ubuntu，coreos作为一个新型的服务器级别的系统，也十分值得关注，因为CoreOs将作为主力的docker容器发展。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>docker 简明教程 | 简果网</code>-相关 CoreOS<br><a target="_blank" rel="noopener" href="http://www.simapple.com/docker-tutorial">http://www.simapple.com/docker-tutorial</a></p>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">完整性、系统性来说CentOS好</span><br><span class="line">CoreOS是一个采用了高度精简的Linux系统内核及外围定制的轻量级操作系统</span><br><span class="line">追问： 那就是说。coreos比centos小</span><br><span class="line">追答： 是的，不过centos也可以最小化安装</span><br><span class="line">追问： 那做服务器他们哪个好点</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>coreos和centos哪个好_百度知道</code></p>
+<p><a target="_blank" rel="noopener" href="http://zhidao.baidu.com/link?url=dddRjzH1OYs22nMMMt3bG1UlfqVfgY7ldErJaISG56kgXCXlUdMXwdbVjhNtVXifVMWJNZOAbNGnLUnGyHZE8OgasZQ4DB4_E1QrgRvduN">http://zhidao.baidu.com/link?url=dddRjzH1OYs22nMMMt3bG1UlfqVfgY7ldErJaISG56kgXCXlUdMXwdbVjhNtVXifVMWJNZOAbNGnLUnGyHZE8OgasZQ4DB4_E1QrgRvduN</a>_</p>
+<hr>
+<p>coreos和Ubuntu及centos的本质区别是什么?其实它们本质上都是Linux的独立发行版，大的区别主要有两点：</p>
+<p>　　1)预装的软件不一样，CoreOS系统预装的软件相比Ubuntu或CentOS少的多(从系统的安装CD内容也能看出来，CoreOS只有 100多MB，Ubuntu的有700多MB)，因此CoreOS系统在启动速度和运行内存上都有优势。另外CoreOS预装的软件很多是为集群环境配备的，例如Etcd和Fleet。</p>
+<p>　　2)CoreOS的系统分区是只读的，也就说，用户不能直接安装程序到系统里面。所有用户程序的运行都要使用到Docker或Rkt容器，从而确保系统升级时候不会因为系统被用户修改而出现意外问题。<br><a target="_blank" rel="noopener" href="http://www.99inf.com/diannao/rjkf/601619.html">http://www.99inf.com/diannao/rjkf/601619.html</a> </p>
+<hr>
+<p><code>Docker学习：Coreos+Docker+rancher真方便简捷_服务器应用_Linux公社-Linux系统门户网站</code><br><a target="_blank" rel="noopener" href="http://www.linuxidc.com/Linux/2016-04/130605.htm">http://www.linuxidc.com/Linux/2016-04/130605.htm</a></p>
+<p><code>借 Docker 东风，CoreOS 蹿红云计算 - 开源中国社区</code><br><a target="_blank" rel="noopener" href="http://www.oschina.net/news/55086/coreos-docker">http://www.oschina.net/news/55086/coreos-docker</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E4%B8%8E%E7%9B%91%E6%8E%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E4%B8%8E%E7%9B%91%E6%8E%A7/" class="post-title-link" itemprop="url">前端异常日志收集与监控</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-10-13 00:00:00" itemprop="dateCreated datePublished" datetime="2016-10-13T00:00:00+00:00">2016-10-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>前端代码异常日志收集与监控_知识库_博客园</code><br><a target="_blank" rel="noopener" href="http://kb.cnblogs.com/page/527520/">http://kb.cnblogs.com/page/527520/</a></p>
+<p><code>前端代码异常监控</code><br><a target="_blank" rel="noopener" href="http://rapheal.sinaapp.com/2014/11/06/javascript-error-monitor/">http://rapheal.sinaapp.com/2014/11/06/javascript-error-monitor/</a></p>
+<p><code>构建可靠的前端异常监控服务 - 采集篇 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/Rjy2Yjz">http://www.tuicool.com/articles/Rjy2Yjz</a></p>
+<p><code>JSTracker 之前端异常数据采集 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/BZN3amR">http://www.tuicool.com/articles/BZN3amR</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ES6%E5%85%BC%E5%AE%B9%E4%BD%8E%E7%89%88%E6%9C%AC%E6%B5%8F%E8%A7%88%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ES6%E5%85%BC%E5%AE%B9%E4%BD%8E%E7%89%88%E6%9C%AC%E6%B5%8F%E8%A7%88%E5%99%A8/" class="post-title-link" itemprop="url">ES6兼容低版本浏览器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-10-11 00:00:00" itemprop="dateCreated datePublished" datetime="2016-10-11T00:00:00+00:00">2016-10-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:21" itemprop="dateModified" datetime="2024-01-26T12:42:21+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="局部引用-全局实现"><a href="#局部引用-全局实现" class="headerlink" title="局部引用 &amp;  全局实现"></a>局部引用 &amp;  全局实现</h1><p>想要不支持该方法的浏览器支持，无非两种办法<br><code>局部引用</code>，引入一个相同的方法代替，其缺点则是使用起来比较麻烦，每个用到的文件都要去引入。<br><code>全局实现</code>，与之相反的方法是使用 polyfill ，其优点便是使用方便，缺点则是会全局污染，特别是实例方法，涉及到修改其 prototype ，不是你的类，你去修改它原型是不推荐的。</p>
+<p>针对这两种办法，提供出以下几种方案，供大家参考</p>
+<h1 id="方案一：引入额外的库"><a href="#方案一：引入额外的库" class="headerlink" title="方案一：引入额外的库"></a>方案一：引入额外的库</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import assign from &#x27;object-assign&#x27;;</span><br><span class="line">assign(&#123;&#125;, &#123;&#125;);</span><br></pre></td></tr></table></figure>
+<p>缺点就是需要去找到对应的库，比如 Promise 我们可以使用 lie</p>
+<h1 id="方案二：全局引入-babel-polyfill"><a href="#方案二：全局引入-babel-polyfill" class="headerlink" title="方案二：全局引入 babel-polyfill"></a>方案二：全局引入 babel-polyfill</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import &#x27;babel-polyfill&#x27;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>polyfill 构建并 uglify 后的大小为 98k，gzip 后为32.6k，32k 对与移动端还是有点大的</p>
+<h1 id="方案三：手动引入-core-js"><a href="#方案三：手动引入-core-js" class="headerlink" title="方案三：手动引入 core-js"></a>方案三：手动引入 core-js</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Object: &#123;</span><br><span class="line">      assign: &quot;object/assign&quot;,</span><br><span class="line">      create: &quot;object/create&quot;,</span><br><span class="line">      defineProperties: &quot;object/define-properties&quot;,</span><br><span class="line">      defineProperty: &quot;object/define-property&quot;,</span><br><span class="line">      entries: &quot;object/entries&quot;,</span><br><span class="line">      freeze: &quot;object/freeze&quot;,</span><br><span class="line">      ...</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import assign from &#x27;core-js/library/fn/object/assign&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import &#x27;core-js/fn/object/assign&#x27;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="方案四：使用-babel-plugin-transform-runtime"><a href="#方案四：使用-babel-plugin-transform-runtime" class="headerlink" title="方案四：使用 babel-plugin-transform-runtime"></a>方案四：使用 <code>babel-plugin-transform-runtime</code></h1><p><a target="_blank" rel="noopener" href="https://babeljs.io/docs/plugins/transform-runtime/">https://babeljs.io/docs/plugins/transform-runtime/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save-dev babel-plugin-transform-runtime</span><br><span class="line">$ npm install --save babel-runtime</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>.babelrc</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// without options</span><br><span class="line">&#123;</span><br><span class="line">  &quot;plugins&quot;: [&quot;transform-runtime&quot;]</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// with options</span><br><span class="line">&#123;</span><br><span class="line">  &quot;plugins&quot;: [</span><br><span class="line">    [&quot;transform-runtime&quot;, &#123;</span><br><span class="line">     &quot;helpers&quot;: false, // defaults to true; v6.12.0 (2016-07-27) 新增;</span><br><span class="line">      &quot;polyfill&quot;: true, // defaults to true</span><br><span class="line">      &quot;regenerator&quot;: true, // defaults to true</span><br><span class="line">      // v6.15.0 (2016-08-31) 新增</span><br><span class="line">      // defaults to &quot;babel-runtime&quot;</span><br><span class="line">      // 可以这样配置</span><br><span class="line">      // moduleName: path.dirname(require.resolve(&#x27;babel-runtime/package&#x27;))</span><br><span class="line">      &quot;moduleName&quot;: &quot;babel-runtime&quot;</span><br><span class="line">    &#125;]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>最后看下终极方案的通用配置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    [&quot;transform-runtime&quot;, &#123;</span><br><span class="line">      &quot;helpers&quot;: false,</span><br><span class="line">      &quot;polyfill&quot;: true,</span><br><span class="line">      &quot;regenerator&quot;: true</span><br><span class="line">    &#125;],</span><br><span class="line">    &#x27;add-module-exports&#x27;,</span><br><span class="line">    &#x27;transform-es3-member-expression-literals&#x27;,</span><br><span class="line">    &#x27;transform-es3-property-literals&#x27;,</span><br><span class="line">  ],</span><br><span class="line">  &quot;presets&quot;: [</span><br><span class="line">    &#x27;react&#x27;,</span><br><span class="line">    &#x27;es2015&#x27;,</span><br><span class="line">    &#x27;stage-1&#x27;</span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<p><code>ES6 + Webpack + React + Babel 如何在低版本浏览器上愉快的玩耍（下） - 推酷</code> <a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/rYRBbiA">http://www.tuicool.com/articles/rYRBbiA</a></p>
+<p><code>开始使用es6的module:import+export - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/zABbYbv">http://www.tuicool.com/articles/zABbYbv</a></p>
+<p><code>Polyfill.io - 自动化的 JavaScript Polyfill 服务 | 小影志</code><br><a target="_blank" rel="noopener" href="http://c7sky.com/polyfill-io.html">http://c7sky.com/polyfill-io.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Read-outliers-the-story-of-success/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Read-outliers-the-story-of-success/" class="post-title-link" itemprop="url">读《异类》</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-10-10 20:15:07" itemprop="dateCreated datePublished" datetime="2016-10-10T20:15:07+00:00">2016-10-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>作者简介</strong>：马尔科姆·格拉德威尔（Malcolm Gladwell），被《快公司》誉为“21世纪的彼得·德鲁克，曾是《华盛顿邮报》商务科学专栏作家，目前是《纽约客》杂志专职作家。马尔科姆出生于英格兰，是牙买加人的后裔。在加拿大长大，现居纽约市。他曾经做过卫生政策和科学新闻方面的记者，其文章喜欢以小见大。马尔科姆是一个非常有创意的作家，他认为自己的文风属于一种adventure of ideas的风格，虽然大部分作品都不属于虚构，又不是围绕一个人物或者一个故事展开，但其中的故事情节却一般比较曲折，看他的文章很有adventure波澜起伏的韵味。</p>
+<p>那些取得杰出成就的人，不仅仅靠的是天赋，更多靠的是机遇，当然机遇包括整个社会所创造的机遇以及他们的家庭、生长环境、出生年月等等诸多未可知因素。而这些取得非凡业绩的人如若选择了那些专业性极强的方面，例如绘画、演奏、作曲、体育运动等，这时候就离不开一万小时理论了，除了机遇之外，剩下的就是勤勉了，相对来说，那些有着更好机遇同时又更加勤勉的人能够更快地达到一万小时的训练水平，当然也会取得更加杰出地成就。</p>
+<p>该书中提到了一个非常重要的实验，就是从1921年开始，刘易斯·特曼就满腔热忱地把测试智商、发现天才作为自己的终身事业。在联邦会的大力支持下，他组织了一个团队到加利福尼亚州的中小学进行测试智商的研究。挑选出最聪明、最有发展前途、智商最高的学生。可是这些人长大成人之后，有些人成了政府官员，有些人成了高级法院的法官，有些人成了图书、学术文章的出版人，有些人在商业上取得了一定成功…… 尽管他们中的大部分人生活得还不错，但缺少出类拔萃之辈，远远低于当时的预期。最令刘易斯·特曼感到尴尬，甚至感到无地自容的是：没有任何一个人获得诺贝尔奖，就连成为全美知名人士的也寥寥无几；可当年测试智商时被认定智商不够高、没有什么发展前途的威廉·肖克利和路易斯·阿尔瓦雷茨，却都获得了诺贝尔奖。</p>
+<p>后来，刘易斯·特曼在《天才基因的研究》一书中，以一种极端失望的笔调写道:“这些人的智商和成就并没有完美地结合在一起。”有时候，获得失败教训的价值并不比获得成功经验的价值小。心理学家刘易斯·特曼智商测试的预言虽然失败了，但却给人们留下了不可小觑的启示。那就是：从总体上看，一个孩子的成功，主要并不决定于智商。</p>
+<p><strong>最重要的是，组成智商的记忆、观察、想象、思考、判断等因素是很重要的，但组成情商的性格力量、意志力量、情感力量、社交力量等因素至少是不可忽视的。在一定意义上可以说，对于一个人的成功，情商比智商更重要。同样地，作者举出了大量的示例，这些事例直接说明并且证实了成功还源自优势的不断积累：你出生在何时何地，你父母的职业以及你成长的环境，这三者互相作用才塑造出这个世界上独特的你。</strong></p>
+<p>在造成飞机失事的民族理论部分中，作者举了阿维安卡52号坠机事故作为例子，这是一个沉痛的沟通案例，在飞机因为各种原因造成燃油即将耗尽的时候，副驾却用异常平静的语气对指挥控制室说“我们正在18 000英尺的右上方，嗯，我们将再试一次。我们的燃油快用完了。”这种轻描淡写的语气根本不足以引起飞行控制室的重视，而结果也异常打脸，飞机因为燃油耗尽而坠毁。</p>
+<p>副驾飞行员的语调并未向控制室管理员传递燃料紧急的严重信息。许多管理员接受过专门的训练，可以在各种情境下捕捉到飞行员声音中极细微的语调变化。尽管机组成员相互之间表现出对燃料问题的极大忧虑，但他们向机场传达信息的语调却是冷静而职业化的。在这次事故中，飞行员的文化、传统以及职业习惯会使飞行员不愿意声明情况紧急。如果正式报告紧急情况之后，飞行员需要写出大量的书面汇报；同时，如果发现飞行员在计算飞行油量方面疏忽大意，联邦飞行管理局就会吊销其驾驶执照。这些消极措施极大地阻碍了飞行员发出紧急呼救的信息。在这种情况下，飞行员的专业技能和荣誉感不必要地变成了决定生死命运的赌注。基于此作者进而引出了“权利距离指数”，简称PDI。权利距离指数具体而言，就是一种特定文化中重视和尊重权威的程度，我想天朝必在此列。</p>
+<p>文中还提到了中国传统的“水稻田文化”，中国人真的是世界上最勤劳的民族了。比如法国农民到了冬天要去“冬眠”，非洲一些地方农民靠捡果子谋生，你让他去种东西，他会说世上有这么多白捡的果子，你种这些干嘛？中国农民不仅勤劳质朴善良还逆来顺受，不到活不下去的地步绝不反抗，这种特质使得我们很难发展成为欧美化的那种高度分权的民选国家。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/javaScript%20%E7%9A%84%E5%80%BC%E4%BC%A0%E9%80%92&%E9%97%AD%E5%8C%85%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/javaScript%20%E7%9A%84%E5%80%BC%E4%BC%A0%E9%80%92&%E9%97%AD%E5%8C%85%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">javaScript 的值传递&闭包应用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-10-10 00:00:00" itemprop="dateCreated datePublished" datetime="2016-10-10T00:00:00+00:00">2016-10-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li><p>值传递</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var value = 1;</span><br><span class="line">var countValue;</span><br><span class="line"> </span><br><span class="line">function count(value) &#123;</span><br><span class="line">  value = value + 1;// 值传递，引用断离</span><br><span class="line">  countValue = value;</span><br><span class="line">  console.log(&#x27;count&#x27;, value); // 2</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">console.log(&#x27;value&#x27;, value);// 1</span><br><span class="line">count(value);</span><br><span class="line">console.log(&#x27;value&#x27;, value);// 1</span><br><span class="line">console.log(&#x27;value&#x27;, countValue); // 2</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>闭包应用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 循环&amp;异步&amp;函数-问题</span><br><span class="line">for (var i = 0; i &lt; 2; i++) &#123;</span><br><span class="line">  setTimeout(</span><br><span class="line">    function () &#123;</span><br><span class="line">      console.log(&#x27;&gt;&#x27;, i)</span><br><span class="line">    &#125;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 循环&amp;异步的问题</span><br><span class="line">for (var i = 0; i &lt; 2; i++) &#123;</span><br><span class="line">  (function (i) &#123;</span><br><span class="line">    // 函数接收的参数值属于值传递,引用断离</span><br><span class="line">    setTimeout(</span><br><span class="line">      function () &#123;</span><br><span class="line">        console.log(&#x27;&gt;&gt;&#x27;, i)</span><br><span class="line">      &#125;</span><br><span class="line">    )</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Lucene-sets-a-single-index-file-size-of-the-performance-test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Lucene-sets-a-single-index-file-size-of-the-performance-test/" class="post-title-link" itemprop="url">Lucene设置单索引文件大小之性能测试</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-10-09 21:31:36" itemprop="dateCreated datePublished" datetime="2016-10-09T21:31:36+00:00">2016-10-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p><strong>Operating System</strong>：Windows 7 企业版 64-bit (6.1, Build 7601) Service Pack 1<br><strong>Processor</strong>：Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz (8 CPUs), ~3.6GHz<br><strong>Java version</strong>：”1.8.0_91” Java HotSpot(TM) 64-Bit Server VM (build 25.91-b15, mixed mode)<br><strong>Lucene Version</strong>：V 5.5.0</p>
+<h3 id="合并策略"><a href="#合并策略" class="headerlink" title="合并策略"></a>合并策略</h3><p>Lucene使用<strong>TieredMergePolicy</strong>作为其默认合并策略，这个默认的策略是合并那些差不多大小的段，受限于每次合并时允许的段的数量。该合并策略的一些默认属性如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">double</span> <span class="variable">DEFAULT_NO_CFS_RATIO</span> <span class="operator">=</span> <span class="number">0.1</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="variable">maxMergeAtOnce</span> <span class="operator">=</span> <span class="number">10</span>;<span class="comment">//在一次合并过程中最多合并十个segments</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">long</span> <span class="variable">maxMergedSegmentBytes</span> <span class="operator">=</span> <span class="number">5</span>*<span class="number">1024</span>*<span class="number">1024</span>*<span class="number">1024L</span>;<span class="comment">//合并之后的最大段文件为5GB</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="variable">maxMergeAtOnceExplicit</span> <span class="operator">=</span> <span class="number">30</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="type">long</span> <span class="variable">floorSegmentBytes</span> <span class="operator">=</span> <span class="number">2</span>*<span class="number">1024</span>*<span class="number">1024L</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="type">double</span> <span class="variable">segsPerTier</span> <span class="operator">=</span> <span class="number">10.0</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="type">double</span> <span class="variable">forceMergeDeletesPctAllowed</span> <span class="operator">=</span> <span class="number">10.0</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="type">double</span> <span class="variable">reclaimDeletesWeight</span> <span class="operator">=</span> <span class="number">2.0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这种默认的合并策略会导致单个段文件的大小达到5GB，那么如果想要控制单个段文件大小的上限要怎么办呢？追踪该类至其父类MergePolicy，继续追踪MergePolicy的所有子类，发现MergePolicy的子类包括：NoMergePolicy、MergePolicyWrapper、LogMergePolicy、TieredMergePolicy，查看LogMergePolicy发现该类有两个子类，分别为LogDocMergePolicy和LogByteSizeMergePolicy，顾名思义，前者考虑段文件的数量，后者考虑段文件的大小。</p>
+<p>另外<strong>TieredMergePolicy</strong>和<strong>LogByteSizeMergepolicy</strong>区别在于前者可以合并不相邻的段，并且区分最多允许一次合并的段数<code>setMaxMergeAtOnce(int v)</code>和一层最多容许的段数<code>setSegmentsPerTier(double v)</code>。</p>
+<p>至此，找到了我们需要使用的合并策略，即<strong>LogByteSizeMergePolicy</strong>。</p>
+<h3 id="复合索引文件"><a href="#复合索引文件" class="headerlink" title="复合索引文件"></a>复合索引文件</h3><p>复合索引文件是指，除了段信息文件，锁文件，以及删除的文件外，其他的一系列索引文件压缩一个后缀名为cfs的文件，意思就是所有的索引文件会被存储成一个单例的Directory，而非复合索引是灵活的，可以单独的访问某几个索引文件，而复合索引文件则不可以，因为其压缩成了一个文件，所以在某些场景下能够获取更高的效率，比如说，查询频繁，而不经常更新的需求，就很适合这种复合索引格式。</p>
+<p>如果仅仅设置<code>setUseCompoundFile(false)</code>，那么在生成的索引中，依然会有复合索引文件并且其大小会超过<code>setMaxMergeMB(double mb)</code>所设置的大小，是不是很奇怪，这是为什么呢？收先查看<code>setMaxMergeMB(double mb)</code>Doc说明如下：</p>
+<blockquote>
+<p>org.apache.lucene.index.LogByteSizeMergePolicy<br>public void setMaxMergeMB(double mb)<br>Determines the largest segment (measured by total byte size of the segment’s files, in MB) that may be merged with other segments. Small values (e.g., less than 50 MB) are best for interactive indexing, as this limits the length of pauses while indexing to a few seconds. Larger values are best for batched indexing and speedier searches.<br>Note that setMaxMergeDocs is also used to check whether a segment is too large for merging (it’s either or).</p>
+</blockquote>
+<p>该函数用于控制可用于合并的最大的段文件大小，通常合并之后的段文件的大小均会超过此值。所以单靠此函数不能实现控制单索引文件上限的目标。</p>
+<p>继续查看<code>setUseCompoundFile(false)</code>Doc说明如下：</p>
+<blockquote>
+<p>org.apache.lucene.index.LiveIndexWriterConfig<br>public LiveIndexWriterConfig setUseCompoundFile(boolean useCompoundFile)<br>Sets if the IndexWriter should pack newly written segments in a compound file. Default is true.<br>Use false for batch indexing with very large ram buffer settings.<br><strong>Note</strong>: To control compound file usage during segment merges see <strong>MergePolicy.setNoCFSRatio(double)</strong> and <strong>MergePolicy.setMaxCFSSegmentSizeMB(double)</strong>. This setting only applies to newly created segments.</p>
+</blockquote>
+<p>其中提到了<code>MergePolicy.setNoCFSRatio(double)</code>，继续查看该方法的Doc说明如下：</p>
+<blockquote>
+<p>org.apache.lucene.index.MergePolicy<br>public void setNoCFSRatio(double noCFSRatio)<br>If a merged segment will be more than this percentage of the total size of the index, leave the segment as non-compound file even if compound file is enabled. <strong>Set to 1.0 to always use CFS regardless of merge size</strong>.</p>
+</blockquote>
+<p>继续追踪noCFSRatio查找到了预定义的默认值<strong>DEFAULT_NO_CFS_RATIO</strong>，该默认值为1.0，而根据Doc说明，当该值为1.0的时候，总是使用复合索引文件并且忽略合并大小的设置，所以就出现了设置不使用复合索引文件但无效的情况。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">double</span> <span class="variable">DEFAULT_NO_CFS_RATIO</span> <span class="operator">=</span> <span class="number">1.0</span>;</span><br><span class="line"><span class="keyword">protected</span> <span class="type">double</span> <span class="variable">noCFSRatio</span> <span class="operator">=</span> DEFAULT_NO_CFS_RATIO;</span><br></pre></td></tr></table></figure>
+<p>那么可以通过调用<code>logByteSizeMergePolicy.setNoCFSRatio();</code>去更改noCFSRatio的值，但是究竟设置多少合适，不得而知。此时不妨去关注下<code>setMaxCFSSegmentSizeMB(double)</code>方法，既然总是会有复合索引文件，那么通过设置复合索引文件的上限一样可以实现控制单索引文件大小的目的。该方法Doc说明如下：</p>
+<blockquote>
+<p>org.apache.lucene.index.MergePolicy<br>public void setMaxCFSSegmentSizeMB(double v)<br>If a merged segment will be more than this value, leave the segment as non-compound file even if compound file is enabled. Set this to Double.POSITIVE_INFINITY (default) and noCFSRatio to 1.0 to always use CFS regardless of merge size.</p>
+</blockquote>
+<p>可知如果合并之后段文件大小会超过此值时，就保留该段文件为非复合索引文件，亦即不进行合并，所以此方法可以达到控制单索引文件上限的目标。</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>使用不同的合并策略配合三种设置，添加50000000个Document，其中每个Document包含10个Field，这些Field类型包括Int、Long、String，其值随机生成。随后根据主键搜索1000000次，统计其累计搜索耗时，其中主键为String类型数字，主键值为[0，50000000)。</p>
+<table>
+<thead>
+<tr>
+<th align="left">合并策略</th>
+<th align="left">参数设置</th>
+<th align="right">索引文件数</th>
+<th align="right">索引总量</th>
+<th align="right">最大索引</th>
+<th align="right">搜索总耗时</th>
+<th align="right">单次搜索最大耗时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">TieredMergePolicy</td>
+<td align="left">默认</td>
+<td align="right">123</td>
+<td align="right">7.33GB</td>
+<td align="right">464MB</td>
+<td align="right">58.2s</td>
+<td align="right">140ms</td>
+</tr>
+<tr>
+<td align="left">LogByteSizeMergePolicy</td>
+<td align="left">LogByteSizeMergePolicy lbs;<br/>lbs.setMinMergeMB(1);<br/>lbs.setMaxMergeMB(64);</td>
+<td align="right">239</td>
+<td align="right">7.77GB</td>
+<td align="right">127MB</td>
+<td align="right">127.1s</td>
+<td align="right">314ms</td>
+</tr>
+<tr>
+<td align="left">LogByteSizeMergePolicy</td>
+<td align="left">IndexWriterConfig iwc;<br/>LogByteSizeMergePolicy lbs;<br/>iwc.setUseCompoundFile(false);<br/>lbs.setMinMergeMB(1);<br/>lbs.setMaxMergeMB(64);<br/> lbs.setMaxCFSSegmentSizeMB(64);</td>
+<td align="right">451</td>
+<td align="right">7.77GB</td>
+<td align="right">60.8MB</td>
+<td align="right">152.1s</td>
+<td align="right">446ms</td>
+</tr>
+</tbody></table>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>虽然每次运行结果时间稍有不同，但总体趋势应该是不变的。即单索引文件上限越小，则生成的索引文件数量越多，索引文件数量越多，对应的单次搜索最长时间和总搜索时间均越长。所以应根据业务需求选择适当的合并策略，在满足需求之后尽可能提高搜索性能。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ionic%20hooks%E9%92%A9%E5%AD%90%E6%96%87%E4%BB%B6-%E6%B8%85%E7%90%86%E6%BA%90%E4%BB%A3%E7%A0%81,%E5%8F%91%E5%B8%83dist/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ionic%20hooks%E9%92%A9%E5%AD%90%E6%96%87%E4%BB%B6-%E6%B8%85%E7%90%86%E6%BA%90%E4%BB%A3%E7%A0%81,%E5%8F%91%E5%B8%83dist/" class="post-title-link" itemprop="url">ionic hooks钩子文件-清理源代码,发布dist</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-10-08 00:00:00" itemprop="dateCreated datePublished" datetime="2016-10-08T00:00:00+00:00">2016-10-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>020_dist_to_platforms_v2.js</code> </p>
+<ul>
+<li>策略不同,避开 mv_path() 同步控制, 效果一样<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env node</span><br><span class="line"> </span><br><span class="line">&#123;</span><br><span class="line">  var fs = require(&#x27;fs&#x27;);</span><br><span class="line">  var path = require(&#x27;path&#x27;);</span><br><span class="line">  var mv = require(&#x27;mv&#x27;);</span><br><span class="line"> </span><br><span class="line">  var iosPlatformsDir_dist = path.resolve(__dirname, &#x27;../../platforms/ios/www/dist&#x27;);</span><br><span class="line">  var iosPlatformsDir = path.resolve(__dirname, &#x27;../../platforms/ios/www&#x27;);</span><br><span class="line"> </span><br><span class="line">  var androidPlatformsDir_dist = path.resolve(__dirname, &#x27;../../platforms/android/assets/www/dist&#x27;);</span><br><span class="line">  var androidPlatformsDir = path.resolve(__dirname, &#x27;../../platforms/android/assets/www&#x27;);</span><br><span class="line"> </span><br><span class="line">  /** ios ****************************************************************************/</span><br><span class="line">  action(iosPlatformsDir, iosPlatformsDir_dist)</span><br><span class="line">  /** android ****************************************************************************/</span><br><span class="line">  action(androidPlatformsDir, androidPlatformsDir_dist)</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">function action(platformsDir, platformsDir_dist) &#123;</span><br><span class="line">  // 1.先删除(因为删除是同步的,移动是异步)</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/app&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/app_module&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/autoTest&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/css&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/js&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/templates&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir_dist + &#x27;/img&#x27;);//  使用源文件资源,不需要dist中资源</span><br><span class="line">  deleteFolderRecursive(platformsDir_dist + &#x27;/lib&#x27;);//  使用源文件资源,不需要dist中资源</span><br><span class="line"> </span><br><span class="line">  // 2.移动dist目录中资源为主资源</span><br><span class="line">  mv_path(platformsDir_dist + &#x27;/dist_css&#x27;, platformsDir + &#x27;/dist_css&#x27;);</span><br><span class="line">  mv_path(platformsDir_dist + &#x27;/dist_js&#x27;, platformsDir + &#x27;/dist_js&#x27;);</span><br><span class="line">  mv_path(platformsDir_dist + &#x27;/index.html&#x27;, platformsDir + &#x27;/index.html&#x27;);</span><br><span class="line"> </span><br><span class="line">  // 3.清理lib(仅保留字体)</span><br><span class="line">  mv_path(platformsDir + &#x27;/lib/ionic/fonts&#x27;, platformsDir + &#x27;/_lib/ionic/fonts&#x27;,function()&#123;</span><br><span class="line">    deleteFolderRecursive(platformsDir + &#x27;/lib&#x27;);</span><br><span class="line">    mv_path(platformsDir + &#x27;/_lib&#x27;, platformsDir + &#x27;/lib&#x27;);// 还原保留</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">/** 移动文件 */</span><br><span class="line">function mv_path(source, target, callback) &#123;</span><br><span class="line">  mv(source, target, &#123;mkdirp: true&#125;, function (err) &#123;</span><br><span class="line">    if (typeof err != &#x27;undefined&#x27;) &#123;</span><br><span class="line">      console.log(&quot;err&quot;);</span><br><span class="line">      console.log(err);</span><br><span class="line">      console.log(&quot;ERROR when moving CSS folder to iOS platform&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">      console.log(&quot;CSS folder moved OK to iOS platform&quot;);</span><br><span class="line">      callback &amp;&amp; callback();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">/** 删除文件 */</span><br><span class="line">function deleteFolderRecursive(removePath) &#123;</span><br><span class="line">  if (fs.existsSync(removePath)) &#123;</span><br><span class="line">    fs.readdirSync(removePath).forEach(function (file, index) &#123;</span><br><span class="line">      var curPath = path.join(removePath, file);</span><br><span class="line">      if (fs.lstatSync(curPath).isDirectory()) &#123; // recurse</span><br><span class="line">        deleteFolderRecursive(curPath);</span><br><span class="line">      &#125; else &#123; // delete file</span><br><span class="line">        fs.unlinkSync(curPath);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    fs.rmdirSync(removePath);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<p><code>020_dist_to_platforms_v1.js</code></p>
+<ul>
+<li>脏代码:mv_path() 同步控制</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env node</span><br><span class="line"> </span><br><span class="line">&#123;</span><br><span class="line">  var fs = require(&#x27;fs&#x27;);</span><br><span class="line">  var path = require(&#x27;path&#x27;);</span><br><span class="line">  var mv = require(&#x27;mv&#x27;);</span><br><span class="line"> </span><br><span class="line">  var iosPlatformsDir_dist = path.resolve(__dirname, &#x27;../../platforms/ios/www/dist&#x27;);</span><br><span class="line">  var iosPlatformsDir_temp = path.resolve(__dirname, &#x27;../../platforms/ios/_www_dist&#x27;);</span><br><span class="line">  var iosPlatformsDir = path.resolve(__dirname, &#x27;../../platforms/ios/www&#x27;);</span><br><span class="line"> </span><br><span class="line">  var androidPlatformsDir_dist = path.resolve(__dirname, &#x27;../../platforms/android/assets/www/dist&#x27;);</span><br><span class="line">  var androidPlatformsDir_temp = path.resolve(__dirname, &#x27;../../platforms/android/assets/_www_dist&#x27;);</span><br><span class="line">  var androidPlatformsDir = path.resolve(__dirname, &#x27;../../platforms/android/assets/www&#x27;);</span><br><span class="line"> </span><br><span class="line">  var cordova_js = &#x27;/cordova.js&#x27;, cordova_plugins = &#x27;/cordova_plugins.js&#x27;;</span><br><span class="line"> </span><br><span class="line">  // 0.转移`cordova.js,cordova_plugins.js`两核心文件</span><br><span class="line">  mv_path(iosPlatformsDir + cordova_js, iosPlatformsDir_dist + cordova_js, function () &#123;</span><br><span class="line">    mv_path(iosPlatformsDir + cordova_plugins, iosPlatformsDir_dist + cordova_plugins, function () &#123;</span><br><span class="line">      mv_path(iosPlatformsDir + &#x27;/plugins&#x27;, iosPlatformsDir_dist + &#x27;/plugins&#x27;, function () &#123;</span><br><span class="line">        mv_path(iosPlatformsDir + &#x27;/cordova-js-src&#x27;, iosPlatformsDir_dist + &#x27;/cordova-js-src&#x27;, function () &#123;</span><br><span class="line"> </span><br><span class="line">          // 1.转移dist目录</span><br><span class="line">          mv_path(iosPlatformsDir_dist, iosPlatformsDir_temp, function () &#123;</span><br><span class="line">            // 2.删除dist外源码</span><br><span class="line">            deleteFolderRecursive(iosPlatformsDir);</span><br><span class="line">            // 3.dist`转正`</span><br><span class="line">            mv_path(iosPlatformsDir_temp, iosPlatformsDir);</span><br><span class="line">          &#125;);</span><br><span class="line"> </span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  // 0.转移`cordova.js,cordova_plugins.js`两核心文件</span><br><span class="line">  mv_path(iosPlatformsDir + cordova_js, iosPlatformsDir_dist + cordova_js, function () &#123;</span><br><span class="line">    mv_path(iosPlatformsDir + cordova_plugins, iosPlatformsDir_dist + cordova_plugins, function () &#123;</span><br><span class="line">      mv_path(iosPlatformsDir + &#x27;/plugins&#x27;, iosPlatformsDir_dist + &#x27;/plugins&#x27;, function () &#123;</span><br><span class="line">        mv_path(iosPlatformsDir + &#x27;/cordova-js-src&#x27;, iosPlatformsDir_dist + &#x27;/cordova-js-src&#x27;, function () &#123;</span><br><span class="line"> </span><br><span class="line">          mv_path(androidPlatformsDir_dist, androidPlatformsDir_temp, function () &#123;</span><br><span class="line">            deleteFolderRecursive(androidPlatformsDir);</span><br><span class="line">            mv_path(androidPlatformsDir_temp, androidPlatformsDir);</span><br><span class="line">          &#125;);</span><br><span class="line"> </span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">/** 移动文件 */</span><br><span class="line">function mv_path(source, target, callback) &#123;</span><br><span class="line">  mv(source, target, &#123;mkdirp: true&#125;, function (err) &#123;</span><br><span class="line">    if (typeof err != &#x27;undefined&#x27;) &#123;</span><br><span class="line">      console.log(&quot;err&quot;);</span><br><span class="line">      console.log(err);</span><br><span class="line">      console.log(&quot;ERROR when moving CSS folder to iOS platform&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">      console.log(&quot;CSS folder moved OK to iOS platform&quot;);</span><br><span class="line">      callback &amp;&amp; callback();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">/** 删除文件 */</span><br><span class="line">function deleteFolderRecursive(removePath) &#123;</span><br><span class="line">  if (fs.existsSync(removePath)) &#123;</span><br><span class="line">    fs.readdirSync(removePath).forEach(function (file, index) &#123;</span><br><span class="line">      var curPath = path.join(removePath, file);</span><br><span class="line">      if (fs.lstatSync(curPath).isDirectory()) &#123; // recurse</span><br><span class="line">        deleteFolderRecursive(curPath);</span><br><span class="line">      &#125; else &#123; // delete file</span><br><span class="line">        fs.unlinkSync(curPath);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    fs.rmdirSync(removePath);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -428,898 +1228,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/cocos%20ios%E7%A8%8B%E5%BA%8Fhome%E9%94%AE%E5%90%8E%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8-%E9%97%AA%E9%80%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/cocos%20ios%E7%A8%8B%E5%BA%8Fhome%E9%94%AE%E5%90%8E%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8-%E9%97%AA%E9%80%80/" class="post-title-link" itemprop="url">cocos ios程序home键后程序异常/闪退</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-09-23 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-23T00:00:00+00:00">2016-09-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:26" itemprop="dateModified" datetime="2024-01-26T12:42:26+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="home键后程序异常日志"><a href="#home键后程序异常日志" class="headerlink" title="home键后程序异常日志"></a>home键后程序异常日志</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">libGPUSupportMercury.dylib`gpus_ReturnNotPermittedKillClient:</span><br><span class="line">    0x2f3df76c &lt;+0&gt;:  movw   r0, #0xbeef</span><br><span class="line">    0x2f3df770 &lt;+4&gt;:  movs   r1, #0x1</span><br><span class="line">    0x2f3df772 &lt;+6&gt;:  movt   r0, #0xdead</span><br><span class="line">-&gt;  0x2f3df776 &lt;+10&gt;: str    r0, [r1]</span><br><span class="line">    0x2f3df778 &lt;+12&gt;: bx     lr</span><br><span class="line">    0x2f3df77a &lt;+14&gt;: nop   </span><br><span class="line"> </span><br><span class="line">webThread(9):exc_bad_access(code=1,address=0x1)</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<p>director在app切换至后台时若被pause，它其实并没有真正暂停，而是仍保持着每秒4帧的绘制速率。但在app处于后台时，ios是不允许app调opengl的。这个原因引发了上述问题。</p>
-<ul>
-<li>解决方法：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[cpp] view plain copy</span><br><span class="line">void AppDelegate::applicationDidEnterBackground() </span><br><span class="line">&#123; </span><br><span class="line">    CCDirector::sharedDirector()-&gt;stopAnimation(); </span><br><span class="line">&#125; </span><br><span class="line">void AppDelegate::applicationWillEnterForeground() </span><br><span class="line">&#123; </span><br><span class="line">    CCDirector::sharedDirector()-&gt;startAnimation(); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<code>按Home键切换到后台后会触发libGPUSupportMercury.dylib: gpus_ReturnNotPermittedKillClient导致crash - Mr_Ray的IT专栏 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/world_liu/article/details/8960786">http://blog.csdn.net/world_liu/article/details/8960786</a></li>
-</ul>
-<hr>
-<h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><p>在cocos2d-x 2.0.4版本上，当点击HOME键将程序切换后台，有时会导致crash，程序停在在<br>gpus_ReturnNotPermittedKillClient函数，搜了一下此问题原因，有几篇文章比较好，</p>
-<p><a target="_blank" rel="noopener" href="http://blog.k-res.net/archives/1193.html%EF%BC%8C%E8%BF%99%E7%89%87%E6%96%87%E7%AB%A0%E8%AF%B4%E4%BA%86%E6%AD%A4%E9%97%AE%E9%A2%98%E7%9A%84%E5%8E%9F%E5%9B%A0%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%85%B6%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E3%80%82">http://blog.k-res.net/archives/1193.html，这片文章说了此问题的原因，以及其在项目中的解决方案。</a></p>
-<p>Implementing a Multitasking-aware OpenGL ES Application，这个是苹果对于此问题的解释，以及部分解决方案。</p>
-<p>以上文章对于此问题做了比较详细的分析与解释，虽然不能解决游戏中此问题，但是对于了解问题本质很有帮助。</p>
-<p>对于cocos2d-x中解决vi问题，</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在AppDelegate::applicationDidEnterBackground()中增加CCDirector::sharedDirector()-&gt;stopAnimation()；</span><br><span class="line">在AppDelegate::applicationWillEnterForeground()中增加CCDirector::sharedDirector()-&gt;resume()。</span><br></pre></td></tr></table></figure>
-
-
-<p>原因是在applicationDidEnterBackground函数中原来调用了CCDirector::sharedDirector()-&gt;pause()函数，此函数并没有真正停止动画，而是以1&#x2F;4秒在继续运行，这样就会导致程序在后台渲染，这是apple不允许的，所以导致crash。</p>
-<p><code>cocos2d-x 2.0.4按home键切换后台导致gpus_ReturnNotPermittedKillClient crash_游戏症候群_新浪博客</code><br><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_62b2318d0101lc0n.html">http://blog.sina.com.cn/s/blog_62b2318d0101lc0n.html</a></p>
-<p><code>官网描述</code><br><a target="_blank" rel="noopener" href="https://developer.apple.com/library/content/qa/qa1766/_index.html">https://developer.apple.com/library/content/qa/qa1766/_index.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/emoji%E8%A1%A8%E6%83%85mysql%E6%94%AF%E6%8C%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/emoji%E8%A1%A8%E6%83%85mysql%E6%94%AF%E6%8C%81/" class="post-title-link" itemprop="url">emoji表情mysql支持</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-09-22 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-22T00:00:00+00:00">2016-09-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="异常-：mysql-Incorrect-string-value-xF0-x9F-x98-x84-xF0-x9F"><a href="#异常-：mysql-Incorrect-string-value-xF0-x9F-x98-x84-xF0-x9F" class="headerlink" title="异常 ：mysql Incorrect string value \xF0\x9F\x98\x84\xF0\x9F"></a>异常 ：mysql Incorrect string value \xF0\x9F\x98\x84\xF0\x9F</h1><p>尝试插入 类似 这样的string（其实是emoji表情），这些uft8 占位过多，数据库如果用标准utf8 格式插入不了这样的字符串</p>
-<ul>
-<li>解决<br>使用uft8mb4 格式<br>(1)设置表格式为utf8mb4<br>(2)设置连接格式为utf8mb4</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/taitoubiyan1/article/details/50595407">http://blog.csdn.net/taitoubiyan1/article/details/50595407</a></p>
-<p><code>mysql - java.sql.SQLException: Incorrect string value: &#39;\xF0\x9F\x91\xBD\xF0\x9F...&#39; - Stack Overflow</code><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/13653712/java-sql-sqlexception-incorrect-string-value-xf0-x9f-x91-xbd-xf0-x9f">http://stackoverflow.com/questions/13653712/java-sql-sqlexception-incorrect-string-value-xf0-x9f-x91-xbd-xf0-x9f</a></p>
-<p><code>【emoji表情】阿里云数据库RDS支持emoji表情 - 推酷</code>  ★ ★ ★<br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/2qYbQ3I">http://www.tuicool.com/articles/2qYbQ3I</a></p>
-<p><code>搜索 - 推酷 : mysql emoji</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/search?kw=mysql+emoji&t=1">http://www.tuicool.com/search?kw=mysql+emoji&amp;t=1</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/web%E7%BD%91%E7%BB%9C%E5%8A%AB%E6%8C%81,%E8%A2%AB%E5%B5%8C%E5%85%A5%E5%B9%BF%E5%91%8A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/web%E7%BD%91%E7%BB%9C%E5%8A%AB%E6%8C%81,%E8%A2%AB%E5%B5%8C%E5%85%A5%E5%B9%BF%E5%91%8A/" class="post-title-link" itemprop="url">web网络劫持,被嵌入广告</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-09-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-20T00:00:00+00:00">2016-09-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:26" itemprop="dateModified" datetime="2024-01-26T12:42:26+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="常见源头"><a href="#常见源头" class="headerlink" title="常见源头:"></a>常见源头:</h1><p>1.是不是我们项目中的第三方jar非官方版本，被植入了一些广告代码   (★)<br>2.dns劫持  (★★★)<br>3.http劫持 (★★★★)</p>
-<h1 id="排查"><a href="#排查" class="headerlink" title="排查:"></a>排查:</h1><p>检查DNS,替换安全DNS观察广告是否存在<br>启用使用https服务,观察广告是否存在</p>
-<h1 id="防护办法"><a href="#防护办法" class="headerlink" title="防护办法:"></a>防护办法:</h1><blockquote>
-<p>替换安全DNS<br>使用https服务<br>nginx出口网络过滤<br>使用第三方官方工具<br>ios&#x2F;android webView过滤<br>前端页面javaScript主动防御</p>
-</blockquote>
-<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/16-9-24/55107594.jpg"></p>
-<p><code>让那些烦人的广告，滚出我们的APP！ - 吴焱的博客 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/wy1002003/article/details/51783623">http://blog.csdn.net/wy1002003/article/details/51783623</a></p>
-<p><code> 联通宽带劫持网页，JS 弹窗广告，该如何解决？ - 知乎</code><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23197534">https://www.zhihu.com/question/23197534</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/aat(async%20auto%20test%20%E5%BC%82%E6%AD%A5%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95)%20%E4%BB%8B%E7%BB%8D&%E6%A8%A1%E5%9D%97%E5%8C%96%E5%AE%9E%E8%B7%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/aat(async%20auto%20test%20%E5%BC%82%E6%AD%A5%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95)%20%E4%BB%8B%E7%BB%8D&%E6%A8%A1%E5%9D%97%E5%8C%96%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">aat(async auto test 异步自动化测试) 介绍&模块化实践</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-09-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-16T00:00:00+00:00">2016-09-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="关键描述"><a href="#关键描述" class="headerlink" title="关键描述"></a>关键描述</h1><ul>
-<li><p>async 步执行函数,目的:页面同步刷新(柯里化)</p>
-</li>
-<li><p>sycFuncPromise 返回Promise的方法,处理连续的异步func调用.(可完全替代async)</p>
-</li>
-<li><p>currying 柯里化,单行定义函数且执行函数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function _Each(index, length) &#123;</span><br><span class="line">  sycFuncPromise(function () &#123;</span><br><span class="line">    el(&#x27;.nav-bar-title.ng-binding&#x27;).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">  &#125;)()</span><br><span class="line">    .then(function () &#123;</span><br><span class="line">      return sycFuncPromise(function () &#123;</span><br><span class="line">        el(&#x27;.bookname_content&gt;.bookname&#x27;, index).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">        ++index &lt; length &amp;&amp; _Each(index, length);// 递归调用自己,相比for没有了时间计算</span><br><span class="line">      &#125;)()</span><br><span class="line">    &#125;)</span><br><span class="line">    .then(function () &#123;</span><br><span class="line">      // ...</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">_Each(0, $(&#x27;.bookname_content&gt;.bookname&#x27;).length);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">currying(function _Each(index, length) &#123;</span><br><span class="line"> </span><br><span class="line">  sycFuncPromise(function () &#123;</span><br><span class="line">    el(&#x27;.nav-bar-title.ng-binding&#x27;).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">  &#125;)()</span><br><span class="line">    .then(function () &#123;</span><br><span class="line">      return sycFuncPromise(function () &#123;</span><br><span class="line">        el(&#x27;.bookname_content&gt;.bookname&#x27;, index).triggerHandler(&#x27;click&#x27;);</span><br><span class="line">        ++index &lt; length &amp;&amp; _Each(index, length);// 递归调用自己,相比for没有了时间计算</span><br><span class="line">      &#125;)()</span><br><span class="line">    &#125;)</span><br><span class="line">    .then(function () &#123;</span><br><span class="line">      // ...</span><br><span class="line">    &#125;)</span><br><span class="line"> </span><br><span class="line">&#125;)(0, $(&#x27;.bookname_content&gt;.bookname&#x27;).length);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>el 简化选择器(支持angular选择器,jquery,querySelector)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 简化选择器</span><br><span class="line">* @param selector</span><br><span class="line">* @param index</span><br><span class="line">* @returns &#123;*&#125;</span><br><span class="line">*/</span><br><span class="line">function el(selector, index) &#123;</span><br><span class="line">  var index = arguments.length &lt;= 1 || arguments[1] === undefined ? 0 : arguments[1];</span><br><span class="line">  return window.angular ? angular.element(document.querySelectorAll(selector)[index]) : $(selector);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">exports.el = el;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h2><ul>
-<li><p>index.html</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;autoTest/core.aat.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;autoTest/task.aat.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>core.aat.js (直接引用情况下会exports会使用window)</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &#x27;object&#x27; &amp;&amp; typeof module !== &#x27;undefined&#x27; ? factory(exports) :// CommonJS</span><br><span class="line">    typeof define === &#x27;function&#x27; &amp;&amp; define.amd ? define([&#x27;exports&#x27;], factory) : // AMD</span><br><span class="line">      (factory((global.aat = global.aat || &#123;&#125;))); // window</span><br><span class="line">&#125;(this, (function (exports) &#123;</span><br><span class="line">  &#x27;use strict&#x27;;</span><br><span class="line"> </span><br><span class="line">  exports.xxx = &#x27;&#x27;;</span><br><span class="line"> </span><br><span class="line">&#125;)));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// ---</span><br><span class="line">或者,直接使用window进行赋值.</span><br></pre></td></tr></table></figure>
-<ul>
-<li>task.aat.js   (直接引用情况下会exports会使用window)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &#x27;object&#x27; &amp;&amp; typeof module !== &#x27;undefined&#x27; ? factory(exports) :// CommonJS</span><br><span class="line">    typeof define === &#x27;function&#x27; &amp;&amp; define.amd ? define([&#x27;exports&#x27;], factory) : // AMD</span><br><span class="line">      (factory((global.aat = global.aat || &#123;&#125;))); // window</span><br><span class="line">&#125;(this, (function (exports) &#123;</span><br><span class="line">  &#x27;use strict&#x27;;</span><br><span class="line"> </span><br><span class="line">  exports.sss = &#x27;&#x27;;</span><br><span class="line"> </span><br><span class="line">&#125;)));</span><br><span class="line">// ---</span><br><span class="line">或者,直接使用window进行赋值.</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h2><hr>
-<h1 id="require-js-模块化方式"><a href="#require-js-模块化方式" class="headerlink" title="require.js 模块化方式"></a>require.js 模块化方式</h1><ul>
-<li>index.html<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script data-main=&quot;js/index&quot; src=&quot;lib/require.js&quot;&gt;&lt;/script&gt;&lt;!--  模块化入口 --&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>js&#x2F;index.js 配置初始化</li>
-<li>requirejs([‘aat_core’, ‘aat’], function (aat_core, task) 对象初始化 &#96;&#96;&#96;<br>requirejs.config({<br>baseUrl: ‘’,<br>paths: {<br>  aat_core: ‘autoTest&#x2F;core.aat’,<br>  aat: ‘autoTest&#x2F;task.aat’<br>}<br>});</li>
-</ul>
-<p>&#x2F;&#x2F; Start the main app<br>requirejs([‘aat_core’, ‘aat’], function (aat_core,  aat ) {<br>  console.log( aat );&#x2F;&#x2F; 初始化验证<br>  window.aat &#x3D;  aat ;<br>});</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- core.aat.js (模块化引用情况下会exports会使用 AMD )</span><br></pre></td></tr></table></figure>
-<p>(function (global, factory) {<br>  typeof exports &#x3D;&#x3D;&#x3D; ‘object’ &amp;&amp; typeof module !&#x3D;&#x3D; ‘undefined’ ? factory(exports) :&#x2F;&#x2F; CommonJS<br>    typeof define &#x3D;&#x3D;&#x3D; ‘function’ &amp;&amp; define.amd ? define([‘exports’], factory) : &#x2F;&#x2F; AMD<br>      (factory((global.aat &#x3D; global.aat || {}))); &#x2F;&#x2F; window<br>}(this, (function (exports) {<br>  ‘use strict’;</p>
-<p>  exports.xxx &#x3D; ‘’;</p>
-<p>})));</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- task.aat.js   ( 模块化 引用情况下会exports会使用 AMD )</span><br><span class="line">&gt; require(&#x27;aat_core&#x27;) 注意需要 requirejs.config初始化`aat_core`且 ` requirejs([&#x27;aat_core&#x27;, &#x27;aat&#x27;], function (aat_core,  aat )`完成初始化</span><br></pre></td></tr></table></figure>
-<p>(function (global, factory) {<br>  typeof exports &#x3D;&#x3D;&#x3D; ‘object’ &amp;&amp; typeof module !&#x3D;&#x3D; ‘undefined’ ? factory(exports) :&#x2F;&#x2F; CommonJS<br>    typeof define &#x3D;&#x3D;&#x3D; ‘function’ &amp;&amp; define.amd ? define([‘exports’], factory) : &#x2F;&#x2F; AMD<br>      (factory((global.aat &#x3D; global.aat || {}))); &#x2F;&#x2F; window<br>}(this, (function (exports) {<br>  ‘use strict’;</p>
-<pre><code>/** 引入模块接口(规范模块化,兼容AMD) */
-</code></pre>
-<p>  var core &#x3D; (typeof require &#x3D;&#x3D;&#x3D; ‘function’) ? require(‘aat_core’) : exports;<br>  var sycFuncPromise &#x3D; core.sycFuncPromise;<br>  var async &#x3D; core.async;<br>  var currying &#x3D; core.currying;<br>  var el &#x3D; core.el;</p>
-<p>  exports.sss &#x3D; ‘’;</p>
-<p>})));</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">--- </span><br><span class="line"># 使用时初始化(使用文件名)</span><br><span class="line">例: ` task.aat.js`  </span><br><span class="line">&gt;define(function (require, exports, module) &#123;  require(&#x27;path/filename&#x27;);  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- js/index.js 配置初始化</span><br><span class="line">- requirejs([&#x27;aat&#x27;], function ( aat ) 对象初始化(仅初始化主函数) ```</span><br><span class="line">requirejs.config(&#123;</span><br><span class="line">  baseUrl: &#x27;&#x27;,</span><br><span class="line">  paths: &#123;</span><br><span class="line">    aat: &#x27;autoTest/task.aat&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">// Start the main app</span><br><span class="line">requirejs([&#x27;aat&#x27;], function ( aat ) &#123;</span><br><span class="line">  console.log( aat );// 初始化验证</span><br><span class="line">  window.aat =  aat ;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>task.aat.js   ( 模块化 引用情况下会exports会使用 AMD )<blockquote>
-<p>require(‘ autoTest&#x2F;aat_core’ ‘) 可不需要 requirejs.config初始化<code>aat_core</code>及 <code> requirejs([&#39;aat_core&#39;, &#39;aat&#39;], function (aat_core,  aat )</code></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &#x27;object&#x27; &amp;&amp; typeof module !== &#x27;undefined&#x27; ? factory(exports) :// CommonJS</span><br><span class="line">    typeof define === &#x27;function&#x27; &amp;&amp; define.amd ? define(factory) : // AMD</span><br><span class="line">      (factory(null,(global.aat = global.aat || &#123;&#125;))); // window</span><br><span class="line">&#125;(this, (function ( require, exports) &#123;</span><br><span class="line">  &#x27;use strict&#x27;;</span><br><span class="line"> </span><br><span class="line">    /** 引入模块接口(规范模块化,兼容AMD) */</span><br><span class="line">  var core = require(&#x27;autoTest/aat_core&#x27;)</span><br><span class="line">  var sycFuncPromise = core.sycFuncPromise;</span><br><span class="line">  var async = core.async;</span><br><span class="line">  var currying = core.currying;</span><br><span class="line">  var el = core.el;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  exports.sss = &#x27;&#x27;;</span><br><span class="line"> </span><br><span class="line">&#125;)));</span><br></pre></td></tr></table></figure></li>
-<li>简易参考<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//这里按照commonjs的形式让requirejs自己去搜一遍，再引入third.js</span><br><span class="line">define(function (require, exports, module) &#123;</span><br><span class="line">    var third =require(&#x27;third&#x27;);</span><br><span class="line">    third();</span><br><span class="line">    module.exports.action = function () &#123;console.log(22)&#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="可能遇到问题-处理办法"><a href="#可能遇到问题-处理办法" class="headerlink" title="可能遇到问题 &amp; 处理办法"></a>可能遇到问题 &amp; 处理办法</h1><h2 id="启动异常-Uncaught-Error-Mismatched-anonymous-define-module-function"><a href="#启动异常-Uncaught-Error-Mismatched-anonymous-define-module-function" class="headerlink" title="启动异常:Uncaught Error: Mismatched anonymous define() module: function"></a>启动异常:Uncaught Error: Mismatched anonymous define() module: function</h2><h3 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h3><p>引入<code> require.js</code>后,所有的<code> define()</code>定义模块都应该使用<code>requirejs([&#39;aat_core&#39;, &#39;aat&#39;],</code>初始化,不应该<Script>直接引入</p>
-<ul>
-<li>分析:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">引用的requirejs跟引用的其他js引起了冲突,其他js中也定义的define这个变量.</span><br><span class="line">比如你引用了这样的js:</span><br><span class="line">&lt;script src=&quot;services/require.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;services/Utility.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">出现了Mismatched anonymous define() module这种错误.那么意味着Utility.js中也定义了define这样的变量.所以在使用中你只引用require.js</span><br><span class="line">然后 require([&#x27;Utility&#x27;],function()&#123;&#125;) 使用Utility.js 就不会出现错误了.</span><br><span class="line">该错误归根结底就是 define已经被定义了.或者在之后的js中被重写了.</span><br></pre></td></tr></table></figure>
-<code>Mismatched anonymous define() module:这个怎么解决requirejs中的_百度知道</code><br><a target="_blank" rel="noopener" href="http://zhidao.baidu.com/link?url=g9Lh6tofr3U7-nPUDqbqk6ifHxLH8PLwkDQ039biy3bhwwCGRyfDkonLaDUFMgoDj-UyiajnmSjO0MvtcCjdjXKvTlNOoMDMk_YpGlyODi7">http://zhidao.baidu.com/link?url=g9Lh6tofr3U7-nPUDqbqk6ifHxLH8PLwkDQ039biy3bhwwCGRyfDkonLaDUFMgoDj-UyiajnmSjO0MvtcCjdjXKvTlNOoMDMk_YpGlyODi7</a></li>
-</ul>
-<h3 id="处理办法"><a href="#处理办法" class="headerlink" title="处理办法"></a>处理办法</h3><p>方法一: 调整<code>&lt;script src=&quot;require.js&quot;&gt;&lt;/script&gt;</code>引入时机</p>
-<p>方法二: 依据规范,通过 <code>requirejs([&#39;aat_core&#39;, &#39;aat&#39;],</code>初始化<br><code>javascript - Uncaught Error: Mismatched anonymous define() module: function definition(name, global) - Stack Overflow</code><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/23796019/uncaught-error-mismatched-anonymous-define-module-function-definitionname">http://stackoverflow.com/questions/23796019/uncaught-error-mismatched-anonymous-define-module-function-definitionname</a></p>
-<p>方法三: 修改<code>&lt;Script&gt;</code>引入方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  var ace = require(&quot;./path/to/ace&quot;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p><code>javascript - loading Ace causes Uncaught Error: Mismatched anonymous define() module: - Stack Overflow</code><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/23224341/loading-ace-causes-uncaught-error-mismatched-anonymous-define-module">http://stackoverflow.com/questions/23224341/loading-ace-causes-uncaught-error-mismatched-anonymous-define-module</a></p>
-<hr>
-<h2 id="启动异常-Uncaught-Error-Module-name-aat-core-has-not-been-loaded-yet-for-context-Use-require"><a href="#启动异常-Uncaught-Error-Module-name-aat-core-has-not-been-loaded-yet-for-context-Use-require" class="headerlink" title="启动异常:Uncaught Error: Module name "aat_core" has not been loaded yet for context: _. Use require([])"></a>启动异常:Uncaught Error: Module name "aat_core" has not been loaded yet for context: _. Use require([])</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">require.js:168 Uncaught Error: Module name &quot;aat_core&quot; has not been loaded yet for context: _. Use require([])</span><br><span class="line">http://requirejs.org/docs/errors.html#notloadedmakeError</span><br><span class="line">     @ require.js:168localRequire</span><br><span class="line">     @ require.js:1433requirejs</span><br><span class="line">     @ require.js:1794(anonymous function)</span><br><span class="line">    @ task.aat.js:18execCb</span><br><span class="line">    @ require.js:1693check</span><br><span class="line">    @ require.js:881enable</span><br><span class="line">    @ require.js:1173init</span><br><span class="line">    @ require.js:786callGetModule</span><br><span class="line">    @ require.js:1200completeLoad</span><br><span class="line">    @ require.js:1587onScriptLoad</span><br><span class="line">    @ require.js:1714</span><br><span class="line">ng_http.factory.js:276 response: 34 0.397s 查询成功 Object &#123;object: Object&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>问题原因</li>
-</ul>
-<p>偶现：资源的异步加载，当使用了未初始化的对象时异常<br>依赖：未明确依赖，需要维护依赖关系</p>
-<ul>
-<li>解决办法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &#x27;object&#x27; &amp;&amp; typeof module !== &#x27;undefined&#x27; ? factory(exports) :// CommonJS</span><br><span class="line">    typeof define === &#x27;function&#x27; &amp;&amp; define.amd ? define([&#x27;exports&#x27;,&#x27;aat_core&#x27;], factory) : // AMD</span><br><span class="line">      (factory((global.aat = global.aat || &#123;&#125;))); // window</span><br><span class="line">&#125;(this, (function (exports) &#123;</span><br><span class="line">  &#x27;use strict&#x27;;</span><br><span class="line"> </span><br><span class="line">  var core = (typeof require === &#x27;function&#x27;) ? require(&#x27;aat_core&#x27;) : exports;</span><br><span class="line">  /** 引入模块接口(规范模块化,兼容AMD) */</span><br><span class="line">  var sycFuncPromise = core.sycFuncPromise;</span><br><span class="line">  var async = core.async;</span><br><span class="line">  var currying = core.currying;</span><br><span class="line">  var el = core.el;</span><br><span class="line"> </span><br><span class="line">  // ...</span><br><span class="line"> </span><br><span class="line">&#125;)))</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><code>理解和解决requireJS的报错:MODULE NAME HAS NOT BEEN LOADED YET FOR CONTEXT</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/aitangyong/article/details/40708025">http://blog.csdn.net/aitangyong/article/details/40708025</a></p>
-<p><code>javascript - Dynamic require in RequireJS, getting &quot;Module name has not been loaded yet for context&quot; error? - Stack Overflow</code><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/17446844/dynamic-require-in-requirejs-getting-module-name-has-not-been-loaded-yet-for-c">http://stackoverflow.com/questions/17446844/dynamic-require-in-requirejs-getting-module-name-has-not-been-loaded-yet-for-c</a></p>
-<hr>
-<h1 id="类似技术-开源技术"><a href="#类似技术-开源技术" class="headerlink" title="类似技术,开源技术"></a>类似技术,开源技术</h1><p><code>搭建基于Karma和Jasmine的前端单元测试 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/a7ffb564734e">www.jianshu.com/p/a7ffb564734e</a></p>
-<p>更多:<code>  简书-搜索: karma</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/search?q=karma&page=1&type=notes">http://www.jianshu.com/search?q=karma&amp;page=1&amp;type=notes</a></p>
-<p><code>webpro/Automated-SPA-Testing: Automated unit &amp; functional testing for web applications</code><br><a target="_blank" rel="noopener" href="https://github.com/webpro/Automated-SPA-Testing">https://github.com/webpro/Automated-SPA-Testing</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/javaScript%20%E6%A8%A1%E5%9D%97%E8%BF%9B%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/javaScript%20%E6%A8%A1%E5%9D%97%E8%BF%9B%E5%8C%96/" class="post-title-link" itemprop="url">javaScript 模块进化</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-09-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-16T00:00:00+00:00">2016-09-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="最初的美好"><a href="#最初的美好" class="headerlink" title="最初的美好"></a>最初的美好</h1><ul>
-<li><p>污染全局变量</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function bar()&#123;</span><br><span class="line">    //do something</span><br><span class="line">&#125;</span><br><span class="line">function log()&#123;</span><br><span class="line">    //do something</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>减少了全局变量 &amp;  暴露所有的模块成员，内部状态可以被外部读写</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var myModule = &#123;</span><br><span class="line">    bar: function()&#123;</span><br><span class="line">        //do something</span><br><span class="line">    &#125;,</span><br><span class="line">    log: function()&#123;</span><br><span class="line">        //do something</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//调用</span><br><span class="line">myMoudle.bar();</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>匿名闭包的写法（Immediately-Invoked Function Expression，IIFE）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var myModule = (function()&#123;</span><br><span class="line">    var _log = &quot;hello world&quot;;</span><br><span class="line">    var log = function()&#123;</span><br><span class="line">        console.log(_log);</span><br><span class="line">    &#125;;</span><br><span class="line"> </span><br><span class="line">    return &#123;</span><br><span class="line">        log: log</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"> </span><br><span class="line">//引用</span><br><span class="line">myModule.log();//hello world</span><br><span class="line">myModule._log;//undefined</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<ul>
-<li><p>引入依赖关系</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var myModule = (function($)&#123;</span><br><span class="line">    var $log = $(&#x27;.log&#x27;);</span><br><span class="line">    var log = function()&#123;</span><br><span class="line">        console.log($log);</span><br><span class="line">    &#125;;</span><br><span class="line"> </span><br><span class="line">    return &#123;</span><br><span class="line">        log: log</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(jQuery);</span><br><span class="line"> </span><br><span class="line">//引用</span><br><span class="line">myModule.log();</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>依赖管理</p>
-</li>
-<li><p>没有引入一个依赖的 js 文件而导致后面 js 的功能失效. | 请求过多 ，不利于性能优化</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;jquery.js&quot;&gt;&lt;script&gt;</span><br><span class="line">&lt;script src=&quot;dialog.js&quot;&gt;&lt;script&gt;</span><br><span class="line">&lt;script src=&quot;tooltip.js&quot;&gt;&lt;script&gt;</span><br><span class="line">&lt;script src=&quot;toast.js&quot;&gt;&lt;script&gt;</span><br><span class="line">&lt;script src=&quot;handlebar.js&quot;&gt;&lt;script&gt;</span><br><span class="line">......</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="CommonJS规范、AMD规范、CMD规范"><a href="#CommonJS规范、AMD规范、CMD规范" class="headerlink" title="CommonJS规范、AMD规范、CMD规范"></a>CommonJS规范、AMD规范、CMD规范</h1><h2 id="CommonJS-代表作-Browserify"><a href="#CommonJS-代表作-Browserify" class="headerlink" title="CommonJS(代表作: Browserify )"></a>CommonJS(代表作: Browserify )</h2><ul>
-<li>服务器端的模块化的规范，是 Nood.js 在实践中推出的，Nood.js 也是首先采用 js 模块化的；</li>
-<li>exports 定义模块</li>
-<li>require 加载模块<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//math.js</span><br><span class="line">exports.add = function(a,b)&#123;</span><br><span class="line">    var c = a + b;</span><br><span class="line">    return c;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//index.js</span><br><span class="line">var add = require(&#x27;math&#x27;).add;//</span><br><span class="line">console.log(add(1,1));//2</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="AMD-代表作-RequireJS"><a href="#AMD-代表作-RequireJS" class="headerlink" title="AMD(代表作:RequireJS )"></a>AMD(代表作:RequireJS )</h2><ul>
-<li><p>Asynchronous Module Definition，即异步的模块定义，是浏览器端的模块化规范，是 RequireJS 在推广过程中对模块定义的规范化产出</p>
-</li>
-<li><p>define 定义模块(同时定义依赖),模块名为文件名</p>
-<ul>
-<li><code>JavaScript模块化－require.js，r.js和打包发布 - 简书</code> <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/7186e5f2f341">http://www.jianshu.com/p/7186e5f2f341</a><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define(id?, dependencies?, factory);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(&#x27;myModule&#x27;,[&#x27;jQuery&#x27;,&#x27;types/Employee&#x27;],function($,Employee)&#123;//定义模块myModule，引入依赖jQuery，types/Employee</span><br><span class="line">   function Programmer()&#123;</span><br><span class="line">            //do something</span><br><span class="line">        &#125;;</span><br><span class="line">        Programmer.prototype = new Employee();</span><br><span class="line">        return Programmer;  //return Constructor</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h2 id="CMD-代表作-SeaJS"><a href="#CMD-代表作-SeaJS" class="headerlink" title="CMD(代表作:SeaJS )"></a>CMD(代表作:SeaJS )</h2><ul>
-<li><p>Common Module Definition，即通用模块定义，是浏览器端的模块化规范，是 SeaJS 在推广过程中对模块定义的规范化产出</p>
-</li>
-<li><p>seajs.use模块载入</p>
-<ul>
-<li>seajs.use(‘.&#x2F;a’),require(‘a’), require.asyc(‘.&#x2F;a.js’)</li>
-<li><code>Seajs模块载入方法 - 简书</code> <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/2de0d5b24c8c">http://www.jianshu.com/p/2de0d5b24c8c</a></li>
-</ul>
-</li>
-<li><p>define 定义模块(require提取依赖模块),模块名为文件名</p>
-<ul>
-<li><code>seajs模块加载机制 - 简书</code> <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/1245af09383e">http://www.jianshu.com/p/1245af09383e</a><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">define(factory)</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>AMD 是 依赖关系前置，提前执行 ；CMD 是类似于 CommonJS 那样 按需加载，延迟执行 ：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//CMD recommanded</span><br><span class="line">define(function(require, exports, module)&#123;</span><br><span class="line">  var a = require(&#x27;a&#x27;);</span><br><span class="line">  a.doSomething();</span><br><span class="line">  var b = require(&#x27;b&#x27;);</span><br><span class="line">  b.doSomething();    // 依赖就近，延迟执行</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">//AMD recommanded</span><br><span class="line">define([&#x27;a&#x27;, &#x27;b&#x27;], function(a, b)&#123;</span><br><span class="line">    a.doSomething();    // 依赖前置，提前执行</span><br><span class="line">    b.doSomething();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="RequireJS模块化及r-js指南"><a href="#RequireJS模块化及r-js指南" class="headerlink" title="RequireJS模块化及r.js指南"></a>RequireJS模块化及r.js指南</h1><ul>
-<li>在 html 中指定了 RrequireJS 第一次需要加载的模块，也就是通过 data-main 所指定<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- index.html --&gt;</span><br><span class="line">&lt;script data-main=&quot;src/js/app/index&quot; src=&quot;src/js/lib/require.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
-<li>index.js<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">requirejs.config(&#123;</span><br><span class="line">  baseUrl: &#x27;src/js&#x27;,</span><br><span class="line">  paths: &#123;</span><br><span class="line">    jquery: &#x27;lib/jquery&#x27;,</span><br><span class="line">    backTop: &#x27;com/backTop&#x27;,</span><br><span class="line">    jumpTo: &#x27;com/jumpTo&#x27;,</span><br><span class="line">    carousel: &#x27;com/carousel&#x27;,</span><br><span class="line">    exposure: &#x27;com/exposure&#x27;,</span><br><span class="line">    navfloor: &#x27;com/navfloor&#x27;,</span><br><span class="line">    waterfall: &#x27;com/waterfall&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
-<li>其中 baseUrl 是改变基准路径，所有的模块相对于 baseUrl 来加载； baseUrl 路径以 index.html 所在的目录为基准；</li>
-<li>其中 requirejs.config() 函数的 paths 属性指定各个模块的加载路径(相对于 baseUrl )，如果没有指定 baseUrl ，路径默认和主模块在同一目录;</li>
-</ul>
-<p>采用了 RequireJS 模块化写法解决了命名冲突和依赖管理的问题，同时也增加了文件数量，这也意味着请求的增多，无疑会带来性能问题；</p>
-<ul>
-<li>打包（优化）工具 r.js ,它可以实现前端文件的压缩与合并,减少服务器请求<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(&#123;</span><br><span class="line">    baseUrl: &quot;./src/js&quot;,</span><br><span class="line">    paths: &#123;</span><br><span class="line">        &#x27;jquery&#x27;: &#x27;lib/bower_components/jquery/dist/jquery.min&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    name: &quot;main&quot;,</span><br><span class="line">    out: &quot;dist/js/merge.js&quot;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
-<li>baseUrl 路径设置应与主模块中 require.config() 方法里的 baseUrl 实际路径一致</li>
-<li>nam 指定的是解析入口，这里写了主模块，路径相对于前面指定的 baseUrl</li>
-</ul>
-<hr>
-<p><code>前端模块化之旅（一）：因何生它 - 推酷</code></p>
-<p><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/z2AFRfF">http://www.tuicool.com/articles/z2AFRfF</a></p>
-<p><code>前端模块化之旅（二）：CommonJS、AMD和CMD - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/ZFvIfmz">www.tuicool.com/articles/ZFvIfmz</a></p>
-<p><code>前端模块化之旅（三）：RequireJS模块化及r.js指南 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/qyInuum">http://www.tuicool.com/articles/qyInuum</a></p>
-<p><code>Javascript模块化编程（一）：模块的写法 - 阮一峰的网络日志</code><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html">http://www.ruanyifeng.com/blog/2012/10/javascript_module.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ES6%20%E6%A8%A1%E5%9D%97%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/ES6%20%E6%A8%A1%E5%9D%97%E5%8C%96/" class="post-title-link" itemprop="url">ES6 模块化</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-15T00:00:00+00:00">2016-09-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:17" itemprop="dateModified" datetime="2024-01-26T12:42:17+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="示例-https-github-com-tildeio-rsvp-js-downloads-ES6编写-支持-CommonJS-AMD模块化规范"><a href="#示例-https-github-com-tildeio-rsvp-js-downloads-ES6编写-支持-CommonJS-AMD模块化规范" class="headerlink" title="示例:  https://github.com/tildeio/rsvp.js  #downloads- ES6编写- 支持 CommonJS, AMD模块化规范"></a>示例:  <a target="_blank" rel="noopener" href="https://github.com/tildeio/rsvp.js">https://github.com/tildeio/rsvp.js</a>  #downloads<br>- ES6编写<br>- 支持 CommonJS, AMD模块化规范<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &#x27;object&#x27; &amp;&amp; typeof module !== &#x27;undefined&#x27; ? factory(exports) :// CommonJS</span><br><span class="line">    typeof define === &#x27;function&#x27; &amp;&amp; define.amd ? define([&#x27;exports&#x27;], factory) : // AMD</span><br><span class="line">      (factory((global.RSVP = global.RSVP || &#123;&#125;))); // window</span><br><span class="line">&#125;(this, (function (exports) &#123;</span><br><span class="line">  &#x27;use strict&#x27;;</span><br><span class="line">&#125;)));</span><br></pre></td></tr></table></figure></h2><p>现代浏览器对模块(module)支持程度不同， 目前都是使用babelJS， 或者Traceur把ES6代码转化为兼容ES5版本的js代码;</p>
-<h1 id="ES6的模块化的基本规则或特点"><a href="#ES6的模块化的基本规则或特点" class="headerlink" title="ES6的模块化的基本规则或特点"></a>ES6的模块化的基本规则或特点</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//lib.js</span><br><span class="line">//导出常量</span><br><span class="line">export const sqrt = Math.sqrt;</span><br><span class="line">//导出函数</span><br><span class="line">export function square(x) &#123;</span><br><span class="line">    return x * x;</span><br><span class="line">&#125;</span><br><span class="line">//导出函数</span><br><span class="line">export function diag(x, y) &#123;</span><br><span class="line">    return sqrt(square(x) + square(y));</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//main.js</span><br><span class="line">import &#123; square, diag &#125; from &#x27;./lib&#x27;;</span><br><span class="line">console.log(square(11)); // 121</span><br><span class="line">console.log(diag(4, 3)); // 5</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="import和export的基本语法"><a href="#import和export的基本语法" class="headerlink" title="import和export的基本语法"></a>import和export的基本语法</h1><ul>
-<li>export{} 导出方式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//lib.js 文件</span><br><span class="line">let bar = &quot;stringBar&quot;;</span><br><span class="line">let foo = &quot;stringFoo&quot;;</span><br><span class="line">let fn0 = function() &#123;</span><br><span class="line">    console.log(&quot;fn0&quot;);</span><br><span class="line">&#125;;</span><br><span class="line">let fn1 = function() &#123;</span><br><span class="line">    console.log(&quot;fn1&quot;);</span><br><span class="line">&#125;;</span><br><span class="line">export&#123; bar , foo, fn0, fn1&#125;</span><br><span class="line"> </span><br><span class="line">//main.js文件</span><br><span class="line">import &#123;bar,foo, fn0, fn1&#125; from &quot;./lib&quot;;</span><br><span class="line">console.log(bar+&quot;_&quot;+foo);</span><br><span class="line">fn0();</span><br><span class="line">fn1();</span><br></pre></td></tr></table></figure></li>
-<li>export{} 导出方式 + 别名<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//lib.js文件</span><br><span class="line">let fn0 = function() &#123;</span><br><span class="line">    console.log(&quot;fn0&quot;);</span><br><span class="line">&#125;;</span><br><span class="line">let obj0 = &#123;&#125;</span><br><span class="line">export &#123; fn0 as foo, obj0 as bar&#125;;</span><br><span class="line"> </span><br><span class="line">//main.js文件</span><br><span class="line">import &#123;foo, bar&#125; from &quot;./lib&quot;;</span><br><span class="line">foo();</span><br><span class="line">console.log(bar);</span><br></pre></td></tr></table></figure></li>
-<li>单行导出<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//lib.js文件</span><br><span class="line">export let foo = ()=&gt; &#123;console.log(&quot;fnFoo&quot;) ;return &quot;foo&quot;&#125;,bar = &quot;stringBar&quot;;</span><br><span class="line"> </span><br><span class="line">//main.js文件</span><br><span class="line">import &#123;foo, bar&#125; from &quot;./lib&quot;;</span><br><span class="line">console.log(foo());</span><br><span class="line">console.log(bar);</span><br></pre></td></tr></table></figure></li>
-<li>default匿名导出<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//lib.js</span><br><span class="line">export default &quot;string&quot;;</span><br><span class="line"> </span><br><span class="line">//main.js</span><br><span class="line">import defaultString from &quot;./lib&quot;;</span><br><span class="line">console.log(defaultString);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//lib.js</span><br><span class="line">let fn = () =&gt; &quot;string&quot;;</span><br><span class="line">export &#123;fn as default&#125;;</span><br><span class="line"> </span><br><span class="line">//main.js</span><br><span class="line">import defaultFn from &quot;./lib&quot;;</span><br><span class="line">console.log(defaultFn());</span><br></pre></td></tr></table></figure></li>
-<li>通配符导出所有<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//lib.js</span><br><span class="line">export * from &quot;./other&quot;;</span><br><span class="line">//如果只想导出部分接口， 只要把接口名字列出来</span><br><span class="line">//export &#123;foo,fnFoo&#125; from &quot;./other&quot;;</span><br><span class="line"> </span><br><span class="line">//other.js</span><br><span class="line">export let foo = &quot;stringFoo&quot;, fnFoo = function() &#123;console.log(&quot;fnFoo&quot;)&#125;;</span><br><span class="line"> </span><br><span class="line">//main.js</span><br><span class="line">import &#123;foo, fnFoo&#125; from &quot;./lib&quot;;</span><br><span class="line">console.log(foo);</span><br><span class="line">console.log(fnFoo());</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import * as obj from &quot;./lib&quot;;</span><br><span class="line">console.log(obj);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="ES6导入的模块都是属于引用"><a href="#ES6导入的模块都是属于引用" class="headerlink" title="ES6导入的模块都是属于引用"></a>ES6导入的模块都是属于引用</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//lib.js</span><br><span class="line">export let counter = 3;</span><br><span class="line">export function incCounter() &#123;</span><br><span class="line">    counter++;</span><br><span class="line">&#125;</span><br><span class="line">export function setCounter(value) &#123;</span><br><span class="line">    counter = value;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">//main.js</span><br><span class="line">import &#123; counter, incCounter ,setCounter&#125; from &#x27;./lib&#x27;;</span><br><span class="line"> </span><br><span class="line">// The imported value `counter` is live</span><br><span class="line">console.log(counter); // 3</span><br><span class="line">incCounter();</span><br><span class="line">console.log(counter); // 4</span><br><span class="line">setCounter(0);</span><br><span class="line">console.log(counter); // 0</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="循环依赖的问题"><a href="#循环依赖的问题" class="headerlink" title="循环依赖的问题"></a>循环依赖的问题</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">//index.html</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;&lt;/title&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;/&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script data-main=&quot;cyclic&quot; src=&quot;//cdn.bootcss.com/require.js/2.2.0/require.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">//cyclic.js</span><br><span class="line">require([&quot;file0&quot;], function(file0) &#123;</span><br><span class="line">    console.log(file0)</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">//file0.js</span><br><span class="line">define([&quot;file1&quot;], function(file1) &#123;</span><br><span class="line">    console.log(file1)</span><br><span class="line">    return &#123;</span><br><span class="line">        file0 : &quot;file0&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">//file1.js</span><br><span class="line">define([&quot;file0&quot;], function(file0) &#123;</span><br><span class="line">    console.log(file0);</span><br><span class="line">    return &#123;</span><br><span class="line">        file1 : &quot;file1&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">undefined</span><br><span class="line">Object &#123; file1: &quot;file1&quot; &#125;</span><br><span class="line">Object &#123; file0: &quot;file0&quot; &#125;</span><br></pre></td></tr></table></figure>
-<p>在执行file1.js的时候file0.js还没执行完， 所以输出了undefined， 这种输出结果和NodeJS输出的情况是一样的；</p>
-<hr>
-<p><code>ES6新特性：使用export和import实现模块化 - 方方和圆圆 - 博客园</code><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/diligenceday/p/5503777.htm">http://www.cnblogs.com/diligenceday/p/5503777.htm</a> l<br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/EryUniv">http://www.tuicool.com/articles/EryUniv</a></p>
-<ul>
-<li>ES6的模块化的基本规则或特点：</li>
-<li>下面列出几种import和export的基本语法：</li>
-<li>ES6导入的模块都是属于引用：</li>
-<li>循环依赖的问题：</li>
-<li>浏览器兼容：</li>
-<li>参考：</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Programmers-financial-management/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Programmers-financial-management/" class="post-title-link" itemprop="url">程序员理财之道</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-09-14 21:02:08" itemprop="dateCreated datePublished" datetime="2016-09-14T21:02:08+00:00">2016-09-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="为什么要理财"><a href="#为什么要理财" class="headerlink" title="为什么要理财"></a>为什么要理财</h3><p>关于这方面的废话我就不多说了，如果你资产低于千万，必然难以通过境外投资达到增保值的目的，亦很难通过多处房产达到增保值的目的，对于我们这些工薪狗仅仅几万块的资产真的是啥也做不了，每月工资在被强奸之后（险、金、税），到手已所剩无几，但也不能坐等让通胀把我们的辛苦钱统统吃掉，所以会点投资理财才是当前可行之道。</p>
-<h3 id="投资渠道"><a href="#投资渠道" class="headerlink" title="投资渠道"></a>投资渠道</h3><p>至于银行的理财产品和某宝的收益率就不多说了，扣掉<a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=FQ9Yf8c67E7TWjUVzcB5J8DmP8lRLcKTAZiM7Nxf80wcDUJqM4N0Qb-8-P1qChIU4F0Rl6YlAj3ABfhXVfIaiJXKKXju_GMX6l2nQdNx679DXDETLncVUi3BEjUjUmJR">CPI</a>基本收益无几，而且我天朝公布的CPI数据一项注水，实际通胀率应该远在公布的CPI之上，所以你的投资收益率必须要跑赢通胀才能达到资金保值甚至增值的目的。其它渠道要么是风险低收益低，要么是风险高收益高，还有就是那专坑散户的股票市场，所以可投的渠道其实并不多，但是对于资金有限的工薪阶层来说已经够了，我目前投资的有黄金、P2P、基金。</p>
-<h3 id="我的理财"><a href="#我的理财" class="headerlink" title="我的理财"></a>我的理财</h3><h4 id="陆金所"><a href="#陆金所" class="headerlink" title="陆金所"></a>陆金所</h4><p>这个不多说，有平安背书，常年盘踞各大P2P平台第一名，收益率在4-9个点左右。具体投资项目，请君自选。如您有意，可通过下面链接跳转注册，平安陆金所新人注册可领100投资券（可抵本金使用），7天有效。&lt;新手专区&gt;首投零活宝-芝麻开花理财计划，额外奖励最高960投资券，快去看看，<a target="_blank" rel="noopener" href="http://t.lu.com/r/qvTZ1=J">点我注册</a>。</p>
-<h4 id="人人贷"><a href="#人人贷" class="headerlink" title="人人贷"></a>人人贷</h4><p>人人贷，唯一上市的P2P投资平台，靠谱。收益率在5-10个点左右，定投期限不同，任君选购。由民生银行资金存管，中国互联网协会AAA级信用平台，新人红包高达4999元，新手专享标年化收益9.6%，<a target="_blank" rel="noopener" href="http://www.we.com/regPageLandingD.action?inviteCode=11j3Fs7zKEz0Q">点我注册</a>。</p>
-<h4 id="挖财"><a href="#挖财" class="headerlink" title="挖财"></a>挖财</h4><p>投资挖财很简单，因为他们是国内为数不多的使用Scala语言的公司，试问哪一家要跑路的平台会使用这么强大新颖的技术，此家公司必然是有着长久的打算的，所以放心投资。收益率在6-12个点左右，新手注册就送20元红包，可抵扣本金，另外还有新手专享12%年化收益的新人宝（最高送150现金）等着你，<a target="_blank" rel="noopener" href="https://8.wacai.com/finance/newInvitation/do_invRegIndex.action?u=beb5ca977df7c722&a_f=yq0hy$-01-004">点我注册</a>。</p>
-<h4 id="招财宝"><a href="#招财宝" class="headerlink" title="招财宝"></a>招财宝</h4><p>蚂蚁金服旗下的蚂蚁聚宝，在上面可以买基金、黄金、定期、股票等，由阿里巴巴背书。收益还不错，就是期限有点长，一直在投姚秋博士的封闭基金。招财宝是蚂蚁聚宝上的一个子平台，该平台的主要投资品种是企业和个人直接或通过推荐机构发布的借款类产品，以及部分金融机构根据监管法律法规发行的其他产品。</p>
-<h4 id="存金宝"><a href="#存金宝" class="headerlink" title="存金宝"></a>存金宝</h4><p>黄金从年初一直涨到现在，苦于没钱投资，只能干看着别人挣钱，哎，都是泪啊。存金宝也是蚂蚁聚宝上的一个子平台，该平台主要提供黄金买卖服务。当你买入存金宝即购买了博时黄金ETF的I类份额。博时黄金ETF基金是一款投资现货黄金的ETF基金，为用户提供1元起买、买卖均0手续费的便捷服务，还给其持有者提供“买黄金生黄金”的权益。</p>
-<h4 id="京东金融"><a href="#京东金融" class="headerlink" title="京东金融"></a>京东金融</h4><p>京东金融是京东金融集团打造的“一站式”在线投融资平台，以“成为国内最值得信赖的互联网投融资平台”为使命，依托京东集团强大的资源，发挥整合和协同效应优势，将传统金融业务与互联网技术相结合，探索全新的互联网金融发展模式，致力于为个人和企业用户提供安全、高收益、定制化的金融服务，让投资理财变得简单快乐。该平台稳定安全，投资渠道种类都很多，值的推荐。</p>
-<h4 id="稳赚不赔"><a href="#稳赚不赔" class="headerlink" title="稳赚不赔"></a>稳赚不赔</h4><p>最大的投资就是投资自己，投资自己包括身体上（吃、喝、健身）、学识上（学习、充电）、精神上（音乐会、舞台剧、演唱会）等，试想，万一在退休前挂了，那么所上交了半辈子的险基本上是免费贡献给国家了，这还是在没有延退的情况下。所以人生苦短，没有经历过的还是很值得去尝试享受一番的。</p>
-<p><strong>声明</strong>：各位如果想注册的话，请走我的推荐链接，谢谢。以上仅是个人投资项目，仅供参考。</p>
-<h3 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h3><p>在「卢冠廷BEYOND IMAGINATION LIVE 2016演唱会」上，已经年过花甲的卢冠廷重新演唱了经典的《一生所爱》，听来不禁让人潸然泪下，奉献给大家。</p>
-<center>
-<embed src="http://static.video.qq.com/TPout.swf?vid=k0199hnmf8m&auto=0" allowFullScreen="true" quality="high" width="720" height="600" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash">
-</embed>
-<br/>
-</center>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ionic%20Icon%20and%20Splash%E5%AE%8C%E6%95%B4%E6%94%B6%E9%9B%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/ionic%20Icon%20and%20Splash%E5%AE%8C%E6%95%B4%E6%94%B6%E9%9B%86/" class="post-title-link" itemprop="url">ionic Icon and Splash完整收集</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-09-14 00:00:00" itemprop="dateCreated datePublished" datetime="2016-09-14T00:00:00+00:00">2016-09-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="ionic-Icon-and-Splash-Screen-Image-Generation完整收集"><a href="#ionic-Icon-and-Splash-Screen-Image-Generation完整收集" class="headerlink" title="ionic Icon and Splash Screen Image Generation完整收集"></a>ionic Icon and Splash Screen Image Generation完整收集</h1><hr>
-<h1 id="ionic-Icon-and-Splash-Screen-Image-Generation官方说明"><a href="#ionic-Icon-and-Splash-Screen-Image-Generation官方说明" class="headerlink" title="ionic Icon and Splash Screen Image Generation官方说明"></a>ionic Icon and Splash Screen Image Generation官方说明</h1><ul>
-<li><p>使用命令（支持png、psd和ai，尺寸越大越好）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ionic resources --icon</span><br><span class="line">$ ionic resources --splash</span><br><span class="line">$ ionic resources</span><br><span class="line">$ ionic resources ios</span><br><span class="line">$ ionic resources --default</span><br><span class="line">$ ionic resources --default --force</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>使用PSD模板</p>
-<ul>
-<li><p><a target="_blank" rel="noopener" href="http://code.ionicframework.com/resources/splash.psd">Photoshop Splash Screen Template</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://code.ionicframework.com/resources/icon.psd">Photoshop Icon Template</a></p>
-</li>
-</ul>
-</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://github.com/driftyco/ionic-cli#icon-and-splash-screen-image-generation">https://github.com/driftyco/ionic-cli#icon-and-splash-screen-image-generation</a></p>
-<p><code>介绍 博客</code><br><a target="_blank" rel="noopener" href="http://blog.ionic.io/automating-icons-and-splash-screens/">http://blog.ionic.io/automating-icons-and-splash-screens/</a></p>
-<p><code>自定义图标 Customize Icons</code><br><a target="_blank" rel="noopener" href="http://cordova.apache.org/docs/en/dev/config_ref/images.html#Icons%20and%20Splash%20Screens">http://cordova.apache.org/docs/en/dev/config_ref/images.html#Icons%20and%20Splash%20Screens</a>_</p>
-<hr>
-<h1 id="在线生成工具"><a href="#在线生成工具" class="headerlink" title="在线生成工具"></a>在线生成工具</h1><p><code>图标工场 - 移动应用图标生成工具，一键生成所有尺寸的应用图标</code>  ★ ★<br><a target="_blank" rel="noopener" href="http://icon.wuruihong.com/">http://icon.wuruihong.com/</a></p>
-<p><code>在线批量生成各种尺寸iOS、Android APP图表集合 - aTool在线工具</code><br><a target="_blank" rel="noopener" href="http://www.atool.org/ios_logo.php">http://www.atool.org/ios_logo.php</a></p>
-<hr>
-<h1 id="开源工具"><a href="#开源工具" class="headerlink" title="开源工具"></a>开源工具</h1><p><code>cordova-icon-splash-generator</code><br><a target="_blank" rel="noopener" href="https://github.com/collingreen/cordova-icon-splash-generator">https://github.com/collingreen/cordova-icon-splash-generator</a></p>
-<p><code>busterc/cordova-resource-generators</code> - liunx,mac <code>35star</code><br><a target="_blank" rel="noopener" href="https://github.com/busterc/cordova-resource-generators">https://github.com/busterc/cordova-resource-generators</a></p>
-<p><code>gulp-cordova-resources</code><br><a target="_blank" rel="noopener" href="https://github.com/david-alexander/gulp-cordova-resources">https://github.com/david-alexander/gulp-cordova-resources</a></p>
-<p><code>cordova-ionic-maven-archetype | cordova-icon-splash 生成器</code> ★<br><a target="_blank" rel="noopener" href="https://github.com/zhoujianhui/cordova-ionic-maven-archetype/blob/52d5186c785d1d27d06336916a2056c6c15d4980/test-cordova-ionic-maven-archetype/icon-splash/README.md">https://github.com/zhoujianhui/cordova-ionic-maven-archetype/blob/52d5186c785d1d27d06336916a2056c6c15d4980/test-cordova-ionic-maven-archetype/icon-splash/README.md</a></p>
-<p><code>cordova-splash</code>  <code>207star</code>  ★<br><a target="_blank" rel="noopener" href="https://github.com/AlexDisler/cordova-splash">https://github.com/AlexDisler/cordova-splash</a></p>
-<p><code>AlexDisler/cordova-icon</code> 404star  ★ ★ <code>for Android and iOS, at least 192*192px (512*512px recommended)</code><br><a target="_blank" rel="noopener" href="https://github.com/AlexDisler/cordova-icon">https://github.com/AlexDisler/cordova-icon</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova-icon --config=config.xml --icon= resources/ icon.png</span><br></pre></td></tr></table></figure>
-
-
-<p><code>AlexDisler/cordova-splash</code> 207star  ★ ★ <code> Create a splash screen (2208x2208)</code><br><a target="_blank" rel="noopener" href="https://github.com/AlexDisler/cordova-splash">https://github.com/AlexDisler/cordova-splash</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cordova-splash --config=config.xml --splash=resources/splash.png</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>(生成后直接应用于platform中,需要手动取出.按规格存放resources)</p>
-<p><code>Icon-Splash-Resize</code><br><a target="_blank" rel="noopener" href="https://github.com/dericeira/Icon-Splash-Resize">https://github.com/dericeira/Icon-Splash-Resize</a></p>
-<p><code>github搜索:cordova splash 生成</code><br><a target="_blank" rel="noopener" href="https://github.com/search?utf8=%E2%9C%93&q=cordova+splash+%E7%94%9F%E6%88%90&type=Code&ref=searchresults">https://github.com/search?utf8=%E2%9C%93&amp;q=cordova+splash+%E7%94%9F%E6%88%90&amp;type=Code&amp;ref=searchresults</a></p>
-<hr>
-<p><code>ionic框架iOS所需icon与splash规格（命名与尺寸）</code><br><a target="_blank" rel="noopener" href="http://blog.leanote.com/freemem">http://blog.leanote.com/freemem</a></p>
-<p><code>App各种Icon及Launch image的尺寸和用途 移动端尺寸基础知识</code></p>
-<p><a target="_blank" rel="noopener" href="https://my.oschina.net/u/2252309/blog/402724">https://my.oschina.net/u/2252309/blog/402724</a></p>
-<hr>
-<h1 id="文章介绍"><a href="#文章介绍" class="headerlink" title="文章介绍"></a>文章介绍</h1><p><code>Cordova 3.x 基础（2） -- 应用图标icon和启动页面SplashScreen - Fish Where The Fish Are - ITeye技术网站</code><br><a target="_blank" rel="noopener" href="http://rensanning.iteye.com/blog/2017380">http://rensanning.iteye.com/blog/2017380</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">如果你本地安装了ImageMagick，CLI还会自动调用ImageMagick来做成不同尺寸的图像。</span><br><span class="line">需要注意的是：</span><br><span class="line">（1）图像的路径是相对于工程根目录不是根据www</span><br><span class="line">（2）不要和PhoneGap CLI的设置混淆</span><br></pre></td></tr></table></figure>
-<p><code>Ionic Framework的一些命令行解释 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/FFfiquu">http://www.tuicool.com/articles/FFfiquu</a></p>
-<p><code>【Ionic】图标-名称-启动画修改_百度经验</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/fdffd1f85ee24ef3e88ca164.html">http://jingyan.baidu.com/article/fdffd1f85ee24ef3e88ca164.html</a></p>
-<p><code>【Ionic】App应用名字+应用图标+启动画的修改_百度经验</code><br><a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/c35dbcb0ec59438916fcbcaf.html">http://jingyan.baidu.com/article/c35dbcb0ec59438916fcbcaf.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/25/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/27/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/25/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/56/">56</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/27/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

@@ -136,18 +136,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">546</span>
+          <span class="site-state-item-count">554</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-count">389</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -164,6 +164,1332 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Improve-the-retrieval-speed-of-lucene-by-DocumentStoredFieldVisitor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Improve-the-retrieval-speed-of-lucene-by-DocumentStoredFieldVisitor/" class="post-title-link" itemprop="url">使用DocumentStoredFieldVisitor提高Lucene检索速度</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-31 21:42:38" itemprop="dateCreated datePublished" datetime="2017-05-31T21:42:38+00:00">2017-05-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="FieldSelector"><a href="#FieldSelector" class="headerlink" title="FieldSelector"></a>FieldSelector</h4><p>提高Lucene检索性能的方法有很多种，这里简单介绍一种常用且便捷可行的方法快速提高Lucene检索性能。在早期的Lucene版本中，使用<strong>FieldSelector</strong>来决定哪些Fields应该被加载，并以何种方式加载，但是在<a target="_blank" rel="noopener" href="https://issues.apache.org/jira/browse/LUCENE-3309">LUCENE-3309</a>中该接口被废弃，并且提出了新的替代接口<strong>StoredFieldVisitor</strong>。</p>
+<h4 id="FieldCache"><a href="#FieldCache" class="headerlink" title="FieldCache"></a>FieldCache</h4><p>另一种提高检索性能的方案是使用FieldCache来缓存Lucene的term values信息，不过该接口目前已被移至<code>org.apache.lucene.uninverting</code>包下，并且访问权限变成包级私有，也就是说，用户再也无法直接使用FieldCache了，该接口以后仅限于Lucene内部使用。FieldCache的主要作用是缓存用来排序field的值，Lucene会将需要排序的字段都读到内存中进行排序，所占内存大小和文档数量相关。其替代方案是使用DocValues类。其实深入一步，当你的Document只有一个Token的时候，FieldCache还可以被用来快速获取每个Document的field值，因为Lucene只做了反向索引，这种Document-&gt;field正向索引是极其耗时的，而FieldCache正好能解决这个问题。</p>
+<p>由于这两个接口基本相当于被废弃，这里不再赘述，主要讲解目前实用的<strong>StoredFieldVisitor</strong>方案。</p>
+<h4 id="StoredFieldVisitor"><a href="#StoredFieldVisitor" class="headerlink" title="StoredFieldVisitor"></a>StoredFieldVisitor</h4><p>StoredFieldVisitor是一个抽象类，它有一个唯一对外暴露的实现类DocumentStoredFieldVisitor，查看该实现类的Doc文档说明，可知其作用是支持加载所有的stored fields，或者通过Set集合指定请求的fields。</p>
+<p>查看DocumentStoredFieldVisitor构造函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">DocumentStoredFieldVisitor</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.fieldsToAdd = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">DocumentStoredFieldVisitor</span><span class="params">(Set&lt;String&gt; fieldsToAdd)</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.fieldsToAdd = fieldsToAdd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Load only fields named in the provided fields. */</span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">DocumentStoredFieldVisitor</span><span class="params">(String... fields)</span> &#123;</span><br><span class="line">  fieldsToAdd = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;(fields.length);</span><br><span class="line">  <span class="keyword">for</span>(String field : fields) &#123;</span><br><span class="line">    fieldsToAdd.add(field);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个无参构造函数，一个接收Set参数的构造函数，还有一个接收可变参数的构造函数，而可变参数的构造函数中其实就是把可变参数加入Set集合，所以其原理和接收Set集合的构造函数是一样的。</p>
+<p>讲了这么多，那么DocumentStoredFieldVisitor的使用场景是什么呢？当用户需要访问各个文档中的某个field的值时，使用IndexSearcher.doc(int docID)可以获得Document，然后再从Document中获得某个域值，当一个Document中field非常多的时候，这种访问速度比较慢，而且只能获得Stored域的值。这时候使用DocumentStoredFieldVisitor可以极大地提高访问速度。下面写个简单的测试代码来看看其性能差距。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.google.common.base.Stopwatch;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.RandomStringUtils;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.analysis.cjk.CJKAnalyzer;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.document.*;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.index.DirectoryReader;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.index.IndexWriter;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.index.IndexWriterConfig;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.search.IndexSearcher;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.search.Query;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.search.ScoreDoc;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.search.TopDocs;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.store.RAMDirectory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Created by wangxu on 2017/05/27 17:37.</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * Description: 基于Lucene 6.5.0实现</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Wang Xu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> V1.0.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> V1.0.0 &lt;br/&gt;</span></span><br><span class="line"><span class="comment"> * WebSite: http://codepub.cn &lt;br&gt;</span></span><br><span class="line"><span class="comment"> * Licence: Apache v2 License</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestStoredFieldVisitor</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> IndexSearcher indexSearcher;</span><br><span class="line">    <span class="keyword">static</span> Query query;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">RAMDirectory</span> <span class="variable">ramDirectory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RAMDirectory</span>();</span><br><span class="line">        <span class="type">IndexWriter</span> <span class="variable">indexWriter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexWriter</span>(ramDirectory, <span class="keyword">new</span> <span class="title class_">IndexWriterConfig</span>(<span class="keyword">new</span> <span class="title class_">CJKAnalyzer</span>()));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">1000000</span>; i++) &#123;</span><br><span class="line">            <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Document</span>();</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">LongPoint</span>(<span class="string">&quot;ID&quot;</span>, i));</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;title&quot;</span>, i + <span class="string">&quot;title&quot;</span>, Field.Store.YES));</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;content&quot;</span>, i + <span class="string">&quot;content&quot;</span>, Field.Store.YES));</span><br><span class="line">            <span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;sex&quot;</span>, <span class="string">&quot;male&quot;</span>, Field.Store.YES));</span><br><span class="line">                document.add(<span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;tags&quot;</span>, <span class="string">&quot;The &quot;</span> + i + <span class="string">&quot;th male!&quot;</span>, Field.Store.YES));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;sex&quot;</span>, <span class="string">&quot;female&quot;</span>, Field.Store.YES));</span><br><span class="line">                document.add(<span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;tags&quot;</span>, <span class="string">&quot;The &quot;</span> + i + <span class="string">&quot;th female!&quot;</span>, Field.Store.YES));</span><br><span class="line">            &#125;</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">TextField</span>(<span class="string">&quot;hobbies&quot;</span>, <span class="string">&quot;I like playing the &quot;</span> + i + <span class="string">&quot; toys!&quot;</span>, Field.Store.YES));</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;testField1&quot;</span>, RandomStringUtils.randomAlphabetic(<span class="number">10</span>), Field.Store.YES));</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;testField2&quot;</span>, RandomStringUtils.randomAlphabetic(<span class="number">10</span>), Field.Store.YES));</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;testField3&quot;</span>, RandomStringUtils.randomAlphabetic(<span class="number">10</span>), Field.Store.YES));</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;testField4&quot;</span>, RandomStringUtils.randomAlphabetic(<span class="number">10</span>), Field.Store.YES));</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;testField5&quot;</span>, RandomStringUtils.randomAlphabetic(<span class="number">10</span>), Field.Store.YES));</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;testField6&quot;</span>, RandomStringUtils.randomAlphabetic(<span class="number">10</span>), Field.Store.YES));</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;testField7&quot;</span>, RandomStringUtils.randomAlphabetic(<span class="number">10</span>), Field.Store.YES));</span><br><span class="line">            document.add(<span class="keyword">new</span> <span class="title class_">StringField</span>(<span class="string">&quot;testField8&quot;</span>, RandomStringUtils.randomAlphabetic(<span class="number">10</span>), Field.Store.YES));</span><br><span class="line">            indexWriter.addDocument(document);</span><br><span class="line">        &#125;</span><br><span class="line">        indexWriter.commit();</span><br><span class="line">        indexWriter.close();</span><br><span class="line">        indexSearcher = <span class="keyword">new</span> <span class="title class_">IndexSearcher</span>(DirectoryReader.open(ramDirectory));</span><br><span class="line">        query = LongPoint.newRangeQuery(<span class="string">&quot;ID&quot;</span>, <span class="number">0</span>, Math.addExact(<span class="number">1000000</span>, -<span class="number">1</span>));</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> indexSearcher.count(query);</span><br><span class="line">        <span class="type">long</span> <span class="variable">total</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            Future&lt;Long&gt; submit = Executors.newSingleThreadExecutor().submit(<span class="keyword">new</span> <span class="title class_">Worker1</span>(count));<span class="comment">//average time cost by 10 times : 8024 ms</span></span><br><span class="line">            <span class="comment">//Future&lt;Long&gt; submit = Executors.newSingleThreadExecutor().submit(new Worker2(count));//average time cost by 10 times : 6507 ms</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                total += submit.get();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException | ExecutionException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;average time cost by 10 times : &quot;</span> + total / <span class="number">10</span> + <span class="string">&quot; ms&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Worker1</span> <span class="keyword">implements</span> <span class="title class_">Callable</span>&lt;Long&gt; &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Worker1</span><span class="params">(<span class="type">int</span> count)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.count = count;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> Long <span class="title function_">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">            <span class="type">Stopwatch</span> <span class="variable">started</span> <span class="operator">=</span> Stopwatch.createStarted();</span><br><span class="line">            List&lt;String&gt; titles = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">            <span class="keyword">if</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="type">TopDocs</span> <span class="variable">docs</span> <span class="operator">=</span> indexSearcher.search(query, count);</span><br><span class="line">                ScoreDoc[] scoreDocs = docs.scoreDocs;</span><br><span class="line">                <span class="keyword">for</span> (ScoreDoc scoreDoc : scoreDocs) &#123;</span><br><span class="line">                    <span class="type">Document</span> <span class="variable">doc</span> <span class="operator">=</span> indexSearcher.doc(scoreDoc.doc);</span><br><span class="line">                    titles.add(doc.get(<span class="string">&quot;title&quot;</span>));</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">&quot;No DocumentStoredFieldVisitor get title counts = &quot;</span> + titles.size());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">long</span> <span class="variable">elapsed</span> <span class="operator">=</span> started.elapsed(TimeUnit.MILLISECONDS);</span><br><span class="line">            System.out.println(<span class="string">&quot;No DocumentStoredFieldVisitor: &quot;</span> + elapsed + <span class="string">&quot; ms&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> elapsed;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Worker2</span> <span class="keyword">implements</span> <span class="title class_">Callable</span>&lt;Long&gt; &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Worker2</span><span class="params">(<span class="type">int</span> count)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.count = count;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> Long <span class="title function_">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">            <span class="type">Stopwatch</span> <span class="variable">started</span> <span class="operator">=</span> Stopwatch.createStarted();</span><br><span class="line">            Set&lt;String&gt; title = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">            title.add(<span class="string">&quot;title&quot;</span>);</span><br><span class="line">            <span class="type">DocumentStoredFieldVisitor</span> <span class="variable">titleVisitor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DocumentStoredFieldVisitor</span>(title);</span><br><span class="line">            <span class="keyword">if</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="type">TopDocs</span> <span class="variable">docs</span> <span class="operator">=</span> indexSearcher.search(query, count);</span><br><span class="line">                ScoreDoc[] scoreDocs = docs.scoreDocs;</span><br><span class="line">                <span class="keyword">for</span> (ScoreDoc scoreDoc : scoreDocs) &#123;</span><br><span class="line">                    indexSearcher.doc(scoreDoc.doc, titleVisitor);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> titleVisitor.getDocument();</span><br><span class="line">                System.out.println(<span class="string">&quot;With DocumentStoredFieldVisitor get title counts = &quot;</span> + document.getValues(<span class="string">&quot;title&quot;</span>).length);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">long</span> <span class="variable">elapsed</span> <span class="operator">=</span> started.elapsed(TimeUnit.MILLISECONDS);</span><br><span class="line">            System.out.println(<span class="string">&quot;With DocumentStoredFieldVisitor: &quot;</span> + elapsed + <span class="string">&quot; ms&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> elapsed;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在索引1000000个文档之后，每个文档添加14个不同类型的Field，分别运行Worker1和Worker2，进行十次的基于ID的范围查询，取十次结果的平均值，得到使用DocumentStoredFieldVisitor平均单次耗时6507 ms，不使用DocumentStoredFieldVisitor平均单次耗时8024 ms。可见性能提升还是很可观的，当然该测试并不权威，但是可以给出一个简单直观的比较。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE-%E5%88%98%E7%A5%A5%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE-%E5%88%98%E7%A5%A5%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" class="post-title-link" itemprop="url">思维导图-刘祥的知识图谱</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-31 00:00:02" itemprop="dateCreated datePublished" datetime="2017-05-31T00:00:02+00:00">2017-05-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:27" itemprop="dateModified" datetime="2024-01-26T12:42:27+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-3/83961861.jpg"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE-java%E6%9E%B6%E6%9E%84%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE-java%E6%9E%B6%E6%9E%84%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">思维导图-java架构相关</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-31 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-31T00:00:00+00:00">2017-05-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/49529571.jpg"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/my-library-time-in-SHU/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/my-library-time-in-SHU/" class="post-title-link" itemprop="url">我的图书馆时光</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-23 08:30:19" itemprop="dateCreated datePublished" datetime="2017-05-23T08:30:19+00:00">2017-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="我的图书馆时光"><a href="#我的图书馆时光" class="headerlink" title="我的图书馆时光"></a>我的图书馆时光</h3><p><strong>姓名</strong>：codepub&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>学号</strong>：13721035&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>学院</strong>：计算机工程与科学学院</p>
+<h4 id="一、入馆记录"><a href="#一、入馆记录" class="headerlink" title="一、入馆记录"></a>一、入馆记录</h4><p>2013年—2016年4月，一共到馆205次，第一次走进宝山校区图书馆是在2013年9月6日10时21分22秒。<br><img src="https://raw.githubusercontent.com/shijiebei2009/img/master/blog/my_library_time_1.jpg"><br>13级硕士生平均入馆138.52次，我的次数是205次，我的入馆次数是平均次数的1.48倍。</p>
+<h4 id="二、选座记录"><a href="#二、选座记录" class="headerlink" title="二、选座记录"></a>二、选座记录</h4><p>2013年—2013年10月，一共预约座位4次，第一次预约的是本部图书馆的二楼综合阅览（东区）的141号座位，时间在2013年9月6日10时23分1秒。<br><img src="https://raw.githubusercontent.com/shijiebei2009/img/master/blog/my_library_time_2.jpg"></p>
+<h4 id="三、上机记录"><a href="#三、上机记录" class="headerlink" title="三、上机记录"></a>三、上机记录</h4><p>您无上机记录。</p>
+<h4 id="四、借还记录"><a href="#四、借还记录" class="headerlink" title="四、借还记录"></a>四、借还记录</h4><p>2013年—2015年10月，一共借还图书69本，我第一次借还的书籍是《语义Web技术基础》，借阅时间是2013年11月11日，我最后一次借还的书籍是《文明之光.:第三册》，借阅时间是2015年10月18日，我的借阅偏好是：专业技术。<br><img src="https://raw.githubusercontent.com/shijiebei2009/img/master/blog/my_library_time_3.jpg"><br>13级硕士生人均借还30.76册，我借还图书69册，我的借阅量是平均量的2.24倍。</p>
+<h4 id="五、我的借还清单"><a href="#五、我的借还清单" class="headerlink" title="五、我的借还清单"></a>五、我的借还清单</h4><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>书名</th>
+<th>作者</th>
+<th>出版社</th>
+<th>出版年</th>
+<th>借阅时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>语义Web技术基础</td>
+<td>Pascal Hitzler … [等] 著</td>
+<td>清华大学出版社</td>
+<td>2012</td>
+<td>20131111</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Hadoop实战</td>
+<td>(美) Chuck Lam著</td>
+<td>人民邮电出版社</td>
+<td>2011</td>
+<td>20131117</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Hadoop实战</td>
+<td>陆嘉恒著</td>
+<td>机械工业出版社</td>
+<td>2011</td>
+<td>20131117</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Lucene in action中文版</td>
+<td>(美) Otis Gospodnetic, Erik Hatcher著</td>
+<td>电子工业出版社</td>
+<td>2007</td>
+<td>20131117</td>
+</tr>
+<tr>
+<td>5</td>
+<td>解密搜索引擎技术实战 :Lucene &amp; Java精华版</td>
+<td>罗刚编著</td>
+<td>电子工业出版社</td>
+<td>2011</td>
+<td>20131117</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Hadoop源代码分析</td>
+<td>张鑫著</td>
+<td>中国铁道出版社</td>
+<td>2013</td>
+<td>20131117</td>
+</tr>
+<tr>
+<td>7</td>
+<td>搜索引擎原理与实践</td>
+<td>袁津生, 李群, 蔡岳编著</td>
+<td>北京邮电大学出版社</td>
+<td>2008</td>
+<td>20131117</td>
+</tr>
+<tr>
+<td>8</td>
+<td>数据挖掘原理与算法</td>
+<td>邵峰晶 … [等] 编著</td>
+<td>科学出版社</td>
+<td>2009</td>
+<td>20131117</td>
+</tr>
+<tr>
+<td>9</td>
+<td>大数据时代的历史机遇 :产业变革与数据科学</td>
+<td>赵国栋 … [等] 著</td>
+<td>清华大学出版社</td>
+<td>2013</td>
+<td>20131117</td>
+</tr>
+<tr>
+<td>10</td>
+<td>自己动手写网络爬虫</td>
+<td>罗刚, 王振东编著</td>
+<td>清华大学出版社</td>
+<td>2010</td>
+<td>20131117</td>
+</tr>
+<tr>
+<td>11</td>
+<td>增长的极限 :the 30-year update</td>
+<td>(美) 德内拉·梅多斯, 乔根·兰德斯, 丹尼斯·梅多斯著</td>
+<td>机械工业出版社</td>
+<td>2006</td>
+<td>20131117</td>
+</tr>
+<tr>
+<td>12</td>
+<td>大数据挑战与NoSQL数据库技术</td>
+<td>陆嘉恒编著</td>
+<td>电子工业出版社</td>
+<td>2013</td>
+<td>20131117</td>
+</tr>
+<tr>
+<td>13</td>
+<td>迅速搭建全文搜索平台 :开源搜索引擎实战教程</td>
+<td>于天恩编著</td>
+<td>清华大学出版社</td>
+<td>2007</td>
+<td>20131117</td>
+</tr>
+<tr>
+<td>14</td>
+<td>数据挖掘与数据化运营实战 :思路、方法、技巧与应用</td>
+<td>卢辉著</td>
+<td>机械工业出版社</td>
+<td>2013</td>
+<td>20131117</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Web 3.0 :互联网的语义革命 :the power of the Semantic Web to transform your business</td>
+<td>(美) 大卫·西格尔著</td>
+<td>科学出版社</td>
+<td>2013</td>
+<td>20131128</td>
+</tr>
+<tr>
+<td>16</td>
+<td>计算智能 :理论、技术与应用</td>
+<td>丁永生编著</td>
+<td>科学出版社</td>
+<td>2004</td>
+<td>20131128</td>
+</tr>
+<tr>
+<td>17</td>
+<td>PHP开发宝典</td>
+<td>刘欣, 李慧等编著</td>
+<td>机械工业出版社</td>
+<td>2012</td>
+<td>20131128</td>
+</tr>
+<tr>
+<td>18</td>
+<td>物联网关键技术</td>
+<td>徐勇军, 刘禹, 王峰编著</td>
+<td>电子工业出版社</td>
+<td>2012</td>
+<td>20131128</td>
+</tr>
+<tr>
+<td>19</td>
+<td>下一代互联网</td>
+<td>吴建平, 李星主编</td>
+<td>电子工业出版社</td>
+<td>2012</td>
+<td>20131128</td>
+</tr>
+<tr>
+<td>20</td>
+<td>物联网与云计算</td>
+<td>张为民, 赵立君, 刘玮编著</td>
+<td>电子工业出版社</td>
+<td>2012</td>
+<td>20131128</td>
+</tr>
+<tr>
+<td>21</td>
+<td>互联网之美</td>
+<td>张浩编著</td>
+<td>清华大学出版社</td>
+<td>2013</td>
+<td>20131128</td>
+</tr>
+<tr>
+<td>22</td>
+<td>QQ帮主 :马化腾其人</td>
+<td>刘世英, 李良忠著</td>
+<td>经济日报出版社</td>
+<td>2010</td>
+<td>20131202</td>
+</tr>
+<tr>
+<td>23</td>
+<td>马化腾谈创业与管理</td>
+<td>谢森任著</td>
+<td>海天出版社</td>
+<td>2011</td>
+<td>20131202</td>
+</tr>
+<tr>
+<td>24</td>
+<td>十亿美金的教训</td>
+<td>林军, 唐宏梅著</td>
+<td>浙江大学出版社</td>
+<td>2011</td>
+<td>20131202</td>
+</tr>
+<tr>
+<td>25</td>
+<td>企鹅凶猛 :马化腾的中国功夫</td>
+<td>薛芳著</td>
+<td>华文出版社</td>
+<td>2009</td>
+<td>20131202</td>
+</tr>
+<tr>
+<td>26</td>
+<td>中国互联网风云16年</td>
+<td>武帅著</td>
+<td>机械工业出版社</td>
+<td>2011</td>
+<td>20131202</td>
+</tr>
+<tr>
+<td>27</td>
+<td>矛盾与出路 :网络时代的文化价值观 :cultural values in the internet era</td>
+<td>金民卿, 王佳菲, 梁孝著</td>
+<td>经济科学出版社</td>
+<td>2013</td>
+<td>20131214</td>
+</tr>
+<tr>
+<td>28</td>
+<td>问道云计算</td>
+<td>王鹏著</td>
+<td>人民邮电出版社</td>
+<td>2011</td>
+<td>20131214</td>
+</tr>
+<tr>
+<td>29</td>
+<td>大数据时代 :生活、工作与思维的大变革 :a revolution that will transform how we live,</td>
+<td>(英) 维克托·迈尔-舍恩伯格, 肯尼思·库克耶著</td>
+<td>浙江人民出版社</td>
+<td>2013</td>
+<td>20131214</td>
+</tr>
+<tr>
+<td>30</td>
+<td>云计算 :深刻改变未来</td>
+<td>张为民 … [等] 编著</td>
+<td>科学出版社</td>
+<td>2009</td>
+<td>20131214</td>
+</tr>
+<tr>
+<td>31</td>
+<td>基于认知与计算的事件语义学研究</td>
+<td>刘茂福, 胡慧君著</td>
+<td>科学出版社</td>
+<td>2013</td>
+<td>20131214</td>
+</tr>
+<tr>
+<td>32</td>
+<td>语义Web原理及应用</td>
+<td>高志强 … [等] 编著</td>
+<td>机械工业出版社</td>
+<td>2009</td>
+<td>20131214</td>
+</tr>
+<tr>
+<td>33</td>
+<td>语义网、社会网络计算与Web资源共享</td>
+<td>王莉著</td>
+<td>电子工业出版社</td>
+<td>2011</td>
+<td>20131214</td>
+</tr>
+<tr>
+<td>34</td>
+<td>语义网原理与技术</td>
+<td>陆建江 … [等] 编著</td>
+<td>科学出版社</td>
+<td>2007</td>
+<td>20131214</td>
+</tr>
+<tr>
+<td>35</td>
+<td>Semantic web for the working ontologist : modeling in RDF, RDFS and OWL &#x3D; 实用语义网 : RDFS与O</td>
+<td>Allemang, Dean.</td>
+<td>Beijing : Posts &amp; Telecom Press, 2009.</td>
+<td>2009</td>
+<td>20131214</td>
+</tr>
+<tr>
+<td>36</td>
+<td>语义Web技术基础</td>
+<td>Pascal Hitzler … [等] 著</td>
+<td>清华大学出版社</td>
+<td>2012</td>
+<td>20131219</td>
+</tr>
+<tr>
+<td>37</td>
+<td>Head First PHP &amp; MySQL</td>
+<td>Lynn Beighley, Michael Morrison著</td>
+<td>中国电力出版社</td>
+<td>2010</td>
+<td>20131219</td>
+</tr>
+<tr>
+<td>38</td>
+<td>云计算与分布式系统 :从并行处理到物联网 :from parallel processing to the internet o</td>
+<td>(美) Kai Hwang, Geoffrey C. Fox, Jack J. Dongarra著</td>
+<td>机械工业出版社</td>
+<td>2013</td>
+<td>20131229</td>
+</tr>
+<tr>
+<td>39</td>
+<td>新概念英语语法新思维.:第四册</td>
+<td>梅雪主编</td>
+<td>中国石化出版社</td>
+<td>2010</td>
+<td>20131229</td>
+</tr>
+<tr>
+<td>40</td>
+<td>程序员的数学</td>
+<td>(日) 结城浩著</td>
+<td>人民邮电出版社</td>
+<td>2012</td>
+<td>20131229</td>
+</tr>
+<tr>
+<td>41</td>
+<td>新概念英语语法新思维.:第三册</td>
+<td>新概念英语学习中心编</td>
+<td>中国石化出版社</td>
+<td>2010</td>
+<td>20131229</td>
+</tr>
+<tr>
+<td>42</td>
+<td>精通Spring :Java轻量级架构开发实践</td>
+<td>孟劼编著</td>
+<td>人民邮电出版社</td>
+<td>2006</td>
+<td>20131229</td>
+</tr>
+<tr>
+<td>43</td>
+<td>Hadoop技术内幕,:深入解析Hadoop Common和HDFS架构设计与实现原理 :in-depth study of C</td>
+<td>蔡斌, 陈湘萍著</td>
+<td>机械工业出版社</td>
+<td>2013</td>
+<td>20131229</td>
+</tr>
+<tr>
+<td>44</td>
+<td>数据挖掘原理与算法</td>
+<td>邵峰晶 … [等] 编著</td>
+<td>科学出版社</td>
+<td>2009</td>
+<td>20140105</td>
+</tr>
+<tr>
+<td>45</td>
+<td>Lucene in action中文版</td>
+<td>(美) Otis Gospodnetic, Erik Hatcher著</td>
+<td>电子工业出版社</td>
+<td>2007</td>
+<td>20140105</td>
+</tr>
+<tr>
+<td>46</td>
+<td>语义Web技术基础</td>
+<td>Pascal Hitzler … [等] 著</td>
+<td>清华大学出版社</td>
+<td>2012</td>
+<td>20140219</td>
+</tr>
+<tr>
+<td>47</td>
+<td>Hadoop技术内幕,:深入解析Hadoop Common和HDFS架构设计与实现原理 :in-depth study of C</td>
+<td>蔡斌, 陈湘萍著</td>
+<td>机械工业出版社</td>
+<td>2013</td>
+<td>20140219</td>
+</tr>
+<tr>
+<td>48</td>
+<td>精通Spring :Java轻量级架构开发实践</td>
+<td>孟劼编著</td>
+<td>人民邮电出版社</td>
+<td>2006</td>
+<td>20140219</td>
+</tr>
+<tr>
+<td>49</td>
+<td>Lucene in action中文版</td>
+<td>(美) Otis Gospodnetic, Erik Hatcher著</td>
+<td>电子工业出版社</td>
+<td>2007</td>
+<td>20140219</td>
+</tr>
+<tr>
+<td>50</td>
+<td>基于认知与计算的事件语义学研究</td>
+<td>刘茂福, 胡慧君著</td>
+<td>科学出版社</td>
+<td>2013</td>
+<td>20140219</td>
+</tr>
+<tr>
+<td>51</td>
+<td>编译原理 :编译程序构造与实践</td>
+<td>张幸儿编著</td>
+<td>机械工业出版社</td>
+<td>2008</td>
+<td>20140325</td>
+</tr>
+<tr>
+<td>52</td>
+<td>编译原理</td>
+<td>主编王磊, 胡元义</td>
+<td>科学出版社</td>
+<td>2009</td>
+<td>20140325</td>
+</tr>
+<tr>
+<td>53</td>
+<td>基于认知与计算的事件语义学研究</td>
+<td>刘茂福, 胡慧君著</td>
+<td>科学出版社</td>
+<td>2013</td>
+<td>20140325</td>
+</tr>
+<tr>
+<td>54</td>
+<td>编译原理及实现</td>
+<td>孙悦红编著</td>
+<td>清华大学出版社</td>
+<td>2011</td>
+<td>20140325</td>
+</tr>
+<tr>
+<td>55</td>
+<td>编译原理及编译程序构造</td>
+<td>薛联凤, 秦振松编著</td>
+<td>东南大学出版社</td>
+<td>2013</td>
+<td>20140325</td>
+</tr>
+<tr>
+<td>56</td>
+<td>C++程序设计教程</td>
+<td>钱能主编</td>
+<td>清华大学出版社</td>
+<td>1999</td>
+<td>20140325</td>
+</tr>
+<tr>
+<td>57</td>
+<td>新概念英语词汇精典.:4</td>
+<td>主编金利</td>
+<td>北京语言大学出版社</td>
+<td>2010</td>
+<td>20140325</td>
+</tr>
+<tr>
+<td>58</td>
+<td>新概念英语词汇精典.:3</td>
+<td>主编金利</td>
+<td>北京语言大学出版社</td>
+<td>2010</td>
+<td>20140325</td>
+</tr>
+<tr>
+<td>59</td>
+<td>单词记忆大革命 :用耳朵记单词,:CET-6</td>
+<td>金莉</td>
+<td>世界图书出版公司</td>
+<td>2007</td>
+<td>20140325</td>
+</tr>
+<tr>
+<td>60</td>
+<td>精通Spring :Java轻量级架构开发实践</td>
+<td>孟劼编著</td>
+<td>人民邮电出版社</td>
+<td>2006</td>
+<td>20140414</td>
+</tr>
+<tr>
+<td>61</td>
+<td>Lucene in action中文版</td>
+<td>(美) Otis Gospodnetic, Erik Hatcher著</td>
+<td>电子工业出版社</td>
+<td>2007</td>
+<td>20140414</td>
+</tr>
+<tr>
+<td>62</td>
+<td>语义Web技术基础</td>
+<td>Pascal Hitzler … [等] 著</td>
+<td>清华大学出版社</td>
+<td>2012</td>
+<td>20140414</td>
+</tr>
+<tr>
+<td>63</td>
+<td>新概念英语词汇精典.:3</td>
+<td>主编金利</td>
+<td>北京语言大学出版社</td>
+<td>2010</td>
+<td>20140511</td>
+</tr>
+<tr>
+<td>64</td>
+<td>新概念英语词汇精典.:4</td>
+<td>主编金利</td>
+<td>北京语言大学出版社</td>
+<td>2010</td>
+<td>20140511</td>
+</tr>
+<tr>
+<td>65</td>
+<td>基于认知与计算的事件语义学研究</td>
+<td>刘茂福, 胡慧君著</td>
+<td>科学出版社</td>
+<td>2013</td>
+<td>20140511</td>
+</tr>
+<tr>
+<td>66</td>
+<td>Java web典型模块与项目实战大全 :49.5小时多媒体教学视频</td>
+<td>常建功等编著</td>
+<td>清华大学出版社</td>
+<td>2011</td>
+<td>20150316</td>
+</tr>
+<tr>
+<td>67</td>
+<td>英语思维是这样炼成的</td>
+<td>王乐平著</td>
+<td>华南理工大学出版社</td>
+<td>2010</td>
+<td>20150316</td>
+</tr>
+<tr>
+<td>68</td>
+<td>文明之光.:第二册</td>
+<td>吴军著</td>
+<td>人民邮电出版社</td>
+<td>2014</td>
+<td>20151018</td>
+</tr>
+<tr>
+<td>69</td>
+<td>文明之光.:第三册</td>
+<td>吴军著</td>
+<td>人民邮电出版社</td>
+<td>2014</td>
+<td>20151018</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E6%89%B9%E5%A4%84%E7%90%86%E8%87%AA%E5%8A%A8%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/%E6%89%B9%E5%A4%84%E7%90%86%E8%87%AA%E5%8A%A8%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4%E8%A1%8C/" class="post-title-link" itemprop="url">批处理自动输入命令行</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-23 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-23T00:00:00+00:00">2017-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>从windows上往Linux上传送文件的时候，安装openSSH后，在cmd中使用scp命令，需要在命令执行后输入密码，这样就无法在程序中调用。批处理也不是很熟，在网上找了一些资料后结果如下：因为runas命令也有类似情况，网上一般都是以此为例<br>1.<a target="_blank" rel="noopener" href="http://www.cn-dos.net/forum/viewthread.php?tid=34574">http://www.cn-dos.net/forum/viewthread.php?tid=34574</a></p>
+<p>[c-sharp] view plain copy</p>
+<ul>
+<li>方法一：使用VBS的SendKeys来输入密码  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo set pws=WScript.CreateObject(&quot;WScript.Shell&quot;)&gt;%temp%/pws.vbs  </span><br><span class="line">echo pws.SendKeys &quot;1&#123;ENTER&#125;&quot;&gt;&gt;%temp%/pws.vbs  </span><br><span class="line">wscript %temp%/pws.vbs&amp;runas /u:test1 cmd.exe  </span><br></pre></td></tr></table></figure></li>
+<li>方法二：使用&#x2F;savecred参数<br>独立用户执行程序时第一次需要建立凭据，其间输入密码是不会回显的，你看不到，输了后回车即可。<br>以后在运行就不需要输入密码了。  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">runas /u:test1 cmd.exe  输入密码并回车  </span><br><span class="line">runas /savecred /u:test1 explorer  不用输密码了  </span><br></pre></td></tr></table></figure></li>
+<li>方法三：用PsTools工具中的PsExec来替代Runas</li>
+</ul>
+<hr>
+<h1 id="Rem-表白记事本"><a href="#Rem-表白记事本" class="headerlink" title="Rem 表白记事本"></a>Rem 表白记事本</h1><p>vbs 用sendkeys 模拟键盘自动输入  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Dim wsh</span><br><span class="line">Set wsh= CreateObject(&quot;wscript.shell&quot;)</span><br><span class="line">wsh.Run &quot;notepad&quot;</span><br><span class="line">WScript.Sleep 100</span><br><span class="line">wsh.SendKeys &quot;I&quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot; &quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot;L&quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot;O&quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot;V&quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot;E&quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot;  &quot;</span><br><span class="line">WScript.Sleep 400</span><br><span class="line">wsh.SendKeys &quot;U&quot;</span><br><span class="line">Set wsh=Nothing</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://blog.163.com/weishao_blog/blog/static/21510302920144711109954/">http://blog.163.com/weishao_blog/blog/static/21510302920144711109954/</a></p>
+<ul>
+<li><p>如何实现自动输入账号密码登陆</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">on error resume next</span><br><span class="line">dim WshShell</span><br><span class="line">set WshShell=CreateObject(&quot;WScript.Shell&quot;)</span><br><span class="line">WshShell.run&quot;http://WWW.BAIDU.COM&quot;</span><br><span class="line">WScript.Sleep 1200</span><br><span class="line">WshShell.Sendkeys&quot;输入帐号&quot;</span><br><span class="line">WScript.Sleep 1000</span><br><span class="line">WshShell.Sendkeys&quot;&#123;Tab&#125;&quot;</span><br><span class="line">WScript.Sleep 1000</span><br><span class="line">WshShell.Sendkeys&quot;输入密码&#123;enter&#125;&quot;</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://tieba.baidu.com/p/3418844408">http://tieba.baidu.com/p/3418844408</a></p>
+</li>
+<li><p>用vbs实现runas命令自动输入密码的问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Const AppPath = &quot;cmd /k runas /user:izual.4@qq.com &quot;&quot;explorer c:\&quot;&quot;&quot;</span><br><span class="line">dim aaa</span><br><span class="line">msgbox AppPath </span><br><span class="line">aaa = InputBox(&quot;请输入巡管帐号的密码&quot;,&quot;输入&quot;)</span><br><span class="line">Set objShell = CreateObject(&quot;Wscript.Shell&quot;)</span><br><span class="line">objshell.Run AppPath</span><br><span class="line">WScript.Sleep 1000</span><br><span class="line">objshell.SendKeys aaa</span><br><span class="line">objshell.SendKeys &quot;&#123;Enter&#125;&quot;</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://tieba.baidu.com/p/1926778758">http://tieba.baidu.com/p/1926778758</a></p>
+</li>
+</ul>
+<hr>
+<h1 id="自动输入-连续执行"><a href="#自动输入-连续执行" class="headerlink" title="自动输入 &amp; 连续执行"></a>自动输入 &amp; 连续执行</h1><ul>
+<li>all 1+.bat.vbs<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x27;call &quot;1.xcopy unsigned.apk.bat&quot;&#x27;</span><br><span class="line">&#x27;call &quot;2.signed.bat&quot;&#x27;</span><br><span class="line">&#x27;call &quot;3.adb install.bat&quot;&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x27;开始&#x27;</span><br><span class="line">Dim wsh</span><br><span class="line">Set wsh= CreateObject(&quot;wscript.shell&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">wsh.run &quot;&quot;&quot;0.cordova build android --release.bat&quot;&quot;&quot;,,true</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">wsh.run &quot;&quot;&quot;1.xcopy unsigned.apk.bat&quot;&quot;&quot;,,true</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">wsh.run &quot;2.signed.bat &amp; 3.adb_install.bat&quot;</span><br><span class="line">WScript.Sleep 500</span><br><span class="line">wsh.SendKeys &quot;**** **** &#123;enter&#125;&#123;enter&#125;&quot;</span><br><span class="line">wsh.SendKeys &quot; **** &#123;enter&#125;&#123;enter&#125;&quot;</span><br></pre></td></tr></table></figure></li>
+<li>VBS注释 ： ‘开始’</li>
+<li>空格路径：<code> &quot;&quot;&quot;* * &quot;&quot;&quot;</code></li>
+<li>连续执行：<code> &quot;2.signed.bat &amp; 3.adb_install.bat&quot;</code></li>
+<li>延迟输入：<code> wsh.SendKeys</code></li>
+</ul>
+<h1 id="批处理注释"><a href="#批处理注释" class="headerlink" title="批处理注释"></a>批处理注释</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1、:: 注释内容（第一个冒号后也可以跟任何一个非字母数字的字符）</span><br><span class="line"> 2、rem 注释内容（不能出现重定向符号和管道符号）</span><br><span class="line"> 3、echo 注释内容（不能出现重定向符号和管道符号）〉nul</span><br><span class="line"> 4、if not exist nul 注释内容（不能出现重定向符号和管道符号）</span><br><span class="line"> 5、:注释内容（注释文本不能与已有标签重名）</span><br><span class="line"> 6、%注释内容%（可以用作行间注释，不能出现重定向符号和管道符号）</span><br><span class="line"> 7、goto 标签 注释内容（可以用作说明goto的条件和执行内容）</span><br><span class="line"> 8、:标签 注释内容（可以用作标签下方段的执行内容）</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<p><code>批处理自动输入命令行 - 潜行 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/bao_qibiao/article/details/5360786">http://blog.csdn.net/bao_qibiao/article/details/5360786</a></p>
+<p><code>使用Runas，告别我心中永远的痛 - 桌面虚拟化杂谈 - 51CTO技术博客</code><br><a target="_blank" rel="noopener" href="http://virtualbus.blog.51cto.com/345374/459234">http://virtualbus.blog.51cto.com/345374/459234</a></p>
+<p><code>VBS中Run和Exec的区别_vbs_脚本之家</code><br><a target="_blank" rel="noopener" href="http://www.jb51.net/article/78086.htm">http://www.jb51.net/article/78086.htm</a></p>
+<p><code>vbs Run方法和Exec方法</code><br><a target="_blank" rel="noopener" href="http://chenpeng.info/html/1928">http://chenpeng.info/html/1928</a></p>
+<p><code>bat批处理的注释语句 - 快乐&amp;&amp;平凡 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/wh_19910525/article/details/8125762">http://blog.csdn.net/wh_19910525/article/details/8125762</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/linux%20alias/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux%20alias/" class="post-title-link" itemprop="url">linux alias</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-21 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-21T00:00:00+00:00">2017-05-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="linux-关闭进程的集中方式-alias"><a href="#linux-关闭进程的集中方式-alias" class="headerlink" title="linux 关闭进程的集中方式-alias"></a>linux 关闭进程的集中方式-alias</h1><ul>
+<li><p>进程，kill<br><code>kill -9 &lt;pid&gt;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23j23f6aaZ ~]# ps -ef|grep nginx|grep -v grep</span><br><span class="line">nobody   25268 28893  0 May11 ?        05:52:46 nginx: worker process</span><br><span class="line">root     28893     1  0 Apr08 ?        00:00:00 nginx: master process ./nginx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# pidof nginx</span><br><span class="line">28893 25268</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# pgrep nginx</span><br><span class="line">25268</span><br><span class="line">28893</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>依据服务名， Xargs接受管道符参数 ，kill<br><code>ps -ef | grep &lt;p_name&gt; | grep -v grep |  xargs kill</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep nginx | grep -v grep | awk &#x27;&#123;print $2&#125;&#x27; |  xargs kill  -9</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>系统别名，kill<br><code>alias killng=&quot; ps -ef | grep nginx | grep -v grep | awk &#39;&#123;print $2&#125;&#39; |  xargs kill  -9 &quot;</code></p>
+</li>
+</ul>
+<hr>
+<h1 id="显示shells集合-【-Shell有这么几种，sh、bash、csh】"><a href="#显示shells集合-【-Shell有这么几种，sh、bash、csh】" class="headerlink" title="显示shells集合 【 Shell有这么几种，sh、bash、csh】"></a>显示shells集合 【 Shell有这么几种，sh、bash、csh】</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23j23f6aaZ ~]# cat /etc/shells</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/bash</span><br><span class="line">/sbin/nologin</span><br><span class="line">/bin/dash</span><br><span class="line">/bin/tcsh</span><br><span class="line">/bin/csh</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Mac 多了一个 <code>zsh</code></li>
+</ul>
+<p> Linux 系统和 OS X 系统的默认 Shell 都是 bash，但是真正强大的 Shell 是深藏不露的 zsh， 这货绝对是马车中的跑车，跑车中的飞行车，史称『终极 Shell』</p>
+<p>快速上手的zsh项目，叫做「oh my zsh」<br>Github 网址是： <a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh">https://github.com/robbyrussell/oh-my-zsh</a></p>
+<h1 id="查看已经配置的alias"><a href="#查看已经配置的alias" class="headerlink" title="查看已经配置的alias"></a>查看已经配置的<code>alias</code></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23j23f6aaZ ~]# alias</span><br><span class="line">alias catalog=&#x27;tail -f $&#123;CATALINA_HOME&#125;/logs/catalina.out&#x27;</span><br><span class="line">alias cfg=&#x27;cd $&#123;CFG_HOME&#125;&#x27;</span><br><span class="line">alias class=&#x27;cd $&#123;CATALINA_HOME&#125;/webapps/server/WEB-INF/classes&#x27;</span><br><span class="line">alias cp=&#x27;cp -i&#x27;</span><br><span class="line">alias help=&#x27;sh $&#123;CFG_HOME&#125;/server.sh help&#x27;</span><br><span class="line">alias k12=&#x27;cd /usr/local/apache-tomcat-7.0.59/bin;./shutdown.sh;sleep 1;./startup.sh&#x27;</span><br><span class="line">alias l.=&#x27;ls -d .* --color=auto&#x27;</span><br><span class="line">alias ll=&#x27;ls -l --color=auto&#x27;</span><br><span class="line">alias local=&#x27;cd $&#123;CATALINA_HOME&#125;/local&#x27;</span><br><span class="line">alias log=&#x27;tail -f $&#123;CATALINA_HOME&#125;/local/server.log&#x27;</span><br><span class="line">alias logs=&#x27;cd $&#123;CATALINA_HOME&#125;/logs&#x27;</span><br><span class="line">alias ls=&#x27;ls --color=auto&#x27;</span><br><span class="line">alias mv=&#x27;mv -i&#x27;</span><br><span class="line">alias nginx=&#x27;/usr/local/nginx/sbin/nginx&#x27;</span><br><span class="line">alias nginxid=&#x27;cat /usr/local/nginx/logs/nginx.pid&#x27;</span><br><span class="line">alias pc=&#x27;cd /usr/local/apache-tomcat-7.0.62/bin;./shutdown.sh;sleep 1;./startup.sh&#x27;</span><br><span class="line">alias restart=&#x27;sh $&#123;CFG_HOME&#125;/server.sh restart&#x27;</span><br><span class="line">alias rm=&#x27;rm -i&#x27;</span><br><span class="line">alias start=&#x27;sh $&#123;CFG_HOME&#125;/server.sh start&#x27;</span><br><span class="line">alias status=&#x27;sh $&#123;CFG_HOME&#125;/server.sh status&#x27;</span><br><span class="line">alias stop=&#x27;sh $&#123;CFG_HOME&#125;/server.sh stop&#x27;</span><br><span class="line">alias version=&#x27;java Version&#x27;</span><br><span class="line">alias webapps=&#x27;cd $&#123;CATALINA_HOME&#125;/webapps&#x27;</span><br><span class="line">alias which=&#x27;alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde&#x27;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="安装zsh"><a href="#安装zsh" class="headerlink" title="安装zsh"></a>安装<code>zsh</code></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ ll</span><br><span class="line">total 0</span><br><span class="line">drwx------@  3 liuxiang  staff   102B  7 24 13:26 Applications</span><br><span class="line">drwx------+ 11 liuxiang  staff   374B  7 25 11:19 Desktop</span><br><span class="line">drwx------+  4 liuxiang  staff   136B  7 24 14:31 Documents</span><br><span class="line">drwx------+ 16 liuxiang  staff   544B  7 26 11:25 Downloads</span><br><span class="line">drwx------@ 58 liuxiang  staff   1.9K  7 24 21:38 Library</span><br><span class="line">drwx------+  3 liuxiang  staff   102B  7 24 11:02 Movies</span><br><span class="line">drwx------+  4 liuxiang  staff   136B  7 25 09:08 Music</span><br><span class="line">drwx------+  3 liuxiang  staff   102B  7 24 11:02 Pictures</span><br><span class="line">drwxr-xr-x+  5 liuxiang  staff   170B  7 24 11:02 Public</span><br></pre></td></tr></table></figure>
+<p><code>终极 Shell——ZSH - MacTalk - 知乎专栏 </code><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk">https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk</a></p>
+<p><code>robbyrussell/oh-my-zsh </code><br><a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh">https://github.com/robbyrussell/oh-my-zsh</a></p>
+<p><code>终极 Shell——ZSH - MacTalk - 知乎专栏 </code>  -<code>autojump</code><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk">https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk</a></p>
+<hr>
+<p><strong>参考</strong></p>
+<p><code>【转】linux下杀死进程（kill）的N种方法</code></p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/andy572633/article/details/7211546">http://blog.csdn.net/andy572633/article/details/7211546</a></p>
+<p><code>Oh My Zsh</code><br><a target="_blank" rel="noopener" href="http://ohmyz.sh/">http://ohmyz.sh/</a></p>
+<p><code>终极 Shell——ZSH</code></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk">https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E9%9B%86%E5%90%88-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/%E9%9B%86%E5%90%88-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">集合-数据结构</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-19 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-19T00:00:00+00:00">2017-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:17" itemprop="dateModified" datetime="2024-01-26T12:42:17+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="colletion-集合"><a href="#colletion-集合" class="headerlink" title="colletion 集合"></a>colletion 集合</h1><p>Collection<br>├List<br>│├LinkedList<br>│├ArrayList<br>│└Vector<br>│　└Stack<br>└Set<br>│├HashSet<br>│├TreeSet</p>
+<p>Vector与ArrayList一样，也是通过数组实现的，不同的是它支持线程的同步，即某一时刻只有一个线程能够写Vector(线程安全)，避免多线程同时写而引起的不一致性，但实现同步需要很高的花费，因此，访问它比访问ArrayList慢</p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-26/47993865.jpg"></p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-26/33139232.jpg"></p>
+<ul>
+<li>HashSet &#x2F; TreeSet (内存结构可见，Set均为Map实现)<br>HashSet内部就是使用Hashmap实现的，和Hashmap不同的是它不需要Key和Value两个值。<br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/ywl925/p/3865269.html">http://www.cnblogs.com/ywl925/p/3865269.html</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-7-22/27211841.jpg"></li>
+</ul>
+<hr>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>Map<br>├ HashMap 数组+链表-&gt;红黑树<br>├Hashtable   线程安全与null值不存储</p>
+<p>├LinkHashMap 双向链（left，right）<br>└WeakHashMap</p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-26/93117418.jpg"></p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-26/17405961.jpg"></p>
+<hr>
+<h1 id="Concurrent-并发"><a href="#Concurrent-并发" class="headerlink" title="Concurrent 并发"></a>Concurrent 并发</h1><p>├ ConcurrentMap 并发<br>│├ ConcurrentHashMap  并发</p>
+<p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-6-26/65851401.jpg"><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-7-22/55627263.jpg"></p>
+<p><code>Hashtable与ConcurrentHashMap区别 - wisgood的专栏 - CSDN博客</code></p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/wisgood/article/details/19338693">http://blog.csdn.net/wisgood/article/details/19338693</a></p>
+<p><code>Java之美[从菜鸟到高手演变]之HashMap、HashTable - 智慧演绎，无处不在 - CSDN博客</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/zhangerqing/article/details/8193118">http://blog.csdn.net/zhangerqing/article/details/8193118</a></p>
+<hr>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479978-eba64be1ecc7d6f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<hr>
+<p><code>java基础 - 简书</code><br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/4e734cbf192a">http://www.jianshu.com/p/4e734cbf192a</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/linux%20vi%20%E8%A1%8C%E5%8F%B7-%E4%BD%8D%E7%BD%AE-%E6%9F%A5%E6%89%BE-%E5%8C%BA%E9%97%B4-%E8%BE%93%E5%87%BA-%E8%BF%87%E6%BB%A4-%E4%B8%8B%E8%BD%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux%20vi%20%E8%A1%8C%E5%8F%B7-%E4%BD%8D%E7%BD%AE-%E6%9F%A5%E6%89%BE-%E5%8C%BA%E9%97%B4-%E8%BE%93%E5%87%BA-%E8%BF%87%E6%BB%A4-%E4%B8%8B%E8%BD%BD/" class="post-title-link" itemprop="url">linux vi 行号/位置/查找/区间/输出/过滤/下载</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-05-18 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-18T00:00:00+00:00">2017-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:28" itemprop="dateModified" datetime="2024-01-26T12:42:28+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="行号"><a href="#行号" class="headerlink" title="行号"></a>行号</h1><p>显示行号 <code>:nu</code><br>全文显示 <code>:set nu</code></p>
+<ul>
+<li>全文行数<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23huf4wo4Z logs]# wc -l localhost_access_log.2017-05-18.txt </span><br><span class="line">770460 localhost_access_log.2017-05-18.txt</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h1><p><code>gg</code>  跳到首一行</p>
+<p><code>GG</code>  跳到尾一行</p>
+<h1 id="查找（相对光标所在位置）"><a href="#查找（相对光标所在位置）" class="headerlink" title="查找（相对光标所在位置）"></a>查找（相对光标所在位置）</h1><p><code>/content</code>  （自上往下）</p>
+<ul>
+<li>下一个<code>n</code></li>
+<li>上一个<code>Shift+n</code></li>
+</ul>
+<p><code>?content</code>  （自 下 往 上 ）</p>
+<ul>
+<li>上 一个<code>n</code></li>
+<li>下 一个<code>Shift+n</code></li>
+</ul>
+<hr>
+<h1 id="打印出起始行和结束行之间的内容"><a href="#打印出起始行和结束行之间的内容" class="headerlink" title="打印出起始行和结束行之间的内容"></a>打印出起始行和结束行之间的内容</h1><p><code>sed -n  &#39;210048,210049p&#39;  catalina.out</code></p>
+<ul>
+<li>输出文件<br><code>sed -n  &#39;210048,312712p&#39;  catalina.out &gt; catalina.out.0209.12</code></li>
+</ul>
+<h1 id="过滤打印"><a href="#过滤打印" class="headerlink" title="过滤打印"></a>过滤打印</h1><p><code>cat catalina.out.0209.12 | grep 操作计时</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[k12Service]  操作计时：188ms  类名: com.wosai.teach.restful.knowPoint.KnowPointLoadExpReadInterFace  方法名:getMain() result:</span><br><span class="line">[k12Service]  操作计时：29ms  类名: com.wosai.teach.restful.sys.SysConfigInterface  方法名:sysConfig() result:</span><br><span class="line">[k12Service]  操作计时：120ms  类名: com.wosai.teach.restful.order.FindProductListInterface  方法名:getMain() result:</span><br><span class="line">[k12Service]  操作计时：112ms  类名: com.wosai.teach.restful.order.FindProductListInterface  方法名:getMain() result:</span><br><span class="line">[k12Service]  操作计时：224ms  类名: com.wosai.teach.restful.knowPoint.KnowPointLoadExpReadInterFace  方法名:getMain() result:</span><br></pre></td></tr></table></figure>
+<ul>
+<li>输出文件<br><code>cat catalina.out.0209.12 | grep 操作计时 &gt; catalina.out.0209.12.grep</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23ult4m4yZ logs]# vi catalina.out</span><br><span class="line">catalina.out               catalina.out.0209.12       catalina.out.0209.12.grep </span><br></pre></td></tr></table></figure></li>
+<li>下载文件<br><code>sz catalina.out.0209.12.grep</code></li>
+</ul>
+<hr>
+<p><code>linux vi 查找 - 疯狂程序员 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/shine0181/article/details/6632597">http://blog.csdn.net/shine0181/article/details/6632597</a></p>
+<p><code>VIM中gg=G是什么 - 编程</code><br><a target="_blank" rel="noopener" href="http://www.myexception.cn/program/880876.html">http://www.myexception.cn/program/880876.html</a></p>
+<p><code>在linux中使用vi 打开文件时，能显示行号吗？_百度知道</code><br><a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/812870968035725732.html">https://zhidao.baidu.com/question/812870968035725732.html</a></p>
+<p><code>linux下的vim/vi永久显示行号</code><br><a target="_blank" rel="noopener" href="http://www.07net01.com/linux/2016/04/1426154.html">http://www.07net01.com/linux/2016/04/1426154.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -352,821 +1678,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/MySQL-pull-the-massive-data-out-of-memory-error/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/MySQL-pull-the-massive-data-out-of-memory-error/" class="post-title-link" itemprop="url">MySQL 拉取海量数据报 OutOfMemoryError</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-12 22:40:37" itemprop="dateCreated datePublished" datetime="2017-05-12T22:40:37+00:00">2017-05-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在用最基本的<code>JDBC</code>拉取数据的时候，由于拉取的是海量数据，所以程序跑了一段时间之后报<code>java.lang.OutOfMemoryError: Java heap space</code>，这个错误很简单，也很好解决，网上一搜一大把，只需要设置<code>ResultSet</code>获取数据模式为<code>row-by-row</code>，但是总结多数的解决方案是如下两种：<br>① 以PreparedStatement为例，需要设置四个参数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">preparedStatement = connection.prepareStatement(formatSql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);</span><br><span class="line">preparedStatement.setFetchSize(Integer.MIN_VALUE);</span><br><span class="line">preparedStatement.setFetchDirection(ResultSet.FETCH_REVERSE);</span><br></pre></td></tr></table></figure>
-
-<p>② 同样以PreparedStatement为例，需要设置三个参数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">preparedStatement = connection.prepareStatement(formatSql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);</span><br><span class="line">preparedStatement.setFetchSize(Integer.MIN_VALUE);</span><br></pre></td></tr></table></figure>
-
-<p>这种解决方案是可以的，那么本文还有无存在的必要呢？当然有。这两种方案基本上都是参看MySQL官方说明来解决的，具体链接<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-implementation-notes.html">点我</a>，内容摘录如下</p>
-<blockquote>
-<p>By default, ResultSets are completely retrieved and stored in memory. In most cases this is the most efficient way to operate and, due to the design of the MySQL network protocol, is easier to implement. If you are working with ResultSets that have a large number of rows or large values and cannot allocate heap space in your JVM for the memory required, you can tell the driver to stream the results back one row at a time.</p>
-</blockquote>
-<blockquote>
-<p>To enable this functionality, create a Statement instance in the following manner:</p>
-</blockquote>
-<blockquote>
-<p>stmt &#x3D; conn.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY, java.sql.ResultSet.CONCUR_READ_ONLY);<br>stmt.setFetchSize(Integer.MIN_VALUE);</p>
-</blockquote>
-<blockquote>
-<p>The combination of a forward-only, read-only result set, with a fetch size of Integer.MIN_VALUE serves as a signal to the driver to stream result sets row-by-row. After this, any result sets created with the statement will be retrieved row-by-row.</p>
-</blockquote>
-<blockquote>
-<p>There are some caveats with this approach. You must read all of the rows in the result set (or close it) before you can issue any other queries on the connection, or an exception will be thrown.</p>
-</blockquote>
-<blockquote>
-<p>The earliest the locks these statements hold can be released (whether they be MyISAM table-level locks or row-level locks in some other storage engine such as InnoDB) is when the statement completes.</p>
-</blockquote>
-<blockquote>
-<p>If the statement is within scope of a transaction, then locks are released when the transaction completes (which implies that the statement needs to complete first). As with most other databases, statements are not complete until all the results pending on the statement are read or the active result set for the statement is closed.</p>
-</blockquote>
-<blockquote>
-<p>Therefore, if using streaming results, process them as quickly as possible if you want to maintain concurrent access to the tables referenced by the statement producing the result set.</p>
-</blockquote>
-<p>但是我想说，其实一个参数就足矣。只需要设置<code>fetch size</code>为<code>Integer.MIN_VALUE</code>即可。代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">preparedStatement = connection.prepareStatement(formatSql);</span><br><span class="line">preparedStatement.setFetchSize(Integer.MIN_VALUE);</span><br></pre></td></tr></table></figure>
-
-<p>这样为什么可以呢？我们来看源码，点开prepareStatement的具体实现。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mysql.jdbc;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConnectionImpl</span> <span class="keyword">extends</span> <span class="title class_">ConnectionPropertiesImpl</span> <span class="keyword">implements</span> <span class="title class_">MySQLConnection</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> PreparedStatement <span class="title function_">prepareStatement</span><span class="params">(String sql)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.prepareStatement(sql, <span class="number">1003</span>, <span class="number">1007</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到即使你调用的是<code>prepareStatement(formatSql)</code>，但是在实现中调用的是<code>prepareStatement(sql, 1003, 1007)</code>，而<code>ResultSet.TYPE_FORWARD_ONLY = 1003</code>，<code>ResultSet.CONCUR_READ_ONLY = 1007</code>，所以不需要在调用的时候传递<code>TYPE_FORWARD_ONLY </code>和<code>CONCUR_READ_ONLY</code>。</p>
-<p>再来看<code>setFetchDirection</code>的具体实现类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mysql.jdbc;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StatementImpl</span> <span class="keyword">implements</span> <span class="title class_">Statement</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setFetchDirection</span><span class="params">(<span class="type">int</span> direction)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">        <span class="keyword">switch</span>(direction) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1000</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1001</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1002</span>:</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">throw</span> SQLError.createSQLException(Messages.getString(<span class="string">&quot;Statement.5&quot;</span>), <span class="string">&quot;S1009&quot;</span>, <span class="built_in">this</span>.getExceptionInterceptor());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可知，在实现中，当<code>direction</code>值是1000、1001和1002时，其处理逻辑是一样的，那么这些值表示什么意思呢？在<code>ResultSet</code>类中可以查到</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">FETCH_FORWARD</span> <span class="operator">=</span> <span class="number">1000</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">FETCH_REVERSE</span> <span class="operator">=</span> <span class="number">1001</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">FETCH_UNKNOWN</span> <span class="operator">=</span> <span class="number">1002</span>;</span><br></pre></td></tr></table></figure>
-<p>所以再调用<code>preparedStatement.setFetchDirection(ResultSet.FETCH_REVERSE);</code>这一句其实完全没必要，因为不论你传递的是哪个值，其结果都是相同的，所以说，使用流式结果集获取海量数据一个参数足矣，不要迷信网上二手信息，同样不要迷信官网，只有源码最靠谱。</p>
-<p>如果想继续深究，可以查看MySQL判断是否开启流式结果集的方法，实现如下，判断逻辑很简单</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mysql.jdbc;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StatementImpl</span> <span class="keyword">implements</span> <span class="title class_">Statement</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="type">boolean</span> <span class="title function_">createStreamingResultSet</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.resultSetType == <span class="number">1003</span> &amp;&amp; <span class="built_in">this</span>.resultSetConcurrency == <span class="number">1007</span> &amp;&amp; <span class="built_in">this</span>.fetchSize == -<span class="number">2147483648</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Gradle-uses-extended-attributes-to-manage-dependent-version-numbers/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Gradle-uses-extended-attributes-to-manage-dependent-version-numbers/" class="post-title-link" itemprop="url">Gradle使用扩展属性管理依赖版本号</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-09 21:15:19" itemprop="dateCreated datePublished" datetime="2017-05-09T21:15:19+00:00">2017-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="Maven预设变量"><a href="#Maven预设变量" class="headerlink" title="Maven预设变量"></a>Maven预设变量</h4><p>使用过<code>Maven</code>的人应该都知道，我们在<code>Maven</code>项目中添加依赖的一般性做法。就是打开<code>pom.xml</code>文件，在<code>&lt;dependencies&gt;</code>节点下添加</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>包含坐标和版本号的内容，那么在<code>Java</code>类文件中，就可以引用<code>Lucene</code>包中的各种类了。但是要注意一点，这里面的版本号是以硬编码的形式存在，作为一个合格的软件开发者，要尽量在你的代码中避免硬编码的情况。为什么呢？比如我需要依赖其它的<code>Lucene</code>模块，那么<code>pom.xml</code>中添加内容如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-analyzers-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-queryparser<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-highlighter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-queries<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>假设经年累月，项目需要升级，<code>Lucene</code>的新版本也已发布，那么是不是需要手动修改每一行<code>&lt;version&gt;5.5.0&lt;/version&gt;</code>呢？这还只是依赖几个模块的问题，假设你依赖成百上千个模块，其版本号都需要升级，是不是觉得想抽当初的自己呢？其实在<code>Maven</code>中这种情况很好解决、就是利用预设变量。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version.lucene</span>&gt;</span>6.0.0<span class="tag">&lt;/<span class="name">version.lucene</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-analyzers-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-queryparser<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-highlighter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.lucene<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lucene-queries<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version.lucene&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>那么以后再遇到项目升级的情况，只需要手动修改<code>&lt;version.lucene&gt;6.0.0&lt;/version.lucene&gt;</code>一行代码即可搞定，所有引用到该版本变量的依赖都自动升级，这样来管理依赖，是不是很哈皮呢？</p>
-<h4 id="Gradle单模块"><a href="#Gradle单模块" class="headerlink" title="Gradle单模块"></a>Gradle单模块</h4><p>同样作为后起之秀的<code>Gradle</code>如何优雅地解决类似问题呢？硬编码的写法如下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile &quot;org.apache.lucene:lucene-core:5.5.0&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>优雅的写法①如下，打开<code>build.gradle</code>文件</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ext &#123;</span><br><span class="line">    luceneVersion = &#x27;6.5.0&#x27;</span><br><span class="line">&#125;</span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &quot;org.apache.lucene:lucene-core:$luceneVersion&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>一定要注意包含<code>$</code>符号时，要用双引号，我就因用单引号在这上吃过亏。在<code>Gradle</code>中单引号和双引号都是合法的，但是略有不同。单引号中的内容严格对应<code>Java</code>中的<code>String</code>，不对<code>$</code>符号进行转义。双引号的内容则和脚本语言处理有点像，如果字符中有<code>$</code>号的话，则它会先对<code>$</code>表达式求值。在<code>Gradle</code>中，其实还有三引号的情形，这代表什么呢？三引号中的字符串支持任意换行，比如</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> multieLines = <span class="string">&#x27;&#x27;</span><span class="string">&#x27; begin</span></span><br><span class="line"><span class="string">  line  1</span></span><br><span class="line"><span class="string">  line  2</span></span><br><span class="line"><span class="string">  line  3</span></span><br><span class="line"><span class="string">  end &#x27;</span><span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>除了①，还有优雅的写法②，使用字典类型，修改<code>build.gradle</code>文件</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ext &#123;</span><br><span class="line">    javaSourceCompatibility = &#x27;1.8&#x27;</span><br><span class="line">    libVersions = [</span><br><span class="line">            junit : &#x27;4.12&#x27;,</span><br><span class="line">            lucene: &#x27;6.5.0&#x27;,</span><br><span class="line">            guava : &#x27;20.0&#x27;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &quot;junit:junit:$libVersions.junit&quot;</span><br><span class="line">    compile &quot;com.google.guava:guava:$libVersions.guava&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Gradle多模块"><a href="#Gradle多模块" class="headerlink" title="Gradle多模块"></a>Gradle多模块</h4><p>当在一个根项目下有多个子模块，那么一种简单的做法是在每个子模块中都定义<code>ext</code>代码块，声明需要使用到的版本号变量，这样做当然可以。但是当遇到需要升级版本号的情况时，需要手动修改所有的子模块，其实还有更优雅的解决方案。就是在根项目中定义<code>ext</code>代码块，打开根项目的<code>build.gradle</code>定义</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ext &#123;</span><br><span class="line">    luceneVersion = &#x27;6.5.0&#x27;</span><br><span class="line">    libVersions = [</span><br><span class="line">            junit : &#x27;4.12&#x27;,</span><br><span class="line">            guava : &#x27;20.0&#x27;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后在每个子模块的<code>build.gradle</code>中都可以直接引用之，方式如下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile &quot;junit:junit:$&#123;rootProject.libVersions.junit&#125;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样，当需要升级版本号的时候，只需要升级根项目中的变量即可，所用子模块的版本号会自动升级。</p>
-<h4 id="消除Gradle编译警告"><a href="#消除Gradle编译警告" class="headerlink" title="消除Gradle编译警告"></a>消除Gradle编译警告</h4><p>通过Gradle编译项目过程中，有时会报如下警告信息</p>
-<blockquote>
-<p>注: xxx.java使用或覆盖了已过时的 API。<br>注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。<br>注: xxx.java使用了未经检查或不安全的操作。<br>注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。</p>
-</blockquote>
-<p>警告不是Error，虽然不影响编译，但是看着总是不舒服，所以想办法消除警告信息。根据StackOverflow上的<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/18689365/how-to-add-xlintunchecked-to-my-android-gradle-based-project">问答</a>，在<code>build.gradle</code>中添加如下配置即可消除警告。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    gradle.projectsEvaluated &#123;</span><br><span class="line">        tasks.withType(JavaCompile) &#123;</span><br><span class="line">            options.compilerArgs &lt;&lt; &quot;-Xlint:unchecked&quot; &lt;&lt; &quot;-Xlint:deprecation&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ionic%E6%97%A5%E6%9C%9F%E6%8E%A7%E4%BB%B6ionicdatepicker/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/ionic%E6%97%A5%E6%9C%9F%E6%8E%A7%E4%BB%B6ionicdatepicker/" class="post-title-link" itemprop="url">ionic日期控件ionicdatepicker</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-09 00:00:02" itemprop="dateCreated datePublished" datetime="2017-05-09T00:00:02+00:00">2017-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:28" itemprop="dateModified" datetime="2024-01-26T12:42:28+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="ionic-datepicker"><a href="#ionic-datepicker" class="headerlink" title="ionic-datepicker"></a>ionic-datepicker</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bower install ionic-datepicker --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://market.ionic.io/plugins/ionicdatepicker">https://market.ionic.io/plugins/ionicdatepicker</a><br><code>github</code> <a target="_blank" rel="noopener" href="https://github.com/rajeshwarpatlolla/ionic-datepicker">https://github.com/rajeshwarpatlolla/ionic-datepicker</a>  <code>★</code><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/42969560.jpg"></p>
-<hr>
-<h1 id="datepicker-for-ionic"><a href="#datepicker-for-ionic" class="headerlink" title="datepicker-for-ionic"></a>datepicker-for-ionic</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bower i datepicker-for-ionic --save</span><br><span class="line">npm i datepicker-for-ionic --save</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/datepicker-for-ionic">https://www.npmjs.com/package/datepicker-for-ionic</a><br><a target="_blank" rel="noopener" href="http://npm.taobao.org/package/datepicker-for-ionic">http://npm.taobao.org/package/datepicker-for-ionic</a></p>
-<p><code>github</code>   <a target="_blank" rel="noopener" href="https://github.com/celsomarques/ionic-datepicker">https://github.com/celsomarques/ionic-datepicker</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/72000024.jpg"></p>
-<hr>
-<p><strong>参考</strong><br><code>ionic之时间&amp;日期组件实例 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/xuexiiphone/article/details/52087915">http://blog.csdn.net/xuexiiphone/article/details/52087915</a></p>
-<p><code>Ionic集成ionic-datepicker插件 - ljw124213的博客 - 博客频道 - CSDN.NET</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/ljw124213/article/details/60588752">http://blog.csdn.net/ljw124213/article/details/60588752</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/jetbrains%20IntelliJ-Webstorm%20svn%E6%8F%92%E4%BB%B6%E5%88%9D%E5%A7%8B%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/jetbrains%20IntelliJ-Webstorm%20svn%E6%8F%92%E4%BB%B6%E5%88%9D%E5%A7%8B%E5%8C%96/" class="post-title-link" itemprop="url">jetbrains IntelliJ/Webstorm svn插件初始化</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-09 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-09T00:00:00+00:00">2017-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="subversion-工具-下载"><a href="#subversion-工具-下载" class="headerlink" title="subversion 工具 下载"></a>subversion 工具 下载</h1><p><a target="_blank" rel="noopener" href="http://subversion.apache.org/packages.html#windows">http://subversion.apache.org/packages.html#windows</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/88396036.jpg"></p>
-<hr>
-<ul>
-<li>**subversion(支持控制台Command) **<br><a target="_blank" rel="noopener" href="https://tortoisesvn.net/downloads.html">https://tortoisesvn.net/downloads.html</a>  <code>TortoiseSVN-1.9.5.27581-x64-svn-1.9.5.msi</code></li>
-</ul>
-<p>使用的是TortoiseSVN-1.9.4.27285-x64-svn-1.9.4，安装过程需要注意的是，默认安装没有选择”command line client tools”<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/25113416.jpg"></p>
-<ul>
-<li><p>**subversion **  绿色免安装<br><a target="_blank" rel="noopener" href="http://subversion.apache.org/download.cgi#recommended-release">http://subversion.apache.org/download.cgi#recommended-release</a>  <code>subversion-1.9.5.zip</code><br><strong>命令行支持，配置环境变量</strong>：path +&#x3D; <code>F:\Tool\SVN,CVS\Apache-Subversion-1.9.5\bin</code></p>
-</li>
-<li><p>** sliksvn **  ： <code>Slik-Subversion-1.9.5-x64.msi</code><br><a target="_blank" rel="noopener" href="https://sliksvn.com/download/">https://sliksvn.com/download/</a></p>
-</li>
-</ul>
-<hr>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p><code>Ctrl + Alt + S</code><br>** Use Command line client ** ：  <code>svn</code> 或 <code>C:\Program Files\SlikSvn\bin\svn.exe</code><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/56881942.jpg"></p>
-<hr>
-<p><strong>参考</strong><br><code>Windows下使用svn命令行.md</code></p>
-<p><code>Webstorm2016使用技巧——SVN插件使用 - 博客频道 - CSDN.NET</code></p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/hysh_keystone/article/details/52013789">http://blog.csdn.net/hysh_keystone/article/details/52013789</a></p>
-<p><code>Webstorm SVN配置_屋里屋外点点_新浪博客</code><br><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_9984f2fb0102w8av.html">http://blog.sina.com.cn/s/blog_9984f2fb0102w8av.html</a></p>
-<p><code>webstorm上svn的安装使用</code><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/jgj0129/article/details/52757115">http://blog.csdn.net/jgj0129/article/details/52757115</a></p>
-<p><code>WebStorm配置svn共享、检出项目-博客-云栖社区-阿里云</code><br><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/46981">https://yq.aliyun.com/articles/46981</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ionic%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/ionic%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1/" class="post-title-link" itemprop="url">ionic嵌套路由</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-08 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-08T00:00:00+00:00">2017-05-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:26" itemprop="dateModified" datetime="2024-01-26T12:42:26+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="getting-started"><a href="#getting-started" class="headerlink" title="getting-started"></a>getting-started</h1><p><a target="_blank" rel="noopener" href="http://ionicframework.com/getting-started">http://ionicframework.com/getting-started</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/30893720.jpg"></p>
-<hr>
-<h1 id="示例：-ionic-starter-tabs"><a href="#示例：-ionic-starter-tabs" class="headerlink" title="示例： ionic-starter-tabs"></a>示例： ionic-starter-tabs</h1><p><a target="_blank" rel="noopener" href="https://github.com/driftyco/ionic-starter-tabs">https://github.com/driftyco/ionic-starter-tabs</a></p>
-<p><a target="_blank" rel="noopener" href="http://plnkr.co/edit/qYMCrt?p=preview">http://plnkr.co/edit/qYMCrt?p=preview</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/36107114.jpg"></p>
-<ul>
-<li><p>tab &#x2F; tab.dash， tab.friends</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  // setup an abstract state for the tabs directive</span><br><span class="line">  .state(&#x27;tab&#x27;, &#123;</span><br><span class="line">    url: &quot;/tab&quot;,</span><br><span class="line">    abstract: true,</span><br><span class="line">    templateUrl: &quot;tabs.html&quot;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  // Each tab has its own nav history stack:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  .state(&#x27;tab.dash&#x27;, &#123;</span><br><span class="line">    url: &#x27;/dash&#x27;,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;tab-dash&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;tab-dash.html&#x27;,</span><br><span class="line">        controller: &#x27;DashCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  .state(&#x27;tab.friends&#x27;, &#123;</span><br><span class="line">    url: &#x27;/friends&#x27;,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;tab-friends&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;tab-friends.html&#x27;,</span><br><span class="line">        controller: &#x27;FriendsCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  .state(&#x27;tab.friend-detail&#x27;, &#123;</span><br><span class="line">    url: &#x27;/friend/:friendId&#x27;,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;tab-friends&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;friend-detail.html&#x27;,</span><br><span class="line">        controller: &#x27;FriendDetailCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  .state(&#x27;tab.account&#x27;, &#123;</span><br><span class="line">    url: &#x27;/account&#x27;,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;tab-account&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;tab-account.html&#x27;,</span><br><span class="line">        controller: &#x27;AccountCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// if none of the above states are matched, use this as the fallback</span><br><span class="line">$urlRouterProvider.otherwise(&#x27;/tab/dash&#x27;);</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>tabs.html</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;ion-tabs class=&quot;tabs-icon-top&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- Pets Tab --&gt;</span><br><span class="line">  &lt;ion-tab title=&quot;Dashboard&quot; icon=&quot;icon ion-home&quot; href=&quot;#/tab/dash&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-dash&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/ion-tab&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- Adopt Tab --&gt;</span><br><span class="line">  &lt;ion-tab title=&quot;Friends&quot; icon=&quot;icon ion-heart&quot; href=&quot;#/tab/friends&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-friends&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/ion-tab&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- About Tab --&gt;</span><br><span class="line">  &lt;ion-tab title=&quot;Account&quot; icon=&quot;icon ion-gear-b&quot; href=&quot;#/tab/account&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-account&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/ion-tab&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/ion-tabs&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="示例：-ionic-starter-sidemenu"><a href="#示例：-ionic-starter-sidemenu" class="headerlink" title="示例： ionic-starter-sidemenu"></a>示例： ionic-starter-sidemenu</h1><p><a target="_blank" rel="noopener" href="https://github.com/driftyco/ionic-starter-sidemenu">https://github.com/driftyco/ionic-starter-sidemenu</a></p>
-<p><a target="_blank" rel="noopener" href="http://plnkr.co/edit/0RXSDB?p=preview">http://plnkr.co/edit/0RXSDB?p=preview</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/68685846.jpg"></p>
-<h1 id="侧边栏-菜单"><a href="#侧边栏-菜单" class="headerlink" title="侧边栏+菜单"></a>侧边栏+菜单</h1><ul>
-<li><p>app</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">  .state(&#x27;app&#x27;, &#123;</span><br><span class="line">    url: &#x27;/app&#x27;,</span><br><span class="line">    abstract: true,</span><br><span class="line">    templateUrl: &#x27;app/app/menu.html&#x27;,</span><br><span class="line">    controller: &#x27;AppCtrl&#x27;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></li>
-<li><p>app.table</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">  .state(&#x27;app.table&#x27;, &#123;</span><br><span class="line">    url: &#x27;/table&#x27;,</span><br><span class="line">    templateUrl: &#x27;app/table/table.html&#x27;,</span><br><span class="line">    controller: &#x27;TableCtrl&#x27;</span><br><span class="line">    // views:&#123;</span><br><span class="line">    //   &#x27;tableContent&#x27;:&#123;</span><br><span class="line">    //     templateUrl:&#x27;app/table/table.html&#x27;,</span><br><span class="line">    //     controller:&#x27;TableCtrl&#x27;</span><br><span class="line">    //   &#125;</span><br><span class="line">    // &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure></li>
-<li><p>app&#x2F;table&#x2F;table.html （<code>自定义嵌套路由页面</code>&#x2F;<code> &lt;ion-tabs</code> ）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;ion-view view-title=&quot;&quot; class=&quot;table_page&quot; hide-nav-bar=&quot;true&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;ion-content class=&quot;table_content&quot; overflow-scroll=&quot;true&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;table_panel&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      &lt;div class=&quot;table_div&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!--主页--&gt;</span><br><span class="line">        &lt;button class=&quot;button buttons button-clear header-item ws_tab&quot; ng-click=&quot;forward(4)&quot;&gt;</span><br><span class="line">          &lt;!--&lt;i class=&quot;icon ion-social-youtube-outline&quot; style=&quot;color: white;&quot;&gt;&lt;/i&gt;--&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/6.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active == 4&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/5.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active != 4&quot;&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">          &lt;div class=&quot;tab_text&quot; ng-style=&quot;&#123;true:&#123;color:&#x27;#56b0ec&#x27;&#125;&#125;[active == 4]&quot;&gt;主页&lt;/div&gt;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!--课件--&gt;</span><br><span class="line">        &lt;button class=&quot;button buttons button-clear header-item ws_tab&quot; ng-click=&quot;forward(1)&quot;&gt;</span><br><span class="line">          &lt;!--&lt;i class=&quot;icon ion-android-home&quot; style=&quot;color: white;&quot;&gt;&lt;/i&gt;--&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/4.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active == 1&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/3.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active != 1&quot;&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">          &lt;div class=&quot;tab_text&quot; ng-style=&quot;&#123;true:&#123;color:&#x27;#56b0ec&#x27;&#125;&#125;[active == 1]&quot;&gt;课件&lt;/div&gt;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!--专项--&gt;</span><br><span class="line">        &lt;button class=&quot;button buttons button-clear header-item ws_tab&quot; ng-click=&quot;forward(2)&quot; ng-if=&quot;$root.ios_isPayChoose&quot;&gt;</span><br><span class="line">          &lt;!--&lt;i class=&quot;icon ion-ios-bookmarks-outline&quot; style=&quot;color: white;&quot;&gt;&lt;/i&gt;--&gt;</span><br><span class="line">          &lt;div&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/2.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active == 2&quot;&gt;</span><br><span class="line">            &lt;img src=&quot;img/table/nav/1.png&quot; class=&quot;tab_img&quot; ng-if=&quot;active != 2&quot;&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">          &lt;div class=&quot;tab_text&quot; ng-style=&quot;&#123;true:&#123;color:&#x27;#56b0ec&#x27;&#125;&#125;[active == 2]&quot;&gt;专项&lt;/div&gt;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;!--&lt;button ui-sref=&quot;app.table.live&quot; class=&quot;button buttons button-clear header-item&quot; ng-click=&quot;active=3&quot;&gt;--&gt;</span><br><span class="line">          &lt;!--&amp;lt;!&amp;ndash;&lt;i class=&quot;icon ion-social-youtube-outline&quot; style=&quot;color: white;&quot;&gt;&lt;/i&gt;&amp;ndash;&amp;gt;--&gt;</span><br><span class="line">          &lt;!--&lt;img src=&quot;img/table/nav/play_active.png&quot; style=&quot;height: 30px;&quot; ng-if=&quot;active == 3&quot;&gt;--&gt;</span><br><span class="line">          &lt;!--&lt;img src=&quot;img/table/nav/play.png&quot; style=&quot;height: 30px;&quot; ng-if=&quot;active != 3&quot;&gt;--&gt;</span><br><span class="line">        &lt;!--&lt;/button&gt;--&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;div ng-show=&quot;active == 4&quot;&gt;</span><br><span class="line">      &lt;ion-nav-view name=&quot;mainContent&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div ng-show=&quot;!active || active == 1&quot;&gt;</span><br><span class="line">      &lt;ion-nav-view name=&quot;homeContent&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div ng-show=&quot;active == 2&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;specialContent&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;!--&lt;div ng-show=&quot;active == 3&quot;&gt;--&gt;</span><br><span class="line">      &lt;!--&lt;ion-nav-view name=&quot;liveContent&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;/div&gt;--&gt;</span><br><span class="line">  &lt;/ion-content&gt;</span><br><span class="line">&lt;/ion-view&gt;</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>app.table. main</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">  .state(&#x27;app.table.main&#x27;, &#123;</span><br><span class="line">    url: &#x27;/main&#x27;,</span><br><span class="line">    // cache:false,</span><br><span class="line">    views: &#123;</span><br><span class="line">      &#x27;mainContent&#x27;: &#123;</span><br><span class="line">        templateUrl: &#x27;app/main/main.html&#x27;,</span><br><span class="line">        controller: &#x27;MainCtrl&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="使用ion-tabs-存在二级路由丢失返回键问题"><a href="#使用ion-tabs-存在二级路由丢失返回键问题" class="headerlink" title="使用ion-tabs  存在二级路由丢失返回键问题"></a>使用<code>ion-tabs</code>  存在二级路由丢失返回键问题</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--&lt;ion-view view-title=&quot;table&quot; class=&quot;page-tab&quot;&gt;--&gt;</span><br><span class="line">&lt;!--&lt;ion-view class=&quot;page-tab&quot;&gt; &amp;lt;!&amp;ndash; 取消路由页面的view-title避免子类复写失败 &amp;ndash;&amp;gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;page-tab&quot;&gt;</span><br><span class="line">  &lt;!-- 注意：存在二级路由丢失返回键问题 --&gt;</span><br><span class="line">  &lt;!--&lt;ion-tabs class=&quot;tabs-icon-top tabs-color-active-positive my-tab&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&amp;lt;!&amp;ndash; Dashboard Tab &amp;ndash;&amp;gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-tab title=&quot;首页&quot; icon-off=&quot;ion-ios-home-outline&quot; icon-on=&quot;ion-ios-home&quot; href=&quot;#/app/tab/home&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-nav-view name=&quot;tab-home&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tab&gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!--&amp;lt;!&amp;ndash; Chats Tab &amp;ndash;&amp;gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-tab title=&quot;设备&quot; icon-off=&quot;ion-ios-chatboxes-outline&quot; icon-on=&quot;ion-ios-chatboxes&quot; href=&quot;#/app/tab/device&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-nav-view name=&quot;tab-device&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tab&gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!--&amp;lt;!&amp;ndash; Account Tab &amp;ndash;&amp;gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-tab title=&quot;工单&quot; icon-off=&quot;ion-ios-list-outline&quot; icon-on=&quot;ion-ios-list&quot; href=&quot;#/app/tab/work&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-nav-view name=&quot;tab-work&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tab&gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!--&lt;ion-tab title=&quot;个人&quot; icon-off=&quot;ion-ios-person-outline&quot; icon-on=&quot;ion-ios-person&quot; href=&quot;#/app/tab/account&quot;&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;ion-nav-view name=&quot;tab-account&quot;&gt;&lt;/ion-nav-view&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tab&gt;--&gt;</span><br><span class="line">  &lt;!--&lt;/ion-tabs&gt;--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- ------------------------------------------------------------ --&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;!-- 注意：自定义路由,可解决二级路由丢失返回键问题 --&gt;</span><br><span class="line">  &lt;div ng-show=&quot;isShow(&#x27;app.tab.home&#x27;)&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-home&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div ng-show=&quot;isShow(&#x27;app.tab.device&#x27;)&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-device&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div ng-show=&quot;isShow(&#x27;app.tab.work&#x27;)&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-work&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div ng-show=&quot;isShow(&#x27;app.tab.account&#x27;)&quot;&gt;</span><br><span class="line">    &lt;ion-nav-view name=&quot;tab-account&quot;&gt;&lt;/ion-nav-view&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;div class=&quot;table_button&quot;&gt;</span><br><span class="line">    &lt;!--&lt;div class=&quot;&quot; ui-sref=&quot;app.tab.home&quot;&gt;--&gt;</span><br><span class="line">    &lt;div class=&quot;&quot; ng-click=&quot;go(&#x27;app.tab.home&#x27;)&quot;&gt;</span><br><span class="line">      &lt;img ng-src=&quot;img/table/nav/&#123;&#123;isShow(&#x27;app.tab.home&#x27;)?2:1&#125;&#125;.png&quot; class=&quot;tab_img&quot;&gt;</span><br><span class="line">      &lt;div&gt;首页&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;!--&lt;div class=&quot;&quot; ui-sref=&quot;app.tab.device&quot;&gt;--&gt;</span><br><span class="line">    &lt;div class=&quot;&quot; ng-click=&quot;go(&#x27;app.tab.device&#x27;)&quot;&gt;</span><br><span class="line">      &lt;img ng-src=&quot;img/table/nav/&#123;&#123;isShow(&#x27;app.tab.device&#x27;)?4:3&#125;&#125;.png&quot; class=&quot;tab_img&quot;&gt;</span><br><span class="line">      &lt;div&gt;设备&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;!--&lt;div class=&quot;&quot; ui-sref=&quot;app.tab.work&quot;&gt;--&gt;</span><br><span class="line">    &lt;div class=&quot;&quot; ng-click=&quot;go(&#x27;app.tab.work&#x27;)&quot;&gt;</span><br><span class="line">      &lt;img ng-src=&quot;img/table/nav/&#123;&#123;isShow(&#x27;app.tab.work&#x27;)?6:5&#125;&#125;.png&quot; class=&quot;tab_img&quot;&gt;</span><br><span class="line">      &lt;div&gt;工单&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;!--&lt;div class=&quot;&quot; ui-sref=&quot;app.tab.account&quot;&gt;--&gt;</span><br><span class="line">    &lt;div class=&quot;&quot; ng-click=&quot;go(&#x27;app.tab.account&#x27;)&quot;&gt;</span><br><span class="line">      &lt;img ng-src=&quot;img/table/nav/&#123;&#123;isShow(&#x27;app.tab.account&#x27;)?6:5&#125;&#125;.png&quot; class=&quot;tab_img&quot;&gt;</span><br><span class="line">      &lt;div&gt;个人&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;!--&lt;/ion-view&gt;--&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  $scope.isShow = isShow;</span><br><span class="line">  $scope.go = function (value) &#123;</span><br><span class="line">    // $ionicHistory.nextViewOptions(&#123;historyRoot: true&#125;);// 路由框架页面,全部升级为顶层路由(不同于默认顶层root)</span><br><span class="line">    $state.go(value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function isShow(stateName) &#123;</span><br><span class="line">  return stateName == $state.current.name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="取消路由页面的view-title避免子类复写失败"><a href="#取消路由页面的view-title避免子类复写失败" class="headerlink" title="取消路由页面的view-title避免子类复写失败"></a>取消路由页面的view-title避免子类复写失败</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--&lt;ion-view view-title=&quot;table&quot; class=&quot;page-tab&quot;&gt;--&gt;</span><br><span class="line">&lt;!--&lt;ion-view class=&quot;page-tab&quot;&gt; &amp;lt;!&amp;ndash; 取消路由页面的view-title避免子类复写失败 &amp;ndash;&amp;gt;--&gt;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="tab切换出现菜单"><a href="#tab切换出现菜单" class="headerlink" title="tab切换出现菜单"></a>tab切换出现菜单</h1><p><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/9520430.jpg"></p>
-<ul>
-<li><p>出现情况，index&#x3D;1 复用了historyId<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/38952069.jpg"></p>
-</li>
-<li><p>不出现情况，各自为index&#x3D;0<br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-8-12/35408752.jpg"></p>
-</li>
-<li><p>问题原因：嵌套路由间切换，同样会发生历史轨迹，出现返回键的情况</p>
-</li>
-<li><p>解决办法：对嵌套路由间切换，全部升级为顶层路由 (不同于默认顶层root)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$scope.go = function (value) &#123;</span><br><span class="line">  $ionicHistory.nextViewOptions(&#123;historyRoot: true&#125;);// 路由框架页面,全部升级为顶层路由(不同于默认顶层root)</span><br><span class="line">  $state.go(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h1 id="同时使用-Tabs-Side-Menu"><a href="#同时使用-Tabs-Side-Menu" class="headerlink" title="同时使用 Tabs + Side Menu"></a>同时使用 Tabs + Side Menu</h1><p><code>Ionic Tabs + Side Menu</code><br><a target="_blank" rel="noopener" href="http://loring-dodge.azurewebsites.net/ionic-tabs-plus-side-menu/">http://loring-dodge.azurewebsites.net/ionic-tabs-plus-side-menu/</a><br><img src="http://7xnbs3.com1.z0.glb.clouddn.com/17-5-31/22491562.jpg"></p>
-<hr>
-<p><strong>参考</strong><br><code>ionic back 返回按钮不正常显示&amp;&amp;二级路由点击返回按钮失效无法返回到上一级页面的问题</code></p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/badgirl_hong/article/details/53505919">http://blog.csdn.net/badgirl_hong/article/details/53505919</a></p>
-<p><code>ionic tab(选项卡) | 菜鸟教程</code><br><a target="_blank" rel="noopener" href="http://www.runoob.com/ionic/ionic-tab.html">http://www.runoob.com/ionic/ionic-tab.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/The-name-of-the-people/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/The-name-of-the-people/" class="post-title-link" itemprop="url">人民的名义</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-06 22:28:03" itemprop="dateCreated datePublished" datetime="2017-05-06T22:28:03+00:00">2017-05-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:21" itemprop="dateModified" datetime="2024-01-26T12:42:21+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>一不小心，追了一个剧《人民的名义》，随着剧情一点一点地推进，突然开始很心疼，心疼的不是别人，也不是剧中的人物，因为那毕竟是虚构的，不是真实的人生，而是我们自己，这才是真真实实的生活与生命。看了剧中的情节，真是大开眼界，不论是祁同伟的一人得道，鸡犬升天，还是赵瑞龙的草菅人命亦或是丁义珍在饭局上左右逢源，逢场作戏，近似人生赢家。甚至一个处级干部赵德汉，都能狂贪几个亿，要知道，除了国家级领导人，下面就是部司厅局处科，小小一个处级干部，都能贪污几个亿？你知道天朝有多少处级干部吗？呵呵，我还真查了下，毛爷爷说，没有调查就没有发言权，参考链接在<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23916966?sort=created">这里</a>，处级干部约60万，一个人一亿的话，不敢想象，当然了，不能这么悲观，要相信党相信政府，我还是有这觉悟的。现如今大家都说日子难过，现在知道了吧？为什么我们日子难过了，在人民的名义中各种现象也只是社会真实情况的冰山一角吧？假设现实情况比电视剧中所要努力描绘的良好社会略槽糕一点点，那么日子难就很正常了，我想说，不正常才奇怪哩。</p>
-<p>现在好多人都说房价高，那么房价为什么会高呢？只有两种情况，一种是你赚钱的速度赶不上房价的上涨速度，另一种是货币贬值了，房价虚高，只不过刚需接盘侠们是货币贬值的最后承受者，没有享受到任何一点点货币贬值带来的收益，要知道货币贬值对所有人来说并不是公平的，有人说，我手里的钱贬值了，那有钱人手里的钱一样也贬值了呀？只能说你too young，too simple，钱就像是流水，就像一条河，同样的一河水，在水的上游和下游能一样吗？同样货币这个贬值链，就像一条河水一样，也分上游下游，货币流到上游的人的手里的时候，并没有贬值，而是和以前价值一样，那么这些占据上游的都是哪些人呢？发大水的是央行，上游的人是各大国有银行、国企、国家各部委、权力掌控者等，中游是商业银行、民营企业、利益既得者等，经过层层盘剥，当这个贬值链流到下游的时候，又是哪些人呢？就是这个底层劳动人民、刚需接盘侠，之所以房价会高涨，是因为没有任何一个产业能够锁住这么海量的贬值货币，唯有将这些海量的货币存之于楼市，才能尽量减少对其他行业的伤害，试想通胀不是流向楼市，而是流向日常生活必须品，那个个吃不上饭可是天大的问题了，但是一部分人住不上房却不是致命的，即使这些住不上房的人闹腾也不用操心，因为那些有房的会代政府来管教他们，你说此话怎讲，君不见，房价略降，全国各地的售楼处都出现了业主打砸情况吗？这不就是有房产者、既得利益者在代国家管教这些无房产者吗？房价想降很难，一是政府不愿意，房价降了，海量的贬值货币往哪藏呢？二是有产者不愿意，买不起房，大家不会联合起来打砸售楼处，但是房价下降，已买房的人则会联合起来上书政府，要求政府救市，更有甚者，直接联合起来打砸售楼处，还有天理吗？法制社会存在这种流氓行径？没有任何理由，就是因为房价下降，就可以任意耍流氓了？呵呵，这些人没有得到严肃的处理，已经代表了政府的态度，睁一只眼闭一只眼，这些人就都没事了。</p>
-<p>追剧的过程中，一把手在剧中出现了无数遍，我英文不好，不要欺负我，我想请问一把手英文怎么翻译呢？大英帝国、美帝国家人民的词典中，有一把手这个词吗？有海外待过的人，还望不吝赐教。民选政府与任命制有着本质的区别，民选出来的领导人要对人民负责，同理，任命制选出来的领导人只对任命他的人负责。这种本质的区别，注定了人民有着本质的不同地位，该得到什么样的对待都是自己争取而来，你笑着看资本主义国家人民游行、示威、罢工，那就不要忽视人家赢得的地位。有付出才有收获，老祖宗留下来的话，是有道理的。任命制在我看来只能听天由命了，就像古代皇帝一样，如果是个雄才大略、英明神武的皇帝，那么人民生活相对来说更幸福一点，如果碰到昏庸无能、荒淫无度的主，那人民的生活能不水深火热吗？这不就是靠天吃饭吗？和现在的任命制有啥区别？一把手喜欢你，就提拔你，至于你对人民来说是福是祸，又有几个一把手会关心呢？</p>
-<p>这部剧叫《人民的名义》，恕我愚钝，我不知道这里面哪一点代表了人民的名义，我只看到草根出身的处长在第一集就被干掉了，我只看到同样草根出身的祁同伟和高小琴最后同样被干掉了，而那个利用权势不断打压祁同伟的人呢？梁璐包括他的父亲最后毫发无损，这就是人民的名义吗？人民的孩子总是最先和最后被干掉吗？我分明看到的就是有权有势同样能逍遥法外，我不知道现实中有多少丁义珍，但是我敢保证现实中的丁义珍绝对不会在国外的餐馆刷盘子，处处美化、处处讨喜，编剧们都不觉得恶心吗？像沙瑞金和侯亮平在现实中毕竟是少数，再进一步讲，现实中有多少丁义珍、赵立春（副国级，国家领导人啊、领导人啊、领导人啊）、赵瑞龙、刘新建、陈清泉等等这些人呢？恐怕远不止电视中所表现的那些吧？</p>
-<p>在剧情最后部分，侯亮平劝降祁同伟，莫名的心疼起祁同伟来，那个和天下棋，愿用自己的命去胜天半子的人，也许在祁的心中是这么想的，你侯亮平算什么东西，也敢来劝降我？在祁的身边，虽然不乏师长，以及同一师门的师弟师妹，但是又有几个打心眼里瞧得起看得起他的呢？他想过靠自己的努力来出人头地，在大学里学习努力，成绩优异，并且还是校学生会主席，但是有什么用呢？毫无关系背景的他，眼睁睁的看着那些能力平平甚至低于他的的校友们分配到了大城市，而他却被掌控权力的梁璐的父亲下放到了穷山沟沟里，只因他没接受梁璐的追求，即便他没有放弃，主动请缨去做缉毒工作，因为这个工作更危险，更容易立功，凭借着过人的勇气和努力，他成为了缉毒英雄，但是结果呢？梁璐的父亲，凭借手握大权，借着权力以惜才为名义，阻止让他升迁，硬生生的将他继续困于穷山沟之中。最终，这个内心孤傲的人向现实屈服了，这才有了那在汉东大学的著名一跪，祁同伟啊是个被时代抛弃的人、是个被权力毁掉的人、是个草根出身不断向上爬却死在权力脚下的人，直到最后事发败露，他也没有屈服，用他的话说，这个世界上没有人能够审判他，即便可能被判无期徒刑，苟延残喘，但是并没有，他没有投降，没有屈服，而是选择自杀结束生命。</p>
-<p>剧中还有一个现象被大家忽略了，那就是高育良和李达康的女儿都出国了，这就是官二代的命啊。而侯亮平和陈海这种所谓的中产呢？孩子只能挤在国内上些垃圾学校，甚至侯亮平妻子给孩子报的一个补习班，那老师居然是个电工，但是招生工作火热火热的，这和现代的学区房、各种补习班真是不谋而合。幸好这个老师被侯亮平一眼识破，谁又能说现实中存在诸多没有被识破的呢？如果现实中没有侯亮平去戳穿老师的嘴脸呢？岂不是依然可以大摇大摆的顶着补习班的名义继续招摇撞骗。如果现实中的所有官员子女都在国外接受教育，他们对人民又怎么会负责呢？从小接受资本主义国家的理念、文化、习俗、教育等等，怎么比得了土生土长的中国人对人民的了解程度呢？这些人谁又能保证其不在官爸爸富爸爸的扶持下走上统治人民的路子呢？当他们成长为了统治阶级，只要自我舒适，谁管你人民死活，大不了贪了几个亿全家移民罢了。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/linux%E6%B8%85%E7%A9%BA%E6%96%87%E4%BB%B6-%E6%B8%85%E7%90%86%E5%86%85%E5%AE%B9%EF%BC%88%E6%B8%85%E7%90%86%E7%A3%81%E7%9B%98%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux%E6%B8%85%E7%A9%BA%E6%96%87%E4%BB%B6-%E6%B8%85%E7%90%86%E5%86%85%E5%AE%B9%EF%BC%88%E6%B8%85%E7%90%86%E7%A3%81%E7%9B%98%EF%BC%89/" class="post-title-link" itemprop="url">linux清空文件/清理内容</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-04-30 00:00:00" itemprop="dateCreated datePublished" datetime="2017-04-30T00:00:00+00:00">2017-04-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>&gt;</code> 覆盖文件<br><code>&gt;&gt;</code> 追加文件</p>
-<h1 id="test-txt-测试"><a href="#test-txt-测试" class="headerlink" title="test.txt 测试"></a>test.txt 测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23j23f6aaZ ~]# echo &#x27;hello&#x27; &gt; test.txt</span><br><span class="line">[root@iZ23j23f6aaZ ~]# ll</span><br><span class="line">total 1484</span><br><span class="line">-rw-r--r-- 1 root root 1506593 Dec 17 14:53 atlassian-jira-6.3.6.tar.gz</span><br><span class="line">drwxr-xr-x 2 root root    4096 Jul 13  2015 cfg</span><br><span class="line">drwxr-xr-x 2 root root    4096 Dec 10 15:34 –p</span><br><span class="line">-rw-r--r-- 1 root root       6 Apr 30 09:28 test.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# echo null &gt; test.txt</span><br><span class="line">[root@iZ23j23f6aaZ ~]# ll</span><br><span class="line">total 1484</span><br><span class="line">-rw-r--r-- 1 root root 1506593 Dec 17 14:53 atlassian-jira-6.3.6.tar.gz</span><br><span class="line">drwxr-xr-x 2 root root    4096 Jul 13  2015 cfg</span><br><span class="line">drwxr-xr-x 2 root root    4096 Dec 10 15:34 –p</span><br><span class="line">-rw-r--r-- 1 root root       5 Apr 30 09:28 test.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# echo &#x27;&#x27; &gt; test.txt</span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# ll</span><br><span class="line">total 1484</span><br><span class="line">-rw-r--r-- 1 root root 1506593 Dec 17 14:53 atlassian-jira-6.3.6.tar.gz</span><br><span class="line">drwxr-xr-x 2 root root    4096 Jul 13  2015 cfg</span><br><span class="line">drwxr-xr-x 2 root root    4096 Dec 10 15:34 –p</span><br><span class="line">-rw-r--r-- 1 root root       1 Apr 30 09:28 test.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ ~]# cat null &gt; test.txt</span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23j23f6aaZ ~]# ll</span><br><span class="line">total 1480</span><br><span class="line">-rw-r--r-- 1 root root 1506593 Dec 17 14:53 atlassian-jira-6.3.6.tar.gz</span><br><span class="line">drwxr-xr-x 2 root root    4096 Jul 13  2015 cfg</span><br><span class="line">drwxr-xr-x 2 root root    4096 Dec 10 15:34 –p</span><br><span class="line">-rw-r--r-- 1 root root       0 Apr 30 09:29 test.txt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code> echo &#39;&#39; &gt; test.txt</code>    结果1kb</li>
-<li><code> cat null &gt; test.txt</code> 结果0 kb</li>
-</ul>
-<h1 id="access-log-测试"><a href="#access-log-测试" class="headerlink" title="access.log  测试"></a>access.log  测试</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1304</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root  58073 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ logs]# echo &#x27;&#x27; &gt; access.log </span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1244</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root   1102 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1256</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root  14806 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ logs]# cat null &gt; access.log</span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1244</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root   2190 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1252</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root  11339 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23j23f6aaZ logs]# cat null &gt; access.log</span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23j23f6aaZ logs]# ll</span><br><span class="line">total 1244</span><br><span class="line">-rw-r--r-- 1 root   root 613639 Apr 30 09:33 access_liux.log</span><br><span class="line">-rw-r--r-- 1 nobody root   1801 Apr 30 09:36 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 639126 Apr 30 07:53 error.log</span><br><span class="line">-rw-r--r-- 1 root   root      6 Apr  8 21:12 nginx.pid</span><br><span class="line">[root@iZ23j23f6aaZ logs]# </span><br></pre></td></tr></table></figure>
-
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ23ult4m4yZ ~]# df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/xvda1       20G  5.2G   14G  28% /</span><br><span class="line">tmpfs           1.9G     0  1.9G   0% /dev/shm</span><br><span class="line">/dev/xvdb1       20G  4.6G   15G  25% /mnt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23ult4m4yZ ~]# cd /usr/local/nginx/logs/</span><br><span class="line">[root@iZ23ult4m4yZ logs]# ll</span><br><span class="line">total 1025708</span><br><span class="line">-rw-r--r-- 1 root   root 702671189 Apr 28 11:21 access_2017-04-27_11:21:53.log</span><br><span class="line">-rw-r--r-- 1 nobody root  77063276 Apr 29 00:00 access_2017-04-28_00:00:01.log</span><br><span class="line">-rw-r--r-- 1 nobody root 143218093 Apr 30 00:00 access_2017-04-29_00:00:01.log</span><br><span class="line">-rw-r--r-- 1 nobody root  49736274 Apr 30 09:39 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root  76566363 Apr 30 09:39 error.log</span><br><span class="line">-rw-r--r-- 1 root   root         6 Apr 23 20:18 nginx.pid</span><br><span class="line">[root@iZ23ult4m4yZ logs]# du -sh *</span><br><span class="line">671M access_2017-04-27_11:21:53.log</span><br><span class="line">74M access_2017-04-28_00:00:01.log</span><br><span class="line">137M access_2017-04-29_00:00:01.log</span><br><span class="line">48M access.log</span><br><span class="line">74M error.log</span><br><span class="line">4.0K nginx.pid</span><br><span class="line">[root@iZ23ult4m4yZ logs]# cat null &gt; access_2017-04-27_11\:21\:53.log </span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23ult4m4yZ logs]# du -sh *</span><br><span class="line">0 access_2017-04-27_11:21:53.log</span><br><span class="line">74M access_2017-04-28_00:00:01.log</span><br><span class="line">137M access_2017-04-29_00:00:01.log</span><br><span class="line">48M access.log</span><br><span class="line">74M error.log</span><br><span class="line">4.0K nginx.pid</span><br><span class="line">[root@iZ23ult4m4yZ logs]# df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/xvda1       20G  5.2G   14G  28% /</span><br><span class="line">tmpfs           1.9G     0  1.9G   0% /dev/shm</span><br><span class="line">/dev/xvdb1       20G  4.0G   15G  21% /mnt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23ult4m4yZ logs]# ll</span><br><span class="line">total 123716</span><br><span class="line">-rw-r--r-- 1 root   root        0 Apr 30 09:40 access_2017-04-27_11:21:53.log</span><br><span class="line">-rw-r--r-- 1 nobody root        0 Apr 30 09:41 access_2017-04-28_00:00:01.log</span><br><span class="line">-rw-r--r-- 1 nobody root        0 Apr 30 09:41 access_2017-04-29_00:00:01.log</span><br><span class="line">-rw-r--r-- 1 nobody root 49978683 Apr 30 09:41 access.log</span><br><span class="line">-rw-r--r-- 1 nobody root 76566363 Apr 30 09:39 error.log</span><br><span class="line">-rw-r--r-- 1 root   root        6 Apr 23 20:18 nginx.pid</span><br><span class="line">[root@iZ23ult4m4yZ logs]# df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/xvda1       20G  5.2G   14G  28% /</span><br><span class="line">tmpfs           1.9G     0  1.9G   0% /dev/shm</span><br><span class="line">/dev/xvdb1       20G  3.8G   15G  20% /mnt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@iZ23ult4m4yZ logs]# cat null &gt; catalina.out </span><br><span class="line">cat: null: No such file or directory</span><br><span class="line">[root@iZ23ult4m4yZ logs]# df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/xvda1       20G  5.2G   14G  28% /</span><br><span class="line">tmpfs           1.9G     0  1.9G   0% /dev/shm</span><br><span class="line">/dev/xvdb1       20G  324M   19G   2% /mnt</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Read-ant-tribe-college-graduates-live-in-the-village-record/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Read-ant-tribe-college-graduates-live-in-the-village-record/" class="post-title-link" itemprop="url">读《蚁族：大学毕业生聚居村实录》</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-04-25 22:35:41" itemprop="dateCreated datePublished" datetime="2017-04-25T22:35:41+00:00">2017-04-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:27" itemprop="dateModified" datetime="2024-01-26T12:42:27+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>古有科举，今有高考，然今日境却不与古日同。科举自隋唐始，终于晚清，这是古代读书人唯一的上升通道，虽然说比较困难，但是最起码还是一个可行的通道，能让人对未来满怀憧憬。但当今时代，时移世易，在这个权利和人情的社会，越是“苦读”的平民家庭出身的孩子，机会可能越少。许多靠近权力的机关和垄断行业里，越来越没有平民和贫苦人家孩子的缘分。父辈的权力和“人脉”会以某种方式“世袭”。“蚁族”们大多来自农村和县级市，家庭收入低，他们的父母处于社会中下层。十年寒窗苦读得以让他们接受高等教育，但毕业时他们发现，由于自己没有“硬”关系，只能又回到“村”里。他们不是不努力不是不上进的一群人，能够从数千万底层劳动人民中脱颖而出，本身就说明了他们还是有所追求，有所渴望的，但是现实给予了他们重重一击，这一击足以让他们将人生中种种不如意，归因于这个社会，从而使自己喝社会对立起来。</p>
-<p>人们说，现在是“知识经济”的时代。然而，蚁族们，接受了高等教育，却无法实现知识致富，甚至对某些人来说，找到一份糊口的工作都比较困难，这到底是自身不够努力？还是社会无法提供施展的平台？他们在社会上究竟处于怎样的位置？他们比传统的农民工幸福吗？难道他们千里迢迢来到大城市只为了体味生活的磨难？蚁族们有太多的故事值得述说，每个人虽然微若蝼蚁，但是都怀有各自那小小的梦想与希望。鲁迅先生说，希望本无所谓有，也无所谓无，这就像地上的路，其实地上本没有路，走的人多了，也便成了路。虽然现实有各种困难，但是对于蚁族们来说，心有多大，舞台才有多大。</p>
-<p>在这本书中记录了大量采访对象身上的故事，看了他们的故事有时候也能看到自己的影子吧。不是不努力，不努力的人确实有，但是努力了依然看不到希望的恐怕才是主流吧，不能简单的把原因归咎于这些才毕业或者说毕业没有多久，也没啥能力的学生身上，大学的垃圾教育不足以培养他们在社会上谋生的手段，这又能怪的了谁呢？大学一直都是易出难进，至少在中国是这样的，而美国与此恰恰相反，美国的模式是易进难出，任何人都可以去读名校，但是四年本科毕业率极低，至少比中国低20个百分点吧。中国的大学就像是一股洪流，不是能够轻易改变的，任何置身其中的人，哪怕你能看到问题所在，你依然无能为力，你能做的只是尽量提高对自己的要求而已，仅此别无他法，只能被这股洪流裹挟着，浪费掉那谈不上多重的生命。</p>
-<p>其实这些蚁族中也不乏有毅力、雄心、长远规划的人，而这些人多数都是男人，总的来说，在采访的蚁族中，每月一两千、两三千且月月光的女生居多，他们从心里上就认为自己是弱者，自己无需为以后考虑，更无需负担买房的压力，所以他们反而是过得更舒适的一类人，而另一类人呢？工资有的能到五六千，但是依然只蜗居在这每月几百块的破旧房子里，而舍不得租住更好的但价格更贵的房子，他们多数都是在默默地为了以后做这长远的打算。他们年纪都不大，却有更远大的目标，他们有能力使自己过得更好，却甘愿蜗居在这条件极差的城中村里，他们不在乎眼前的生活是否安逸。在这个世界上，他们将事业放在重要的位置。在他们看来，美好的梦想永远值得他们努力奋斗。</p>
-<p>农村孩子在城市中等待翻身，如同等待铁树开花一样艰难。他们以考大学的方式告别农村，却至今仍无法融入城市的主流文化。物竞天择，家庭的负担和过低的起点，使农村的孩子无法轻装上阵。走出了老家的农村，又走进了北京的农村，这仿佛是一种宿命，萦绕着他们本该绽放的人生。然而他们没有退缩，在我看来，这些蜗居在城中村的人，心中依然保留着一份幻想，期待靠自己的努力，不断打拼，最终能够在这个城市立稳脚跟。可惜，现实是残酷的，他们终将成为北京的弃儿，我又何尝不是呢？一个人奋斗在魔都，满以为凭自己的努力可以奋斗出属于自己的一片天，如今想想，痴念罢了。不管是既得利益者，还是有产阶层，抑或统治阶级，都不可能轻易的让你成为这个全国顶尖城市的原住民。</p>
-<p>大家想必都还记得曾经非常火热的《奋斗》吧？这些刚毕业就开上奥迪或奥拓的年轻人是否就是我们想象中的奋斗？如果这就是80后的奋斗，那这些城中村居住着的大学生难道都在混生活混日子？《奋斗》中那些俊男靓女们整天无所事事，打台球、泡吧的都市青年们究竟在为什么奋斗？其实，真正的生活中，这些住在“聚居村”里的“蚁族”正以实际行动诠释着“奋斗”的真正含义。刚毕业的他们面对生活显得捉襟见肘，但是这些能直面现实、接受现实的年轻人具有强大的精神动力，他们有自己的理想，而且正在积蓄力量为实现这些理想而奋斗。现实的分层是残酷的，《奋斗》的导演们以及里面的俊男靓女们其实并不知道什么才是真正源于生活的奋斗，那种从社会的底层不断向上爬，去努力撬动途径的每一个阶层所遇到的阻力与抗拒究竟有多大，他们是完全无法体会的，这部剧虽然很火，但是仅仅是富家公子顽劣青年的自我标榜与吹捧而已，他们并不理解艺术源于生活，更高于生活的真正含义。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/15/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/56/">56</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/15/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

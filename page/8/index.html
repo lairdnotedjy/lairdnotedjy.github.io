@@ -136,18 +136,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">546</span>
+          <span class="site-state-item-count">554</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-count">389</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -164,6 +164,774 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/go-flag-slice-map/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/go-flag-slice-map/" class="post-title-link" itemprop="url">Go语言flag接收slice和map类型参数</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-09-03 15:22:27" itemprop="dateCreated datePublished" datetime="2019-09-03T15:22:27+00:00">2019-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:27" itemprop="dateModified" datetime="2024-01-26T12:42:27+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>go 自带的<code>flag</code>包可以很容易的实现一个命令行程序的参数解析，但是<code>flag</code>包默认只支持几个基本类型的参数解析，如果需要传递<code>slice</code>或者<code>map</code>类型时就要自定义了，这里记录一下。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>通过<code>flag.Var()</code>方法传递一个<code>Value</code>接口，即可自定义命令行参数的解析，<code>flag.Value</code>接口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">type Value interface &#123;</span><br><span class="line">	String() string</span><br><span class="line">	Set(string) error</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/go-flag-slice-map/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/free-ssl-cert/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/free-ssl-cert/" class="post-title-link" itemprop="url">使用免费的HTTPS证书</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-08-14 15:20:56" itemprop="dateCreated datePublished" datetime="2019-08-14T15:20:56+00:00">2019-08-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>众所周知 HTTPS 是保证 HTTP 通讯安全的协议，网站启用 HTTPS 可以避免很多安全性的问题， 而且 Chrome 浏览器 从 68 版本开始直接将 HTTP 网站标记为不安全了。</p>
+<p>所以把网站升级成 HTTPS 自然是大势所趋，不过启用 HTTPS 有个最重要的问题是 HTTPS 证书<code>要花钱</code>！如果每年额外花钱去购买 HTTPS 证书，那也是一笔很大的开销。那么有没有免费的<code>HTTPS</code>证书可以用呢，查了下资料有个叫<a target="_blank" rel="noopener" href="https://letsencrypt.org/"><code>Let’s Encrypt</code></a>的项目就提供了免费签发 HTTPS 证书的服务，这里记录下如何使用<code>Let’s Encrypt</code>来签发证书。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/free-ssl-cert/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/server-push-and-websocket/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/server-push-and-websocket/" class="post-title-link" itemprop="url">服务器推送技术与websocket协议</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-08-08 16:35:37" itemprop="dateCreated datePublished" datetime="2019-08-08T16:35:37+00:00">2019-08-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>websocket 作为现代浏览器的长连接标准，可以很好的解决浏览器与服务器实时通讯的问题，那么在 websocket 出现之前是怎么解决这个问题的呢？首先来回顾一下在此之前浏览器和服务器的”长连接”之路。</p>
+<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>在 websocket 协议出来之前，主要是有三种方向去实现类似 websocket 的功能的。</p>
+<h3 id="Flash"><a href="#Flash" class="headerlink" title="Flash"></a>Flash</h3><p>flash 支持 socket 通讯功能，基于 flash 可以很简单的实现与服务器建立通讯。</p>
+<ul>
+<li>优点：开发简单、兼容性高</li>
+<li>缺点：需要浏览器启用 flash 功能，并且逐渐被浏览器淘汰</li>
+</ul>
+<h3 id="AJAX-Polling"><a href="#AJAX-Polling" class="headerlink" title="AJAX Polling"></a>AJAX Polling</h3><p>浏览器使用 ajax 去轮询服务器，服务器有内容就返回，轮询也分为短轮询和长轮询。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/server-push-and-websocket/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/maven-download-jar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/maven-download-jar/" class="post-title-link" itemprop="url">maven下载指定依赖jar包</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-07-25 09:40:16" itemprop="dateCreated datePublished" datetime="2019-07-25T09:40:16+00:00">2019-07-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:get -Dartifact=groupId:artifactId:version:jar:sources</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><ul>
+<li><p>下载jar包</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:get -Dartifact=junit:junit:4.12:jar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载源码</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:get -Dartifact=junit:junit:4.12:jar:sources</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/docker-web-terminal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/docker-web-terminal/" class="post-title-link" itemprop="url">通过web terminal来连接docker容器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-07-19 18:22:01" itemprop="dateCreated datePublished" datetime="2019-07-19T18:22:01+00:00">2019-07-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在公司内部使用 Jenkins 做 CI&#x2F;CD 时，经常会碰到项目构建失败的情况，一般情况下通过 Jenkins 的构建控制台输出都可以了解到大概发生的问题，但是有些特殊情况开发需要在 Jenkins 服务器上排查问题，这个时候就只能找运维去调试了，为了开发人员的体验就调研了下 web terminal，能够在构建失败时提供容器终端给开发进行问题的排查。</p>
+<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><p><img src="/docker-web-terminal/2019-07-22-09-24-49.png"><br>支持颜色高亮，支持<kbd>tab</kbd>键补全，支持复制粘贴，体验基本上与平常的 terminal 一致。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/docker-web-terminal/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/k8s-graceful-shutdown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/k8s-graceful-shutdown/" class="post-title-link" itemprop="url">Kubernetes之服务优雅升级</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-07-11 10:22:46" itemprop="dateCreated datePublished" datetime="2019-07-11T10:22:46+00:00">2019-07-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><code>k8s</code>本身就支持服务滚动升级，但是如果程序没有正确的处理退出信号时，就会导致部分请求直接被中断从而影响用户体验。</p>
+<h2 id="滚动升级步骤"><a href="#滚动升级步骤" class="headerlink" title="滚动升级步骤"></a>滚动升级步骤</h2><p>每个<code>pod</code>代表一个集群中的节点，在 k8s 做<code>rolling-update</code>的时候默认会向旧的<code>pod</code>发送一个<code>SIGTERM</code>信号，如果应用没有对<code>SIGTERM</code>信号做处理的话，会立即强制退出程序，这样的话会导致有些请求还没处理完，前端应用请求错误。</p>
+<p>先来回顾下 k8s 的滚动升级步骤：</p>
+<ol>
+<li>启动一个新的 pod</li>
+<li>等待新的 pod 进入 Ready 状态</li>
+<li>创建 Endpoint，将新的 pod 纳入负载均衡</li>
+<li>移除与老 pod 相关的 Endpoint，并且将老 pod 状态设置为 Terminating，此时将不会有新的请求到达老 pod</li>
+<li>给老 pod 发送 SIGTERM 信号，并且等待 terminationGracePeriodSeconds 这么长的时间。(默认为 30 秒)</li>
+<li>超过 terminationGracePeriodSeconds 等待时间直接强制 kill 进程并关闭旧的 pod</li>
+</ol>
+<p>这里要注意，<code>SIGTERM信号如果进程没有处理的话也其实也就会导致进程被强杀</code>，如果处理了但是超过<code>terminationGracePeriodSeconds</code>配置的时间也一样会被强杀，所以这个时间可以根据具体的情况去设置。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/k8s-graceful-shutdown/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/win10-open-cmd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/win10-open-cmd/" class="post-title-link" itemprop="url">win10右键菜单在当前目录下打开CMD</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-07-08 11:18:36" itemprop="dateCreated datePublished" datetime="2019-07-08T11:18:36+00:00">2019-07-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:26" itemprop="dateModified" datetime="2024-01-26T12:42:26+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/windows/" itemprop="url" rel="index"><span itemprop="name">windows</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>win10 右键菜单只能打开 Powershell，然而不知道是 Powershell 难用还是我不会用，各种莫名其妙的问题，这个时候想想还是<code>cmd</code>真香，所以在网上找了个办法把 <code>cmd</code> 加到右键菜单里已方便使用。</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>新建一个文档，赋值粘贴以下代码，并且将文档保存为.reg 格式的文件。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/win10-open-cmd/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/java-reflect-getdeclaredmethods-issue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/java-reflect-getdeclaredmethods-issue/" class="post-title-link" itemprop="url">java反射使用getDeclaredMethods会获取到父类方法的解决办法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-07-03 10:18:25" itemprop="dateCreated datePublished" datetime="2019-07-03T10:18:25+00:00">2019-07-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:17" itemprop="dateModified" datetime="2024-01-26T12:42:17+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在使用<code>getDeclaredMethods</code>方法获取类中的方法时碰到一个奇怪的问题，先来看看<code>getDeclaredMethods</code>方法的注释：</p>
+<blockquote>
+<p>Returns an array containing Method objects reflecting all the declared methods of the class or interface represented by this Class object, including public, protected, default (package) access, and private methods, <strong>but excluding inherited methods</strong>.</p>
+</blockquote>
+<p>谷歌翻译:</p>
+<blockquote>
+<p>返回一个包含 Method 对象的数组，这些对象反映此 Class 对象所表示的类或接口的所有声明方法，包括 public，protected，default（包）访问和私有方法，<strong>但不包括继承的方法</strong>。</p>
+</blockquote>
+<p>注意加粗的字体，可以看到 JDK 注释里明确的说明了<code>getDeclaredMethods</code>方法不会返回继承的方法，我要的功能就是取当前类上的方法(不包含父类的)，但是事情并没有这么简单，下面一起来看看是为什么。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/java-reflect-getdeclaredmethods-issue/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -350,784 +1118,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/fiddler-tutorial/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/fiddler-tutorial/" class="post-title-link" itemprop="url">HTTP调试工具之Fiddler使用教程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2019-05-24 18:20:57" itemprop="dateCreated datePublished" datetime="2019-05-24T18:20:57+00:00">2019-05-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="Fidder-简介"><a href="#Fidder-简介" class="headerlink" title="Fidder 简介"></a>Fidder 简介</h2><p><code>Fiddler</code>是一个用于 HTTP 调试的代理服务器应用程序，最初由微软 Internet Explorer 开发团队的前程序经理 Eric Lawrence 编写。通过<code>Fiddler</code>的代理服务器，可以捕获<code>HTTP</code>和<code>HTTPS</code>协议流量，并且可对<code>HTTP</code>请求和响应做出修改，使用<code>Fiddler</code>可以很方便的对<code>HTTP</code>协议进行分析和调试。</p>
-<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p><img src="/fiddler-tutorial/2019-05-25-18-17-30.png"><br>客户端的请求经过 Fiddler 的代理服务器转发，再由<code>Fidder</code>对目标服务器进行请求，得到响应之后再返回给客户端，在整个通讯过程中 Fidder 是一个中间人的角色，可以捕获到所有的请求和响应报文。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/fiddler-tutorial/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/git-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/git-summary/" class="post-title-link" itemprop="url">git常用命令集</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2019-05-07 09:32:44" itemprop="dateCreated datePublished" datetime="2019-05-07T09:32:44+00:00">2019-05-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" itemprop="url" rel="index"><span itemprop="name">版本控制</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>git 在本地有三个工作区域：</p>
-<ol>
-<li>工作区</li>
-<li>暂存区</li>
-<li>版本库</li>
-</ol>
-<p>它们之间的转化关系如下图：<br><img src="/git-summary/2019-05-17-23-04-35.png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/git-summary/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/read-chinese-chives-self-improvement/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/read-chinese-chives-self-improvement/" class="post-title-link" itemprop="url">读《韭菜的自我修养》</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-12-02 23:40:41" itemprop="dateCreated datePublished" datetime="2018-12-02T23:40:41+00:00">2018-12-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:28" itemprop="dateModified" datetime="2024-01-26T12:42:28+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote  class="blockquote-center">
-**思考带来决策，决策带来行动，行动改变命运。
-——李笑来**
-</blockquote>
-
-<p>非常喜欢读笑来老师的书，每次读来都感觉干货满满，通篇大实话，逻辑清晰简洁明了。但是我们都知道，往往讲真话的人通常都是不受待见的人，所以社会上有很多不明真相的人都以为笑来老师是个大骗子。试想如果没有真才实学的话，谁能骗得到这么多的身家，居然还可以安然无恙呢？所以凭真本事赚钱才是笑来老师的发家之本。</p>
-<p>如果看了很多笑来老师书的人，都知道笑来老师的一贯风格是弄清每一个概念，有了这些不同的准确的清晰的概念之后，自己的大脑才能更好更精准的处理与这些概念相关的事物。所以笑来给韭菜下了个定义</p>
-<blockquote>
-<p>所谓的“韭菜”，指的是在交易市场中没赚到钱甚至赔钱的势单力薄的散户<br>所谓的“韭菜”，指的是那些在本质上并不是零和游戏的交易市场里以为自己在玩零和游戏的交易者</p>
-</blockquote>
-<p>之所以给出第二个定义，主要是想说明并不是散户就是韭菜，韭菜也不一定是散户。</p>
-<p>那么，依此来看，如果你不想做“韭菜”，任务很简单啊，那就是“赚到钱……”</p>
-<p>另外如果仅仅根据定义还难以判断自己或者他人是否是“韭菜”，那再来看一些韭菜的基本特征</p>
-<blockquote>
-<p>他们严重缺乏基本的阅读能力。他们是那种买一辈子东西都不读产品说明书的人，他们是那种无论拿到什么，都要问别人怎么用的人……特别常见吧？</p>
-</blockquote>
-<p>对好多人来说，不论是炒股还是炒币，总之买啥啥跌，卖啥啥涨，世界上居然会有这么吊诡的事？显然是不可能的，其实这个很好解释，每一次行情结束的根本原因是“入场资金枯竭”，换言之，当街边卖茶叶蛋的大妈都在讨论股票的时候，那股市很可能是见顶了。这和现在全民炒房，当一个普通的农村妇女都知道买房赚钱的时候，是不是意味着房市也要见顶了呢？那你敢不敢相信自己的判断继而做出正确的决策呢？</p>
-<p>许多韭菜进场的时候，往往都是牛市的末期，因为连你这么一个八竿子打不着的人，都要冲进市场去赚钱的时候，这个牛市已经走到了末尾，而进来的韭菜们就成了接盘侠，其实不论何时进场都不晚，一定要有控制住自己的能力，切忌一进场就All In，把自己的钱全部花光，这样无论后面出现多好的抄底机会，你也只能眼睁睁的看着别人抄底。成功交易者的一个基本素质就是：在任何时候都持有一定比例的现金。久混币圈我也积累了不少的经验，比如说常见的，当大家都还在笑呵呵的骂爹骂娘，自己又亏了多少，还饶有兴致的嬉笑怒骂的时候，这样的市场一定没有到底，真正的底部是无声的收割，是无声的流血，是深入到骨子里的亏损，是庄家终于拿到了那些带血的筹码。只有当大家连骂娘都懒得骂的时候，所有的人都不再发声了，市场一片寂静，说明这个市场才是真正的已经到底了。还有常说的“是底不反弹，反弹不是底”，底部一定是慢慢磨出来的，当把所有的韭菜都洗出去之后，这个底部才算真正的夯实，市场才会真正的起飞。而经常看K线图的人，还会说一句“横有多长，竖有多高”，横代表市场的底部夯实的时间，也就是说这个底部磨的越久，将来的市场会飞的越高。</p>
-<p>无论什么时候，永远不要一把梭，不要把自己的所有现金流都投进去。刚开始做韭菜不要紧，关键的是要做一个不断学习持续进步的人，为什么要保有现金流呢？这个保有的现金流可以拉低你的持仓成本，没有任何人能买在最低点，卖在最高点，所以当你一进场被套住的时候也不要慌，随时市场不断的下跌，开始不断的加仓，用后面的低成本筹码来拉低你整体的持仓成本。</p>
-<p>任何的市场都没有只涨不跌的神话，即便是强如中国房地产，我依然相信经济周期的存在，而房产的周期一般是十年左右，从2008年四万亿货币大放水开始到2018年结束，这是一个周期，2018年高点买房的人，很大概率会成为最后一批接棒的人。而2018之后的两三年或许是刚需上车房地产的一个好机会，这是题外话。而股市或者说币市里的人多数都是看到短期的涨跌，而没有看到一个完整的经济周期，有涨有跌牛熊交替，才是一个完整的周期。所以从我进入币圈开始，就没想着说赚快钱，赚一笔就跑，与周期为伍，一年中哪怕抓住一次两次机会，都能让你的资产快速翻倍，这也是我选择进入币圈的一大原因。如果你能坚持熬过币圈的一两个周期，赚到钱基本不是什么难事，现如今阶层固化，而想要让阶层回到固化前的状态是基本不可能的，这会触及到大多数人的利益，所以固化只会更加严重，放眼望去，还有什么市场能够让你快速的完成阶层跃升呢？上一辈人是这一轮房市的最大得益者，如果你还想靠房市来赢得与他们对等的利益，这基本是不可能的了，目前来看，币圈是一个非常大的也是非常好的机会。</p>
-<p>还有一个非常重要的因素可以决定你是否会成为韭菜，那就是“频次才是决定一切的根本因素”。常在币圈混的人，也有一套自己的说辞，那就是手里的币越交易越少，很奇怪不是，你每次交易都是冲着盈利去的，即便不谈金钱上的盈利，从币的数量上来说，不考虑市场的波动的话，我们手里的币应该越来越多才对，为什么会变少呢？又一个很吊诡的现象。其实这背后的原因就是交易是有成本的，每一次的交易都会凭空损失一笔交易手续费，不管是股市还是币市，挣交易费的人从来都是市场的大赢家。币圈的金句实在是很多，比如还有一句“牛市挣钱，熊市屯币”，在熊市的时候，所有的资产价格都在急速下跌，自己手里的币换算成人民币自然也是急剧缩水，而这个时候不应该盯着人民币去看，而要以币作为本位，就是让自己手里的币越来越多，并且能够熬过熊市，那么牛市一旦到来，手里的资产将急剧膨胀，快速翻番。所以笑来总结到，韭菜想要翻身，只有一条路可走“降低交易频次……降低降低再降低”，频繁交易的结果就是手续费累积，累积到吞噬你的所有利润和本金。</p>
-<p>现实生活中，我们也会经常听说，所谓的专家预测某只股票的涨幅和一只黑猩猩随意选出来的股票涨幅很接近，进而得出专家和猩猩差不多的结论，专家自然有很水的专家，但很水的结论不是从短期的涨跌得出来的，更不是因为和黑猩猩做对比得来的。因为越是短期的预测，越接近于抛硬币，一个专业选手和一个业余选手在短期内对股票的预测，结果会非常相近，而越是长期的预测，越容易接近真实的逻辑推断，所以真正的聪明的专家应该只做长期的预测，这才是真正的理性推断。</p>
-<p>最后，附上比特币白皮书的中英文对照：<a target="_blank" rel="noopener" href="http://lixiaolai.com/Bitcoin-Whitepaper-EN-CN.html">《比特币：一种点对点的电子现金系统》</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/proxyee-down-3-0-guide/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/proxyee-down-3-0-guide/" class="post-title-link" itemprop="url">Proxyee Down 3.0 正式版发布</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-09-05 11:33:46" itemprop="dateCreated datePublished" datetime="2018-09-05T11:33:46+00:00">2018-09-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">杂谈</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在经历了近半年的时间之后，Proxyee Down 终于迎来了 3.0 版本,新版本改动非常的大同时进步也非常的大，来看看 3.0 版本的新特性吧。</p>
-<h2 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h2><ol>
-<li>UI 界面完全重构。</li>
-<li>使用全新的<a target="_blank" rel="noopener" href="https://github.com/proxyee-down-org/pdown-core">下载核心</a>，稳定性和下载速度全面提升，现在下载完的连接会去支持没下载完的连接，而不是和老版本一样下载完了就停止了。</li>
-<li>去除老版本自带的百度云下载插件，新增扩展模块，在扩展商城里可以下载各种各样的扩展而不是仅限于百度云下载插件，支持第三方开发扩展(<a target="_blank" rel="noopener" href="https://github.com/proxyee-down-org/proxyee-down-extension">参与开发</a>)。</li>
-<li>加入限速功能，包括单任务限速和全局限速。</li>
-<li>加入同时下载任务数设置功能。</li>
-<li>启动速度大幅度提高</li>
-<li>加入国际化支持(欢迎提交 PR)</li>
-<li>文件夹选择器使用操作系统原生选择器，支持局域网共享文件夹、移动硬盘、U 盘。</li>
-<li>移除老版本自带的百度云解压工具(之后会单独开发一款解压工具从下载器里独立出来)</li>
-<li>mac 系统打包成原生 app 应用，而不是像之前一样用批处理文件启动。</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/proxyee-down-3-0-guide/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/hello-elasticsearch-install/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/hello-elasticsearch-install/" class="post-title-link" itemprop="url">Elasticsearch6.x学习笔记 - 安装</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-08-06 14:24:02" itemprop="dateCreated datePublished" datetime="2018-08-06T14:24:02+00:00">2018-08-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近心血来潮，准备学习下开源届首选的搜索引擎<code>Elasticsearch</code>，在了解相关概念之后就准备在虚拟机装上试一试了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/hello-elasticsearch-install/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/vscode-vue-eslint-prettier/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/vscode-vue-eslint-prettier/" class="post-title-link" itemprop="url">如何优雅的使用VS Code+ESLint+Prettier写Vue程序</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-08-03 09:17:15" itemprop="dateCreated datePublished" datetime="2018-08-03T09:17:15+00:00">2018-08-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:27" itemprop="dateModified" datetime="2024-01-26T12:42:27+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本人是 JAVA 为主，开发工具用的 IDEA，之前写 Vue 前端的时候也是直接用的 IDEA+Vue 插件来开发的，一般也是写着玩，不是正式项目，所以也从来没用过<code>ESLint</code>和<code>Prettier</code>，然后最近要参与一个前端项目，用 IDEA 导入项目后打开，出于强迫症使用熟悉的<kbd>ctrl</kbd>+<kbd>alt</kbd>+<kbd>L</kbd>格式了下代码，发现代码格式完全对不上啊，调研了下之后，义无反顾的转投<code>VS Code</code>写前端了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/vscode-vue-eslint-prettier/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/jvm-dump-class/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/jvm-dump-class/" class="post-title-link" itemprop="url">从JVM中dump出动态代理生成的class</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-07-25 17:25:37" itemprop="dateCreated datePublished" datetime="2018-07-25T17:25:37+00:00">2018-07-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>由于动态代理生成的 class 是直接以二进制的方式加载进内存中的，并没有对应的.class 文件生成，所以如果想通过反编译工具查看动态代理生成的代码需要通过特殊的手段来处理。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/jvm-dump-class/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/publish-jar-to-maven/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/publish-jar-to-maven/" class="post-title-link" itemprop="url">发布jar包到maven中央仓库</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-07-23 14:00:24" itemprop="dateCreated datePublished" datetime="2018-07-23T14:00:24+00:00">2018-07-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:23" itemprop="dateModified" datetime="2024-01-26T12:42:23+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们知道在 maven 中引入第三方 jar 包是非常简单的，只需要使用 groupId+artifactId+version 就能从 maven 仓库中下载下来对应的 jar 包。</p>
-<blockquote>
-<p>例如：引入 fastjson 的 jar 包</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;fastjson&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.2.46&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<p>那如果想要发布自己的 jar 包到 maven 仓库应该如何操作呢。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/publish-jar-to-maven/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/56/">56</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

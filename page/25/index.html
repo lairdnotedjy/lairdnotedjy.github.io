@@ -136,18 +136,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">546</span>
+          <span class="site-state-item-count">554</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">381</span>
+        <span class="site-state-item-count">389</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -164,6 +164,964 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ionic%E9%9A%90%E8%97%8F%E7%B3%BB%E7%BB%9F%E8%BF%94%E5%9B%9E%E9%94%AE%20&%20%E8%87%AA%E5%AE%9A%E4%B9%89%E8%BF%94%E5%9B%9E%E9%94%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ionic%E9%9A%90%E8%97%8F%E7%B3%BB%E7%BB%9F%E8%BF%94%E5%9B%9E%E9%94%AE%20&%20%E8%87%AA%E5%AE%9A%E4%B9%89%E8%BF%94%E5%9B%9E%E9%94%AE/" class="post-title-link" itemprop="url">ionic隐藏系统返回键 & 自定义返回键</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-11-18 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-18T00:00:00+00:00">2016-11-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:28" itemprop="dateModified" datetime="2024-01-26T12:42:28+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="hide-back-button"><a href="#hide-back-button" class="headerlink" title="hide-back-button"></a>hide-back-button</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;ion-view view-title=&quot;活动中心&quot; class=&quot;appBg page-myMessage&quot; hide-back-button=&quot;true&quot;&gt;</span><br><span class="line"> </span><br><span class="line"> &lt;ion-nav-buttons side=&quot;left&quot;&gt;</span><br><span class="line">    &lt;i class=&quot;button ion-ios-arrow-left back &quot; style=&quot;font-size: 30px;border: 0;&quot; ng-click=&quot;navBack()&quot;&gt;&lt;/i&gt;</span><br><span class="line">  &lt;/ion-nav-buttons&gt;</span><br><span class="line"> </span><br><span class="line">  &lt;ion-content&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>更好的样式(Button相比i具备自动居中的能力,整体布局与ionic自有机制保持一致)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;ion-view class=&quot;feedback&quot; view-title=&quot;帮助与反馈&quot; hide-back-button=&quot;true&quot;&gt;</span><br><span class="line"> </span><br><span class="line">  &lt;ion-nav-buttons side=&quot;left&quot;&gt;</span><br><span class="line">    &lt;!--&lt;i class=&quot;button ion-ios-arrow-left back &quot; style=&quot;font-size: 30px;border: 0;&quot; ng-click=&quot;navBack()&quot;&gt;&lt;/i&gt;--&gt;</span><br><span class="line">    &lt;button ng-click=&quot;navBack()&quot; class=&quot;button buttons button-clear header-item&quot;&gt;</span><br><span class="line">      &lt;i class=&quot;icon ion-ios-arrow-back&quot;&gt;&lt;/i&gt;</span><br><span class="line">      &lt;span class=&quot;back-text&quot; style=&quot;transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);&quot;&gt;</span><br><span class="line">          &lt;span class=&quot;default-title&quot;&gt;&amp;emsp;&amp;emsp;&lt;/span&gt;</span><br><span class="line">        &lt;/span&gt;</span><br><span class="line">    &lt;/button&gt;</span><br><span class="line"> </span><br><span class="line">  &lt;/ion-nav-buttons&gt;</span><br><span class="line"> </span><br><span class="line">  &lt;ion-nav-buttons side=&quot;right&quot;&gt;</span><br><span class="line">    &lt;button class=&quot;button button-clear icon&quot; ng-click=&quot;feedbackList()&quot;&gt;反馈记录&lt;/button&gt;</span><br><span class="line">  &lt;/ion-nav-buttons&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="头部-底部添加按钮"><a href="#头部-底部添加按钮" class="headerlink" title="头部&#x2F;底部添加按钮"></a>头部&#x2F;底部添加按钮</h1><ul>
+<li>头部&#x2F;底部可以添加按钮，按钮的样式根据头部&#x2F;底部来设定，所以你不需要为按钮添加额外的样式。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;bar bar-header&quot;&gt;</span><br><span class="line">  &lt;button class=&quot;button icon ion-navicon&quot;&gt;&lt;/button&gt;</span><br><span class="line">  &lt;h1 class=&quot;title&quot;&gt;Header Buttons&lt;/h1&gt;</span><br><span class="line">  &lt;button class=&quot;button&quot;&gt;Edit&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></li>
+<li>button-clear 类可以设置无背景和边框的头部&#x2F;底部按钮。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;bar bar-header&quot;&gt;</span><br><span class="line">  &lt;button class=&quot;button button-icon icon ion-navicon&quot;&gt;&lt;/button&gt;</span><br><span class="line">  &lt;div class=&quot;h1 title&quot;&gt;Header Buttons&lt;/div&gt;</span><br><span class="line">  &lt;button class=&quot;button button-clear button-positive&quot;&gt;Edit&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<a target="_blank" rel="noopener" href="http://www.runoob.com/ionic/ionic-button.html">http://www.runoob.com/ionic/ionic-button.html</a></li>
+</ul>
+<hr>
+<h1 id="解决ios键盘输入焦点时-切换页面导致崩溃问题"><a href="#解决ios键盘输入焦点时-切换页面导致崩溃问题" class="headerlink" title="解决ios键盘输入焦点时,切换页面导致崩溃问题"></a>解决ios键盘输入焦点时,切换页面导致崩溃问题</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function navBack() &#123;</span><br><span class="line">  setTimeout(function () &#123;</span><br><span class="line">    $ionicHistory.goBack();</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Safari%20%E4%B8%AD%E4%BD%BF%E7%94%A8sort%E5%B7%AE%E5%BC%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Safari%20%E4%B8%AD%E4%BD%BF%E7%94%A8sort%E5%B7%AE%E5%BC%82/" class="post-title-link" itemprop="url">Safari 中使用sort差异</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-11-17 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-17T00:00:00+00:00">2016-11-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="排序场景"><a href="#排序场景" class="headerlink" title="排序场景"></a>排序场景</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var myArray = [&#123;date:&quot;2013.03.01&quot;&#125;,&#123;date:&quot;2013.03.08&quot;&#125;,&#123;date:&quot;2013.03.19&quot;&#125;];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">myArray.sort(function(a,b)&#123;</span><br><span class="line">  return b.date &gt; a.date;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>chrome<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;2013.03.19&quot;, &quot;2013.03.08&quot;, &quot;2013.03.01&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>Safari <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;2013.03.01&quot;, &quot;2013.03.08&quot;, &quot;2013.03.19&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="方法一-兼容chrome-safari"><a href="#方法一-兼容chrome-safari" class="headerlink" title="方法一 (兼容chrome,safari)"></a>方法一 (兼容chrome,safari)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function(a,b)&#123;</span><br><span class="line">  return b.date - a.date;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="方法二-兼容chrome-safari-适合非数字类型的控制"><a href="#方法二-兼容chrome-safari-适合非数字类型的控制" class="headerlink" title="方法二(兼容chrome,safari.适合非数字类型的控制)"></a>方法二(兼容chrome,safari.适合非数字类型的控制)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myArray.sort(function(a,b)&#123;</span><br><span class="line">  return (b.date &gt; a.date) ? 1 : (b.date &lt; a.date) ? -1 : 0;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>javascript - Safari doesn&#39;t sort array of objects like others browsers - Stack Overflow</code><br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/15507729/safari-doesnt-sort-array-of-objects-like-others-browsers">https://stackoverflow.com/questions/15507729/safari-doesnt-sort-array-of-objects-like-others-browsers</a></p>
+<hr>
+<h1 id="解决过问题"><a href="#解决过问题" class="headerlink" title="解决过问题"></a>解决过问题</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$scope.openSection.knowPoints.sort(function (item,item2) &#123;</span><br><span class="line">  return (item.name == &#x27;本节总结&#x27;) ? 1 : (item2.name == &#x27;本节总结&#x27;)? -1 : 0; // 本章总结最后</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Read-the-tipping-point/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Read-the-tipping-point/" class="post-title-link" itemprop="url">读《引爆点》</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-11-07 22:49:24" itemprop="dateCreated datePublished" datetime="2016-11-07T22:49:24+00:00">2016-11-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:28" itemprop="dateModified" datetime="2024-01-26T12:42:28+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>作者简介：</strong>马尔科姆·格拉德威尔，曾是《华盛顿邮报》商务科学专栏作家，目前是《纽约客》杂志专职作家。2005年被《时代》周刊评为全球最有影响力的100位人物之一。2005年，他更是创造书市神话，两部作品同时位居《纽约时报》畅销书排行榜精装本和平装本第一名。</p>
+<p>引爆点主要解决了关于流行的三大难题：谁制造流行？流行的奥秘何在？如何创造流行？作者归纳了引爆流行的三项法则，即个别人物法则、附着力因素法则、环境威力法则，并根据这些法则剖析了种种极具感染力的事件，例如各种风尚、传染病传播、电视节目、直邮广告等。</p>
+<p>我们常常会与那些同自己共事的人或与那些与自己做事方式相似的人成为朋友。换句话说，我们并不是在挑选朋友本身。我们往往和那些与自己生活工作在同一个小空间的人发生联系。正如我们是依靠一些人把我们与其他人联系起来，同样地，我们也是依靠一些人把我们与信息联系在一起。既存在人际疏通专家，也存在信息传播专家。</p>
+<p>环境威力法则的实质就是，对于有些环境来说情况也是如此——我们所处的外部环境决定着我们的内心状态，尽管我们对此并不完全了解。环境威力法则的一个最知名的例子就是破窗户理论，虽然我们的内心知道该做什么或者不该做什么，但在潜意识中还是极易受到外部环境的影响，进而做出并非本意的事情，另外一项著名的例子是斯坦福大学的模拟监狱实验，那些监狱看守们，他们当中有些人原来认为自己是反对暴力的和平主义者，很快就变成了冷酷的训导者。该实验得出的结论是，在某些具体情境下，我们内在的癖性会屈服于强大的情境。</p>
+<p>该文通过大量的例子以及实验来说明产生这些现象背后的原因，读来稍感乏味，在最后部分，作者总结如下</p>
+<ul>
+<li>要想发起流行潮，就必须做到把有限的资源集中用到关键方面</li>
+<li>世界并非是我们一厢情愿认为的我们直觉中的世界</li>
+<li>成功发起流行潮最重要的因素，是要具备一个基本的信念，那就是，制造变化是可能的，人们是能够在一些特定力量的驱使下，骤然改变自己的行为或观念的</li>
+</ul>
+<p>引爆点最终再次证实了存在改变一切的能力和采取明智行动的力量。看看周围世界吧，它看上去似乎雷打不动、无法改变。其实不然。只要你找准位置，轻轻一触，它就可能倾斜。</p>
+<p>我们都生活在一个遵循着梅特卡夫定律的世界中，该定律称：一个网络的价值是与其节点数量成正比的。传统经济中，越稀缺价值越高，例如钻石和黄金。但是网络的逻辑与此相反，只有加入的人越多，网络的价值才越大。但是信息呢？信息从早期的稀缺到如今的过载，我们每个人都被淹没在信息的洪流中，当人们被铺天盖地的信息淹没，他们就对这些形式的交流产生了免疫力。作为替代，他们开始向生活中自己尊敬的人、仰慕的人和信任的人征询意见，从他们那里获取信息。由此我在想是不是建立一个权威的品牌网站能更好的帮助我们做出决策呢？比如无论选购何种东西都会被众多的品牌和型号所淹没，不可能每个人都是方方面面的专家，由此若推出细分的商品品牌推荐榜，会不会有市场呢？如果没有这么多的专家，可以借鉴豆瓣的模式，由用户对品牌进行添加、编辑、评分，将该品牌评分榜单展示在细分的商品名下，当我们需要做出购买决策时，借助该商品的推荐榜单，能否让我们用最短的时间做出最正确的决定呢？</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Read-the-great-stagnation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Read-the-great-stagnation/" class="post-title-link" itemprop="url">读《大停滞？科技高原下的经济困境：美国的难题与中国的机遇》</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-11-04 22:17:25" itemprop="dateCreated datePublished" datetime="2016-11-04T22:17:25+00:00">2016-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>作者简介：</strong>泰勒•考恩Tyler Cowen，哈佛大学经济学博士，目前任教于乔治梅森大学，并主持该校知名智库Mercatus Center。他的博客在全美经济类点阅率的排行榜上高居第二位，超过克鲁格曼在《纽约时报》的博客。《彭博商业周刊》称他为“美国最炙手可热的经济学家”，也入选英国《经济学人》过去十年“最有影响力的经济学家”，《大停滞》一书即源于其广受欢迎的博客，整理出版后即成为当年畅销之作。因其在此书中对科技与生产力关系的独特思考，使其被誉为“下一个托马斯•弗里德曼”。</p>
+<p>偶遇此书，薄薄的一本，遂全读之，一气呵成。我觉得此书所谈之事未必适于中国，比如：停滞，并不是一场金融危机，而是一代人的懒惰与不思进取。中国的问题更多的是政策性的问题，而不是国民懒惰与不思进取，天朝人民历来是世界上勤劳与忍耐度并列第一的民族。与西方不同，对于民选政府，从政者必然极力讨好选民，导致西方社会福利负担过重，而整个社会生产效率与能力却并未提升，人的生活水平倒是不断提升，靠着救济金就能挣着比工作还多的钱，试问谁还会去努力工作？今天的西方国家，政府开支占GDP的比例已经从1875年的5%增长到50%左右，个别国家甚至一度高达60%，也和民主制度有关。</p>
+<p>在该书中，作者指出1970年代中期开始，已经进入一个停滞阶段。这个停滞，可以归结为两个主要原因。一是人类的天性，喜欢采摘“低垂的果实”，即贪图便宜，总是挑容易的事先做，向上爬的苦事一定要等有压力才肯使劲。二是美国进入了“科技高原”，即科技创新也遭遇了高原“窒息”，换句话说，科技进步也停滞了。这两点都是谈不上多么深邃与难以理解，大多数人都明白也理解的了；我们都是凡夫俗子不是圣人，贪图便宜是人之本性，不能以太高的道德标准去要求普通大众，至于科技极限，任何事物都有极限，科技也难以置身事外，在人类社会和自然界，停滞是普遍存在的，甚至可以说是事物发展的一个必然规律，只要你去细心观察，停滞现象是一个广泛的存在。那么我们每个人仅仅知道停滞就够了吗？重要的是停滞背后的原因，唯知因才有果，进而研究如何制造新条件打破这种停滞。</p>
+<p>然而天朝子民无需担心，美国的停滞对于中国来说可能正是一个弯道超车的绝佳机会。中国借助于跨越式发展，比如跳过固定电话，直接进入无线通信的时代，而美国当年在固定电话上进行了大量的投入与普及工作，使得我们与世界领头羊美国的差距越来越小。除此之外，中国还将在诸多领域获得跨越式发展，例如互联网金融、全民信用制度、ATM机物理网点、电动汽车、自动驾驶等。</p>
+<p>在这本书中，作者认为美国应该提高科学家的地位。作者说即使在美国，一名重要科学家的地位，也不如一位歌星、艺术家更能引起媒体和大众的关注，他建议美国的政府和社会，不仅要舍得拨款、在经济上满足科研人员的需要，还要在家庭、学校、媒体倡导对科学家的尊重，这难道不正是中国需要的吗？愿国人重视之。</p>
+<p>尽管作者指出了很多问题，但在文章收尾阶段，作者对未来还是抱有极大的信心。其一有利的趋势是印度和中国在科技上的兴趣，二者除了提供可用商品和服务的廉价版本，随着时间的推移，二者还会扮演伟大创新者的角色。其二互联网可以为利润增长贡献更多，互联网使科学的学习和沟通传播的便捷程度前所未有，也以不同寻常的方式提高了科学家的产生效率。例如在<a target="_blank" rel="noopener" href="https://zh.coursera.org/">coursera</a>上，你可以学习到世界上最好的课程。其三美国也正在采取更好的激励措施、更好的监督机制或是其它工作来改善教育现状。基于这些原因，未来还会出现更多的“低垂的果实”（指一些有非常重要、容易攫取成果的物质财富）。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E5%89%8D%E7%AB%AFjavaScript%E5%8A%A0%E5%AF%86[MD5,jsSHA]/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/%E5%89%8D%E7%AB%AFjavaScript%E5%8A%A0%E5%AF%86%5BMD5,jsSHA%5D/" class="post-title-link" itemprop="url">前端javaScript加密[MD5,jsSHA]</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-11-04 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-04T00:00:00+00:00">2016-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="JavaScript-MD5实现"><a href="#JavaScript-MD5实现" class="headerlink" title="JavaScript MD5实现"></a>JavaScript MD5实现</h1><p><code>JavaScript MD5实现 [blueimp]</code></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/blueimp/JavaScript-MD5">https://github.com/blueimp/JavaScript-MD5</a></p>
+<p><code>JavaScript MD5实现 [ pajhome.org ]</code><br><a target="_blank" rel="noopener" href="http://pajhome.org.uk/crypt/md5/index.html">http://pajhome.org.uk/crypt/md5/index.html</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var sign = hex_md5(result);</span><br><span class="line">return sign.toUpperCase();</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="安全散列标准的完整的JavaScript实现"><a href="#安全散列标准的完整的JavaScript实现" class="headerlink" title="安全散列标准的完整的JavaScript实现"></a>安全散列标准的完整的JavaScript实现</h1><p>github： <a target="_blank" rel="noopener" href="https://github.com/Caligatio/jsSHA/">https://github.com/Caligatio/jsSHA/</a><br>在线：<a target="_blank" rel="noopener" href="https://caligatio.github.io/jsSHA/">https://caligatio.github.io/jsSHA/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sign: function (jsapi_ticket, url) &#123;</span><br><span class="line">var ret = &#123;</span><br><span class="line">jsapi_ticket: jsapi_ticket,</span><br><span class="line">nonceStr: this.createNonceStr(),</span><br><span class="line">timestamp: this.createTimestamp(),</span><br><span class="line">url: url</span><br><span class="line">&#125;;</span><br><span class="line">var string = this.raw(ret);</span><br><span class="line">shaObj = new jsSHA(string, &#x27;TEXT&#x27;);</span><br><span class="line">ret.signature = shaObj.getHash(&#x27;SHA-1&#x27;, &#x27;HEX&#x27;);</span><br><span class="line">return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="第三方-安全规范"><a href="#第三方-安全规范" class="headerlink" title="第三方-安全规范"></a>第三方-安全规范</h1><h3 id="微信-SDK-签名规范"><a href="#微信-SDK-签名规范" class="headerlink" title="微信 SDK- 签名规范"></a><code>微信 SDK- 签名规范</code></h3><p><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">签名算法</span><br><span class="line">签名生成的通用步骤如下：</span><br><span class="line">第一步，设所有发送或者接收到的数据为集合M，将集合M内非空参数值的参数按照参数名ASCII码从小到大排序（字典序），使用URL键值对的格式（即key1=value1&amp;key2=value2…）拼接成字符串stringA。</span><br><span class="line">特别注意以下重要规则：</span><br><span class="line">◆ 参数名ASCII码从小到大排序（字典序）；</span><br><span class="line">◆ 如果参数的值为空不参与签名；</span><br><span class="line">◆ 参数名区分大小写；</span><br><span class="line">◆ 验证调用返回或微信主动通知签名时，传送的sign参数不参与签名，将生成的签名与该sign值作校验。</span><br><span class="line">◆ 微信接口可能增加字段，验证签名时必须支持增加的扩展字段</span><br><span class="line">第二步，在stringA最后拼接上key得到stringSignTemp字符串，并对stringSignTemp进行MD5运算，再将得到的字符串所有字符转换为大写，得到sign值signValue。</span><br><span class="line">key设置路径：微信商户平台(pay.weixin.qq.com)--&gt;账户设置--&gt;API安全--&gt;密钥设置</span><br></pre></td></tr></table></figure>
+
+
+<p><code>商户回调API安全</code><br>在普通的网络环境下，HTTP请求存在DNS劫持、运营商插入广告、数据被窃取，正常数据被修改等安全风险。商户回调接口使用HTTPS协议可以保证数据传输的安全性。所以微信支付建议商户提供给微信支付的各种回调采用HTTPS协议。请参考：<code>HTTPS搭建指南</code>  <a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=10_4">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=10_4</a></p>
+<p><code>微信公众平台支付接口调试工具</code><br><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/tools/signverify/">https://pay.weixin.qq.com/wiki/tools/signverify/</a></p>
+<h3 id="微信JS-SDK-签名算法"><a href="#微信JS-SDK-签名算法" class="headerlink" title=" 微信JS- SDK- 签名算法"></a><code> 微信JS- SDK- 签名算法</code></h3><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115&token=&lang=zh_CN">https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421141115&amp;token=&amp;lang=zh_CN</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">签名生成规则如下：</span><br><span class="line">参与签名的字段包括noncestr（随机字符串）, 有效的jsapi_ticket, timestamp（时间戳）, url（当前网页的URL，不包含#及其后面部分） 。 对所有待签名参数按照字段名的ASCII 码从小到大排序（字典序）后，使用URL键值对的格式（即key1=value1&amp;key2=value2…）拼接成字符串string1。</span><br><span class="line">这里需要注意的是所有参数名均为小写字符。 对string1作sha1加密，字段名和字段值都采用原始值，不进行URL 转义</span><br></pre></td></tr></table></figure>
+
+
+<p><code>微信 JS 接口签名校验工具</code><br><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign">http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign</a></p>
+<hr>
+<h1 id="参数名ASCII码从小到大排序（字典序）-微信SDK常用到（参数列表加密前排序）"><a href="#参数名ASCII码从小到大排序（字典序）-微信SDK常用到（参数列表加密前排序）" class="headerlink" title="参数名ASCII码从小到大排序（字典序）-微信SDK常用到（参数列表加密前排序）"></a>参数名ASCII码从小到大排序（字典序）-微信SDK常用到（参数列表加密前排序）</h1><p>参见： <code>微信 SDK- 签名规范</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">raw: function (args) &#123;</span><br><span class="line">            var keys = Object.keys(args);</span><br><span class="line">            keys = keys.sort()</span><br><span class="line">            var newArgs = &#123;&#125;;</span><br><span class="line">            keys.forEach(function (key) &#123;</span><br><span class="line">                newArgs[key.toLowerCase()] = args[key];</span><br><span class="line">            &#125;);</span><br><span class="line"> </span><br><span class="line">            var string = &#x27;&#x27;;</span><br><span class="line">            for (var k in newArgs) &#123;</span><br><span class="line">                string += &#x27;&amp;&#x27; + k + &#x27;=&#x27; + newArgs[k];</span><br><span class="line">            &#125;</span><br><span class="line">            string = string.substr(1);</span><br><span class="line">            return string;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Build-system-gradle-memos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Build-system-gradle-memos/" class="post-title-link" itemprop="url">构建系统Gradle备忘录</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-11-03 20:52:36" itemprop="dateCreated datePublished" datetime="2016-11-03T20:52:36+00:00">2016-11-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li><p>Gradle是什么？<br>Gradle是一个集合了Maven和Ant优点的构建工具，据说要取代Maven，不置可否。</p>
+</li>
+<li><p>什么是projects和tasks？<br>每一个构建都是由一个或多个projects构成的。一个project到底代表什么取决于你想用Gradle做什么。每一个project是由一个或多个tasks构成的，一个task代表一些更加细化的构建。可能是编译一些classes，创建一个JAR，生成javadoc或者生成某个目录的压缩文件。</p>
+</li>
+<li><p>经常用的<code>gradle -q</code>，其中<code>-q</code>是干什么的？<br><code>-q</code>代表quiet模式，它不会生成Gradle的日志信息(log messages)，所以用户只能看到tasks的输出，它使得输出更加清晰。</p>
+</li>
+<li><p>如何定义一个task？<br>在build.gradle中</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">task hello &#123;</span><br><span class="line">    doLast &#123;</span><br><span class="line">        println(<span class="string">&quot;hello world!&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中task名称叫hello，hello的action叫doLast。</p>
+</li>
+<li><p>如何快捷的定义一个task？</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">task hello &lt;&lt; &#123;</span><br><span class="line">    println(<span class="string">&quot;hello world!&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中doLast被替换成了<code>&lt;&lt;</code></p>
+</li>
+<li><p>任务之间如何相互依赖？</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">task first &lt;&lt; &#123;</span><br><span class="line">    println(<span class="string">&quot;first!&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">task after(<span class="attr">dependsOn:</span> first) &lt;&lt; &#123;</span><br><span class="line">    println(<span class="string">&quot;after!&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>gradle -q after</strong>输出：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">first!</span><br><span class="line">after!</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>动态的创建任务</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4.</span>times &#123;</span><br><span class="line">    counter -&gt;</span><br><span class="line">        task <span class="string">&quot;task$counter&quot;</span> &lt;&lt; &#123;</span><br><span class="line">            println(<span class="string">&quot;I&#x27;m task number $counter!&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里动态的创建了task0，task1，task2，task3<br><strong>gradle -q task3</strong>输出：<code>I&#39;m task number 3!</code><br>如果使用<code>task0.dependsOn task2, task3</code>指定任务依赖关系，那么<strong>gradle -q task0</strong>输出：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">I<span class="string">&#x27;m task number 2!</span></span><br><span class="line"><span class="string">I&#x27;</span>m task number <span class="number">3</span>!</span><br><span class="line">I<span class="string">&#x27;m task number 0!</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>短标记法<br>有一个短标记<code>$</code>可以访问一个存在的任务，也就是说每个任务都可以作为构建脚本的属性。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">task first &lt;&lt; &#123;</span><br><span class="line">    println(<span class="string">&quot;first!&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">task after &lt;&lt; &#123;</span><br><span class="line">    println(<span class="string">&quot;$first.name&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>gradle -q after</strong>输出：<code>first</code><br>其中name是任务的默认属性，代表当前任务的名称。</p>
+</li>
+<li><p>自定义任务属性</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">task first &#123;</span><br><span class="line">    ext.myProperty = <span class="string">&quot;value&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">task after &lt;&lt; &#123;</span><br><span class="line">    println(first.myProperty)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>gradle -q after</strong>输出：<code>value</code></p>
+</li>
+<li><p>默认任务</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">defaultTasks <span class="string">&#x27;validate&#x27;</span>, <span class="string">&#x27;run&#x27;</span></span><br><span class="line">task validate &lt;&lt; &#123;</span><br><span class="line">    println(<span class="string">&quot;Default Validating&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">task run &lt;&lt; &#123;</span><br><span class="line">    println(<span class="string">&quot;Default Running&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>gradle -q</strong>输出：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Default Validating</span><br><span class="line">Default Running</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列出可以执行的任务<br>使用<code>gradle tasks</code>来列出项目的所有任务</p>
+</li>
+<li><p>Java插件下常用任务<br>使用<code>apply plugin: &#39;java&#39;</code>之后，Java插件会向你的项目里加入许多任务，常用的如下<br><strong>build</strong>任务，它会建立你的项目；<br><strong>clean</strong>任务，删除build生成的目录和所有生成的文件；<br><strong>assemble</strong>任务，编译并打包你的代码，但是并不运行单元测试。其他插件会在这个任务里加入更多的东西。举个例子，如果你使用War插件，这个任务将根据你的项目生成一个 WAR文件；<br><strong>check</strong>任务，编译并测试你的代码。其他的插件会加入更多的检查步骤。举个例子，如果你使用checkstyle插件，这个任务将会运行Checkstyle来检查你的代码。</p>
+</li>
+<li><p>查看哪些属性是可用的<br>使用<code>gradle properties</code>命令来列出项目的所有属性。</p>
+</li>
+<li><p>发布Jar文件</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">uploadArchives &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        flatDir &#123;</span><br><span class="line">            dirs <span class="string">&#x27;repos&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行<code>gradle uploadArchives</code>命令来发布Jar文件。</p>
+</li>
+<li><p>多项目构建<br>目录结构为</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">multiproject/</span><br><span class="line">  api/</span><br><span class="line">  services<span class="regexp">/webservice/</span></span><br><span class="line">  services<span class="regexp">/shared/</span></span><br><span class="line">  shared/</span><br></pre></td></tr></table></figure>
+<p>则在项目根目录下的settings.gradle中添加<code>include &quot;shared&quot;, &quot;api&quot;, &quot;services:webservice&quot;, &quot;services:shared&quot;</code></p>
+</li>
+<li><p>多项目构建-项目之间的依赖<br>假设api项目的构建需要用到shared项目的Jar文件，那么在api&#x2F;build.gradle中加入</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile project(<span class="string">&#x27;:shared&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>依赖配置<br><strong>compile</strong>：用来编译项目源代码的依赖。<br><strong>runtime</strong>：在运行时被生成的类使用的依赖。默认的，也包含了编译时的依赖。<br><strong>testCompile</strong>：编译测试代码的依赖。默认的，包含生成的类运行所需的依赖和编译源代码的依赖。<br><strong>testRuntime</strong>：运行测试所需要的依赖。默认的，包含上面三个依赖。</p>
+</li>
+<li><p>构建一个WAR文件<br>在build.gradle中加入<code>apply plugin: &#39;war&#39;</code>。这个插件也会在你的项目里加入Java插件，运行gradle build将会编译，测试和创建项目的WAR文件。</p>
+</li>
+<li><p>运行Web应用<br>在build.gradle中加入<code>apply plugin: &#39;jetty&#39;</code>。由于Jetty plugin继承自War plugin。使用gradle jettyRun命令将会把你的工程启动部署到jetty容器中。调用gradle jettyRunWar命令会打包并启动部署到jetty容器中。</p>
+</li>
+<li><p>多任务调用<br>你可以以列表的形式在命令行中一次调用多个任务，它们所依赖的任务也会被调用。这些任务只会被调用一次。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">task last &lt;&lt; &#123;</span><br><span class="line">    println(<span class="string">&quot;LAST&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">task first(<span class="attr">dependsOn:</span> last) &lt;&lt; &#123;</span><br><span class="line">    println(<span class="string">&quot;FIRST&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>gradle -q first last first</strong>和<strong>gradle -q first</strong>命令的输出结果是一样的：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LAST</span><br><span class="line">FIRST</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>排除任务<br>你可以用命令行选项<code>-x</code>来排除某些任务，例如<code>gradle dist -x test</code>命令会排除test任务。即使test任务是dist任务的依赖，test也会被排除，同时test任务的依赖任务也都会被排除，而被test和其他任务同时依赖的任务则不会被排除。</p>
+</li>
+<li><p>失败后继续执行构建<br>默认情况下，只要有任务调用失败，Gradle就会中断执行。这可能会使调用过程更快，但那些后面隐藏的错误就没有办法发现了。所以你可以使用<code>--continue</code>选项在一次调用中尽可能多的发现所有问题。采用<code>--continue</code>选项，Gralde会调用每一个任务以及它们依赖的任务。而不是一旦出现错误就会中断执行，所有错误信息都会在最后被列出来。但是一旦某个任务执行失败，那么所有依赖于该任务的子任务都不会被调用。</p>
+</li>
+<li><p>选择执行构建<br>调用gradle命令时，默认情况下总是会构建当前目录下的文件，可以使用<code>-b</code>参数选择其他目录的构建文件，并且当你使用此参数时<code>settings.gradle</code>将不会生效。<code>-b</code>参数用以指定脚本具体所在位置，格式为<code>dirpwd/build.gradle</code>，<code>-p</code>参数用以指定脚本目录即可。</p>
+</li>
+<li><p>项目列表<br>执行<code>gradle projects</code>命令会为你列出子项目名称列表。</p>
+</li>
+<li><p>任务列表<br>执行<code>gradle tasks</code>命令会列出项目中所有任务。当然你也可以用<code>--all</code>参数来收集更多任务信息。这会列出项目中所有任务以及任务之间的依赖关系。</p>
+</li>
+<li><p>获取任务具体信息<br>执行<code>gradle help --task someTask</code>可以显示指定任务的详细信息，或者多项目构建中相同任务名称的所有任务的信息。</p>
+</li>
+<li><p>获取依赖列表<br>执行<code>gradle dependencies</code>命令会列出项目的依赖列表，所有依赖会根据任务区分，以树型结构展示出来。还可以通过<code>--configuration</code>参数来查看指定构建任务的依赖情况。例如<code>gradle -q api:dependencies --configuration testCompile</code>。</p>
+</li>
+<li><p>查看特定依赖<br>执行<code>gradle dependencyInsight</code>命令可以查看指定的依赖。例如<code>gradle -q webapp:dependencyInsight --dependency groovy --configuration compile</code>。</p>
+</li>
+<li><p>获取项目属性列表<br>执行<code>gradle properties</code>可以获取项目所有属性列表。</p>
+</li>
+<li><p>构建日志<br><code>--profile</code>参数可以收集一些构建期间的信息并保存到<code>build/reports/profile</code>目录下。并且会以构建时间命名这些文件。</p>
+</li>
+<li><p>Gradle图形界面<br>为了辅助传统的命令行交互，Gradle还提供了一个图形界面。我们可以使用Gradle命令中<code>--gui</code>选项来启动它。注意：这个命令执行后会使得命令行一直处于封锁状态，直到我们关闭图形界面。如果是在<code>*nix</code>系统下，则可以通过加上“&amp;”让它在后台执行：<code>gradle --gui&amp;</code>，此命令对Windows系统无效。</p>
+</li>
+<li><p>标准项目属性<br> Project对象提供了一些常用的标准属性如下</p>
+</li>
+</ul>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>project</td>
+<td>Project</td>
+<td>Project 实例对象</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>项目目录的名称</td>
+</tr>
+<tr>
+<td>path</td>
+<td>String</td>
+<td>项目的绝对路径</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>项目描述</td>
+</tr>
+<tr>
+<td>projectDir</td>
+<td>File</td>
+<td>包含构建脚本的目录</td>
+</tr>
+<tr>
+<td>build</td>
+<td>File</td>
+<td>projectDir&#x2F;build</td>
+</tr>
+<tr>
+<td>group</td>
+<td>Object</td>
+<td>未具体说明</td>
+</tr>
+<tr>
+<td>version</td>
+<td>Object</td>
+<td>未具体说明</td>
+</tr>
+<tr>
+<td>ant</td>
+<td>AntBuilder</td>
+<td>Ant实例对象</td>
+</tr>
+</tbody></table>
+</blockquote>
+<ul>
+<li><p>声明变量<br>在Gradle构建脚本中有两种类型的变量可以声明：局部变量(local)和扩展属性(extra)。局部变量使用关键字def来声明，其只在声明它的地方可见，扩展属性使用ext声明，例如<code>ext.purpose = null</code>，另外，使用ext扩展块可以以此添加多个属性。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ext &#123;</span><br><span class="line">    springVersion = <span class="string">&quot;5.0.0&quot;</span></span><br><span class="line">    emailNotification = <span class="string">&quot;build@master.org&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Java插件-依赖配置</p>
+</li>
+</ul>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>扩展</th>
+<th>被使用时运行的任务</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>compile</td>
+<td>-</td>
+<td>compileJava</td>
+<td>编译时的依赖</td>
+</tr>
+<tr>
+<td>runtime</td>
+<td>compile</td>
+<td>-</td>
+<td>运行时的依赖</td>
+</tr>
+<tr>
+<td>testCompile</td>
+<td>compile</td>
+<td>compileTestJava</td>
+<td>编译测试所需的额外依赖</td>
+</tr>
+<tr>
+<td>testRuntime</td>
+<td>runtime</td>
+<td>test</td>
+<td>仅供运行测试的额外依赖</td>
+</tr>
+<tr>
+<td>archives</td>
+<td>-</td>
+<td>uploadArchives</td>
+<td>项目产生的信息单元（如:jar包）</td>
+</tr>
+<tr>
+<td>default</td>
+<td>runtime</td>
+<td>-</td>
+<td>使用其他项目的默认依赖项，包括该项目产生的信息单元以及依赖</td>
+</tr>
+</tbody></table>
+</blockquote>
+<ul>
+<li><p>gradle利用maven的本地仓库<br>有的人是从maven转向gradle，那么这时maven已经在本地仓库中缓存了大量的jar文件，如何让gradle利用maven的本地仓库呢？首先在<code>build.gradle</code>配置</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    mavenLocal()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时，gradle会查找maven的本地仓库地址，查找顺序如下，可以参考<a target="_blank" rel="noopener" href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.dsl.RepositoryHandler.html">在线文档</a></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> The value of system property <span class="string">&#x27;maven.repo.local&#x27;</span> <span class="keyword">if</span> set;</span><br><span class="line"><span class="number">2.</span> The value of element &lt;localRepository&gt; of <span class="regexp">~/.m2/</span>settings.xml <span class="keyword">if</span> <span class="variable language_">this</span> file exists and element is set;</span><br><span class="line"><span class="number">3.</span> The value of element &lt;localRepository&gt; of $M2_HOME<span class="regexp">/conf/</span>settings.xml (where $M2_HOME is the value of the environment variable with that name) <span class="keyword">if</span> <span class="variable language_">this</span> file exists and element is set;</span><br><span class="line"><span class="number">4.</span> The path <span class="regexp">~/.m2/</span>repository.</span><br></pre></td></tr></table></figure>
+
+<p>例如我的maven配置文件位置在<code>D:/apache-maven-3.3.3/conf/settings.xml</code>，并且指定了<code>&lt;localRepository&gt;D:/apache-maven-3.3.3/repo&lt;/localRepository&gt;</code>那么gradle就会找到该位置</p>
+</li>
+<li><p>IDEA中如何设置gradle的本地仓库地址<br>在IDEA中打开Settings || Build, Execution, Deployment || Build Tools || Gradle，修改Service directory path，该值为Gradle的默认缓存目录中，比如填<code>D:/apache-maven-3.3.3/repo</code>，这样gradle就会将jar下载到该路径下，例如我的IDEA中的gradle下载的jar地址为：<code>D:/apache-maven-3.3.3/repo/caches/modules-2/files-2.1</code>，这样就可以将maven的本地仓库和gradle的本地仓库合二为一了。顺便在Gradle VM options中填<code>-Dfile.encoding=UTF-8</code>可以解决一些中文乱码问题。</p>
+</li>
+</ul>
+<p> 前提是IDEA中的maven已经配置好了，同样在Settings || Build, Execution, Deployment || Build Tools || Maven中配置<br> <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Maven home <span class="attr">directory:</span> <span class="attr">D:</span>/apache-maven<span class="number">-3.3</span><span class="number">.3</span></span><br><span class="line">User settings <span class="attr">file:</span> <span class="attr">D:</span><span class="regexp">/apache-maven-3.3.3/</span>conf/settings.xml</span><br><span class="line">Local <span class="attr">repository:</span> <span class="attr">D:</span><span class="regexp">/apache-maven-3.3.3/</span>repo</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Read-the-road-to-financial-freedom/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Read-the-road-to-financial-freedom/" class="post-title-link" itemprop="url">读《财务自由之路》</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-10-29 16:56:32" itemprop="dateCreated datePublished" datetime="2016-10-29T16:56:32+00:00">2016-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:19" itemprop="dateModified" datetime="2024-01-26T12:42:19+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>作者简介：</strong>博多•舍费尔。1960年9月10日出生在德国科隆，是德国著名的投资家、企业家、演说家以及畅销书作家。从小，博多便目睹了贫穷给人们带来的种种伤害，这让他厌恶贫穷。6岁时，他决心要在30岁时成为百万富翁。16岁时，博多只身远赴美国闯荡。26岁时，他陷入了严重的个人财务危机。然而，凭借坚强的意志和正确的投资理念，博多在30岁时摆脱了债务，获得了成功——这时，凭借个人资产产生的利息，他就可以过上富有的生活。博多决心把他的理财知识传播给更多的人。他开始频频参加电视访谈节目，在世界各地举办讲座并著书立说。他的《赢家法则》成为德国最佳畅销书；《小狗钱钱》全球销量逾千万册，也已在中国出版，并受到广大中国读者的喜爱。</p>
+<p>创造奇迹的5个层次</p>
+<ul>
+<li>第一个层次：你对现状严重不满。因此，你决定采取行动</li>
+<li>第二个层次：期望的结果没有出现，你开始认识到一般意义的行动还不够。你必须采取更有针对性的行动，以解决问题</li>
+<li>第三个层次：技巧已经帮助你取得了一定的进步。但是，当你与其他成功人士比较时，你会发现他们取得成就好像比你更容易。他们可能有一些有影响力的朋友帮他们打开了门路</li>
+<li>第四个层次：多想一想你自己以及别人，重新考虑你的世界观。很多人凭直觉就把这个美好的世界想象成丛林，认为你需要通过尖利的爪牙才能生存</li>
+<li>第五个层次：通过改变对自身的认知，我们可以带来巨大的改变</li>
+</ul>
+<p>记住，不要认为学校毕业就意味着学习的结束。这仅仅是开始。可惜的是，我们并未将这一知识推广到生活的其他领域，否则我们不会如此短视。如果做别人都在做的事，你的价值就像沧海一粟，你的收获和大家不会有区别。如果你是某方面的专家，客户就会自己找上门来，所以，关键不是比别人好，而是要和别人不一样。一个人的专家地位只能由自己来创造，如果你想生活有所改变，就必须从你忙碌的工作中安排出时间。留出一些时间来打造你的专家地位，通过持续学习来做好准备，选定目标领域，并锲而不舍地寻找通往目标领域的道路。</p>
+<p>收入并不代表财富，挣大钱并不意味着富有，通常，我们的生活水平随着收入的增长而提高。我们的“需求”不断增长，而需求增长总是和收入增长保持同步。只有依靠资本——而不是工作——生活时，你才算拥有财富。你挣钱并不能使你富有，能存下钱才能使你富有。在积累到足够的资本、可以靠利息生活之前不要停止增加收入。</p>
+<p>税收体制本应创造一种平等的机会，然而，众所周知，我们的税收体制只对精英和专业人士有好处。有钱人可以聘请好的顾问，而好顾问了解法律的漏洞。通常，只有积累了一定数额的金钱，人们才会对高利率感兴趣。在此之前，复利的魔力与他们无缘。好顾问要收费，合法的纳税方案要收费，优秀的税务会计师也要收费。但你因此节省的钱是支付给他们的许多倍。有钱又有好顾问辅佐的人，能够从投资中获得12<del>30%的年收益率——既合法又免税！钱少又不懂理财的人，每年只能得到2.5</del>7.5%的收益率。即使这点微博的收益，税务局和通货膨胀还要来蚕食。</p>
+<p>如今，只有为别人创造大量财富的人才能致富。想要致富的人要创造别人需要的就业机会、产品或服务。放眼社会，如果你想要获得大量的财富，要么让别人致富（例如淘宝）、要么服务于别人（例如滴滴出行、摩拜单车），这不仅仅是一个思维方式更应该是一个行动格言。</p>
+<p>股市投资的十条黄金法则</p>
+<ul>
+<li>股市涨跌交替转换</li>
+<li>放长线，钓大鱼</li>
+<li>至少买5只不同的股票，但不要超过10只</li>
+<li>卖掉股票之前，盈亏没有定论</li>
+<li>利润来自股价上涨和红利</li>
+<li>崩盘给你低价吃进的机会</li>
+<li>不要从众</li>
+<li>抓住时机、理性决策，避免感情用事</li>
+<li>以自有资本投资，决不可借贷入市</li>
+<li>股票总是胜过货币，将来依然如此</li>
+</ul>
+<p>实现财务自由很难吗？是的，很难。但是，如果不去努力，会更难。努力提高自己很苦，但是混吃等死更苦。雁过留声，人过留名。在这个世界上空走一遭是悲哀的，为生活的意义全力以赴才是可取的。只有这样，我们才能完成自己的使命，我们的生活才有意义。满足和惰性使一个人区别于另一个人，并最终造成人们生活的差距。我们应当永不满足。成千上万的人自甘穷困潦倒。如果你的周围都是穷人，你也会沉沦，然后在不停的抱怨中了此残生。仅仅阅读此书不能使你致富。你必须付诸行动，而且越快越好。最重要的是：你必须创造一种督促自己成功的环境。平凡的生活使大多数人迅速湮没在人群之中。“知识就是力量”这句话其实并不确切。正确的说法应当是：“应用知识就是力量”。</p>
+<p>大多数人高估了他们在一年内能做的事情，而低估了他们在10年里能做的事情。竹子就是一个形象的例子。竹农栽下竹苗，然后用土覆盖。竹苗要在地下沉睡四年之久。竹农每天早晨给它浇水，4年里每天如此。4年后的某一天，竹苗终于破土而出。然后，它在90天的时间里疯长到20米高。在长达4年的时间里，竹农根本不知道竹苗是死是活。但他坚信竹苗终有一天会破土而出，因此坚持浇水、永不言弃。一位目光远大的思想家需要有这样的信念。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Jealousy-of-human-nature/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Jealousy-of-human-nature/" class="post-title-link" itemprop="url">人性的嫉妒</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-10-21 20:59:36" itemprop="dateCreated datePublished" datetime="2016-10-21T20:59:36+00:00">2016-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-26 12:42:24" itemprop="dateModified" datetime="2024-01-26T12:42:24+00:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>有感而发，之前在网上看到过类似文章，深以为然。起因是一次扣费事件，事情是这样的，新接的通知<em>党员交纳党费的比例为：每月工资收入在3000元以下(含3000元)者，交纳月工资收入的0.5%；3000元以上至5000元(含5000元)者，交纳1%；5000元以上至10000元(含10000元)者，交纳1.5%；10000元以上者，交纳2%。</em>如果按照这个标准，我要缴2%，对此我不讳言，一份死工资，处处受剥削，本已所剩无几，还要存钱买房，于是我发了个朋友圈论及此事。</p>
+<p>好了，结果来了，某些熟人观点总结如下（真心的好朋友还是有的）：① 你工资高多缴点；这是什么神逻辑，工资高低是我的事，和你半毛钱关系？不论工资高低那是自己挣来的，不是天上掉下来的，他们宁愿你的钱被多扣点也不愿看到你挣钱多，这样显得和你的差距也并没有这么大了，总之如果有件事，可以让你或陌生人受益，那么他们宁愿便宜陌生人，因为毕竟陌生人和他们无有交集，眼不见心不烦，但是如果熟人受益的话，这个梗总是存在，如刺在喉 ② 跟你挣的比，这些都是小钱；我每月就这点死工资，养老金、医疗金、失业金、公积金、个税扣除四千，房租生活费扣除三千，你有没有看到我税后到手多少？不管大钱小钱那不是你能定义的，对于攒首付的来说，我觉得每一笔扣除的钱都不是小钱，你简单一句话完全无视别人的努力与付出，仅仅一句拿别人的努力结果说事，照你这逻辑，反而是没本事没能力挣钱的人理直气壮了？ ③ 你就哭穷吧，潜台词是工资那么高，还在我们面前装穷；其一我从没觉得工资高；其二我也没说我是穷光蛋，我只是表达不乐意被剥削而已；其三，燕雀安知鸿鹄之志哉，他们总是会潜意识中将你的收入套在他们所处的物价水平之上，而不晓得大上海的生活成本有多高。大上海这个房价，我工资就是翻倍，也未必买的起，换个角度，与上海这房价相比，我还真的是穷光蛋了。你心里见得别人工资高，然后一看在你所处的地方买房还挺容易啊，于是别人说没钱的时候在你的心里就变成装穷了。《庄子·秋水》有云：<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/928982.htm">惠子相梁</a>，<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/2760.htm">庄子</a>往见之，或谓惠子曰‘庄子来，欲待子相’。于是<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/353627.htm">惠子</a>恐，搜于国中，三日三夜，<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/2760.htm">庄子</a>往见之，曰：‘南方有鸟，其名<a target="_blank" rel="noopener" href="http://baike.baidu.com/link?url=tEaWmL2uR6KGMx9cioHE7fH2xwH9G9q8BN7buBWuoQfwQsrq9FUz_i1gr9VD0Bv11q2IB9SmOHouzaPz_jqYa48-3mZr1H-h_KaJDXf0Dva">鹓鶵</a>（yuān chú，神鸟），子知之乎？夫鹓鶵发于南海而飞于北海，非梧桐不止，非练食不食，非醴泉不饮，于是鸱（chī）得腐鼠，鹓鶵过之，仰而视之曰：“吓！”今子欲以子之梁国吓我邪？’。你潜意识中拿我和你作比，却不知道我从没把你当做对手，因为你还够不了和我同台竞技的资格。</p>
+<p>当今之世，每个人身边都有很多熟人，或是昔日同窗或是今日同事。当你取得一点点成绩在与人分享时，总会有同事会背地里八卦你：切，我还不知道他那几把刷子，狗屎运罢了。有同学会私下里嘲讽你：他上学时就是个白痴，真是瞎猫撞上死耗子了。有些熟人是不愿意承认怎么身边那个平平无奇的他突然变的比我好这么多了？提拔这么快，赚了这么多，这怎么可以？“只要你过得比我好，我就受不了！！”我就要诋毁你讽刺你，想办法拉低你，就像和美人拍合影一样，我高不了瘦不了，那我得把你拖下来！</p>
+<p>这样的嘲讽和诋毁根本不值得在意，他们自己不会去努力不会去付出，也看不见你的努力和付出，但见你的成绩却会不舒服，他们会劝你何必这么拼命啊，何必牺牲那么多时间去学习去充电啊，一起喝喝啤酒享受玩乐多愉快，他们心里也会自我安慰：我之所以没有取得好的成就，只是我不屑于付出和那傻逼一样的努力罢了。</p>
+<p>人无完人，而任性、懒惰、嫉妒这人性的三大弱点相辅相生，并没有完全的独立开来，任性可以衍生固执。固执本身就是一种懒惰，是思维的懒惰，固执己见不愿换位思考，在某种程度上讨厌思考的麻烦，人的懒惰首先是思想的懒惰；固执的人总是相信自己是最正确的，认为别人的都不如自己，一旦发现别人差就会在心里强制否认别人，尽管他们自己也清楚别人在某方面比自己强，但就是不愿对自己承认和妥协，于是嫉妒心理就产生了。同样懒惰可以衍生任性，嫉妒可以衍生任性固执。</p>
+<p>这些人不求上进，当你们本来处于同一水平而你通过自己的努力，一骑绝尘将他远远甩于身后之时，人的嫉妒之心便暴露无遗，这样的人总是存在，你很难避免，他们不求上进同样也看不得别人上进。俗话说远的崇拜，近的嫉妒；够不着的崇拜，够得着的嫉妒。对方比你强，但强不了多少，你的小心眼里会嘀咕『这孙子，看上去一点也不高大上，和我一样普通，咋就骑我头上了呢？』——你因为不服，所以会嫉妒。只有当差距大到他们难以企及之时，才会由嫉妒转为崇拜吧，所以借此督促自己，继续奋勇向前。所有的嫉妒都源于比较，嫉妒之心，人皆有之，不愿苛求别人，但如果我的朋友中有这些人，那我只能敬而远之了。我们所能做的仅仅是真心的对待身边的好友，默默的远离这些嫉妒心大于友情的人吧。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -342,808 +1300,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Java-8-configure-maven-java-doc-plugin/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Java-8-configure-maven-java-doc-plugin/" class="post-title-link" itemprop="url">Java 8 配置Maven-javadoc-plugin</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-10-18 22:41:30" itemprop="dateCreated datePublished" datetime="2016-10-18T22:41:30+00:00">2016-10-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在升级JDK至1.8之后，使用<code>Maven-javadoc-plugin</code>插件打包报错，**[ERROR] Failed to execute goal org.apache.maven.plugins:maven-javadoc-plugin:2.10.4:jar (attach-javadocs) on project<br>**详细信息如下</p>
-<blockquote>
-<p>[ERROR] Failed to execute goal org.apache.maven.plugins:maven-javadoc-plugin:2.10.4:jar (attach-javadocs) on project StatisticsReport: MavenReportException: Error while generating Javadoc:<br>[ERROR] Exit code: 1 - D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:29: 警告: @param 没有说明<br>[ERROR] * @param preparedStatement<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:30: 警告: @param 没有说明<br>[ERROR] * @param params<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:31: 警告: @return 没有说明<br>[ERROR] * @return<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:32: 警告: @throws 没有说明<br>[ERROR] * @throws SQLException<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:34: 警告: logFlag没有 @param<br>[ERROR] public static ResultSet pullData(PreparedStatement preparedStatement, boolean logFlag, String… params) throws SQLException {<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:51: 警告: @param 没有说明<br>[ERROR] * @param preparedStatement<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:52: 警告: @param 没有说明<br>[ERROR] * @param params<br>[ERROR] ^<br>[ERROR] D:\Multi-module-project\StatisticsReport\src\main\java\com\yuewen\statistics\report\service\db\PullData.java:53: 警告: @return 没有说明<br>[ERROR] * @return<br>[ERROR] ^</p>
-</blockquote>
-<p>经查得知，在JDK 8中，Javadoc中添加了<em>doclint</em>，而这个工具的主要目的是旨在获得符合W3C HTML 4.01标准规范的HTML文档，在JDK 8中，已经无法获取如下的Javadoc，除非它满足<em>doclint</em>：</p>
-<ul>
-<li>不能有自关闭的HTML tags，例如<code>&lt;br/&gt;</code>或者<code>&lt;a id=&quot;x&quot;/&gt;</code></li>
-<li>不能有未关闭的HTML tags，例如有<code>&lt;ul&gt;</code>而没有<code>&lt;/ul&gt;</code></li>
-<li>不能有非法的HTML end tags，例如<code>&lt;/br&gt;</code></li>
-<li>不能有非法的HTML attributes，需要符合doclint基于W3C HTML 4.01的实现</li>
-<li>不能有重复的HTML id attribute</li>
-<li>不能有空的HTML href attribute</li>
-<li>不能有不正确的嵌套标题，例如类的文档说明中必须有<code>&lt;h3&gt;</code>而不是<code>&lt;h4&gt;</code></li>
-<li>不能有非法的HTML tags，例如<code>List&lt;String&gt;</code>需要用<code>&lt;&gt;</code>对应的实体符号</li>
-<li>不能有损坏的<code>@link references</code></li>
-<li>不能有损坏的<code>@param references</code>，它们必须匹配实际的参数名称</li>
-<li>不能有损坏的<code>@throws references</code>，第一个词必须是一个类名称</li>
-</ul>
-<p>注意违反这些规则的话，将不会得到Javadoc的输出。</p>
-<p>一种解决办法就是关闭<em>doclint</em>，如果你在Maven中运行，你需要使用<code>additionalparam</code>设置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>disable-javadoc-doclint<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>[1.8,)<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">additionalparam</span>&gt;</span>-Xdoclint:none<span class="tag">&lt;/<span class="name">additionalparam</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>或者是添加到<code>maven-javadoc-plugin</code>中：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-javadoc-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.10.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>$&#123;chartset.UTF8&#125;<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aggregate</span>&gt;</span>true<span class="tag">&lt;/<span class="name">aggregate</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">charset</span>&gt;</span>$&#123;chartset.UTF8&#125;<span class="tag">&lt;/<span class="name">charset</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">docencoding</span>&gt;</span>$&#123;chartset.UTF8&#125;<span class="tag">&lt;/<span class="name">docencoding</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span>&gt;</span>attach-javadocs<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">goal</span>&gt;</span>jar<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">additionalparam</span>&gt;</span>-Xdoclint:none<span class="tag">&lt;/<span class="name">additionalparam</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/docker%E7%8E%AF%E5%A2%83CoreOS%E3%80%81CentOS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/docker%E7%8E%AF%E5%A2%83CoreOS%E3%80%81CentOS/" class="post-title-link" itemprop="url">docker环境CoreOS、CentOS</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-10-17 00:00:00" itemprop="dateCreated datePublished" datetime="2016-10-17T00:00:00+00:00">2016-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:25" itemprop="dateModified" datetime="2024-01-26T12:42:25+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li><p>systemd  容器进行管理</p>
-</li>
-<li><p>fleet  容器进行管理， 服务发现和配置信息共享</p>
-</li>
-<li><p>Vagrantfile</p>
-</li>
-<li><p>state partition 状态分区,CoreOS非只读区</p>
-</li>
-</ul>
-<hr>
-<p>CoreOS<br>CoreOS是一种新的、架构体系重新设计的Linux发行版，可以运行在既有的硬件或者云上。CoreOS不提供类似yum或者apt类似的包管理工具，用户不需要在CoreOS中安装软件，而是让程序都在Docker容器中去运行。CoreOS使用systemd和fleet来对容器进行管理，通过etcd进行服务发现和配置信息共享。CoreOS目前风头正劲，目前已经获得融资并于上周宣布收购私有Docker仓库服务商Quay.io，进军企业级的Registry。另外，CoreOS的etcd等组件也获得了社区的认可，并得到了大规模使用。CoreOS已经发布首个稳定版本，目前主流的云服务商都提供了对CoreOS的支持。</p>
-<p><code>十大基于Docker的开发工具</code><br><a target="_blank" rel="noopener" href="http://www.infoq.com/cn/news/2014/08/top-10-open-source-docker/">http://www.infoq.com/cn/news/2014/08/top-10-open-source-docker/</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">为什么选择 CoreOS?</span><br><span class="line">CoreOS有几个很牛的特点. 它以只读模式运行, 除了“state partition”, 这个地方，我们基本上使用它来存放系统单元文件，包括启动监视你的docker容器, 另外还有docker’的本地图片缓存和一些固定的区域。我喜欢只读文件系统，因为这意味着，他们很稳定，并且几乎不可能被破坏. 另外, CoreOS会自动更新而且它重用了ChromeOS的更新器. </span><br></pre></td></tr></table></figure>
-<p><code>CoreOS 和 Docker 入门 - 开源中国社区</code><br><a target="_blank" rel="noopener" href="http://www.oschina.net/translate/coreos_and_docker_first_steps?cmp">http://www.oschina.net/translate/coreos_and_docker_first_steps?cmp</a></p>
-<p><code>Docker和CoreOS一直在争夺,为何不互补-阿里云资讯网</code><br><a target="_blank" rel="noopener" href="https://www.aliyun.com/zixun/content/1_1_1038419.html">https://www.aliyun.com/zixun/content/1_1_1038419.html</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最流行最基础的Docker镜像还是“Ubuntu”</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">老外在这里强烈推荐CoreOS，说怎么怎么好，我还是推荐先使用ubuntu或者在windows上装个vbox在用ubuntu，coreos作为一个新型的服务器级别的系统，也十分值得关注，因为CoreOs将作为主力的docker容器发展。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>docker 简明教程 | 简果网</code>-相关 CoreOS<br><a target="_blank" rel="noopener" href="http://www.simapple.com/docker-tutorial">http://www.simapple.com/docker-tutorial</a></p>
-<hr>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">完整性、系统性来说CentOS好</span><br><span class="line">CoreOS是一个采用了高度精简的Linux系统内核及外围定制的轻量级操作系统</span><br><span class="line">追问： 那就是说。coreos比centos小</span><br><span class="line">追答： 是的，不过centos也可以最小化安装</span><br><span class="line">追问： 那做服务器他们哪个好点</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>coreos和centos哪个好_百度知道</code></p>
-<p><a target="_blank" rel="noopener" href="http://zhidao.baidu.com/link?url=dddRjzH1OYs22nMMMt3bG1UlfqVfgY7ldErJaISG56kgXCXlUdMXwdbVjhNtVXifVMWJNZOAbNGnLUnGyHZE8OgasZQ4DB4_E1QrgRvduN">http://zhidao.baidu.com/link?url=dddRjzH1OYs22nMMMt3bG1UlfqVfgY7ldErJaISG56kgXCXlUdMXwdbVjhNtVXifVMWJNZOAbNGnLUnGyHZE8OgasZQ4DB4_E1QrgRvduN</a>_</p>
-<hr>
-<p>coreos和Ubuntu及centos的本质区别是什么?其实它们本质上都是Linux的独立发行版，大的区别主要有两点：</p>
-<p>　　1)预装的软件不一样，CoreOS系统预装的软件相比Ubuntu或CentOS少的多(从系统的安装CD内容也能看出来，CoreOS只有 100多MB，Ubuntu的有700多MB)，因此CoreOS系统在启动速度和运行内存上都有优势。另外CoreOS预装的软件很多是为集群环境配备的，例如Etcd和Fleet。</p>
-<p>　　2)CoreOS的系统分区是只读的，也就说，用户不能直接安装程序到系统里面。所有用户程序的运行都要使用到Docker或Rkt容器，从而确保系统升级时候不会因为系统被用户修改而出现意外问题。<br><a target="_blank" rel="noopener" href="http://www.99inf.com/diannao/rjkf/601619.html">http://www.99inf.com/diannao/rjkf/601619.html</a> </p>
-<hr>
-<p><code>Docker学习：Coreos+Docker+rancher真方便简捷_服务器应用_Linux公社-Linux系统门户网站</code><br><a target="_blank" rel="noopener" href="http://www.linuxidc.com/Linux/2016-04/130605.htm">http://www.linuxidc.com/Linux/2016-04/130605.htm</a></p>
-<p><code>借 Docker 东风，CoreOS 蹿红云计算 - 开源中国社区</code><br><a target="_blank" rel="noopener" href="http://www.oschina.net/news/55086/coreos-docker">http://www.oschina.net/news/55086/coreos-docker</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E4%B8%8E%E7%9B%91%E6%8E%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E5%89%8D%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E4%B8%8E%E7%9B%91%E6%8E%A7/" class="post-title-link" itemprop="url">前端异常日志收集与监控</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-10-13 00:00:00" itemprop="dateCreated datePublished" datetime="2016-10-13T00:00:00+00:00">2016-10-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>前端代码异常日志收集与监控_知识库_博客园</code><br><a target="_blank" rel="noopener" href="http://kb.cnblogs.com/page/527520/">http://kb.cnblogs.com/page/527520/</a></p>
-<p><code>前端代码异常监控</code><br><a target="_blank" rel="noopener" href="http://rapheal.sinaapp.com/2014/11/06/javascript-error-monitor/">http://rapheal.sinaapp.com/2014/11/06/javascript-error-monitor/</a></p>
-<p><code>构建可靠的前端异常监控服务 - 采集篇 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/Rjy2Yjz">http://www.tuicool.com/articles/Rjy2Yjz</a></p>
-<p><code>JSTracker 之前端异常数据采集 - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/BZN3amR">http://www.tuicool.com/articles/BZN3amR</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ES6%E5%85%BC%E5%AE%B9%E4%BD%8E%E7%89%88%E6%9C%AC%E6%B5%8F%E8%A7%88%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/ES6%E5%85%BC%E5%AE%B9%E4%BD%8E%E7%89%88%E6%9C%AC%E6%B5%8F%E8%A7%88%E5%99%A8/" class="post-title-link" itemprop="url">ES6兼容低版本浏览器</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-10-11 00:00:00" itemprop="dateCreated datePublished" datetime="2016-10-11T00:00:00+00:00">2016-10-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:21" itemprop="dateModified" datetime="2024-01-26T12:42:21+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="局部引用-全局实现"><a href="#局部引用-全局实现" class="headerlink" title="局部引用 &amp;  全局实现"></a>局部引用 &amp;  全局实现</h1><p>想要不支持该方法的浏览器支持，无非两种办法<br><code>局部引用</code>，引入一个相同的方法代替，其缺点则是使用起来比较麻烦，每个用到的文件都要去引入。<br><code>全局实现</code>，与之相反的方法是使用 polyfill ，其优点便是使用方便，缺点则是会全局污染，特别是实例方法，涉及到修改其 prototype ，不是你的类，你去修改它原型是不推荐的。</p>
-<p>针对这两种办法，提供出以下几种方案，供大家参考</p>
-<h1 id="方案一：引入额外的库"><a href="#方案一：引入额外的库" class="headerlink" title="方案一：引入额外的库"></a>方案一：引入额外的库</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import assign from &#x27;object-assign&#x27;;</span><br><span class="line">assign(&#123;&#125;, &#123;&#125;);</span><br></pre></td></tr></table></figure>
-<p>缺点就是需要去找到对应的库，比如 Promise 我们可以使用 lie</p>
-<h1 id="方案二：全局引入-babel-polyfill"><a href="#方案二：全局引入-babel-polyfill" class="headerlink" title="方案二：全局引入 babel-polyfill"></a>方案二：全局引入 babel-polyfill</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import &#x27;babel-polyfill&#x27;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>polyfill 构建并 uglify 后的大小为 98k，gzip 后为32.6k，32k 对与移动端还是有点大的</p>
-<h1 id="方案三：手动引入-core-js"><a href="#方案三：手动引入-core-js" class="headerlink" title="方案三：手动引入 core-js"></a>方案三：手动引入 core-js</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Object: &#123;</span><br><span class="line">      assign: &quot;object/assign&quot;,</span><br><span class="line">      create: &quot;object/create&quot;,</span><br><span class="line">      defineProperties: &quot;object/define-properties&quot;,</span><br><span class="line">      defineProperty: &quot;object/define-property&quot;,</span><br><span class="line">      entries: &quot;object/entries&quot;,</span><br><span class="line">      freeze: &quot;object/freeze&quot;,</span><br><span class="line">      ...</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import assign from &#x27;core-js/library/fn/object/assign&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>或</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import &#x27;core-js/fn/object/assign&#x27;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="方案四：使用-babel-plugin-transform-runtime"><a href="#方案四：使用-babel-plugin-transform-runtime" class="headerlink" title="方案四：使用 babel-plugin-transform-runtime"></a>方案四：使用 <code>babel-plugin-transform-runtime</code></h1><p><a target="_blank" rel="noopener" href="https://babeljs.io/docs/plugins/transform-runtime/">https://babeljs.io/docs/plugins/transform-runtime/</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save-dev babel-plugin-transform-runtime</span><br><span class="line">$ npm install --save babel-runtime</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>.babelrc</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// without options</span><br><span class="line">&#123;</span><br><span class="line">  &quot;plugins&quot;: [&quot;transform-runtime&quot;]</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// with options</span><br><span class="line">&#123;</span><br><span class="line">  &quot;plugins&quot;: [</span><br><span class="line">    [&quot;transform-runtime&quot;, &#123;</span><br><span class="line">     &quot;helpers&quot;: false, // defaults to true; v6.12.0 (2016-07-27) 新增;</span><br><span class="line">      &quot;polyfill&quot;: true, // defaults to true</span><br><span class="line">      &quot;regenerator&quot;: true, // defaults to true</span><br><span class="line">      // v6.15.0 (2016-08-31) 新增</span><br><span class="line">      // defaults to &quot;babel-runtime&quot;</span><br><span class="line">      // 可以这样配置</span><br><span class="line">      // moduleName: path.dirname(require.resolve(&#x27;babel-runtime/package&#x27;))</span><br><span class="line">      &quot;moduleName&quot;: &quot;babel-runtime&quot;</span><br><span class="line">    &#125;]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>最后看下终极方案的通用配置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    [&quot;transform-runtime&quot;, &#123;</span><br><span class="line">      &quot;helpers&quot;: false,</span><br><span class="line">      &quot;polyfill&quot;: true,</span><br><span class="line">      &quot;regenerator&quot;: true</span><br><span class="line">    &#125;],</span><br><span class="line">    &#x27;add-module-exports&#x27;,</span><br><span class="line">    &#x27;transform-es3-member-expression-literals&#x27;,</span><br><span class="line">    &#x27;transform-es3-property-literals&#x27;,</span><br><span class="line">  ],</span><br><span class="line">  &quot;presets&quot;: [</span><br><span class="line">    &#x27;react&#x27;,</span><br><span class="line">    &#x27;es2015&#x27;,</span><br><span class="line">    &#x27;stage-1&#x27;</span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<p><code>ES6 + Webpack + React + Babel 如何在低版本浏览器上愉快的玩耍（下） - 推酷</code> <a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/rYRBbiA">http://www.tuicool.com/articles/rYRBbiA</a></p>
-<p><code>开始使用es6的module:import+export - 推酷</code><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/zABbYbv">http://www.tuicool.com/articles/zABbYbv</a></p>
-<p><code>Polyfill.io - 自动化的 JavaScript Polyfill 服务 | 小影志</code><br><a target="_blank" rel="noopener" href="http://c7sky.com/polyfill-io.html">http://c7sky.com/polyfill-io.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Read-outliers-the-story-of-success/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Read-outliers-the-story-of-success/" class="post-title-link" itemprop="url">读《异类》</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-10-10 20:15:07" itemprop="dateCreated datePublished" datetime="2016-10-10T20:15:07+00:00">2016-10-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:18" itemprop="dateModified" datetime="2024-01-26T12:42:18+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Life-Talk/" itemprop="url" rel="index"><span itemprop="name">Life-Talk</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>作者简介</strong>：马尔科姆·格拉德威尔（Malcolm Gladwell），被《快公司》誉为“21世纪的彼得·德鲁克，曾是《华盛顿邮报》商务科学专栏作家，目前是《纽约客》杂志专职作家。马尔科姆出生于英格兰，是牙买加人的后裔。在加拿大长大，现居纽约市。他曾经做过卫生政策和科学新闻方面的记者，其文章喜欢以小见大。马尔科姆是一个非常有创意的作家，他认为自己的文风属于一种adventure of ideas的风格，虽然大部分作品都不属于虚构，又不是围绕一个人物或者一个故事展开，但其中的故事情节却一般比较曲折，看他的文章很有adventure波澜起伏的韵味。</p>
-<p>那些取得杰出成就的人，不仅仅靠的是天赋，更多靠的是机遇，当然机遇包括整个社会所创造的机遇以及他们的家庭、生长环境、出生年月等等诸多未可知因素。而这些取得非凡业绩的人如若选择了那些专业性极强的方面，例如绘画、演奏、作曲、体育运动等，这时候就离不开一万小时理论了，除了机遇之外，剩下的就是勤勉了，相对来说，那些有着更好机遇同时又更加勤勉的人能够更快地达到一万小时的训练水平，当然也会取得更加杰出地成就。</p>
-<p>该书中提到了一个非常重要的实验，就是从1921年开始，刘易斯·特曼就满腔热忱地把测试智商、发现天才作为自己的终身事业。在联邦会的大力支持下，他组织了一个团队到加利福尼亚州的中小学进行测试智商的研究。挑选出最聪明、最有发展前途、智商最高的学生。可是这些人长大成人之后，有些人成了政府官员，有些人成了高级法院的法官，有些人成了图书、学术文章的出版人，有些人在商业上取得了一定成功…… 尽管他们中的大部分人生活得还不错，但缺少出类拔萃之辈，远远低于当时的预期。最令刘易斯·特曼感到尴尬，甚至感到无地自容的是：没有任何一个人获得诺贝尔奖，就连成为全美知名人士的也寥寥无几；可当年测试智商时被认定智商不够高、没有什么发展前途的威廉·肖克利和路易斯·阿尔瓦雷茨，却都获得了诺贝尔奖。</p>
-<p>后来，刘易斯·特曼在《天才基因的研究》一书中，以一种极端失望的笔调写道:“这些人的智商和成就并没有完美地结合在一起。”有时候，获得失败教训的价值并不比获得成功经验的价值小。心理学家刘易斯·特曼智商测试的预言虽然失败了，但却给人们留下了不可小觑的启示。那就是：从总体上看，一个孩子的成功，主要并不决定于智商。</p>
-<p><strong>最重要的是，组成智商的记忆、观察、想象、思考、判断等因素是很重要的，但组成情商的性格力量、意志力量、情感力量、社交力量等因素至少是不可忽视的。在一定意义上可以说，对于一个人的成功，情商比智商更重要。同样地，作者举出了大量的示例，这些事例直接说明并且证实了成功还源自优势的不断积累：你出生在何时何地，你父母的职业以及你成长的环境，这三者互相作用才塑造出这个世界上独特的你。</strong></p>
-<p>在造成飞机失事的民族理论部分中，作者举了阿维安卡52号坠机事故作为例子，这是一个沉痛的沟通案例，在飞机因为各种原因造成燃油即将耗尽的时候，副驾却用异常平静的语气对指挥控制室说“我们正在18 000英尺的右上方，嗯，我们将再试一次。我们的燃油快用完了。”这种轻描淡写的语气根本不足以引起飞行控制室的重视，而结果也异常打脸，飞机因为燃油耗尽而坠毁。</p>
-<p>副驾飞行员的语调并未向控制室管理员传递燃料紧急的严重信息。许多管理员接受过专门的训练，可以在各种情境下捕捉到飞行员声音中极细微的语调变化。尽管机组成员相互之间表现出对燃料问题的极大忧虑，但他们向机场传达信息的语调却是冷静而职业化的。在这次事故中，飞行员的文化、传统以及职业习惯会使飞行员不愿意声明情况紧急。如果正式报告紧急情况之后，飞行员需要写出大量的书面汇报；同时，如果发现飞行员在计算飞行油量方面疏忽大意，联邦飞行管理局就会吊销其驾驶执照。这些消极措施极大地阻碍了飞行员发出紧急呼救的信息。在这种情况下，飞行员的专业技能和荣誉感不必要地变成了决定生死命运的赌注。基于此作者进而引出了“权利距离指数”，简称PDI。权利距离指数具体而言，就是一种特定文化中重视和尊重权威的程度，我想天朝必在此列。</p>
-<p>文中还提到了中国传统的“水稻田文化”，中国人真的是世界上最勤劳的民族了。比如法国农民到了冬天要去“冬眠”，非洲一些地方农民靠捡果子谋生，你让他去种东西，他会说世上有这么多白捡的果子，你种这些干嘛？中国农民不仅勤劳质朴善良还逆来顺受，不到活不下去的地步绝不反抗，这种特质使得我们很难发展成为欧美化的那种高度分权的民选国家。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/javaScript%20%E7%9A%84%E5%80%BC%E4%BC%A0%E9%80%92&%E9%97%AD%E5%8C%85%E5%BA%94%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/javaScript%20%E7%9A%84%E5%80%BC%E4%BC%A0%E9%80%92&%E9%97%AD%E5%8C%85%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">javaScript 的值传递&闭包应用</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-10-10 00:00:00" itemprop="dateCreated datePublished" datetime="2016-10-10T00:00:00+00:00">2016-10-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li><p>值传递</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var value = 1;</span><br><span class="line">var countValue;</span><br><span class="line"> </span><br><span class="line">function count(value) &#123;</span><br><span class="line">  value = value + 1;// 值传递，引用断离</span><br><span class="line">  countValue = value;</span><br><span class="line">  console.log(&#x27;count&#x27;, value); // 2</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">console.log(&#x27;value&#x27;, value);// 1</span><br><span class="line">count(value);</span><br><span class="line">console.log(&#x27;value&#x27;, value);// 1</span><br><span class="line">console.log(&#x27;value&#x27;, countValue); // 2</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>闭包应用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 循环&amp;异步&amp;函数-问题</span><br><span class="line">for (var i = 0; i &lt; 2; i++) &#123;</span><br><span class="line">  setTimeout(</span><br><span class="line">    function () &#123;</span><br><span class="line">      console.log(&#x27;&gt;&#x27;, i)</span><br><span class="line">    &#125;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 循环&amp;异步的问题</span><br><span class="line">for (var i = 0; i &lt; 2; i++) &#123;</span><br><span class="line">  (function (i) &#123;</span><br><span class="line">    // 函数接收的参数值属于值传递,引用断离</span><br><span class="line">    setTimeout(</span><br><span class="line">      function () &#123;</span><br><span class="line">        console.log(&#x27;&gt;&gt;&#x27;, i)</span><br><span class="line">      &#125;</span><br><span class="line">    )</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/Lucene-sets-a-single-index-file-size-of-the-performance-test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Lucene-sets-a-single-index-file-size-of-the-performance-test/" class="post-title-link" itemprop="url">Lucene设置单索引文件大小之性能测试</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-10-09 21:31:36" itemprop="dateCreated datePublished" datetime="2016-10-09T21:31:36+00:00">2016-10-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:22" itemprop="dateModified" datetime="2024-01-26T12:42:22+00:00">2024-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Notes/" itemprop="url" rel="index"><span itemprop="name">Programming Notes</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p><strong>Operating System</strong>：Windows 7 企业版 64-bit (6.1, Build 7601) Service Pack 1<br><strong>Processor</strong>：Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz (8 CPUs), ~3.6GHz<br><strong>Java version</strong>：”1.8.0_91” Java HotSpot(TM) 64-Bit Server VM (build 25.91-b15, mixed mode)<br><strong>Lucene Version</strong>：V 5.5.0</p>
-<h3 id="合并策略"><a href="#合并策略" class="headerlink" title="合并策略"></a>合并策略</h3><p>Lucene使用<strong>TieredMergePolicy</strong>作为其默认合并策略，这个默认的策略是合并那些差不多大小的段，受限于每次合并时允许的段的数量。该合并策略的一些默认属性如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">double</span> <span class="variable">DEFAULT_NO_CFS_RATIO</span> <span class="operator">=</span> <span class="number">0.1</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="variable">maxMergeAtOnce</span> <span class="operator">=</span> <span class="number">10</span>;<span class="comment">//在一次合并过程中最多合并十个segments</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">long</span> <span class="variable">maxMergedSegmentBytes</span> <span class="operator">=</span> <span class="number">5</span>*<span class="number">1024</span>*<span class="number">1024</span>*<span class="number">1024L</span>;<span class="comment">//合并之后的最大段文件为5GB</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="variable">maxMergeAtOnceExplicit</span> <span class="operator">=</span> <span class="number">30</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="type">long</span> <span class="variable">floorSegmentBytes</span> <span class="operator">=</span> <span class="number">2</span>*<span class="number">1024</span>*<span class="number">1024L</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="type">double</span> <span class="variable">segsPerTier</span> <span class="operator">=</span> <span class="number">10.0</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="type">double</span> <span class="variable">forceMergeDeletesPctAllowed</span> <span class="operator">=</span> <span class="number">10.0</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="type">double</span> <span class="variable">reclaimDeletesWeight</span> <span class="operator">=</span> <span class="number">2.0</span>;</span><br></pre></td></tr></table></figure>
-
-<p>这种默认的合并策略会导致单个段文件的大小达到5GB，那么如果想要控制单个段文件大小的上限要怎么办呢？追踪该类至其父类MergePolicy，继续追踪MergePolicy的所有子类，发现MergePolicy的子类包括：NoMergePolicy、MergePolicyWrapper、LogMergePolicy、TieredMergePolicy，查看LogMergePolicy发现该类有两个子类，分别为LogDocMergePolicy和LogByteSizeMergePolicy，顾名思义，前者考虑段文件的数量，后者考虑段文件的大小。</p>
-<p>另外<strong>TieredMergePolicy</strong>和<strong>LogByteSizeMergepolicy</strong>区别在于前者可以合并不相邻的段，并且区分最多允许一次合并的段数<code>setMaxMergeAtOnce(int v)</code>和一层最多容许的段数<code>setSegmentsPerTier(double v)</code>。</p>
-<p>至此，找到了我们需要使用的合并策略，即<strong>LogByteSizeMergePolicy</strong>。</p>
-<h3 id="复合索引文件"><a href="#复合索引文件" class="headerlink" title="复合索引文件"></a>复合索引文件</h3><p>复合索引文件是指，除了段信息文件，锁文件，以及删除的文件外，其他的一系列索引文件压缩一个后缀名为cfs的文件，意思就是所有的索引文件会被存储成一个单例的Directory，而非复合索引是灵活的，可以单独的访问某几个索引文件，而复合索引文件则不可以，因为其压缩成了一个文件，所以在某些场景下能够获取更高的效率，比如说，查询频繁，而不经常更新的需求，就很适合这种复合索引格式。</p>
-<p>如果仅仅设置<code>setUseCompoundFile(false)</code>，那么在生成的索引中，依然会有复合索引文件并且其大小会超过<code>setMaxMergeMB(double mb)</code>所设置的大小，是不是很奇怪，这是为什么呢？收先查看<code>setMaxMergeMB(double mb)</code>Doc说明如下：</p>
-<blockquote>
-<p>org.apache.lucene.index.LogByteSizeMergePolicy<br>public void setMaxMergeMB(double mb)<br>Determines the largest segment (measured by total byte size of the segment’s files, in MB) that may be merged with other segments. Small values (e.g., less than 50 MB) are best for interactive indexing, as this limits the length of pauses while indexing to a few seconds. Larger values are best for batched indexing and speedier searches.<br>Note that setMaxMergeDocs is also used to check whether a segment is too large for merging (it’s either or).</p>
-</blockquote>
-<p>该函数用于控制可用于合并的最大的段文件大小，通常合并之后的段文件的大小均会超过此值。所以单靠此函数不能实现控制单索引文件上限的目标。</p>
-<p>继续查看<code>setUseCompoundFile(false)</code>Doc说明如下：</p>
-<blockquote>
-<p>org.apache.lucene.index.LiveIndexWriterConfig<br>public LiveIndexWriterConfig setUseCompoundFile(boolean useCompoundFile)<br>Sets if the IndexWriter should pack newly written segments in a compound file. Default is true.<br>Use false for batch indexing with very large ram buffer settings.<br><strong>Note</strong>: To control compound file usage during segment merges see <strong>MergePolicy.setNoCFSRatio(double)</strong> and <strong>MergePolicy.setMaxCFSSegmentSizeMB(double)</strong>. This setting only applies to newly created segments.</p>
-</blockquote>
-<p>其中提到了<code>MergePolicy.setNoCFSRatio(double)</code>，继续查看该方法的Doc说明如下：</p>
-<blockquote>
-<p>org.apache.lucene.index.MergePolicy<br>public void setNoCFSRatio(double noCFSRatio)<br>If a merged segment will be more than this percentage of the total size of the index, leave the segment as non-compound file even if compound file is enabled. <strong>Set to 1.0 to always use CFS regardless of merge size</strong>.</p>
-</blockquote>
-<p>继续追踪noCFSRatio查找到了预定义的默认值<strong>DEFAULT_NO_CFS_RATIO</strong>，该默认值为1.0，而根据Doc说明，当该值为1.0的时候，总是使用复合索引文件并且忽略合并大小的设置，所以就出现了设置不使用复合索引文件但无效的情况。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">double</span> <span class="variable">DEFAULT_NO_CFS_RATIO</span> <span class="operator">=</span> <span class="number">1.0</span>;</span><br><span class="line"><span class="keyword">protected</span> <span class="type">double</span> <span class="variable">noCFSRatio</span> <span class="operator">=</span> DEFAULT_NO_CFS_RATIO;</span><br></pre></td></tr></table></figure>
-<p>那么可以通过调用<code>logByteSizeMergePolicy.setNoCFSRatio();</code>去更改noCFSRatio的值，但是究竟设置多少合适，不得而知。此时不妨去关注下<code>setMaxCFSSegmentSizeMB(double)</code>方法，既然总是会有复合索引文件，那么通过设置复合索引文件的上限一样可以实现控制单索引文件大小的目的。该方法Doc说明如下：</p>
-<blockquote>
-<p>org.apache.lucene.index.MergePolicy<br>public void setMaxCFSSegmentSizeMB(double v)<br>If a merged segment will be more than this value, leave the segment as non-compound file even if compound file is enabled. Set this to Double.POSITIVE_INFINITY (default) and noCFSRatio to 1.0 to always use CFS regardless of merge size.</p>
-</blockquote>
-<p>可知如果合并之后段文件大小会超过此值时，就保留该段文件为非复合索引文件，亦即不进行合并，所以此方法可以达到控制单索引文件上限的目标。</p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>使用不同的合并策略配合三种设置，添加50000000个Document，其中每个Document包含10个Field，这些Field类型包括Int、Long、String，其值随机生成。随后根据主键搜索1000000次，统计其累计搜索耗时，其中主键为String类型数字，主键值为[0，50000000)。</p>
-<table>
-<thead>
-<tr>
-<th align="left">合并策略</th>
-<th align="left">参数设置</th>
-<th align="right">索引文件数</th>
-<th align="right">索引总量</th>
-<th align="right">最大索引</th>
-<th align="right">搜索总耗时</th>
-<th align="right">单次搜索最大耗时</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">TieredMergePolicy</td>
-<td align="left">默认</td>
-<td align="right">123</td>
-<td align="right">7.33GB</td>
-<td align="right">464MB</td>
-<td align="right">58.2s</td>
-<td align="right">140ms</td>
-</tr>
-<tr>
-<td align="left">LogByteSizeMergePolicy</td>
-<td align="left">LogByteSizeMergePolicy lbs;<br/>lbs.setMinMergeMB(1);<br/>lbs.setMaxMergeMB(64);</td>
-<td align="right">239</td>
-<td align="right">7.77GB</td>
-<td align="right">127MB</td>
-<td align="right">127.1s</td>
-<td align="right">314ms</td>
-</tr>
-<tr>
-<td align="left">LogByteSizeMergePolicy</td>
-<td align="left">IndexWriterConfig iwc;<br/>LogByteSizeMergePolicy lbs;<br/>iwc.setUseCompoundFile(false);<br/>lbs.setMinMergeMB(1);<br/>lbs.setMaxMergeMB(64);<br/> lbs.setMaxCFSSegmentSizeMB(64);</td>
-<td align="right">451</td>
-<td align="right">7.77GB</td>
-<td align="right">60.8MB</td>
-<td align="right">152.1s</td>
-<td align="right">446ms</td>
-</tr>
-</tbody></table>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>虽然每次运行结果时间稍有不同，但总体趋势应该是不变的。即单索引文件上限越小，则生成的索引文件数量越多，索引文件数量越多，对应的单次搜索最长时间和总搜索时间均越长。所以应根据业务需求选择适当的合并策略，在满足需求之后尽可能提高搜索性能。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/ionic%20hooks%E9%92%A9%E5%AD%90%E6%96%87%E4%BB%B6-%E6%B8%85%E7%90%86%E6%BA%90%E4%BB%A3%E7%A0%81,%E5%8F%91%E5%B8%83dist/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="DJY">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sovdating Linux">
-      <meta itemprop="description" content="Hello dev">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Sovdating Linux">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/ionic%20hooks%E9%92%A9%E5%AD%90%E6%96%87%E4%BB%B6-%E6%B8%85%E7%90%86%E6%BA%90%E4%BB%A3%E7%A0%81,%E5%8F%91%E5%B8%83dist/" class="post-title-link" itemprop="url">ionic hooks钩子文件-清理源代码,发布dist</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-10-08 00:00:00" itemprop="dateCreated datePublished" datetime="2016-10-08T00:00:00+00:00">2016-10-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-26 12:42:20" itemprop="dateModified" datetime="2024-01-26T12:42:20+00:00">2024-01-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>020_dist_to_platforms_v2.js</code> </p>
-<ul>
-<li>策略不同,避开 mv_path() 同步控制, 效果一样<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env node</span><br><span class="line"> </span><br><span class="line">&#123;</span><br><span class="line">  var fs = require(&#x27;fs&#x27;);</span><br><span class="line">  var path = require(&#x27;path&#x27;);</span><br><span class="line">  var mv = require(&#x27;mv&#x27;);</span><br><span class="line"> </span><br><span class="line">  var iosPlatformsDir_dist = path.resolve(__dirname, &#x27;../../platforms/ios/www/dist&#x27;);</span><br><span class="line">  var iosPlatformsDir = path.resolve(__dirname, &#x27;../../platforms/ios/www&#x27;);</span><br><span class="line"> </span><br><span class="line">  var androidPlatformsDir_dist = path.resolve(__dirname, &#x27;../../platforms/android/assets/www/dist&#x27;);</span><br><span class="line">  var androidPlatformsDir = path.resolve(__dirname, &#x27;../../platforms/android/assets/www&#x27;);</span><br><span class="line"> </span><br><span class="line">  /** ios ****************************************************************************/</span><br><span class="line">  action(iosPlatformsDir, iosPlatformsDir_dist)</span><br><span class="line">  /** android ****************************************************************************/</span><br><span class="line">  action(androidPlatformsDir, androidPlatformsDir_dist)</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">function action(platformsDir, platformsDir_dist) &#123;</span><br><span class="line">  // 1.先删除(因为删除是同步的,移动是异步)</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/app&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/app_module&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/autoTest&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/css&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/js&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir + &#x27;/templates&#x27;);</span><br><span class="line">  deleteFolderRecursive(platformsDir_dist + &#x27;/img&#x27;);//  使用源文件资源,不需要dist中资源</span><br><span class="line">  deleteFolderRecursive(platformsDir_dist + &#x27;/lib&#x27;);//  使用源文件资源,不需要dist中资源</span><br><span class="line"> </span><br><span class="line">  // 2.移动dist目录中资源为主资源</span><br><span class="line">  mv_path(platformsDir_dist + &#x27;/dist_css&#x27;, platformsDir + &#x27;/dist_css&#x27;);</span><br><span class="line">  mv_path(platformsDir_dist + &#x27;/dist_js&#x27;, platformsDir + &#x27;/dist_js&#x27;);</span><br><span class="line">  mv_path(platformsDir_dist + &#x27;/index.html&#x27;, platformsDir + &#x27;/index.html&#x27;);</span><br><span class="line"> </span><br><span class="line">  // 3.清理lib(仅保留字体)</span><br><span class="line">  mv_path(platformsDir + &#x27;/lib/ionic/fonts&#x27;, platformsDir + &#x27;/_lib/ionic/fonts&#x27;,function()&#123;</span><br><span class="line">    deleteFolderRecursive(platformsDir + &#x27;/lib&#x27;);</span><br><span class="line">    mv_path(platformsDir + &#x27;/_lib&#x27;, platformsDir + &#x27;/lib&#x27;);// 还原保留</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">/** 移动文件 */</span><br><span class="line">function mv_path(source, target, callback) &#123;</span><br><span class="line">  mv(source, target, &#123;mkdirp: true&#125;, function (err) &#123;</span><br><span class="line">    if (typeof err != &#x27;undefined&#x27;) &#123;</span><br><span class="line">      console.log(&quot;err&quot;);</span><br><span class="line">      console.log(err);</span><br><span class="line">      console.log(&quot;ERROR when moving CSS folder to iOS platform&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">      console.log(&quot;CSS folder moved OK to iOS platform&quot;);</span><br><span class="line">      callback &amp;&amp; callback();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">/** 删除文件 */</span><br><span class="line">function deleteFolderRecursive(removePath) &#123;</span><br><span class="line">  if (fs.existsSync(removePath)) &#123;</span><br><span class="line">    fs.readdirSync(removePath).forEach(function (file, index) &#123;</span><br><span class="line">      var curPath = path.join(removePath, file);</span><br><span class="line">      if (fs.lstatSync(curPath).isDirectory()) &#123; // recurse</span><br><span class="line">        deleteFolderRecursive(curPath);</span><br><span class="line">      &#125; else &#123; // delete file</span><br><span class="line">        fs.unlinkSync(curPath);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    fs.rmdirSync(removePath);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<p><code>020_dist_to_platforms_v1.js</code></p>
-<ul>
-<li>脏代码:mv_path() 同步控制</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env node</span><br><span class="line"> </span><br><span class="line">&#123;</span><br><span class="line">  var fs = require(&#x27;fs&#x27;);</span><br><span class="line">  var path = require(&#x27;path&#x27;);</span><br><span class="line">  var mv = require(&#x27;mv&#x27;);</span><br><span class="line"> </span><br><span class="line">  var iosPlatformsDir_dist = path.resolve(__dirname, &#x27;../../platforms/ios/www/dist&#x27;);</span><br><span class="line">  var iosPlatformsDir_temp = path.resolve(__dirname, &#x27;../../platforms/ios/_www_dist&#x27;);</span><br><span class="line">  var iosPlatformsDir = path.resolve(__dirname, &#x27;../../platforms/ios/www&#x27;);</span><br><span class="line"> </span><br><span class="line">  var androidPlatformsDir_dist = path.resolve(__dirname, &#x27;../../platforms/android/assets/www/dist&#x27;);</span><br><span class="line">  var androidPlatformsDir_temp = path.resolve(__dirname, &#x27;../../platforms/android/assets/_www_dist&#x27;);</span><br><span class="line">  var androidPlatformsDir = path.resolve(__dirname, &#x27;../../platforms/android/assets/www&#x27;);</span><br><span class="line"> </span><br><span class="line">  var cordova_js = &#x27;/cordova.js&#x27;, cordova_plugins = &#x27;/cordova_plugins.js&#x27;;</span><br><span class="line"> </span><br><span class="line">  // 0.转移`cordova.js,cordova_plugins.js`两核心文件</span><br><span class="line">  mv_path(iosPlatformsDir + cordova_js, iosPlatformsDir_dist + cordova_js, function () &#123;</span><br><span class="line">    mv_path(iosPlatformsDir + cordova_plugins, iosPlatformsDir_dist + cordova_plugins, function () &#123;</span><br><span class="line">      mv_path(iosPlatformsDir + &#x27;/plugins&#x27;, iosPlatformsDir_dist + &#x27;/plugins&#x27;, function () &#123;</span><br><span class="line">        mv_path(iosPlatformsDir + &#x27;/cordova-js-src&#x27;, iosPlatformsDir_dist + &#x27;/cordova-js-src&#x27;, function () &#123;</span><br><span class="line"> </span><br><span class="line">          // 1.转移dist目录</span><br><span class="line">          mv_path(iosPlatformsDir_dist, iosPlatformsDir_temp, function () &#123;</span><br><span class="line">            // 2.删除dist外源码</span><br><span class="line">            deleteFolderRecursive(iosPlatformsDir);</span><br><span class="line">            // 3.dist`转正`</span><br><span class="line">            mv_path(iosPlatformsDir_temp, iosPlatformsDir);</span><br><span class="line">          &#125;);</span><br><span class="line"> </span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  // 0.转移`cordova.js,cordova_plugins.js`两核心文件</span><br><span class="line">  mv_path(iosPlatformsDir + cordova_js, iosPlatformsDir_dist + cordova_js, function () &#123;</span><br><span class="line">    mv_path(iosPlatformsDir + cordova_plugins, iosPlatformsDir_dist + cordova_plugins, function () &#123;</span><br><span class="line">      mv_path(iosPlatformsDir + &#x27;/plugins&#x27;, iosPlatformsDir_dist + &#x27;/plugins&#x27;, function () &#123;</span><br><span class="line">        mv_path(iosPlatformsDir + &#x27;/cordova-js-src&#x27;, iosPlatformsDir_dist + &#x27;/cordova-js-src&#x27;, function () &#123;</span><br><span class="line"> </span><br><span class="line">          mv_path(androidPlatformsDir_dist, androidPlatformsDir_temp, function () &#123;</span><br><span class="line">            deleteFolderRecursive(androidPlatformsDir);</span><br><span class="line">            mv_path(androidPlatformsDir_temp, androidPlatformsDir);</span><br><span class="line">          &#125;);</span><br><span class="line"> </span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">/** 移动文件 */</span><br><span class="line">function mv_path(source, target, callback) &#123;</span><br><span class="line">  mv(source, target, &#123;mkdirp: true&#125;, function (err) &#123;</span><br><span class="line">    if (typeof err != &#x27;undefined&#x27;) &#123;</span><br><span class="line">      console.log(&quot;err&quot;);</span><br><span class="line">      console.log(err);</span><br><span class="line">      console.log(&quot;ERROR when moving CSS folder to iOS platform&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">      console.log(&quot;CSS folder moved OK to iOS platform&quot;);</span><br><span class="line">      callback &amp;&amp; callback();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">/** 删除文件 */</span><br><span class="line">function deleteFolderRecursive(removePath) &#123;</span><br><span class="line">  if (fs.existsSync(removePath)) &#123;</span><br><span class="line">    fs.readdirSync(removePath).forEach(function (file, index) &#123;</span><br><span class="line">      var curPath = path.join(removePath, file);</span><br><span class="line">      if (fs.lstatSync(curPath).isDirectory()) &#123; // recurse</span><br><span class="line">        deleteFolderRecursive(curPath);</span><br><span class="line">      &#125; else &#123; // delete file</span><br><span class="line">        fs.unlinkSync(curPath);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    fs.rmdirSync(removePath);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/24/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/26/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/24/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/56/">56</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/26/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

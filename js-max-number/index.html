@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="baidu-site-verification" content="codeva-6wmKWl5hmx" />
+<meta name="bytedance-verification-code" content="GcOf/MpQ8shZ5Hh/2hvr" />
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4522670236044605"
+     crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-33RJLY0818"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-33RJLY0818');
+</script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="这是我转战JAVA以来的第一篇博文，纪念一下。  背景组织变动，转战JAVA差不多有一个月了，做了一个小需求，遇到一个诡异的问题。本文记录一下排查经过，顺便提醒自己后续开发中避免这样的坑。 问题描述JAVA后端需要给前端返回一串数据，其中有个交易订单号，该交易订单在返回给前端后跟后端吐出的值不一致。直观地来看，最后的几个数字被0取代了。一开始以为取错了交易订单号，然而从DEBUG的过程来看，后端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个诡异的前后端数据不一致问题的排查">
+<meta property="og:url" content="https://www.sovdating.com/js-max-number/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="这是我转战JAVA以来的第一篇博文，纪念一下。  背景组织变动，转战JAVA差不多有一个月了，做了一个小需求，遇到一个诡异的问题。本文记录一下排查经过，顺便提醒自己后续开发中避免这样的坑。 问题描述JAVA后端需要给前端返回一串数据，其中有个交易订单号，该交易订单在返回给前端后跟后端吐出的值不一致。直观地来看，最后的几个数字被0取代了。一开始以为取错了交易订单号，然而从DEBUG的过程来看，后端">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/62d95157gy1fgblq39u2kj208l02x74g.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/62d95157gy1fgblq2d5a7j20ho07ngmi.jpg">
+<meta property="article:published_time" content="2024-02-04T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-06T00:53:01.040Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="整型">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wx3.sinaimg.cn/mw690/62d95157gy1fgblq39u2kj208l02x74g.jpg">
+
+
+<link rel="canonical" href="https://www.sovdating.com/js-max-number/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/js-max-number/","path":"js-max-number/","title":"一个诡异的前后端数据不一致问题的排查"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>一个诡异的前后端数据不一致问题的排查 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%8E%9F%E5%9B%A0"><span class="nav-number">3.</span> <span class="nav-text">问题原因</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">554</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">94</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">389</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/js-max-number/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="一个诡异的前后端数据不一致问题的排查 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一个诡异的前后端数据不一致问题的排查
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-04 00:00:00" itemprop="dateCreated datePublished" datetime="2024-02-04T00:00:00+00:00">2024-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-02-06 00:53:01" itemprop="dateModified" datetime="2024-02-06T00:53:01+00:00">2024-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">技术人生</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>这是我转战JAVA以来的第一篇博文，纪念一下。</p>
+</blockquote>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>组织变动，转战JAVA差不多有一个月了，做了一个小需求，遇到一个诡异的问题。本文记录一下排查经过，顺便提醒自己后续开发中避免这样的坑。</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>JAVA后端需要给前端返回一串数据，其中有个交易订单号，该交易订单在返回给前端后跟后端吐出的值不一致。直观地来看，最后的几个数字被0取代了。<br>一开始以为取错了交易订单号，然而从DEBUG的过程来看，后端的处理结果没有问题，返回了正确的结果给前端。<br>如下图所示：<br><img src="http://wx3.sinaimg.cn/mw690/62d95157gy1fgblq39u2kj208l02x74g.jpg"><br><img src="http://wx1.sinaimg.cn/mw690/62d95157gy1fgblq2d5a7j20ho07ngmi.jpg"></p>
+<p>当时也并没有纠结问题的根本原因，下意识地将交易订单号类型从<code>List&lt;Long&gt;</code>换成了<code>List&lt;String&gt;</code>返回就正常了。</p>
+<p>发布以后觉得这里可能是个坑，于是研究了一下果然是有缘由的。</p>
+<span id="more"></span>
+
+<h1 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h1><p>既然将Long改为String就解决了问题，很自然地就想到是不是类型转换的过程中造成了精度丢失。但服务器返回的时候又是正确的，那么问题应该是出在浏览器端了。<br>于是着手验证：<br>浏览器终端上运行代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var t = 1000006221004368407;</span><br><span class="line">console.log(t);         // 输出1000006221004368400</span><br><span class="line">var tt = 100000622100436847;</span><br><span class="line">console.log(tt);        // 输出100000622100436850</span><br></pre></td></tr></table></figure>
+<p>至此已经能够确定是前端在解析的时候丢失精度了。</p>
+<p>在网上搜索查到一段关于js整型大小的说明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">精度</span><br><span class="line">整数（不使用小数点或指数计数法）最多为 15 位。</span><br><span class="line">小数的最大位数是 17，但是浮点运算并不总是 100% 准确</span><br></pre></td></tr></table></figure>
+
+<p>问题解决了，巧合的是我们的项目里刚好id位数18位超过了js能够精确表达的最大位数。于是在将后端返回的数据JSON化渲染的过程中造成了精度丢失。<br>如果不是这个巧合，这个问题可能还不会被发现。<br>这也提示我们，<strong>后续如果有超长位数数字需要显示的时候，数据结构最好定义为字符串类型。</strong></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/js/" rel="tag"># js</a>
+              <a href="/tags/%E6%95%B4%E5%9E%8B/" rel="tag"># 整型</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/fix-next-leancloud-counter/" rel="prev" title="修复Next主题LeanCloud计数的问题">
+                  <i class="fa fa-angle-left"></i> 修复Next主题LeanCloud计数的问题
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/js-lib-share3/" rel="next" title="分享我收藏的小而美JS库[三] -- Vivid.js">
+                  分享我收藏的小而美JS库[三] -- Vivid.js <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

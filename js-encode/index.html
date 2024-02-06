@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="baidu-site-verification" content="codeva-6wmKWl5hmx" />
+<meta name="bytedance-verification-code" content="GcOf/MpQ8shZ5Hh/2hvr" />
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4522670236044605"
+     crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-33RJLY0818"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-33RJLY0818');
+</script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.sovdating.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="背景今天平台在向调用的平台发送回调请求的时候，发现有问题，排查了一会儿发现并不是所有的回调请求都会有问题。基本上纯字母或数字的回调都没有问题，而出问题的请求包含”&amp;”,”-“等特殊字符，于是第一时间想到是不是解析特殊字符的问题。 于是跟接收方约定，我将请求encode后发送，接收方接收后decode后再解析。 TEST1代码片段： 1var resParams &#x3D; &#123;&quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript中几个编码函数encodeURI、encodeURIComponent以及escape的区别">
+<meta property="og:url" content="https://www.sovdating.com/js-encode/index.html">
+<meta property="og:site_name" content="Sovdating Linux">
+<meta property="og:description" content="背景今天平台在向调用的平台发送回调请求的时候，发现有问题，排查了一会儿发现并不是所有的回调请求都会有问题。基本上纯字母或数字的回调都没有问题，而出问题的请求包含”&amp;”,”-“等特殊字符，于是第一时间想到是不是解析特殊字符的问题。 于是跟接收方约定，我将请求encode后发送，接收方接收后decode后再解析。 TEST1代码片段： 1var resParams &#x3D; &#123;&quot;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-02-04T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-06T00:53:01.036Z">
+<meta property="article:author" content="DJY">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="encode">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.sovdating.com/js-encode/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.sovdating.com/js-encode/","path":"js-encode/","title":"javascript中几个编码函数encodeURI、encodeURIComponent以及escape的区别"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>javascript中几个编码函数encodeURI、encodeURIComponent以及escape的区别 | Sovdating Linux</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sovdating Linux</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">some code for program</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TEST1"><span class="nav-number">2.</span> <span class="nav-text">TEST1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TEST2"><span class="nav-number">3.</span> <span class="nav-text">TEST2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DJY</p>
+  <div class="site-description" itemprop="description">Hello dev</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">554</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">94</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">389</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.sovdating.com/js-encode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DJY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sovdating Linux">
+      <meta itemprop="description" content="Hello dev">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="javascript中几个编码函数encodeURI、encodeURIComponent以及escape的区别 | Sovdating Linux">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          javascript中几个编码函数encodeURI、encodeURIComponent以及escape的区别
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-04 00:00:00" itemprop="dateCreated datePublished" datetime="2024-02-04T00:00:00+00:00">2024-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-02-06 00:53:01" itemprop="dateModified" datetime="2024-02-06T00:53:01+00:00">2024-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">技术人生</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>今天平台在向调用的平台发送回调请求的时候，发现有问题，排查了一会儿发现并不是所有的回调请求都会有问题。基本上纯字母或数字的回调都没有问题，而出问题的请求包含”&amp;”,”-“等特殊字符，于是第一时间想到是不是解析特殊字符的问题。</p>
+<p>于是跟接收方约定，我将请求encode后发送，接收方接收后decode后再解析。</p>
+<h4 id="TEST1"><a href="#TEST1" class="headerlink" title="TEST1"></a>TEST1</h4><p>代码片段：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> resParams = &#123;<span class="string">&quot;name&quot;</span>:<span class="built_in">encodeURI</span>(out.<span class="property">name</span>),<span class="string">&quot;blockId&quot;</span>:blockId,<span class="string">&quot;total&quot;</span>:<span class="number">1</span>,<span class="string">&quot;detail&quot;</span>:<span class="built_in">encodeURI</span>(reportPath)&#125;;</span><br></pre></td></tr></table></figure>
+<p>发布后，重新触发，查看日志：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...<span class="string">&quot;detail&quot;</span>:<span class="string">&quot;http://(绿色围墙)/detail?id=1&amp;suffix=1438601805325&quot;</span>...&#125;</span><br></pre></td></tr></table></figure>
+<p>怎么貌似请求串没有改变？</p>
+<p>第一反应，怀疑是不是编码没有成功，但我之前一直都是使用<code>encodeURI</code>编码，并不会别的什么方法，于是百度了下，发现还有个<code>encodeURIComponent以及escape的区别</code>方法。</p>
+<h4 id="TEST2"><a href="#TEST2" class="headerlink" title="TEST2"></a>TEST2</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> resParams = &#123;<span class="string">&quot;name&quot;</span>:<span class="built_in">encodeURIComponent</span>(out.<span class="property">name</span>),<span class="string">&quot;blockId&quot;</span>:blockId,<span class="string">&quot;total&quot;</span>:<span class="number">1</span>,<span class="string">&quot;detail&quot;</span>:<span class="built_in">encodeURIComponent</span>(reportPath)&#125;;</span><br></pre></td></tr></table></figure>
+<p>发布后，重新触发，查看日志：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...<span class="string">&quot;detail&quot;</span>:<span class="string">&quot;http://(绿色围墙)/detail%3Fid%3D1%26suffix%3D1438601805325&quot;</span>...&#125;</span><br></pre></td></tr></table></figure>
+<p>起效了~</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><blockquote>
+<p>javascript中有三种编码的函数，分别是：*<code>escape()</code><em>,</em><code>encodeURI()</code><em>以及</em><code>encodeURIComponent()</code>*。</p>
+</blockquote>
+<ol>
+<li><p>escape<br>该方法不对ASCII字母和数字编码，也不会对ASCII标点符号编码，除此之外的所有字符均会被编码。<br>基本上该方法已经被javascript标准所遗弃，从ECMAScript v3开始，标准就建议使用encodeURI和encodeURIComponent代替。</p>
+</li>
+<li><p>encodeURI<br>该方法不会对字母和数字编码，也不会对这些ASCII标点符号编码：** -_.!~*’() **<br>该方法的目的是对URI进行完整的编码，对URI中具有特殊含义的标点符号不进行转义。<br>因此正如我遇到的问题一样，如果URI中含有分隔符，则应当使用<code>encodeURIComponent</code>方法编码。</p>
+</li>
+<li><p>encodeURIComponent<br>该方法不会对字母和数字编码，也不会对这些ASCII标点符号编码：** -_.!~<em>‘() **<br>其他字符，如</em>* ;&#x2F;?:@&amp;&#x3D;+$,# **这些用于分隔 URI 组件的标点符号，都会由十六进制转义替换。<br>encodeURIComponent除了编码标准的URI之外，对于它的参数也都一并进行处理。</p>
+</li>
+</ol>
+<p>他们对应的解码函数分别是：<br><em><code>unescape()</code></em>,<em><code>decodeURI()</code></em>,<em><code>decodeURIComponent()</code></em></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/javascript/" rel="tag"># javascript</a>
+              <a href="/tags/encode/" rel="tag"># encode</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/js-for-in/" rel="prev" title="javascript中for..in循环获取对象属性顺序问题的探讨">
+                  <i class="fa fa-angle-left"></i> javascript中for..in循环获取对象属性顺序问题的探讨
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/js-device/" rel="next" title="js区分访问设备">
+                  js区分访问设备 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">DJY</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
